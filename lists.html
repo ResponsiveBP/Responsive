@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Responsive - A minimalist front-end framework.">
+    <meta name="viewport" content="width=device-width">
+    <title>Responsive :: Lists</title>
+    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="assets/css/docs.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+    <article class="container">
+        <h1 class="masthead">Lists</h1>
+        <p>Responsive lists whose padding and margin scale with the base font size.</p>
+        <section class="row">
+            <div class="column-4">
+                <h2>Standard</h2>
+                <ul>
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third
+                        <ul>
+                            <li>alpha</li>
+                            <li>beta</li>
+                            <li>gamma</li>
+                            <li>delta</li>
+                        </ul>
+                    </li>
+                    <li>fourth</li>
+                </ul>
+
+                <ol>
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third
+                        <ol>
+                            <li>alpha</li>
+                            <li>beta</li>
+                            <li>gamma</li>
+                            <li>delta</li>
+                        </ol>
+                    </li>
+                    <li>fourth</li>
+                </ol>
+            </div>
+            <div class="column-4">
+                <h2>No bullets</h2>
+                <p>Add class <code>.no-bullets</code></p>
+                <ul class="no-bullets">
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third
+                        <ul>
+                            <li>alpha</li>
+                            <li>beta</li>
+                            <li>gamma</li>
+                            <li>delta</li>
+                        </ul>
+                    </li>
+                    <li>fourth</li>
+                </ul>
+
+                <ol class="no-bullets">
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third
+                        <ol>
+                            <li>alpha</li>
+                            <li>beta</li>
+                            <li>gamma</li>
+                            <li>delta</li>
+                        </ol>
+                    </li>
+                    <li>fourth</li>
+                </ol>
+            </div>
+            <div class="column-4">
+                <h2>Coloured</h2>
+                <p>Add class <code>.colored</code></p>
+                <ul class="colored">
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third
+                        <ul>
+                            <li>alpha</li>
+                            <li>beta</li>
+                            <li>gamma</li>
+                            <li>delta</li>
+                        </ul>
+                    </li>
+                    <li>fourth</li>
+                </ul>
+
+                <ol class="colored">
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third
+                        <ol>
+                            <li>alpha</li>
+                            <li>beta</li>
+                            <li>gamma</li>
+                            <li>delta</li>
+                        </ol>
+                    </li>
+                    <li>fourth</li>
+                </ol>
+            </div>
+        </section>
+        <hr />
+        <section class="row">
+            <h1>Definition Lists</h1>
+            <div class="column-6">
+                <h2>Standard</h2>
+                <dl>
+                    <dt>Description list</dt>
+                    <dd>A group of terms and their definitions.</dd>
+                    <dt>Name of the term</dt>
+                    <dd>Description of the term.</dd>
+                    <dd>Secondary description of the term.</dd>
+                    <dt>Name of the term</dt>
+                    <dd>Description of the term with lots of copy. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.
+                    </dd>
+                </dl>
+            </div>
+            <div class="column-6">
+                <h2>Horizontal Layout</h2>
+                <p>Add class <code>.dl-horizontal</code></p>
+                <dl class="dl-horizontal">
+                    <dt>Description list</dt>
+                    <dd>A group of terms and their definitions.</dd>
+                    <dt>Name of the term</dt>
+                    <dd>Description of the term.</dd>
+                    <dd>Secondary description of the term.</dd>
+                    <dt>Name of the term</dt>
+                    <dd>Description of the term with lots of copy. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.
+                    </dd>
+                </dl>
+            </div>
+        </section>
+    </article>
+    <footer class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is responsive web development boilerplate built for your benefit by <a href="https://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="assets/js/responsive.js"></script>
+
+    <!-- Google Analytics: -->
+    <script>
+        var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = '//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s)
+        }(document, 'script'));
+    </script>
+
+    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+</body>
+</html>
