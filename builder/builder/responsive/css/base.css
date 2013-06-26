@@ -1,0 +1,114 @@
+﻿/* Responsive Base v1.0.0 */
+
+/*
+ * Fix the box model
+ */
+*, *:before, *:after {
+    -webkit-box-sizing: border-box!important;
+    -moz-box-sizing: border-box!important;
+    -ms-box-sizing: border-box!important;
+    box-sizing: border-box!important;
+}
+
+
+/*
+ * 1. Use the iOS devices hardware accelerator to provide native scrolling.
+ * 2. Prevents iOS and MS text size adjust after orientation change, without disabling user zoom.
+ */
+html {
+    -webkit-overflow-scrolling: touch; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/*
+ * Headers
+ * 1: Improve rendering of screen fonts.
+ * 2: Ensure class driven versions act appropriately.
+ */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    text-rendering: optimizeLegibility; /* 1 */
+    display: block; /* 2 */
+    font-weight: bold; /* 2 */
+    page-break-after: avoid; /* 2 */
+}
+
+/*Match the default defined in normalize.css*/
+.h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+.h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+}
+
+.h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+}
+
+.h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+}
+
+.h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0;
+}
+
+.h6 {
+    font-size: 0.67em;
+    margin: 2.33em 0;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #c0c0c0;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Add query indicator to abbr
+ */
+abbr {
+    cursor: help;
+}

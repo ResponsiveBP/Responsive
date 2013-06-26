@@ -1,0 +1,156 @@
+﻿/* Responsive Carousel v1.0.0 */
+
+.carousel {
+    position: relative;
+    margin-bottom: 1em;
+    border: 1px solid #c0c0c0;
+}
+
+.carousel-inner {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* 
+ * Default slide version
+ */
+.carousel .carousel-item {
+    display: none;
+    position: relative;
+    -webkit-transition: .7s ease-in-out left;
+    -moz-transition: .7s ease-in-out left;
+    -o-transition: .7s ease-in-out left;
+    transition: .7s ease-in-out left;
+}
+
+    .carousel .carousel-item > img {
+        display: block;
+        width: 100%;
+    }
+
+/* 
+ * Next Last version
+ */
+.carousel .carousel-active,
+.carousel .next,
+.carousel .prev {
+    display: block;
+}
+
+.carousel .carousel-active {
+    left: 0;
+}
+
+.carousel .next,
+.carousel .prev {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.carousel .next {
+    left: 100%;
+}
+
+.carousel .prev {
+    left: -100%;
+}
+
+    .carousel .next.left,
+    .carousel .prev.right {
+        left: 0;
+    }
+
+.carousel .carousel-active.left {
+    left: -100%;
+}
+
+.carousel .carousel-active.right {
+    left: 100%;
+}
+
+.carousel-control,
+.carousel-control:visited {
+    position: absolute;
+    top: 40%;
+    left: 1em;
+    padding: .5em;
+    margin-top: -1em;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #222;
+    color: inherit;
+    text-decoration: none;
+}
+
+    .carousel-control.right {
+        left: auto;
+        right: 1em;
+    }
+
+    .carousel-control,
+    .carousel-control:visited,
+    .carousel-control:focus {
+        outline: 0;
+    }
+
+        .carousel-control:hover {
+            text-decoration: underline;
+        }
+
+.carousel-caption {
+    padding: 0 1em;
+    background: #fff;
+}
+
+/* 
+ * Fade version
+ */
+.carousel[data-carousel-mode="fade"] .carousel-item {
+    -webkit-transition: opacity 1.4s ease-in-out;
+    -moz-transition: opacity 1.4s ease-in-out;
+    -o-transition: opacity 1.4s ease-in-out;
+    transition: opacity 1.4s ease-in-out;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -moz-opacity: 0;
+    opacity: 0;
+}
+
+.carousel[data-carousel-mode="fade"] .carousel-active {
+    -moz-opacity: 1;
+    opacity: 1;
+}
+
+    .carousel[data-carousel-mode="fade"] .carousel-active.left,
+    .carousel[data-carousel-mode="fade"] .carousel-active.right {
+        left: 0;
+        -moz-opacity: 0;
+        opacity: 0;
+        z-index: 2;
+    }
+
+.carousel[data-carousel-mode="fade"] .carousel-item.next,
+.carousel[data-carousel-mode="fade"] .carousel-item.prev {
+    left: 0;
+    z-index: 1;
+    -moz-opacity: 1;
+    opacity: 1;
+}
+
+.carousel[data-carousel-mode="fade"] .carousel-item.carousel-active {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel[data-carousel-mode="fade"] .carousel-control,
+.carousel.carousel-fade .carousel-control:visited {
+    z-index: 3;
+}

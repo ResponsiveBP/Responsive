@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="dotless" type="dotless.Core.configuration.DotlessConfigurationSectionHandler, dotless.Core" />
+  </configSections>
+  <dotless minifyCss="false" cache="true" web="false" />
+  <system.webServer>
+    <handlers>
+      <add name="dotless" path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler,dotless.Core" resourceType="File" preCondition="" />
+    </handlers>
+  </system.webServer>
+  <system.web>
+    <httpHandlers>
+      <add path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler, dotless.Core" />
+    </httpHandlers>
+  </system.web>
+</configuration>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Responsive - A minimalist front-end framework.">
+    <meta name="viewport" content="width=device-width">
+    <title>Responsive :: Media</title>
+    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="assets/css/docs.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+    <article class="container" role="main">
+        <h1 class="masthead">Media</h1>
+        <p>Responsive images and video that scale to your viewport.</p>
+        <section>
+            <h1>Images</h1>
+            <div class="row">
+                <div class="column-4">
+                    <img src="assets/img/img.gif" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="column-4">
+                    <img src="assets/img/img.gif" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="column-4">
+                    <img src="assets/img/img.gif" alt="responsive image" title="responsive image" />
+                </div>
+            </div>
+        </section>
+        <section>
+            <h1>Video</h1>
+            <p>Video containers are scaled when embedding a video from YouTube, Vimeo, or another site that uses iframe, embed or object elements.</p>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Youtube</h2>
+                    <p>Add class <code>.media</code> to the media container.</p>
+                    <div class="media">
+                        <iframe width="560" height="315" src="http://www.youtube.com/embed/eRW84aVCMWo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Vimeo</h2>
+                    <p>Add classes <code>.media</code> and <code>.vimeo</code> to the media container.</p>
+                    <div class="media vimeo">
+                        <iframe src="http://player.vimeo.com/video/24954567" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
+        </section>
+    </article>
+    <footer class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="https://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="assets/js/responsive.js"></script>
+
+    <!-- Google Analytics: -->
+    <script>
+        var _gaq = [['_setAccount', 'UA-42035025-1'], ['_trackPageview']];
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = '//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s)
+        }(document, 'script'));
+    </script>
+
+    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+</body>
+</html>

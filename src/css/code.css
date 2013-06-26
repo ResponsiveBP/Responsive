@@ -1,0 +1,49 @@
+﻿/* Responsive Code v1.0.0 */
+
+/*
+ * Colours and padding.
+ */
+pre, code, samp, kbd {
+    background-color: #f7f7f9;
+    border: 1px solid #c0c0c0;
+    color: #ad0d36;
+    padding: .13em .25em;
+}
+
+/*
+ * Prevent overlap on concurrent lines.
+ */
+code, samp, kbd {
+    padding: .067em .25em;
+}
+
+/*
+ * Prevent wrapping.
+ */
+kbd {
+    white-space: nowrap;
+}
+
+/*
+ * Remove borders etc in pre.
+ */
+pre code,
+pre samp {
+    border: none;
+    padding: 0;
+}
+
+/*
+ * Reassert wrapping.
+ */
+pre code {
+    white-space: pre-wrap;
+}
+
+/*
+ * Fixed height with overflow.
+ */
+.pre-scrollable {
+    max-height: 20em;
+    overflow-y: scroll;
+}

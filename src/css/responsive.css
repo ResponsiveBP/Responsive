@@ -1,0 +1,44 @@
+﻿/*
+ * Responsive framework
+ *
+ * Responsive is a minimalist framework for rapidly creating responsive websites specifically 
+ * written to prevent the need to undo styles set by the framework itself and allow 
+ * developers to write streamlined code.
+ *
+ * Portions of this CSS are based on the incredibly hard work that has been 
+ * done creating the HTML5 Boilerplate, Twitter Bootstrap, Zurb Foundation, and Normalize.css 
+ * and all credit for that work is due to them.
+ * 
+ */
+
+/*  ==|== Responsive =============================================================
+    Author: James South
+    twitter : http://twitter.com/James_M_South
+    github : https://github.com/JimBobSquarePants/Responsive
+    Copyright (c),  James South.
+    Licensed under the Apache License v2.0.
+    ============================================================================== */
+
+/*! Responsive v1.0.0 | Apache v2.0 License | git.io/rRNRLA */
+/* All CSS files combined. This should be ran through a preprocessor */
+@import url(normalize.css);
+@import url(grid.css);
+@import url(base.css);
+@import url(lists-base.css);
+@import url(lists.css) screen and (min-width: 768px);
+@import url(tables.css);
+@import url(alerts.css);
+@import url(media.css);
+@import url(forms-base.css);
+@import url(forms.css) screen and (min-width: 480px);
+@import url(buttons.css);
+@import url(code.css);
+@import url(dropdown.css);
+@import url(autosize.css);
+@import url(carousel.css);
+@import url(tabs.css);
+@import url(lightbox-base.css);
+@import url(lightbox.css);
+@import url(helpers-base.css);
+@import url(helpers.css);
+@import url(print.css);

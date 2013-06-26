@@ -1,0 +1,134 @@
+﻿/* Responsive Buttons v1.0.0 */
+
+/*
+ * Normalize button borders, colour, and padding.
+ * 1: Remove rounded corners on iPhone.
+ */
+
+button,
+input[type="submit"],
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: .5em 1em;
+    margin-bottom: 0;
+    line-height: normal;
+    font-size: 1em;
+    color: #222;
+    cursor: pointer;
+    position: relative;
+    -webkit-appearance: none; /* 1 */
+    border-radius: 0; /* 1 */
+}
+
+    /*
+     * Disabled state.
+     */
+    button.disabled,
+    button[disabled],
+    input[type="submit"].disabled,
+    input[type="submit"][disabled],
+    .btn.disabled {
+        cursor: not-allowed;
+    }
+
+
+/*
+ * Simple button style.
+ */
+.btn {
+    border: solid 1px #c0c0c0;
+    background-color: #dadada;
+}
+
+    /*
+     * Button states.
+     */
+    .btn:hover,
+    .btn.hover,
+    .btn:active,
+    .btn.active,
+    .btn:focus,
+    .btn.focus,
+    .btn[disabled],
+    .btn.disabled {
+        background-color: #cdcdcd;
+    }
+
+    /*
+     * IE8 & IE9 render a double width outline on input.
+     * To normalise remove the outline and use border.
+     */
+    .btn:focus,
+    .btn.focus {
+        border: 1px solid #00a9ec;
+        outline: 0;
+    }
+
+    .btn:active,
+    .btn.active {
+        background-color: #e7e7e7;
+        border-color: #c0c0c0;
+        outline: none;
+    }
+
+    .btn.disabled,
+    .btn[disabled] {
+        color: #5d5d5d;
+        background-color: #e7e7e7;
+    }
+
+/*
+ * Inline buttons designed for rendering next to inputs.
+ * 1. Fix inline-block margin.
+ * 2. Padd buttons.
+ * 3. Fix alignment for anchors
+ */
+
+button.btn-inline,
+input[type="submit"].btn-inline,
+.btn-inline {
+    margin-left: -5px; /* 1 */
+    padding: .25em 1em; /* 2 */
+}
+
+input[type="submit"].btn.btn-inline,
+.btn.btn-inline {
+    margin-left: -4px; /* 1 */
+}
+
+/*
+ * Grouped buttons.
+ */
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.btn-group:before,
+.btn-group:after {
+    content: "";
+    display: table;
+}
+
+.btn-group:after {
+    clear: both;
+}
+
+.btn-group {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+    .btn-group > .btn {
+        float: left;
+    }

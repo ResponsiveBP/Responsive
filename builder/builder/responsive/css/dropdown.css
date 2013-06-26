@@ -1,0 +1,37 @@
+﻿/* Responsive Accordion v1.0.0 */
+
+.accordion {
+    border: solid 1px #c0c0c0;
+    margin-bottom: .125em;
+}
+
+.accordion-head {
+    display: block;
+    padding: .5em;
+    cursor: pointer;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+    .accordion-head a {
+        outline: none;
+    }
+
+.accordion-body {
+    padding: 0 .5em;
+}
+
+.expand, .collapse {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    margin-top: 0;
+    -moz-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    -webkit-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+}
+
+.collapse {
+    height: 0;
+    margin-top: -1px;
+}

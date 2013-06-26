@@ -1,0 +1,58 @@
+﻿/* Responsive Media v1.0.0*/
+
+/*
+ * Remove the gap between images and the bottom of their containers.
+ * Make the image responsive.
+ */
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+/*
+ * Remove the border around images in anchors.
+ */
+a img {
+    border: none;
+}
+
+
+/*
+ * Properly scale your video on any device based on YouTube ratio.
+ */
+.media {
+    position: relative;
+    padding-top: 1.5625em;
+    padding-bottom: 67.5%;
+    height: 0;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+
+    /* 
+     * Widescreen mode.
+     */
+    .media.widescreen {
+        padding-bottom: 57.25%;
+    }
+
+    /*
+     * Vimeo places the controls on the player itself.
+     */
+    .media.vimeo {
+        padding-top: 0;
+    }
+
+    /*
+     * The actual player.
+     */
+    .media iframe,
+    .media object,
+    .media embed,
+    .media video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }

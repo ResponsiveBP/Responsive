@@ -1,0 +1,23 @@
+﻿/* Responsive Lists v1.0.0*/
+
+/* Definition lists */
+
+/* 
+ * Horizontally styled definition list 
+ */
+
+.dl-horizontal > dt {
+    float: left;
+    clear: left;
+    width: 150px;
+    overflow: hidden;
+    text-align: right;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dl-horizontal > dd {
+    margin-left: 166px;
+}

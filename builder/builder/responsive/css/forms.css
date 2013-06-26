@@ -1,0 +1,45 @@
+﻿/* Responsive Forms v1.0.0 */
+
+/* horizontal */
+.form-horizontal label {
+    float: left;
+    clear: left;
+    width: 160px;
+    overflow: hidden;
+    text-align: right;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+.form-horizontal input,
+.form-horizontal input[type="text"],
+.form-horizontal input[type="password"],
+.form-horizontal input[type="datetime"],
+.form-horizontal input[type="datetime-local"],
+.form-horizontal input[type="date"],
+.form-horizontal input[type="month"],
+.form-horizontal input[type="time"],
+.form-horizontal input[type="week"],
+.form-horizontal input[type="number"],
+.form-horizontal input[type="email"],
+.form-horizontal input[type="url"],
+.form-horizontal input[type="search"],
+.form-horizontal input[type="tel"],
+.form-horizontal input[type="color"],
+.form-horizontal select,
+.form-horizontal textarea,
+.form-horizontal .no-edit-input,
+.form-horizontal .input-tamer,
+.form-horizontal fieldset > p,
+.form-horizontal fieldset > span {
+    margin-left: 176px;
+    margin-bottom: 1em;
+}
+
+.form-horizontal .form-actions {
+    padding-left: 176px;
+}

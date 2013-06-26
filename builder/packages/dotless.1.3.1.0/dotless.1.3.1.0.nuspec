@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>dotless</id>
+    <version>1.3.1.0</version>
+    <authors>Daniel Hölbling,  James Foster,  Luke Page</authors>
+    <owners>Daniel Hölbling,  James Foster,  Luke Page</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This is a project to port the hugely useful Less libary to the .NET world. It give variables, nested rules and operators to CSS.
+
+For more information about the original Less project see http://lesscss.org/ or http://github.com/dotless/dotless. For more information about how to get started with the .NET version see http://www.dotlesscss.org/.
+
+For the client only dll on its own, see the DotlessClientOnly package.</description>
+  </metadata>
+</package>

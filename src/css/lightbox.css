@@ -1,0 +1,10 @@
+﻿/* Responsive LightBox Base v1.0.0 */
+
+/*
+ * Responsive iframe widths.
+ */
+@media screen and (min-width: 767px) {
+    .lightbox iframe {
+        min-width: 644px;
+    }
+}
