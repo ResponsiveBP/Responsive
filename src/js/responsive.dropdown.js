@@ -88,7 +88,7 @@
                     // The event to expose.
                     var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
 
-                    if (startEvent === "show") {
+                    if (startEvent.type === "show") {
                         // Reset to allow animation to continue.
                         self.reset();
                     }
