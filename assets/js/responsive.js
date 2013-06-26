@@ -71,15 +71,20 @@
     }());
 
     $.extend($.expr[":"], {
-        // Custom selector extension to allow attribute starts with selection.
         attrStart: function (el, i, props) {
+            /// <summary>Custom selector extension to allow attribute starts with selection.</summary>
+            /// <param name="el" type="DOM">The element to test against.</param>
+            /// <param name="i" type="Number">The index of the element in the stack.</param>
+            /// <param name="props" type="Object">Metadata for the element.</param>
+            /// <returns type="Boolean">True if the element is a match; otherwise, false.</returns>
             var hasAttribute = false;
 
-            $.each(el.attributes, function (i, attr) {
-                if (attr.name.indexOf(props[3]) !== -1) {
+            $.each(el.attributes, function () {
+                if (this.name.indexOf(props[3]) !== -1) {
                     hasAttribute = true;
                     return false;  // Exit the iteration.
                 }
+                return true;
             });
 
             return hasAttribute;
@@ -87,7 +92,11 @@
     });
 
     $.buildDataOptions = function ($elem, options, prefix) {
-
+        /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
+        /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
+        /// <param name="options" type="Object">The object to extend</param>
+        /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
+        /// <returns type="Object">The extended object.</returns>
         $.each($elem.data(), function (key, val) {
 
             if (key.indexOf(prefix) === 0 && key.length > prefix.length) {
@@ -111,152 +120,6 @@
 
 }(jQuery));
 /*
-* Responsive Accordion v1.0.0
-*/
-
-/*global jQuery*/
-(function ($) {
-
-    "use strict";
-
-    // General variables.
-    var supportTransition = $.support.transition,
-
-    // The Accordion object that contains our methods.
-        Accordion = function (element, options) {
-
-            this.$element = $(element);
-            this.options = $.extend({}, $.fn.accordion.defaults, options);
-            this.$parent = null;
-            this.transitioning = null;
-
-            if (this.options.parent) {
-                this.$parent = this.$element.parents(this.options.parent + ":first");
-            }
-
-            // Check to see if the plug-in is set to toggle and trigger 
-            // the correct internal method if so.
-            if (this.options.toggle) {
-                this.toggle();
-            }
-
-        };
-
-    // Assign public methods via the Accordion prototype.
-    Accordion.prototype = {
-
-        constructor: Accordion,
-        show: function () {
-
-            if (this.transitioning || this.$element.hasClass("expand")) {
-                return;
-            }
-
-            var actives = this.$parent && this.$parent.find(".expand"),
-                hasData;
-
-            if (actives && actives.length) {
-                hasData = actives.data("accordion");
-                actives.accordion("hide");
-
-                if (!hasData) {
-                    actives.data("accordion", null);
-                }
-            }
-
-            this.transition("addClass", $.Event("show"), "shown");
-        },
-        hide: function () {
-
-            if (this.transitioning || !this.$element.hasClass("expand")) {
-                return;
-            }
-
-            this.transition("removeClass", $.Event("hide"), "hidden");
-
-        },
-        transition: function (method, startEvent, completeEvent) {
-            var self = this,
-                complete = function () {
-                    // The event to expose.
-                    var eventToTrigger = $.Event(completeEvent + ".accordion.responsive");
-
-                    self.transitioning = false;
-
-                    self.$element.trigger(eventToTrigger);
-                };
-
-            if (startEvent.isDefaultPrevented()) {
-                return;
-            }
-
-            self.transitioning = true;
-
-            this.$element.trigger(startEvent)[method]("expand");
-            this.$element[startEvent.type === "hide" ? "addClass" : "removeClass"]("collapse");
-
-            if (supportTransition && this.$element.hasClass("collapse")) {
-                this.$element.one(supportTransition.end, complete);
-            } else {
-                complete();
-            }
-
-        },
-        toggle: function () {
-            // Run the correct command based on the presence of the class 'expand'.
-            this[this.$element.hasClass("expand") ? "hide" : "show"]();
-        }
-
-    };
-
-    /* Plugin definition */
-    $.fn.accordion = function (options) {
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data("accordion"),
-                opts = typeof options === "object" ? options : null;
-
-            if (!data) {
-                // Check the data and reassign if not present.
-                $this.data("accordion", (data = new Accordion(this, opts)));
-            }
-
-            // Run the appropriate function if a string is passed.
-            if (typeof options === "string") {
-                data[options]();
-            }
-
-        });
-
-    };
-
-    // Define the defaults.
-    $.fn.accordion.defaults = {
-        toggle: true
-    };
-
-    // Set the public constructor.
-    $.fn.accordion.Constructor = Accordion;
-
-    // Accordion data api initialization.
-    $(function () {
-        $(document.body).on("click.accordion.responsive", ":attrStart(data-accordion)", function (event) {
-
-            event.preventDefault();
-
-            var $this = $(this),
-                data = $this.data("accordionOptions"),
-                options = data || $.buildDataOptions($this, {}, "accordion"),
-                target = options.target || (options.target = $this.attr("href")),
-                $target = $(target),
-                params = $target.data("accordion") ? "toggle" : options;
-
-            // Run the accordion method.
-            $target.accordion(params);
-
-        });
-    });
-}(jQuery));/*
  * Responsive AutoSize v1.0.0
  */
 
@@ -278,6 +141,23 @@
             if ($.isPlainObject(options)) {
 
                 this.options = $.extend({}, $.fn.autoSize.defaults, options);
+
+                this.$element.on("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive", function (event) {
+
+                    var $this = $(this),
+                        delay = 0;
+
+                    if (event.type === "paste" || event.type === "cut") {
+                        delay = 5;
+                    }
+
+                    window.setTimeout(function () {
+
+                        // Run the autosize method.
+                        $this.autoSize("size");
+
+                    }, delay);
+                });
 
                 var self = this,
                     attributes = this.options.removeAttributes,
@@ -403,25 +283,7 @@
             // Run the autosize method.
             $this.autoSize(options);
 
-            // Add further events.
-            $(document.body).on("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive", "textarea[data-autosize]", function (event) {
-
-                var $this = $(this),
-                    delay = 0;
-
-                if (event.type === "paste" || event.type === "cut") {
-                    delay = 5;
-                }
-
-                window.setTimeout(function () {
-
-                    // Run the autosize method.
-                    $this.autoSize("size");
-
-                }, delay);
-            });
         });
-
     });
 
     $(window).on("resize.autosize.responsive", function () {
@@ -852,7 +714,7 @@
 
             var $this = $(this),
                 data = $this.data("dismissOptions"),
-                options = data || $.buildDataOptions($this, {}, "dismiss"),//  $this.data("dismiss"),
+                options = data || $.buildDataOptions($this, {}, "dismiss"),
                 target = options.target || (options.target = $this.attr("href"));
 
             // Run the dismiss method.
@@ -863,6 +725,177 @@
         });
     });
 
+}(jQuery));/*
+* Responsive Dropdown v1.0.0
+*/
+
+/*global jQuery*/
+(function ($) {
+
+    "use strict";
+
+    // General variables.
+    var supportTransition = $.support.transition,
+
+    // The Dropdown object that contains our methods.
+        Dropdown = function (element, options) {
+
+            this.$element = $(element);
+            this.options = $.extend({}, $.fn.dropdown.defaults, options);
+            this.$parent = null;
+            this.transitioning = null;
+
+            if (this.options.parent) {
+                this.$parent = this.$element.parents(this.options.parent + ":first");
+            }
+
+            // Check to see if the plug-in is set to toggle and trigger 
+            // the correct internal method if so.
+            if (this.options.toggle) {
+                this.toggle();
+            }
+
+        };
+
+    // Assign public methods via the Dropdown prototype.
+    Dropdown.prototype = {
+
+        constructor: Dropdown,
+        show: function () {
+
+            if (this.transitioning || !this.$element.hasClass("collapse")) {
+                return;
+            }
+
+            var dimension = this.options.dimension,
+                scroll = $.camelCase(["scroll", dimension].join("-")),
+                actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
+                hasData;
+
+            if (actives && actives.length) {
+                hasData = actives.data("dropdown");
+                actives.dropdown("hide");
+
+                if (!hasData) {
+                    actives.data("dropdown", null);
+                }
+            }
+
+            // Set the height/width to zero then to the scroll height/width
+            // so animation can take place.
+            this.$element[dimension](0);
+            this.$element[dimension](this.$element[0][scroll]);
+            this.transition("removeClass", $.Event("show"), "shown");
+        },
+        hide: function () {
+
+            if (this.transitioning || this.$element.hasClass("collapse")) {
+                return;
+            }
+
+            // Reset the height/width and then reduce to zero.
+            var dimension = this.options.dimension;
+            this.reset(this.$element[dimension]());
+            this.transition("addClass", $.Event("hide"), "hidden");
+            this.$element[dimension](0);
+        },
+        reset: function (size) {
+
+            // Reset the size of the hidden element.
+            var dimension = this.options.dimension;
+            this.$element.removeClass("expand")
+                         [dimension](size || "auto")
+                         [0].offsetWidth; // Force reflow 
+
+            return this;
+        },
+        transition: function (method, startEvent, completeEvent) {
+            var self = this,
+                complete = function () {
+                    // The event to expose.
+                    var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
+
+                    if (startEvent === "show") {
+                        // Reset to allow animation to continue.
+                        self.reset();
+                    }
+
+                    self.transitioning = false;
+                    self.$element.trigger(eventToTrigger);
+                };
+
+            if (startEvent.isDefaultPrevented()) {
+                return;
+            }
+
+            self.transitioning = true;
+
+            // Remove or add the expand classes.
+            this.$element.trigger(startEvent)[method]("collapse");
+            this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand");
+
+            if (supportTransition) {
+                this.$element.one(supportTransition.end, complete);
+            } else {
+                complete();
+            }
+
+        },
+        toggle: function () {
+            // Run the correct command based on the presence of the class 'collapse'.
+            this[this.$element.hasClass("collapse") ? "show" : "hide"]();
+        }
+
+    };
+
+    /* Plugin definition */
+    $.fn.dropdown = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data("dropdown"),
+                opts = typeof options === "object" ? options : null;
+
+            if (!data) {
+                // Check the data and reassign if not present.
+                $this.data("dropdown", (data = new Dropdown(this, opts)));
+            }
+
+            // Run the appropriate function if a string is passed.
+            if (typeof options === "string") {
+                data[options]();
+            }
+
+        });
+
+    };
+
+    // Define the defaults.
+    $.fn.dropdown.defaults = {
+        toggle: true,
+        dimension: "height"
+    };
+
+    // Set the public constructor.
+    $.fn.dropdown.Constructor = Dropdown;
+
+    // Dropdown data api initialization.
+    $(function () {
+        $(document.body).on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
+
+            event.preventDefault();
+
+            var $this = $(this),
+                data = $this.data("dropdownOptions"),
+                options = data || $.buildDataOptions($this, {}, "dropdown"),
+                target = options.target || (options.target = $this.attr("href")),
+                $target = $(target),
+                params = $target.data("dropdown") ? "toggle" : options;
+
+            // Run the dropdown method.
+            $target.dropdown(params);
+
+        });
+    });
 }(jQuery));/*
 * Responsive Lightbox v1.0.0
 */
@@ -1401,6 +1434,18 @@
         Tabs = function (element) {
 
             this.$element = $(element);
+
+            this.$element.on("click.tabs.responsive", "ul.tabs > li > a", function (event) {
+
+                event.preventDefault();
+
+                var $this = $(this),
+                    $li = $this.parent(),
+                    index = $li.index();
+
+                $(event.delegateTarget).tabs(index);
+
+            });
         };
 
     Tabs.prototype = {
@@ -1480,17 +1525,7 @@
 
     $(document).on("ready.tabs.responsive", function () {
 
-        $("[data-tabs]").tabs().on("click.tabs.responsive", "ul.tabs > li > a", function (event) {
-
-            event.preventDefault();
-
-            var $this = $(this),
-                $li = $this.parent(),
-                index = $li.index();
-
-            $(event.delegateTarget).tabs(index);
-
-        });
+        $("[data-tabs]").tabs();
 
     });
 
