@@ -5,7 +5,7 @@
  * written to prevent the need to undo styles set by the framework itself and allow 
  * developers to write streamlined code.
  *
- * Portions of this CSS are based on the incredibly hard work that has been 
+ * Portions of this CSS and JS are based on the incredibly hard work that has been 
  * done creating the HTML5 Boilerplate, Twitter Bootstrap, Zurb Foundation, and Normalize.css 
  * and all credit for that work is due to them.
  * 
@@ -19,12 +19,10 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! 
- * Responsive v1.0.0 | Apache v2.0 License | git.io/rRNRLA 
- */
+/*! Responsive v1.0.1 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
- * Responsive Utils v1.0.0
+ * Responsive Utils v1.0.1
  */
 
 /*global jQuery*/

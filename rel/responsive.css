@@ -5,7 +5,7 @@
  * written to prevent the need to undo styles set by the framework itself and allow 
  * developers to write streamlined code.
  *
- * Portions of this CSS are based on the incredibly hard work that has been 
+ * Portions of this CSS and JS are based on the incredibly hard work that has been 
  * done creating the HTML5 Boilerplate, Twitter Bootstrap, Zurb Foundation, and Normalize.css 
  * and all credit for that work is due to them.
  * 
@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.0.1 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 
@@ -417,7 +417,7 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/* Responsive Grid v1.0.0 */
+/* Responsive Grid v1.0.1 */
 
 .container {
     margin: 0 auto;
@@ -680,7 +680,7 @@ table {
     left: 8.3333%;
 }
 
-/* Responsive Base v1.0.0 */
+/* Responsive Base v1.0.1 */
 
 /*
  * Fix the box model
@@ -795,7 +795,7 @@ abbr {
     cursor: help;
 }
 
-/* Responsive Lists Base v1.0.0*/
+/* Responsive Lists Base v1.0.1*/
 
 /* 
  * Unordered and ordered lists 
@@ -886,7 +886,7 @@ dt, dd {
 }
 
 @media  screen and (min-width: 768px){
-/* Responsive Lists v1.0.0*/
+/* Responsive Lists v1.0.1*/
 
 /* Definition lists */
 
@@ -911,7 +911,7 @@ dt, dd {
 }
 
 }
-/* Responsive Tables v1.0.0*/
+/* Responsive Tables v1.0.1*/
 
 /* 
  *  Make it responsive
@@ -958,7 +958,7 @@ table {
     background-color: #e7e7e7;
 }
 
-/* Responsive Alert v1.0.0 */
+/* Responsive Alert v1.0.1 */
 
 .alert {
     background-color: #FCF8E3;
@@ -1022,7 +1022,7 @@ table {
 }
 
 
-/* Responsive Media v1.0.0*/
+/* Responsive Media v1.0.1*/
 
 /*
  * Remove the gap between images and the bottom of their containers.
@@ -1081,7 +1081,7 @@ a img {
         height: 100%;
     }
 
-/* Responsive Forms Base v1.0.0 */
+/* Responsive Forms Base v1.0.1 */
 
 .form {
     margin: 1em 0;
@@ -1387,7 +1387,7 @@ textarea[readonly] {
 }
 
 @media  screen and (min-width: 480px){
-/* Responsive Forms v1.0.0 */
+/* Responsive Forms v1.0.1 */
 
 /* horizontal */
 .form-horizontal label {
@@ -1434,7 +1434,7 @@ textarea[readonly] {
 }
 
 }
-/* Responsive Buttons v1.0.0 */
+/* Responsive Buttons v1.0.1 */
 
 /*
  * Normalize button borders, colour, and padding.
@@ -1569,7 +1569,7 @@ input[type="submit"].btn.btn-inline,
         float: left;
     }
 
-/* Responsive Code v1.0.0 */
+/* Responsive Code v1.0.1 */
 
 /*
  * Colours and padding.
@@ -1619,7 +1619,7 @@ pre code {
     overflow-y: scroll;
 }
 
-/* Responsive Accordion v1.0.0 */
+/* Responsive Dropdown v1.0.1 */
 
 .accordion {
     border: solid 1px #c0c0c0;
@@ -1641,23 +1641,33 @@ pre code {
     padding: 0 .5em;
 }
 
+    .accordion-body.collapse {
+        margin-top: -1px;
+    }
+
 .expand, .collapse {
     position: relative;
+    display: block;
     height: auto;
+    width: auto;
     overflow: hidden;
     margin-top: 0;
-    -moz-transition: height 0.6s ease;
-    -o-transition: height 0.6s ease;
-    -webkit-transition: height 0.6s ease;
-    transition: height 0.6s ease;
+    -moz-transition: height 0.5s ease, width 0.5s ease;
+    -o-transition: height 0.5s ease, width 0.5s ease;
+    -webkit-transition: height 0.5s ease, width 0.5s ease;
+    transition: height 0.5s ease, width 0.5s ease;
 }
 
 .collapse {
     height: 0;
-    margin-top: -1px;
 }
 
-/* Responsive Autosize v1.0.0 */
+    .collapse.width {
+        height: auto;
+        width: 0;
+    }
+
+/* Responsive Autosize v1.0.1 */
 
 [data-autosize] {
     overflow: hidden;
@@ -1667,7 +1677,7 @@ pre code {
     transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
 }
 
-/* Responsive Carousel v1.0.0 */
+/* Responsive Carousel v1.0.1 */
 
 .carousel {
     position: relative;
@@ -1824,7 +1834,7 @@ pre code {
     z-index: 3;
 }
 
-/* Responsive Tabs v1.0.0*/
+/* Responsive Tabs v1.0.1*/
 
 [data-tabs] ul.tabs {
     list-style: none;
@@ -1880,7 +1890,7 @@ pre code {
         display: block;
     }
 
-/* Responsive LightBox Base v1.0.0 */
+/* Responsive LightBox Base v1.0.1 */
 
 /* 
  * 1: Average max z-index.
@@ -2017,7 +2027,7 @@ pre code {
             text-decoration: underline;
         }
 
-/* Responsive LightBox Base v1.0.0 */
+/* Responsive LightBox Base v1.0.1 */
 
 /*
  * Responsive iframe widths.
@@ -2028,7 +2038,7 @@ pre code {
     }
 }
 
-/* Responsive Helpers Base v1.0.0 */
+/* Responsive Helpers Base v1.0.1 */
 
 /*
  * Image replacement
@@ -2185,7 +2195,7 @@ pre code {
     display: inherit !important;
 }
 
-/* Responsive Helpers v1.0.0 */
+/* Responsive Helpers v1.0.1 */
 
 /*
  * Responsive helpers to toggle visibility. 
@@ -2235,7 +2245,7 @@ pre code {
     }
 }
 
-/* Responsive Print v1.0.0*/
+/* Responsive Print v1.0.1*/
 
 @media print {
     * {

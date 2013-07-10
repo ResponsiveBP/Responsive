@@ -1,5 +1,5 @@
 ﻿/*
-* Responsive Lightbox v1.0.0
+* Responsive Lightbox v1.0.1
 */
 
 /*global jQuery*/
@@ -13,10 +13,8 @@
         $overlay = $("<div/>").addClass("lightbox-overlay hidden fade-out"),
         $lightbox = $("<div/>").addClass("lightbox fade-out lightbox-loader").appendTo($overlay),
         $next = $("<a/>").attr("href", "#")
-                         .text(">")
                          .addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr("href", "#")
-                             .text("<")
                              .addClass("lightbox-direction left hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         supportTransition = $.support.transition,
@@ -94,6 +92,8 @@
             target = this.options.target,
             local = !this.options.external,
             group = this.options.group,
+            nextText = this.options.next,
+            previousText = this.options.previous,
             iframeScroll = this.options.iframeScroll,
             iframe = this.options.iframe || !local ? isExternalUrl(target) : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "lightbox-iframe-scroll" : "lightbox-iframe"),
@@ -188,8 +188,8 @@
 
         if (group) {
             // Need to show next/previous.
-            $next.prependTo($lightbox).removeClass("hidden");
-            $previous.prependTo($lightbox).removeClass("hidden");
+            $next.text(nextText).prependTo($lightbox).removeClass("hidden");
+            $previous.text(previousText).prependTo($lightbox).removeClass("hidden");
         }
 
         $lightbox.off(eclick).on(eclick, $.proxy(function (event) {
@@ -199,15 +199,15 @@
 
             var next = $next[0],
                 previous = $previous[0],
-                close = $close[0],
-                target = event.target;
+                closeTarget = $close[0],
+                eventTarget = event.target;
 
-            if (target === next || target === previous) {
+            if (eventTarget === next || eventTarget === previous) {
 
-                this[target === next ? "next" : "previous"]();
+                this[eventTarget === next ? "next" : "previous"]();
             }
 
-            if (target === close) {
+            if (eventTarget === closeTarget) {
 
                 this.hide();
             }
@@ -470,7 +470,9 @@
         group: null,
         iframe: false,
         iframeScroll: true,
-        keyboard: true
+        keyboard: true,
+        next: ">",
+        previous: "<"
     };
 
     // Bind the lightbox trigger.

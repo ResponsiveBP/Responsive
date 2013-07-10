@@ -1,5 +1,5 @@
 ﻿/*
-* Responsive Dismiss v1.0.0
+* Responsive Dismiss v1.0.1
 */
 
 /*global jQuery*/

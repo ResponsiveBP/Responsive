@@ -1,5 +1,5 @@
 ﻿/*
-* Responsive Dropdown v1.0.0
+* Responsive Dropdown v1.0.1
 */
 
 /*global jQuery*/
@@ -88,7 +88,7 @@
                     // The event to expose.
                     var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
 
-                    if (startEvent === "show") {
+                    if (startEvent.type === "show") {
                         // Reset to allow animation to continue.
                         self.reset();
                     }

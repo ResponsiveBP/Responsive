@@ -1,5 +1,5 @@
 /*
-* Responsive Carousel v1.0.0
+* Responsive Carousel v1.0.1
 */
 
 /*global jQuery*/

@@ -1,5 +1,5 @@
 ﻿/*
-* Responsive Dropdown v1.0.0
+* Responsive Dropdown v1.0.1
 */
 
 /*global jQuery*/
