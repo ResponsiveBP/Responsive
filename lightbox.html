@@ -144,7 +144,7 @@ Lightbox trigger
                 If you need to override this behaviour the following code will allow you to do so.
                 </p>
                 <pre><code>// Override the default behaviour
-$(document.body).off("click.lightbox.responsive", ":attrStart(data-lightbox)", function (event) {    
+$(document.body).off("click.lightbox.responsive").on("click.lightbox.responsive", ":attrStart(data-lightbox)", function (event) {    
     // Your custom behaviour...
 });</code></pre>
             </section>
