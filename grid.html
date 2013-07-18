@@ -11,6 +11,7 @@
       <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
     <![endif]-->
     <link href="assets/css/docs.css" rel="stylesheet" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
     <!--[if lt IE 9 &!(IEMobile)]>
       <link href="assets/css/docs-legacy.css" rel="stylesheet" />
       <script src="assets/js/vendor/html5shiv.js"></script>
@@ -33,14 +34,14 @@
             <h1 class="masthead">The Grid</h1>
             <p>
                 The default Responsive grid system utilizes 12 columns. These can be wrapped in a containing element marked with the class 
-                <code>.container</code> which will constrain the width to 95% of the viewport width to a maximum of 1140px and center the grid within the viewport.
+                <code>.container</code> which will constrain the width to 95% of the viewport width up to a maximum of 1140px and center the grid within the viewport.
             </p>
             <p>
                 On viewports below 768px wide, the columns stack vertically unless otherwise specified.
             </p>
             <p>On IE8 the grid system is static.</p>
             <p>Grids are laid out as follows:</p>
-            <pre><code>&lt;!-- A two column layout --&gt;
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
 &lt;div class="row"&gt;
   &lt;div class="column-6"&gt; First column &lt;/div&gt; 
   &lt;div class="column-6"&gt; Second column &lt;/div&gt; 
@@ -607,6 +608,7 @@
     <![endif]-->
     <!--[if gt IE 8]><!-->
     <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
     <script src="assets/js/responsive.js"></script>

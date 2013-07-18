@@ -11,6 +11,7 @@
       <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
     <![endif]-->
     <link href="assets/css/docs.css" rel="stylesheet" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
     <!--[if lt IE 9 &!(IEMobile)]>
       <link href="assets/css/docs-legacy.css" rel="stylesheet" />
       <script src="assets/js/vendor/html5shiv.js"></script>
@@ -62,7 +63,7 @@
         <hr />
         <section class="row">
             <h1>The Markup</h1>
-            <pre><code>/* Add inside any element. */
+            <pre class="language-markup"><code>/* Add inside any element. */
 &lt;a href="#" data-dismiss-target="YOUR_SELECTOR"&gt;x&lt;/a&gt;</code></pre>
         </section>
         <hr />
@@ -82,7 +83,7 @@
             <p>The dismiss plugin  exposes the following events allowing the developer to tap into its behaviour.</p>
             <dl>
                 <dt><strong>close.dismiss.responsive</strong></dt>
-                <dd>This event is fired immediately when the plugins <code class=" language-javascript">close</code> instance method is invoked.</dd>
+                <dd>This event is fired immediately when the plugins <code>close</code> instance method is invoked.</dd>
                 <dt><strong>closed.dismiss.responsive</strong></dt>
                 <dd>This event is fired when the plugins <code>closed</code> instance method is invoked once the target has completed the animation and is hidden.</dd>
             </dl>
@@ -94,10 +95,11 @@
                 The tabs default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
                 If you need to override this behaviour the following code will allow you to do so.
             </p>
-            <pre><code>// Override the default behaviour
-$(document.body).off("click.dismiss.responsive", ":attrStart(data-dismiss)", function (event) {    
-    // Your custom behaviour...
-});</code></pre>
+            <pre class="language-javascript"><code>// Override the default behaviour
+$(document.body).off("click.dismiss.responsive")
+                .on("click.dismiss.responsive", ":attrStart(data-dismiss)", function (event) {    
+                    // Your custom behaviour...
+                });</code></pre>
         </section>
     </article>
     <footer class="container">
@@ -125,6 +127,7 @@ $(document.body).off("click.dismiss.responsive", ":attrStart(data-dismiss)", fun
     <![endif]-->
     <!--[if gt IE 8]><!-->
     <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
     <script src="assets/js/responsive.js"></script>

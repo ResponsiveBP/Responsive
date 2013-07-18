@@ -11,6 +11,7 @@
       <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
     <![endif]-->
     <link href="assets/css/docs.css" rel="stylesheet" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
     <!--[if lt IE 9 &!(IEMobile)]>
       <link href="assets/css/docs-legacy.css" rel="stylesheet" />
       <script src="assets/js/vendor/html5shiv.js"></script>
@@ -77,7 +78,7 @@
             <hr />
             <section class="row">
                 <h1>The Markup</h1>
-                <pre><code>/* Add inside any element. */
+                <pre class="language-markup"><code>/* Add inside any element. */
 &lt;a href="YOUR_TARGET" or data-lightbox-target="YOUR_TARGET" data-lightbox-title="YOUR_TITLE" data-lightbox-group="YOUR_GROUP_NAME" &gt;
 Lightbox trigger
 &lt;/a&gt;</code></pre>
@@ -105,6 +106,10 @@ Lightbox trigger
                                 <dd>Whether the iframe should have scrollbars.</dd>
                                 <dt><strong>keyboard</strong></dt>
                                 <dd>Whether to enable keyboard control.</dd>
+                                <dt><strong>title</strong></dt>
+                                <dd>The text to insert as the title of the lightbox</dd>
+                                <dt><strong>description</strong></dt>
+                                <dd>The text to insert as the description of the lightbox in the footer</dd>
                                 <dt><strong>next</strong></dt>
                                 <dd>The text to insert into the next indicator. Defaults to 
                                     <var>></var></dd>
@@ -149,10 +154,11 @@ Lightbox trigger
                     The lightbox's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
                 If you need to override this behaviour the following code will allow you to do so.
                 </p>
-                <pre><code>// Override the default behaviour
-$(document.body).off("click.lightbox.responsive").on("click.lightbox.responsive", ":attrStart(data-lightbox)", function (event) {    
-    // Your custom behaviour...
-});</code></pre>
+                <pre class="language-javascript"><code>// Override the default behaviour
+$(document.body).off("click.lightbox.responsive")
+                .on("click.lightbox.responsive", ":attrStart(data-lightbox)", function (event) {    
+                    // Your custom behaviour...
+                });</code></pre>
             </section>
         </div>
     </article>
@@ -181,6 +187,7 @@ $(document.body).off("click.lightbox.responsive").on("click.lightbox.responsive"
     <![endif]-->
     <!--[if gt IE 8]><!-->
     <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
     <script src="assets/js/responsive.js"></script>

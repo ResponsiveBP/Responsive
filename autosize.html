@@ -11,6 +11,7 @@
       <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
     <![endif]-->
     <link href="assets/css/docs.css" rel="stylesheet" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
     <!--[if lt IE 9 &!(IEMobile)]>
       <link href="assets/css/docs-legacy.css" rel="stylesheet" />
       <script src="assets/js/vendor/html5shiv.js"></script>
@@ -51,10 +52,10 @@
         <hr />
         <section class="row">
             <h1>The Markup</h1>
-            <pre><code>&lt;!-- Standard markup --&gt;
+            <pre class="language-markup"><code>&lt;!-- Standard markup --&gt;
 &lt;textarea id="textarea1" name="textarea1" data-autosize="" &gt;&lt;/textarea &gt;
 
-&lt;!-- Additional remove attributes/classes markup --&gt;
+&lt;!-- Additional remove attributes/classes markup (space separated values) --&gt;
 &lt;textarea id="textarea2" name="textarea2" data-autosize="" data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate error" &gt;&lt;/textarea &gt;</code></pre>
         </section>
         <hr />
@@ -98,20 +99,23 @@
                 The autosize plugin default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
                 If you need to override this behaviour the following code will allow you to do so.
             </p>
-            <pre><code>// Override the default behaviour
-$(document).off("ready.autosize.responsive", function () {
-    // Your custom behaviour...
-}); 
+            <pre class="language-javascript"><code>// Override the default behaviour
+$(document).off("ready.autosize.responsive")
+           .on("ready.autosize.responsive", function () {
+               // Your custom behaviour...
+           }); 
 
 // Override the default textarea control cut/paste/keyup behaviour
-$(document.body).off("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive", "textarea[data-autosize]", function (event) {
-    // Your custom behaviour...
-}); 
+$(document.body).off("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive")
+                .on("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive", "textarea[data-autosize]", function (event) {
+                    // Your custom behaviour...
+                }); 
 
 // Override the default window resize behaviour
-$(window).off("resize.autosize.responsive", function () {
-    // Your custom behaviour...
-}); 
+$(window).off("resize.autosize.responsive")
+         .on("resize.autosize.responsive", function () {
+             // Your custom behaviour...
+         }); 
 
 // Bind to the size event.
 $("YOUR_SELECTOR").on("size.autosize.responsive", function(event) {
@@ -149,6 +153,7 @@ $("YOUR_SELECTOR").on("sized.autosize.responsive", function(event) {
     <![endif]-->
     <!--[if gt IE 8]><!-->
     <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
     <script src="assets/js/responsive.js"></script>
