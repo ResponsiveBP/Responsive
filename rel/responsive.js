@@ -19,10 +19,10 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.0.2 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
- * Responsive Utils v1.0.1
+ * Responsive Utils
  */
 
 /*global jQuery*/
@@ -120,7 +120,7 @@
 
 }(jQuery));
 /*
- * Responsive AutoSize v1.0.1
+ * Responsive AutoSize
  */
 
 /*global jQuery*/
@@ -312,8 +312,8 @@
 
 }(jQuery));
 /*
-* Responsive Carousel v1.0.1
-*/
+ * Responsive Carousel
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/
@@ -633,8 +633,8 @@
     });
 
 }(jQuery));/*
-* Responsive Dismiss v1.0.1
-*/
+ * Responsive Dismiss 
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/
@@ -726,8 +726,8 @@
     });
 
 }(jQuery));/*
-* Responsive Dropdown v1.0.1
-*/
+ * Responsive Dropdown 
+ */
 
 /*global jQuery*/
 (function ($) {
@@ -897,8 +897,8 @@
         });
     });
 }(jQuery));/*
-* Responsive Lightbox v1.0.1
-*/
+ * Responsive Lightbox
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/
@@ -1388,8 +1388,8 @@
 
     });
 }(jQuery));/*
-* Responsive tabs v1.0.1
-*/
+ * Responsive tabs
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/

@@ -19,10 +19,10 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.0.2 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
- * Responsive Utils v1.0.1
+ * Responsive Utils
  */
 
 /*global jQuery*/

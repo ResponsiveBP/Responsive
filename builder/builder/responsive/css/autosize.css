@@ -1,5 +1,6 @@
-﻿/* Responsive Autosize v1.0.1 */
+﻿/* Responsive Autosize */
 
+.autosize,
 [data-autosize] {
     overflow: hidden;
     -webkit-transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;

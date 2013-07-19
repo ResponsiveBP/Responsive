@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.0.2 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 
@@ -417,7 +417,7 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/* Responsive Grid Legacy v1.0.1 */
+/* Responsive Grid Legacy */
 
 .container {
     margin: 0 auto;
@@ -661,7 +661,7 @@ table {
     left: 8.3333%;
 }
 
-/* Responsive Base v1.0.1 */
+/* Responsive Base */
 
 /*
  * Fix the box model
@@ -776,7 +776,7 @@ abbr {
     cursor: help;
 }
 
-/* Responsive Lists Base v1.0.1*/
+/* Responsive Lists Base */
 
 /* 
  * Unordered and ordered lists 
@@ -866,7 +866,7 @@ dt, dd {
     min-height: 1.4em;
 }
 
-/* Responsive Lists v1.0.1*/
+/* Responsive Lists */
 
 /* Definition lists */
 
@@ -890,7 +890,7 @@ dt, dd {
     margin-left: 166px;
 }
 
-/* Responsive Tables v1.0.1*/
+/* Responsive Tables*/
 
 /* 
  *  Make it responsive
@@ -937,7 +937,7 @@ table {
     background-color: #e7e7e7;
 }
 
-/* Responsive Alert v1.0.1 */
+/* Responsive Alert */
 
 .alert {
     background-color: #FCF8E3;
@@ -1001,7 +1001,7 @@ table {
 }
 
 
-/* Responsive Media v1.0.1*/
+/* Responsive Media */
 
 /*
  * Remove the gap between images and the bottom of their containers.
@@ -1060,7 +1060,7 @@ a img {
         height: 100%;
     }
 
-/* Responsive Forms Base v1.0.1 */
+/* Responsive Forms Base */
 
 .form {
     margin: 1em 0;
@@ -1365,7 +1365,7 @@ textarea[readonly] {
     padding: 1em 0;
 }
 
-/* Responsive Forms v1.0.1 */
+/* Responsive Forms */
 
 /* horizontal */
 .form-horizontal label {
@@ -1411,7 +1411,7 @@ textarea[readonly] {
     padding-left: 176px;
 }
 
-/* Responsive Buttons v1.0.1 */
+/* Responsive Buttons */
 
 /*
  * Normalize button borders, colour, and padding.
@@ -1546,7 +1546,7 @@ input[type="submit"].btn.btn-inline,
         float: left;
     }
 
-/* Responsive Code v1.0.1 */
+/* Responsive Code */
 
 /*
  * Colours and padding.
@@ -1596,7 +1596,7 @@ pre code {
     overflow-y: scroll;
 }
 
-/* Responsive Dropdown v1.0.1 */
+/* Responsive Dropdown */
 
 .accordion {
     border: solid 1px #c0c0c0;
@@ -1644,8 +1644,9 @@ pre code {
         width: 0;
     }
 
-/* Responsive Autosize v1.0.1 */
+/* Responsive Autosize */
 
+.autosize,
 [data-autosize] {
     overflow: hidden;
     -webkit-transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
@@ -1654,7 +1655,7 @@ pre code {
     transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
 }
 
-/* Responsive Carousel v1.0.1 */
+/* Responsive Carousel */
 
 .carousel {
     position: relative;
@@ -1765,6 +1766,7 @@ pre code {
 /* 
  * Fade version
  */
+.carousel-fade .carousel-item,
 .carousel[data-carousel-mode="fade"] .carousel-item {
     -webkit-transition: opacity 1.4s ease-in-out;
     -moz-transition: opacity 1.4s ease-in-out;
@@ -1779,11 +1781,14 @@ pre code {
     opacity: 0;
 }
 
+.carousel-fade .carousel-active,
 .carousel[data-carousel-mode="fade"] .carousel-active {
     -moz-opacity: 1;
     opacity: 1;
 }
 
+    .carousel-fade .carousel-active.left,
+    .carousel-fade .carousel-active.right,
     .carousel[data-carousel-mode="fade"] .carousel-active.left,
     .carousel[data-carousel-mode="fade"] .carousel-active.right {
         left: 0;
@@ -1792,6 +1797,8 @@ pre code {
         z-index: 2;
     }
 
+.carousel-fade .carousel-item.next,
+.carousel-fade .carousel-item.prev,
 .carousel[data-carousel-mode="fade"] .carousel-item.next,
 .carousel[data-carousel-mode="fade"] .carousel-item.prev {
     left: 0;
@@ -1800,6 +1807,7 @@ pre code {
     opacity: 1;
 }
 
+.carousel-fade .carousel-item.carousel-active,
 .carousel[data-carousel-mode="fade"] .carousel-item.carousel-active {
     position: relative;
     width: 100%;
@@ -1807,11 +1815,11 @@ pre code {
 }
 
 .carousel[data-carousel-mode="fade"] .carousel-control,
-.carousel.carousel-fade .carousel-control:visited {
+.carousel-fade .carousel-control:visited {
     z-index: 3;
 }
 
-/* Responsive Tabs v1.0.1*/
+/* Responsive Tabs*/
 
 [data-tabs] ul.tabs {
     list-style: none;
@@ -1867,7 +1875,7 @@ pre code {
         display: block;
     }
 
-/* Responsive LightBox Base v1.0.1 */
+/* Responsive LightBox Base */
 
 /* 
  * 1: Average max z-index.
@@ -1882,17 +1890,9 @@ pre code {
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,.7);
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)"; /* 2 */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /*overlay.png*/;
     text-align: center;
 }
-
-    /* 
-     * IE9 hack to prevent background color mix 
-     */
-    .lightbox-overlay:not(dummy) {
-        filter: progid:dximagetransform.microsoft.gradient(enabled=false); /* 1 */
-    }
 
 .lightbox {
     position: relative;
@@ -1938,6 +1938,10 @@ pre code {
     overflow-x: hidden;
 }
 
+    .lightbox-content > img {
+        width: auto;
+    }
+
 /* 
  * IOS iframes don't naturally allow scroll. 
  */
@@ -1955,6 +1959,9 @@ pre code {
     -webkit-overflow-scrolling: touch;
 }
 
+/*
+ * 1: IE8 won't stretch.
+ */
 .lightbox iframe {
     padding: 0;
     margin: 0;
@@ -1963,6 +1970,7 @@ pre code {
     vertical-align: top;
     display: block;
     width: 100%;
+    min-width: 600px \0; /* 1 */
     min-height: 400px;
     height: 100%;
     background-color: transparent;
@@ -2004,7 +2012,7 @@ pre code {
             text-decoration: underline;
         }
 
-/* Responsive Helpers Base v1.0.1 */
+/* Responsive Helpers Base */
 
 /*
  * Image replacement
@@ -2161,7 +2169,7 @@ pre code {
     display: inherit !important;
 }
 
-/* Responsive Print v1.0.1*/
+/* Responsive Print */
 
 @media print {
     * {

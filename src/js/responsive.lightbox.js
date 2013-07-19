@@ -1,6 +1,6 @@
 ﻿/*
-* Responsive Lightbox v1.0.1
-*/
+ * Responsive Lightbox
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/

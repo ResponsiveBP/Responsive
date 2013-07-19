@@ -1,6 +1,6 @@
 ﻿/*
-* Responsive Dismiss v1.0.1
-*/
+ * Responsive Dismiss 
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/

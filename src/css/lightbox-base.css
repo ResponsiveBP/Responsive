@@ -1,4 +1,4 @@
-﻿/* Responsive LightBox Base v1.0.1 */
+﻿/* Responsive LightBox Base */
 
 /* 
  * 1: Average max z-index.
@@ -13,17 +13,9 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,.7);
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)"; /* 2 */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /*overlay.png*/;
     text-align: center;
 }
-
-    /* 
-     * IE9 hack to prevent background color mix 
-     */
-    .lightbox-overlay:not(dummy) {
-        filter: progid:dximagetransform.microsoft.gradient(enabled=false); /* 1 */
-    }
 
 .lightbox {
     position: relative;
@@ -69,6 +61,10 @@
     overflow-x: hidden;
 }
 
+    .lightbox-content > img {
+        width: auto;
+    }
+
 /* 
  * IOS iframes don't naturally allow scroll. 
  */
@@ -86,6 +82,9 @@
     -webkit-overflow-scrolling: touch;
 }
 
+/*
+ * 1: IE8 won't stretch.
+ */
 .lightbox iframe {
     padding: 0;
     margin: 0;
@@ -94,6 +93,7 @@
     vertical-align: top;
     display: block;
     width: 100%;
+    min-width: 600px \0; /* 1 */
     min-height: 400px;
     height: 100%;
     background-color: transparent;

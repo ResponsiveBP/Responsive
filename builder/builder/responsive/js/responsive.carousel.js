@@ -1,6 +1,6 @@
 /*
-* Responsive Carousel v1.0.1
-*/
+ * Responsive Carousel
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/

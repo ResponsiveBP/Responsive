@@ -1,5 +1,5 @@
 /*
- * Responsive AutoSize v1.0.1
+ * Responsive AutoSize
  */
 
 /*global jQuery*/

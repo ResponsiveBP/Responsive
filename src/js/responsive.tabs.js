@@ -1,6 +1,6 @@
 /*
-* Responsive tabs v1.0.1
-*/
+ * Responsive tabs
+ */
 
 /*global jQuery*/
 /*jshint expr:true*/

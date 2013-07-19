@@ -1,6 +1,6 @@
 ﻿/*
-* Responsive Dropdown v1.0.1
-*/
+ * Responsive Dropdown 
+ */
 
 /*global jQuery*/
 (function ($) {

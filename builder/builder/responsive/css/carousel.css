@@ -1,4 +1,4 @@
-﻿/* Responsive Carousel v1.0.1 */
+﻿/* Responsive Carousel */
 
 .carousel {
     position: relative;
@@ -109,6 +109,7 @@
 /* 
  * Fade version
  */
+.carousel-fade .carousel-item,
 .carousel[data-carousel-mode="fade"] .carousel-item {
     -webkit-transition: opacity 1.4s ease-in-out;
     -moz-transition: opacity 1.4s ease-in-out;
@@ -123,11 +124,14 @@
     opacity: 0;
 }
 
+.carousel-fade .carousel-active,
 .carousel[data-carousel-mode="fade"] .carousel-active {
     -moz-opacity: 1;
     opacity: 1;
 }
 
+    .carousel-fade .carousel-active.left,
+    .carousel-fade .carousel-active.right,
     .carousel[data-carousel-mode="fade"] .carousel-active.left,
     .carousel[data-carousel-mode="fade"] .carousel-active.right {
         left: 0;
@@ -136,6 +140,8 @@
         z-index: 2;
     }
 
+.carousel-fade .carousel-item.next,
+.carousel-fade .carousel-item.prev,
 .carousel[data-carousel-mode="fade"] .carousel-item.next,
 .carousel[data-carousel-mode="fade"] .carousel-item.prev {
     left: 0;
@@ -144,6 +150,7 @@
     opacity: 1;
 }
 
+.carousel-fade .carousel-item.carousel-active,
 .carousel[data-carousel-mode="fade"] .carousel-item.carousel-active {
     position: relative;
     width: 100%;
@@ -151,6 +158,6 @@
 }
 
 .carousel[data-carousel-mode="fade"] .carousel-control,
-.carousel.carousel-fade .carousel-control:visited {
+.carousel-fade .carousel-control:visited {
     z-index: 3;
 }
