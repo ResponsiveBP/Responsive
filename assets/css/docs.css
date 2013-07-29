@@ -11,17 +11,43 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    text-align: right;
     z-index: 1030;
     margin-bottom: 0;
-    overflow: visible;
+    overflow: auto;
 }
 
     .top-nav a {
         color: #fff;
-        font-size: 1.5em;
-        margin: 0.83em 0;
         text-decoration: none;
+    }
+
+    .top-nav .top-level,
+    .top-nav ul a {
+        font-size: 1.5em;
+        margin: 0.41em 0;
+    }
+
+    .top-nav h2 {
+        margin: 0;
+    }
+
+.nav {
+    background: url(mobile-nav.png) no-repeat center center;
+    width: 24px;
+    height: 1em;
+    display: block;
+}
+
+a[data-dropdown-target] {
+    outline: none !important;
+}
+
+.menu {
+    text-align: left;
+}
+
+    .menu a:hover {
+        text-decoration: underline;
     }
 
 .masthead {
