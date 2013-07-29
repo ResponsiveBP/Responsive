@@ -1,7 +1,7 @@
 ﻿
 body {
     font-family: Arial, sans-serif;
-    padding-top: 3.5em;
+    padding-top: 4em;
 }
 
 .top-nav {
@@ -14,11 +14,16 @@ body {
     z-index: 1030;
     margin-bottom: 0;
     overflow: auto;
+	padding: .2em 0;
 }
 
     .top-nav a {
         color: #fff;
         text-decoration: none;
+    }
+	
+    .top-nav ul {
+        margin: 0;
     }
 
     .top-nav .top-level,
