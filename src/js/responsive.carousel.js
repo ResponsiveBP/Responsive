@@ -26,11 +26,11 @@
                 event.preventDefault();
 
                 var $this = $(this),
-                    options = $this.data("carouselSlide"),
+                    opts = $this.data("carouselSlide"),
                     $target = $(event.delegateTarget),
                     $trigger = $this.parent("li");
 
-                if (options) {
+                if (opts) {
 
                     // Flag that the carousel slider has been triggered.
                     $target.find("[data-carousel-slide]").parent("li").not($trigger).removeClass("on");
@@ -38,21 +38,21 @@
                     $trigger.addClass("on");
 
                     // Run the carousel method.
-                    $target.carousel(options);
+                    $target.carousel(opts);
                 }
 
             });
-
-            if (this.options.slide) {
-
-                // Handle a slide instruction.
-                this.slide(this.options.slide);
-            }
 
             if (this.options.pause === "hover") {
                 // Bind the mouse enter/leave events
                 this.$element.on("mouseenter", $.proxy(this.pause, this))
                              .on("mouseleave", $.proxy(this.cycle, this));
+            }
+
+            if (this.options.slide && this.$element.is(":visible")) {
+
+                // Handle a slide instruction.
+                this.slide(this.options.slide);
             }
 
         };
@@ -75,7 +75,7 @@
             // Return the carousel for chaining.
             return this;
         },
-        goto: function (position) {
+        goTo: function (position) {
 
             var $activeItem = this.$element.find(".carousel-active"),
                 $children = $activeItem.parent().children(),
@@ -83,11 +83,11 @@
                 self = this;
 
             // Since the index is zero based we need to subtract one.
-            position = position -= 1;
+            position -= 1;
 
             if (position > ($children.length) || position < 0) {
 
-                return;
+                return false;
             }
 
             if (this.sliding) {
@@ -95,7 +95,7 @@
                 // Fire the slid event.
                 return this.$element.one("slid.carousel.responsive", function () {
                     // Reset the position.
-                    self.goto(position + 1);
+                    self.goTo(position + 1);
 
                 });
             }
@@ -112,7 +112,12 @@
             if (!event) {
                 // Mark as paused
                 this.paused = true;
+            }
 
+            // Ensure that transition end is triggered.
+            if (this.$element.find(".next, .prev").length && $.support.transition.end) {
+                this.$element.trigger($.support.transition.end);
+                this.cycle(true);
             }
 
             // Clear the interval and return the carousel for chaining.
@@ -125,7 +130,7 @@
         next: function () {
 
             if (this.sliding) {
-                return;
+                return false;
             }
 
             return this.slide("next");
@@ -133,7 +138,7 @@
         prev: function () {
 
             if (this.sliding) {
-                return;
+                return false;
             }
 
             return this.slide("prev");
@@ -166,7 +171,7 @@
             $nextItem = $nextItem.length ? $nextItem : this.$element.find(".carousel-item")[fallback]();
 
             if ($nextItem.hasClass("carousel-active")) {
-                return;
+                return false;
             }
 
             if (supportTransition && (slideMode || fadeMode)) {
@@ -175,7 +180,7 @@
                 this.$element.trigger(slideEvent);
 
                 if (slideEvent.isDefaultPrevented()) {
-                    return;
+                    return false;
                 }
 
                 // Good to go? Then let's slide.
@@ -207,7 +212,7 @@
                 this.$element.trigger(slideEvent);
 
                 if (slideEvent.isDefaultPrevented()) {
-                    return;
+                    return false;
                 }
 
                 $activeItem.removeClass("carousel-active");
@@ -248,7 +253,7 @@
 
             if (typeof options === "number") {
                 // Cycle to the given number.
-                data.goto(options);
+                data.goTo(options);
 
             } else if (typeof options === "string" || (options = opts.slide)) {
 
@@ -307,8 +312,8 @@
         if (action === "pause" || action === "cycle") {
             $(".carousel").each(function () {
 
-                var $this = $(this),
-                    carousel = $this.data(carousel);
+                var $self = $(this),
+                    carousel = $self.data("carousel");
 
                 if (carousel && carousel[action]) {
                     // It has data so perform the given action.
