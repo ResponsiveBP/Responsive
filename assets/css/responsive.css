@@ -1148,6 +1148,7 @@ input {
         font-family: inherit;
         padding: .25em \9;
         background-color: #fff \9;
+        border: 1px solid transparent;
         border: 1px solid #c0c0c0 \9;
     }
 
