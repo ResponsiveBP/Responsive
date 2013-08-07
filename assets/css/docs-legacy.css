@@ -3,3 +3,12 @@
     letter-spacing: -2px;
     margin: .0933em 0;
 }
+
+/*
+ * Force top navs to show on tablet 
+ */
+
+.top-nav ul {
+    height: auto !important;
+    padding-bottom: 1em;
+}

@@ -14,27 +14,37 @@ body {
     z-index: 1030;
     margin-bottom: 0;
     overflow: auto;
-	padding: .2em 0;
+    padding: .2em 0;
 }
 
     .top-nav a {
         color: #fff;
         text-decoration: none;
     }
-	
+
     .top-nav ul {
         margin: 0;
     }
 
-    .top-nav .top-level,
-    .top-nav ul a {
-        font-size: 1.5em;
-        margin: 0.41em 0;
+/*
+ * Force top navs to show on tablet 
+ */
+@media screen and (min-width: 768px) {
+    .top-nav ul {
+        height: auto !important;
+        padding-bottom: 1em;
     }
+}
 
-    .top-nav h2 {
-        margin: 0;
-    }
+.top-nav .top-level,
+.top-nav ul a {
+    font-size: 1.5em;
+    margin: 0.41em 0;
+}
+
+.top-nav h2 {
+    margin: 0;
+}
 
 .nav {
     background: url(mobile-nav.png) no-repeat center center;
@@ -60,6 +70,9 @@ a[data-dropdown-target] {
     line-height: 1;
 }
 
+/*
+ * Change the masthead size.
+ */
 @media screen and (min-width: 480px) {
     .masthead {
         font-size: 7.5em;
