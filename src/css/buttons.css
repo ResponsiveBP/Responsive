@@ -55,20 +55,16 @@ input[type="submit"],
         background-color: #cdcdcd;
     }
 
-    /*
-     * IE8 & IE9 render a double width outline on input.
-     * To normalise remove the outline and use border.
-     */
     .btn:focus,
     .btn.focus {
-        border: 1px solid #00a9ec;
-        outline: 0;
+        border-color: #c0c0c0;
+        outline: 1px solid #00a9ec;
+        outline-offset: -1px;
     }
 
     .btn:active,
     .btn.active {
         background-color: #e7e7e7;
-        border-color: #c0c0c0;
         outline: none;
     }
 

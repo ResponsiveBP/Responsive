@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.3 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.0.4 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 
@@ -1112,13 +1112,22 @@ input {
     input[type="search"],
     input[type="tel"],
     input[type="color"],
-    input[type="range"],
     input[type="checkbox"],
     .no-edit {
         font-family: inherit;
         padding: .25em;
         background-color: #fff;
         border: 1px solid #c0c0c0;
+    }
+
+    /*
+     * Add range styles for IE8 and IE9
+     */
+    input[type="range"] {
+        font-family: inherit;
+        padding: .25em \9;
+        background-color: #fff \9;
+        border: 1px solid #c0c0c0 \9;
     }
 
 /*
@@ -1151,23 +1160,21 @@ input {
     }
 }
 
-
 /*
  * 1. Remove borders and padding on range controls in IE10+
  * 2. Remove borders and padding on range controls in Opera
- *    http://bricss.net/post/11230266445/css-hack-to-target-opera
  */
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /* 1 */
-    input[type="range"] {
-        border: none;
-        padding: .25em 0;
-    }
-}
-
-x:-o-prefocus, input[type="range"] { /* 2 */
-    border: none;
+x::-ms-reveal,
+input[type="range"] { /* 1 */
+    border: 1px solid transparent;
     padding: .25em 0;
 }
+
+x:-o-prefocus,
+input[type="range"] { /* 2 */
+    border: 1px solid transparent;
+}
+
 
 /* Standard layout */
 form label,
@@ -1325,7 +1332,7 @@ select.focus,
 input.focus,
 textarea.focus,
 .no-edit:focus {
-    border-color: #00a9ec;
+    border: 1px solid #00a9ec;
     outline: 0;
 }
 
@@ -1338,6 +1345,7 @@ input[type="radio"].focus,
 input[type="radio"]:checked,
 input[type="radio"].checked {
     outline: 1px solid #00a9ec;
+    outline-offset: -1px;
 }
 
 /* 
@@ -1468,20 +1476,16 @@ input[type="submit"],
         background-color: #cdcdcd;
     }
 
-    /*
-     * IE8 & IE9 render a double width outline on input.
-     * To normalise remove the outline and use border.
-     */
     .btn:focus,
     .btn.focus {
-        border: 1px solid #00a9ec;
-        outline: 0;
+        border-color: #c0c0c0;
+        outline: 1px solid #00a9ec;
+        outline-offset: -1px;
     }
 
     .btn:active,
     .btn.active {
         background-color: #e7e7e7;
-        border-color: #c0c0c0;
         outline: none;
     }
 
