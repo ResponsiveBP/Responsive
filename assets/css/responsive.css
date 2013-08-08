@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.5 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.1.0 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 
@@ -1941,12 +1941,15 @@ pre code {
     text-align: left;
     display: inline-block;
     margin: 0 auto;
-    max-width: 95%;
     padding: 1em;
     background: #fff;
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,1);
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,1);
+    -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,1);
+    box-shadow: 0 0 10px 1px rgba(0,0,0,1);
 }
+
+    .lightbox.lightbox-image {
+        width: auto;
+    }
 
 .lightbox-header {
     padding: 0 2.17em 0 0;
@@ -1980,17 +1983,16 @@ pre code {
     overflow-x: hidden;
 }
 
-    .lightbox-content > img {
-        width: auto;
-    }
-
 /* 
  * IOS iframes don't naturally allow scroll. 
  */
 .lightbox .lightbox-iframe,
 .lightbox .lightbox-iframe-scroll {
-    height: 400px;
     overflow: hidden;
+    position: relative;
+    padding: 50% 50% 0;
+    height: 0;
+    margin-bottom: 1em;
 }
 
 /* 
@@ -2009,11 +2011,10 @@ pre code {
     margin: 0;
     border: 0;
     outline: none;
-    vertical-align: top;
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-width: 600px \0; /* 1 */
-    min-height: 400px;
     height: 100%;
     background-color: transparent;
 }
@@ -2053,17 +2054,6 @@ pre code {
         .lightbox-direction:hover {
             text-decoration: underline;
         }
-
-/* Responsive LightBox Base */
-
-/*
- * Responsive iframe widths.
- */
-@media screen and (min-width: 767px) {
-    .lightbox iframe {
-        min-width: 644px;
-    }
-}
 
 /* Responsive Helpers Base */
 
