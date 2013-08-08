@@ -21,6 +21,10 @@ body {
         color: #fff;
         text-decoration: none;
     }
+	
+	.top-nav a:hover {
+        text-decoration: underline;
+    }
 
     .top-nav ul {
         margin: 0;
@@ -34,6 +38,12 @@ body {
         height: auto !important;
         padding-bottom: 1em;
     }
+	
+	.top-nav a[data-dropdown-target=".css"],
+	.top-nav a[data-dropdown-target=".js"]{
+	    cursor: text;
+		text-decoration: none;
+	}
 }
 
 .top-nav .top-level,
@@ -60,10 +70,6 @@ a[data-dropdown-target] {
 .menu {
     text-align: left;
 }
-
-    .menu a:hover {
-        text-decoration: underline;
-    }
 
 .masthead {
     font-size: 3em;

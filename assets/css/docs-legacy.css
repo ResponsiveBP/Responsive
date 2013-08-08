@@ -17,3 +17,9 @@
     height: auto !important;
     padding-bottom: 1em;
 }
+
+.top-nav a[data-dropdown-target=".css"],
+.top-nav a[data-dropdown-target=".js"]{
+	cursor: text;
+	text-decoration: none;
+}
