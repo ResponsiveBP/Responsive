@@ -267,10 +267,25 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 input[type="range"]:focus,
 select:focus,
+.no-edit:focus textarea.focus,
+input[type="text"].focus,
+input[type="file"].focus,
+input[type="password"].focus,
+input[type="datetime"].focus,
+input[type="datetime-local"].focus,
+input[type="date"].focus,
+input[type="month"].focus,
+input[type="time"].focus,
+input[type="week"].focus,
+input[type="number"].focus,
+input[type="email"].focus,
+input[type="url"].focus,
+input[type="search"].focus,
+input[type="tel"].focus,
+input[type="color"].focus,
+input[type="range"].focus,
 select.focus,
-input.focus,
-textarea.focus,
-.no-edit:focus {
+.no-edit.focus {
     border: 1px solid #00a9ec;
     outline: 0;
 }
