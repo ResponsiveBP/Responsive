@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.5 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.1.0 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -914,7 +914,7 @@
 
     var $body = $(document.body),
         $overlay = $("<div/>").addClass("lightbox-overlay hidden fade-out"),
-        $lightbox = $("<div/>").addClass("lightbox fade-out lightbox-loader").appendTo($overlay),
+        $lightbox = $("<div/>").addClass("lightbox container fade-out lightbox-loader").appendTo($overlay),
         $next = $("<a/>").attr("href", "#")
                          .addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr("href", "#")
@@ -928,7 +928,7 @@
         },
         rexternalHost = new RegExp("//" + document.location.host + "($|/)"),
         // Taken from Fancybox
-        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/,
+        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
         // Taken from jQuery.
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
@@ -1032,6 +1032,11 @@
 
             $placeholder.detach().insertAfter(this.$element);
             $(target).detach().appendTo($content).removeClass("hidden");
+
+            if (rimage.test($(target).attr("src"))) {
+                $lightbox.addClass("lightbox-image");
+            }
+
             fadeIn();
         }
         else {
@@ -1059,6 +1064,9 @@
             } else {
 
                 if (rimage.test(target)) {
+                    
+                    $lightbox.addClass("lightbox-image");
+
                     $img = $("<img/>").one("load", function () {
                         fadeIn();
                     })
@@ -1238,6 +1246,7 @@
                 callback = function () {
 
                     $overlay.addClass("hidden");
+                    $lightbox.removeClass("lightbox-image");
 
                     // Clean up.
                     cleanUp.call(this);
@@ -1372,7 +1381,7 @@
         external: false,
         group: null,
         iframe: false,
-        iframeScroll: true,
+        iframeScroll: false,
         keyboard: true,
         next: ">",
         previous: "<"
