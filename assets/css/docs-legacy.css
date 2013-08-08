@@ -5,8 +5,13 @@
 }
 
 /*
- * Force top navs to show on tablet 
+ * Force top navs to show on desktop 
  */
+
+.top-nav .container {
+    width: 95%;
+    max-width: 95%;
+}
 
 .top-nav ul {
     height: auto !important;
