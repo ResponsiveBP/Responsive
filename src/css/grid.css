@@ -1,0 +1,262 @@
+﻿/* Responsive Grid */
+
+.container {
+    margin: 0 auto;
+    /* Manages width in a single place */
+    width: 95%;
+    max-width: 1140px;
+}
+
+    .fixed .container,
+    .container.fixed {
+        /* Manages width in a single place */
+        width: 1140px;
+    }
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.row:before,
+.row:after {
+    content: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+/*columns*/
+.row [class*="column-"] {
+    position: relative;
+    display: block;
+    min-height: 1px;
+    float: left;
+}
+
+/*
+ * No gutter produces gaps on rounding so we remove the float and overflow.
+ */
+/*.no-gutter [class*="column-"] + [class*="column-"]:last-child {
+    float: none;
+    overflow-x: hidden;
+    width: auto;
+}*/
+
+/* ==|== media queries ===================================================
+
+========================================================================== */
+@media screen and (max-width: 767px) {
+    .container:not(.fixed) .row:not(.fixed) > [class*="column-"] {
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+    }
+}
+
+/*Width + margin*/
+@media screen and (max-width: 1197px) {
+    .fixed .container,
+    .container.fixed {
+        /*Drop the margin*/
+        margin-left: 2.5%;
+    }
+}
+
+.row:not(.no-gutter) > [class*="column-"] + [class*="column-"] {
+    margin-left: 2%;
+}
+
+/* columns */
+
+/* Full width calculated with margins */
+.column-12 {
+    width: 100%;
+}
+
+.column-11 {
+    width: 91.5%;
+}
+
+.column-10 {
+    width: 83%;
+}
+
+.column-9 {
+    width: 74.5%;
+}
+
+.column-8 {
+    width: 66%;
+}
+
+.column-7 {
+    width: 57.5%;
+}
+
+.column-6 {
+    width: 49%;
+}
+
+.column-5 {
+    width: 40.5%;
+}
+
+.column-4 {
+    width: 32%;
+}
+
+.column-3 {
+    width: 23.5%;
+}
+
+.column-2 {
+    width: 15%;
+}
+
+.column-1 {
+    width: 6.5%;
+}
+
+/* No gutter margins */
+.no-gutter .column-11 {
+    width: 91.6667%;
+}
+
+.no-gutter .column-10 {
+    width: 83.3333%;
+}
+
+.no-gutter .column-9 {
+    width: 75%;
+}
+
+.no-gutter .column-8 {
+    width: 66.6667%;
+}
+
+.no-gutter .column-7 {
+    width: 58.3333%;
+}
+
+.no-gutter .column-6 {
+    width: 50%;
+}
+
+.no-gutter .column-5 {
+    width: 41.6667%;
+}
+
+.no-gutter .column-4 {
+    width: 33.3333%;
+}
+
+.no-gutter .column-3 {
+    width: 25%;
+}
+
+.no-gutter .column-2 {
+    width: 16.6667%;
+}
+
+.no-gutter .column-1 {
+    width: 8.3333%;
+}
+
+/* offsetting columns */
+.push-11 {
+    left: 93.5%;
+}
+
+.push-10 {
+    left: 85%;
+}
+
+.push-9 {
+    left: 76.5%;
+}
+
+.push-8 {
+    left: 68%;
+}
+
+.push-7 {
+    left: 59.5%;
+}
+
+.push-6 {
+    left: 51%;
+}
+
+.push-5 {
+    left: 42.5%;
+}
+
+.push-4 {
+    left: 34%;
+}
+
+.push-3 {
+    left: 25.5%;
+}
+
+.push-2 {
+    left: 17%;
+}
+
+.push-1 {
+    left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .push-11 {
+    left: 91.6667%;
+}
+
+.no-gutter .push-10 {
+    left: 83.3333%;
+}
+
+.no-gutter .push-9 {
+    left: 75%;
+}
+
+.no-gutter .push-8 {
+    left: 66.6667%;
+}
+
+.no-gutter .push-7 {
+    left: 58.3333%;
+}
+
+.no-gutter .push-6 {
+    left: 50%;
+}
+
+.no-gutter .push-5 {
+    left: 41.6667%;
+}
+
+.no-gutter .push-4 {
+    left: 33.3333%;
+}
+
+.no-gutter .push-3 {
+    left: 25%;
+}
+
+.no-gutter .push-2 {
+    left: 16.6667%;
+}
+
+.no-gutter .push-1 {
+    left: 8.3333%;
+}

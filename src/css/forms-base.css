@@ -1,0 +1,328 @@
+﻿/* Responsive Forms Base */
+
+.form {
+    margin: 1em 0;
+}
+
+/*
+ * Normalize fieldsets.
+ */
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/*
+ * Normalize legends.
+ */
+legend {
+    display: block;
+    width: 100%;
+    font-size: 1.17em;
+    margin-bottom: 1em;
+}
+
+label[for] {
+    cursor: pointer;
+}
+
+/* Normalize  */
+select,
+textarea,
+input {
+    border-radius: 0;
+}
+
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    input[type="checkbox"],
+    .no-edit {
+        font-family: inherit;
+        padding: .25em;
+        background-color: #fff;
+        border: 1px solid #c0c0c0;
+    }
+
+    /*
+     * Add range styles for IE8 and IE9
+     */
+    input[type="range"] {
+        font-family: inherit;
+        padding: .25em \9;
+        background-color: #fff \9;
+        border: 1px solid transparent;
+        border: 1px solid #c0c0c0 \9;
+    }
+
+/*
+ * Fix field styling on iPhone and iPad.
+ * http://stephen.io/mediaqueries/
+ * 1. Strip OS styling on IOS
+ * 2. Add a dropdown indicator
+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
+    select,
+    input[type="search"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"] {
+        -webkit-appearance: none; /* 1 */
+    }
+
+    select,
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"] {
+        background-image: url('data:image/png;base64,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') /* 2 */;
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+}
+
+/*
+ * 1. Remove borders and padding on range controls in IE10+
+ * 2. Remove borders and padding on range controls in Opera
+ */
+x::-ms-reveal,
+input[type="range"] { /* 1 */
+    border: 1px solid transparent;
+    padding: .25em 0;
+}
+
+x:-o-prefocus,
+input[type="range"] { /* 2 */
+    border: 1px solid transparent;
+}
+
+
+/* Standard layout */
+form label,
+form input,
+form textarea,
+form select,
+form .no-edit,
+.input-tamer {
+    display: block;
+    margin-bottom: 1em;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+input[type="range"],
+textarea,
+.no-edit {
+    max-width: 210px;
+    width: 100%;
+}
+
+/*
+ * 1. Remove excess padding in Webkit
+ */
+input[type="color"] {
+    -webkit-padding-start: 0; /* 1 */
+    -webkit-padding-end: 0;
+    -webkit-padding-before: 0;
+    -webkit-padding-after: 0;
+    max-width: 105px;
+}
+
+/*
+ * Declared separately to reduce selector duplication
+ * for padding
+ */
+input[type="radio"],
+input[type="checkbox"] {
+    padding: 0;
+    display: block;
+    margin: 3px 3px 3px 0!important;
+    width: auto;
+    max-width: 15px;
+}
+
+/*
+ * Textareas : Multiple resizable options.
+ * 1: Horizontal
+ * 2: Vertical
+ * 3: None
+ */
+textarea {
+    width: auto;
+    min-width: 210px;
+    max-width: 100%;
+    height: auto;
+    resize: both;
+    min-height: 84px;
+}
+
+    textarea.horizontal {
+        resize: horizontal; /* 1 */
+    }
+
+    textarea.vertical {
+        resize: vertical; /* 2 */
+    }
+
+    textarea.no-resize {
+        resize: none; /* 3 */
+    }
+
+.no-edit {
+    cursor: not-allowed;
+    border-color: #ebebeb;
+}
+
+select {
+    max-width: 210px;
+    width: 100%;
+    border: 1px solid #c0c0c0;
+}
+
+    select option {
+        height: 100%;
+    }
+
+/*
+ * Full Width
+ */
+.full-width {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+
+/* 
+ * Placeholder : These have to be kept separate
+ * 1. Safari and Chrome
+ * 2. Firefox 4-18
+ * 3. Firefox 19+
+ * 4. IE10+
+ */
+::-webkit-input-placeholder {
+    color: #c0c0c0; /* 1 */
+}
+
+:-moz-placeholder {
+    color: #c0c0c0; /* 2 */
+}
+
+::-moz-placeholder {
+    color: #c0c0c0; /* 3 */
+}
+
+:-ms-input-placeholder {
+    color: #c0c0c0; /* 4 */
+}
+
+/* 
+ * Focus 
+ */
+textarea:focus,
+input[type="text"]:focus,
+input[type="file"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+input[type="range"]:focus,
+select:focus,
+.no-edit:focus textarea.focus,
+input[type="text"].focus,
+input[type="file"].focus,
+input[type="password"].focus,
+input[type="datetime"].focus,
+input[type="datetime-local"].focus,
+input[type="date"].focus,
+input[type="month"].focus,
+input[type="time"].focus,
+input[type="week"].focus,
+input[type="number"].focus,
+input[type="email"].focus,
+input[type="url"].focus,
+input[type="search"].focus,
+input[type="tel"].focus,
+input[type="color"].focus,
+input[type="range"].focus,
+select.focus,
+.no-edit.focus {
+    border: 1px solid #00a9ec;
+    outline: 0;
+}
+
+input[type="checkbox"]:focus,
+input[type="checkbox"].focus,
+input[type="checkbox"]:checked,
+input[type="checkbox"].checked,
+input[type="radio"]:focus,
+input[type="radio"].focus,
+input[type="radio"]:checked,
+input[type="radio"].checked {
+    outline: 1px solid #00a9ec;
+    outline-offset: -1px;
+}
+
+/* 
+ * Disabled 
+ * 1. Override the value set in normalize.css
+ */
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+    cursor: not-allowed!important; /* 1 */
+    background-color: #ebebeb;
+    border-color: #c0c0c0;
+    color: #c0c0c0;
+    outline: 0!important;
+}
+
+/*
+ * Actions - Contains buttons 
+ */
+.form-actions {
+    margin: 1em 0;
+    padding: 1em 0;
+}

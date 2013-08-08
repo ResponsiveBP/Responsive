@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Responsive - A minimalist front-end framework.">
+    <meta name="viewport" content="width=device-width">
+    <title>Responsive :: Carousel</title>
+    <link href="../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="../src/css/responsive-legacy.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="assets/css/docs.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+    <article class="container" role="main">
+        <h1 class="masthead">Carousel</h1>
+        <p>A jQuery plugin that creates a carousel for cycling through elements. Uses CSS transitions to perform the animation.</p>
+        <p>
+            Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+            This is Responsive's first class API and should be your first consideration when using a plugin.
+        </p>
+        <section class="row">
+            <div class="column-6">
+                <h1>Slide Mode</h1>
+                <div class="carousel" data-carousel-interval="5000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item carousel-active">
+                            <img src="assets/img/hydrangeas.jpg" alt="hydrangeas">
+                            <div class="carousel-caption">
+                                <h4>First Thumbnail label</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                            <div class="carousel-caption">
+                                <h4>Second Thumbnail label</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/desert.jpg" alt="desert">
+                            <div class="carousel-caption">
+                                <h4>Third Thumbnail label</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#" data-carousel-slide="prev">&lt;</a>
+                    <a class="right carousel-control" href="#" data-carousel-slide="next">&gt;</a>
+                </div>
+
+
+            </div>
+            <div class="column-6">
+                <h1>Fade Mode</h1>
+                <div class="carousel" data-carousel-mode="fade" data-carousel-interval="5000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item carousel-active">
+                            <img src="assets/img/hydrangeas.jpg" alt="hydrangeas">
+                            <div class="carousel-caption">
+                                <h4>First Thumbnail label</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                            <div class="carousel-caption">
+                                <h4>Second Thumbnail label</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/desert.jpg" alt="desert">
+                            <div class="carousel-caption">
+                                <h4>Third Thumbnail label</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#" data-carousel-slide="prev">&lt;</a>
+                    <a class="right carousel-control" href="#" data-carousel-slide="next">&gt;</a>
+                </div>
+
+            </div>
+        </section>
+        <hr />
+        <section class="row">
+            <h1>The Markup</h1>
+            <pre><code>&lt;div class="carousel" data-carousel-mode="fade" data-carousel-interval="5000"&gt;
+    &lt;!-- Carousel items --&gt;
+    &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item carousel-active"&gt;...&lt;/div&gt;
+    &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+    &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Carousel navigation --&gt;
+    &lt;a class="carousel-control left" href="#" data-carousel-slide="prev"&gt;&amp;lsaquo;&lt;/a&gt;
+    &lt;a class="carousel-control right" href="#" data-carousel-slide="next"&gt;&amp;rsaquo;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+        <hr />
+        <section>
+            <h1>Methods</h1>
+            <p>The carousel exposes the following method signatures.</p>
+            <dl>
+                <dt><strong>.carousel(options)</strong>  </dt>
+                <dd>Initialises the plugin with an optional options <code>object</code>
+                    <dl class="dl-horizontal">
+                        <dt><strong>options</strong></dt>
+                        <dd>Contains parameters to pass to the plugin.
+                            <dl>
+                                <dt><strong>mode</strong></dt>
+                                <dd>A string containing either the values
+                                    <var>fade</var>
+                                    or
+                                    <var>slide</var>.</dd>
+                                <dt><strong>interval</strong></dt>
+                                <dd>The time in milliseconds between carousel transitions.</dd>
+                            </dl>
+                        </dd>
+                    </dl>
+                </dd>
+                <dt><strong>.carousel("cycle")</strong></dt>
+                <dd>Cycles through the carousel instance items in a logical order.</dd>
+                <dt><strong>.carousel("pause")</strong></dt>
+                <dd>Triggers the pause event of the carousel instance stopping it cycling.</dd>
+                <dt><strong>.carousel("prev")</strong></dt>
+                <dd>Cycles the carousel instance to the previous item.</dd>
+                <dt><strong>.carousel("next")</strong></dt>
+                <dd>Cycles the carousel instance to the next item.</dd>
+                <dt><strong>.carousel(number)</strong></dt>
+                <dd>Cycles the carousel to a particular item with at the given index.</dd>
+            </dl>
+        </section>
+        <hr />
+        <section>
+            <h1>Events</h1>
+            <p>The carousel exposes the following events allowing the developer to tap into its behaviour.</p>
+            <dl>
+                <dt><strong>slide.carousel.responsive</strong></dt>
+                <dd>This event is fired immediately when the plugins <code>slide</code> instance method is invoked.
+                </dd>
+                <dt><strong>slid.carousel.responsive</strong></dt>
+                <dd>This event is fired when the plugins <code>slide</code> instance method is invoked once the carousel has completed sliding.
+                </dd>
+            </dl>
+        </section>
+        <hr />
+        <section>
+            <h1>Data API</h1>
+            <p>
+                The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+                If you need to override this behaviour the following code will allow you to do so.
+            </p>
+            <pre><code>// Override the default loading behaviour
+$(window).off("load.carousel.responsive", function () {
+    // Your custom behaviour...
+}); 
+
+// Override the default carousel control click behaviour
+$("YOUR_SELECTOR").off("click.carousel.responsive", "[data-carousel-slide]", function (event) {
+    // Your custom behaviour...
+}); 
+
+// Bind to the slide event.
+$("YOUR_SELECTOR").on("slide.carousel.responsive", function(event) {
+    // Your custom behaviour...
+});
+                                               
+// Bind to the slid event.
+$("YOUR_SELECTOR").on("slid.carousel.responsive", function(event) {
+    // Your custom behaviour...
+});</code></pre>
+        </section>
+    </article>
+    <footer class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../src/js/000-responsive.utils.js"></script>
+    <script src="../src/js/responsive.carousel.js"></script>
+
+</body>
+</html>

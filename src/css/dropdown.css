@@ -1,0 +1,47 @@
+﻿/* Responsive Dropdown */
+
+.accordion {
+    border: solid 1px #c0c0c0;
+    margin-bottom: .125em;
+}
+
+.accordion-head {
+    display: block;
+    padding: .5em;
+    cursor: pointer;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+    .accordion-head a {
+        outline: none;
+    }
+
+.accordion-body {
+    padding: 0 .5em;
+}
+
+    .accordion-body.collapse {
+        margin-top: -1px;
+    }
+
+.expand, .collapse {
+    position: relative;
+    display: block;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+    margin-top: 0;
+    -moz-transition: height 0.5s ease, width 0.5s ease;
+    -o-transition: height 0.5s ease, width 0.5s ease;
+    -webkit-transition: height 0.5s ease, width 0.5s ease;
+    transition: height 0.5s ease, width 0.5s ease;
+}
+
+.collapse {
+    height: 0;
+}
+
+    .collapse.width {
+        height: auto;
+        width: 0;
+    }

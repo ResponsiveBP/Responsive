@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Responsive - A minimalist front-end framework.">
+    <meta name="viewport" content="width=device-width">
+    <title>Responsive :: Lightbox</title>
+    <link href="../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="../src/css/responsive-legacy.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="assets/css/docs.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+    <article class="container" role="main">
+        <h1 class="masthead">Lightbox</h1>
+        <p>A jQuery plugin that adds lightbox functionality to any element it targets. Uses CSS transitions to perform the animation.</p>
+        <p>Comes with keyboard controls <kbd>ESC</kbd>, <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> to help navigation.</p>
+        <p>
+            Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+            This is Responsive's first class API and should be your first consideration when using a plugin.
+        </p>
+        <section class="row">
+
+            <h1>Example</h1>
+            <h3>Relatively loaded target</h3>
+            <a href="tables.html #tables" data-lightbox-title="Relative url">Launch relative overlay</a>
+            <h3>External target with iframe header and footer</h3>
+            <a href="http://bbc.co.uk" data-lightbox-title="bbc" data-lightbox-description="<p>sample text or the footer.</p>">Launch external overlay</a>
+
+            <h3>External target with iframe header and footer and scrollbars</h3>
+            <a href="http://bbc.co.uk" data-lightbox-title="bbc" data-lightbox-description="<p>sample text or the footer.</p>" data-lightbox-iframe-scroll="true">Launch external overlay</a>
+
+            <h3>Internal target</h3>
+            <a href="#" data-lightbox-target="#overlay1">Launch internal overlay</a>
+            <div id="overlay1" class="hidden">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+
+            <h3>Grouped</h3>
+            <div class="row">
+                <div class="column-4">
+                    <a href="assets/img/hydrangeas.jpg" data-lightbox-title="Hydrangeas" data-lightbox-group="grouped">Grouped Item 1</a>
+                </div>
+                <div class="column-4">
+                    <a href="assets/img/chrysanthemum.jpg" data-lightbox-title="Chrysanthemum" data-lightbox-group="grouped">Grouped Item 2</a>
+                </div>
+                <div class="column-4">
+                    <a href="assets/img/desert.jpg" data-lightbox-title="Desert" data-lightbox-group="grouped">Grouped Item 3</a>
+                </div>
+            </div>
+        </section>
+        <div>
+            <hr />
+            <section class="row">
+                <h1>The Markup</h1>
+                <pre><code>/* Add inside any element. */
+&lt;a href="YOUR_TARGET" or data-lightbox-target="YOUR_TARGET" data-lightbox-title="YOUR_TITLE" data-lightbox-group="YOUR_GROUP_NAME" &gt;
+Lightbox trigger
+&lt;/a&gt;</code></pre>
+            </section>
+            <hr />
+            <section>
+                <h1>Methods</h1>
+                <p>The lightbox plugin exposes the following method signatures.</p>
+                <dl>
+                    <dt><strong>.lightbox(options)</strong>  </dt>
+                    <dd>Initialises the plugin with an optional options <code>object</code>
+                        <dl class="dl-horizontal">
+                            <dt><strong>options</strong></dt>
+                            <dd>Contains parameters to pass to the plugin.
+                            <dl>
+                                <dt><strong>close</strong></dt>
+                                <dd>Whether to add a close indicator to the lightbox.</dd>
+                                <dt><strong>external</strong></dt>
+                                <dd>Whether the target is on a different page.</dd>
+                                <dt><strong>group</strong></dt>
+                                <dd>A string containing a group identifier for creating galleries.</dd>
+                                <dt><strong>iframe</strong></dt>
+                                <dd>Whether to use an iframe.</dd>
+                                <dt><strong>iframeScroll</strong></dt>
+                                <dd>Whether the iframe should have scrollbars.</dd>
+                                <dt><strong>keyboard</strong></dt>
+                                <dd>Whether to enable keyboard control.</dd>
+                            </dl>
+                            </dd>
+                        </dl>
+                    </dd>
+                    <dt><strong>.lightbox(toggle)</strong></dt>
+                    <dd>Toggle the visibility of the lightbox.</dd>
+                    <dt><strong>.lightbox("show")</strong></dt>
+                    <dd>Show the lightbox.</dd>
+                    <dt><strong>.lightbox("hide")</strong></dt>
+                    <dd>Show the lightbox.</dd>
+                    <dt><strong>.lightbox("previous")</strong></dt>
+                    <dd>Cycles the lightbox instance to the previous item.</dd>
+                    <dt><strong>.lightbox("next")</strong></dt>
+                    <dd>Cycles the lightbox instance to the next item.</dd>
+                </dl>
+            </section>
+            <hr />
+            <section>
+                <h1>Events</h1>
+                <p>The lightbox plugin  exposes the following events allowing the developer to tap into its behaviour.</p>
+                <dl>
+                    <dt><strong>show.lightbox.responsive</strong></dt>
+                    <dd>This event is fired immediately when the plugins <code class=" language-javascript">show</code> instance method is invoked.</dd>
+                    <dt><strong>shown.lightbox.responsive</strong></dt>
+                    <dd>This event is fired when the plugins <code>shown</code> instance method is invoked once the target has completed the animation and is shown.</dd>
+                    <dt><strong>hide.lightbox.responsive</strong></dt>
+                    <dd>This event is fired immediately when the plugins <code class=" language-javascript">hide</code> instance method is invoked.</dd>
+                    <dt><strong>hidden.lightbox.responsive</strong></dt>
+                    <dd>This event is fired when the plugins <code>hidden</code> instance method is invoked once the target has completed the animation and is hidden.</dd>
+                </dl>
+            </section>
+            <hr />
+            <section>
+                <h1>Data API</h1>
+                <p>
+                    The lightbox's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+                If you need to override this behaviour the following code will allow you to do so.
+                </p>
+                <pre><code>// Override the default behaviour
+$(document.body).off("click.lightbox.responsive", ":attrStart(data-lightbox)", function (event) {    
+    // Your custom behaviour...
+});</code></pre>
+            </section>
+        </div>
+    </article>
+    <footer class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../src/js/000-responsive.utils.js"></script>
+    <script src="../src/js/responsive.lightbox.js"></script>
+</body>
+</html>
