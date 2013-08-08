@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.0.5 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.1.0 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 @import url(normalize.css);
 @import url(grid.css);
@@ -37,7 +37,6 @@
 @import url(autosize.css);
 @import url(carousel.css);
 @import url(tabs.css);
-@import url(lightbox-base.css);
 @import url(lightbox.css);
 @import url(helpers-base.css);
 @import url(helpers.css);
