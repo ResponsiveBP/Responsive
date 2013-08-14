@@ -1,5 +1,5 @@
 #Responsive
-##A super lightweight css and javascript framework for building responsive websites
+##A super lightweight CSS and JavaScript framework for building responsive websites
 
 ###<a href="http://twitter.github.io/bootstrap/" target="_blank" rel="nofollow">Bootstrap</a> and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Foundation</a> both do a good job but they're too heavy.
 
