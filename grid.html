@@ -76,16 +76,16 @@
             </p>
             <p>On IE8 the grid system is static.</p>
             <p>Grids are laid out as follows:</p>
-            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
-&lt;div class="row"&gt;
-  &lt;div class="column-6"&gt; First column &lt;/div&gt; 
-  &lt;div class="column-6"&gt; Second column &lt;/div&gt; 
-&lt;/div&gt;
-</code></pre>
         </section>
         <section class="container">
             <h1>Responsive Standard</h1>
             <p>A twelve column fluid grid system.</p>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="column-6"&gt; First column &lt;/div&gt; 
+    &lt;div class="column-6"&gt; Second column &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row">
                 <div class="column-12">
                     12
@@ -183,6 +183,12 @@
         <section class="container">
             <h1>Responsive: No Gutter</h1>
             <p>Add class <code>.no-gutter</code> to the row.</p>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="row no-gutter"&gt;
+    &lt;div class="column-6"&gt; First column &lt;/div&gt; 
+    &lt;div class="column-6"&gt; Second column &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row no-gutter">
                 <div class="column-12">
                     12
@@ -280,6 +286,14 @@
         <section class="container fixed">
             <h1>Fixed Width</h1>
             <p>Add class <code>.fixed</code> to the container.</p>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="container fixed"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="column-6"&gt; First column &lt;/div&gt; 
+        &lt;div class="column-6"&gt; Second column &lt;/div&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
             <div class="row">
                 <div class="column-12">
                     12
@@ -377,6 +391,12 @@
         <section class="container">
             <h1>Persistent columns</h1>
             <p>Add class <code>.fixed</code> to the row.</p>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="row fixed"&gt;
+    &lt;div class="column-6"&gt; First column &lt;/div&gt; 
+    &lt;div class="column-6"&gt; Second column &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row fixed">
                 <div class="column-6">
                     6
@@ -399,6 +419,22 @@
         </section>
         <section class="container">
             <h1>Nested columns</h1>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="column-6"&gt; First column 
+        &lt;div class="row"&gt;
+            &lt;div class="column-6"&gt; First nested column &lt;/div&gt; 
+            &lt;div class="column-6"&gt; Second nested column &lt;/div&gt; 
+        &lt;/div&gt;
+    &lt;/div&gt; 
+    &lt;div class="column-6"&gt; Second column 
+        &lt;div class="row"&gt;
+            &lt;div class="column-6"&gt; First nested column &lt;/div&gt; 
+            &lt;div class="column-6"&gt; Second nested column &lt;/div&gt; 
+        &lt;/div&gt;
+    &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row">
                 <div class="column-6">
                     6
@@ -427,10 +463,26 @@
         <section class="container">
             <h1>Persistent Nested columns</h1>
             <p>Add class <code>.fixed</code> to the row.</p>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="row fixed"&gt;
+    &lt;div class="column-6"&gt; First column 
+        &lt;div class="row fixed"&gt;
+            &lt;div class="column-6"&gt; First nested column &lt;/div&gt; 
+            &lt;div class="column-6"&gt; Second nested column &lt;/div&gt; 
+        &lt;/div&gt;
+    &lt;/div&gt; 
+    &lt;div class="column-6"&gt; Second column 
+        &lt;div class="row fixed"&gt;
+            &lt;div class="column-6"&gt; First nested column &lt;/div&gt; 
+            &lt;div class="column-6"&gt; Second nested column &lt;/div&gt; 
+        &lt;/div&gt;
+    &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row fixed">
                 <div class="column-6">
                     6           
-                    <div class="row">
+                    <div class="row fixed">
                         <div class="column-4">
                             4
                         </div>
@@ -444,7 +496,7 @@
                 </div>
                 <div class="column-6">
                     6           
-                    <div class="row">
+                    <div class="row fixed">
                         <div class="column-4">
                             4
                         </div>
@@ -460,6 +512,24 @@
         </section>
         <section class="container fixed">
             <h1>Fixed Width : Nested columns</h1>
+            <pre class="language-markup"><code>&lt;!-- A two column layout --&gt;
+&lt;div class="container fixed"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="column-6"&gt; First column 
+            &lt;div class="row"&gt;
+                &lt;div class="column-6"&gt; First nested column &lt;/div&gt; 
+                &lt;div class="column-6"&gt; Second nested column &lt;/div&gt; 
+            &lt;/div&gt;
+        &lt;/div&gt; 
+        &lt;div class="column-6"&gt; Second column 
+            &lt;div class="row"&gt;
+                &lt;div class="column-6"&gt; First nested column &lt;/div&gt; 
+                &lt;div class="column-6"&gt; Second nested column &lt;/div&gt; 
+            &lt;/div&gt;
+        &lt;/div&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
             <div class="row">
                 <div class="column-6">
                     6
@@ -488,6 +558,11 @@
         <section class="container">
             <h1>Offset Columns</h1>
             <p>Add class <code>.push-[number]</code> to the column.</p>
+            <pre class="language-markup"><code>&lt;!-- A one column layout pushed --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="column-6 push-6"&gt; First column &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row">
                 <div class="column-1 push-11">
                     1
@@ -546,7 +621,13 @@
         </section>
         <section class="container">
             <h1>Offset Columns : No Gutter</h1>
+            <p>Add class <code>.no-gutter</code> to the row.</p>
             <p>Add class <code>.push-[number]</code> to the column.</p>
+            <pre class="language-markup"><code>&lt;!-- A one column layout pushed --&gt;
+&lt;div class="row no-gutter"&gt;
+    &lt;div class="column-6 push-6"&gt; First column &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row no-gutter">
                 <div class="column-1 push-11">
                     1
@@ -608,6 +689,12 @@
             <h1>Spaced Columns</h1>
             <p>Add class <code>.no-gutter</code> to the row.</p>
             <p>Add class <code>.push-[number]</code> to the column.</p>
+            <pre class="language-markup"><code>&lt;!-- A two column layout pushed --&gt;
+&lt;div class="row no-gutter"&gt;
+    &lt;div class="column-3"&gt; First column &lt;/div&gt; 
+    &lt;div class="column-3 push-3"&gt; First column &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
             <div class="row no-gutter">
                 <div class="column-3">
                     3
