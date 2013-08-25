@@ -77,11 +77,21 @@
             <h1>Example</h1>
             <h3>Relatively loaded target</h3>
             <a href="tables.html #tables" data-lightbox-title="Relative url">Launch relative overlay</a>
+
             <h3>External target with iframe header and footer</h3>
-            <a href="http://bbc.co.uk" data-lightbox-title="bbc" data-lightbox-description="<p>sample text or the footer.</p>">Launch external overlay</a>
+            <a href="http://bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>">Launch external overlay</a>
 
             <h3>External target with iframe header and footer and scrollbars</h3>
-            <a href="http://bbc.co.uk" data-lightbox-title="bbc" data-lightbox-description="<p>sample text or the footer.</p>" data-lightbox-iframe-scroll="true">Launch external overlay</a>
+            <a href="http://bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>" data-lightbox-iframe-scroll="true">Launch external overlay</a>
+
+            <h3>Youtube</h3>
+            <a href="http://www.youtube.com/embed/eRW84aVCMWo" data-lightbox-title="Youtube">Launch Youtube overlay</a>
+
+            <h3>Vimeo</h3>
+            <a href="http://player.vimeo.com/video/24954567" data-lightbox-title="Vimeo">Launch Vimeo overlay</a>
+
+            <h3>Google Maps</h3>
+            <a href="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;output=embed" data-lightbox-title="Google Maps">Launch Google Map overlay</a>
 
             <h3>Internal target</h3>
             <a href="#" data-lightbox-target="#overlay1">Launch internal overlay</a>
@@ -172,7 +182,8 @@ Lightbox trigger
                 <h1>Events</h1>
                 <p>
                     The lightbox plugin exposes the following events allowing the developer to tap into its behaviour. 
-                    These events can be tapped into by selecting the lightbox trigger.</p>
+                    These events can be tapped into by selecting the lightbox trigger.
+                </p>
                 <dl>
                     <dt><strong>show.lightbox.responsive</strong></dt>
                     <dd>This event is fired immediately when the plugins <code>show</code> instance method is invoked.</dd>
