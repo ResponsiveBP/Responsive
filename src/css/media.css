@@ -18,41 +18,74 @@ a img {
 
 
 /*
- * Properly scale your video on any device based on YouTube ratio.
+ * Properly scale your video on any device based on YouTube/Dailymotion ratio.
  */
 .media {
     position: relative;
-    padding-top: 1.5625em;
-    padding-bottom: 67.5%;
+    padding-top: 30px;
+    padding-bottom: 56.25%;
     height: 0;
+    height: auto;
+    max-width: 100%;
     margin-bottom: 1em;
     overflow: hidden;
 }
 
-    /* 
-     * Widescreen mode.
-     */
-    .media.widescreen {
-        padding-bottom: 57.25%;
-    }
+/* 
+ *  Scrollable media 
+ */
+.media-scroll {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
-    /*
-     * Vimeo places the controls on the player itself.
-     */
-    .media.vimeo {
-        padding-top: 0;
-    }
+/* 
+ * Widescreen mode.
+ */
+.media.widescreen {
+    padding-bottom: 45%;
+}
 
-    /*
-     * The actual player.
-     */
-    .media iframe,
-    .media object,
-    .media embed,
-    .media video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+/*
+ * Vimeo places the controls on the player itself.
+ */
+.media.vimeo {
+    padding-top: 0;
+}
+
+/*
+ * Instagram
+ */
+.media.instagram {
+    height: auto;
+    max-width: none;
+    padding-bottom: 120%;
+}
+
+/*
+ * Vine
+ */
+.media.vine {
+    height: auto;
+    max-width: none;
+    padding-bottom: 100%;
+}
+
+/*
+ * The actual player.
+ */
+.media iframe,
+.media object,
+.media embed,
+.media video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+}

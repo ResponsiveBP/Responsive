@@ -11,7 +11,7 @@
 
     var $body = $(document.body),
         $overlay = $("<div/>").addClass("lightbox-overlay hidden fade-out"),
-        $lightbox = $("<div/>").addClass("lightbox container fade-out lightbox-loader").appendTo($overlay),
+        $lightbox = $("<div/>").addClass("lightbox fade-out lightbox-loader").appendTo($overlay),
         $next = $("<a/>").attr("href", "#")
                          .addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr("href", "#")
@@ -30,6 +30,7 @@
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
+        rembedProvider = /vimeo|vine|instagram/i,
         eclick = "click.lightbox.responsive",
         ekeyup = "keyup.lightbox.responsive",
         eshow = "show.lightbox.responsive",
@@ -96,7 +97,7 @@
             previousText = this.options.previous,
             iframeScroll = this.options.iframeScroll,
             iframe = this.options.iframe || !local ? isExternalUrl(target) : false,
-            $iframeWrap = $("<div/>").addClass(iframeScroll ? "lightbox-iframe-scroll" : "lightbox-iframe"),
+            $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
             $inner = $("<div/>").addClass("lightbox-inner"),
             $content = $("<div/>").addClass("lightbox-content"),
             $iframe,
@@ -138,6 +139,9 @@
         }
         else {
             if (iframe) {
+
+                $lightbox.addClass("iframe");
+
                 // Have to add inline styles for older browsers.
                 $iframe = $("<iframe/>")
                                    .attr({
@@ -153,7 +157,10 @@
                                    })
                                   .appendTo($iframeWrap);
 
-                $iframeWrap.appendTo($content);
+                // Test and add additional media classes.
+                var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
+
+                $iframeWrap.addClass(mediaClasses).appendTo($content);
 
                 // Not on load as can take forever.
                 fadeIn();
@@ -161,7 +168,7 @@
             } else {
 
                 if (rimage.test(target)) {
-                    
+
                     $lightbox.addClass("lightbox-image");
 
                     $img = $("<img/>").one("load", function () {
@@ -259,7 +266,7 @@
         // Clean up the lightbox.
         $next.detach();
         $previous.detach();
-        $lightbox.empty();
+        $lightbox.removeClass("iframe").empty();
 
         // Unbind the keyboard actions.
         if (this.options.keyboard) {
