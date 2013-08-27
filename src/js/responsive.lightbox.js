@@ -30,7 +30,7 @@
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
-        rembedProvider = /vimeo|vine|instagram/i,
+        rembedProvider = /vimeo|vine|instagram|instagr\.am/i,
         eclick = "click.lightbox.responsive",
         ekeyup = "keyup.lightbox.responsive",
         eshow = "show.lightbox.responsive",
@@ -266,14 +266,27 @@
         // Clean up the lightbox.
         $next.detach();
         $previous.detach();
-        $lightbox.removeClass("iframe").empty();
 
-        // Unbind the keyboard actions.
-        if (this.options.keyboard) {
-            manageKeyboardEvents.call(this);
-        }
+        var self = this,
+            empty = function () {
+                $lightbox.removeClass("iframe").empty();
 
-        this.isShown = false;
+                // Unbind the keyboard actions.
+                if (self.options.keyboard) {
+                    manageKeyboardEvents.call(self);
+                }
+
+                self.isShown = false;
+
+            };
+
+        $.when($lightbox.find("iframe").attr("src", "")).then(function () {
+            // Fix __flash__removeCallback' is undefined error.
+            window.setTimeout(empty, 100);
+
+        });
+
+
     };
 
     // The LightBox object that contains our methods.
@@ -384,12 +397,17 @@
                     position = index + 1,
                     callback = function () {
 
-                        // Clean up.
-                        cleanUp.call(this);
+                        var self = this,
+                            reShow = function () {
 
-                        if (this.$sibling) {
-                            this.$sibling.trigger(eclick);
-                        }
+                                if (self.$sibling) {
+                                    self.$sibling.trigger(eclick);
+                                }
+                            };
+
+                        // Clean up.
+                        cleanUp.call(self);
+                        window.setTimeout(reShow, 300);
 
                     },
                     proxy = $.proxy(callback, this);
@@ -421,12 +439,17 @@
                     position = index - 1,
                     callback = function () {
 
+                        var self = this,
+                            reShow = function () {
+
+                                if (self.$sibling) {
+                                    self.$sibling.trigger(eclick);
+                                }
+                            };
+
                         // Clean up.
                         cleanUp.call(this);
-
-                        if (this.$sibling) {
-                            this.$sibling.trigger(eclick);
-                        }
+                        window.setTimeout(reShow, 300);
 
                     },
                     proxy = $.proxy(callback, this);
