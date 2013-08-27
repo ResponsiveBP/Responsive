@@ -124,3 +124,10 @@
         .lightbox-direction:hover {
             text-decoration: underline;
         }
+
+/*
+ * Fix display warp on IE8 when loading cached images.
+ */
+.lightbox-image .lightbox-content > img {
+    display: table-cell \9;
+}
