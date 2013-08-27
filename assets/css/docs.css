@@ -163,3 +163,7 @@ blockquote {
     /*new syntax*/
     overflow-wrap: break-word;
 }
+
+.examples img {
+    border: solid 1px #c0c0c0;
+}
