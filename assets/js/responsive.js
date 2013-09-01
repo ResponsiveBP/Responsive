@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.2.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.2.2 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -1112,21 +1112,20 @@
 
         $lightbox.off(eclick).on(eclick, $.proxy(function (event) {
 
-            event.preventDefault();
-            event.stopPropagation();
-
             var next = $next[0],
                 previous = $previous[0],
                 closeTarget = $close[0],
                 eventTarget = event.target;
 
             if (eventTarget === next || eventTarget === previous) {
-
+                event.preventDefault();
+                event.stopPropagation();
                 this[eventTarget === next ? "next" : "previous"]();
             }
 
             if (eventTarget === closeTarget) {
-
+                event.preventDefault();
+                event.stopPropagation();
                 this.hide();
             }
 
@@ -1144,9 +1143,11 @@
         $overlay.addClass("fade-in")[0].offsetWidth; // force reflow
 
         // Bind the click events
-        $overlay.off(eclick).on(eclick, $.proxy(function () {
+        $overlay.off(eclick).on(eclick, $.proxy(function (event) {
 
-            this.hide();
+            if (event.target === $overlay[0]) {
+                this.hide();
+            }
 
         }, this));
     };
@@ -1190,6 +1191,61 @@
         });
 
 
+    };
+
+    var changeDirection = function (direction) {
+        if (!this.isShown) {
+            return;
+        }
+
+        if (this.options.group) {
+            var index = this.$group.index(this.$element),
+                length = this.$group.length,
+                position = direction === "next" ? index + 1 : index - 1,
+                callback = function () {
+
+                    var self = this,
+                        reShow = function () {
+
+                            if (self.$sibling) {
+                                self.$sibling.trigger(eclick);
+                            }
+                        };
+
+                    // Clean up.
+                    cleanUp.call(self);
+                    window.setTimeout(reShow, 300);
+
+                },
+                proxy = $.proxy(callback, this);
+
+            if (direction === "next") {
+
+                if (position >= length || position < 0) {
+
+                    position = 0;
+                }
+            } else {
+
+                if (position >= length) {
+
+                    position = 0;
+                }
+
+                if (position < 0) {
+                    position = length - 1;
+                }
+            }
+
+            this.$sibling = $(this.$group[position]);
+
+            destroy.call(this);
+
+            // Call the callback.
+            supportTransition ? $lightbox.one(supportTransition.end, proxy)
+                              : proxy();
+
+        }
     };
 
     // The LightBox object that contains our methods.
@@ -1289,91 +1345,12 @@
 
         },
         next: function () {
-
-            if (!this.isShown) {
-                return;
-            }
-
-            if (this.options.group) {
-                var index = this.$group.index(this.$element),
-                    length = this.$group.length,
-                    position = index + 1,
-                    callback = function () {
-
-                        var self = this,
-                            reShow = function () {
-
-                                if (self.$sibling) {
-                                    self.$sibling.trigger(eclick);
-                                }
-                            };
-
-                        // Clean up.
-                        cleanUp.call(self);
-                        window.setTimeout(reShow, 300);
-
-                    },
-                    proxy = $.proxy(callback, this);
-
-                if (position >= length || position < 0) {
-
-                    position = 0;
-                }
-
-                this.$sibling = $(this.$group[position]);
-
-                destroy.call(this);
-
-                // Call the callback.
-                supportTransition ? $lightbox.one(supportTransition.end, proxy)
-                                  : proxy();
-
-            }
+            
+            changeDirection.call(this, "next");
         },
         previous: function () {
 
-            if (!this.isShown) {
-                return;
-            }
-
-            if (this.options.group) {
-                var index = this.$group.index(this.$element),
-                    length = this.$group.length,
-                    position = index - 1,
-                    callback = function () {
-
-                        var self = this,
-                            reShow = function () {
-
-                                if (self.$sibling) {
-                                    self.$sibling.trigger(eclick);
-                                }
-                            };
-
-                        // Clean up.
-                        cleanUp.call(this);
-                        window.setTimeout(reShow, 300);
-
-                    },
-                    proxy = $.proxy(callback, this);
-
-                if (position >= length) {
-
-                    position = 0;
-                }
-
-                if (position < 0) {
-                    position = length - 1;
-                }
-
-                this.$sibling = $(this.$group[position]);
-                destroy.call(this);
-
-                // Call the callback.
-                supportTransition ? $lightbox.one(supportTransition.end, proxy)
-                                  : proxy();
-            }
-
+            changeDirection.call(this, "previous");
         },
         toggle: function () {
             return this[!this.isShown ? "show" : "hide"]();
