@@ -5,21 +5,18 @@
 }
 
 /*
- * Force top navs to show on desktop 
+ * Force top navigation to show on larger displays.
  */
-
-.top-nav .container {
-    width: 95%;
-    max-width: 95%;
-}
-
-.top-nav ul {
+nav[role="navigation"] ul {
     height: auto !important;
-    padding-bottom: 1em;
 }
 
-.top-nav a[data-dropdown-target=".css"],
-.top-nav a[data-dropdown-target=".js"]{
-	cursor: text;
-	text-decoration: none;
+nav[role="navigation"] a[data-dropdown-target=".css"],
+nav[role="navigation"] a[data-dropdown-target=".js"] {
+    cursor: text;
+    text-decoration: none;
+}
+
+nav[role="navigation"] h2 {
+    margin: 0.83em 0;
 }

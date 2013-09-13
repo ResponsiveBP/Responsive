@@ -23,18 +23,16 @@
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png">
 </head>
 <body>
-    <nav class="top-nav">
+    <nav role="navigation" class="top-nav">
         <div class="container">
             <div class="clearfix">
-                <a href="/Responsive/" class="top-level push-left">Responsive</a>
-                <a href="#" data-dropdown-target=".menu" class="top-level push-right nav ir">Menu</a>
+                <a href="/Responsive/" rel="home" class=" push-left">Responsive</a>
+                <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
             </div>
             <div class="menu collapse">
                 <div class="row">
-                    <nav class="column-3">
-                        <a href="#" data-dropdown-target=".css">
-                            <h2>CSS</h2>
-                        </a>
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target=".css">CSS</a></h2>
                         <ul class="no-bullets collapse css">
                             <li><a href="base.html">Base</a></li>
                             <li><a href="grid.html">Grid</a></li>
@@ -46,10 +44,9 @@
                             <li><a href="code.html">Code</a></li>
                             <li><a href="alerts.html">Alerts</a></li>
                         </ul>
-                    </nav>
-                    <nav class="column-3">
-                        <h2><a href="#" data-dropdown-target=".js">JavaScript
-                        </a></h2>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target=".js">JavaScript</a></h2>
                         <ul class="no-bullets collapse js">
                             <li><a href="autosize.html">Autosize</a></li>
                             <li><a href="carousel.html">Carousel</a></li>
@@ -58,18 +55,16 @@
                             <li><a href="lightbox.html">Lightbox</a></li>
                             <li><a href="tabs.html">Tabs</a></li>
                         </ul>
-                    </nav>
-                    <nav class="column-3">
-                        <a href="gallery.html">
-                            <h2>Gallery</h2>
-                        </a>
-                    </nav>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="gallery.html">Gallery</a></h2>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
-    <article class="container" role="main">
-        <section>
+    <main class="container" role="main">
+        <header role="banner">
             <h1 class="masthead">Responsive</h1>
             <h2>A super lightweight HTML, CSS, and JavaScript framework for building responsive websites</h2>
             <p><a href="http://github.com/JimBobSquarePants/Responsive/raw/master/rel/responsive.zip" class="btn masthead-btn" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Framework Download">Download Responsive</a></p>
@@ -80,9 +75,9 @@
                 <li>Version 1.2.2
                 </li>
             </ul>
-        </section>
+        </header>
         <hr />
-        <section>
+        <article>
             <h1>
                 <a href="http://twitter.github.io/bootstrap/" target="_blank" rel="nofollow">Bootstrap</a> and 
             <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Foundation</a> both do a good job but they're too heavy.
@@ -101,7 +96,7 @@
                 It's designed to be dropped-in, as-is to your website such as you would with normalize.css.
             </p>
             <p>Browser support covers IE8+ as well as all other modern browsers.</p>
-        </section>
+        </article>
         <section class="row">
             <h1>Framework Examples</h1>
             <section class="column-4">
@@ -141,13 +136,13 @@
                 </aside>
             </section>
         </section>
-    </article>
-    <footer class="container">
+    </main>
+    <footer role="contentinfo" class="container">
         <hr />
         <div class="row">
             <div class="column-8">
                 <p>
-                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
                 </p>
                 <p>
                     Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
@@ -158,7 +153,7 @@
                 </p>
             </div>
             <div class="column-2 push-right">
-                <a href="#" class="btn">Back to top ^</a>
+                <a href="#" role="button" class="btn">Back to top ^</a>
             </div>
         </div>
     </footer>

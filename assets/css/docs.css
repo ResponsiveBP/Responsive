@@ -1,71 +1,87 @@
-﻿
+﻿/*
+ * Base elements.
+ */
 body {
     font-family: Arial, sans-serif;
     padding-top: 4em;
 }
 
-.top-nav {
+blockquote {
+    padding: 1em 1em 1em 1.5em;
+    border-left: 5px solid #c0c0c0;
+}
+
+/*
+ * 1: Fix webkit position fixed issues.
+ */
+nav[role="navigation"] {
     color: #fff;
     background: #222;
-    -webkit-transform: translateZ(0);
+    -webkit-transform: translateZ(0); /* 1 */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1030;
-    margin-bottom: 0;
-    overflow-y: auto;
     padding: .2em 0;
 }
 
-    .top-nav a {
+    nav[role="navigation"] h2 {
+        margin: 0;
+    }
+
+    nav[role="navigation"] a {
         color: #fff;
         text-decoration: none;
     }
 
-        .top-nav a:hover {
+        nav[role="navigation"] a:hover {
             text-decoration: underline;
         }
 
-    .top-nav ul {
+    nav[role="navigation"] [data-dropdown-target] {
+        outline: none !important;
+    }
+
+    /*
+     * Home and navigation trigger links.
+     */
+    nav[role="navigation"] [rel="home"],
+    nav[role="navigation"] [role="button"],
+    nav[role="navigation"] ul {
+        font-size: 1.5em;
+    }
+
+    nav[role="navigation"] [role="button"] {
+        background: url(mobile-nav.png) no-repeat center center;
+        width: 24px;
+        height: 1.5em;
+        display: block;
+    }
+
+    nav[role="navigation"] ul {
         margin: 0;
+        list-style: none;
+        padding-bottom: .3em;
     }
 
 /*
- * Force top navs to show on tablet 
+ * Force top navigation to show on larger displays.
  */
 @media screen and (min-width: 768px) {
-    .top-nav ul {
+    nav[role="navigation"] ul {
         height: auto !important;
-        padding-bottom: 1em;
     }
 
-    .top-nav a[data-dropdown-target=".css"],
-    .top-nav a[data-dropdown-target=".js"] {
+    nav[role="navigation"] a[data-dropdown-target=".css"],
+    nav[role="navigation"] a[data-dropdown-target=".js"] {
         cursor: text;
         text-decoration: none;
     }
-}
 
-.top-nav .top-level,
-.top-nav ul a {
-    font-size: 1.5em;
-    margin: 0.41em 0;
-}
-
-.top-nav h2 {
-    margin: 0;
-}
-
-.nav {
-    background: url(mobile-nav.png) no-repeat center center;
-    width: 24px;
-    height: 1em;
-    display: block;
-}
-
-a[data-dropdown-target] {
-    outline: none !important;
+    nav[role="navigation"] h2 {
+        margin: 0.83em 0;
+    }
 }
 
 .menu {
@@ -105,6 +121,9 @@ a[data-dropdown-target] {
     font-size: 1.5em;
 }
 
+/*
+ * Grid demo.
+ */
 .grid-demo .row {
     text-align: center;
     background: #ebebeb;
@@ -128,11 +147,6 @@ a[data-dropdown-target] {
     .grid-demo [class*="column"] [class*="column"] {
         background-color: #434343;
     }
-
-blockquote {
-    padding: 1em 1em 1em 1.5em;
-    border-left: 5px solid #c0c0c0;
-}
 
 .responsive-helper-pane,
 .responsive-helper-alert {
