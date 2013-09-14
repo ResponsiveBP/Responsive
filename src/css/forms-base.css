@@ -170,6 +170,7 @@ input[type="checkbox"] {
     margin: 3px 3px 3px 0!important;
     width: auto;
     max-width: 15px;
+    line-height: inherit;
 }
 
 /*

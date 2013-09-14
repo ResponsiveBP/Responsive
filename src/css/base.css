@@ -39,42 +39,11 @@ body {
  * 1: Improve rendering of screen fonts.
  * 2: Ensure class driven versions act appropriately.
  */
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility; /* 1 */
     display: block; /* 2 */
     font-weight: bold; /* 2 */
     page-break-after: avoid; /* 2 */
-}
-
-/*Match the default defined in normalize.css*/
-.h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
-.h2 {
-    font-size: 1.5em;
-    margin: 0.83em 0;
-}
-
-.h3 {
-    font-size: 1.17em;
-    margin: 1em 0;
-}
-
-.h4 {
-    font-size: 1em;
-    margin: 1.33em 0;
-}
-
-.h5 {
-    font-size: 0.83em;
-    margin: 1.67em 0;
-}
-
-.h6 {
-    font-size: 0.67em;
-    margin: 2.33em 0;
 }
 
 /*

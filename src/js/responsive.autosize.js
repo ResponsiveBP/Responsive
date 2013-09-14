@@ -3,7 +3,7 @@
  */
 
 /*global jQuery*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -30,7 +30,7 @@
                         delay = 5;
                     }
 
-                    window.setTimeout(function () {
+                    w.setTimeout(function () {
 
                         // Run the autosize method.
                         $this.autoSize("size");
@@ -165,10 +165,10 @@
         });
     });
 
-    $(window).on("resize.autosize.responsive", function () {
+    $(w).on("resize.autosize.responsive", function () {
 
         if (resisizeTimer) {
-            window.clearTimeout(resisizeTimer);
+            w.clearTimeout(resisizeTimer);
         }
 
         var resize = function () {
@@ -186,7 +186,7 @@
 
         };
 
-        resisizeTimer = window.setTimeout(resize, 50);
+        resisizeTimer = w.setTimeout(resize, 50);
     });
 
-}(jQuery));
+}(jQuery, window));

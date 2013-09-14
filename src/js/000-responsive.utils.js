@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.2.2 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.0 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -33,7 +33,9 @@
 
     var el = document.createElement("responsive"),
         testProps = function (props) {
-            // A flexible property testing method.
+            /// <summary>A flexible property testing method.</summary>
+            /// <param name="props" type="Array|Object">The object to test.</param>
+            /// <returns type="Boolean">True if the object or array contains the property.</returns> 
 
             var type = $.isArray(props) ? "a" : "o";
 
@@ -50,7 +52,8 @@
 
 
     $.support.transition = (function () {
-        // Returns a value indicating whether the browser supports CSS transitions.
+        /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
+        /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
 
         var transitionTests = {
             "transition": "transitionend",
@@ -80,7 +83,7 @@
             var hasAttribute = false;
 
             $.each(el.attributes, function () {
-                if (this.name.indexOf(props[3]) !== -1) {
+                if (this.name.indexOf(props[3]) === 0) {
                     hasAttribute = true;
                     return false;  // Exit the iteration.
                 }

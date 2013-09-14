@@ -4,6 +4,11 @@ body {
     padding-top: 3.5em;
 }
 
+blockquote {
+    padding: 1em 1em 1em 1.5em;
+    border-left: 5px solid #c0c0c0;
+}
+
 .top-nav {
     color: #fff;
     background: #222;
@@ -54,6 +59,10 @@ body {
     font-size: 1.5em;
 }
 
+/*
+ * Grid examples.
+ */
+
 .grid-demo .row {
     text-align: center;
     background: #ebebeb;
@@ -78,10 +87,9 @@ body {
         background-color: #434343;
     }
 
-blockquote {
-    padding: 1em 1em 1em 1.5em;
-    border-left: 5px solid #c0c0c0;
-}
+/*
+ * Helper examples.
+ */
 
 .responsive-helper-pane,
 .responsive-helper-alert {
@@ -97,4 +105,13 @@ blockquote {
     left: -1px;
     right: -1px;
     bottom: -1px;
+}
+
+/*
+ * Dropdown examples.
+ */
+
+.dropdown-width-example {
+   height: 220px;
+    width: 300px;
 }

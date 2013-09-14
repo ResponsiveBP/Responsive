@@ -120,6 +120,8 @@
     right: 0;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     -moz-opacity: 0;
     opacity: 0;
 }
@@ -153,8 +155,6 @@
 .carousel-fade .carousel-item.carousel-active,
 .carousel[data-carousel-mode="fade"] .carousel-item.carousel-active {
     position: relative;
-    width: 100%;
-    height: 100%;
 }
 
 .carousel[data-carousel-mode="fade"] .carousel-control,

@@ -3,12 +3,12 @@
  */
 
 /*global jQuery*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
     // General variables.
-    var supportTransition = $.support.transition,
+    var supportTransition = w.getComputedStyle && $.support.transition,
 
     // The Dropdown object that contains our methods.
         Dropdown = function (element, options) {
@@ -17,6 +17,7 @@
             this.options = $.extend({}, $.fn.dropdown.defaults, options);
             this.$parent = null;
             this.transitioning = null;
+            this.endSize = null;
 
             if (this.options.parent) {
                 this.$parent = this.$element.parents(this.options.parent + ":first");
@@ -41,7 +42,6 @@
             }
 
             var dimension = this.options.dimension,
-                scroll = $.camelCase(["scroll", dimension].join("-")),
                 actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
                 hasData;
 
@@ -54,10 +54,23 @@
                 }
             }
 
-            // Set the height/width to zero then to the scroll height/width
+            // Set the height/width to zero then to the height/width
             // so animation can take place.
             this.$element[dimension](0);
-            this.$element[dimension](this.$element[0][scroll]);
+
+            if (supportTransition) {
+
+                // Calculate the height/width.
+                this.$element[dimension]("auto");
+                this.endSize = w.getComputedStyle(this.$element[0])[dimension];
+
+                // Reset to zero and force repaint.
+                this.$element[dimension](0)[0].offsetWidth; // Force reflow ;
+
+            }
+
+            this.$element[dimension](this.endSize || "auto");
+
             this.transition("removeClass", $.Event("show"), "shown");
         },
         hide: function () {
@@ -67,20 +80,23 @@
             }
 
             // Reset the height/width and then reduce to zero.
-            var dimension = this.options.dimension;
-            this.reset(this.$element[dimension]());
-            this.transition("addClass", $.Event("hide"), "hidden");
+            var dimension = this.options.dimension,
+                size;
+
+            if (supportTransition) {
+
+                // Set the height to auto, calculate the height/width and reset.
+                size = w.getComputedStyle(this.$element[0])[dimension];
+
+                // Reset to zero and force repaint.
+                this.$element[dimension](size)[0].offsetWidth; // Force reflow ;
+
+            }
+
+            this.$element.removeClass("expand");
             this.$element[dimension](0);
-        },
-        reset: function (size) {
+            this.transition("addClass", $.Event("hide"), "hidden");
 
-            // Reset the size of the hidden element.
-            var dimension = this.options.dimension;
-            this.$element.removeClass("expand")
-                         [dimension](size || "auto")
-                         [0].offsetWidth; // Force reflow 
-
-            return this;
         },
         transition: function (method, startEvent, completeEvent) {
             var self = this,
@@ -89,8 +105,9 @@
                     var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
 
                     if (startEvent.type === "show") {
-                        // Reset to allow animation to continue.
-                        self.reset();
+                        // Ensure the height/width is set to auto.
+                        var dimension = self.options.dimension;
+                        self.$element[dimension]("auto");
                     }
 
                     self.transitioning = false;
@@ -153,7 +170,7 @@
 
     // Dropdown data api initialization.
     $(function () {
-        $(document.body).on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
+        $("body").on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
 
             event.preventDefault();
 
@@ -169,4 +186,4 @@
 
         });
     });
-}(jQuery));
+}(jQuery, window));
