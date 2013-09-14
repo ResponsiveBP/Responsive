@@ -121,6 +121,8 @@
 
                         if (supportTransition) {
                             self.$element.one(supportTransition.end, cleanUp);
+                        } else {
+                            cleanUp();
                         }
                     }
 
