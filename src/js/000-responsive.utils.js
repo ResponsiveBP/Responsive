@@ -31,45 +31,32 @@
 
     "use strict";
 
-    var el = document.createElement("responsive"),
-        testProps = function (props) {
-            /// <summary>A flexible property testing method.</summary>
-            /// <param name="props" type="Array|Object">The object to test.</param>
-            /// <returns type="Boolean">True if the object or array contains the property.</returns> 
+    var transitionEnd = function () {
+        /// <summary>Gets transition end event for the current browser.</summary>
+        /// <returns type="Object">The transition end event for the current browser.</returns>
 
-            var type = $.isArray(props) ? "a" : "o";
+        var el = document.createElement("responsive"),
+            transEndEventNames = {
+                "WebkitTransition": "webkitTransitionEnd",
+                "MozTransition": "transitionend",
+                "OTransition": "oTransitionEnd otransitionend",
+                "transition": "transitionend"
+            };
 
-            for (var i in props) {
-
-                var prop = (type === "a" ? props[i] : i);
-
-                if (el.style[prop] !== undefined) {
-                    return prop;
-                }
+        for (var name in transEndEventNames) {
+            if (el.style[name] !== undefined) {
+                return { end: transEndEventNames[name] };
             }
-            return false;
-        };
+        }
 
+        return false;
+    };
 
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
 
-        var transitionTests = {
-            "transition": "transitionend",
-            "WebkitTransition": "webkitTransitionEnd",
-            "MozTransition": "transitionend",
-            "OTransition": "otransitionend"
-        },
-            support = testProps(transitionTests);
-
-        return support && {
-            end: (function () {
-
-                return transitionTests[support];
-
-            }())
-        };
+        return transitionEnd();
 
     }());
 

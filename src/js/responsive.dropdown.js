@@ -10,7 +10,7 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
 
-    // The Dropdown object that contains our methods.
+     // The Dropdown object that contains our methods.
         Dropdown = function (element, options) {
 
             this.$element = $(element);
@@ -66,7 +66,6 @@
 
                 // Reset to zero and force repaint.
                 this.$element[dimension](0)[0].offsetWidth; // Force reflow ;
-
             }
 
             this.$element[dimension](this.endSize || "auto");
@@ -103,27 +102,31 @@
         transition: function (method, startEvent, completeEvent) {
             var self = this,
                 complete = function () {
+
                     // The event to expose.
                     var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
 
                     if (startEvent.type === "show") {
                         // Ensure the height/width is set to auto.
-                        var dimension = self.options.dimension;
+                        var dimension = self.options.dimension,
+                            minDimension = $.camelCase(["min", dimension].join("-"));
 
-                        // Chrome repaints twice for some reason.
-                        self.$element.css("min-" + dimension, self.endSize || "");
+                        // Chrome repaints twice for some reason which causes the dropdown
+                        // to animate twice.
+                        self.$element.css(minDimension, self.endSize || "");
                         self.$element[dimension]("auto");
 
                         // Clean up after chrome.
                         var cleanUp = function () {
-                            self.$element.css("min-" + dimension, "");
+                            self.$element.css(minDimension, "");
                         };
 
-                        if (supportTransition) {
+                        if (supportTransition && supportTransition.end === "webkitTransitionEnd") {
                             self.$element.one(supportTransition.end, cleanUp);
                         } else {
                             cleanUp();
                         }
+
                     }
 
                     self.transitioning = false;
