@@ -6,36 +6,37 @@
     <meta content="A lightweight html, css, and javascript framework for building responsive websites." name="description">
     <meta content="width=device-width" name="viewport">
     <title>Responsive :: Base</title>
+
     <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
     <!--[if lt IE 9 &!(IEMobile)]>
       <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
-    <![endif]-->
-    <link href="assets/css/docs.css" rel="stylesheet" />
-    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/docs.css" rel="stylesheet" />
       <link href="assets/css/docs-legacy.css" rel="stylesheet" />
       <script src="assets/js/vendor/html5shiv.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png">
+
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
-    <nav class="top-nav">
+    <nav role="navigation">
         <div class="container">
             <div class="clearfix">
-                <a href="/Responsive/" class="top-level push-left">Responsive</a>
-                <a href="#" data-dropdown-target=".menu" class="top-level push-right nav ir">Menu</a>
+                <a href="/Responsive/" rel="home" class=" push-left">Responsive</a>
+                <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
             </div>
             <div class="menu collapse">
                 <div class="row">
-                    <nav class="column-3">
-                        <a href="#" data-dropdown-target=".css">
-                            <h2>CSS</h2>
-                        </a>
-                        <ul class="no-bullets collapse css">
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#css">CSS</a></h2>
+                        <ul id="css" class="no-bullets collapse">
                             <li><a href="base.html">Base</a></li>
                             <li><a href="grid.html">Grid</a></li>
                             <li><a href="forms.html">Forms</a></li>
@@ -46,11 +47,10 @@
                             <li><a href="code.html">Code</a></li>
                             <li><a href="alerts.html">Alerts</a></li>
                         </ul>
-                    </nav>
-                    <nav class="column-3">
-                        <h2><a href="#" data-dropdown-target=".js">JavaScript
-                        </a></h2>
-                        <ul class="no-bullets collapse js">
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#js">JavaScript</a></h2>
+                        <ul id="js" class="no-bullets collapse">
                             <li><a href="autosize.html">Autosize</a></li>
                             <li><a href="carousel.html">Carousel</a></li>
                             <li><a href="dismiss.html">Dismiss</a></li>
@@ -58,19 +58,17 @@
                             <li><a href="lightbox.html">Lightbox</a></li>
                             <li><a href="tabs.html">Tabs</a></li>
                         </ul>
-                    </nav>
-                    <nav class="column-3">
-                        <a href="gallery.html">
-                            <h2>Gallery</h2>
-                        </a>
-                    </nav>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="gallery.html">Gallery</a></h2>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
     <article class="container" role="main">
         <h1 class="masthead">Base</h1>
-        <section>
+        <header role="banner">
             <h1>Normalize</h1>
             <p>Responsive provides lots of building blocks that are specifically designed to speed up your development by boilerplating common components from normalized styles.</p>
             <p>
@@ -82,19 +80,19 @@
                 Normalize.css is a small CSS file that provides better cross-browser consistency in the default styling of HTML elements. 
             It’s a modern, HTML5-ready, alternative to the traditional CSS reset.
             </blockquote>
-        </section>
+        </header>
         <hr />
         <section>
             <h1>Typography</h1>
             <p>
-                Responsive does not add any additional styles to basic typographical elements such as <code>&lt;p/&gt;</code> it does however add some additional styles to allow
-                you to mimic other elements. For example:
+                Responsive does not add any additional styles to basic typographical elements such as <code>&lt;p/&gt;</code>. Header tags and other elements conform to 
+                cross-browser normalized standards.
             </p>
             <table class="table-bordered">
                 <thead>
                     <tr>
-                        <th>Default Headers</th>
-                        <th>Class-driven Headers</th>
+                        <th>Header Element</th>
+                        <th>Default Dimensions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,42 +100,60 @@
                         <td>
                             <h1>h1 element</h1>
                         </td>
-                        <td><span class="h1">h1 styled span</span></td>
+                        <td>
+                            <pre class="narrow-code"><code>font-size: 2em;
+margin: .67em 0;</code></pre>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <h2>h2 element</h2>
                         </td>
-                        <td><span class="h2">h2 styled span</span></td>
+                        <td>
+                            <pre class="narrow-code"><code>font-size: 1.5em;
+margin: .83em 0;</code></pre>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <h3>h3 element</h3>
                         </td>
-                        <td><span class="h3">h3 styled span</span></td>
+                        <td>
+                            <pre class="narrow-code"><code>font-size: 1.17em;
+margin: 1em 0;</code></pre>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <h4>h4 element</h4>
                         </td>
-                        <td><span class="h4">h4 styled span</span></td>
+                        <td>
+                            <pre class="narrow-code"><code>font-size: 1em;
+margin: 1.33em 0;</code></pre>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <h5>h5 element</h5>
                         </td>
-                        <td><span class="h5">h5 styled span</span></td>
+                        <td>
+                            <pre class="narrow-code"><code>font-size: .83em;
+margin: 1.67em 0;</code></pre>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <h6>h6 element</h6>
                         </td>
-                        <td><span class="h6">h6 styled span</span></td>
+                        <td>
+                            <pre class="narrow-code"><code>font-size: .67em;
+margin: 2.33em 0;</code></pre>
+                        </td>
                     </tr>
                 </tbody>
             </table>
 
-            <p><code>&lt;hr/&gt;</code> elements have also been tweaked slightly to allow developers to more easily style them. For example:</p>
+            <p><code>&lt;hr/&gt;</code> elements have been tweaked slightly though to allow developers to more easily style them. For example:</p>
             <hr />
             <div class="alert alert-info">
                 <p>Responsive also adds some light styling to code driven elements. See <a href="code.html" rel="bookmark">Code</a> for examples of that styling.</p>
@@ -285,12 +301,12 @@
             </dl>
         </section>
     </article>
-    <footer class="container">
+    <footer role="contentinfo" class="container">
         <hr />
         <div class="row">
             <div class="column-8">
                 <p>
-                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
                 </p>
                 <p>
                     Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
@@ -301,15 +317,16 @@
                 </p>
             </div>
             <div class="column-2 push-right">
-                <a href="#" class="btn">Back to top ^</a>
+                <a href="#" role="button" class="btn">Back to top ^</a>
             </div>
         </div>
     </footer>
     <!--[if IE 8]>     
-        <script src="assets/js/vendor/jquery-1.10.1.min.js"></script>
+        <script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <script src="assets/js/vendor/jquery-2.0.2.min.js"></script>
+    <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
     <script src="assets/js/responsive.js"></script>
@@ -320,7 +337,7 @@
         (function (d, t) {
             var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
             g.src = '//www.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g, s)
+            s.parentNode.insertBefore(g, s);
         }(document, 'script'));
     </script>
 
