@@ -11,7 +11,7 @@ of the website. That's annoying!
 and coded to be as lightweight as possible to prevent the need to undo styles set by the framework itself and allow developers to write efficient code.
 Most CSS styles are there to simply normalize behaviour across devices or provide hooks for further styling.
 
-Responsive is tiny. The combined CSS and JavaScript is **only 14.9kb minified and gzipped**. (40.5kb minified.), but there is a lot of functionality built into the framework.
+Responsive is tiny. The combined CSS and JavaScript is **only 14kb minified and gzipped**. (42kb minified.), but there is a lot of functionality built into the framework.
 It's designed to be dropped-in, as-is to your website such as you would with normalize.css.
 
 Browser support covers IE8+ as well as all other modern browsers.
