@@ -82,6 +82,8 @@
             // Reset the height/width and then reduce to zero.
             var dimension = this.options.dimension,
                 size;
+            // Chrome repaints twice for some reason.
+            this.$element.css("min-" + dimension, "");
 
             if (supportTransition) {
 
@@ -107,6 +109,9 @@
                     if (startEvent.type === "show") {
                         // Ensure the height/width is set to auto.
                         var dimension = self.options.dimension;
+
+                        // Chrome repaints twice for some reason.
+                        self.$element.css("min-" + dimension, self.endSize || "");
                         self.$element[dimension]("auto");
                     }
 
