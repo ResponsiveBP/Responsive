@@ -73,8 +73,8 @@ nav[role="navigation"] {
         height: auto !important;
     }
 
-    nav[role="navigation"] a[data-dropdown-target=".css"],
-    nav[role="navigation"] a[data-dropdown-target=".js"] {
+    nav[role="navigation"] a[data-dropdown-target="#css"],
+    nav[role="navigation"] a[data-dropdown-target="#js"] {
         cursor: text;
         text-decoration: none;
     }
@@ -180,4 +180,17 @@ nav[role="navigation"] {
 
 .examples img {
     border: solid 1px #c0c0c0;
+}
+
+.narrow-code {
+    max-width: 300px;
+}
+
+/*
+ * Dropdown examples.
+ */
+
+.dropdown-width-example {
+    height: 220px;
+    width: 300px;
 }

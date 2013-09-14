@@ -11,8 +11,8 @@ nav[role="navigation"] ul {
     height: auto !important;
 }
 
-nav[role="navigation"] a[data-dropdown-target=".css"],
-nav[role="navigation"] a[data-dropdown-target=".js"] {
+nav[role="navigation"] a[data-dropdown-target="#css"],
+nav[role="navigation"] a[data-dropdown-target="#js"] {
     cursor: text;
     text-decoration: none;
 }
