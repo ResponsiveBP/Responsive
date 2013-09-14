@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.2.2 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.0 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -33,7 +33,9 @@
 
     var el = document.createElement("responsive"),
         testProps = function (props) {
-            // A flexible property testing method.
+            /// <summary>A flexible property testing method.</summary>
+            /// <param name="props" type="Array|Object">The object to test.</param>
+            /// <returns type="Boolean">True if the object or array contains the property.</returns> 
 
             var type = $.isArray(props) ? "a" : "o";
 
@@ -50,7 +52,8 @@
 
 
     $.support.transition = (function () {
-        // Returns a value indicating whether the browser supports CSS transitions.
+        /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
+        /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
 
         var transitionTests = {
             "transition": "transitionend",
@@ -80,7 +83,7 @@
             var hasAttribute = false;
 
             $.each(el.attributes, function () {
-                if (this.name.indexOf(props[3]) !== -1) {
+                if (this.name.indexOf(props[3]) === 0) {
                     hasAttribute = true;
                     return false;  // Exit the iteration.
                 }
@@ -124,7 +127,7 @@
  */
 
 /*global jQuery*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -151,7 +154,7 @@
                         delay = 5;
                     }
 
-                    window.setTimeout(function () {
+                    w.setTimeout(function () {
 
                         // Run the autosize method.
                         $this.autoSize("size");
@@ -286,10 +289,10 @@
         });
     });
 
-    $(window).on("resize.autosize.responsive", function () {
+    $(w).on("resize.autosize.responsive", function () {
 
         if (resisizeTimer) {
-            window.clearTimeout(resisizeTimer);
+            w.clearTimeout(resisizeTimer);
         }
 
         var resize = function () {
@@ -307,17 +310,17 @@
 
         };
 
-        resisizeTimer = window.setTimeout(resize, 50);
+        resisizeTimer = w.setTimeout(resize, 50);
     });
 
-}(jQuery));
+}(jQuery, window));
 /*
  * Responsive Carousel
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -382,7 +385,7 @@
             if (this.options.interval && !this.paused) {
 
                 // Cycle to the next item on the set interval
-                (this.interval = window.setInterval($.proxy(this.next, this), this.options.interval));
+                (this.interval = w.setInterval($.proxy(this.next, this), this.options.interval));
             }
 
             // Return the carousel for chaining.
@@ -434,7 +437,7 @@
             }
 
             // Clear the interval and return the carousel for chaining.
-            window.clearInterval(this.interval);
+            w.clearInterval(this.interval);
             this.interval = null;
 
             return this;
@@ -497,8 +500,7 @@
                 }
 
                 // Good to go? Then let's slide.
-                $nextItem.addClass(type);
-                $nextItem[0].offsetWidth; // Force reflow.
+                $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
 
                 // Do the slide.
                 $activeItem.addClass(direction);
@@ -590,7 +592,7 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    $(window).on("load.carousel.responsive", function () {
+    $(w).on("load.carousel.responsive", function () {
 
         $(".carousel").each(function () {
 
@@ -637,7 +639,7 @@
         }
     });
 
-}(jQuery));/*
+}(jQuery, window));/*
  * Responsive Dismiss 
  */
 
@@ -735,12 +737,12 @@
  */
 
 /*global jQuery*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
     // General variables.
-    var supportTransition = $.support.transition,
+    var supportTransition = w.getComputedStyle && $.support.transition,
 
     // The Dropdown object that contains our methods.
         Dropdown = function (element, options) {
@@ -749,6 +751,7 @@
             this.options = $.extend({}, $.fn.dropdown.defaults, options);
             this.$parent = null;
             this.transitioning = null;
+            this.endSize = null;
 
             if (this.options.parent) {
                 this.$parent = this.$element.parents(this.options.parent + ":first");
@@ -773,7 +776,6 @@
             }
 
             var dimension = this.options.dimension,
-                scroll = $.camelCase(["scroll", dimension].join("-")),
                 actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
                 hasData;
 
@@ -786,10 +788,23 @@
                 }
             }
 
-            // Set the height/width to zero then to the scroll height/width
+            // Set the height/width to zero then to the height/width
             // so animation can take place.
             this.$element[dimension](0);
-            this.$element[dimension](this.$element[0][scroll]);
+
+            if (supportTransition) {
+
+                // Calculate the height/width.
+                this.$element[dimension]("auto");
+                this.endSize = w.getComputedStyle(this.$element[0])[dimension];
+
+                // Reset to zero and force repaint.
+                this.$element[dimension](0)[0].offsetWidth; // Force reflow ;
+
+            }
+
+            this.$element[dimension](this.endSize || "auto");
+
             this.transition("removeClass", $.Event("show"), "shown");
         },
         hide: function () {
@@ -799,20 +814,23 @@
             }
 
             // Reset the height/width and then reduce to zero.
-            var dimension = this.options.dimension;
-            this.reset(this.$element[dimension]());
-            this.transition("addClass", $.Event("hide"), "hidden");
+            var dimension = this.options.dimension,
+                size;
+
+            if (supportTransition) {
+
+                // Set the height to auto, calculate the height/width and reset.
+                size = w.getComputedStyle(this.$element[0])[dimension];
+
+                // Reset to zero and force repaint.
+                this.$element[dimension](size)[0].offsetWidth; // Force reflow ;
+
+            }
+
+            this.$element.removeClass("expand");
             this.$element[dimension](0);
-        },
-        reset: function (size) {
+            this.transition("addClass", $.Event("hide"), "hidden");
 
-            // Reset the size of the hidden element.
-            var dimension = this.options.dimension;
-            this.$element.removeClass("expand")
-                         [dimension](size || "auto")
-                         [0].offsetWidth; // Force reflow 
-
-            return this;
         },
         transition: function (method, startEvent, completeEvent) {
             var self = this,
@@ -821,8 +839,9 @@
                     var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
 
                     if (startEvent.type === "show") {
-                        // Reset to allow animation to continue.
-                        self.reset();
+                        // Ensure the height/width is set to auto.
+                        var dimension = self.options.dimension;
+                        self.$element[dimension]("auto");
                     }
 
                     self.transitioning = false;
@@ -885,7 +904,7 @@
 
     // Dropdown data api initialization.
     $(function () {
-        $(document.body).on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
+        $("body").on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
 
             event.preventDefault();
 
@@ -901,14 +920,14 @@
 
         });
     });
-}(jQuery));/*
+}(jQuery, window));/*
  * Responsive Lightbox
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
 
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -1186,7 +1205,7 @@
 
         $.when($lightbox.find("iframe").attr("src", "")).then(function () {
             // Fix __flash__removeCallback' is undefined error.
-            window.setTimeout(empty, 100);
+            w.setTimeout(empty, 100);
 
         });
 
@@ -1214,7 +1233,7 @@
 
                     // Clean up.
                     cleanUp.call(self);
-                    window.setTimeout(reShow, 300);
+                    w.setTimeout(reShow, 300);
 
                 },
                 proxy = $.proxy(callback, this);
@@ -1345,7 +1364,7 @@
 
         },
         next: function () {
-            
+
             changeDirection.call(this, "next");
         },
         previous: function () {
@@ -1408,7 +1427,7 @@
         $this.lightbox(params);
 
     });
-}(jQuery));/*
+}(jQuery, window));/*
  * Responsive tabs
  */
 

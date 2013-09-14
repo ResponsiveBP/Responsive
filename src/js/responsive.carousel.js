@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -69,7 +69,7 @@
             if (this.options.interval && !this.paused) {
 
                 // Cycle to the next item on the set interval
-                (this.interval = window.setInterval($.proxy(this.next, this), this.options.interval));
+                (this.interval = w.setInterval($.proxy(this.next, this), this.options.interval));
             }
 
             // Return the carousel for chaining.
@@ -121,7 +121,7 @@
             }
 
             // Clear the interval and return the carousel for chaining.
-            window.clearInterval(this.interval);
+            w.clearInterval(this.interval);
             this.interval = null;
 
             return this;
@@ -184,8 +184,7 @@
                 }
 
                 // Good to go? Then let's slide.
-                $nextItem.addClass(type);
-                $nextItem[0].offsetWidth; // Force reflow.
+                $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
 
                 // Do the slide.
                 $activeItem.addClass(direction);
@@ -277,7 +276,7 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    $(window).on("load.carousel.responsive", function () {
+    $(w).on("load.carousel.responsive", function () {
 
         $(".carousel").each(function () {
 
@@ -324,4 +323,4 @@
         }
     });
 
-}(jQuery));
+}(jQuery, window));

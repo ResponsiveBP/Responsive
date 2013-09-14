@@ -5,7 +5,7 @@
 /*global jQuery*/
 /*jshint expr:true*/
 
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -283,7 +283,7 @@
 
         $.when($lightbox.find("iframe").attr("src", "")).then(function () {
             // Fix __flash__removeCallback' is undefined error.
-            window.setTimeout(empty, 100);
+            w.setTimeout(empty, 100);
 
         });
 
@@ -311,7 +311,7 @@
 
                     // Clean up.
                     cleanUp.call(self);
-                    window.setTimeout(reShow, 300);
+                    w.setTimeout(reShow, 300);
 
                 },
                 proxy = $.proxy(callback, this);
@@ -442,7 +442,7 @@
 
         },
         next: function () {
-            
+
             changeDirection.call(this, "next");
         },
         previous: function () {
@@ -505,4 +505,4 @@
         $this.lightbox(params);
 
     });
-}(jQuery));
+}(jQuery, window));

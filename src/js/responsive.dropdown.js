@@ -3,12 +3,12 @@
  */
 
 /*global jQuery*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
     // General variables.
-    var supportTransition = $.support.transition,
+    var supportTransition = w.getComputedStyle && $.support.transition,
 
     // The Dropdown object that contains our methods.
         Dropdown = function (element, options) {
@@ -58,11 +58,11 @@
             // so animation can take place.
             this.$element[dimension](0);
 
-            if (window.getComputedStyle && supportTransition) {
+            if (supportTransition) {
 
                 // Calculate the height/width.
                 this.$element[dimension]("auto");
-                this.endSize = window.getComputedStyle(this.$element[0])[dimension];
+                this.endSize = w.getComputedStyle(this.$element[0])[dimension];
 
                 // Reset to zero and force repaint.
                 this.$element[dimension](0)[0].offsetWidth; // Force reflow ;
@@ -83,20 +83,20 @@
             var dimension = this.options.dimension,
                 size;
 
-            if (window.getComputedStyle && supportTransition) {
+            if (supportTransition) {
 
                 // Set the height to auto, calculate the height/width and reset.
-                size = window.getComputedStyle(this.$element[0])[dimension];
+                size = w.getComputedStyle(this.$element[0])[dimension];
 
                 // Reset to zero and force repaint.
                 this.$element[dimension](size)[0].offsetWidth; // Force reflow ;
 
             }
-            
+
             this.$element.removeClass("expand");
             this.$element[dimension](0);
             this.transition("addClass", $.Event("hide"), "hidden");
-    
+
         },
         transition: function (method, startEvent, completeEvent) {
             var self = this,
@@ -170,7 +170,7 @@
 
     // Dropdown data api initialization.
     $(function () {
-        $(document.body).on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
+        $("body").on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
 
             event.preventDefault();
 
@@ -186,4 +186,4 @@
 
         });
     });
-}(jQuery));
+}(jQuery, window));
