@@ -113,6 +113,15 @@
                         // Chrome repaints twice for some reason.
                         self.$element.css("min-" + dimension, self.endSize || "");
                         self.$element[dimension]("auto");
+
+                        // Clean up after chrome.
+                        var cleanUp = function () {
+                            self.$element.css("min-" + dimension, "");
+                        };
+
+                        if (supportTransition) {
+                            self.$element.one(supportTransition.end, cleanUp);
+                        }
                     }
 
                     self.transitioning = false;
