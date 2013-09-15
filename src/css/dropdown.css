@@ -24,6 +24,13 @@
         margin-top: -1px;
     }
 
+.trans, .collapse {
+    -moz-transition: height 0.5s ease, width 0.5s ease;
+    -o-transition: height 0.5s ease, width 0.5s ease;
+    -webkit-transition: height 0.5s ease, width 0.5s ease;
+    transition: height 0.5s ease, width 0.5s ease;
+}
+
 .expand, .collapse {
     position: relative;
     display: block;
@@ -31,10 +38,6 @@
     width: auto;
     overflow: hidden;
     margin-top: 0;
-    -moz-transition: height 0.5s ease, width 0.5s ease;
-    -o-transition: height 0.5s ease, width 0.5s ease;
-    -webkit-transition: height 0.5s ease, width 0.5s ease;
-    transition: height 0.5s ease, width 0.5s ease;
 }
 
 .collapse {

@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.3.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.1 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -31,30 +31,30 @@
 
     "use strict";
 
-    var transitionEnd = function () {
-        /// <summary>Gets transition end event for the current browser.</summary>
-        /// <returns type="Object">The transition end event for the current browser.</returns>
-
-        var el = document.createElement("responsive"),
-            transEndEventNames = {
-                "WebkitTransition": "webkitTransitionEnd",
-                "MozTransition": "transitionend",
-                "OTransition": "oTransitionEnd otransitionend",
-                "transition": "transitionend"
-            };
-
-        for (var name in transEndEventNames) {
-            if (el.style[name] !== undefined) {
-                return { end: transEndEventNames[name] };
-            }
-        }
-
-        return false;
-    };
-
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
+
+        var transitionEnd = function () {
+            /// <summary>Gets transition end event for the current browser.</summary>
+            /// <returns type="Object">The transition end event for the current browser.</returns>
+
+            var el = document.createElement("responsive"),
+                transEndEventNames = {
+                    "transition": "transitionend",
+                    "WebkitTransition": "webkitTransitionEnd",
+                    "MozTransition": "transitionend",
+                    "OTransition": "oTransitionEnd otransitionend"
+                };
+
+            for (var name in transEndEventNames) {
+                if (el.style[name] !== undefined) {
+                    return { end: transEndEventNames[name] };
+                }
+            }
+
+            return false;
+        };
 
         return transitionEnd();
 

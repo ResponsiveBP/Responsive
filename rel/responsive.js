@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.3.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.1 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -31,30 +31,30 @@
 
     "use strict";
 
-    var transitionEnd = function () {
-        /// <summary>Gets transition end event for the current browser.</summary>
-        /// <returns type="Object">The transition end event for the current browser.</returns>
-
-        var el = document.createElement("responsive"),
-            transEndEventNames = {
-                "WebkitTransition": "webkitTransitionEnd",
-                "MozTransition": "transitionend",
-                "OTransition": "oTransitionEnd otransitionend",
-                "transition": "transitionend"
-            };
-
-        for (var name in transEndEventNames) {
-            if (el.style[name] !== undefined) {
-                return { end: transEndEventNames[name] };
-            }
-        }
-
-        return false;
-    };
-
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
+
+        var transitionEnd = function () {
+            /// <summary>Gets transition end event for the current browser.</summary>
+            /// <returns type="Object">The transition end event for the current browser.</returns>
+
+            var el = document.createElement("responsive"),
+                transEndEventNames = {
+                    "transition": "transitionend",
+                    "WebkitTransition": "webkitTransitionEnd",
+                    "MozTransition": "transitionend",
+                    "OTransition": "oTransitionEnd otransitionend"
+                };
+
+            for (var name in transEndEventNames) {
+                if (el.style[name] !== undefined) {
+                    return { end: transEndEventNames[name] };
+                }
+            }
+
+            return false;
+        };
 
         return transitionEnd();
 
@@ -749,7 +749,6 @@
             if (this.options.toggle) {
                 this.toggle();
             }
-
         };
 
     // Assign public methods via the Dropdown prototype.
@@ -758,7 +757,7 @@
         constructor: Dropdown,
         show: function () {
 
-            if (this.transitioning || !this.$element.hasClass("collapse")) {
+            if (this.transitioning || this.$element.hasClass("expand")) {
                 return;
             }
 
@@ -786,7 +785,7 @@
                 this.endSize = w.getComputedStyle(this.$element[0])[dimension];
 
                 // Reset to zero and force repaint.
-                this.$element[dimension](0)[0].offsetWidth; // Force reflow ;
+                this.$element[dimension](0)[0].offsetWidth;
             }
 
             this.$element[dimension](this.endSize || "auto");
@@ -819,34 +818,15 @@
 
         },
         transition: function (method, startEvent, completeEvent) {
+
             var self = this,
                 complete = function () {
 
                     // The event to expose.
                     var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
 
-                    if (startEvent.type === "show") {
-                        // Ensure the height/width is set to auto.
-                        var dimension = self.options.dimension,
-                            minDimension = $.camelCase(["min", dimension].join("-"));
-
-                        // Chrome repaints twice for some reason which causes the dropdown
-                        // to animate twice.
-                        self.$element.css(minDimension, self.endSize || "");
-                        self.$element[dimension]("auto");
-
-                        // Clean up after chrome.
-                        var cleanUp = function () {
-                            self.$element.css(minDimension, "");
-                        };
-
-                        if (supportTransition && supportTransition.end === "webkitTransitionEnd") {
-                            self.$element.one(supportTransition.end, cleanUp);
-                        } else {
-                            cleanUp();
-                        }
-
-                    }
+                    // Ensure the height/width is set to auto.
+                    self.$element.removeClass("trans")[self.options.dimension]("");
 
                     self.transitioning = false;
                     self.$element.trigger(eventToTrigger);
@@ -856,11 +836,11 @@
                 return;
             }
 
-            self.transitioning = true;
+            this.transitioning = true;
 
             // Remove or add the expand classes.
             this.$element.trigger(startEvent)[method]("collapse");
-            this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand");
+            this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
             if (supportTransition) {
                 this.$element.one(supportTransition.end, complete);
@@ -921,7 +901,6 @@
 
             // Run the dropdown method.
             $target.dropdown(params);
-
         });
     });
 }(jQuery, window));/*
