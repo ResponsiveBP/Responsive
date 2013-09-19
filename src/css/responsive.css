@@ -19,18 +19,18 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.3.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.2 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 @import url(normalize.css);
-@import url(grid.css);
 @import url(base.css);
+@import url(grid.css);
 @import url(lists-base.css);
-@import url(lists.css) screen and (min-width: 768px);
+@import url(lists.css) screen and (min-width: 48em);
 @import url(tables.css);
 @import url(alerts.css);
 @import url(media.css);
 @import url(forms-base.css);
-@import url(forms.css) screen and (min-width: 480px);
+@import url(forms.css) screen and (min-width: 30em);
 @import url(buttons.css);
 @import url(code.css);
 @import url(dropdown.css);

@@ -37,18 +37,18 @@
     }
 
 /*
- * Landscape tablet to default desktop: 769 > viewport < 1023px
+ * Landscape tablet to default desktop: 768px >= viewport < 1024px
  */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 48em) and (max-width: 63.975em) {
     .lightbox.iframe {
         min-width: 75%;
     }
 }
 
 /*
- * Default desktop upwards: 980 > viewport
+ * Default desktop upwards: 1024 > viewport
  */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 64em) {
     .lightbox.iframe {
         min-width: 60%;
     }
@@ -123,6 +123,11 @@
         .lightbox-direction:hover {
             text-decoration: underline;
         }
+
+
+.lightbox-image .lightbox-content > * {
+    width: 100%;
+}
 
 /*
  * Fix display warp on IE8 when loading cached images.

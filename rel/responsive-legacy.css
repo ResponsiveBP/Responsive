@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.3.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.2 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -427,6 +427,90 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+/* Responsive Base */
+
+/*
+ * Fix the box model
+ */
+*, *:before, *:after {
+    -webkit-box-sizing: border-box!important;
+    -moz-box-sizing: border-box!important;
+    -ms-box-sizing: border-box!important;
+    box-sizing: border-box!important;
+}
+
+
+/*
+ * 1. Use the iOS devices hardware accelerator to provide native scrolling.
+ * 2. Prevents iOS and MS text size adjust after orientation change, without disabling user zoom.
+ */
+html {
+    -webkit-overflow-scrolling: touch; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/*
+ * Headers
+ * 1: Improve rendering of screen fonts.
+ * 2: Ensure class driven versions act appropriately.
+ */
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility; /* 1 */
+    display: block; /* 2 */
+    font-weight: bold; /* 2 */
+    page-break-after: avoid; /* 2 */
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #c0c0c0;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Add query indicator to abbr
+ */
+abbr {
+    cursor: help;
+}
+
 /* Responsive Grid Legacy */
 
 .container {
@@ -669,90 +753,6 @@ table {
 
 .no-gutter .push-1 {
     left: 8.3333%;
-}
-
-/* Responsive Base */
-
-/*
- * Fix the box model
- */
-*, *:before, *:after {
-    -webkit-box-sizing: border-box!important;
-    -moz-box-sizing: border-box!important;
-    -ms-box-sizing: border-box!important;
-    box-sizing: border-box!important;
-}
-
-
-/*
- * 1. Use the iOS devices hardware accelerator to provide native scrolling.
- * 2. Prevents iOS and MS text size adjust after orientation change, without disabling user zoom.
- */
-html {
-    -webkit-overflow-scrolling: touch; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-    -ms-text-size-adjust: 100%; /* 2 */
-}
-
-html,
-button,
-input,
-select,
-textarea {
-    color: #222;
-}
-
-body {
-    font-size: 16px;
-    line-height: 1.4;
-}
-
-/*
- * Headers
- * 1: Improve rendering of screen fonts.
- * 2: Ensure class driven versions act appropriately.
- */
-h1, h2, h3, h4, h5, h6 {
-    text-rendering: optimizeLegibility; /* 1 */
-    display: block; /* 2 */
-    font-weight: bold; /* 2 */
-    page-break-after: avoid; /* 2 */
-}
-
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #c0c0c0;
-    margin: 1em 0;
-    padding: 0;
-}
-
-/*
- * Add query indicator to abbr
- */
-abbr {
-    cursor: help;
 }
 
 /* Responsive Lists Base */
@@ -1949,18 +1949,18 @@ pre code {
     }
 
 /*
- * Landscape tablet to default desktop: 769 > viewport < 1023px
+ * Landscape tablet to default desktop: 768px >= viewport < 1024px
  */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 48em) and (max-width: 63.975em) {
     .lightbox.iframe {
         min-width: 75%;
     }
 }
 
 /*
- * Default desktop upwards: 980 > viewport
+ * Default desktop upwards: 1024 > viewport
  */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 64em) {
     .lightbox.iframe {
         min-width: 60%;
     }
@@ -2035,6 +2035,11 @@ pre code {
         .lightbox-direction:hover {
             text-decoration: underline;
         }
+
+
+.lightbox-image .lightbox-content > * {
+    width: 100%;
+}
 
 /*
  * Fix display warp on IE8 when loading cached images.

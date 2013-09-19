@@ -54,7 +54,7 @@
 /* ==|== media queries ===================================================
 
 ========================================================================== */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375em) {
     .container:not(.fixed) .row:not(.fixed) > [class*="column-"] {
         width: 100%;
         margin-left: 0;
@@ -63,7 +63,7 @@
 }
 
 /*Width + margin*/
-@media screen and (max-width: 1197px) {
+@media screen and (max-width: 74.8125em) {
     .fixed .container,
     .container.fixed {
         /*Drop the margin*/

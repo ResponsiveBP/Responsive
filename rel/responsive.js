@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.3.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.3.2 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -1001,7 +1001,7 @@
             nextText = this.options.next,
             previousText = this.options.previous,
             iframeScroll = this.options.iframeScroll,
-            iframe = this.options.iframe || !local ? isExternalUrl(target) : false,
+            iframe = this.options.iframe || !local ? isExternalUrl(target) && !rimage.test(target) : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
             $inner = $("<div/>").addClass("lightbox-inner"),
             $content = $("<div/>").addClass("lightbox-content"),
