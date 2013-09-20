@@ -1,39 +1,29 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Responsive - A minimalist front-end framework.">
-    <meta name="viewport" content="width=device-width">
-    <title>Responsive :: Tables</title>
-    <link href="../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Table Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
     <!--[if lt IE 9 &!(IEMobile)]>
-      <link href="../src/css/responsive-legacy.css" rel="stylesheet" />
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
     <![endif]-->
-    <link href="test-assets/css/docs.css" rel="stylesheet" />
-    <!--[if lt IE 9 &!(IEMobile)]>
-      <link href="test-assets/css/docs-legacy.css" rel="stylesheet" />
-      <script src="test-assets/js/vendor/html5shiv.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="test-assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="test-assets/ico/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="test-assets/ico/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="test-assets/ico/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="test-assets/ico/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon-precomposed" href="test-assets/ico/apple-touch-icon-57x57.png">
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="container">
-            <a href="index.html">Home</a>
-        </div>
-    </nav>
-    <article class="container" role="main">
-        <h1 class="masthead">Tables</h1>
-        <p>Tables come in three flavours that scale to their container with minimum css to promote easy styling.</p>
-        <section id="tables" class="row">
+    <article class="container">
+        <h1>Tables</h1>
+        <hr />
+        <section class="row">
             <div class="column-6">
-                <h1>Standard Table</h1>
+                <h3>Standard Table</h3>
                 <table>
                     <thead>
                         <tr>
@@ -62,7 +52,7 @@
                 </table>
             </div>
             <div class="column-6">
-                <h1>Bordered Table</h1>
+                <h3>Bordered Table</h3>
                 <p>Add the class <code>.table-bordered</code> to the table.</p>
                 <table class="table-bordered">
                     <thead>
@@ -94,7 +84,7 @@
         </section>
         <section class="row">
             <div class="column-6">
-                <h1>Striped Table</h1>
+                <h3>Striped Table</h3>
                 <p>Add the class <code>.table-striped</code> to the table. If IE8 support is required, add class <code>.table-row-alt</code> to the appropriate table row.</p>
                 <table class="table-striped">
                     <thead>
@@ -125,25 +115,21 @@
             </div>
         </section>
     </article>
-    <footer class="container">
-        <hr />
-        <div class="row">
-            <div class="column-8">
-                <p>
-                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
-                </p>
-                <p>
-                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
-                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
-                </p>
-                <p>
-                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
-                </p>
-            </div>
-            <div class="column-2 push-right">
-                <a href="#" class="btn">Back to top ^</a>
-            </div>
-        </div>
-    </footer>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
 </body>
 </html>

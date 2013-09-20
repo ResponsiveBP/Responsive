@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Code Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <h1>Code</h1>
+        <hr />
+        <div class="row">
+            <div class="column-6">
+                <h2>Inline Code</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. 
+                Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et <code>mollis dolor</code>. Praesent et diam eget 
+                libero egestas mattis sit amet vitae augue. Nam <code>tincidunt</code> congue enim, ut porta lorem lacinia consectetur. Donec ut
+                libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut 
+                gravida lorem. <code>Ut turpis felis</code>, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna 
+                consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero 
+                in urna <code>ultrices</code> accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis 
+                natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi 
+                at sem facilisis semper ac in est.
+                </p>
+            </div>
+            <div class="column-6">
+                <h2>Pre</h2>
+                <p>This is the <code>Panel</code> constructor:</p>
+                <pre><code>function Panel(element, canClose, closeHandler) {
+  this.element = element;
+  this.canClose = canClose;
+  this.closeHandler = function () { 
+    
+    if (closeHandler) {
+    
+    closeHandler(); 
+
+    }
+
+  };
+}</code></pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-6">
+                <h2>Inline Code</h2>
+                <p>
+                    In the following snippet,
+                    <samp>samp</samp>
+                    and <kbd>kbd</kbd> elements are mixed in the contents of a pre element to show a session of Zork I.
+                </p>
+
+                <pre><samp>You are in an open field west of a big white house with 
+a boarded front door.
+There is a small mailbox here.
+
+></samp> <kbd>open mailbox</kbd>
+
+<samp>Opening the mailbox reveals:
+A leaflet.
+
+></samp></pre>
+            </div>
+            <div class="column-6">
+                <h2>Fixed Height</h2>
+                <p>Add the class <code>.pre-scrollable</code>.</p>
+                <pre class="pre-scrollable"><code>pre, code, samp, kbd {
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    color: #dd1144;
+    padding: .13em .25em;
+}
+
+code {
+    padding: .067em .25em;
+    white-space: nowrap;
+}
+
+pre code,
+pre samp {
+    border: none;
+    padding: 0;
+    white-space: pre-wrap;
+}
+
+.pre-scrollable {
+    max-height: 20em;
+    overflow-y: scroll;
+}</code></pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-6">
+                <p>The following shows a contemporary poem that uses the <code>pre</code> element to preserve its unusual formatting, which forms an intrinsic part of the poem itself.</p>
+                <pre>                maxling
+
+it is with a          heart
+               heavy
+
+that i admit loss of a feline
+        so           loved
+
+a friend lost to the
+        unknown
+                                (night)
+
+~cdr 11dec07</pre>
+            </div>
+        </div>
+    </article>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
+</body>
+</html>

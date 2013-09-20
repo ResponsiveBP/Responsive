@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Media Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <h1>Media</h1>
+        <hr />
+        <section>
+            <h2>Iframe</h2>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Youtube</h2>
+                    <p>Add class <code>.media</code> to the media container.</p>
+                    <div class="media">
+                        <iframe src="http://www.youtube.com/embed/eRW84aVCMWo" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Dailymotion</h2>
+                    <p>Add class <code>.media</code> to the media container.</p>
+                    <div class="media">
+                        <iframe src="http://www.dailymotion.com/embed/video/x10o8jk" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Google Maps</h2>
+                    <p>Add classes <code>.media</code> and <code>.google-map</code> to the media container.</p>
+                    <div class="media google-map">
+                        <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;output=embed"></iframe>
+                        <br />
+                        <small><a href="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;source=embed" style="color: #0000FF; text-align: left">View Larger Map</a></small>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Vimeo</h2>
+                    <p>Add classes <code>.media</code> and <code>.vimeo</code> to the media container.</p>
+                    <div class="media vimeo">
+                        <iframe src="http://player.vimeo.com/video/24954567" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Vine</h2>
+                    <p>Add classes <code>.media</code> and <code>.vine</code> to the media container.</p>
+                    <div class="media vine">
+                        <iframe src="https://vine.co/v/bYwPIluIipH/embed/simple" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Instagram</h2>
+                    <p>Add classes <code>.media</code> and <code>.instagram</code> to the media container.</p>
+                    <div class="media instagram">
+                        <iframe src="http://instagram.com/p/dJJvzMI4X8/embed/" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+            </div>
+            <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
+
+            <div class="alert alert-info">
+                <p>
+                    Twitter, Facebook, SoundCloud, Storify, and Scribd (select 'Autosize') already provide responsive embed code.
+                </p>
+            </div>
+        </section>
+    </article>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
+</body>
+</html>

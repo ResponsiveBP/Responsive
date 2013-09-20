@@ -45,11 +45,6 @@
 /*
  * No gutter produces gaps on rounding so we remove the float and overflow.
  */
-/*.no-gutter [class*="column-"] + [class*="column-"]:last-child {
-    float: none;
-    overflow-x: hidden;
-    width: auto;
-}*/
 
 /* ==|== media queries ===================================================
 

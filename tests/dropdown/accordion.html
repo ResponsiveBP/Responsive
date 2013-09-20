@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dropdown Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <h1>Dropdown</h1>
+        <hr />
+        <section class="row">
+            <h2>Accordion</h2>
+            <div class="column-6">
+                <h3>Un-Grouped</h3>
+
+                <div class="accordion">
+                    <div class="accordion-head">
+                        <a data-dropdown-target="#cllps1" class="accordion-toggle" href="#">Accordion group item 1                               
+                        </a>
+                    </div>
+                    <div class="accordion-body" id="cllps1">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.                              
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-head">
+                        <a data-dropdown-target="#cllps2" class="accordion-toggle" href="#">Accordion group item 2                               
+                        </a>
+                    </div>
+                    <div class="accordion-body collapse" id="cllps2">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.                              
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-head">
+                        <a data-dropdown-target="#cllps3" class="accordion-toggle" href="#">Accordion group item 3                               
+                        </a>
+                    </div>
+                    <div class="accordion-body collapse" id="cllps3">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.                              
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="column-6">
+                <h3>Grouped</h3>
+                <p>Add <code>data-dropdown-parent="selector"</code> to the trigger and class <code>.dropdown-group</code> to each target.</p>
+                <div class="accordion-group">
+                    <div class="accordion">
+                        <div class="accordion-head">
+                            <a data-dropdown-target="#cllps4" data-dropdown-parent=".accordion-group" class="accordion-toggle" href="#">Accordion group item 1                               
+                            </a>
+                        </div>
+                        <div class="accordion-body dropdown-group" id="cllps4">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.                              
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-head">
+                            <a data-dropdown-target="#cllps5" data-dropdown-parent=".accordion-group" class="accordion-toggle" href="#">Accordion group item 2                               
+                            </a>
+                        </div>
+                        <div class="accordion-body dropdown-group collapse" id="cllps5">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.                              
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-head">
+                            <a data-dropdown-target="#cllps6" data-dropdown-parent=".accordion-group" class="accordion-toggle" href="#">Accordion group item 3                               
+                            </a>
+                        </div>
+                        <div class="accordion-body dropdown-group collapse" id="cllps6">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.                              
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
+</body>
+</html>

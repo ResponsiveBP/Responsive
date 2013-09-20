@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Table Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+    <style type="text/css">
+        .table-list {
+            display: block;
+            overflow: hidden;
+            overflow-x: auto;
+            position: relative;
+        }
+
+            .table-list tr {
+                min-width: 480px;
+            }
+
+            .table-list thead,
+            .table-list tfoot,
+            .table-list th:not([scope="row"]) {
+                display: none;
+            }
+
+            .table-list td,
+            .table-list th[scope="row"] {
+                display: block;
+            }
+
+                .table-list th[scope="row"],
+                .table-list th[scope="row"]:before {
+                    white-space: nowrap;
+                }
+
+                    .table-list td:before,
+                    .table-list th[scope="row"]:before,
+                    .table-list td:after,
+                    .table-list th[scope="row"]:after {
+                        content: attr(data-thead);
+                        font-weight: bold;
+                        display: inline-block;
+                        padding: 0 .5em 0 0;
+                        vertical-align: top;
+                    }
+
+                    .table-list td:after,
+                    .table-list th[scope="row"]:after {
+                        content: attr(data-tfoot);
+                        padding: 0 .5em;
+                    }
+
+        @media (min-width: 48em) {
+            .table-list {
+                display: table;
+                overflow: visible;
+            }
+
+                .table-list tr {
+                    min-width: 0;
+                }
+
+                .table-list thead {
+                    display: table-header-group;
+                }
+
+                .table-list tfoot {
+                    display: table-footer-group;
+                }
+
+                .table-list th,
+                .table-list td,
+                .table-list th:not([scope="row"]),
+                .table-list th[scope="row"] {
+                    display: table-cell;
+                }
+
+                    .table-list td:before,
+                    .table-list th[scope="row"]:before,
+                    .table-list td:after,
+                    .table-list th[scope="row"]:after {
+                        content: none;
+                    }
+        }
+    </style>
+    <style type="text/css">
+        .table-overflow {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+            .table-overflow table {
+                max-width: none;
+            }
+    </style>
+</head>
+<body>
+    <article class="container">
+        <h1>Tables</h1>
+        <hr />
+        <section class="row">
+            <div class="column-6">
+                <h3>TableList</h3>
+                <table class="table-list">
+                    <thead>
+                        <tr>
+                            <th scope="col">Header1</th>
+                            <th>Header2</th>
+                            <th>Header3</th>
+                            <th>Header4</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">Footer1</th>
+                            <th>Footer2</th>
+                            <th>Footer3</th>
+                            <th>Footer4</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="row">
+            <div class="column-6">
+                <h3>Standard Table</h3>
+                <div class="table-overflow">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Header1</th>
+                                <th>Header2</th>
+                                <th>Header3</th>
+                                <th>Header4</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">Header1</th>
+                                <th>Header2</th>
+                                <th>Header3</th>
+                                <th>Header4</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Data1</th>
+                                <td>Data2</td>
+                                <td>Data3</td>
+                                <td>Data4</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Data1</th>
+                                <td>Data2</td>
+                                <td>Data3</td>
+                                <td>Data4</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Data1</th>
+                                <td>Data2</td>
+                                <td>Data3</td>
+                                <td>Data4</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Data1</th>
+                                <td>Data2</td>
+                                <td>Data3</td>
+                                <td>Data4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
+</body>
+</html>

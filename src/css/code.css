@@ -37,6 +37,11 @@ pre samp {
  * Reassert wrapping.
  */
 pre code {
+    word-break: break-all; /* webkit */
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre;
+    white-space: -moz-pre-wrap; /* fennec */
     white-space: pre-wrap;
 }
 
