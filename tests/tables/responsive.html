@@ -17,58 +17,51 @@
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
     <style type="text/css">
+        /*
+         * Basic layout.
+         */
         .table-list {
             display: block;
-            overflow: hidden;
-            overflow-x: auto;
-            position: relative;
         }
-
-            .table-list tr {
-                min-width: 480px;
-            }
 
             .table-list thead,
             .table-list tfoot,
-            .table-list th:not([scope="row"]) {
+            .table-list th {
                 display: none;
             }
 
-            .table-list td,
-            .table-list th[scope="row"] {
-                display: block;
-            }
-
-                .table-list th[scope="row"],
-                .table-list th[scope="row"]:before {
-                    white-space: nowrap;
+                .table-list tr,
+                .table-list td,
+                .table-list th[scope="row"] {
+                    display: block;
                 }
 
                     .table-list td:before,
-                    .table-list th[scope="row"]:before,
                     .table-list td:after,
+                    .table-list th[scope="row"]:before,
                     .table-list th[scope="row"]:after {
                         content: attr(data-thead);
                         font-weight: bold;
-                        display: inline-block;
-                        padding: 0 .5em 0 0;
-                        vertical-align: top;
+                        display: block;
+                        padding: .25em 0;
                     }
 
                     .table-list td:after,
                     .table-list th[scope="row"]:after {
                         content: attr(data-tfoot);
-                        padding: 0 .5em;
                     }
 
         @media (min-width: 48em) {
+            /*
+             * Reset defaults.
+             */
             .table-list {
                 display: table;
                 overflow: visible;
             }
 
                 .table-list tr {
-                    min-width: 0;
+                    display: table-row;
                 }
 
                 .table-list thead {
@@ -79,19 +72,31 @@
                     display: table-footer-group;
                 }
 
-                .table-list th,
                 .table-list td,
-                .table-list th:not([scope="row"]),
+                .table-list th,
                 .table-list th[scope="row"] {
                     display: table-cell;
                 }
 
                     .table-list td:before,
-                    .table-list th[scope="row"]:before,
                     .table-list td:after,
+                    .table-list th[scope="row"]:before,
                     .table-list th[scope="row"]:after {
                         content: none;
                     }
+        }
+
+        /*
+         * Bordered
+         */
+        .table-list.table-bordered {
+            border-top-style: none;
+        }
+
+        @media (min-width: 48em) {
+            .table-list.table-bordered {
+                border-top-style: solid;
+            }
         }
     </style>
     <style type="text/css">
@@ -132,7 +137,54 @@
                     <tbody>
                         <tr>
                             <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
                             <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column-6">
+                <h3>TableList Striped</h3>
+                <table class="table-list table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Header1</th>
+                            <th>Header2</th>
+                            <th>Header3</th>
+                            <th>Header4</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">Footer1</th>
+                            <th>Footer2</th>
+                            <th>Footer3</th>
+                            <th>Footer4</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
                             <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
                             <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
                         </tr>
@@ -160,7 +212,103 @@
         </section>
         <section class="row">
             <div class="column-6">
-                <h3>Standard Table</h3>
+                <h3>TableList Bordered</h3>
+                <table class="table-list table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Header1</th>
+                            <th>Header2</th>
+                            <th>Header3</th>
+                            <th>Header4</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">Footer1</th>
+                            <th>Footer2</th>
+                            <th>Footer3</th>
+                            <th>Footer4</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column-6">
+                <h3>TableList Bordered</h3>
+                <table class="table-list table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Header1</th>
+                            <th>Header2</th>
+                            <th>Header3</th>
+                            <th>Header4</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">Footer1</th>
+                            <th>Footer2</th>
+                            <th>Footer3</th>
+                            <th>Footer4</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="row">
+            <div class="column-6">
+                <h3>Table with overflow wrapper</h3>
                 <div class="table-overflow">
                     <table>
                         <thead>
