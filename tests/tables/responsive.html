@@ -16,99 +16,7 @@
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
-    <style type="text/css">
-        /*
-         * Basic layout.
-         */
-        .table-list {
-            display: block;
-        }
 
-            .table-list thead,
-            .table-list tfoot,
-            .table-list th {
-                display: none;
-            }
-
-                .table-list tr,
-                .table-list td,
-                .table-list th[scope="row"] {
-                    display: block;
-                }
-
-                    .table-list td:before,
-                    .table-list td:after,
-                    .table-list th[scope="row"]:before,
-                    .table-list th[scope="row"]:after {
-                        content: attr(data-thead);
-                        font-weight: bold;
-                        display: block;
-                        padding: .25em 0;
-                    }
-
-                    .table-list td:after,
-                    .table-list th[scope="row"]:after {
-                        content: attr(data-tfoot);
-                    }
-
-        @media (min-width: 48em) {
-            /*
-             * Reset defaults.
-             */
-            .table-list {
-                display: table;
-                overflow: visible;
-            }
-
-                .table-list tr {
-                    display: table-row;
-                }
-
-                .table-list thead {
-                    display: table-header-group;
-                }
-
-                .table-list tfoot {
-                    display: table-footer-group;
-                }
-
-                .table-list td,
-                .table-list th,
-                .table-list th[scope="row"] {
-                    display: table-cell;
-                }
-
-                    .table-list td:before,
-                    .table-list td:after,
-                    .table-list th[scope="row"]:before,
-                    .table-list th[scope="row"]:after {
-                        content: none;
-                    }
-        }
-
-        /*
-         * Bordered
-         */
-        .table-list.table-bordered {
-            border-top-style: none;
-        }
-
-        @media (min-width: 48em) {
-            .table-list.table-bordered {
-                border-top-style: solid;
-            }
-        }
-    </style>
-    <style type="text/css">
-        .table-overflow {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-            .table-overflow table {
-                max-width: none;
-            }
-    </style>
 </head>
 <body>
     <article class="container">
@@ -137,7 +45,7 @@
                     <tbody>
                         <tr>
                             <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
                             <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
                             <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
                         </tr>
@@ -184,7 +92,7 @@
                     <tbody>
                         <tr>
                             <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
                             <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
                             <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
                         </tr>
@@ -233,7 +141,7 @@
                     <tbody>
                         <tr>
                             <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
                             <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
                             <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
                         </tr>
@@ -280,7 +188,7 @@
                     <tbody>
                         <tr>
                             <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to see what happens when we drop down the display width to less than 30em.</td>
+                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
                             <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
                             <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
                         </tr>
@@ -309,7 +217,8 @@
         <section class="row">
             <div class="column-6">
                 <h3>Table with overflow wrapper</h3>
-                <div class="table-overflow">
+                <p>Wrap the table in a container with the class <code>.table-scrollable</code>.</p>
+                <div class="table-scrollable">
                     <table>
                         <thead>
                             <tr>
