@@ -39,6 +39,10 @@
     width: 300px;
 }
 
+.narrow-code {
+    max-width: 300px;
+}
+
 
 /*
  * Helper examples.

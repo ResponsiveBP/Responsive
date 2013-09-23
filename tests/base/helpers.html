@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Base Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <h1>Base</h1>
+        <hr />
+        <section>
+            <h2>Responsive helpers.</h2>
+            <div class="row">
+                <h3>Visible Example: Green means visible</h3>
+                <div class="column-4">
+                    <div class="responsive-helper-pane">
+                        <h3>Mobile &lt; 48em (768px)</h3>
+                        <code>.visible-phone</code>
+                        <div class="visible-phone responsive-helper-alert alert-success">
+                            <h3>Mobile &lt; 48em (768px)</h3>
+                            <code>.visible-phone</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="responsive-helper-pane">
+                        <h3>Tablet 48em - 61.1875em (768px - 979px)</h3>
+                        <code>.visible-tablet</code>
+                        <div class="visible-tablet responsive-helper-alert alert-success">
+                            <h3>Tablet 48em - 61.1875em (768px - 979px)</h3>
+                            <code>.visible-tablet</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="responsive-helper-pane">
+                        <h3>Desktop &gt; 61.1875em (979px)</h3>
+                        <code>.visible-desktop</code>
+                        <div class="visible-desktop responsive-helper-alert alert-success">
+                            <h3>Desktop &gt; 61.1875em (979px)</h3>
+                            <code>.visible-desktop</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h3>Hidden Example: Red means hidden</h3>
+                <div class="column-4">
+                    <div class="responsive-helper-pane">
+                        <h3>Mobile &lt; 48em (768px)</h3>
+                        <code>.hidden-phone</code>
+                        <div class="hidden-phone responsive-helper-alert alert-error">
+                            <h3>Mobile &lt; 48em (768px)</h3>
+                            <code>.hidden-phone</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="responsive-helper-pane">
+                        <h3>Tablet 48em - 61.1875em (768px - 979px)</h3>
+                        <code>.hidden-tablet</code>
+                        <div class="hidden-tablet responsive-helper-alert alert-error">
+                            <h3>Tablet 48em - 61.1875em (768px - 979px)</h3>
+                            <code>.hidden-tablet</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="responsive-helper-pane">
+                        <h3>Desktop &gt; 61.1875em (979px)</h3>
+                        <code>.hidden-desktop</code>
+                        <div class="hidden-desktop responsive-helper-alert alert-error">
+                            <h3>Desktop &gt; 61.1875em (979px)</h3>
+                            <code>.hidden-desktop</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
+</body>
+</html>

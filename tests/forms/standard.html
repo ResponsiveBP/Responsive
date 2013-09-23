@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form Tests</title>
+
+    <!-- Conditional statements are blocking so download modern styles first -->
+    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
+    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <h1>Forms</h1>
+        <hr />
+        <section class="row">
+            <div class="column-6">
+                <form action="#">
+                    <fieldset>
+                        <legend>Standard Form</legend>
+                        <label for="input-focused2">Focused</label>
+                        <input type="text" id="input-focused2" class="focus" value="focused input..." />
+                        <label for="input-disabled2">Disabled</label>
+                        <input type="text" id="input-disabled2" disabled value="disabled input..." />
+                        <p>Support text to help describe the input.</p>
+                        <label for="input-no-edit2">Non editable</label>
+                        <span id="input-no-edit2" class="no-edit">No edit</span>
+                        <label for="select-default2">Select</label>
+                        <select id="select-default2">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <label for="input-file2">File upload</label>
+                        <input id="input-file2" type="file" />
+                        <label for="input-password2">Password</label>
+                        <input type="password" id="input-password2" />
+                        <label for="input-time2">Time</label>
+                        <input type="time" id="input-time2" />
+                        <label for="input-week2">Week</label>
+                        <input type="week" id="input-week2" />
+                        <label for="input-month2">Month</label>
+                        <input type="month" id="input-month2" />
+                        <label for="input-date2">Date</label>
+                        <input type="date" id="input-date2" />
+                        <label for="input-datetime2">Datetime</label>
+                        <input type="datetime" id="input-datetime2" />
+                        <label for="input-datetime-local2">Datetime Local</label>
+                        <input type="datetime-local" id="input-datetime-local2" />
+                        <label for="input-search2">Search</label>
+                        <input type="search" id="input-search2" />
+                        <label for="input-color2">Color</label>
+                        <input type="color" id="input-color2" />
+                        <label for="input-range2">Range</label>
+                        <input type="range" id="input-range2" min="0" max="100" value="50" />
+                        <label for="input-email2">Email</label>
+                        <input type="email" id="input-email2" />
+                        <label for="check-disabled2">Disabled Checkbox</label>
+                        <div class="input-tamer">
+                            <input type="checkbox" id="check-disabled2" value="option2" disabled="" class="inline-block">
+                        </div>
+                        <label for="check2">Checkbox</label>
+                        <div class="input-tamer">
+                            <input type="checkbox" id="check2" value="option1" class="inline-block">
+                            <input type="checkbox" id="check3" value="option2" class="inline-block">
+                        </div>
+                        <label for="radio2">Radio</label>
+                        <div class="input-tamer">
+                            <input type="radio" id="radio2" name="radio" value="option1" class="inline-block">
+                            <input type="radio" id="radio3" name="radio" value="option2" class="inline-block">
+                        </div>
+                        <label for="default-textarea2">Textarea</label>
+                        <textarea id="default-textarea2"></textarea>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Save changes</button>
+                        <button class="btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </article>
+
+    <!-- Scripts at the bottom for improved performance. -->
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="../../src/js/000-responsive.utils.js"></script>
+    <script src="../../src/js/responsive.autosize.js"></script>
+    <script src="../../src/js/responsive.carousel.js"></script>
+    <script src="../../src/js/responsive.dismiss.js"></script>
+    <script src="../../src/js/responsive.dropdown.js"></script>
+    <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.tabs.js"></script>
+</body>
+</html>
