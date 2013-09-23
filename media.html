@@ -77,19 +77,43 @@
             <p>All images are responsive by default and will not overflow the boundaries of their container.</p>
             <div class="row">
                 <div class="column-4">
-                    <img src="assets/img/img.gif" alt="responsive image" title="responsive image" />
+                    <img src="assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
                 </div>
                 <div class="column-4">
-                    <img src="assets/img/img.gif" alt="responsive image" title="responsive image" />
+                    <img src="assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
                 </div>
                 <div class="column-4">
-                    <img src="assets/img/img.gif" alt="responsive image" title="responsive image" />
+                    <img src="assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
                 </div>
             </div>
         </section>
         <section>
-            <h1>Video</h1>
-            <p>Video containers are scaled when embedding a video from YouTube, Vimeo, or another site that uses iframe, embed or object elements.</p>
+            <h1>Constrained Images</h1>
+            <p>Wrap the image in a container with the class <code>.media</code> to vertically center align any images.</p>
+            <div class="row">
+                <div class="column-4">
+                    <div class="media">
+                        <img src="assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="media">
+                        <img src="assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="media">
+                        <img src="assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <hr />
+        <section>
+            <h1>Iframes</h1>
+            <p>Containers are scaled when embedding an object from YouTube, Vimeo, or another site that uses iframe, embed or object elements.</p>
             <div class="row">
                 <div class="column-6">
                     <h2>Youtube</h2>
@@ -141,7 +165,6 @@
                     </div>
                 </div>
             </div>
-            <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
             <aside>
                 <h1>The Markup</h1>
                 <pre class="language-markup"><code>&lt;div class="media instagram"&gt;
@@ -149,6 +172,35 @@
     &lt;/iframe&gt;
 &lt;/div&gt;</code></pre>
             </aside>
+        </section>
+        <hr />
+        <section>
+            <h1>Video</h1>
+            <div class="row">
+                <p>Wrap the video element in a container marked with classes <code>.media</code> and <code>.video</code>.</p>
+                <p>Embed code taken from <a href="http://camendesign.com/code/video_for_everybody">"Video For Everybody"</a>.</p>
+                <div class="column-6">
+                    <div class="media video">
+                        <!-- "Video For Everybody" http://camendesign.com/code/video_for_everybody -->
+                        <video controls="controls" poster="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360">
+                            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
+                            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" />
+                            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" />
+                            <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
+                                <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                                <param name="allowFullScreen" value="true" />
+                                <param name="wmode" value="transparent" />
+                                <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fsandbox.thewikies.com%2Fvfe-generator%2Fimages%2Fbig-buck-bunny_poster.jpg',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />
+                                <img alt="Big Buck Bunny" src="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360" title="No video playback capabilities, please download the video below" />
+                            </object>
+                        </video>
+                    </div>
+                    <p>
+                        <strong>Download video:</strong> <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">MP4 format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv">Ogg format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm">WebM format</a>
+                    </p>
+                    <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
+                </div>
+            </div>
         </section>
     </article>
     <footer role="contentinfo" class="container">

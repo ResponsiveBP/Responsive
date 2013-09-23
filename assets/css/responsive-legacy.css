@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.3.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.4.0 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -427,6 +427,90 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+/* Responsive Base */
+
+/*
+ * Fix the box model
+ */
+*, *:before, *:after {
+    -webkit-box-sizing: border-box!important;
+    -moz-box-sizing: border-box!important;
+    -ms-box-sizing: border-box!important;
+    box-sizing: border-box!important;
+}
+
+
+/*
+ * 1. Use the iOS devices hardware accelerator to provide native scrolling.
+ * 2. Prevents iOS and MS text size adjust after orientation change, without disabling user zoom.
+ */
+html {
+    -webkit-overflow-scrolling: touch; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/*
+ * Headers
+ * 1: Improve rendering of screen fonts.
+ * 2: Ensure class driven versions act appropriately.
+ */
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility; /* 1 */
+    display: block; /* 2 */
+    font-weight: bold; /* 2 */
+    page-break-after: avoid; /* 2 */
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #c0c0c0;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Add query indicator to abbr
+ */
+abbr {
+    cursor: help;
+}
+
 /* Responsive Grid Legacy */
 
 .container {
@@ -671,90 +755,6 @@ table {
     left: 8.3333%;
 }
 
-/* Responsive Base */
-
-/*
- * Fix the box model
- */
-*, *:before, *:after {
-    -webkit-box-sizing: border-box!important;
-    -moz-box-sizing: border-box!important;
-    -ms-box-sizing: border-box!important;
-    box-sizing: border-box!important;
-}
-
-
-/*
- * 1. Use the iOS devices hardware accelerator to provide native scrolling.
- * 2. Prevents iOS and MS text size adjust after orientation change, without disabling user zoom.
- */
-html {
-    -webkit-overflow-scrolling: touch; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-    -ms-text-size-adjust: 100%; /* 2 */
-}
-
-html,
-button,
-input,
-select,
-textarea {
-    color: #222;
-}
-
-body {
-    font-size: 16px;
-    line-height: 1.4;
-}
-
-/*
- * Headers
- * 1: Improve rendering of screen fonts.
- * 2: Ensure class driven versions act appropriately.
- */
-h1, h2, h3, h4, h5, h6 {
-    text-rendering: optimizeLegibility; /* 1 */
-    display: block; /* 2 */
-    font-weight: bold; /* 2 */
-    page-break-after: avoid; /* 2 */
-}
-
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #c0c0c0;
-    margin: 1em 0;
-    padding: 0;
-}
-
-/*
- * Add query indicator to abbr
- */
-abbr {
-    cursor: help;
-}
-
 /* Responsive Lists Base */
 
 /* 
@@ -916,6 +916,21 @@ table {
     background-color: #e7e7e7;
 }
 
+
+/*
+ * Overflow helpers
+ */
+.table-scrollable {
+    width: 100%;
+    margin: 1em 0;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+    .table-scrollable table {
+        margin: 0;
+    }
+
 /* Responsive Alert */
 
 .alert {
@@ -988,6 +1003,7 @@ table {
  */
 img {
     max-width: 100%;
+    height: auto;
     vertical-align: middle;
 }
 
@@ -1053,6 +1069,10 @@ a img {
     padding-bottom: 100%;
 }
 
+.media.video {
+    padding-top: 0;
+}
+
 /*
  * The actual player.
  */
@@ -1070,6 +1090,22 @@ a img {
     border: 0;
     outline: none;
     background-color: transparent;
+}
+
+/*
+ * Position the image absolutely and then move it's four positions
+ * 1000000% out of the container. This with an auto margin is the core of the trick.
+ * Why such a large number? Firefox seems to have issue when using larger images even
+ * at 100%.
+ */
+.media img {
+    position: absolute;
+    top: -1000000%;
+    right: -1000000%;
+    bottom: -1000000%;
+    left: -1000000%;
+    margin: auto;
+    width: 100%;
 }
 
 /* Responsive Forms Base */
@@ -1617,6 +1653,11 @@ pre samp {
  * Reassert wrapping.
  */
 pre code {
+    word-break: break-all; /* webkit */
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre;
+    white-space: -moz-pre-wrap; /* fennec */
     white-space: pre-wrap;
 }
 
@@ -1913,20 +1954,22 @@ pre code {
 /* Responsive LightBox Base */
 
 /* 
- * 1: Average max z-index.
- * 1: IE8 transparent background. 
+ * 1: Fix webkit position fixed issues.
+ * 2: Average max z-index.
+ * 3: IE8 transparent background. 
  */
 .lightbox-overlay {
     position: fixed;
+    -webkit-transform: translateZ(0); /* 1 */
     overflow: hidden;
     overflow-y: auto;
-    z-index: 2147483647;
+    z-index: 2147483647; /* 2 */
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
     padding: 2.5% 0;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /*overlay.png*/;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /* 3 */;
     background-repeat: repeat;
     text-align: center;
 }
@@ -1949,18 +1992,18 @@ pre code {
     }
 
 /*
- * Landscape tablet to default desktop: 769 > viewport < 1023px
+ * Landscape tablet to default desktop: 768px >= viewport < 1024px
  */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 48em) and (max-width: 63.975em) {
     .lightbox.iframe {
         min-width: 75%;
     }
 }
 
 /*
- * Default desktop upwards: 980 > viewport
+ * Default desktop upwards: 1024 > viewport
  */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 64em) {
     .lightbox.iframe {
         min-width: 60%;
     }
@@ -1994,10 +2037,10 @@ pre code {
     }
 
 /*
- * 1: Overwrite the margin.
+ * 1: Overwrite the margin set in media.
  */
 .lightbox .media {
-    margin-bottom: 0;
+    margin-bottom: 0; /* 1 */
 }
 
 .lightbox-footer {
@@ -2036,12 +2079,22 @@ pre code {
             text-decoration: underline;
         }
 
+
+.lightbox-image .lightbox-content > * {
+    width: 100%;
+}
+
 /*
  * Fix display warp on IE8 when loading cached images.
  */
-.lightbox-image .lightbox-content > img {
-    display: table-cell \9;
+.lightbox-image .lightbox-content {
+    display: table \9;
+    width: 100% \9;
 }
+
+    .lightbox-image .lightbox-content > img {
+        display: table-cell \9;
+    }
 
 /* Responsive Helpers Base */
 
@@ -2179,7 +2232,6 @@ pre code {
     -webkit-transition: opacity 0.3s linear 0s;
     transition: opacity 0.3s linear 0s;
 }
-
 
 /*
  * Responsive helpers to toggle visibility. 
