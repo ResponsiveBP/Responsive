@@ -15,131 +15,105 @@
     top: 0;
     right: 0;
     bottom: 0;
-    height: 100%;
+    padding: 2.5% 0;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /* 3 */;
+    background-repeat: repeat;
     text-align: center;
 }
 
+.lightbox {
+    position: relative;
+    text-align: left;
+    display: inline-block;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 1em;
+    background: #fff;
+    -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,1);
+    box-shadow: 0 0 10px 1px rgba(0,0,0,1);
+}
+
+    .lightbox.iframe {
+        min-width: 95%;
+        min-width: 60% \9;
+    }
+
 /*
- * 1: Forces height calculations to work in JavaScript.
+ * Landscape tablet to default desktop: 768px >= viewport < 1024px
  */
-.lightbox-header, .lightbox-footer {
-    padding: 1px 1em; /* 1 */
-    margin: -1px 0; /* 1 */
-    width: 100%;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    overflow: hidden;
+@media screen and (min-width: 48em) and (max-width: 63.975em) {
+    .lightbox.iframe {
+        min-width: 75%;
+    }
+}
+
+/*
+ * Default desktop upwards: 1024 > viewport
+ */
+@media screen and (min-width: 64em) {
+    .lightbox.iframe {
+        min-width: 60%;
+    }
 }
 
 .lightbox-header {
-    padding-right: 4.555em;
+    padding: 0 2.17em 0 0;
+    min-height: 2.67em;
 }
 
-.lightbox-footer {
-    top: auto;
-    bottom: 0;
-}
-
-.lightbox-overlay,
-.lightbox-header,
-.lightbox-footer {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /* 3 */;
-    background-repeat: repeat;
-}
-
-    .lightbox-overlay:before {
-        content: "";
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-        width: 1px;
-        margin-right: -1px;
-        margin-left: -.25em;
+    .lightbox-header h1 {
+        margin-top: 0;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
     }
 
-.lightbox {
-    display: inline-block;
-    vertical-align: middle;
-    max-height: 100%;
-    margin: 0 auto;
-}
-
-.lightbox.lightbox-iframe {
-    width: 100%;
-    max-width: 900px;
-    overflow: hidden;
-}
-
-    .lightbox.lightbox-image {
-        width: auto;
-    }
-
-    .lightbox-content,
-    .lightbox > img,
-    .lightbox > .media {
-        background-color: #222;
-        -webkit-box-shadow: 0 0 8px rgba(0,0,0,.6);
-        -ms-box-shadow: 0 0 8px rgba(0,0,0,.6);
-        box-shadow: 0 0 8px rgba(0,0,0,.6);
-    }
-
-.lightbox-content {
-    background-color: #fff;
-    padding: 1em;
-    text-align: left;
-}
-
-.lightbox > img {
-    height: auto;
-    max-height: 100%;
-    max-width: 100%;
-    vertical-align: middle;
-}
-
-.lightbox > .media {
-    margin: 0 auto;
-}
-
-.lightbox-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    margin: 0.67em;
-    color: #fff;
-    font-size: 2em;
+.lightbox .close {
+    color: inherit;
+    float: right;
+    font-size: 1.17em;
     font-weight: bold;
+    line-height: 1em;
+    position: relative;
+    right: -1.89em;
     text-decoration: none;
+    top: 0;
 }
 
-    .lightbox-close:hover {
+    .lightbox .close:hover {
         text-decoration: underline;
     }
 
+/*
+ * 1: Overwrite the margin set in media.
+ */
+.lightbox .media {
+    margin-bottom: 0; /* 1 */
+}
+
+.lightbox-footer {
+    margin-top: 1em;
+}
 
 .lightbox-direction,
 .lightbox-direction:visited {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: -1px;
     padding: .5em;
-    margin-top: -2em;
-    font-size: 2em;
+    margin-top: -1em;
+    font-size: 1em;
     font-weight: bold;
     text-align: center;
-    background-color: #111;
-    color: #fff;
+    background-color: #fff;
+    border: 1px solid #222;
+    color: inherit;
     text-decoration: none;
-    z-index: 2;
+    z-index: 1;
 }
 
     .lightbox-direction.right {
         left: auto;
-        right: 0;
+        right: -1px;
     }
 
     .lightbox-direction,
@@ -151,3 +125,20 @@
         .lightbox-direction:hover {
             text-decoration: underline;
         }
+
+
+.lightbox-image .lightbox-content > * {
+    width: 100%;
+}
+
+/*
+ * Fix display warp on IE8 when loading cached images.
+ */
+.lightbox-image .lightbox-content {
+    display: table \9;
+    width: 100% \9;
+}
+
+    .lightbox-image .lightbox-content > img {
+        display: table-cell \9;
+    }
