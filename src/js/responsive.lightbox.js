@@ -17,8 +17,8 @@
 
     var $body = $(document.body),
         $window = $(w),
-        $overlay = $("<div/>").addClass("lightbox-overlay hidden fade-out"),
-        $lightbox = $("<div/>").addClass("lightbox fade-out lightbox-loader").appendTo($overlay),
+        $overlay = $("<div/>").addClass("lightbox-overlay lightbox-loader hidden fade-out"),
+        $lightbox = $("<div/>").addClass("lightbox fade-out").appendTo($overlay),
         $header = $("<div/>").addClass("lightbox-header fade-out"),
         $footer = $("<div/>").addClass("lightbox-footer fade-out"),
         $close = $("<a/>").attr("href", "#").addClass("lightbox-close fade-out").html("x"),
@@ -31,6 +31,7 @@
             LEFT: 37,
             RIGHT: 39
         },
+        protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
         rexternalHost = new RegExp("//" + document.location.host + "($|/)"),
         rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
         // Taken from jQuery.
@@ -47,12 +48,17 @@
         eresize = "resize." + ns;
 
     // Private methods.
-    var isExternalUrl = function (url) {
+    var isExternalUrl = function (url, normalize) {
+        // Handle different host types.
         // Split the url into it's various parts.
-        var locationParts = rurl.exec(url);
+        var locationParts = rurl.exec(url) || normalize && rurl.exec(protocol + url);
+
+        if (locationParts === undefined || rhash.test(url)) {
+            return false;
+        }
 
         // Target is a local protocol.
-        if (locationParts === null || rlocalProtocol.test(locationParts[1])) {
+        if (locationParts === null || locationParts[2] === undefined || rlocalProtocol.test(locationParts[1])) {
             return false;
         }
 
@@ -99,12 +105,12 @@
             description = this.options.description,
             close = this.options.close,
             target = this.options.target,
-            local = !this.options.external,
+            local = !this.options.external && !isExternalUrl(target),
             group = this.options.group,
             nextText = this.options.next,
             previousText = this.options.previous,
             iframeScroll = this.options.iframeScroll,
-            iframe = this.options.iframe || !local ? isExternalUrl(target) && !rimage.test(target) : false,
+            iframe = this.options.iframe || !local ? isExternalUrl(target, true) && !rimage.test(target) : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
             $content = $("<div/>").addClass("lightbox-content"),
             $iframe,
@@ -119,7 +125,7 @@
                     var headerHeight,
                         footerHeight,
                         childHeight,
-                        $child = $img || $iframe;
+                        $child = $img || $iframe || $content;
 
                     if ($child) {
 
@@ -134,7 +140,7 @@
                             if ($img) {
 
                                 $img.css("max-height", childHeight + "px");
-                            } else {
+                            } else if ($iframe) {
 
                                 var ratio = $iframe[0].clientWidth / $iframe[0].clientHeight,
                                     childWidth = childHeight * ratio;
@@ -150,6 +156,11 @@
                                 });
                             }
 
+                            $lightbox.css({
+                                "margin-top": headerHeight > 0 ? headerHeight + "px" : "",
+                                "margin-bottom": footerHeight > 0 ? footerHeight + "px" : ""
+                            });
+
                             oldWindowHeight = newWindowHeight;
                         }
                     }
@@ -157,8 +168,8 @@
                     $header.addClass("fade-in");
                     $footer.addClass("fade-in");
                     $close.addClass("fade-in");
-                    $lightbox.removeClass("lightbox-loader")
-                             .addClass("fade-in")[0].offsetWidth; // force reflow
+                    $overlay.removeClass("lightbox-loader");
+                    $lightbox.addClass("fade-in")[0].offsetWidth; // force reflow
 
                 }).triggerHandler(eresize);
             };
@@ -188,6 +199,9 @@
 
                 $lightbox.addClass("lightbox-iframe");
 
+                // Normalize the src.
+                var src = target.indexOf("http") !== 0 ? protocol + target : target;
+
                 // Have to add inline styles for older browsers.
                 $iframe = $("<iframe/>")
                                    .attr({
@@ -199,7 +213,7 @@
                                        "webkitallowfullscreen": "",
                                        "mozallowfullscreen": "",
                                        "allowfullscreen": "",
-                                       "src": target
+                                       "src": src
                                    })
                                   .appendTo($iframeWrap);
 
@@ -215,6 +229,8 @@
 
                 if (rimage.test(target)) {
 
+                    $lightbox.addClass("lightbox-image");
+
                     $img = $("<img/>").one("load", function () {
                         fadeIn();
                     })
@@ -222,6 +238,9 @@
                     .appendTo($lightbox);
                 }
                 else {
+
+                    $lightbox.addClass("lightbox-ajax");
+
                     // Standard ajax load.
                     $content.load(target, function () {
                         $content.appendTo($lightbox);
@@ -270,7 +289,8 @@
         $footer.removeClass("fade-in");
         $close.removeClass("fade-in");
         $lightbox.removeClass("fade-in")[0].offsetWidth; // force reflow
-        $lightbox.removeClass(".lightbox-iframe").addClass("lightbox-loader");
+        $lightbox.removeClass(".lightbox-iframe");
+        $overlay.addClass("lightbox-loader");
     };
 
     var createOverlay = function () {
@@ -322,9 +342,11 @@
 
         var self = this,
             empty = function () {
-                $lightbox.removeClass("lightbox-iframe").css({
+                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
                     "max-height": "",
-                    "max-width": ""
+                    "max-width": "",
+                    "margin-top": "",
+                    "margin-bottom": ""
                 }).empty();
 
                 // Unbind the keyboard actions.
@@ -435,6 +457,12 @@
                 return;
             }
 
+            // If the trigger has a mobile target and the viewport is smaller than the mobile limit
+            // then redirect to that page instead.
+            if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
+                w.location.href = this.options.mobileTarget;
+            }
+
             var showEvent = $.Event(eshow),
                 shownEvent = $.Event(eshown),
                 callback = function () {
@@ -444,7 +472,6 @@
                         manageKeyboardEvents.call(this);
                     }
 
-                    this.isShown = true;
                     this.$element.trigger(shownEvent);
                 },
             proxy = $.proxy(callback, this);
@@ -458,6 +485,8 @@
             // Create the lightbox.
             create.call(this);
 
+            this.isShown = true;
+
             // Call the callback.
             supportTransition ? $lightbox.one(supportTransition.end, proxy)
                               : proxy();
@@ -468,12 +497,13 @@
             if (!this.isShown) {
                 return;
             }
+
             var hideEvent = $.Event(ehide),
                 hiddenEvent = $.Event(ehidden),
                 callback = function () {
 
                     $overlay.addClass("hidden");
-                    $lightbox.removeClass("lightbox-iframe");
+                    $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image");
 
                     // Clean up.
                     cleanUp.call(this);
@@ -542,7 +572,9 @@
         iframeScroll: false,
         keyboard: true,
         next: ">",
-        previous: "<"
+        previous: "<",
+        mobileTarget: null,
+        mobileViewportWidth: 480
     };
 
     // Bind the lightbox trigger.

@@ -23,22 +23,22 @@
         <h1>Lightbox</h1>
         <hr />
         <h3>Relatively loaded target</h3>
-        <a href="../grid/standard.html" data-lightbox-title="Relative url">Launch relative overlay</a>
+        <a href="../grid/standard.html #grid" data-lightbox-title="Relative url">Launch relative overlay</a>
 
         <h3>External target with iframe header and footer</h3>
-        <a href="http://bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>">Launch external overlay</a>
+        <a href="//bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>">Launch external overlay</a>
 
         <h3>External target with iframe header and footer and scrollbars</h3>
-        <a href="http://bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>" data-lightbox-iframe-scroll="true">Launch external overlay</a>
+        <a href="//bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>" data-lightbox-iframe-scroll="true">Launch external overlay</a>
 
         <h3>Youtube</h3>
-        <a href="http://www.youtube.com/embed/eRW84aVCMWo" data-lightbox-title="Youtube">Launch Youtube overlay</a>
+        <a href="//www.youtube.com/embed/eRW84aVCMWo" data-lightbox-title="Youtube">Launch Youtube overlay</a>
 
         <h3>Vimeo</h3>
-        <a href="http://player.vimeo.com/video/24954567" data-lightbox-title="Vimeo">Launch Vimeo overlay</a>
+        <a href="//player.vimeo.com/video/24954567" data-lightbox-title="Vimeo">Launch Vimeo overlay</a>
 
         <h3>Google Maps</h3>
-        <a href="http://maps.google.co.uk/maps?safe=off&amp;q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=h&amp;z=11&amp;ll=55.864237,-4.251806&amp;output=embed" data-lightbox-title="Google Maps">Launch Google Map overlay</a>
+        <a href="//maps.google.co.uk/maps?safe=off&amp;q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=h&amp;z=11&amp;ll=55.864237,-4.251806&amp;output=embed" data-lightbox-title="Google Maps">Launch Google Map overlay</a>
 
         <h3>Internal target</h3>
         <a href="#" data-lightbox-target="#overlay1">Launch internal overlay</a>
@@ -76,6 +76,21 @@
                 </div>
             </form>
         </div>
+        <h3>Wrapped Image</h3>
+        <div class="row">
+            <a href="../test-assets/img/768x900.jpg" data-lightbox-title="Kittens!">
+                <img src="../test-assets/img/768x900_thumb.jpg" />
+            </a>
+        </div>
+
+        <h3>Mobile Redirect</h3>
+        <p>Should redirect on viewports of 768px and below. (settable)</p>
+        <div class="row">
+            <a href="../test-assets/img/768x900.jpg" data-lightbox-mobile-target="../test-assets/img/768x900.jpg" data-lightbox-mobile-viewport-width="768">
+                <img src="../test-assets/img/768x900_thumb.jpg" />
+            </a>
+        </div>
+
         <h3>Grouped</h3>
         <div class="row">
             <div class="column-3">
