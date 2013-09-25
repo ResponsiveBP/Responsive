@@ -11,7 +11,7 @@
 
     // Prevents ajax requests from reloading everything and
     // rebinding events.
-    if (w.RESPONSIVELIGHTBOXLOADED) {
+    if (w.RESPONSIVE_LIGHTBOX) {
         return;
     }
 
@@ -39,13 +39,13 @@
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         rembedProvider = /vimeo|vine|instagram|instagr\.am/i,
-        eclick = "click." + ns,
-        ekeyup = "keyup." + ns,
-        eshow = "show." + ns,
-        eshown = "shown." + ns,
-        ehide = "hide." + ns,
-        ehidden = "hidden." + ns,
-        eresize = "resize." + ns;
+        eclick = "click" + ns,
+        ekeyup = "keyup" + ns,
+        eshow = "show" + ns,
+        eshown = "shown" + ns,
+        ehide = "hide" + ns,
+        ehidden = "hidden" + ns,
+        eresize = "resize" + ns;
 
     // Private methods.
     var isExternalUrl = function (url, normalize) {
@@ -592,6 +592,6 @@
 
     });
 
-    w.RESPONSIVELIGHTBOXLOADED = true;
+    w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, "lightbox.responsive"));
+}(jQuery, window, ".lightbox.r"));

@@ -4,16 +4,26 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_TABS) {
+        return;
+    }
+
     // General variables.
     var supportTransition = $.support.transition,
+        eready = "ready" + ns,
+        eclick = "click" + ns,
+        eshow = "show" + ns,
+        eshown = "shown" + ns,
 
         tab = function (activePosition, postion, callback) {
 
-            var showEvent = $.Event("show.tabs.responsive"),
+            var showEvent = $.Event(eshow),
                 $element = this.$element,
                 $childTabs = $element.find("ul.tabs li"),
                 $childPanes = $element.children("div"),
@@ -48,7 +58,7 @@
 
             this.$element = $(element);
 
-            this.$element.on("click.tabs.responsive", "ul.tabs > li > a", function (event) {
+            this.$element.on(eclick, "ul.tabs > li > a", function (event) {
 
                 event.preventDefault();
 
@@ -72,13 +82,13 @@
 
             if (position > ($children.length - 1) || position < 0) {
 
-                return;
+                return false;
             }
 
             if (this.tabbing) {
 
                 // Fire the tabbed event.
-                return this.$element.one("shown.tabs.responsive", function () {
+                return this.$element.one(eshown, function () {
                     // Reset the position.
                     self.show(position + 1);
 
@@ -86,14 +96,13 @@
             }
 
             if (activePosition === position) {
-                return;
+                return false;
             }
 
             // Call the function with the callback
             return tab.call(this, activePosition, position, function () {
 
-                var shownEvent = $.Event("shown.tabs.responsive"),
-                    self = this,
+                var shownEvent = $.Event(eshown),
                     complete = function () {
 
                         self.tabbing = false;
@@ -136,10 +145,12 @@
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
-    $(document).on("ready.tabs.responsive", function () {
+    $(document).on(eready, function () {
 
         $("[data-tabs]").tabs();
 
     });
 
-}(jQuery));
+    w.RESPONSIVE_TABS = true;
+
+}(jQuery, window, ".tabs.r"));

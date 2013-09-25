@@ -3,11 +3,24 @@
  */
 
 /*global jQuery*/
-(function ($, w) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_AUTOSIZE) {
+        return;
+    }
+
     var resisizeTimer,
+        eready = "ready" + ns,
+        eresize = "resize" + ns,
+        ekeyup = "keyup" + ns,
+        epaste = "paste" + ns,
+        ecut = "cut" + ns,
+        esize = "size" + ns,
+        esized = "sized" + ns,
 
     // The AutoSize object that contains our methods.
         AutoSize = function (element, options) {
@@ -21,7 +34,7 @@
 
                 this.options = $.extend({}, $.fn.autoSize.defaults, options);
 
-                this.$element.on("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive", function (event) {
+                this.$element.on(ekeyup + " " + epaste + " " + ecut, function (event) {
 
                     var $this = $(this),
                         delay = 0;
@@ -74,8 +87,8 @@
                 $clone = this.$clone,
                 clone = $clone[0],
                 height = 0,
-                sizeEvent = $.Event("size.autosize.responsive"),
-                sizedEvent = $.Event("sized.autosize.responsive"),
+                sizeEvent = $.Event(esize),
+                sizedEvent = $.Event(esized),
                 complete = function () {
                     $element.trigger(sizedEvent);
                 };
@@ -151,7 +164,7 @@
     $.fn.autoSize.Constructor = AutoSize;
 
     // Autosize data API initialisation.
-    $(document).on("ready.autosize.responsive", function () {
+    $(document).on(eready, function () {
 
         $("textarea[data-autosize]").each(function () {
 
@@ -165,7 +178,7 @@
         });
     });
 
-    $(w).on("resize.autosize.responsive", function () {
+    $(w).on(eresize, function () {
 
         if (resisizeTimer) {
             w.clearTimeout(resisizeTimer);
@@ -189,4 +202,6 @@
         resisizeTimer = w.setTimeout(resize, 50);
     });
 
-}(jQuery, window));
+    w.RESPONSIVE_AUTOSIZE = true;
+
+}(jQuery, window, ".autosize.r"));

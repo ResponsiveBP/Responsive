@@ -2136,6 +2136,7 @@ pre code {
     display: inline-block;
     vertical-align: middle;
     max-height: 100%;
+    max-width: 100%;
     margin: 0 auto;
     overflow: auto;
 }
@@ -2155,13 +2156,9 @@ pre code {
         overflow: hidden;
     }
 
-    .lightbox-content,
     .lightbox > img,
     .lightbox > .media {
         background-color: #222;
-        -webkit-box-shadow: 0 0 8px rgba(0,0,0,.6);
-        -ms-box-shadow: 0 0 8px rgba(0,0,0,.6);
-        box-shadow: 0 0 8px rgba(0,0,0,.6);
     }
 
 .lightbox-content {
@@ -2171,10 +2168,8 @@ pre code {
 }
 
 .lightbox > img {
-    height: auto;
     max-height: 100%;
     max-width: 100%;
-    vertical-align: middle;
 }
 
 .lightbox > .media {
@@ -2182,11 +2177,12 @@ pre code {
 }
 
 .lightbox-close {
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
     z-index: 2;
-    margin: 0.83em;
+    display: inline-block;
+    padding: 0.83em;
     color: #fff;
     font-size: 1.5em;
     font-weight: bold;

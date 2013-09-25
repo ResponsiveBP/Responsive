@@ -4,12 +4,24 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_CAROUSEL) {
+        return;
+    }
+
     // General variables.
     var supportTransition = $.support.transition,
+        eclick = "click" + ns,
+        eload = "load" + ns,
+        efocus = "focus" + ns,
+        eblur = "blur" + ns,
+        eslide = "slide" + ns,
+        eslid = "slid" + ns,
 
     // The Carousel object that contains our methods.
         Carousel = function (element, options) {
@@ -21,7 +33,7 @@
             this.sliding = null;
 
             // Bind the trigger click event.
-            this.$element.on("click.carousel.responsive", "[data-carousel-slide]", function (event) {
+            this.$element.on(eclick, "[data-carousel-slide]", function (event) {
 
                 event.preventDefault();
 
@@ -93,7 +105,7 @@
             if (this.sliding) {
 
                 // Fire the slid event.
-                return this.$element.one("slid.carousel.responsive", function () {
+                return this.$element.one(eslid, function () {
                     // Reset the position.
                     self.goTo(position + 1);
 
@@ -152,8 +164,8 @@
                 direction = isNext ? "left" : "right",
                 fallback = isNext ? "first" : "last",
                 self = this,
-                slideEvent = $.Event("slide.carousel.responsive"),
-                slidEvent = $.Event("slid.carousel.responsive"),
+                slideEvent = $.Event(eslide),
+                slidEvent = $.Event(eslid),
                 slideMode = this.options.mode === "slide",
                 fadeMode = this.options.mode === "fade",
                 index,
@@ -276,7 +288,7 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    $(w).on("load.carousel.responsive", function () {
+    $(w).on(eload, function () {
 
         $(".carousel").each(function () {
 
@@ -288,7 +300,8 @@
 
         });
 
-    }).on("focus.carousel.responsive blur.carousel.responsive", function (event) {
+    }).on(efocus + " " + eblur, function (event) {
+        // Restart the carousel when Firefox fails to.
 
         var $this = $(this),
              prevType = $this.data("prevType"),
@@ -323,4 +336,6 @@
         }
     });
 
-}(jQuery, window));
+    w.RESPONSIVE_CAROUSEL = true;
+
+}(jQuery, window, ".carousel.r"));

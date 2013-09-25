@@ -114,11 +114,24 @@
  */
 
 /*global jQuery*/
-(function ($, w) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_AUTOSIZE) {
+        return;
+    }
+
     var resisizeTimer,
+        eready = "ready" + ns,
+        eresize = "resize" + ns,
+        ekeyup = "keyup" + ns,
+        epaste = "paste" + ns,
+        ecut = "cut" + ns,
+        esize = "size" + ns,
+        esized = "sized" + ns,
 
     // The AutoSize object that contains our methods.
         AutoSize = function (element, options) {
@@ -132,7 +145,7 @@
 
                 this.options = $.extend({}, $.fn.autoSize.defaults, options);
 
-                this.$element.on("keyup.autosize.responsive paste.autosize.responsive cut.autosize.responsive", function (event) {
+                this.$element.on(ekeyup + " " + epaste + " " + ecut, function (event) {
 
                     var $this = $(this),
                         delay = 0;
@@ -185,8 +198,8 @@
                 $clone = this.$clone,
                 clone = $clone[0],
                 height = 0,
-                sizeEvent = $.Event("size.autosize.responsive"),
-                sizedEvent = $.Event("sized.autosize.responsive"),
+                sizeEvent = $.Event(esize),
+                sizedEvent = $.Event(esized),
                 complete = function () {
                     $element.trigger(sizedEvent);
                 };
@@ -262,7 +275,7 @@
     $.fn.autoSize.Constructor = AutoSize;
 
     // Autosize data API initialisation.
-    $(document).on("ready.autosize.responsive", function () {
+    $(document).on(eready, function () {
 
         $("textarea[data-autosize]").each(function () {
 
@@ -276,7 +289,7 @@
         });
     });
 
-    $(w).on("resize.autosize.responsive", function () {
+    $(w).on(eresize, function () {
 
         if (resisizeTimer) {
             w.clearTimeout(resisizeTimer);
@@ -300,19 +313,33 @@
         resisizeTimer = w.setTimeout(resize, 50);
     });
 
-}(jQuery, window));
+    w.RESPONSIVE_AUTOSIZE = true;
+
+}(jQuery, window, ".autosize.r"));
 /*
  * Responsive Carousel
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_CAROUSEL) {
+        return;
+    }
+
     // General variables.
     var supportTransition = $.support.transition,
+        eclick = "click" + ns,
+        eload = "load" + ns,
+        efocus = "focus" + ns,
+        eblur = "blur" + ns,
+        eslide = "slide" + ns,
+        eslid = "slid" + ns,
 
     // The Carousel object that contains our methods.
         Carousel = function (element, options) {
@@ -324,7 +351,7 @@
             this.sliding = null;
 
             // Bind the trigger click event.
-            this.$element.on("click.carousel.responsive", "[data-carousel-slide]", function (event) {
+            this.$element.on(eclick, "[data-carousel-slide]", function (event) {
 
                 event.preventDefault();
 
@@ -396,7 +423,7 @@
             if (this.sliding) {
 
                 // Fire the slid event.
-                return this.$element.one("slid.carousel.responsive", function () {
+                return this.$element.one(eslid, function () {
                     // Reset the position.
                     self.goTo(position + 1);
 
@@ -455,8 +482,8 @@
                 direction = isNext ? "left" : "right",
                 fallback = isNext ? "first" : "last",
                 self = this,
-                slideEvent = $.Event("slide.carousel.responsive"),
-                slidEvent = $.Event("slid.carousel.responsive"),
+                slideEvent = $.Event(eslide),
+                slidEvent = $.Event(eslid),
                 slideMode = this.options.mode === "slide",
                 fadeMode = this.options.mode === "fade",
                 index,
@@ -579,7 +606,7 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    $(w).on("load.carousel.responsive", function () {
+    $(w).on(eload, function () {
 
         $(".carousel").each(function () {
 
@@ -591,7 +618,8 @@
 
         });
 
-    }).on("focus.carousel.responsive blur.carousel.responsive", function (event) {
+    }).on(efocus + " " + eblur, function (event) {
+        // Restart the carousel when Firefox fails to.
 
         var $this = $(this),
              prevType = $this.data("prevType"),
@@ -626,15 +654,27 @@
         }
     });
 
-}(jQuery, window));/*
+    w.RESPONSIVE_CAROUSEL = true;
+
+}(jQuery, window, ".carousel.r"));/*
  * Responsive Dismiss 
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($) {
+(function ($, w, ns) {
 
     "use strict";
+
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_DISMISS) {
+        return;
+    }
+
+    var eclick = "click" + ns,
+        eclose = "close" + ns,
+        eclosed = "closed" + ns;
 
     var Dismiss = function (element, target) {
 
@@ -648,8 +688,8 @@
         close: function () {
 
             var supportTransition = $.support.transition,
-                closeEvent = $.Event("close.dismiss.responsive"),
-                closedEvent = $.Event("closed.dismiss.responsive"),
+                closeEvent = $.Event(eclose),
+                closedEvent = $.Event(eclosed),
                 $target = this.$target,
                 self = this,
                 complete = function () {
@@ -701,35 +741,46 @@
     $.fn.dismiss.Constructor = Dismiss;
 
     // Dismiss data api initialisation.
-    $(function () {
-        $(document.body).on("click.dismiss.responsive", ":attrStart(data-dismiss)", function (event) {
+    $("body").on(eclick, ":attrStart(data-dismiss)", function (event) {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            var $this = $(this),
-                data = $this.data("dismissOptions"),
-                options = data || $.buildDataOptions($this, {}, "dismiss"),
-                target = options.target || (options.target = $this.attr("href"));
+        var $this = $(this),
+            data = $this.data("dismissOptions"),
+            options = data || $.buildDataOptions($this, {}, "dismiss"),
+            target = options.target || (options.target = $this.attr("href"));
 
-            // Run the dismiss method.
-            if (target) {
-                $(this).dismiss(options.target);
-            }
+        // Run the dismiss method.
+        if (target) {
+            $(this).dismiss(options.target);
+        }
 
-        });
     });
 
-}(jQuery));/*
+    w.RESPONSIVE_DISMISS = true;
+
+}(jQuery, window, ".dismiss.r"));/*
  * Responsive Dropdown 
  */
 
 /*global jQuery*/
-(function ($, w) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_DROPDOWN) {
+        return;
+    }
+
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        eclick = "click" + ns,
+        eshow = "show" + ns,
+        eshown = "shown" + ns,
+        ehide = "hide" + ns,
+        ehidden = "hidden" + ns,
 
      // The Dropdown object that contains our methods.
         Dropdown = function (element, options) {
@@ -790,7 +841,7 @@
 
             this.$element[dimension](this.endSize || "auto");
 
-            this.transition("removeClass", $.Event("show"), "shown");
+            this.transition("removeClass", $.Event(eshow), eshown);
         },
         hide: function () {
 
@@ -814,7 +865,7 @@
 
             this.$element.removeClass("expand");
             this.$element[dimension](0);
-            this.transition("addClass", $.Event("hide"), "hidden");
+            this.transition("addClass", $.Event(ehide), ehidden);
 
         },
         transition: function (method, startEvent, completeEvent) {
@@ -823,7 +874,7 @@
                 complete = function () {
 
                     // The event to expose.
-                    var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
+                    var eventToTrigger = $.Event(completeEvent);
 
                     // Ensure the height/width is set to auto.
                     self.$element.removeClass("trans")[self.options.dimension]("");
@@ -887,23 +938,24 @@
     $.fn.dropdown.Constructor = Dropdown;
 
     // Dropdown data api initialization.
-    $(function () {
-        $("body").on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
+    $("body").on(eclick, ":attrStart(data-dropdown)", function (event) {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            var $this = $(this),
-                data = $this.data("dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown"),
-                target = options.target || (options.target = $this.attr("href")),
-                $target = $(target),
-                params = $target.data("dropdown") ? "toggle" : options;
+        var $this = $(this),
+            data = $this.data("dropdownOptions"),
+            options = data || $.buildDataOptions($this, {}, "dropdown"),
+            target = options.target || (options.target = $this.attr("href")),
+            $target = $(target),
+            params = $target.data("dropdown") ? "toggle" : options;
 
-            // Run the dropdown method.
-            $target.dropdown(params);
-        });
+        // Run the dropdown method.
+        $target.dropdown(params);
     });
-}(jQuery, window));/*
+
+    w.RESPONSIVE_DROPDOWN = true;
+
+}(jQuery, window, ".dropdown.r"));/*
  * Responsive Lightbox
  */
 
@@ -916,7 +968,7 @@
 
     // Prevents ajax requests from reloading everything and
     // rebinding events.
-    if (w.RESPONSIVELIGHTBOXLOADED) {
+    if (w.RESPONSIVE_LIGHTBOX) {
         return;
     }
 
@@ -944,13 +996,13 @@
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         rembedProvider = /vimeo|vine|instagram|instagr\.am/i,
-        eclick = "click." + ns,
-        ekeyup = "keyup." + ns,
-        eshow = "show." + ns,
-        eshown = "shown." + ns,
-        ehide = "hide." + ns,
-        ehidden = "hidden." + ns,
-        eresize = "resize." + ns;
+        eclick = "click" + ns,
+        ekeyup = "keyup" + ns,
+        eshow = "show" + ns,
+        eshown = "shown" + ns,
+        ehide = "hide" + ns,
+        ehidden = "hidden" + ns,
+        eresize = "resize" + ns;
 
     // Private methods.
     var isExternalUrl = function (url, normalize) {
@@ -1497,24 +1549,34 @@
 
     });
 
-    w.RESPONSIVELIGHTBOXLOADED = true;
+    w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, "lightbox.responsive"));/*
+}(jQuery, window, ".lightbox.r"));/*
  * Responsive tabs
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_TABS) {
+        return;
+    }
+
     // General variables.
     var supportTransition = $.support.transition,
+        eready = "ready" + ns,
+        eclick = "click" + ns,
+        eshow = "show" + ns,
+        eshown = "shown" + ns,
 
         tab = function (activePosition, postion, callback) {
 
-            var showEvent = $.Event("show.tabs.responsive"),
+            var showEvent = $.Event(eshow),
                 $element = this.$element,
                 $childTabs = $element.find("ul.tabs li"),
                 $childPanes = $element.children("div"),
@@ -1549,7 +1611,7 @@
 
             this.$element = $(element);
 
-            this.$element.on("click.tabs.responsive", "ul.tabs > li > a", function (event) {
+            this.$element.on(eclick, "ul.tabs > li > a", function (event) {
 
                 event.preventDefault();
 
@@ -1573,13 +1635,13 @@
 
             if (position > ($children.length - 1) || position < 0) {
 
-                return;
+                return false;
             }
 
             if (this.tabbing) {
 
                 // Fire the tabbed event.
-                return this.$element.one("shown.tabs.responsive", function () {
+                return this.$element.one(eshown, function () {
                     // Reset the position.
                     self.show(position + 1);
 
@@ -1587,14 +1649,13 @@
             }
 
             if (activePosition === position) {
-                return;
+                return false;
             }
 
             // Call the function with the callback
             return tab.call(this, activePosition, position, function () {
 
-                var shownEvent = $.Event("shown.tabs.responsive"),
-                    self = this,
+                var shownEvent = $.Event(eshown),
                     complete = function () {
 
                         self.tabbing = false;
@@ -1637,10 +1698,12 @@
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
-    $(document).on("ready.tabs.responsive", function () {
+    $(document).on(eready, function () {
 
         $("[data-tabs]").tabs();
 
     });
 
-}(jQuery));
+    w.RESPONSIVE_TABS = true;
+
+}(jQuery, window, ".tabs.r"));

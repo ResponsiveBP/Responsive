@@ -3,12 +3,23 @@
  */
 
 /*global jQuery*/
-(function ($, w) {
+(function ($, w, ns) {
 
     "use strict";
 
+    // Prevents ajax requests from reloading everything and
+    // rebinding events.
+    if (w.RESPONSIVE_DROPDOWN) {
+        return;
+    }
+
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        eclick = "click" + ns,
+        eshow = "show" + ns,
+        eshown = "shown" + ns,
+        ehide = "hide" + ns,
+        ehidden = "hidden" + ns,
 
      // The Dropdown object that contains our methods.
         Dropdown = function (element, options) {
@@ -69,7 +80,7 @@
 
             this.$element[dimension](this.endSize || "auto");
 
-            this.transition("removeClass", $.Event("show"), "shown");
+            this.transition("removeClass", $.Event(eshow), eshown);
         },
         hide: function () {
 
@@ -93,7 +104,7 @@
 
             this.$element.removeClass("expand");
             this.$element[dimension](0);
-            this.transition("addClass", $.Event("hide"), "hidden");
+            this.transition("addClass", $.Event(ehide), ehidden);
 
         },
         transition: function (method, startEvent, completeEvent) {
@@ -102,7 +113,7 @@
                 complete = function () {
 
                     // The event to expose.
-                    var eventToTrigger = $.Event(completeEvent + ".dropdown.responsive");
+                    var eventToTrigger = $.Event(completeEvent);
 
                     // Ensure the height/width is set to auto.
                     self.$element.removeClass("trans")[self.options.dimension]("");
@@ -166,20 +177,21 @@
     $.fn.dropdown.Constructor = Dropdown;
 
     // Dropdown data api initialization.
-    $(function () {
-        $("body").on("click.dropdown.responsive", ":attrStart(data-dropdown)", function (event) {
+    $("body").on(eclick, ":attrStart(data-dropdown)", function (event) {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            var $this = $(this),
-                data = $this.data("dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown"),
-                target = options.target || (options.target = $this.attr("href")),
-                $target = $(target),
-                params = $target.data("dropdown") ? "toggle" : options;
+        var $this = $(this),
+            data = $this.data("dropdownOptions"),
+            options = data || $.buildDataOptions($this, {}, "dropdown"),
+            target = options.target || (options.target = $this.attr("href")),
+            $target = $(target),
+            params = $target.data("dropdown") ? "toggle" : options;
 
-            // Run the dropdown method.
-            $target.dropdown(params);
-        });
+        // Run the dropdown method.
+        $target.dropdown(params);
     });
-}(jQuery, window));
+
+    w.RESPONSIVE_DROPDOWN = true;
+
+}(jQuery, window, ".dropdown.r"));
