@@ -112,7 +112,8 @@
             fadeIn = function () {
                 // Bind the resize event and fade in.
                 var newWindowHeight,
-                    oldWindowHeight;
+                    oldWindowHeight,
+                    maxWidth = parseInt($lightbox.css("max-width"), 10);
 
                 $window.off(eresize).on(eresize, function () {
                     var headerHeight,
@@ -138,13 +139,9 @@
                                 var ratio = $iframe[0].clientWidth / $iframe[0].clientHeight,
                                     childWidth = childHeight * ratio;
 
-                                var maxWidth = $lightbox.css("max-width");
-
-
-
                                 $lightbox.css({
                                     "max-height": childHeight + "px",
-                                    "max-width": childWidth > parseInt(maxWidth) ? maxWidth : childWidth + "px"
+                                    "max-width": childWidth > maxWidth ? maxWidth + "px" : childWidth + "px"
                                 });
 
                                 $iframe.css({
@@ -169,7 +166,7 @@
         // 1: Build the header
         if (title || close) {
             $header = $("<div/>").addClass("lightbox-header")
-                                 .html(title ? "<div class=\"container\"><h1>" + title + "</h1></div>" : "");
+                                 .html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "");
 
             $header.appendTo($overlay);
 
