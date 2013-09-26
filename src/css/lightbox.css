@@ -101,20 +101,22 @@
         overflow: hidden;
     }
 
-    .lightbox > img,
-    .lightbox > .media {
-        background-color: #222;
-    }
-
 .lightbox-content {
     background-color: #fff;
     padding: 1em;
     text-align: left;
 }
 
+.lightbox > img,
+.lightbox > .media {
+    background-color: #222;
+}
+
 .lightbox > img {
     max-height: 100%;
     max-width: 100%;
+    display: table-cell \9;
+    width: auto \9;
 }
 
 .lightbox > .media {

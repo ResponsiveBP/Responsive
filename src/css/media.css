@@ -1,13 +1,23 @@
 ﻿/* Responsive Media */
 
 /*
- * Remove the gap between images and the bottom of their containers.
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+/*
  * Make the image responsive.
  */
 img {
     max-width: 100%;
     height: auto;
-    vertical-align: middle;
 }
 
 /*
