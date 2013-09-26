@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.4.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v2.0.0 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -989,6 +989,7 @@
             RIGHT: 39
         },
         protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
+        // Regular expression.
         rexternalHost = new RegExp("//" + document.location.host + "($|/)"),
         rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
         // Taken from jQuery.
@@ -996,13 +997,16 @@
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         rembedProvider = /vimeo|vine|instagram|instagr\.am/i,
+        // Events
         eclick = "click" + ns,
         ekeyup = "keyup" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns;
+        eresize = "resize" + ns,
+        // Classes
+        cfadeIn = "fade-in";
 
     // Private methods.
     var isExternalUrl = function (url, normalize) {
@@ -1070,25 +1074,28 @@
             iframe = this.options.iframe || !local ? isExternalUrl(target, true) && !rimage.test(target) : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
             $content = $("<div/>").addClass("lightbox-content"),
-            $iframe,
-            $img,
+            $iframe = $("<iframe/>"), // This needs to be assigned then unassigned or ie8 won't test against it.
+            $img = $("<img/>"), // ditto.
             fadeIn = function () {
+
                 // Bind the resize event and fade in.
                 var newWindowHeight,
                     oldWindowHeight,
                     maxWidth = parseInt($lightbox.css("max-width"), 10);
 
                 $window.off(eresize).on(eresize, function () {
+
                     var headerHeight,
                         footerHeight,
                         childHeight,
-                        $child = $img || $iframe || $content;
+                        $child = $iframe || $img || $content;
 
                     if ($child) {
 
                         newWindowHeight = $window.height();
 
                         if (newWindowHeight !== oldWindowHeight) {
+
                             headerHeight = $header[0] ? $header[0].clientHeight : 0;
                             footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
 
@@ -1096,54 +1103,62 @@
 
                             if ($img) {
 
-                                $img.css("max-height", childHeight + "px");
+                                $img.css("max-height", childHeight);
+
                             } else if ($iframe) {
 
-                                var ratio = $iframe[0].clientWidth / $iframe[0].clientHeight,
+                                var clientWidth = $iframe[0].clientWidth,
+                                    clientHeight = $iframe[0].clientHeight,
+                                    ratio = clientWidth / clientHeight,
                                     childWidth = childHeight * ratio;
 
-                                $lightbox.css({
-                                    "max-height": childHeight + "px",
-                                    "max-width": childWidth > maxWidth ? maxWidth + "px" : childWidth + "px"
-                                });
+                                $.each([$lightbox, $iframe], function () {
 
-                                $iframe.css({
-                                    "max-height": childHeight + "px",
-                                    "max-width": childWidth + "px"
+                                    this.css({
+                                        "max-height": childHeight,
+                                        "max-width": childWidth > maxWidth ? maxWidth : childWidth
+                                    });
                                 });
                             }
 
                             $lightbox.css({
-                                "margin-top": headerHeight > 0 ? headerHeight + "px" : "",
-                                "margin-bottom": footerHeight > 0 ? footerHeight + "px" : ""
+                                "margin-top": headerHeight > 0 ? headerHeight : "",
+                                "margin-bottom": footerHeight > 0 ? footerHeight : ""
                             });
 
                             oldWindowHeight = newWindowHeight;
                         }
                     }
 
-                    $header.addClass("fade-in");
-                    $footer.addClass("fade-in");
-                    $close.addClass("fade-in");
+                    $header.addClass(cfadeIn);
+                    $footer.addClass(cfadeIn);
+                    $close.addClass(cfadeIn);
                     $overlay.removeClass("lightbox-loader");
-                    $lightbox.addClass("fade-in")[0].offsetWidth; // force reflow
+                    $lightbox.addClass(cfadeIn)[0].offsetWidth; // force reflow
 
                 }).triggerHandler(eresize);
             };
 
         // 1: Build the header
         if (title || close) {
-            $header = $("<div/>").addClass("lightbox-header")
-                                 .html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "");
 
-            $header.appendTo($overlay);
+            $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
+                   .appendTo($overlay);
 
             if (close) {
                 $close.appendTo($overlay);
             }
         }
 
-        // 2: Build the content
+        // 2: Build the footer
+        if (description) {
+
+            // Add footer text if necessary
+            $footer.html(description ? "<div class=\"container\">" + description + "</div>" : "")
+                   .appendTo($overlay);
+        }
+
+        // 3: Build the content
         if (local) {
 
             $placeholder.detach().insertAfter(this.$element);
@@ -1154,24 +1169,25 @@
         else {
             if (iframe) {
 
+                $img = null;
+
                 $lightbox.addClass("lightbox-iframe");
 
                 // Normalize the src.
                 var src = target.indexOf("http") !== 0 ? protocol + target : target;
 
                 // Have to add inline styles for older browsers.
-                $iframe = $("<iframe/>")
-                                   .attr({
-                                       "scrolling": iframeScroll ? "yes" : "no",
-                                       "allowTransparency": true,
-                                       "frameborder": 0,
-                                       "hspace": 0,
-                                       "vspace": 0,
-                                       "webkitallowfullscreen": "",
-                                       "mozallowfullscreen": "",
-                                       "allowfullscreen": "",
-                                       "src": src
-                                   })
+                $iframe.attr({
+                    "scrolling": iframeScroll ? "yes" : "no",
+                    "allowTransparency": true,
+                    "frameborder": 0,
+                    "hspace": 0,
+                    "vspace": 0,
+                    "webkitallowfullscreen": "",
+                    "mozallowfullscreen": "",
+                    "allowfullscreen": "",
+                    "src": src
+                })
                                   .appendTo($iframeWrap);
 
                 // Test and add additional media classes.
@@ -1186,15 +1202,18 @@
 
                 if (rimage.test(target)) {
 
+                    $iframe = null;
+
                     $lightbox.addClass("lightbox-image");
 
-                    $img = $("<img/>").one("load", function () {
+                    $img.one("load", function () {
                         fadeIn();
-                    })
-                    .attr("src", target)
-                    .appendTo($lightbox);
+                    }).attr("src", target)
+                      .appendTo($lightbox);
                 }
                 else {
+                    $img = null;
+                    $iframe = null;
 
                     $lightbox.addClass("lightbox-ajax");
 
@@ -1206,15 +1225,6 @@
                 }
 
             }
-        }
-
-        // 3: Build the footer
-        if (description) {
-
-            // Add footer text if necessary
-            $footer = $("<div/>").addClass("lightbox-footer")
-                                 .html(description ? "<div class=\"container\">" + description + "</div>" : "")
-                                 .appendTo($overlay);
         }
 
         if (group) {
@@ -1242,17 +1252,17 @@
     var destroy = function () {
         // Context is passed from the lightbox.
         // Clean up the header/footer.
-        $header.removeClass("fade-in");
-        $footer.removeClass("fade-in");
-        $close.removeClass("fade-in");
-        $lightbox.removeClass("fade-in")[0].offsetWidth; // force reflow
+        $header.removeClass(cfadeIn);
+        $footer.removeClass(cfadeIn);
+        $close.removeClass(cfadeIn);
+        $lightbox.removeClass(cfadeIn)[0].offsetWidth; // force reflow
         $lightbox.removeClass(".lightbox-iframe");
         $overlay.addClass("lightbox-loader");
     };
 
     var createOverlay = function () {
 
-        $overlay.addClass("fade-in")[0].offsetWidth; // force reflow
+        $overlay.addClass(cfadeIn)[0].offsetWidth; // force reflow
 
         // Bind the click events
         $overlay.off(eclick).on(eclick, $.proxy(function (event) {
@@ -1276,7 +1286,7 @@
     var destroyOverlay = function () {
 
         // Context is passed from the LightBox.
-        $overlay.removeClass("fade-in")[0].offsetWidth; // force reflow
+        $overlay.removeClass(cfadeIn)[0].offsetWidth; // force reflow
     };
 
     var cleanUp = function () {
@@ -1289,9 +1299,9 @@
         }
 
         // Clean up the header/footer.
-        $header.removeClass("fade-in").empty().detach();
-        $footer.removeClass("fade-in").empty().detach();
-        $close.removeClass("fade-in").detach();
+        $header.removeClass(cfadeIn).empty().detach();
+        $footer.removeClass(cfadeIn).empty().detach();
+        $close.removeClass(cfadeIn).detach();
 
         // Clean up the lightbox.
         $next.detach();

@@ -4,9 +4,7 @@
     * {
         background: transparent !important;
         color: #000 !important; /* Black prints faster: h5bp.com/s */
-        -webkit-box-shadow: none !important;
         box-shadow: none !important;
-        -webkit-text-shadow: none !important;
         text-shadow: none !important;
     }
 
@@ -61,10 +59,5 @@
     h3 {
         orphans: 3;
         widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
     }
 }

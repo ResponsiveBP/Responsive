@@ -1,21 +1,16 @@
 ﻿/* Responsive Forms Base */
 
+/* Normalize  */
 .form {
     margin: 1em 0;
 }
 
-/*
- * Normalize fieldsets.
- */
 fieldset {
     padding: 0;
     margin: 0;
     border: 0;
 }
 
-/*
- * Normalize legends.
- */
 legend {
     display: block;
     width: 100%;
@@ -27,39 +22,26 @@ label[for] {
     cursor: pointer;
 }
 
-/* Normalize  */
 select,
 textarea,
-input {
+input,
+.no-edit {
+    font-family: inherit;
+    padding: .25em;
+    background-color: #fff;
     border-radius: 0;
+    border: 1px solid #c0c0c0;
+    max-width: 210px;
+    width: 100%;
+    display: block;
+    margin-bottom: 1em;
 }
 
-    select,
-    textarea,
-    input[type],
-    .no-edit {
-        font-family: inherit;
-        padding: .25em;
-        background-color: #fff;
-        border: 1px solid #c0c0c0;
-    }
-
-    input[type="radio"],
-    input[type="file"] {
-        border-color: transparent;
-        border-color: #c0c0c0 \9;
-    }
-
-    /*
-     * Add range styles for IE8 and IE9
-     */
-    input[type="range"] {
-        font-family: inherit;
-        padding: .25em \9;
-        background-color: #fff \9;
-        border: 1px solid transparent;
-        border: 1px solid #c0c0c0 \9;
-    }
+label,
+.input-group {
+    display: block;
+    margin-bottom: 1em;
+}
 
 /*
  * Fix field styling on iPhone and iPad.
@@ -92,8 +74,18 @@ input {
 }
 
 /*
+ * Add range styles for IE8 and IE9
+ */
+input[type="range"] {
+    padding: .25em 0;
+    padding: .25em \9;
+    background-color: #fff \9;
+    border: 1px solid transparent;
+    border: 1px solid #c0c0c0 \9;
+}
+
+/*
  * 1. Remove borders and padding on range controls in IE10+
- * 2. Remove borders and padding on range controls in Opera
  */
 x::-ms-reveal,
 input[type="range"] { /* 1 */
@@ -101,40 +93,26 @@ input[type="range"] { /* 1 */
     padding: .25em 0;
 }
 
-x:-o-prefocus,
-input[type="range"] { /* 2 */
-    border: 1px solid transparent;
-}
-
-
-/* Standard layout */
-form label,
-form input,
-form textarea,
-form select,
-form .no-edit,
-.input-tamer {
-    display: block;
-    margin-bottom: 1em;
-}
-
-input[type],
-textarea,
-.no-edit {
-    max-width: 210px;
-    width: 100%;
-}
-
 /*
  * 1. Remove excess padding in Webkit
  */
 input[type="color"] {
-    -webkit-padding-start: 0; /* 1 */
+    -webkit-appearance: none; /* 1 */
+    -webkit-padding-start: 0;
     -webkit-padding-end: 0;
     -webkit-padding-before: 0;
     -webkit-padding-after: 0;
     max-width: 105px;
 }
+
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        -webkit-appearance: none; /* 1 */
+        padding: 0;
+    }
+
+    input[type="color"]::-webkit-color-swatch {
+        border: none; /* 1 */
+    }
 
 /*
  * Declared separately to reduce selector duplication
@@ -148,6 +126,10 @@ input[type="checkbox"] {
     width: auto;
     max-width: 15px;
     line-height: inherit;
+}
+
+input[type="radio"] {
+    border-color: transparent;
 }
 
 /*
@@ -177,61 +159,19 @@ textarea {
         resize: none; /* 3 */
     }
 
-.no-edit {
-    cursor: not-allowed;
-    border-color: #ebebeb;
-}
-
-select {
-    max-width: 210px;
-    width: 100%;
-    border: 1px solid #c0c0c0;
-}
-
-    select option {
-        height: 100%;
-    }
-
-/*
- * Full Width
- */
-.full-width {
-    max-width: 100% !important;
-    width: 100% !important;
-}
-
-/* 
- * Placeholder : These have to be kept separate
- * 1. Safari and Chrome
- * 2. Firefox 4-18
- * 3. Firefox 19+
- * 4. IE10+
- */
-::-webkit-input-placeholder {
-    color: #c0c0c0; /* 1 */
-}
-
-:-moz-placeholder {
-    color: #c0c0c0; /* 2 */
-}
-
-::-moz-placeholder {
-    color: #c0c0c0; /* 3 */
-}
-
-:-ms-input-placeholder {
-    color: #c0c0c0; /* 4 */
+select option {
+    height: 100%;
 }
 
 /* 
  * Focus 
  */
 textarea:focus,
-input[type]:focus,
+input:focus,
 select:focus,
 .no-edit:focus,
 textarea.focus,
-input[type].focus,
+input.focus,
 select.focus,
 .no-edit.focus {
     border: 1px solid #00a9ec;
@@ -258,21 +198,58 @@ input[type="checkbox"].checked {
     border-color: #c0c0c0;
 }
 
+/*
+ * Read only
+ */
+.no-edit,
+[readonly] {
+    cursor: not-allowed;
+    border-color: #ebebeb;
+}
+
 /* 
  * Disabled 
  * 1. Override the value set in normalize.css
  */
 input[disabled],
 select[disabled],
-textarea[disabled],
-input[readonly],
-select[readonly],
-textarea[readonly] {
+textarea[disabled] {
     cursor: not-allowed!important; /* 1 */
     background-color: #ebebeb;
     border-color: #c0c0c0;
     color: #c0c0c0;
     outline: 0!important;
+}
+
+/* 
+ * Placeholder : These have to be kept separate
+ * 1. Safari and Chrome
+ * 2. Firefox 4-18
+ * 3. Firefox 19+
+ * 4. IE10+
+ */
+::-webkit-input-placeholder {
+    color: #c0c0c0; /* 1 */
+}
+
+:-moz-placeholder {
+    color: #c0c0c0; /* 2 */
+}
+
+::-moz-placeholder {
+    color: #c0c0c0; /* 3 */
+}
+
+:-ms-input-placeholder {
+    color: #c0c0c0; /* 4 */
+}
+
+/*
+ * Full Width
+ */
+.full-width {
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 /*

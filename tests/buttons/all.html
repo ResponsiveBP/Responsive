@@ -22,146 +22,102 @@
         <h1>Buttons</h1>
         <hr />
         <section class="row">
+            <h2>Default Button Styles</h2>
+            <p>All styles are attribute based.</p>
+            <p>
+                Button states are:
+                <code>:hover</code>, <code>:focus</code>, <code>:active</code>, and <code>:disabled</code>.
+                Hyperlinks disabled state are styled by adding the class <code>.disabled</code>.
+            </p>
             <div class="column-6">
-                <h2>OS Default</h2>
                 <div>
-                    <h2>Default</h2>
+                    <h3>Button</h3>
                     <p>Standard <code>button</code> element.</p>
                     <button>button</button>
                 </div>
                 <div>
-                    <h2>Default</h2>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button" />
+                </div>
+            </div>
+            <div class="column-6">
+                <div>
+                    <h3>Input : Submit </h3>
                     <p>Standard <code>input[type="submit"]</code> element.</p>
                     <input type="submit" value="button" />
                 </div>
-            </div>
-            <div class="column-6">
-                <h2>Styled</h2>
                 <div>
-                    <h2>Default</h2>
-                    <p>Add the class <code>.btn</code>.</p>
-                    <button class="btn">button</button>
+                    <h3>Link</h3>
+                    <p>Standard <code>a[role="button]</code> element.</p>
+                    <a href="#" role="button">button</a>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <section class="row">
+            <div class="column-6">
+                <h2>Disabled State</h2>
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <button disabled>button</button>
                 </div>
                 <div>
-                    <h2>Default</h2>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button" disabled />
+                </div>
+                <div>
+                    <h3>Input : Submit</h3>
                     <p>Standard <code>input[type="submit"]</code> element.</p>
-                    <input type="submit" value="button" class="btn" />
+                    <input type="submit" value="button" disabled />
                 </div>
                 <div>
-                    <h2>Default</h2>
-                    <p>Standard <code>a</code> element.</p>
-                    <a href="#" class="btn">button</a>
+                    <h3>Link</h3>
+                    <p>Standard <code>a[role="button]</code> element.</p>
+                    <a href="#" role="button" class="disabled">button</a>
                 </div>
             </div>
-        </section>
-        <hr />
-        <section class="row">
-            <h2>Styled button States</h2>
-            <div class="column-3">
-                <div>
-                    <h2>Hover</h2>
-                    <p>Add class <code>.hover</code> to force.</p>
-                    <button class="btn hover">button</button>
-                </div>
-                <div>
-                    <p><code>input[type="submit"]</code></p>
-                    <input type="submit" value="button" class="btn hover" />
-                </div>
-                <div>
-                    <p>Standard <code>a</code> element.</p>
-                    <a href="#" class="btn hover">button</a>
-                </div>
-            </div>
-            <div class="column-3">
-                <div>
-                    <h2>Active</h2>
-                    <p>Add class <code>.active</code> to force.</p>
-                    <button class="btn active">button</button>
-                </div>
-                <div>
-                    <p><code>input[type="submit"]</code></p>
-                    <input type="submit" value="button" class="btn active" />
-                </div>
-                <div>
-                    <p>Standard <code>a</code> element.</p>
-                    <a href="#" class="btn active">button</a>
-                </div>
-            </div>
-            <div class="column-3">
-                <div>
-                    <h2>Focus</h2>
-                    <p>Add class <code>.focus</code> to force.</p>
-                    <button class="btn focus">button</button>
-                </div>
-                <div>
-                    <p><code>input[type="submit"]</code></p>
-                    <input type="submit" value="button" class="btn focus" />
-                </div>
-                <div>
-                    <p>Standard <code>a</code> element.</p>
-                    <a href="#" class="btn focus">button</a>
-                </div>
-            </div>
-            <div class="column-3">
-                <div>
-                    <h2>Disabled</h2>
-                    <p>Add class <code>.disabled</code> to force.</p>
-                    <button class="btn" disabled="">button</button>
-                </div>
-                <div>
-                    <p><code>input[type="submit"]</code></p>
-                    <input type="submit" value="button" class="btn" disabled="" />
-                </div>
-                <div>
-                    <p>Standard <code>a</code> element.</p>
-                    <a href="#" class="btn disabled">button</a>
-                </div>
-            </div>
-        </section>
-        <hr />
-        <section class="row">
-            <h2>Inline buttons</h2>
-            <p>Add the class <code>.btn-inline</code> </p>
             <div class="column-6">
+                <h2>Inline buttons</h2>
+                <p>Add the class <code>.btn-inline</code> </p>
                 <div>
-                    <h2>OS Default</h2>
-                    <input type="text" />
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <input type="text" class="inline-block" />
                     <button class="btn-inline">submit</button>
                 </div>
                 <div>
-                    <p><code>input[type="submit"]</code></p>
-                    <input type="text" />
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="text" class="inline-block" />
+                    <input type="button" value="submit" class="btn-inline" />
+                </div>
+                <div>
+                    <h3>Input : Submit</h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <input type="text" class="inline-block" />
                     <input type="submit" value="submit" class="btn-inline" />
                 </div>
-            </div>
-            <div class="column-6">
-                <h2>Styled</h2>
                 <div>
-                    <input type="text" />
-                    <button class="btn btn-inline">submit</button>
-                </div>
-                <div>
-                    <p><code>input[type="submit"]</code></p>
-                    <input type="text" />
-                    <input type="submit" value="submit" class="btn btn-inline" />
-                </div>
-                <div>
-                    <p>Standard <code>a</code> element.</p>
-                    <input type="text" />
-                    <a href="#" class="btn btn-inline">submit</a>
+                    <h3>Link</h3>
+                    <p>Standard <code>a[role="button]</code> element.</p>
+                    <input type="text" class="inline-block" />
+                    <a href="#" role="button" class="btn-inline">submit</a>
                 </div>
             </div>
         </section>
         <hr />
         <section class="row">
-            <h2>Grouped Buttons</h2>
+            <h3>Grouped Buttons</h3>
             <div class="column-6">
                 <p>Wrap the buttons in a div with class <code>.btn-group</code></p>
                 <div class="btn-group">
-                    <a href="#" class="btn">first</a>
-                    <a href="#" class="btn">second</a>
-                    <a href="#" class="btn">third</a>
-                    <a href="#" class="btn">fourth</a>
+                    <a href="#" role="button">first</a>
+                    <a href="#" role="button">second</a>
+                    <a href="#" role="button">third</a>
+                    <a href="#" role="button">fourth</a>
                 </div>
             </div>
         </section>

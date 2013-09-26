@@ -448,6 +448,9 @@ html {
     -webkit-overflow-scrolling: touch; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
+    font-size: 16px;
+    line-height: 1.4;
+    font-family: Arial, sans-serif;
 }
 
 html,
@@ -458,27 +461,20 @@ textarea {
     color: #222;
 }
 
-body {
-    font-size: 16px;
-    line-height: 1.4;
-}
-
 /*
  * Headers
  * 1: Improve rendering of screen fonts.
- * 2: Ensure class driven versions act appropriately.
+ * 2: Prevent page breaking.
  */
 h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility; /* 1 */
-    display: block; /* 2 */
-    font-weight: bold; /* 2 */
     page-break-after: avoid; /* 2 */
 }
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
- * Customize the background color to match your design.
+ * Customize the background colour to match your design.
  */
 
 ::-moz-selection {
@@ -521,14 +517,6 @@ abbr {
 
 /*
  * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
  */
 .row:before,
 .row:after {
@@ -998,13 +986,23 @@ table {
 /* Responsive Media */
 
 /*
- * Remove the gap between images and the bottom of their containers.
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+/*
  * Make the image responsive.
  */
 img {
     max-width: 100%;
     height: auto;
-    vertical-align: middle;
 }
 
 /*
@@ -1110,22 +1108,17 @@ a img {
 
 /* Responsive Forms Base */
 
+/* Normalize  */
 .form {
     margin: 1em 0;
 }
 
-/*
- * Normalize fieldsets.
- */
 fieldset {
     padding: 0;
     margin: 0;
     border: 0;
 }
 
-/*
- * Normalize legends.
- */
 legend {
     display: block;
     width: 100%;
@@ -1137,47 +1130,26 @@ label[for] {
     cursor: pointer;
 }
 
-/* Normalize  */
 select,
 textarea,
-input {
+input,
+.no-edit {
+    font-family: inherit;
+    padding: .25em;
+    background-color: #fff;
     border-radius: 0;
+    border: 1px solid #c0c0c0;
+    max-width: 210px;
+    width: 100%;
+    display: block;
+    margin-bottom: 1em;
 }
 
-    select,
-    textarea,
-    input[type="text"],
-    input[type="password"],
-    input[type="datetime"],
-    input[type="datetime-local"],
-    input[type="date"],
-    input[type="month"],
-    input[type="time"],
-    input[type="week"],
-    input[type="number"],
-    input[type="email"],
-    input[type="url"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="color"],
-    input[type="checkbox"],
-    .no-edit {
-        font-family: inherit;
-        padding: .25em;
-        background-color: #fff;
-        border: 1px solid #c0c0c0;
-    }
-
-    /*
-     * Add range styles for IE8 and IE9
-     */
-    input[type="range"] {
-        font-family: inherit;
-        padding: .25em \9;
-        background-color: #fff \9;
-        border: 1px solid transparent;
-        border: 1px solid #c0c0c0 \9;
-    }
+label,
+.input-group {
+    display: block;
+    margin-bottom: 1em;
+}
 
 /*
  * Fix field styling on iPhone and iPad.
@@ -1210,8 +1182,18 @@ input {
 }
 
 /*
+ * Add range styles for IE8 and IE9
+ */
+input[type="range"] {
+    padding: .25em 0;
+    padding: .25em \9;
+    background-color: #fff \9;
+    border: 1px solid transparent;
+    border: 1px solid #c0c0c0 \9;
+}
+
+/*
  * 1. Remove borders and padding on range controls in IE10+
- * 2. Remove borders and padding on range controls in Opera
  */
 x::-ms-reveal,
 input[type="range"] { /* 1 */
@@ -1219,55 +1201,26 @@ input[type="range"] { /* 1 */
     padding: .25em 0;
 }
 
-x:-o-prefocus,
-input[type="range"] { /* 2 */
-    border: 1px solid transparent;
-}
-
-
-/* Standard layout */
-form label,
-form input,
-form textarea,
-form select,
-form .no-edit,
-.input-tamer {
-    display: block;
-    margin-bottom: 1em;
-}
-
-input[type="text"],
-input[type="file"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-input[type="range"],
-textarea,
-.no-edit {
-    max-width: 210px;
-    width: 100%;
-}
-
 /*
  * 1. Remove excess padding in Webkit
  */
 input[type="color"] {
-    -webkit-padding-start: 0; /* 1 */
+    -webkit-appearance: none; /* 1 */
+    -webkit-padding-start: 0;
     -webkit-padding-end: 0;
     -webkit-padding-before: 0;
     -webkit-padding-after: 0;
     max-width: 105px;
 }
+
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        -webkit-appearance: none; /* 1 */
+        padding: 0;
+    }
+
+    input[type="color"]::-webkit-color-swatch {
+        border: none; /* 1 */
+    }
 
 /*
  * Declared separately to reduce selector duplication
@@ -1283,6 +1236,10 @@ input[type="checkbox"] {
     line-height: inherit;
 }
 
+input[type="radio"] {
+    border-color: transparent;
+}
+
 /*
  * Textareas : Multiple resizable options.
  * 1: Horizontal
@@ -1295,7 +1252,7 @@ textarea {
     max-width: 100%;
     height: auto;
     resize: both;
-    min-height: 84px;
+    min-height: 5.25em;
 }
 
     textarea.horizontal {
@@ -1310,29 +1267,67 @@ textarea {
         resize: none; /* 3 */
     }
 
-.no-edit {
+select option {
+    height: 100%;
+}
+
+/* 
+ * Focus 
+ */
+textarea:focus,
+input:focus,
+select:focus,
+.no-edit:focus,
+textarea.focus,
+input.focus,
+select.focus,
+.no-edit.focus {
+    border: 1px solid #00a9ec;
+    outline: 0;
+}
+
+input[type="range"]:focus,
+input[type="range"].focus,
+input[type="checkbox"]:focus,
+input[type="checkbox"].focus,
+input[type="radio"]:focus,
+input[type="radio"].focus,
+input:checked,
+input.checked {
+    border-color: transparent;
+    outline: 1px solid #00a9ec;
+    outline-offset: -1px;
+}
+
+input[type="checkbox"]:focus,
+input[type="checkbox"].focus,
+input[type="checkbox"]:checked,
+input[type="checkbox"].checked {
+    border-color: #c0c0c0;
+}
+
+/*
+ * Read only
+ */
+.no-edit,
+[readonly] {
     cursor: not-allowed;
     border-color: #ebebeb;
 }
 
-select {
-    max-width: 210px;
-    width: 100%;
-    border: 1px solid #c0c0c0;
-}
-
-    select option {
-        height: 100%;
-    }
-
-/*
- * Full Width
+/* 
+ * Disabled 
+ * 1. Override the value set in normalize.css
  */
-.full-width {
-    max-width: 100% !important;
-    width: 100% !important;
+input[disabled],
+select[disabled],
+textarea[disabled] {
+    cursor: not-allowed!important; /* 1 */
+    background-color: #ebebeb;
+    border-color: #c0c0c0;
+    color: #c0c0c0;
+    outline: 0!important;
 }
-
 
 /* 
  * Placeholder : These have to be kept separate
@@ -1357,77 +1352,12 @@ select {
     color: #c0c0c0; /* 4 */
 }
 
-/* 
- * Focus 
+/*
+ * Full Width
  */
-textarea:focus,
-input[type="text"]:focus,
-input[type="file"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-input[type="range"]:focus,
-select:focus,
-.no-edit:focus textarea.focus,
-input[type="text"].focus,
-input[type="file"].focus,
-input[type="password"].focus,
-input[type="datetime"].focus,
-input[type="datetime-local"].focus,
-input[type="date"].focus,
-input[type="month"].focus,
-input[type="time"].focus,
-input[type="week"].focus,
-input[type="number"].focus,
-input[type="email"].focus,
-input[type="url"].focus,
-input[type="search"].focus,
-input[type="tel"].focus,
-input[type="color"].focus,
-input[type="range"].focus,
-select.focus,
-.no-edit.focus {
-    border: 1px solid #00a9ec;
-    outline: 0;
-}
-
-input[type="checkbox"]:focus,
-input[type="checkbox"].focus,
-input[type="checkbox"]:checked,
-input[type="checkbox"].checked,
-input[type="radio"]:focus,
-input[type="radio"].focus,
-input[type="radio"]:checked,
-input[type="radio"].checked {
-    outline: 1px solid #00a9ec;
-    outline-offset: -1px;
-}
-
-/* 
- * Disabled 
- * 1. Override the value set in normalize.css
- */
-input[disabled],
-select[disabled],
-textarea[disabled],
-input[readonly],
-select[readonly],
-textarea[readonly] {
-    cursor: not-allowed!important; /* 1 */
-    background-color: #ebebeb;
-    border-color: #c0c0c0;
-    color: #c0c0c0;
-    outline: 0!important;
+.full-width {
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 /*
@@ -1456,33 +1386,27 @@ textarea[readonly] {
 }
 
 .form-horizontal input,
-.form-horizontal input[type="text"],
-.form-horizontal input[type="password"],
-.form-horizontal input[type="datetime"],
-.form-horizontal input[type="datetime-local"],
-.form-horizontal input[type="date"],
-.form-horizontal input[type="month"],
-.form-horizontal input[type="time"],
-.form-horizontal input[type="week"],
-.form-horizontal input[type="number"],
-.form-horizontal input[type="email"],
-.form-horizontal input[type="url"],
-.form-horizontal input[type="search"],
-.form-horizontal input[type="tel"],
-.form-horizontal input[type="color"],
 .form-horizontal select,
 .form-horizontal textarea,
-.form-horizontal .no-edit-input,
-.form-horizontal .input-tamer,
+.form-horizontal .no-edit,
+.form-horizontal .input-group,
 .form-horizontal fieldset > p,
 .form-horizontal fieldset > span {
     margin-left: 176px;
     margin-bottom: 1em;
 }
 
+    .form-horizontal .input-group * {
+        margin-left: 0;
+    }
+
 .form-horizontal .form-actions {
     padding-left: 176px;
 }
+
+    .form-horizontal .form-actions input {
+        margin-left: 0;
+    }
 
 /* Responsive Buttons */
 
@@ -1493,90 +1417,72 @@ textarea[readonly] {
 
 button,
 input[type="submit"],
-.btn {
+input[type="button"],
+a[role="button"] {
+    -webkit-appearance: none; /* 1 */
+    border-radius: 0; /* 1 */
     display: inline-block;
-    text-decoration: none;
+    width: auto;
+    max-width: none;
     padding: .5em 1em;
     margin-bottom: 0;
     line-height: normal;
+    text-decoration: none;
     font-size: 1em;
+    border: solid 1px #c0c0c0;
+    background-color: #dadada;
     color: #222;
     cursor: pointer;
     position: relative;
-    -webkit-appearance: none; /* 1 */
-    border-radius: 0; /* 1 */
-}
-
-    /*
-     * Disabled state.
-     */
-    button.disabled,
-    button[disabled],
-    input[type="submit"].disabled,
-    input[type="submit"][disabled],
-    .btn.disabled {
-        cursor: not-allowed;
-    }
-
-
-/*
- * Simple button style.
- */
-.btn {
-    border: solid 1px #c0c0c0;
-    background-color: #dadada;
 }
 
     /*
      * Button states.
      */
-    .btn:hover,
-    .btn.hover,
-    .btn:active,
-    .btn.active,
-    .btn:focus,
-    .btn.focus,
-    .btn[disabled],
-    .btn.disabled {
+    button:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    a[role="button"]:hover {
         background-color: #cdcdcd;
     }
 
-    .btn:focus,
-    .btn.focus {
+    button:focus,
+    input[type="submit"]:focus,
+    input[type="button"]:focus,
+    a[role="button"]:focus {
         outline: 1px solid #00a9ec;
         outline-offset: -1px;
     }
 
-    .btn:active,
-    .btn.active {
+    button:active,
+    input[type="submit"]:active,
+    input[type="button"]:active,
+    a[role="button"]:active {
         background-color: #e7e7e7;
         outline: none;
     }
 
-    .btn.disabled,
-    .btn[disabled] {
+    button[disabled],
+    input[type="submit"][disabled],
+    input[type="button"][disabled],
+    a[role="button"].disabled {
         color: #5d5d5d;
         background-color: #e7e7e7;
+        cursor: not-allowed;
     }
 
-/*
- * Inline buttons designed for rendering next to inputs.
- * 1. Fix inline-block margin.
- * 2. Padd buttons.
- * 3. Fix alignment for anchors
- */
-
-button.btn-inline,
-input[type="submit"].btn-inline,
-.btn-inline {
-    margin-left: -5px; /* 1 */
-    padding: .25em 1em; /* 2 */
-}
-
-input[type="submit"].btn.btn-inline,
-.btn.btn-inline {
-    margin-left: -4px; /* 1 */
-}
+    /*
+     * Inline buttons designed for rendering next to inputs.
+     * 1. Fix inline-block margin.
+     * 2. Pad buttons.
+     */
+    button.btn-inline,
+    input[type="submit"].btn-inline,
+    input[type="button"].btn-inline,
+    a[role="button"].btn-inline {
+        margin-left: -4px; /* 1 */
+        padding: .25em 1em; /* 2 */
+    }
 
 /*
  * Grouped buttons.
@@ -1584,14 +1490,6 @@ input[type="submit"].btn.btn-inline,
 
 /*
  * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
  */
 .btn-group:before,
 .btn-group:after {
@@ -1610,7 +1508,7 @@ input[type="submit"].btn.btn-inline,
     vertical-align: middle;
 }
 
-    .btn-group > .btn {
+    .btn-group > * {
         float: left;
     }
 
@@ -2054,20 +1952,22 @@ pre code {
         overflow: hidden;
     }
 
-    .lightbox > img,
-    .lightbox > .media {
-        background-color: #222;
-    }
-
 .lightbox-content {
     background-color: #fff;
     padding: 1em;
     text-align: left;
 }
 
+.lightbox > img,
+.lightbox > .media {
+    background-color: #222;
+}
+
 .lightbox > img {
     max-height: 100%;
     max-width: 100%;
+    display: table-cell \9;
+    width: auto \9;
 }
 
 .lightbox > .media {
@@ -2285,9 +2185,7 @@ pre code {
     * {
         background: transparent !important;
         color: #000 !important; /* Black prints faster: h5bp.com/s */
-        -webkit-box-shadow: none !important;
         box-shadow: none !important;
-        -webkit-text-shadow: none !important;
         text-shadow: none !important;
     }
 
@@ -2342,11 +2240,6 @@ pre code {
     h3 {
         orphans: 3;
         widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
     }
 }
 

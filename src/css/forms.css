@@ -15,22 +15,25 @@
     z-index: 1;
 }
 
-.form-horizontal input[type],
+.form-horizontal input,
 .form-horizontal select,
 .form-horizontal textarea,
-.form-horizontal .no-edit-input,
-.form-horizontal .input-tamer,
+.form-horizontal .no-edit,
+.form-horizontal .input-group,
 .form-horizontal fieldset > p,
 .form-horizontal fieldset > span {
     margin-left: 176px;
     margin-bottom: 1em;
 }
 
+    .form-horizontal .input-group * {
+        margin-left: 0;
+    }
+
 .form-horizontal .form-actions {
     padding-left: 176px;
 }
 
-    .form-horizontal .form-actions input[type] {
-        padding-left: 176px;
+    .form-horizontal .form-actions input {
         margin-left: 0;
     }
