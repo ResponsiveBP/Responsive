@@ -194,4 +194,4 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".dropdown.r"));
+}(jQuery, window, ".r.dropdown"));

@@ -3,7 +3,6 @@
 .carousel {
     position: relative;
     margin-bottom: 1em;
-    border: 1px solid #c0c0c0;
 }
 
 .carousel-inner {
@@ -74,21 +73,20 @@
 .carousel-control:visited {
     position: absolute;
     top: 40%;
-    left: 1em;
+    left: 0;
     padding: .5em;
     margin-top: -1em;
-    font-size: 1em;
+    font-size: 2em;
     font-weight: bold;
     text-align: center;
-    background-color: #fff;
-    border: 1px solid #222;
-    color: inherit;
+    background-color: #222;
+    color: #fff;
     text-decoration: none;
 }
 
     .carousel-control.right {
         left: auto;
-        right: 1em;
+        right: 0;
     }
 
     .carousel-control,
@@ -102,8 +100,9 @@
         }
 
 .carousel-caption {
-    padding: 0 1em;
-    background: #fff;
+    padding: 1px 1em;
+    background: #222;
+    color: #fff;
 }
 
 /* 

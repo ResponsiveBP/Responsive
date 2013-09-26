@@ -81,11 +81,12 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, options, prefix) {
+    $.buildDataOptions = function ($elem, options, prefix, namespace) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
         /// <param name="options" type="Object">The object to extend</param>
         /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
+        /// <param name="namespace" type="String">The namespace with which to segregate the data attribute.</param>
         /// <returns type="Object">The extended object.</returns>
         $.each($elem.data(), function (key, val) {
 
@@ -103,7 +104,11 @@
 
         });
 
-        $elem.data(prefix + "Options", options);
+        if (namespace) {
+            $elem.data(namespace + "." + prefix + "Options", options);
+        } else {
+            $elem.data(prefix + "Options", options);
+        }
 
         return options;
     };

@@ -604,4 +604,4 @@
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".lightbox.r"));
+}(jQuery, window, ".r.lightbox"));

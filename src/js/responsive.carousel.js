@@ -282,7 +282,8 @@
     $.fn.carousel.defaults = {
         interval: 5e3,
         mode: "slide",
-        pause: "hover"
+        pause: "hover",
+        wrap: true
     };
 
     // Set the public constructor.
@@ -338,4 +339,4 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".carousel.r"));
+}(jQuery, window, ".r.carousel"));
