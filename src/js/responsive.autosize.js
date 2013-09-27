@@ -77,18 +77,14 @@
             removeAttributes: null,
             removeClasses: null
         };
+        this.options = $.extend({}, this.defaults, options);
         this.$clone = null;
         this.options = null;
         this.sizing = null;
 
         // Initial setup.
-        if ($.isPlainObject(options)) {
-
-            this.options = $.extend({}, this.defaults, options);
-
-            bindEvents.call(this);
-            createClone.call(this);
-        }
+        bindEvents.call(this);
+        createClone.call(this);
     };
 
     AutoSize.prototype.size = function () {

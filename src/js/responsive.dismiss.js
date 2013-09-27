@@ -12,11 +12,12 @@
         return;
     }
 
-    // General variables and methods.
+    // General variables.
     var eclick = "click" + ns,
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
 
+    // Dismiss class definition
     var Dismiss = function (element, target) {
 
         this.$element = $(element);
@@ -24,7 +25,6 @@
         this.dismissing = null;
     };
 
-    // Dismiss class definition
     Dismiss.prototype.close = function () {
 
         var supportTransition = $.support.transition,
