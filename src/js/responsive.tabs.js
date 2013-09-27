@@ -31,7 +31,7 @@
             $nextPane = $childPanes.eq(postion);
 
         $element.trigger(showEvent);
-        
+
         if (this.tabbing || showEvent.isDefaultPrevented()) {
             return;
         }
@@ -46,10 +46,8 @@
         $nextPane.addClass("tab-pane-active fade-out");
         $childPanes.filter(".fade-in").removeClass("tab-pane-active fade-in");
 
-        // Force reflow.
-        $nextPane[0].offsetWidth;
-
-        $nextPane.addClass("fade-in");
+        // Force redraw.
+        $nextPane.redraw().addClass("fade-in");
 
         // Do the callback
         callback.call(this);
@@ -62,7 +60,8 @@
         this.$element = $(element);
         this.tabbing = null;
 
-        this.$element.on(eclick, "ul.tabs > li > a", function (event) {
+        // TODO: Move this.
+        this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
 
             event.preventDefault();
 
@@ -98,16 +97,10 @@
 
                 self.tabbing = false;
                 self.$element.trigger($.Event(eshown));
-
             };
 
             // Do our callback
-            if (supportTransition) {
-                this.$element.one(supportTransition.end, complete);
-            } else {
-                complete();
-            }
-
+            supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
         });
     };
 
@@ -132,7 +125,6 @@
             }
 
         });
-
     };
 
     // Set the public constructor.
@@ -144,11 +136,10 @@
         return this;
     };
 
-    // Data Api
+    // Data API
     $(document).on(eready, function () {
 
         $("[data-tabs]").tabs();
-
     });
 
     w.RESPONSIVE_TABS = true;

@@ -3,47 +3,33 @@
 /*
  * Responsive helpers to toggle visibility. 
  */
-
-/*
- * Landscape phone to small desktop & portrait tablet viewport < 768px
- */
-@media screen and (max-width: 47.9375em) {
-
-    .hidden-desktop {
-        display: inherit !important;
-    }
-
-    .visible-desktop {
-        display: none !important;
-    }
-
-    .visible-phone {
-        display: inherit !important;
-    }
-
-    .hidden-phone {
-        display: none !important;
-    }
-}
-
 /*
  * Landscape tablet to default desktop: 769 > viewport < 980px
  */
 @media screen and (min-width: 48em) and (max-width: 61.1875em) {
 
-    .hidden-desktop {
+    .hidden-small,
+    .visible-medium {
         display: inherit !important;
     }
 
-    .visible-desktop {
+    .visible-small,
+    .hidden-medium {
         display: none !important;
     }
+}
 
-    .visible-tablet {
+/*
+ * Default desktop up: viewport > 980px
+ */
+@media screen and (min-width: 61.3125em) {
+    .hidden-small,
+    .visible-large {
         display: inherit !important;
     }
 
-    .hidden-tablet {
+    .visible-small,
+    .hidden-large {
         display: none !important;
     }
 }

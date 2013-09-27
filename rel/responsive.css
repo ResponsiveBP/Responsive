@@ -1518,9 +1518,10 @@ textarea[disabled] {
  */
 
 button,
-input[type="submit"],
-input[type="button"],
-a[role="button"] {
+[type="submit"],
+[type="button"],
+[type="reset"],
+[role="button"] {
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
     display: inline-block;
@@ -1542,32 +1543,36 @@ a[role="button"] {
      * Button states.
      */
     button:hover,
-    input[type="submit"]:hover,
-    input[type="button"]:hover,
-    a[role="button"]:hover {
+    [type="submit"]:hover,
+    [type="button"]:hover,
+    [type="reset"]:hover,
+    [role="button"]:hover {
         background-color: #cdcdcd;
     }
 
     button:focus,
-    input[type="submit"]:focus,
-    input[type="button"]:focus,
-    a[role="button"]:focus {
+    [type="submit"]:focus,
+    [type="button"]:focus,
+    [type="reset"]:focus,
+    [role="button"]:focus {
         outline: 1px solid #00a9ec;
         outline-offset: -1px;
     }
 
     button:active,
-    input[type="submit"]:active,
-    input[type="button"]:active,
-    a[role="button"]:active {
+    [type="submit"]:active,
+    [type="button"]:active,
+    [type="reset"]:active,
+    [role="button"]:active {
         background-color: #e7e7e7;
         outline: none;
     }
 
     button[disabled],
-    input[type="submit"][disabled],
-    input[type="button"][disabled],
-    a[role="button"].disabled {
+    [type="submit"][disabled],
+    [type="button"][disabled],
+    [type="reset"][disabled],
+    [role="button"].disabled {
         color: #5d5d5d;
         background-color: #e7e7e7;
         cursor: not-allowed;
@@ -1579,9 +1584,10 @@ a[role="button"] {
      * 2. Pad buttons.
      */
     button.btn-inline,
-    input[type="submit"].btn-inline,
-    input[type="button"].btn-inline,
-    a[role="button"].btn-inline {
+    [type="submit"].btn-inline,
+    [type="button"].btn-inline,
+    [type="reset"].btn-inline,
+    [role="button"].btn-inline {
         margin-left: -4px; /* 1 */
         padding: .25em 1em; /* 2 */
     }
@@ -1736,7 +1742,6 @@ pre code {
 .carousel {
     position: relative;
     margin-bottom: 1em;
-    border: 1px solid #c0c0c0;
 }
 
 .carousel-inner {
@@ -1807,21 +1812,20 @@ pre code {
 .carousel-control:visited {
     position: absolute;
     top: 40%;
-    left: 1em;
-    padding: .5em;
+    left: 0;
+    padding: 0 .5em;
     margin-top: -1em;
-    font-size: 1em;
+    font-size: 2em;
     font-weight: bold;
     text-align: center;
-    background-color: #fff;
-    border: 1px solid #222;
-    color: inherit;
+    background-color: #222;
+    color: #fff;
     text-decoration: none;
 }
 
     .carousel-control.right {
         left: auto;
-        right: 1em;
+        right: 0;
     }
 
     .carousel-control,
@@ -1835,8 +1839,9 @@ pre code {
         }
 
 .carousel-caption {
-    padding: 0 1em;
-    background: #fff;
+    padding: 1px 1em;
+    background: #222;
+    color: #fff;
 }
 
 /* 
@@ -1844,10 +1849,10 @@ pre code {
  */
 .carousel-fade .carousel-item,
 .carousel[data-carousel-mode="fade"] .carousel-item {
-    -webkit-transition: opacity 1.4s ease-in-out;
-    -moz-transition: opacity 1.4s ease-in-out;
-    -o-transition: opacity 1.4s ease-in-out;
-    transition: opacity 1.4s ease-in-out;
+    -webkit-transition: opacity .7s ease-in-out;
+    -moz-transition: opacity .7s ease-in-out;
+    -o-transition: opacity .7s ease-in-out;
+    transition: opacity .7s ease-in-out;
     position: absolute;
     top: 0;
     right: 0;
@@ -1894,6 +1899,32 @@ pre code {
 .carousel-fade .carousel-control:visited {
     z-index: 3;
 }
+
+.carousel-indicators {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    list-style: none;
+}
+
+    .carousel-indicators li {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        margin: 1px;
+        text-indent: -9999px;
+        cursor: pointer;
+        border: 2px solid #222;
+    }
+
+    .carousel-indicators .active {
+        background-color: #fff;
+    }
 
 /* Responsive Tabs*/
 
@@ -1998,7 +2029,8 @@ pre code {
 
 .lightbox-overlay,
 .lightbox-header,
-.lightbox-footer {
+.lightbox-footer,
+.lightbox-direction {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkYxMDI4MzlFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkYxMDI4M0FFRkU1MTFFMjg3QUU4NzI5RTNDQTdBNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjEwMjgzN0VGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjEwMjgzOEVGRTUxMUUyODdBRTg3MjlFM0NBN0E3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuF8nHUAAAAPSURBVHjaYmBgYNgMEGAAALgAtNah8fUAAAAASUVORK5CYII=') /* 3 */;
     background-repeat: repeat;
 }
@@ -2099,12 +2131,11 @@ pre code {
     position: fixed;
     top: 50%;
     left: 0;
-    padding: .5em;
+    padding: 0 .5em;
     margin-top: -2em;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    background-color: #111;
     color: #fff;
     text-decoration: none;
     z-index: 2;
@@ -2265,68 +2296,47 @@ pre code {
 /*
  * Responsive helpers to toggle visibility. 
  */
-.visible-phone {
+
+.hidden-small,
+.visible-medium,
+.visible-large {
     display: none !important;
 }
 
-.visible-tablet {
-    display: none !important;
-}
 
-.hidden-desktop {
-    display: none !important;
-}
-
-.visible-desktop {
-    display: inherit !important;
-}
 
 /* Responsive Helpers */
 
 /*
  * Responsive helpers to toggle visibility. 
  */
-
-/*
- * Landscape phone to small desktop & portrait tablet viewport < 768px
- */
-@media screen and (max-width: 47.9375em) {
-
-    .hidden-desktop {
-        display: inherit !important;
-    }
-
-    .visible-desktop {
-        display: none !important;
-    }
-
-    .visible-phone {
-        display: inherit !important;
-    }
-
-    .hidden-phone {
-        display: none !important;
-    }
-}
-
 /*
  * Landscape tablet to default desktop: 769 > viewport < 980px
  */
 @media screen and (min-width: 48em) and (max-width: 61.1875em) {
 
-    .hidden-desktop {
+    .hidden-small,
+    .visible-medium {
         display: inherit !important;
     }
 
-    .visible-desktop {
+    .visible-small,
+    .hidden-medium {
         display: none !important;
     }
+}
 
-    .visible-tablet {
+/*
+ * Default desktop up: viewport > 980px
+ */
+@media screen and (min-width: 61.3125em) {
+    .hidden-small,
+    .visible-large {
         display: inherit !important;
     }
 
-    .hidden-tablet {
+    .visible-small,
+    .hidden-large {
         display: none !important;
     }
 }

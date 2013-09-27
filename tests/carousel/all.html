@@ -24,7 +24,12 @@
         <section class="row">
             <div class="column-6">
                 <h2>Slide Mode</h2>
-                <div class="carousel" data-carousel-interval="5000">
+                <div id="carousel-1" class="carousel" data-carousel-interval="5000">
+                    <ol class="carousel-indicators">
+                        <li data-carousel-target="#carousel-1" data-carousel-slide-to="0" class="active"></li>
+                        <li data-carousel-target="#carousel-1" data-carousel-slide-to="1"></li>
+                        <li data-carousel-target="#carousel-1" data-carousel-slide-to="2"></li>
+                    </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item carousel-active">
                             <img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas">
@@ -48,13 +53,18 @@
                             </div>
                         </div>
                     </div>
-                    <a class="left carousel-control" href="#" data-carousel-slide="prev">&lt;</a>
-                    <a class="right carousel-control" href="#" data-carousel-slide="next">&gt;</a>
+                    <a class="left carousel-control" href="#carousel-1" data-carousel-slide="prev">&lt;</a>
+                    <a class="right carousel-control" href="#carousel-1" data-carousel-slide="next">&gt;</a>
                 </div>
             </div>
             <div class="column-6">
                 <h2>Fade Mode</h2>
-                <div class="carousel" data-carousel-mode="fade" data-carousel-interval="5000">
+                <div id="carousel-2" class="carousel" data-carousel-mode="fade" data-carousel-interval="5000">
+                    <ol class="carousel-indicators">
+                        <li data-carousel-target="#carousel-2" data-carousel-slide-to="0" class="active"></li>
+                        <li data-carousel-target="#carousel-2" data-carousel-slide-to="1"></li>
+                        <li data-carousel-target="#carousel-2" data-carousel-slide-to="2"></li>
+                    </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item carousel-active">
                             <img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas">
@@ -80,8 +90,8 @@
                             </div>
                         </div>
                     </div>
-                    <a class="left carousel-control" href="#" data-carousel-slide="prev">&lt;</a>
-                    <a class="right carousel-control" href="#" data-carousel-slide="next">&gt;</a>
+                    <a class="left carousel-control" href="#carousel-2" data-carousel-slide="prev">&lt;</a>
+                    <a class="right carousel-control" href="#carousel-2" data-carousel-slide="next">&gt;</a>
                 </div>
 
             </div>

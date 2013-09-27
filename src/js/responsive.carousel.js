@@ -8,263 +8,244 @@
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_CAROUSEL) {
         return;
     }
 
     // General variables.
     var supportTransition = $.support.transition,
+        emouseenter = "mouseenter" + ns,
+        emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
         eload = "load" + ns,
-        efocus = "focus" + ns,
-        eblur = "blur" + ns,
         eslide = "slide" + ns,
-        eslid = "slid" + ns,
+        eslid = "slid" + ns;
 
-    // The Carousel object that contains our methods.
-        Carousel = function (element, options) {
+    // Private methods.
+    var getActiveIndex = function () {
 
-            this.$element = $(element);
-            this.options = $.extend({}, $.fn.carousel.defaults, options);
-            this.paused = null;
-            this.interval = null;
-            this.sliding = null;
+        var $activeItem = this.$element.find(".carousel-active");
+        this.$items = $activeItem.parent().children();
 
-            // Bind the trigger click event.
-            this.$element.on(eclick, "[data-carousel-slide]", function (event) {
+        return this.$items.index($activeItem);
+    };
 
-                event.preventDefault();
+    // AutoSize class definition
+    var Carousel = function (element, options) {
 
-                var $this = $(this),
-                    opts = $this.data("carouselSlide"),
-                    $target = $(event.delegateTarget),
-                    $trigger = $this.parent("li");
-
-                if (opts) {
-
-                    // Flag that the carousel slider has been triggered.
-                    $target.find("[data-carousel-slide]").parent("li").not($trigger).removeClass("on");
-
-                    $trigger.addClass("on");
-
-                    // Run the carousel method.
-                    $target.carousel(opts);
-                }
-
-            });
-
-            if (this.options.pause === "hover") {
-                // Bind the mouse enter/leave events
-                this.$element.on("mouseenter", $.proxy(this.pause, this))
-                             .on("mouseleave", $.proxy(this.cycle, this));
-            }
-
-            if (this.options.slide && this.$element.is(":visible")) {
-
-                // Handle a slide instruction.
-                this.slide(this.options.slide);
-            }
-
+        this.$element = $(element);
+        this.defaults = {
+            interval: 5000,
+            mode: "slide",
+            pause: "hover",
+            wrap: true
         };
+        this.options = $.extend({}, this.defaults, options);
+        this.$indicators = this.$element.find(".carousel-indicators");
+        this.paused = null;
+        this.interval = null;
+        this.sliding = null;
+        this.$items = null;
 
-    Carousel.prototype = {
-        constructor: Carousel,
-        cycle: function (event) {
-
-            if (!event) {
-                // Flag false when there's no event.
-                this.paused = false;
-            }
-
-            if (this.options.interval && !this.paused) {
-
-                // Cycle to the next item on the set interval
-                (this.interval = w.setInterval($.proxy(this.next, this), this.options.interval));
-            }
-
-            // Return the carousel for chaining.
-            return this;
-        },
-        goTo: function (position) {
-
-            var $activeItem = this.$element.find(".carousel-active"),
-                $children = $activeItem.parent().children(),
-                activePosition = $children.index($activeItem),
-                self = this;
-
-            // Since the index is zero based we need to subtract one.
-            position -= 1;
-
-            if (position > ($children.length) || position < 0) {
-
-                return false;
-            }
-
-            if (this.sliding) {
-
-                // Fire the slid event.
-                return this.$element.one(eslid, function () {
-                    // Reset the position.
-                    self.goTo(position + 1);
-
-                });
-            }
-
-            if (activePosition === position) {
-                return this.pause().cycle();
-            }
-
-            return this.slide(position > activePosition ? "next" : "prev", $($children[position]));
-
-        },
-        pause: function (event) {
-
-            if (!event) {
-                // Mark as paused
-                this.paused = true;
-            }
-
-            // Ensure that transition end is triggered.
-            if (this.$element.find(".next, .prev").length && $.support.transition.end) {
-                this.$element.trigger($.support.transition.end);
-                this.cycle(true);
-            }
-
-            // Clear the interval and return the carousel for chaining.
-            w.clearInterval(this.interval);
-            this.interval = null;
-
-            return this;
-
-        },
-        next: function () {
-
-            if (this.sliding) {
-                return false;
-            }
-
-            return this.slide("next");
-        },
-        prev: function () {
-
-            if (this.sliding) {
-                return false;
-            }
-
-            return this.slide("prev");
-        },
-        slide: function (type, next) {
-
-            var $activeItem = this.$element.find(".carousel-active"),
-                $nextItem = next || $activeItem[type](),
-                isCycling = this.interval,
-                isNext = type === "next",
-                direction = isNext ? "left" : "right",
-                fallback = isNext ? "first" : "last",
-                self = this,
-                slideEvent = $.Event(eslide),
-                slidEvent = $.Event(eslid),
-                slideMode = this.options.mode === "slide",
-                fadeMode = this.options.mode === "fade",
-                index,
-                $thumbnails;
-
-            // Mark as sliding.
-            this.sliding = true;
-
-            if (isCycling) {
-                // Pause if cycling.
-                this.pause();
-            }
-
-            // Work out which item to slide to.
-            $nextItem = $nextItem.length ? $nextItem : this.$element.find(".carousel-item")[fallback]();
-
-            if ($nextItem.hasClass("carousel-active")) {
-                return false;
-            }
-
-            if (supportTransition && (slideMode || fadeMode)) {
-
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
-
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
-
-                // Good to go? Then let's slide.
-                $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
-
-                // Do the slide.
-                $activeItem.addClass(direction);
-                $nextItem.addClass(direction);
-
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
-
-                // Callback.
-                this.$element.one(supportTransition.end, function () {
-
-                    $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
-                    $activeItem.removeClass(["carousel-active", direction].join(" "));
-
-                    self.sliding = false;
-                    self.$element.trigger(slidEvent);
-
-                });
-            } else {
-
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
-
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
-
-                $activeItem.removeClass("carousel-active");
-                $nextItem.addClass("carousel-active");
-
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
-
-                self.sliding = false;
-                self.$element.trigger(slidEvent);
-            }
-
-            // Restart the cycle.
-            if (isCycling) {
-
-                this.cycle();
-            }
-
-            return this;
+        if (this.options.pause === "hover") {
+            // Bind the mouse enter/leave events
+            this.$element.on(emouseenter, $.proxy(this.pause, this))
+                         .on(emouseleave, $.proxy(this.cycle, this));
         }
     };
 
-    /* Plugin definition */
+    Carousel.prototype.cycle = function (event) {
+
+        if (!event) {
+            // Flag false when there's no event.
+            this.paused = false;
+        }
+
+        if (this.interval) {
+            w.clearInterval(this.interval);
+        }
+
+        if (this.options.interval && !this.paused) {
+
+            // Cycle to the next item on the set interval
+            this.interval = w.setInterval($.proxy(this.next, this), this.options.interval);
+        }
+
+        // Return the carousel for chaining.
+        return this;
+    };
+
+    Carousel.prototype.to = function (position) {
+
+        var activePosition = getActiveIndex.call(this),
+            self = this;
+
+        if (position > (this.$items.length - 1) || position < 0) {
+
+            return false;
+        }
+
+        if (this.sliding) {
+
+            // Fire the slid event.
+            return this.$element.one(eslid, function () {
+                // Reset the position.
+                self.to(position);
+
+            });
+        }
+
+        if (activePosition === position) {
+            return this.pause().cycle();
+        }
+
+        return this.slide(position > activePosition ? "next" : "prev", $(this.$items[position]));
+
+    };
+
+    Carousel.prototype.pause = function (event) {
+
+        if (!event) {
+            // Mark as paused
+            this.paused = true;
+        }
+
+        // Ensure that transition end is triggered.
+        if (this.$element.find(".next, .prev").length && $.support.transition.end) {
+            this.$element.trigger($.support.transition.end);
+            this.cycle(true);
+        }
+
+        // Clear the interval and return the carousel for chaining.
+        this.interval = w.clearInterval(this.interval);
+
+        return this;
+    };
+
+    Carousel.prototype.next = function () {
+
+        if (this.sliding) {
+            return false;
+        }
+
+        return this.slide("next");
+    };
+
+    Carousel.prototype.prev = function () {
+
+        if (this.sliding) {
+            return false;
+        }
+
+        return this.slide("prev");
+    };
+
+    Carousel.prototype.slide = function (type, next) {
+
+        var $activeItem = this.$element.find(".carousel-active"),
+            $nextItem = next || $activeItem[type](),
+            isCycling = this.interval,
+            isNext = type === "next",
+            direction = isNext ? "left" : "right",
+            fallback = isNext ? "first" : "last",
+            self = this,
+            slidEvent = $.Event(eslid),
+            slideMode = this.options.mode === "slide",
+            fadeMode = this.options.mode === "fade";
+
+        if (isCycling) {
+            // Pause if cycling.
+            this.pause();
+        }
+
+        // Work out which item to slide to.
+        if (!$nextItem.length) {
+
+            if (!this.options.wrap) {
+                return false;
+            }
+
+            $nextItem = this.$element.find(".carousel-item")[fallback]();
+        }
+
+        if ($nextItem.hasClass("carousel-active")) {
+            return false;
+        }
+
+        if (this.interval) {
+            this.pause();
+        }
+
+        // Trigger the slide event with positional data.
+        var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
+        this.$element.trigger(slideEvent);
+
+        if (this.sliding || slideEvent.isDefaultPrevented()) {
+            return false;
+        }
+
+
+        // Good to go? Then let's slide.
+        this.sliding = true;
+
+        // Highlight the correct indicator.
+        if (this.$indicators.length) {
+            this.$indicators.find(".active").removeClass("active");
+
+            this.$element.one(eslid, function () {
+                var $nextIndicator = $(self.$indicators.children()[getActiveIndex.call(self)]);
+                if ($nextIndicator) {
+                    $nextIndicator.addClass("active");
+                }
+            });
+        };
+
+        var complete = function () {
+            $activeItem.removeClass(["carousel-active", direction].join(" "));
+            $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+            self.sliding = false;
+            self.$element.trigger(slidEvent);
+        };
+
+        // Force reflow.
+        $nextItem.addClass(type).redraw();
+
+        // Do the slide.
+        $activeItem.addClass(direction);
+        $nextItem.addClass(direction);
+
+        supportTransition && (slideMode || fadeMode)
+            ? $activeItem.one(supportTransition.end, complete)
+            : complete();
+
+        // Restart the cycle.
+        if (isCycling) {
+
+            this.cycle();
+        }
+
+        return this;
+    };
+
+    // Plug-in definition 
+    var old = $.fn.carousel;
+
     $.fn.carousel = function (options) {
 
         return this.each(function () {
 
             var $this = $(this),
-                data = $this.data("carousel"),
+                data = $this.data("r.carousel"),
                 opts = typeof options === "object" ? options : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("carousel", (data = new Carousel(this, opts)));
+                $this.data("r.carousel", (data = new Carousel(this, opts)));
             }
 
             if (typeof options === "number") {
                 // Cycle to the given number.
-                data.goTo(options);
+                data.to(options);
 
             } else if (typeof options === "string" || (options = opts.slide)) {
 
@@ -273,68 +254,44 @@
             } else if (data.options.interval) {
                 data.cycle();
             }
-
         });
-
-    };
-
-    // Define the defaults.
-    $.fn.carousel.defaults = {
-        interval: 5e3,
-        mode: "slide",
-        pause: "hover",
-        wrap: true
     };
 
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
+
+    // No conflict.
+    $.fn.carousel.noConflict = function () {
+        $.fn.carousel = old;
+        return this;
+    };
+
+    $(document).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
+
+        event.preventDefault();
+
+        var $this = $(this),
+            data = $this.data("r.carouselOptions"),
+            options = data || $.buildDataOptions($this, {}, "carousel", "r"),
+            $target = $(options.target || (options.target = $this.attr("href"))),
+            slideIndex = options.slideTo,
+            carousel = $target.data("r.carousel");
+
+        if (carousel) {
+            typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
+        }
+    });
 
     $(w).on(eload, function () {
 
         $(".carousel").each(function () {
 
             var $this = $(this),
-                data = $this.data("carouselOptions"),
-                options = data || $.buildDataOptions($this, {}, "carousel");
+                data = $this.data("r.carouselOptions"),
+                options = data || $.buildDataOptions($this, {}, "carousel", "r");
 
             $this.carousel(options);
-
         });
-
-    }).on(efocus + " " + eblur, function (event) {
-        // Restart the carousel when Firefox fails to.
-
-        var $this = $(this),
-             prevType = $this.data("prevType"),
-             action;
-
-        //  Reduce double fire issues
-        if (prevType !== event.type) {
-            switch (event.type) {
-                case "blur":
-                    action = "pause";
-                    break;
-                case "focus":
-                    action = "cycle";
-                    break;
-            }
-        }
-
-        $this.data("prevType", event.type);
-
-        if (action === "pause" || action === "cycle") {
-            $(".carousel").each(function () {
-
-                var $self = $(this),
-                    carousel = $self.data("carousel");
-
-                if (carousel && carousel[action]) {
-                    // It has data so perform the given action.
-                    carousel[action]();
-                }
-
-            });
-        }
     });
 
     w.RESPONSIVE_CAROUSEL = true;

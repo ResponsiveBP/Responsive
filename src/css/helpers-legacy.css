@@ -1,0 +1,16 @@
+﻿/* Responsive Helpers */
+
+/*
+ * IE8 Fixes.
+ */
+.hidden-small,
+.hidden-medium,
+.visible-large {
+    display: inherit!important;
+}
+
+.visible-small,
+.visible-medium,
+.hidden-large {
+    display: none!important;
+}

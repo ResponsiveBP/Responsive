@@ -177,7 +177,7 @@
                     $footer.addClass(cfadeIn);
                     $close.addClass(cfadeIn);
                     $overlay.removeClass("lightbox-loader");
-                    $lightbox.addClass(cfadeIn)[0].offsetWidth; // force reflow
+                    $lightbox.addClass(cfadeIn).redraw(); // force reflow
 
                 }).triggerHandler(eresize);
             };
@@ -298,14 +298,14 @@
         $header.removeClass(cfadeIn);
         $footer.removeClass(cfadeIn);
         $close.removeClass(cfadeIn);
-        $lightbox.removeClass(cfadeIn)[0].offsetWidth; // force reflow
+        $lightbox.removeClass(cfadeIn).redraw(); // force reflow
         $lightbox.removeClass(".lightbox-iframe");
         $overlay.addClass("lightbox-loader");
     };
 
     var createOverlay = function () {
 
-        $overlay.addClass(cfadeIn)[0].offsetWidth; // force reflow
+        $overlay.addClass(cfadeIn).redraw(); // force reflow
 
         // Bind the click events
         $overlay.off(eclick).on(eclick, $.proxy(function (event) {
@@ -329,7 +329,7 @@
     var destroyOverlay = function () {
 
         // Context is passed from the LightBox.
-        $overlay.removeClass(cfadeIn)[0].offsetWidth; // force reflow
+        $overlay.removeClass(cfadeIn).redraw(); // force reflow
     };
 
     var cleanUp = function () {

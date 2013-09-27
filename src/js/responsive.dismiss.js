@@ -35,7 +35,6 @@
 
                 self.dismissing = false;
                 $target.addClass("hidden").trigger($.Event(edismissed));
-
             };
 
         $target.trigger(dismissEvent);
@@ -46,16 +45,12 @@
 
         this.dismissing = true;
 
-        $target.addClass("fade-in fade-out");
-
-        $target[0].offsetWidth; // reflow
-
-        $target.removeClass("fade-in");
+        $target.addClass("fade-in fade-out")
+               .redraw()
+               .removeClass("fade-in");
 
         // Do our callback
-        supportTransition ? this.$target.one(supportTransition.end, complete)
-            : complete();
-
+        supportTransition ? this.$target.one(supportTransition.end, complete) : complete();
     };
 
     // Plug-in definition 
@@ -75,7 +70,6 @@
 
             // Close the element.
             data.close();
-
         });
     };
 
@@ -88,7 +82,7 @@
         return this;
     };
 
-    // Data Api
+    // Data API
     $("body").on(eclick, ":attrStart(data-dismiss)", function (event) {
 
         event.preventDefault();
@@ -102,7 +96,6 @@
         if (target) {
             $(this).dismiss(options.target);
         }
-
     });
 
     w.RESPONSIVE_DISMISS = true;

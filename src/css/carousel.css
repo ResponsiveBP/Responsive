@@ -74,7 +74,7 @@
     position: absolute;
     top: 40%;
     left: 0;
-    padding: .5em;
+    padding: 0 .5em;
     margin-top: -1em;
     font-size: 2em;
     font-weight: bold;
@@ -110,10 +110,10 @@
  */
 .carousel-fade .carousel-item,
 .carousel[data-carousel-mode="fade"] .carousel-item {
-    -webkit-transition: opacity 1.4s ease-in-out;
-    -moz-transition: opacity 1.4s ease-in-out;
-    -o-transition: opacity 1.4s ease-in-out;
-    transition: opacity 1.4s ease-in-out;
+    -webkit-transition: opacity .7s ease-in-out;
+    -moz-transition: opacity .7s ease-in-out;
+    -o-transition: opacity .7s ease-in-out;
+    transition: opacity .7s ease-in-out;
     position: absolute;
     top: 0;
     right: 0;
@@ -160,3 +160,29 @@
 .carousel-fade .carousel-control:visited {
     z-index: 3;
 }
+
+.carousel-indicators {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    list-style: none;
+}
+
+    .carousel-indicators li {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        margin: 1px;
+        text-indent: -9999px;
+        cursor: pointer;
+        border: 2px solid #222;
+    }
+
+    .carousel-indicators .active {
+        background-color: #fff;
+    }

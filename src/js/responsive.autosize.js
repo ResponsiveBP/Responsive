@@ -89,7 +89,6 @@
             bindEvents.call(this);
             createClone.call(this);
         }
-
     };
 
     AutoSize.prototype.size = function () {
@@ -100,19 +99,14 @@
             element = this.$element[0],
             $clone = this.$clone,
             clone = $clone[0],
-            height = 0,
+            heightComparer = 0,
+            startHeight,
+            endHeight,
             sizeEvent = $.Event(esize),
             complete = function () {
+                self.sizing = false;
                 $element.trigger($.Event(esized));
             };
-
-        $element.trigger($.Event(esize));
-
-        if (this.sizing || sizeEvent.isDefaultPrevented()) {
-            return;
-        }
-
-        this.sizing = true;
 
         // Set the width of the clone to match.
         $clone.width($element.width());
@@ -121,7 +115,8 @@
         $clone.val($element.val());
 
         // Set the height so animation will work.
-        $element.height($clone.height());
+        startHeight = $clone.height();
+        $element.height(startHeight);
 
         // Shrink
         while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
@@ -129,18 +124,30 @@
         }
 
         // Grow
-        while (clone.scrollHeight > clone.offsetHeight && height !== clone.offsetHeight) {
-            height = element.offsetHeight;
+        while (clone.scrollHeight > clone.offsetHeight && heightComparer !== clone.offsetHeight) {
+            heightComparer = element.offsetHeight;
             clone.rows += 1;
         }
         clone.rows += 1;
 
-        // Reset the height
-        $element.height($clone.height());
+        endHeight = $clone.height();
 
-        // Do our callback
-        supportTransition ? $element.one(supportTransition.end, complete) : complete();
-        self.sizing = false;
+        if (startHeight !== endHeight) {
+
+            $element.trigger($.Event(esize));
+
+            if (this.sizing || sizeEvent.isDefaultPrevented()) {
+                return;
+            }
+
+            this.sizing = true;
+
+            // Reset the height
+            $element.height($clone.height());
+
+            // Do our callback
+            supportTransition ? $element.one(supportTransition.end, complete) : complete();
+        }
     };
 
     // Plug-in definition 
@@ -175,7 +182,7 @@
         return this;
     };
 
-    // Data Api
+    // Data API
     $(document).on(eready, function () {
 
         $("textarea[data-autosize]").each(function () {

@@ -60,6 +60,15 @@
 
     }());
 
+    $.fn.redraw = function () {
+        /// <summary>Forces the browser to redraw by measuring the given target.</summary>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        var redraw;
+        return this.each(function () {
+            redraw = this.offsetWidth;
+        });
+    };
+
     $.extend($.expr[":"], {
         attrStart: function (el, i, props) {
             /// <summary>Custom selector extension to allow attribute starts with selection.</summary>

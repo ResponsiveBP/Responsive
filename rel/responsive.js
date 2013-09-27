@@ -60,6 +60,15 @@
 
     }());
 
+    $.fn.redraw = function () {
+        /// <summary>Forces the browser to redraw by measuring the given target.</summary>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        var redraw;
+        return this.each(function () {
+            redraw = this.offsetWidth;
+        });
+    };
+
     $.extend($.expr[":"], {
         attrStart: function (el, i, props) {
             /// <summary>Custom selector extension to allow attribute starts with selection.</summary>
@@ -81,11 +90,12 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, options, prefix) {
+    $.buildDataOptions = function ($elem, options, prefix, namespace) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
         /// <param name="options" type="Object">The object to extend</param>
         /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
+        /// <param name="namespace" type="String">The namespace with which to segregate the data attribute.</param>
         /// <returns type="Object">The extended object.</returns>
         $.each($elem.data(), function (key, val) {
 
@@ -103,7 +113,11 @@
 
         });
 
-        $elem.data(prefix + "Options", options);
+        if (namespace) {
+            $elem.data(namespace + "." + prefix + "Options", options);
+        } else {
+            $elem.data(prefix + "Options", options);
+        }
 
         return options;
     };
@@ -114,16 +128,16 @@
  */
 
 /*global jQuery*/
+/*jshint expr:true*/
 (function ($, w, ns) {
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_AUTOSIZE) {
         return;
     }
 
+    // General variables and methods.
     var resisizeTimer,
         eready = "ready" + ns,
         eresize = "resize" + ns,
@@ -131,157 +145,176 @@
         epaste = "paste" + ns,
         ecut = "cut" + ns,
         esize = "size" + ns,
-        esized = "sized" + ns,
+        esized = "sized" + ns;
 
-    // The AutoSize object that contains our methods.
-        AutoSize = function (element, options) {
+    // Private methods.
+    var bindEvents = function () {
 
-            this.$element = $(element);
-            this.$clone = null;
-            this.options = null;
+        this.$element.on(ekeyup + " " + epaste + " " + ecut, function (event) {
 
-            // Initial setup.
-            if ($.isPlainObject(options)) {
+            var $this = $(this),
+                delay = 0;
 
-                this.options = $.extend({}, $.fn.autoSize.defaults, options);
+            if (event.type === "paste" || event.type === "cut") {
+                delay = 5;
+            }
 
-                this.$element.on(ekeyup + " " + epaste + " " + ecut, function (event) {
+            w.setTimeout(function () {
 
-                    var $this = $(this),
-                        delay = 0;
+                // Run the size method.
+                $this.autoSize("size");
 
-                    if (event.type === "paste" || event.type === "cut") {
-                        delay = 5;
+            }, delay);
+        });
+
+    },
+        createClone = function () {
+
+            var self = this,
+                attributes = this.options.removeAttributes,
+                classes = this.options.removeClasses,
+                $element = this.$element,
+                clone = function () {
+
+                    // Create a clone and offset it removing all specified attributes classes and data.
+                    self.$clone = self.$element.clone()
+                                      .css({ "position": "absolute", "top": "-99999px", "left": "-99999px", "visibility": "hidden", "overflow": "hidden" })
+                                      .attr({ "tabindex": -1, "rows": 2 })
+                                      .removeAttr("id name data-autosize " + attributes)
+                                      .removeClass(classes)
+                                      .insertAfter($element);
+
+                    // jQuery goes spare if you try to remove null data.
+                    if (classes) {
+                        self.$clone.removeData(classes);
                     }
 
-                    w.setTimeout(function () {
-
-                        // Run the autosize method.
-                        $this.autoSize("size");
-
-                    }, delay);
-                });
-
-                var self = this,
-                    attributes = this.options.removeAttributes,
-                    classes = this.options.removeClasses,
-                    $element = this.$element,
-                    createClone = function () {
-
-                        // Create a clone and offset it removing all specified attributes classes and data.
-                        self.$clone = self.$element.clone()
-                                          .css({ "position": "absolute", "top": "-99999px", "left": "-99999px", "visibility": "hidden", "overflow": "hidden" })
-                                          .attr({ "tabindex": -1, "rows": 2 })
-                                          .removeAttr("id name data-autosize " + attributes)
-                                          .removeClass(classes)
-                                          .insertAfter($element);
-
-                        // jQuery goes spare if you try to remove
-                        // null data.
-                        if (classes) {
-                            self.$clone.removeData(classes);
-                        }
-
-                    };
-
-                $.when(createClone()).then(this.size());
-            }
-        };
-
-    AutoSize.prototype = {
-        constructor: AutoSize,
-        size: function () {
-
-            var transition = $.support.transition,
-                $element = this.$element,
-                element = this.$element[0],
-                $clone = this.$clone,
-                clone = $clone[0],
-                height = 0,
-                sizeEvent = $.Event(esize),
-                sizedEvent = $.Event(esized),
-                complete = function () {
-                    $element.trigger(sizedEvent);
                 };
 
-            $element.trigger(sizeEvent);
+            $.when(clone()).then(this.size());
+        };
 
-            // Set the width of the clone to match.
-            $clone.width($element.width());
+    // AutoSize class definition
+    var AutoSize = function (element, options) {
 
-            // Copy the text across.
-            $clone.val($element.val());
+        this.$element = $(element);
+        this.defaults = {
+            removeAttributes: null,
+            removeClasses: null
+        };
+        this.$clone = null;
+        this.options = null;
+        this.sizing = null;
 
-            // Set the height so animation will work.
-            $element.height($clone.height());
+        // Initial setup.
+        if ($.isPlainObject(options)) {
 
-            // Shrink
-            while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
-                clone.rows -= 1;
-            }
+            this.options = $.extend({}, this.defaults, options);
 
-            // Grow
-            while (clone.scrollHeight > clone.offsetHeight && height !== clone.offsetHeight) {
-                height = element.offsetHeight;
-                clone.rows += 1;
-            }
+            bindEvents.call(this);
+            createClone.call(this);
+        }
+    };
+
+    AutoSize.prototype.size = function () {
+
+        var supportTransition = $.support.transition,
+            self = this,
+            $element = this.$element,
+            element = this.$element[0],
+            $clone = this.$clone,
+            clone = $clone[0],
+            heightComparer = 0,
+            startHeight,
+            endHeight,
+            sizeEvent = $.Event(esize),
+            complete = function () {
+                self.sizing = false;
+                $element.trigger($.Event(esized));
+            };
+
+        // Set the width of the clone to match.
+        $clone.width($element.width());
+
+        // Copy the text across.
+        $clone.val($element.val());
+
+        // Set the height so animation will work.
+        startHeight = $clone.height();
+        $element.height(startHeight);
+
+        // Shrink
+        while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
+            clone.rows -= 1;
+        }
+
+        // Grow
+        while (clone.scrollHeight > clone.offsetHeight && heightComparer !== clone.offsetHeight) {
+            heightComparer = element.offsetHeight;
             clone.rows += 1;
+        }
+        clone.rows += 1;
+
+        endHeight = $clone.height();
+
+        if (startHeight !== endHeight) {
+
+            $element.trigger($.Event(esize));
+
+            if (this.sizing || sizeEvent.isDefaultPrevented()) {
+                return;
+            }
+
+            this.sizing = true;
 
             // Reset the height
             $element.height($clone.height());
 
             // Do our callback
-            if (transition) {
-
-                $element.one(transition.end, complete);
-
-            } else {
-
-                complete();
-
-            }
+            supportTransition ? $element.one(supportTransition.end, complete) : complete();
         }
     };
 
-    /* Plugin definition */
+    // Plug-in definition 
+    var old = $.fn.autoSize;
+
     $.fn.autoSize = function (options) {
 
         return this.each(function () {
 
             var $this = $(this),
-                data = $this.data("autosize"),
+                data = $this.data("r.autosize"),
                 opts = typeof options === "object" ? options : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("autosize", (data = new AutoSize(this, opts)));
+                $this.data("r.autosize", (data = new AutoSize(this, opts)));
             }
 
             // Run the appropriate function is a string is passed.
             if (typeof options === "string") {
                 data[options]();
             }
-
         });
-    };
-
-    // Define the defaults. 
-    $.fn.autoSize.defaults = {
-        removeAttributes: null,
-        removeClasses: null
     };
 
     // Set the public constructor.
     $.fn.autoSize.Constructor = AutoSize;
 
-    // Autosize data API initialisation.
+    // No conflict.
+    $.fn.autoSize.noConflict = function () {
+        $.fn.autoSize = old;
+        return this;
+    };
+
+    // Data API
     $(document).on(eready, function () {
 
         $("textarea[data-autosize]").each(function () {
 
             var $this = $(this),
-                data = $this.data("autosizeOptions"),
-                options = data || $.buildDataOptions($this, {}, "autosize");
+                data = $this.data("r.autosizeOptions"),
+                options = data || $.buildDataOptions($this, {}, "autosize", "r");
 
             // Run the autosize method.
             $this.autoSize(options);
@@ -299,24 +332,19 @@
 
             $("textarea[data-autosize]").each(function () {
 
-                var $this = $(this),
-                    autosize = $this.data("autosize");
+                var autosize = $(this).data("r.autosize");
 
-                if (autosize) {
-                    autosize.size();
-                }
+                if (autosize) { autosize.size(); }
 
             });
-
         };
 
-        resisizeTimer = w.setTimeout(resize, 50);
+        resisizeTimer = w.setTimeout(resize, 5);
     });
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".autosize.r"));
-/*
+}(jQuery, window, ".r.autosize.data-api"));/*
  * Responsive Carousel
  */
 
@@ -326,263 +354,244 @@
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_CAROUSEL) {
         return;
     }
 
     // General variables.
     var supportTransition = $.support.transition,
+        emouseenter = "mouseenter" + ns,
+        emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
         eload = "load" + ns,
-        efocus = "focus" + ns,
-        eblur = "blur" + ns,
         eslide = "slide" + ns,
-        eslid = "slid" + ns,
+        eslid = "slid" + ns;
 
-    // The Carousel object that contains our methods.
-        Carousel = function (element, options) {
+    // Private methods.
+    var getActiveIndex = function () {
 
-            this.$element = $(element);
-            this.options = $.extend({}, $.fn.carousel.defaults, options);
-            this.paused = null;
-            this.interval = null;
-            this.sliding = null;
+        var $activeItem = this.$element.find(".carousel-active");
+        this.$items = $activeItem.parent().children();
 
-            // Bind the trigger click event.
-            this.$element.on(eclick, "[data-carousel-slide]", function (event) {
+        return this.$items.index($activeItem);
+    };
 
-                event.preventDefault();
+    // AutoSize class definition
+    var Carousel = function (element, options) {
 
-                var $this = $(this),
-                    opts = $this.data("carouselSlide"),
-                    $target = $(event.delegateTarget),
-                    $trigger = $this.parent("li");
-
-                if (opts) {
-
-                    // Flag that the carousel slider has been triggered.
-                    $target.find("[data-carousel-slide]").parent("li").not($trigger).removeClass("on");
-
-                    $trigger.addClass("on");
-
-                    // Run the carousel method.
-                    $target.carousel(opts);
-                }
-
-            });
-
-            if (this.options.pause === "hover") {
-                // Bind the mouse enter/leave events
-                this.$element.on("mouseenter", $.proxy(this.pause, this))
-                             .on("mouseleave", $.proxy(this.cycle, this));
-            }
-
-            if (this.options.slide && this.$element.is(":visible")) {
-
-                // Handle a slide instruction.
-                this.slide(this.options.slide);
-            }
-
+        this.$element = $(element);
+        this.defaults = {
+            interval: 5000,
+            mode: "slide",
+            pause: "hover",
+            wrap: true
         };
+        this.options = $.extend({}, this.defaults, options);
+        this.$indicators = this.$element.find(".carousel-indicators");
+        this.paused = null;
+        this.interval = null;
+        this.sliding = null;
+        this.$items = null;
 
-    Carousel.prototype = {
-        constructor: Carousel,
-        cycle: function (event) {
-
-            if (!event) {
-                // Flag false when there's no event.
-                this.paused = false;
-            }
-
-            if (this.options.interval && !this.paused) {
-
-                // Cycle to the next item on the set interval
-                (this.interval = w.setInterval($.proxy(this.next, this), this.options.interval));
-            }
-
-            // Return the carousel for chaining.
-            return this;
-        },
-        goTo: function (position) {
-
-            var $activeItem = this.$element.find(".carousel-active"),
-                $children = $activeItem.parent().children(),
-                activePosition = $children.index($activeItem),
-                self = this;
-
-            // Since the index is zero based we need to subtract one.
-            position -= 1;
-
-            if (position > ($children.length) || position < 0) {
-
-                return false;
-            }
-
-            if (this.sliding) {
-
-                // Fire the slid event.
-                return this.$element.one(eslid, function () {
-                    // Reset the position.
-                    self.goTo(position + 1);
-
-                });
-            }
-
-            if (activePosition === position) {
-                return this.pause().cycle();
-            }
-
-            return this.slide(position > activePosition ? "next" : "prev", $($children[position]));
-
-        },
-        pause: function (event) {
-
-            if (!event) {
-                // Mark as paused
-                this.paused = true;
-            }
-
-            // Ensure that transition end is triggered.
-            if (this.$element.find(".next, .prev").length && $.support.transition.end) {
-                this.$element.trigger($.support.transition.end);
-                this.cycle(true);
-            }
-
-            // Clear the interval and return the carousel for chaining.
-            w.clearInterval(this.interval);
-            this.interval = null;
-
-            return this;
-
-        },
-        next: function () {
-
-            if (this.sliding) {
-                return false;
-            }
-
-            return this.slide("next");
-        },
-        prev: function () {
-
-            if (this.sliding) {
-                return false;
-            }
-
-            return this.slide("prev");
-        },
-        slide: function (type, next) {
-
-            var $activeItem = this.$element.find(".carousel-active"),
-                $nextItem = next || $activeItem[type](),
-                isCycling = this.interval,
-                isNext = type === "next",
-                direction = isNext ? "left" : "right",
-                fallback = isNext ? "first" : "last",
-                self = this,
-                slideEvent = $.Event(eslide),
-                slidEvent = $.Event(eslid),
-                slideMode = this.options.mode === "slide",
-                fadeMode = this.options.mode === "fade",
-                index,
-                $thumbnails;
-
-            // Mark as sliding.
-            this.sliding = true;
-
-            if (isCycling) {
-                // Pause if cycling.
-                this.pause();
-            }
-
-            // Work out which item to slide to.
-            $nextItem = $nextItem.length ? $nextItem : this.$element.find(".carousel-item")[fallback]();
-
-            if ($nextItem.hasClass("carousel-active")) {
-                return false;
-            }
-
-            if (supportTransition && (slideMode || fadeMode)) {
-
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
-
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
-
-                // Good to go? Then let's slide.
-                $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
-
-                // Do the slide.
-                $activeItem.addClass(direction);
-                $nextItem.addClass(direction);
-
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
-
-                // Callback.
-                this.$element.one(supportTransition.end, function () {
-
-                    $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
-                    $activeItem.removeClass(["carousel-active", direction].join(" "));
-
-                    self.sliding = false;
-                    self.$element.trigger(slidEvent);
-
-                });
-            } else {
-
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
-
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
-
-                $activeItem.removeClass("carousel-active");
-                $nextItem.addClass("carousel-active");
-
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
-
-                self.sliding = false;
-                self.$element.trigger(slidEvent);
-            }
-
-            // Restart the cycle.
-            if (isCycling) {
-
-                this.cycle();
-            }
-
-            return this;
+        if (this.options.pause === "hover") {
+            // Bind the mouse enter/leave events
+            this.$element.on(emouseenter, $.proxy(this.pause, this))
+                         .on(emouseleave, $.proxy(this.cycle, this));
         }
     };
 
-    /* Plugin definition */
+    Carousel.prototype.cycle = function (event) {
+
+        if (!event) {
+            // Flag false when there's no event.
+            this.paused = false;
+        }
+
+        if (this.interval) {
+            w.clearInterval(this.interval);
+        }
+
+        if (this.options.interval && !this.paused) {
+
+            // Cycle to the next item on the set interval
+            this.interval = w.setInterval($.proxy(this.next, this), this.options.interval);
+        }
+
+        // Return the carousel for chaining.
+        return this;
+    };
+
+    Carousel.prototype.to = function (position) {
+
+        var activePosition = getActiveIndex.call(this),
+            self = this;
+
+        if (position > (this.$items.length - 1) || position < 0) {
+
+            return false;
+        }
+
+        if (this.sliding) {
+
+            // Fire the slid event.
+            return this.$element.one(eslid, function () {
+                // Reset the position.
+                self.to(position);
+
+            });
+        }
+
+        if (activePosition === position) {
+            return this.pause().cycle();
+        }
+
+        return this.slide(position > activePosition ? "next" : "prev", $(this.$items[position]));
+
+    };
+
+    Carousel.prototype.pause = function (event) {
+
+        if (!event) {
+            // Mark as paused
+            this.paused = true;
+        }
+
+        // Ensure that transition end is triggered.
+        if (this.$element.find(".next, .prev").length && $.support.transition.end) {
+            this.$element.trigger($.support.transition.end);
+            this.cycle(true);
+        }
+
+        // Clear the interval and return the carousel for chaining.
+        this.interval = w.clearInterval(this.interval);
+
+        return this;
+    };
+
+    Carousel.prototype.next = function () {
+
+        if (this.sliding) {
+            return false;
+        }
+
+        return this.slide("next");
+    };
+
+    Carousel.prototype.prev = function () {
+
+        if (this.sliding) {
+            return false;
+        }
+
+        return this.slide("prev");
+    };
+
+    Carousel.prototype.slide = function (type, next) {
+
+        var $activeItem = this.$element.find(".carousel-active"),
+            $nextItem = next || $activeItem[type](),
+            isCycling = this.interval,
+            isNext = type === "next",
+            direction = isNext ? "left" : "right",
+            fallback = isNext ? "first" : "last",
+            self = this,
+            slidEvent = $.Event(eslid),
+            slideMode = this.options.mode === "slide",
+            fadeMode = this.options.mode === "fade";
+
+        if (isCycling) {
+            // Pause if cycling.
+            this.pause();
+        }
+
+        // Work out which item to slide to.
+        if (!$nextItem.length) {
+
+            if (!this.options.wrap) {
+                return false;
+            }
+
+            $nextItem = this.$element.find(".carousel-item")[fallback]();
+        }
+
+        if ($nextItem.hasClass("carousel-active")) {
+            return false;
+        }
+
+        if (this.interval) {
+            this.pause();
+        }
+
+        // Trigger the slide event with positional data.
+        var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
+        this.$element.trigger(slideEvent);
+
+        if (this.sliding || slideEvent.isDefaultPrevented()) {
+            return false;
+        }
+
+
+        // Good to go? Then let's slide.
+        this.sliding = true;
+
+        // Highlight the correct indicator.
+        if (this.$indicators.length) {
+            this.$indicators.find(".active").removeClass("active");
+
+            this.$element.one(eslid, function () {
+                var $nextIndicator = $(self.$indicators.children()[getActiveIndex.call(self)]);
+                if ($nextIndicator) {
+                    $nextIndicator.addClass("active");
+                }
+            });
+        };
+
+        var complete = function () {
+            $activeItem.removeClass(["carousel-active", direction].join(" "));
+            $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+            self.sliding = false;
+            self.$element.trigger(slidEvent);
+        };
+
+        // Force reflow.
+        $nextItem.addClass(type).redraw();
+
+        // Do the slide.
+        $activeItem.addClass(direction);
+        $nextItem.addClass(direction);
+
+        supportTransition && (slideMode || fadeMode)
+            ? $activeItem.one(supportTransition.end, complete)
+            : complete();
+
+        // Restart the cycle.
+        if (isCycling) {
+
+            this.cycle();
+        }
+
+        return this;
+    };
+
+    // Plug-in definition 
+    var old = $.fn.carousel;
+
     $.fn.carousel = function (options) {
 
         return this.each(function () {
 
             var $this = $(this),
-                data = $this.data("carousel"),
+                data = $this.data("r.carousel"),
                 opts = typeof options === "object" ? options : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("carousel", (data = new Carousel(this, opts)));
+                $this.data("r.carousel", (data = new Carousel(this, opts)));
             }
 
             if (typeof options === "number") {
                 // Cycle to the given number.
-                data.goTo(options);
+                data.to(options);
 
             } else if (typeof options === "string" || (options = opts.slide)) {
 
@@ -591,72 +600,49 @@
             } else if (data.options.interval) {
                 data.cycle();
             }
-
         });
-
-    };
-
-    // Define the defaults.
-    $.fn.carousel.defaults = {
-        interval: 5e3,
-        mode: "slide",
-        pause: "hover"
     };
 
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
+
+    // No conflict.
+    $.fn.carousel.noConflict = function () {
+        $.fn.carousel = old;
+        return this;
+    };
+
+    $(document).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
+
+        event.preventDefault();
+
+        var $this = $(this),
+            data = $this.data("r.carouselOptions"),
+            options = data || $.buildDataOptions($this, {}, "carousel", "r"),
+            $target = $(options.target || (options.target = $this.attr("href"))),
+            slideIndex = options.slideTo,
+            carousel = $target.data("r.carousel");
+
+        if (carousel) {
+            typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
+        }
+    });
 
     $(w).on(eload, function () {
 
         $(".carousel").each(function () {
 
             var $this = $(this),
-                data = $this.data("carouselOptions"),
-                options = data || $.buildDataOptions($this, {}, "carousel");
+                data = $this.data("r.carouselOptions"),
+                options = data || $.buildDataOptions($this, {}, "carousel", "r");
 
             $this.carousel(options);
-
         });
-
-    }).on(efocus + " " + eblur, function (event) {
-        // Restart the carousel when Firefox fails to.
-
-        var $this = $(this),
-             prevType = $this.data("prevType"),
-             action;
-
-        //  Reduce double fire issues
-        if (prevType !== event.type) {
-            switch (event.type) {
-                case "blur":
-                    action = "pause";
-                    break;
-                case "focus":
-                    action = "cycle";
-                    break;
-            }
-        }
-
-        $this.data("prevType", event.type);
-
-        if (action === "pause" || action === "cycle") {
-            $(".carousel").each(function () {
-
-                var $self = $(this),
-                    carousel = $self.data("carousel");
-
-                if (carousel && carousel[action]) {
-                    // It has data so perform the given action.
-                    carousel[action]();
-                }
-
-            });
-        }
     });
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".carousel.r"));/*
+}(jQuery, window, ".r.carousel"));/*
  * Responsive Dismiss 
  */
 
@@ -666,59 +652,54 @@
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_DISMISS) {
         return;
     }
 
+    // General variables and methods.
     var eclick = "click" + ns,
-        eclose = "close" + ns,
-        eclosed = "closed" + ns;
+        edismiss = "dismiss" + ns,
+        edismissed = "dismissed" + ns;
 
     var Dismiss = function (element, target) {
 
         this.$element = $(element);
         this.$target = this.$element.parents(target);
-
+        this.dismissing = null;
     };
 
-    Dismiss.prototype = {
-        constructor: Dismiss,
-        close: function () {
+    // Dismiss class definition
+    Dismiss.prototype.close = function () {
 
-            var supportTransition = $.support.transition,
-                closeEvent = $.Event(eclose),
-                closedEvent = $.Event(eclosed),
-                $target = this.$target,
-                self = this,
-                complete = function () {
+        var supportTransition = $.support.transition,
+            dismissEvent = $.Event(edismiss),
+            $target = this.$target,
+            self = this,
+            complete = function () {
 
-                    self.transitioning = false;
-                    $target.addClass("hidden").trigger(closedEvent);
+                self.dismissing = false;
+                $target.addClass("hidden").trigger($.Event(edismissed));
+            };
 
-                };
+        $target.trigger(dismissEvent);
 
-            if (this.transitioning || closeEvent.isDefaultPrevented()) {
-                return;
-            }
-
-            this.transitioning = true;
-
-            $target.addClass("fade-in fade-out");
-
-            $target[0].offsetWidth; // reflow
-
-            $target.removeClass("fade-in");
-
-            // Do our callback
-            supportTransition ? this.$target.one(supportTransition.end, complete)
-                              : complete();
-
+        if (this.dismissing || dismissEvent.isDefaultPrevented()) {
+            return;
         }
+
+        this.dismissing = true;
+
+        $target.addClass("fade-in fade-out")
+               .redraw()
+               .removeClass("fade-in");
+
+        // Do our callback
+        supportTransition ? this.$target.one(supportTransition.end, complete) : complete();
     };
 
-    /* Plug-in definition */
+    // Plug-in definition 
+    var old = $.fn.dismiss;
+
     $.fn.dismiss = function (target) {
 
         return this.each(function () {
@@ -733,33 +714,37 @@
 
             // Close the element.
             data.close();
-
         });
     };
 
     // Set the public constructor.
     $.fn.dismiss.Constructor = Dismiss;
 
-    // Dismiss data api initialisation.
+    // No conflict.
+    $.fn.dismiss.noConflict = function () {
+        $.fn.dismiss = old;
+        return this;
+    };
+
+    // Data API
     $("body").on(eclick, ":attrStart(data-dismiss)", function (event) {
 
         event.preventDefault();
 
         var $this = $(this),
-            data = $this.data("dismissOptions"),
-            options = data || $.buildDataOptions($this, {}, "dismiss"),
+            data = $this.data("r.dismissOptions"),
+            options = data || $.buildDataOptions($this, {}, "dismiss", "r"),
             target = options.target || (options.target = $this.attr("href"));
 
         // Run the dismiss method.
         if (target) {
             $(this).dismiss(options.target);
         }
-
     });
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".dismiss.r"));/*
+}(jQuery, window, ".r.dismiss"));/*
  * Responsive Dropdown 
  */
 
@@ -768,8 +753,6 @@
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_DROPDOWN) {
         return;
     }
@@ -780,162 +763,157 @@
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
-        ehidden = "hidden" + ns,
+        ehidden = "hidden" + ns;
 
-     // The Dropdown object that contains our methods.
-        Dropdown = function (element, options) {
+    // Private methods.
+    var transition = function (method, startEvent, completeEvent) {
 
-            this.$element = $(element);
-            this.options = $.extend({}, $.fn.dropdown.defaults, options);
-            this.$parent = null;
-            this.transitioning = null;
-            this.endSize = null;
+        var self = this,
+            complete = function () {
 
-            if (this.options.parent) {
-                this.$parent = this.$element.parents(this.options.parent + ":first");
-            }
+                // The event to expose.
+                var eventToTrigger = $.Event(completeEvent);
 
-            // Check to see if the plug-in is set to toggle and trigger 
-            // the correct internal method if so.
-            if (this.options.toggle) {
-                this.toggle();
-            }
-        };
+                // Ensure the height/width is set to auto.
+                self.$element.removeClass("trans")[self.options.dimension]("");
 
-    // Assign public methods via the Dropdown prototype.
-    Dropdown.prototype = {
+                self.transitioning = false;
+                self.$element.trigger(eventToTrigger);
+            };
 
-        constructor: Dropdown,
-        show: function () {
-
-            if (this.transitioning || this.$element.hasClass("expand")) {
-                return;
-            }
-
-            var dimension = this.options.dimension,
-                actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
-                hasData;
-
-            if (actives && actives.length) {
-                hasData = actives.data("dropdown");
-                actives.dropdown("hide");
-
-                if (!hasData) {
-                    actives.data("dropdown", null);
-                }
-            }
-
-            // Set the height/width to zero then to the height/width
-            // so animation can take place.
-            this.$element[dimension](0);
-
-            if (supportTransition) {
-
-                // Calculate the height/width.
-                this.$element[dimension]("auto");
-                this.endSize = w.getComputedStyle(this.$element[0])[dimension];
-
-                // Reset to zero and force repaint.
-                this.$element[dimension](0)[0].offsetWidth;
-            }
-
-            this.$element[dimension](this.endSize || "auto");
-
-            this.transition("removeClass", $.Event(eshow), eshown);
-        },
-        hide: function () {
-
-            if (this.transitioning || this.$element.hasClass("collapse")) {
-                return;
-            }
-
-            // Reset the height/width and then reduce to zero.
-            var dimension = this.options.dimension,
-                size;
-
-            if (supportTransition) {
-
-                // Set the height to auto, calculate the height/width and reset.
-                size = w.getComputedStyle(this.$element[0])[dimension];
-
-                // Reset to zero and force repaint.
-                this.$element[dimension](size)[0].offsetWidth; // Force reflow ;
-
-            }
-
-            this.$element.removeClass("expand");
-            this.$element[dimension](0);
-            this.transition("addClass", $.Event(ehide), ehidden);
-
-        },
-        transition: function (method, startEvent, completeEvent) {
-
-            var self = this,
-                complete = function () {
-
-                    // The event to expose.
-                    var eventToTrigger = $.Event(completeEvent);
-
-                    // Ensure the height/width is set to auto.
-                    self.$element.removeClass("trans")[self.options.dimension]("");
-
-                    self.transitioning = false;
-                    self.$element.trigger(eventToTrigger);
-                };
-
-            if (startEvent.isDefaultPrevented()) {
-                return;
-            }
-
-            this.transitioning = true;
-
-            // Remove or add the expand classes.
-            this.$element.trigger(startEvent)[method]("collapse");
-            this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
-
-            if (supportTransition) {
-                this.$element.one(supportTransition.end, complete);
-            } else {
-                complete();
-            }
-
-        },
-        toggle: function () {
-            // Run the correct command based on the presence of the class 'collapse'.
-            this[this.$element.hasClass("collapse") ? "show" : "hide"]();
+        if (this.transitioning || startEvent.isDefaultPrevented()) {
+            return;
         }
 
+        this.transitioning = true;
+
+        // Remove or add the expand classes.
+        this.$element.trigger(startEvent)[method]("collapse");
+        this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+
+        supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
     };
 
-    /* Plugin definition */
+    // The Dropdown class definition
+    var Dropdown = function (element, options) {
+
+        this.$element = $(element);
+        this.defaults = {
+            toggle: true,
+            dimension: "height"
+        };
+        this.options = $.extend({}, this.defaults, options);
+        this.$parent = null;
+        this.transitioning = null;
+        this.endSize = null;
+
+        if (this.options.parent) {
+            this.$parent = this.$element.parents(this.options.parent + ":first");
+        }
+
+        // Check to see if the plug-in is set to toggle and trigger 
+        // the correct internal method if so.
+        if (this.options.toggle) {
+            this.toggle();
+        }
+    };
+
+    Dropdown.prototype.show = function () {
+
+        if (this.transitioning || this.$element.hasClass("expand")) {
+            return;
+        }
+
+        var dimension = this.options.dimension,
+            actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
+            hasData;
+
+        if (actives && actives.length) {
+            hasData = actives.data("r.dropdown");
+            actives.dropdown("hide");
+
+            if (!hasData) {
+                actives.data("r.dropdown", null);
+            }
+        }
+
+        // Set the height/width to zero then to the height/width
+        // so animation can take place.
+        this.$element[dimension](0);
+
+        if (supportTransition) {
+
+            // Calculate the height/width.
+            this.$element[dimension]("auto");
+            this.endSize = w.getComputedStyle(this.$element[0])[dimension];
+
+            // Reset to zero and force repaint.
+            this.$element[dimension](0).redraw();
+        }
+
+        this.$element[dimension](this.endSize || "auto");
+
+        transition.call(this, "removeClass", $.Event(eshow), eshown);
+    };
+
+    Dropdown.prototype.hide = function () {
+
+        if (this.transitioning || this.$element.hasClass("collapse")) {
+            return;
+        }
+
+        // Reset the height/width and then reduce to zero.
+        var dimension = this.options.dimension,
+            size;
+
+        if (supportTransition) {
+
+            // Set the height to auto, calculate the height/width and reset.
+            size = w.getComputedStyle(this.$element[0])[dimension];
+
+            // Reset the size and force repaint.
+            this.$element[dimension](size).redraw(); // Force reflow ;
+        }
+
+        this.$element.removeClass("expand");
+        this.$element[dimension](0);
+        transition.call(this, "addClass", $.Event(ehide), ehidden);
+    };
+
+    Dropdown.prototype.toggle = function () {
+        // Run the correct command based on the presence of the class 'collapse'.
+        this[this.$element.hasClass("collapse") ? "show" : "hide"]();
+    };
+
+    // Plug-in definition 
+    var old = $.fn.dropdown;
+
     $.fn.dropdown = function (options) {
         return this.each(function () {
             var $this = $(this),
-                data = $this.data("dropdown"),
+                data = $this.data("r.dropdown"),
                 opts = typeof options === "object" ? options : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("dropdown", (data = new Dropdown(this, opts)));
+                $this.data("r.dropdown", (data = new Dropdown(this, opts)));
             }
 
             // Run the appropriate function if a string is passed.
             if (typeof options === "string") {
                 data[options]();
             }
-
         });
-
-    };
-
-    // Define the defaults.
-    $.fn.dropdown.defaults = {
-        toggle: true,
-        dimension: "height"
     };
 
     // Set the public constructor.
     $.fn.dropdown.Constructor = Dropdown;
+
+    // No conflict.
+    $.fn.dropdown.noConflict = function () {
+        $.fn.dropdown = old;
+        return this;
+    };
 
     // Dropdown data api initialization.
     $("body").on(eclick, ":attrStart(data-dropdown)", function (event) {
@@ -943,11 +921,11 @@
         event.preventDefault();
 
         var $this = $(this),
-            data = $this.data("dropdownOptions"),
-            options = data || $.buildDataOptions($this, {}, "dropdown"),
+            data = $this.data("r.dropdownOptions"),
+            options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
             target = options.target || (options.target = $this.attr("href")),
             $target = $(target),
-            params = $target.data("dropdown") ? "toggle" : options;
+            params = $target.data("r.dropdown") ? "toggle" : options;
 
         // Run the dropdown method.
         $target.dropdown(params);
@@ -955,7 +933,7 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".dropdown.r"));/*
+}(jQuery, window, ".r.dropdown"));/*
  * Responsive Lightbox
  */
 
@@ -1561,7 +1539,7 @@
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".lightbox.r"));/*
+}(jQuery, window, ".r.lightbox"));/*
  * Responsive tabs
  */
 
@@ -1571,8 +1549,6 @@
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_TABS) {
         return;
     }
@@ -1582,118 +1558,106 @@
         eready = "ready" + ns,
         eclick = "click" + ns,
         eshow = "show" + ns,
-        eshown = "shown" + ns,
+        eshown = "shown" + ns;
 
-        tab = function (activePosition, postion, callback) {
+    // Private methods.
+    var tab = function (activePosition, postion, callback) {
 
-            var showEvent = $.Event(eshow),
-                $element = this.$element,
-                $childTabs = $element.find("ul.tabs li"),
-                $childPanes = $element.children("div"),
-                $nextTab = $childTabs.eq(postion),
-                $currentPane = $childPanes.eq(activePosition),
-                $nextPane = $childPanes.eq(postion);
+        var showEvent = $.Event(eshow),
+            $element = this.$element,
+            $childTabs = $element.find("ul.tabs > li"),
+            $childPanes = $element.children("div"),
+            $nextTab = $childTabs.eq(postion),
+            $currentPane = $childPanes.eq(activePosition),
+            $nextPane = $childPanes.eq(postion);
 
-            this.tabbing = true;
+        $element.trigger(showEvent);
 
-            $element.trigger(showEvent);
-
-            $childTabs.removeClass("tab-active");
-            $nextTab.addClass("tab-active");
-
-            // Do some class shuffling to allow the transition.
-            $currentPane.addClass("fade-out fade-in");
-            $nextPane.addClass("tab-pane-active fade-out");
-            $childPanes.filter(".fade-in").removeClass("tab-pane-active fade-in");
-
-            // Force reflow.
-            $nextPane[0].offsetWidth;
-
-            $nextPane.addClass("fade-in");
-
-            // Do the callback
-            callback.call(this);
-
-        },
-
-    // The Tabs object that contains our methods.
-        Tabs = function (element) {
-
-            this.$element = $(element);
-
-            this.$element.on(eclick, "ul.tabs > li > a", function (event) {
-
-                event.preventDefault();
-
-                var $this = $(this),
-                    $li = $this.parent(),
-                    index = $li.index();
-
-                $(event.delegateTarget).tabs(index);
-
-            });
-        };
-
-    Tabs.prototype = {
-        constructor: Tabs,
-        show: function (position) {
-
-            var $activeItem = this.$element.find(".tab-active"),
-                $children = $activeItem.parent().children(),
-                activePosition = $children.index($activeItem),
-                self = this;
-
-            if (position > ($children.length - 1) || position < 0) {
-
-                return false;
-            }
-
-            if (this.tabbing) {
-
-                // Fire the tabbed event.
-                return this.$element.one(eshown, function () {
-                    // Reset the position.
-                    self.show(position + 1);
-
-                });
-            }
-
-            if (activePosition === position) {
-                return false;
-            }
-
-            // Call the function with the callback
-            return tab.call(this, activePosition, position, function () {
-
-                var shownEvent = $.Event(eshown),
-                    complete = function () {
-
-                        self.tabbing = false;
-                        self.$element.trigger(shownEvent);
-
-                    };
-
-                // Do our callback
-                if (supportTransition) {
-                    this.$element.one(supportTransition.end, complete);
-                } else { complete(); }
-
-            });
-
+        if (this.tabbing || showEvent.isDefaultPrevented()) {
+            return;
         }
+
+        this.tabbing = true;
+
+        $childTabs.removeClass("tab-active");
+        $nextTab.addClass("tab-active");
+
+        // Do some class shuffling to allow the transition.
+        $currentPane.addClass("fade-out fade-in");
+        $nextPane.addClass("tab-pane-active fade-out");
+        $childPanes.filter(".fade-in").removeClass("tab-pane-active fade-in");
+
+        // Force redraw.
+        $nextPane.redraw().addClass("fade-in");
+
+        // Do the callback
+        callback.call(this);
+
     };
 
-    /* Plug-in definition */
+    // Tabs class definition
+    var Tabs = function (element) {
+
+        this.$element = $(element);
+        this.tabbing = null;
+
+        // TODO: Move this.
+        this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
+
+            event.preventDefault();
+
+            var $this = $(this),
+                $li = $this.parent(),
+                index = $li.index();
+
+            $(event.delegateTarget).tabs(index);
+
+        });
+    };
+
+    Tabs.prototype.show = function (position) {
+
+        var $activeItem = this.$element.find(".tab-active"),
+             $children = $activeItem.parent().children(),
+             activePosition = $children.index($activeItem),
+             self = this;
+
+        if (position > ($children.length - 1) || position < 0) {
+
+            return false;
+        }
+
+        if (activePosition === position) {
+            return false;
+        }
+
+        // Call the function with the callback
+        return tab.call(this, activePosition, position, function () {
+
+            var complete = function () {
+
+                self.tabbing = false;
+                self.$element.trigger($.Event(eshown));
+            };
+
+            // Do our callback
+            supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
+        });
+    };
+
+    // Plug-in definition 
+    var old = $.fn.tabs;
+
     $.fn.tabs = function (options) {
 
         return this.each(function () {
 
             var $this = $(this),
-                data = $this.data("tabs");
+                data = $this.data("r.tabs");
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("tabs", (data = new Tabs(this)));
+                $this.data("r.tabs", (data = new Tabs(this)));
             }
 
             // Show the given number.
@@ -1702,18 +1666,23 @@
             }
 
         });
-
     };
 
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
+    // No conflict.
+    $.fn.tabs.noConflict = function () {
+        $.fn.tabs = old;
+        return this;
+    };
+
+    // Data API
     $(document).on(eready, function () {
 
         $("[data-tabs]").tabs();
-
     });
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".tabs.r"));
+}(jQuery, window, ".r.tabs.data-api"));
