@@ -79,7 +79,7 @@
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    background-color: #222;
+    background-color: #111;
     color: #fff;
     text-decoration: none;
 }
@@ -101,7 +101,7 @@
 
 .carousel-caption {
     padding: 1px 1em;
-    background: #222;
+    background: #111;
     color: #fff;
 }
 
@@ -180,7 +180,7 @@
         margin: 1px;
         text-indent: -9999px;
         cursor: pointer;
-        border: 2px solid #222;
+        border: 2px solid #111;
     }
 
     .carousel-indicators .active {

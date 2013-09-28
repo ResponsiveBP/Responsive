@@ -266,6 +266,7 @@
         return this;
     };
 
+    // Data API
     $(document).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
 
         event.preventDefault();
