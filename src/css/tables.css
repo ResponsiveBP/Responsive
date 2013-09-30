@@ -3,6 +3,10 @@
 /*
  * Basic layout.
  */
+[data-table-list] {
+    opacity: 0;
+}
+
 .table-list {
     display: block;
 }

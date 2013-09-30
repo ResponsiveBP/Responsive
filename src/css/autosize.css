@@ -3,8 +3,8 @@
 .autosize,
 [data-autosize] {
     overflow: hidden;
-    -webkit-transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
-    -moz-transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
-    -o-transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
-    transition: border linear 0.3s, box-shadow linear 0.3s, height 0.3s linear;
+    -webkit-transition: height 0.3s linear;
+    -moz-transition: height 0.3s linear;
+    -o-transition: height 0.3s linear;
+    transition: height 0.3s linear;
 }

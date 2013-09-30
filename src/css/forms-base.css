@@ -169,32 +169,22 @@ select option {
 textarea:focus,
 input:focus,
 select:focus,
-.no-edit:focus,
-textarea.focus,
-input.focus,
-select.focus,
-.no-edit.focus {
+.no-edit:focus {
     border: 1px solid #00a9ec;
     outline: 0;
 }
 
 input[type="range"]:focus,
-input[type="range"].focus,
 input[type="checkbox"]:focus,
-input[type="checkbox"].focus,
 input[type="radio"]:focus,
-input[type="radio"].focus,
-input:checked,
-input.checked {
+input:checked {
     border-color: transparent;
     outline: 1px solid #00a9ec;
     outline-offset: -1px;
 }
 
 input[type="checkbox"]:focus,
-input[type="checkbox"].focus,
-input[type="checkbox"]:checked,
-input[type="checkbox"].checked {
+input[type="checkbox"]:checked {
     border-color: #c0c0c0;
 }
 

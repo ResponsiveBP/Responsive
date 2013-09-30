@@ -15,7 +15,7 @@
     // General variables and methods.
     var resisizeTimer,
         eready = "ready" + ns,
-        eresize = "resize" + ns,
+        eresize = "resize" + ns + " orientationchange" + ns,
         ekeyup = "keyup" + ns,
         epaste = "paste" + ns,
         ecut = "cut" + ns,
@@ -79,7 +79,6 @@
         };
         this.options = $.extend({}, this.defaults, options);
         this.$clone = null;
-        this.options = null;
         this.sizing = null;
 
         // Initial setup.
@@ -189,7 +188,6 @@
 
             // Run the autosize method.
             $this.autoSize(options);
-
         });
     });
 

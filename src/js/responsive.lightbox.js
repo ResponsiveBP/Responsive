@@ -49,7 +49,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns;
+        eresize = "resize" + ns + " orientationchange" + ns;
 
     // Private methods.
     var isExternalUrl = function (url) {
