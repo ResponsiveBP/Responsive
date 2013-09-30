@@ -202,18 +202,14 @@
             removeAttributes: null,
             removeClasses: null
         };
+        this.options = $.extend({}, this.defaults, options);
         this.$clone = null;
         this.options = null;
         this.sizing = null;
 
         // Initial setup.
-        if ($.isPlainObject(options)) {
-
-            this.options = $.extend({}, this.defaults, options);
-
-            bindEvents.call(this);
-            createClone.call(this);
-        }
+        bindEvents.call(this);
+        createClone.call(this);
     };
 
     AutoSize.prototype.size = function () {
@@ -612,6 +608,7 @@
         return this;
     };
 
+    // Data API
     $(document).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
 
         event.preventDefault();
@@ -656,11 +653,12 @@
         return;
     }
 
-    // General variables and methods.
+    // General variables.
     var eclick = "click" + ns,
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
 
+    // Dismiss class definition
     var Dismiss = function (element, target) {
 
         this.$element = $(element);
@@ -668,7 +666,6 @@
         this.dismissing = null;
     };
 
-    // Dismiss class definition
     Dismiss.prototype.close = function () {
 
         var supportTransition = $.support.transition,
@@ -944,18 +941,20 @@
 
     "use strict";
 
-    // Prevents ajax requests from reloading everything and
-    // rebinding events.
     if (w.RESPONSIVE_LIGHTBOX) {
         return;
     }
 
-    var $body = $(document.body),
-        $window = $(w),
-        $overlay = $("<div/>").addClass("lightbox-overlay lightbox-loader hidden fade-out"),
+    // General variables.
+    var $window = $(w),
+        $body = $("body"),
+        $overlay = $("<div/>").addClass("lightbox-overlay lightbox-loader fade-out"),
         $lightbox = $("<div/>").addClass("lightbox fade-out").appendTo($overlay),
         $header = $("<div/>").addClass("lightbox-header fade-out"),
         $footer = $("<div/>").addClass("lightbox-footer fade-out"),
+        $img = null,
+        $iframe = null,
+        $content = null,
         $close = $("<a/>").attr("href", "#").addClass("lightbox-close fade-out").html("x"),
         $next = $("<a/>").attr("href", "#").addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr("href", "#").addClass("lightbox-direction left hidden"),
@@ -968,7 +967,7 @@
         },
         protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
         // Regular expression.
-        rexternalHost = new RegExp("//" + document.location.host + "($|/)"),
+        rexternalHost = new RegExp("//" + w.location.host + "($|/)"),
         rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
         // Taken from jQuery.
         rhash = /^#.*$/, // Altered to only match beginning.
@@ -982,15 +981,13 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns,
-        // Classes
-        cfadeIn = "fade-in";
+        eresize = "resize" + ns;
 
     // Private methods.
-    var isExternalUrl = function (url, normalize) {
+    var isExternalUrl = function (url) {
         // Handle different host types.
         // Split the url into it's various parts.
-        var locationParts = rurl.exec(url) || normalize && rurl.exec(protocol + url);
+        var locationParts = rurl.exec(url) || rurl.exec(protocol + url);
 
         if (locationParts === undefined || rhash.test(url)) {
             return false;
@@ -1003,492 +1000,489 @@
 
         // If the regex doesn't match return true . 
         return !rexternalHost.test(locationParts[2]);
-    };
+    },
+        create = function () {
 
-    var manageKeyboardEvents = function () {
-        // Context is passed from the lightbox.
-        if (this.options.keyboard) {
+            // Calculate whether this is an external request and set the value.
+            this.options.external = !rhash.test(this.options.target);
 
-            $body.off(ekeyup).on(ekeyup, $.proxy(function (event) {
+            var self = this,
+                title = this.options.title,
+                description = this.options.description,
+                close = this.options.close,
+                target = this.options.target,
+                local = !this.options.external && !isExternalUrl(target),
+                group = this.options.group,
+                nextText = this.options.next,
+                previousText = this.options.previous,
+                iframeScroll = this.options.iframeScroll,
+                iframe = this.options.iframe || !local ? isExternalUrl(target) && !rimage.test(target) : false,
+                $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media");
 
-                // Bind the escape key.
-                if (event.which === keys.ESCAPE) {
-                    this.hide();
+            $content = $("<div/>").addClass("lightbox-content");
+            $iframe = $("<iframe/>"); // This needs to be assigned then unassigned or ie8 won't test against it.
+            $img = $("<img/>"); // ditto.
+
+            // 1: Build the header
+            if (title || close) {
+
+                $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
+                       .appendTo($overlay);
+
+                if (close) {
+                    $close.appendTo($overlay);
                 }
+            }
 
-                // Bind the next/previous keys.
-                if (this.options.group) {
-                    // Bind the left arrow key.
-                    if (event.which === keys.LEFT) {
-                        this.previous();
-                    }
+            // 2: Build the footer
+            if (description) {
 
-                    // Bind the right arrow key.
-                    if (event.which === keys.RIGHT) {
-                        this.next();
+                // Add footer text if necessary
+                $footer.html("<div class=\"container\">" + description + "</div>")
+                       .appendTo($overlay);
+            }
+
+            // 3: Build the content
+            if (local) {
+
+                $placeholder.detach().insertAfter(this.$element);
+                $(target).detach().appendTo($content).removeClass("hidden");
+                $content.appendTo($lightbox);
+                toggleFade.call(this);
+            } else {
+                if (iframe) {
+
+                    $img = null;
+
+                    $lightbox.addClass("lightbox-iframe");
+
+                    // Normalize the src.
+                    var src = target.indexOf("http") !== 0 ? protocol + target : target;
+
+                    // Have to add inline styles for older browsers.
+                    $iframe.attr({
+                        "scrolling": iframeScroll ? "yes" : "no",
+                        "allowTransparency": true,
+                        "frameborder": 0,
+                        "hspace": 0,
+                        "vspace": 0,
+                        "webkitallowfullscreen": "",
+                        "mozallowfullscreen": "",
+                        "allowfullscreen": "",
+                        "src": src
+                    })
+                        .appendTo($iframeWrap);
+
+                    // Test and add additional media classes.
+                    var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
+
+                    $iframeWrap.addClass(mediaClasses).appendTo($lightbox);
+
+                    // Not on load as can take forever.
+                    toggleFade.call(this);
+
+                } else {
+
+                    if (rimage.test(target)) {
+
+                        $iframe = null;
+
+                        $lightbox.addClass("lightbox-image");
+
+                        $img.one("load", function () {
+                            toggleFade.call(self);
+                        }).attr("src", target)
+                            .appendTo($lightbox);
+                    } else {
+
+                        $img = null;
+                        $iframe = null;
+
+                        $lightbox.addClass("lightbox-ajax");
+
+                        // Standard ajax load.
+                        $content.load(target, function () {
+                            $content.appendTo($lightbox);
+                            toggleFade.call(self);
+                        });
                     }
+                }
+            }
+
+            if (group) {
+                // Need to show next/previous.
+                $next.text(nextText).prependTo($lightbox).removeClass("hidden");
+                $previous.text(previousText).prependTo($lightbox).removeClass("hidden");
+            }
+
+            // Bind the click events.
+            $lightbox.off(eclick).on(eclick, $.proxy(function (event) {
+
+                var next = $next[0],
+                    previous = $previous[0],
+                    eventTarget = event.target;
+
+                if (eventTarget === next || eventTarget === previous) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this[eventTarget === next ? "next" : "previous"]();
                 }
 
             }, this));
-        }
-    };
 
-    var create = function () {
+        },
 
-        // Calculate whether this is an external request
-        // and set the value.
-        this.options.external = !rhash.test(this.options.target);
+        destroy = function () {
+            if (!this.options.external) {
+                // Put that kid back where it came from or so help me.
+                $(this.options.target).addClass("hidden").detach().insertAfter($placeholder);
+                $placeholder.detach().insertAfter($overlay);
+            }
 
-        // Context is passed from the lightbox.
-        var title = this.options.title,
-            description = this.options.description,
-            close = this.options.close,
-            target = this.options.target,
-            local = !this.options.external && !isExternalUrl(target),
-            group = this.options.group,
-            nextText = this.options.next,
-            previousText = this.options.previous,
-            iframeScroll = this.options.iframeScroll,
-            iframe = this.options.iframe || !local ? isExternalUrl(target, true) && !rimage.test(target) : false,
-            $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
-            $content = $("<div/>").addClass("lightbox-content"),
-            $iframe = $("<iframe/>"), // This needs to be assigned then unassigned or ie8 won't test against it.
-            $img = $("<img/>"), // ditto.
-            fadeIn = function () {
+            toggleFade.call(this);
 
-                // Bind the resize event and fade in.
-                var newWindowHeight,
-                    oldWindowHeight,
-                    maxWidth = parseInt($lightbox.css("max-width"), 10);
+            // Clean up the header/footer.
+            $header.empty().detach();
+            $footer.empty().detach();
+            $close.detach();
 
-                $window.off(eresize).on(eresize, function () {
+            // Clean up the lightbox.
+            $next.detach();
+            $previous.detach();
 
-                    var headerHeight,
-                        footerHeight,
-                        childHeight,
-                        $child = $iframe || $img || $content;
+            var self = this,
+                empty = function () {
+                    $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
+                        "max-height": "",
+                        "max-width": "",
+                        "margin-top": "",
+                        "margin-bottom": ""
+                    }).empty();
 
-                    if ($child) {
+                    // Unbind the keyboard actions.
+                    if (self.options.keyboard) {
 
-                        newWindowHeight = $window.height();
+                        manageKeyboard.call(self, "hide");
+                    }
+                };
 
-                        if (newWindowHeight !== oldWindowHeight) {
+            // Fix __flash__removeCallback' is undefined error.
+            $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
+        },
 
-                            headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                            footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
+        resize = function () {
+            // Bind the resize event and fade in.
+            var newWindowHeight,
+                oldWindowHeight,
+                maxWidth = parseInt($lightbox.css("max-width"), 10);
 
-                            childHeight = newWindowHeight - (headerHeight + footerHeight);
+            $window.off(eresize).on(eresize, function () {
 
-                            if ($img) {
+                var headerHeight,
+                    footerHeight,
+                    childHeight,
+                    $child = $iframe || $img || $content;
 
-                                $img.css("max-height", childHeight);
+                if ($child) {
 
-                            } else if ($iframe) {
+                    newWindowHeight = $window.height();
 
-                                var clientWidth = $iframe[0].clientWidth,
-                                    clientHeight = $iframe[0].clientHeight,
-                                    ratio = clientWidth / clientHeight,
-                                    childWidth = childHeight * ratio;
+                    if (newWindowHeight !== oldWindowHeight) {
 
-                                $.each([$lightbox, $iframe], function () {
+                        headerHeight = $header[0] ? $header[0].clientHeight : 0;
+                        footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
 
-                                    this.css({
-                                        "max-height": childHeight,
-                                        "max-width": childWidth > maxWidth ? maxWidth : childWidth
-                                    });
+                        childHeight = newWindowHeight - (headerHeight + footerHeight);
+
+                        if ($img) {
+
+                            $img.css("max-height", childHeight);
+
+                        } else if ($iframe) {
+
+                            var clientWidth = $iframe[0].clientWidth,
+                                clientHeight = $iframe[0].clientHeight,
+                                ratio = clientWidth / clientHeight,
+                                childWidth = childHeight * ratio;
+
+                            $.each([$lightbox, $iframe], function () {
+
+                                this.css({
+                                    "max-height": childHeight,
+                                    "max-width": childWidth > maxWidth ? maxWidth : childWidth
                                 });
-                            }
-
-                            $lightbox.css({
-                                "margin-top": headerHeight > 0 ? headerHeight : "",
-                                "margin-bottom": footerHeight > 0 ? footerHeight : ""
                             });
-
-                            oldWindowHeight = newWindowHeight;
                         }
+
+                        $lightbox.css({
+                            "margin-top": headerHeight > 0 ? headerHeight : "",
+                            "margin-bottom": footerHeight > 0 ? footerHeight : ""
+                        });
+
+                        oldWindowHeight = newWindowHeight;
+                    }
+                }
+
+            }).triggerHandler(eresize);
+        },
+
+        toggleFade = function () {
+
+            // Resize the lightbox content.
+            if (this.isShown) {
+                resize();
+            }
+
+            $.each([$header, $footer, $close, $lightbox], function () {
+
+                this.toggleClass("fade-in")
+                    .redraw();
+            });
+
+            $overlay.toggleClass("lightbox-loader");
+        },
+
+        toggleOverlay = function (event) {
+
+            var fade = event === "show" ? "addClass" : "removeClass",
+                self = this,
+                complete = function () {
+
+                    if (event === "hide") {
+                        $overlay.addClass("hidden");
+                        return;
                     }
 
-                    $header.addClass(cfadeIn);
-                    $footer.addClass(cfadeIn);
-                    $close.addClass(cfadeIn);
-                    $overlay.removeClass("lightbox-loader");
-                    $lightbox.addClass(cfadeIn)[0].offsetWidth; // force reflow
+                    $overlay.off(eclick).on(eclick, function (e) {
 
-                }).triggerHandler(eresize);
-            };
+                        var closeTarget = $close[0],
+                            eventTarget = e.target;
 
-        // 1: Build the header
-        if (title || close) {
+                        if (eventTarget === closeTarget) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            self.hide();
+                        }
 
-            $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
-                   .appendTo($overlay);
-
-            if (close) {
-                $close.appendTo($overlay);
-            }
-        }
-
-        // 2: Build the footer
-        if (description) {
-
-            // Add footer text if necessary
-            $footer.html(description ? "<div class=\"container\">" + description + "</div>" : "")
-                   .appendTo($overlay);
-        }
-
-        // 3: Build the content
-        if (local) {
-
-            $placeholder.detach().insertAfter(this.$element);
-            $(target).detach().appendTo($content).removeClass("hidden");
-            $content.appendTo($lightbox);
-            fadeIn();
-        }
-        else {
-            if (iframe) {
-
-                $img = null;
-
-                $lightbox.addClass("lightbox-iframe");
-
-                // Normalize the src.
-                var src = target.indexOf("http") !== 0 ? protocol + target : target;
-
-                // Have to add inline styles for older browsers.
-                $iframe.attr({
-                    "scrolling": iframeScroll ? "yes" : "no",
-                    "allowTransparency": true,
-                    "frameborder": 0,
-                    "hspace": 0,
-                    "vspace": 0,
-                    "webkitallowfullscreen": "",
-                    "mozallowfullscreen": "",
-                    "allowfullscreen": "",
-                    "src": src
-                })
-                                  .appendTo($iframeWrap);
-
-                // Test and add additional media classes.
-                var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
-
-                $iframeWrap.addClass(mediaClasses).appendTo($lightbox);
-
-                // Not on load as can take forever.
-                fadeIn();
-
-            } else {
-
-                if (rimage.test(target)) {
-
-                    $iframe = null;
-
-                    $lightbox.addClass("lightbox-image");
-
-                    $img.one("load", function () {
-                        fadeIn();
-                    }).attr("src", target)
-                      .appendTo($lightbox);
-                }
-                else {
-                    $img = null;
-                    $iframe = null;
-
-                    $lightbox.addClass("lightbox-ajax");
-
-                    // Standard ajax load.
-                    $content.load(target, function () {
-                        $content.appendTo($lightbox);
-                        fadeIn();
+                        if (eventTarget === $overlay[0]) {
+                            self.hide();
+                        }
                     });
-                }
+                };
 
-            }
-        }
+            // Add the overlay to the body if not done already.
+            if (!$("div.lightbox-overlay").length) {
 
-        if (group) {
-            // Need to show next/previous.
-            $next.text(nextText).prependTo($lightbox).removeClass("hidden");
-            $previous.text(previousText).prependTo($lightbox).removeClass("hidden");
-        }
-
-        // Bind the click events.
-        $lightbox.off(eclick).on(eclick, $.proxy(function (event) {
-
-            var next = $next[0],
-                previous = $previous[0],
-                eventTarget = event.target;
-
-            if (eventTarget === next || eventTarget === previous) {
-                event.preventDefault();
-                event.stopPropagation();
-                this[eventTarget === next ? "next" : "previous"]();
+                $body.append($overlay);
             }
 
-        }, this));
-    };
+            $overlay.removeClass("hidden")
+                .redraw()[fade]("fade-in")
+                .redraw();
 
-    var destroy = function () {
-        // Context is passed from the lightbox.
-        // Clean up the header/footer.
-        $header.removeClass(cfadeIn);
-        $footer.removeClass(cfadeIn);
-        $close.removeClass(cfadeIn);
-        $lightbox.removeClass(cfadeIn)[0].offsetWidth; // force reflow
-        $lightbox.removeClass(".lightbox-iframe");
-        $overlay.addClass("lightbox-loader");
-    };
+            supportTransition ? $overlay.one(supportTransition.end, complete)
+                  : complete();
 
-    var createOverlay = function () {
+        },
 
-        $overlay.addClass(cfadeIn)[0].offsetWidth; // force reflow
+        direction = function (course) {
 
-        // Bind the click events
-        $overlay.off(eclick).on(eclick, $.proxy(function (event) {
-
-            var closeTarget = $close[0],
-                eventTarget = event.target;
-
-            if (eventTarget === closeTarget) {
-                event.preventDefault();
-                event.stopPropagation();
-                this.hide();
+            if (!this.isShown) {
+                return;
             }
 
-            if (eventTarget === $overlay[0]) {
-                this.hide();
+            if (this.options.group) {
+                var self = this,
+                    index = this.$group.index(this.$element),
+                    length = this.$group.length,
+                    position = course === "next" ? index + 1 : index - 1,
+                    complete = function () {
+
+                        self.isShown = false;
+                        if (self.$sibling) {
+                            self.$sibling.trigger(eclick);
+                        }
+                    };
+
+                if (course === "next") {
+
+                    if (position >= length || position < 0) {
+
+                        position = 0;
+                    }
+                } else {
+
+                    if (position >= length) {
+
+                        position = 0;
+                    }
+
+                    if (position < 0) {
+                        position = length - 1;
+                    }
+                }
+
+                this.$sibling = $(this.$group[position]);
+
+                destroy.call(this);
+
+                supportTransition ? $lightbox.one(supportTransition.end, complete)
+                    : complete();
             }
+        },
 
-        }, this));
-    };
+      manageKeyboard = function (event) {
+          if (this.options.keyboard) {
 
-    var destroyOverlay = function () {
+              if (event === "hide") {
+                  $body.off(ekeyup);
+                  return;
+              }
 
-        // Context is passed from the LightBox.
-        $overlay.removeClass(cfadeIn)[0].offsetWidth; // force reflow
-    };
+              $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
 
-    var cleanUp = function () {
-        // Context is passed from the LightBox.
+                  // Bind the escape key.
+                  if (e.which === keys.ESCAPE) {
+                      this.hide();
+                  }
 
-        if (!this.options.external) {
-            // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass("hidden").detach().insertAfter($placeholder);
-            $placeholder.detach().insertAfter($overlay);
-        }
+                  // Bind the next/previous keys.
+                  if (this.options.group) {
+                      // Bind the left arrow key.
+                      if (e.which === keys.LEFT) {
+                          this.previous();
+                      }
 
-        // Clean up the header/footer.
-        $header.removeClass(cfadeIn).empty().detach();
-        $footer.removeClass(cfadeIn).empty().detach();
-        $close.removeClass(cfadeIn).detach();
+                      // Bind the right arrow key.
+                      if (e.which === keys.RIGHT) {
+                          this.next();
+                      }
+                  }
+              }, this));
+          }
+      };
 
-        // Clean up the lightbox.
-        $next.detach();
-        $previous.detach();
-
-        var self = this,
-            empty = function () {
-                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
-                    "max-height": "",
-                    "max-width": "",
-                    "margin-top": "",
-                    "margin-bottom": ""
-                }).empty();
-
-                // Unbind the keyboard actions.
-                if (self.options.keyboard) {
-                    manageKeyboardEvents.call(self);
-                }
-
-                self.isShown = false;
-
-            };
-
-        $.when($lightbox.find("iframe").attr("src", "")).then(function () {
-            // Fix __flash__removeCallback' is undefined error.
-            w.setTimeout(empty, 100);
-
-        });
-    };
-
-    var changeDirection = function (direction) {
-        if (!this.isShown) {
-            return;
-        }
-
-        if (this.options.group) {
-            var index = this.$group.index(this.$element),
-                length = this.$group.length,
-                position = direction === "next" ? index + 1 : index - 1,
-                callback = function () {
-
-                    var self = this,
-                        reShow = function () {
-
-                            if (self.$sibling) {
-                                self.$sibling.trigger(eclick);
-                            }
-                        };
-
-                    // Clean up.
-                    cleanUp.call(self);
-                    w.setTimeout(reShow, 300);
-
-                },
-                proxy = $.proxy(callback, this);
-
-            if (direction === "next") {
-
-                if (position >= length || position < 0) {
-
-                    position = 0;
-                }
-            } else {
-
-                if (position >= length) {
-
-                    position = 0;
-                }
-
-                if (position < 0) {
-                    position = length - 1;
-                }
-            }
-
-            this.$sibling = $(this.$group[position]);
-
-            destroy.call(this);
-
-            // Call the callback.
-            supportTransition ? $lightbox.one(supportTransition.end, proxy)
-                              : proxy();
-
-        }
-    };
-
-    // The LightBox object that contains our methods.
+    // Lightbox class definition
     var LightBox = function (element, options) {
+
         this.$element = $(element);
-        this.options = $.extend({}, $.fn.lightbox.defaults, options);
-        this.title = this.options.title || (this.options.title = this.$element.attr("title"));
+        this.defaults = {
+            close: true,
+            external: false,
+            group: null,
+            iframe: false,
+            iframeScroll: false,
+            keyboard: true,
+            next: ">",
+            previous: "<",
+            mobileTarget: null,
+            mobileViewportWidth: 480
+        };
+        this.options = $.extend({}, this.defaults, options);
+        this.title = null;
+        this.description = null;
         this.isShown = null;
         this.$group = null;
-        this.$sibling = null;
-
-        // Add the overlay to the body if not done already.
-        if (!$("div.lightbox-overlay").length) {
-
-            $body.append($overlay);
-        }
-
-        // Add the placeholder to the body if not done already.
-        if (!$("div.lightbox-placeholder").length) {
-            $body.append($overlay);
-        }
 
         // Make a list of grouped lightbox targets.
         if (this.options.group) {
             this.$group = $("[data-lightbox-group=" + this.options.group + "]");
         }
 
-        // Show the lightbox.
         this.toggle();
     };
 
-    LightBox.prototype = {
-        constructor: LightBox,
-        show: function () {
+    LightBox.prototype.show = function () {
 
-            if (this.isShown) {
-                return;
-            }
-
-            // If the trigger has a mobile target and the viewport is smaller than the mobile limit
-            // then redirect to that page instead.
-            if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
-                w.location.href = this.options.mobileTarget;
-            }
-
-            var showEvent = $.Event(eshow),
-                shownEvent = $.Event(eshown),
-                callback = function () {
-
-                    // Bind the keyboard actions.
-                    if (this.options.keyboard) {
-                        manageKeyboardEvents.call(this);
-                    }
-
-                    this.$element.trigger(shownEvent);
-                },
-            proxy = $.proxy(callback, this);
-
-            this.$element.trigger(showEvent);
-
-            // Fade in the overlay.
-            $overlay.removeClass("hidden");
-            createOverlay.call(this);
-
-            // Create the lightbox.
-            create.call(this);
-
-            this.isShown = true;
-
-            // Call the callback.
-            supportTransition ? $lightbox.one(supportTransition.end, proxy)
-                              : proxy();
-
-        },
-        hide: function () {
-
-            if (!this.isShown) {
-                return;
-            }
-
-            var hideEvent = $.Event(ehide),
-                hiddenEvent = $.Event(ehidden),
-                callback = function () {
-
-                    $overlay.addClass("hidden");
-                    $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image");
-
-                    // Clean up.
-                    cleanUp.call(this);
-                    this.$element.trigger(hiddenEvent);
-                },
-            proxy = $.proxy(callback, this);
-
-
-            this.$element.trigger(hideEvent);
-
-            // Fade out the overlay.
-            destroyOverlay.call(this);
-
-            // Destroy the lightbox.
-            destroy.call(this);
-
-            // Call the callback.
-            supportTransition ? $overlay.one(supportTransition.end, proxy)
-                              : proxy();
-
-        },
-        next: function () {
-
-            changeDirection.call(this, "next");
-        },
-        previous: function () {
-
-            changeDirection.call(this, "previous");
-        },
-        toggle: function () {
-            return this[!this.isShown ? "show" : "hide"]();
+        if (this.isShown) {
+            return;
         }
+
+        // If the trigger has a mobile target and the viewport is smaller than the mobile limit
+        // then redirect to that page instead.
+        if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
+            w.location.href = this.options.mobileTarget;
+        }
+
+        var self = this,
+            showEvent = $.Event(eshow),
+            shownEvent = $.Event(eshown),
+            complete = function () {
+
+                // Bind the keyboard actions.
+                if (self.options.keyboard) {
+                    manageKeyboard.call(self, "show");
+                }
+
+                self.$element.trigger(shownEvent);
+            };
+
+        this.$element.trigger(showEvent);
+
+        if (showEvent.isDefaultPrevented()) {
+            return;
+        }
+
+        this.isShown = true;
+
+        toggleOverlay.call(this, "show");
+        create.call(this);
+
+        // Call the callback.
+        supportTransition ? $lightbox.one(supportTransition.end, complete)
+                          : complete();
     };
 
-    /* Plugin definition */
+    LightBox.prototype.hide = function () {
+
+        if (!this.isShown) {
+            return;
+        }
+
+        var self = this,
+            hideEvent = $.Event(ehide),
+            hiddenEvent = $.Event(ehidden),
+            complete = function () {
+
+                self.$element.trigger(hiddenEvent);
+            };
+
+
+        this.$element.trigger(hideEvent);
+
+        if (hideEvent.isDefaultPrevented()) {
+            return;
+        }
+
+        this.isShown = false;
+
+        toggleOverlay.call(this, "hide");
+        destroy.call(this);
+
+        supportTransition ? $lightbox.one(supportTransition.end, complete)
+                          : complete();
+    };
+
+    LightBox.prototype.next = function () {
+        direction.call(this, "next");
+    };
+
+    LightBox.prototype.previous = function () {
+        direction.call(this, "previous");
+    };
+
+    LightBox.prototype.toggle = function () {
+        return this[!this.isShown ? "show" : "hide"]();
+    };
+
+    // Plug-in definition 
+    var old = $.fn.lightbox;
+
     $.fn.lightbox = function (options) {
 
         return this.each(function () {
             var $this = $(this),
-                data = $this.data("lightbox"),
+                data = $this.data("r.lightbox"),
                 opts = typeof options === "object" ? options : {};
 
             if (!opts.target) {
@@ -1497,7 +1491,7 @@
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("lightbox", (data = new LightBox(this, opts)));
+                $this.data("r.lightbox", (data = new LightBox(this, opts)));
             }
 
             // Run the appropriate function if a string is passed.
@@ -1508,33 +1502,24 @@
         });
     };
 
-    // Define the defaults
-    $.fn.lightbox.defaults = {
-        close: true,
-        external: false,
-        group: null,
-        iframe: false,
-        iframeScroll: false,
-        keyboard: true,
-        next: ">",
-        previous: "<",
-        mobileTarget: null,
-        mobileViewportWidth: 480
+    // No conflict.
+    $.fn.lightbox.noConflict = function () {
+        $.fn.lightbox = old;
+        return this;
     };
 
-    // Bind the lightbox trigger.
+    // Data API
     $body.on(eclick, ":attrStart(data-lightbox)", function (event) {
 
         event.preventDefault();
 
         var $this = $(this),
-            data = $this.data("lightboxOptions"),
-            options = data || $.buildDataOptions($this, {}, "lightbox"),
-            params = $this.data("lightbox") ? "toggle" : options;
+            data = $this.data("r.lightboxOptions"),
+            options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
+            params = $this.data("r.lightbox") ? "toggle" : options;
 
         // Run the lightbox method.
         $this.lightbox(params);
-
     });
 
     w.RESPONSIVE_LIGHTBOX = true;

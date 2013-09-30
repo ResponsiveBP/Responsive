@@ -450,7 +450,6 @@
         this.title = null;
         this.description = null;
         this.isShown = null;
-        this.transitioning = null;
         this.$group = null;
 
         // Make a list of grouped lightbox targets.
