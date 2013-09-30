@@ -23,9 +23,9 @@
         $img = null,
         $iframe = null,
         $content = null,
-        $close = $("<a/>").attr("href", "#").addClass("lightbox-close fade-out").html("x"),
-        $next = $("<a/>").attr("href", "#").addClass("lightbox-direction right hidden"),
-        $previous = $("<a/>").attr("href", "#").addClass("lightbox-direction left hidden"),
+        $close = $("<a/>").attr({ "href": "#", "title": "Close (Esc)" }).addClass("lightbox-close fade-out").html("x"),
+        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
+        $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)" }).addClass("lightbox-direction left hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         supportTransition = $.support.transition,
         keys = {
