@@ -23,6 +23,22 @@
             display: block;
         }
 
+            .table-list tr:before,
+            .table-list tr:after {
+                content: " ";
+                display: table;
+            }
+
+            .table-list tr:after {
+                clear: both;
+            }
+
+        .table-list td,
+        .table-list th[scope="row"] {
+            float: left;
+            width: 100%;
+        }
+
             .table-list td:before,
             .table-list td:after,
             .table-list th[scope="row"]:before,
@@ -40,11 +56,12 @@
 
 @media (min-width: 48em) {
     /*
-             * Reset defaults.
-             */
+     * Reset defaults.
+     */
     .table-list {
         display: table;
         overflow: visible;
+        table-layout: auto;
     }
 
         .table-list tr {
@@ -63,6 +80,8 @@
         .table-list th,
         .table-list th[scope="row"] {
             display: table-cell;
+            width: auto;
+            float: none;
         }
 
             .table-list td:before,

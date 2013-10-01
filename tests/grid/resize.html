@@ -18,38 +18,36 @@
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
 </head>
 <body class="grid-test">
-    <article class="container fixed grid-test">
+    <article class="container grid-test">
         <h1>Grid</h1>
         <hr />
-        <h3>Fixed Width: Nested Columns</h3>
+        <h3>Spaced Columns</h3>
+        <p>
+            Add class <code>.col-{size}-{number}</code> to the column.
+        </p>
+        <p>
+            Add class <code>.col-reset-{size}</code> to the columns to reset the margin.       
+        </p>
         <div class="row">
-            <div class="column-6">
-                6
-                               
-                <div class="row">
-                    <div class="column-6">
-                        6
-                                   
-                    </div>
-                    <div class="column-6">
-                        6
-                                   
-                    </div>
-                </div>
+            <div class="col-s-3 col-m-6">
+                <div class="visible-xs">12</div>
+                <div class="visible-s">3</div>
+                <div class="hidden-xs hidden-s">6</div>
             </div>
-            <div class="column-6">
-                6
-                               
-                <div class="row">
-                    <div class="column-6">
-                        6
-                                   
-                    </div>
-                    <div class="column-6">
-                        6
-                                   
-                    </div>
-                </div>
+            <div class="col-s-3 col-m-6">
+                <div class="visible-xs">12</div>
+                <div class="visible-s">3</div>
+                <div class="hidden-xs hidden-s">6</div>
+            </div>
+            <div class="col-s-3 col-m-6 col-reset-m col-reset-l">
+                <div class="visible-xs">12</div>
+                <div class="visible-s">3</div>
+                <div class="hidden-xs hidden-s">6</div>
+            </div>
+            <div class="col-s-3 col-m-6">
+                <div class="visible-xs">12</div>
+                <div class="visible-s">3</div>
+                <div class="hidden-xs hidden-s">6</div>
             </div>
         </div>
     </article>

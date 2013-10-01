@@ -1,4 +1,13 @@
-﻿.row [class*="col-s"] {
+﻿.row [class*="col-"] + [class*="col-s"],
+.row [class*="col-"].col-reset-xs {
+    margin-left: 2%;
+}
+
+.row [class*="col-"].col-reset-s {
+    margin-left: 0;
+}
+
+.row [class*="col-s"] {
     float: left;
 }
 

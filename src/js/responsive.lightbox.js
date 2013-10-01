@@ -121,7 +121,6 @@
                 if (iframe) {
 
                     $img = null;
-
                     $lightbox.addClass("lightbox-iframe");
 
                     // Normalize the src.
@@ -154,7 +153,6 @@
                     if (rimage.test(target)) {
 
                         $iframe = null;
-
                         $lightbox.addClass("lightbox-image");
 
                         $img.one("load", function () {
@@ -165,7 +163,6 @@
 
                         $img = null;
                         $iframe = null;
-
                         $lightbox.addClass("lightbox-ajax");
 
                         // Standard ajax load.
@@ -242,56 +239,58 @@
             // Bind the resize event and fade in.
             var newWindowHeight,
                 oldWindowHeight,
-                maxWidth = parseInt($lightbox.css("max-width"), 10);
+                maxWidth = parseInt($lightbox.css("max-width"), 10),
+                onResize = function () {
 
-            $window.off(eresize).on(eresize, function () {
+                    var headerHeight,
+                        footerHeight,
+                        childHeight,
+                        $child = $iframe || $img || $content;
 
-                var headerHeight,
-                    footerHeight,
-                    childHeight,
-                    $child = $iframe || $img || $content;
+                    if ($child) {
 
-                if ($child) {
+                        newWindowHeight = $window.height();
 
-                    newWindowHeight = $window.height();
+                        if (newWindowHeight !== oldWindowHeight) {
 
-                    if (newWindowHeight !== oldWindowHeight) {
+                            headerHeight = $header[0] ? $header[0].clientHeight : 0;
+                            footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
 
-                        headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                        footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
+                            childHeight = newWindowHeight - (headerHeight + footerHeight);
 
-                        childHeight = newWindowHeight - (headerHeight + footerHeight);
+                            if ($img) {
+  
+                                $img.css("max-height", childHeight);
 
-                        if ($img) {
+                            } else if ($iframe) {
 
-                            $img.css("max-height", childHeight);
+                                var clientWidth = $iframe[0].clientWidth,
+                                    clientHeight = $iframe[0].clientHeight,
+                                    ratio = clientWidth / clientHeight,
+                                    childWidth = childHeight * ratio;
 
-                        } else if ($iframe) {
+                                $.each([$lightbox, $iframe], function () {
 
-                            var clientWidth = $iframe[0].clientWidth,
-                                clientHeight = $iframe[0].clientHeight,
-                                ratio = clientWidth / clientHeight,
-                                childWidth = childHeight * ratio;
-
-                            $.each([$lightbox, $iframe], function () {
-
-                                this.css({
-                                    "max-height": childHeight,
-                                    "max-width": childWidth > maxWidth ? maxWidth : childWidth
+                                    this.css({
+                                        "max-height": childHeight,
+                                        "max-width": childWidth > maxWidth ? maxWidth : childWidth
+                                    });
                                 });
+                            }
+
+                            $lightbox.css({
+                                "margin-top": headerHeight > 0 ? headerHeight : "",
+                                "margin-bottom": footerHeight > 0 ? footerHeight : ""
                             });
+
+                            oldWindowHeight = newWindowHeight;
                         }
-
-                        $lightbox.css({
-                            "margin-top": headerHeight > 0 ? headerHeight : "",
-                            "margin-bottom": footerHeight > 0 ? footerHeight : ""
-                        });
-
-                        oldWindowHeight = newWindowHeight;
                     }
-                }
+                };
 
-            }).triggerHandler(eresize);
+            $window.off(eresize).on(eresize, onResize);
+
+            onResize();
         },
 
         toggleFade = function () {
@@ -368,7 +367,14 @@
 
                         self.isShown = false;
                         if (self.$sibling) {
-                            self.$sibling.trigger(eclick);
+
+                            if (supportTransition) {
+                                self.$sibling.trigger(eclick);
+                            } else {
+                                w.setTimeout(function () {
+                                    self.$sibling.trigger(eclick);
+                                }, 300);
+                            }
                         }
                     };
 

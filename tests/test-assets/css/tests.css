@@ -20,13 +20,13 @@
         background-color: #3876a7;
     }
 
-.grid-test [class*="column"] {
+.grid-test [class*="col-"] {
     line-height: 2em;
     background-color: #3876a7;
     color: #fff;
 }
 
-    .grid-test [class*="column"] [class*="column"] {
+    .grid-test [class*="col-"] [class*="col-"] {
         background-color: #434343;
     }
 

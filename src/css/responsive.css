@@ -23,7 +23,7 @@
 /* All CSS files combined. This should be ran through a preprocessor */
 @import url(normalize.css);
 @import url(base.css);
-@import url(grid.css);
+@import url(grid-base.css);
 @import url(grid-small.css) all and (min-width: 48em);
 @import url(grid-medium.css) all and (min-width: 62em);
 @import url(grid-large.css) all and (min-width: 75em);

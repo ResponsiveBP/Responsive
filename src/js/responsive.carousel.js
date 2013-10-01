@@ -17,7 +17,7 @@
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
-        eload = "load" + ns,
+        eready = "ready" + ns,
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
@@ -281,9 +281,7 @@
         if (carousel) {
             typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
         }
-    });
-
-    $(w).on(eload, function () {
+    }).on(eready, function () {
 
         $(".carousel").each(function () {
 

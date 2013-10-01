@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Alert Tests</title>
 
-    <!-- Conditional statements are blocking so download modern styles first -->
-    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!-- Combined CSS as respond.js cannot cater for imports-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
-    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/html5shiv.min.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />

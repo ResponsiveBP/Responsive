@@ -542,11 +542,20 @@ abbr {
     min-height: 1px;
 }
 
-/*
- * No gutter.
- */
-.row.no-gutter > [class*="col-"] + [class*="col-"] {
-    margin-left: 0;
+    .row [class*="col-"] + [class*="col-"] {
+        margin-left: 2%;
+    }
+
+    .row.no-gutter > [class*="col-"] + [class*="col-"],
+    .row [class*="col-"] + [class*="col-s"],
+    .row [class*="col-"] + [class*="col-m"],
+    .row [class*="col-"] + [class*="col-l"],
+    .row [class*=".col-reset-"] {
+        margin-left: 0;
+    }
+
+.row [class*="col-xs"] {
+    float: left;
 }
 
 /* Full width calculated with margins */
@@ -735,6 +744,15 @@ abbr {
 }
 
 @media  all and (min-width: 48em){
+.row [class*="col-"] + [class*="col-s"],
+.row [class*="col-"].col-reset-xs {
+    margin-left: 2%;
+}
+
+.row [class*="col-"].col-reset-s {
+    margin-left: 0;
+}
+
 .row [class*="col-s"] {
     float: left;
 }
@@ -925,6 +943,15 @@ abbr {
 
 }
 @media  all and (min-width: 62em){
+.row [class*="col-"] + [class*="col-m"],
+.row [class*="col-"].col-reset-s {
+    margin-left: 2%;
+}
+
+.row [class*="col-"].col-reset-m {
+    margin-left: 0;
+}
+
 .row [class*="col-m"] {
     float: left;
 }
@@ -1115,6 +1142,15 @@ abbr {
 
 }
 @media  all and (min-width: 75em){
+.row [class*="col-"] + [class*="col-l"],
+.row [class*="col-"].col-reset-m {
+    margin-left: 2%;
+}
+
+.row [class*="col-"].col-reset-l {
+    margin-left: 0;
+}
+
 .row [class*="col-l"] {
     float: left;
 }
@@ -1507,6 +1543,22 @@ table {
             display: block;
         }
 
+            .table-list tr:before,
+            .table-list tr:after {
+                content: " ";
+                display: table;
+            }
+
+            .table-list tr:after {
+                clear: both;
+            }
+
+        .table-list td,
+        .table-list th[scope="row"] {
+            float: left;
+            width: 100%;
+        }
+
             .table-list td:before,
             .table-list td:after,
             .table-list th[scope="row"]:before,
@@ -1524,11 +1576,12 @@ table {
 
 @media (min-width: 48em) {
     /*
-             * Reset defaults.
-             */
+     * Reset defaults.
+     */
     .table-list {
         display: table;
         overflow: visible;
+        table-layout: auto;
     }
 
         .table-list tr {
@@ -1547,6 +1600,8 @@ table {
         .table-list th,
         .table-list th[scope="row"] {
             display: table-cell;
+            width: auto;
+            float: none;
         }
 
             .table-list td:before,
@@ -2634,8 +2689,8 @@ pre code {
 .lightbox > img {
     max-height: 100%;
     max-width: 100%;
-    display: table-cell \9;
-    width: auto \9;
+    display: table-cell\9;
+    width: auto\9;
 }
 
 .lightbox > .media {
