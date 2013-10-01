@@ -23,6 +23,8 @@
 /* All CSS files combined. This should be ran through a preprocessor */
 @import url(normalize.css);
 @import url(base.css);
+@import url(grid.css);
+@import url(grid-small.css);
 @import url(grid-legacy.css);
 @import url(lists-base.css);
 @import url(lists.css);

@@ -139,9 +139,10 @@
  * Responsive helpers to toggle visibility. 
  */
 
-.hidden-small,
-.visible-medium,
-.visible-large {
+.hidden-xs,
+.visible-s,
+.visible-m,
+.visible-l {
     display: none !important;
 }
 

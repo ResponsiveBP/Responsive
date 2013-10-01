@@ -507,6 +507,421 @@ abbr {
     cursor: help;
 }
 
+/* Responsive Grid */
+
+.container {
+    margin: 0 auto;
+    /* Manages width in a single place */
+    width: 95%;
+    max-width: 1140px;
+}
+
+    .fixed .container,
+    .container.fixed {
+        /* Manages width in a single place */
+        width: 1140px;
+    }
+
+/*
+ * Clearfix: contain floats
+ */
+.row:before,
+.row:after {
+    content: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+/*cols*/
+.row [class*="col-"] {
+    position: relative;
+    display: block;
+    min-height: 1px;
+}
+
+/*
+ * No gutter.
+ */
+.row.no-gutter > [class*="col-"] + [class*="col-"] {
+    margin-left: 0;
+}
+
+/* Full width calculated with margins */
+.col-xs-12 {
+    width: 100%;
+    margin-left: 0;
+}
+
+.col-xs-11 {
+    width: 91.5%;
+}
+
+.col-xs-10 {
+    width: 83%;
+}
+
+.col-xs-9 {
+    width: 74.5%;
+}
+
+.col-xs-8 {
+    width: 66%;
+}
+
+.col-xs-7 {
+    width: 57.5%;
+}
+
+.col-xs-6 {
+    width: 49%;
+}
+
+.col-xs-5 {
+    width: 40.5%;
+}
+
+.col-xs-4 {
+    width: 32%;
+}
+
+.col-xs-3 {
+    width: 23.5%;
+}
+
+.col-xs-2 {
+    width: 15%;
+}
+
+.col-xs-1 {
+    width: 6.5%;
+}
+
+/* No gutter margins */
+.no-gutter .col-xs-11 {
+    width: 91.6667%;
+}
+
+.no-gutter .col-xs-10 {
+    width: 83.3333%;
+}
+
+.no-gutter .col-xs-9 {
+    width: 75%;
+}
+
+.no-gutter .col-xs-8 {
+    width: 66.6667%;
+}
+
+.no-gutter .col-xs-7 {
+    width: 58.3333%;
+}
+
+.no-gutter .col-xs-6 {
+    width: 50%;
+}
+
+.no-gutter .col-xs-5 {
+    width: 41.6667%;
+}
+
+.no-gutter .col-xs-4 {
+    width: 33.3333%;
+}
+
+.no-gutter .col-xs-3 {
+    width: 25%;
+}
+
+.no-gutter .col-xs-2 {
+    width: 16.6667%;
+}
+
+.no-gutter .col-xs-1 {
+    width: 8.3333%;
+}
+
+/* offsetting cols */
+.push-xs-11 {
+    left: 93.5%;
+}
+
+.push-xs-10 {
+    left: 85%;
+}
+
+.push-xs-9 {
+    left: 76.5%;
+}
+
+.push-xs-8 {
+    left: 68%;
+}
+
+.push-xs-7 {
+    left: 59.5%;
+}
+
+.push-xs-6 {
+    left: 51%;
+}
+
+.push-xs-5 {
+    left: 42.5%;
+}
+
+.push-xs-4 {
+    left: 34%;
+}
+
+.push-xs-3 {
+    left: 25.5%;
+}
+
+.push-xs-2 {
+    left: 17%;
+}
+
+.push-xs-1 {
+    left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .push-xs-11 {
+    left: 91.6667%;
+}
+
+.no-gutter .push-xs-10 {
+    left: 83.3333%;
+}
+
+.no-gutter .push-xs-9 {
+    left: 75%;
+}
+
+.no-gutter .push-xs-8 {
+    left: 66.6667%;
+}
+
+.no-gutter .push-xs-7 {
+    left: 58.3333%;
+}
+
+.no-gutter .push-xs-6 {
+    left: 50%;
+}
+
+.no-gutter .push-xs-5 {
+    left: 41.6667%;
+}
+
+.no-gutter .push-xs-4 {
+    left: 33.3333%;
+}
+
+.no-gutter .push-xs-3 {
+    left: 25%;
+}
+
+.no-gutter .push-xs-2 {
+    left: 16.6667%;
+}
+
+.no-gutter .push-xs-1 {
+    left: 8.3333%;
+}
+
+.row [class*="col-s"] {
+    float: left;
+}
+
+.col-s-12 {
+    width: 100%;
+    margin-left: 0;
+}
+
+.col-s-11 {
+    width: 91.5%;
+}
+
+.col-s-10 {
+    width: 83%;
+}
+
+.col-s-9 {
+    width: 74.5%;
+}
+
+.col-s-8 {
+    width: 66%;
+}
+
+.col-s-7 {
+    width: 57.5%;
+}
+
+.col-s-6 {
+    width: 49%;
+}
+
+.col-s-5 {
+    width: 40.5%;
+}
+
+.col-s-4 {
+    width: 32%;
+}
+
+.col-s-3 {
+    width: 23.5%;
+}
+
+.col-s-2 {
+    width: 15%;
+}
+
+.col-s-1 {
+    width: 6.5%;
+}
+
+/* No gutter margins */
+.no-gutter .col-s-11 {
+    width: 91.6667%;
+}
+
+.no-gutter .col-s-10 {
+    width: 83.3333%;
+}
+
+.no-gutter .col-s-9 {
+    width: 75%;
+}
+
+.no-gutter .col-s-8 {
+    width: 66.6667%;
+}
+
+.no-gutter .col-s-7 {
+    width: 58.3333%;
+}
+
+.no-gutter .col-s-6 {
+    width: 50%;
+}
+
+.no-gutter .col-s-5 {
+    width: 41.6667%;
+}
+
+.no-gutter .col-s-4 {
+    width: 33.3333%;
+}
+
+.no-gutter .col-s-3 {
+    width: 25%;
+}
+
+.no-gutter .col-s-2 {
+    width: 16.6667%;
+}
+
+.no-gutter .col-s-1 {
+    width: 8.3333%;
+}
+
+/* offsetting cols */
+.push-s-11 {
+    left: 93.5%;
+}
+
+.push-s-10 {
+    left: 85%;
+}
+
+.push-s-9 {
+    left: 76.5%;
+}
+
+.push-s-8 {
+    left: 68%;
+}
+
+.push-s-7 {
+    left: 59.5%;
+}
+
+.push-s-6 {
+    left: 51%;
+}
+
+.push-s-5 {
+    left: 42.5%;
+}
+
+.push-s-4 {
+    left: 34%;
+}
+
+.push-s-3 {
+    left: 25.5%;
+}
+
+.push-s-2 {
+    left: 17%;
+}
+
+.push-s-1 {
+    left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .push-s-11 {
+    left: 91.6667%;
+}
+
+.no-gutter .push-s-10 {
+    left: 83.3333%;
+}
+
+.no-gutter .push-s-9 {
+    left: 75%;
+}
+
+.no-gutter .push-s-8 {
+    left: 66.6667%;
+}
+
+.no-gutter .push-s-7 {
+    left: 58.3333%;
+}
+
+.no-gutter .push-s-6 {
+    left: 50%;
+}
+
+.no-gutter .push-s-5 {
+    left: 41.6667%;
+}
+
+.no-gutter .push-s-4 {
+    left: 33.3333%;
+}
+
+.no-gutter .push-s-3 {
+    left: 25%;
+}
+
+.no-gutter .push-s-2 {
+    left: 16.6667%;
+}
+
+.no-gutter .push-s-1 {
+    left: 8.3333%;
+}
+
 /* Responsive Grid Legacy */
 
 .container {
@@ -2179,9 +2594,10 @@ pre code {
  * Responsive helpers to toggle visibility. 
  */
 
-.hidden-small,
-.visible-medium,
-.visible-large {
+.hidden-xs,
+.visible-s,
+.visible-m,
+.visible-l {
     display: none !important;
 }
 

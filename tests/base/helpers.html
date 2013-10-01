@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Base Tests</title>
 
-    <!-- Conditional statements are blocking so download modern styles first -->
-    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!-- <link href="../../src/css/responsive.css" rel="stylesheet" />-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
-    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
@@ -25,90 +25,86 @@
             <h2>Responsive helpers.</h2>
             <div class="row">
                 <h3>Visible Example: Green means visible</h3>
-                <div class="column-4">
+                <div class="col-s-3">
                     <div class="responsive-helper-pane alert-error">
-                        <h3>&lt; 48em
-                            <br />
-                            (768px)</h3>
-                        <code>.visible-small</code>
-                        <div class="visible-small responsive-helper-alert alert-success">
-                            <h3>&lt; 48em
-                                <br />
-                                (768px)</h3>
-                            <code>.visible-small</code>
+                        <h3>&lt; 48em</h3>
+                        <code>.visible-xs</code>
+                        <div class="visible-xs responsive-helper-alert alert-success">
+                            <h3>&lt; 48em</h3>
+                            <code>.visible-xs</code>
                         </div>
                     </div>
                 </div>
-                <div class="column-4">
+                <div class="col-s-3">
                     <div class="responsive-helper-pane alert-error">
-                        <h3>48em - 61.1875em
-                            <br />
-                            (768px - 979px)</h3>
-                        <code>.visible-medium</code>
-                        <div class="visible-medium responsive-helper-alert alert-success">
-                            <h3>48em - 61.1875em
-                                <br />
-                                (768px - 979px)</h3>
-                            <code>.visible-medium</code>
+                        <h3>48em - 61.9375em</h3>
+                        <code>.visible-s</code>
+                        <div class="visible-s responsive-helper-alert alert-success">
+                            <h3>48em - 61.9375em</h3>
+                            <code>.visible-s</code>
                         </div>
                     </div>
                 </div>
-                <div class="column-4">
+                <div class="col-s-3">
                     <div class="responsive-helper-pane alert-error">
-                        <h3>&gt; 61.1875em
-                            <br />
-                            (979px)</h3>
-                        <code>.visible-large</code>
-                        <div class="visible-large responsive-helper-alert alert-success">
-                            <h3>&gt; 61.1875em
-                                <br />
-                                (979px)</h3>
-                            <code>.visible-large</code>
+                        <h3>62em - 74.9375em</h3>
+                        <code>.visible-m</code>
+                        <div class="visible-m responsive-helper-alert alert-success">
+                            <h3>62em - 74.9375em</h3>
+                            <code>.visible-m</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s-3">
+                    <div class="responsive-helper-pane alert-error">
+                        <h3>&gt; 75em</h3>
+                        <code>.visible-l</code>
+                        <div class="visible-l responsive-helper-alert alert-success">
+                            <h3>&gt; 75em</h3>
+                            <code>.visible-l</code>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <h3>Hidden Example: Red means hidden</h3>
-                <div class="column-4">
+                <div class="col-s-3">
                     <div class="responsive-helper-pane alert-error">
-                        <h3>&lt; 48em
-                            <br />
-                            (768px)</h3>
-                        <code>.hidden-small</code>
-                        <div class="hidden-small responsive-helper-alert alert-success">
-                            <h3>&lt; 48em
-                                <br />
-                                (768px)</h3>
-                            <code>.hidden-small</code>
+                        <h3>&lt; 48em</h3>
+                        <code>.hidden-xs</code>
+                        <div class="hidden-xs responsive-helper-alert alert-success">
+                            <h3>&lt; 48em</h3>
+                            <code>.hidden-xs</code>
                         </div>
                     </div>
                 </div>
-                <div class="column-4">
+                <div class="col-s-3">
                     <div class="responsive-helper-pane alert-error">
-                        <h3>48em - 61.1875em
-                            <br />
-                            (768px - 979px)</h3>
-                        <code>.hidden-medium</code>
-                        <div class="hidden-medium responsive-helper-alert alert-success">
-                            <h3>48em - 61.1875em
-                                <br />
-                                (768px - 979px)</h3>
-                            <code>.hidden-medium</code>
+                        <h3>48em - 61.9375em</h3>
+                        <code>.hidden-s</code>
+                        <div class="hidden-s responsive-helper-alert alert-success">
+                            <h3>48em - 61.9375em</h3>
+                            <code>.hidden-s</code>
                         </div>
                     </div>
                 </div>
-                <div class="column-4">
+                <div class="col-s-3">
                     <div class="responsive-helper-pane alert-error">
-                        <h3>&gt; 61.1875em
-                            <br />
-                            (979px)</h3>
-                        <code>.hidden-large</code>
-                        <div class="hidden-large responsive-helper-alert alert-success">
-                            <h3>&gt; 61.1875em
-                                <br />
-                                (979px)</h3>
-                            <code>.hidden-large</code>
+                        <h3>62em - 74.9375em</h3>
+                        <code>.hidden-m</code>
+                        <div class="hidden-m responsive-helper-alert alert-success">
+                            <h3>62em - 74.9375em</h3>
+                            <code>.hidden-m</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s-3">
+                    <div class="responsive-helper-pane alert-error">
+                        <h3>&gt; 75em</h3>
+                        <code>.hidden-l</code>
+                        <div class="hidden-l responsive-helper-alert alert-success">
+                            <h3>&gt; 75em</h3>
+                            <code>.hidden-l</code>
                         </div>
                     </div>
                 </div>

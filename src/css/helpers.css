@@ -1,35 +1,158 @@
 ﻿/* Responsive Helpers */
 
 /*
- * Responsive helpers to toggle visibility. 
+ * 769 > viewport < 991px
  */
-/*
- * Landscape tablet to default desktop: 769 > viewport < 980px
- */
-@media screen and (min-width: 48em) and (max-width: 61.1875em) {
+@media screen and (min-width: 48em) and (max-width: 61.9375em) {
 
-    .hidden-small,
-    .visible-medium {
-        display: inherit !important;
+    .hidden-xs,
+    .visible-s {
+        display: block !important;
     }
 
-    .visible-small,
-    .hidden-medium {
+    table.hidden-xs,
+    table.visible-s {
+        display: table !important;
+    }
+
+    thead.hidden-xs,
+    thead.visible-s {
+        display: table-header-group !important;
+    }
+
+    tfoot.hidden-xs,
+    tfoot.visible-s {
+        display: table-footer-group !important;
+    }
+
+    tr.hidden-xs,
+    tr.visible-s {
+        display: table-row !important;
+    }
+
+    th.hidden-xs,
+    th.visible-s,
+    td.hidden-xs,
+    td.visible-s {
+        display: table-cell !important;
+    }
+
+    col.hidden-xs,
+    col.visible-s {
+        display: table-column !important;
+    }
+
+    caption.hidden-xs,
+    caption.visible-s {
+        display: table-caption !important;
+    }
+
+    .visible-xs,
+    .hidden-s {
         display: none !important;
     }
 }
 
 /*
- * Default desktop up: viewport > 980px
+ * 992px > viewport < 1200px
  */
-@media screen and (min-width: 61.3125em) {
-    .hidden-small,
-    .visible-large {
-        display: inherit !important;
+@media screen and (min-width: 62em) and (max-width: 74.9375em) {
+    .hidden-xs,
+    .visible-m {
+        display: block !important;
     }
 
-    .visible-small,
-    .hidden-large {
+    table.hidden-xs,
+    table.visible-m {
+        display: table !important;
+    }
+
+    thead.hidden-xs,
+    thead.visible-m {
+        display: table-header-group !important;
+    }
+
+    tfoot.hidden-xs,
+    tfoot.visible-m {
+        display: table-footer-group !important;
+    }
+
+    tr.hidden-xs,
+    tr.visible-m {
+        display: table-row !important;
+    }
+
+    th.hidden-xs,
+    th.visible-m,
+    td.hidden-xs,
+    td.visible-m {
+        display: table-cell !important;
+    }
+
+    col.hidden-xs,
+    col.visible-m {
+        display: table-column !important;
+    }
+
+    caption.hidden-xs,
+    caption.visible-m {
+        display: table-caption !important;
+    }
+
+    .visible-xs,
+    .hidden-m {
+        display: none !important;
+    }
+}
+
+/*
+ * viewport > 1200px
+ */
+@media screen and (min-width: 75em) {
+    .hidden-xs,
+    .visible-l {
+        display: block !important;
+    }
+
+    table.hidden-xs,
+    table.visible-l {
+        display: table !important;
+    }
+
+    thead.hidden-xs,
+    thead.visible-l {
+        display: table-header-group !important;
+    }
+
+    tfoot.hidden-xs,
+    tfoot.visible-l {
+        display: table-footer-group !important;
+    }
+
+    tr.hidden-xs,
+    tr.visible-l {
+        display: table-row !important;
+    }
+
+    th.hidden-xs,
+    th.visible-l,
+    td.hidden-xs,
+    td.visible-l {
+        display: table-cell !important;
+    }
+
+    col.hidden-xs,
+    col.visible-l {
+        display: table-column !important;
+    }
+
+    caption.hidden-xs,
+    caption.visible-l {
+        display: table-caption !important;
+    }
+
+    .visible-xs,
+    .hidden-l {
         display: none !important;
     }
 }
