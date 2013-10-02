@@ -60,6 +60,14 @@
 
     }());
 
+    $.support.touch = (function () {
+        /// <summary>Returns a value indicating whether the browser supports touch.</summary>
+        /// <returns type="Boolean">True if the current browser supports touch.</returns>
+
+        return ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch;
+
+    }());
+
     $.fn.redraw = function () {
         /// <summary>Forces the browser to redraw by measuring the given target.</summary>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
@@ -354,8 +362,12 @@
 
     // General variables.
     var supportTransition = $.support.transition,
+        supportTouch = $.support.touch,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
+        etouchstart = "touchstart" + ns,
+        etouchmove = "touchmove" + ns,
+        etouchend = "touchend" + ns,
         eclick = "click" + ns,
         eready = "ready" + ns,
         eslide = "slide" + ns,
@@ -368,7 +380,74 @@
         this.$items = $activeItem.parent().children();
 
         return this.$items.index($activeItem);
-    };
+    },
+
+        manageTouch = function () {
+
+            var move = function (event) {
+
+                var original = event.originalEvent;
+
+                // Ensure swiping with one touch and not pinching.
+                if (original.touches.length > 1 || original.scale && original.scale !== 1) {
+                    return;
+                }
+
+                var touches = original.touches[0];
+
+                // Measure change in x and y.
+                this.touchDelta = {
+                    x: touches.pageX - this.touchStart.x,
+                    y: touches.pageY - this.touchStart.y
+                };
+
+            }, end = function () {
+
+                // Measure duration
+                var duration = +new Date - this.touchStart.time;
+
+                // Determine if slide attempt triggers next/previous slide.
+                // If slide duration is less than 1000ms
+                // and if slide amt is greater than 20px
+                // or if slide amt is greater than half the width
+                var isValidSlide = Number(duration) < 1000 && Math.abs(this.touchDelta.x) > 20 || Math.abs(this.touchDelta) > this.$element[0].clientWidth / 2;
+
+                if (isValidSlide) {
+
+                    // Set the direction.
+                    var direction = this.touchDelta.x < 0 ? "next" : "prev";
+
+                    // Disable the touch events till next time.
+                    this.$element.off(etouchmove).off(etouchend);
+
+                    this[direction]();
+                }
+            };
+
+            this.$element.on(etouchstart, $.proxy(function (event) {
+
+                var original = event.originalEvent,
+                    touches = original.touches[0];
+
+                // Measure start values.
+                this.touchStart = {
+                    // Get initial touch coordinates.
+                    x: touches.pageX,
+                    y: touches.pageY,
+
+                    // Store time to determine touch duration.
+                    time: +new Date
+                };
+
+                // Reset delta and end measurements.
+                this.touchDelta = {};
+
+                // Attach touchmove and touchend listeners.
+                this.$element.on(etouchmove, $.proxy(move, this))
+                             .on(etouchend, $.proxy(end, this));
+
+            }, this));
+        };
 
     // AutoSize class definition
     var Carousel = function (element, options) {
@@ -386,11 +465,17 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
+        this.touchDelta = {};
+        this.touchStart = {};
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events
             this.$element.on(emouseenter, $.proxy(this.pause, this))
                          .on(emouseleave, $.proxy(this.cycle, this));
+        }
+
+        if (supportTouch) {
+            manageTouch.call(this);
         }
     };
 
@@ -538,7 +623,7 @@
                     $nextIndicator.addClass("active");
                 }
             });
-        };
+        }
 
         var complete = function () {
             $activeItem.removeClass(["carousel-active", direction].join(" "));
@@ -554,9 +639,7 @@
         $activeItem.addClass(direction);
         $nextItem.addClass(direction);
 
-        supportTransition && (slideMode || fadeMode)
-            ? $activeItem.one(supportTransition.end, complete)
-            : complete();
+        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
 
         // Restart the cycle.
         if (isCycling) {
@@ -1051,6 +1134,7 @@
                 if (iframe) {
 
                     $img = null;
+                    $content = null;
                     $lightbox.addClass("lightbox-iframe");
 
                     // Normalize the src.
@@ -1083,6 +1167,7 @@
                     if (rimage.test(target)) {
 
                         $iframe = null;
+                        $content = null;
                         $lightbox.addClass("lightbox-image");
 
                         $img.one("load", function () {
@@ -1192,7 +1277,12 @@
 
                                 $img.css("max-height", childHeight);
 
-                            } else if ($iframe) {
+                            }
+                            else if ($content) {
+                                $lightbox.css("max-height", childHeight);
+                                $content.css("max-height", childHeight);
+                            }
+                            else {
 
                                 var clientWidth = $iframe[0].clientWidth,
                                     clientHeight = $iframe[0].clientHeight,
@@ -1250,7 +1340,7 @@
                         $html.removeClass("lightbox-on");
 
                         if (lastScroll !== $window.scrollTop) {
-                            $($html, $body).animate({ scrollTop: lastScroll });
+                            $window.scrollTop(lastScroll);
                             lastScroll = 0;
                         }
 

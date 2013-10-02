@@ -123,6 +123,7 @@
                 if (iframe) {
 
                     $img = null;
+                    $content = null;
                     $lightbox.addClass("lightbox-iframe");
 
                     // Normalize the src.
@@ -155,6 +156,7 @@
                     if (rimage.test(target)) {
 
                         $iframe = null;
+                        $content = null;
                         $lightbox.addClass("lightbox-image");
 
                         $img.one("load", function () {
@@ -264,7 +266,12 @@
 
                                 $img.css("max-height", childHeight);
 
-                            } else if ($iframe) {
+                            }
+                            else if ($content) {
+                                $lightbox.css("max-height", childHeight);
+                                $content.css("max-height", childHeight);
+                            }
+                            else {
 
                                 var clientWidth = $iframe[0].clientWidth,
                                     clientHeight = $iframe[0].clientHeight,
@@ -322,7 +329,7 @@
                         $html.removeClass("lightbox-on");
 
                         if (lastScroll !== $window.scrollTop) {
-                            $($html, $body).animate({ scrollTop: lastScroll });
+                            $window.scrollTop(lastScroll);
                             lastScroll = 0;
                         }
 

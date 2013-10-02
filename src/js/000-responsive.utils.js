@@ -60,6 +60,14 @@
 
     }());
 
+    $.support.touch = (function () {
+        /// <summary>Returns a value indicating whether the browser supports touch.</summary>
+        /// <returns type="Boolean">True if the current browser supports touch.</returns>
+
+        return ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch;
+
+    }());
+
     $.fn.redraw = function () {
         /// <summary>Forces the browser to redraw by measuring the given target.</summary>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>

@@ -108,6 +108,7 @@
     background-color: #fff;
     padding: 1em;
     text-align: left;
+    overflow: auto;
 }
 
 .lightbox > img,
