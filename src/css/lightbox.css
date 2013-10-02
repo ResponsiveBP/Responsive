@@ -1,5 +1,12 @@
 ﻿/* Responsive LightBox Base */
 
+.lightbox-on,
+.lightbox-on body {
+    height: 100%;
+    overflow: hidden;
+}
+
+
 /* 
  * 1: Average browser max z-index.
  * 2: IE8 transparent background. 

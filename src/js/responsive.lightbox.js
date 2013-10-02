@@ -15,6 +15,7 @@
 
     // General variables.
     var $window = $(w),
+        $html = $("html"),
         $body = $("body"),
         $overlay = $("<div/>").addClass("lightbox-overlay lightbox-loader fade-out"),
         $lightbox = $("<div/>").addClass("lightbox fade-out").appendTo($overlay),
@@ -27,6 +28,7 @@
         $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)" }).addClass("lightbox-direction left hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
+        lastScroll = 0,
         supportTransition = $.support.transition,
         keys = {
             ESCAPE: 27,
@@ -259,7 +261,7 @@
                             childHeight = newWindowHeight - (headerHeight + footerHeight);
 
                             if ($img) {
-  
+
                                 $img.css("max-height", childHeight);
 
                             } else if ($iframe) {
@@ -317,6 +319,13 @@
 
                     if (event === "hide") {
                         $overlay.addClass("hidden");
+                        $html.removeClass("lightbox-on");
+
+                        if (lastScroll !== $window.scrollTop) {
+                            $($html, $body).animate({ scrollTop: lastScroll });
+                            lastScroll = 0;
+                        }
+
                         return;
                     }
 
@@ -342,6 +351,11 @@
 
                 $body.append($overlay);
             }
+
+            if (lastScroll === 0) {
+                lastScroll = $window.scrollTop();
+            }
+            $html.addClass("lightbox-on");
 
             $overlay.removeClass("hidden")
                 .redraw()[fade]("fade-in")
