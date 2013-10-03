@@ -108,6 +108,7 @@
     background-color: #fff;
     padding: 1em;
     text-align: left;
+    max-height: 100%;
     overflow: auto;
 }
 

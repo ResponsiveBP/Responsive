@@ -61,7 +61,10 @@
     }());
 
     $.fn.swipe = function (namespace) {
-
+        /// <summary>Adds swiping functionality to the given element.</summary>
+        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        
         var ns = namespace && ("." + namespace),
             eswipestart = "swipestart" + ns,
             eswipemove = "swipemove" + ns,
@@ -183,6 +186,25 @@
                 $this.on(etouchmove, move)
                     .on(etouchend, end);
             });
+        });
+    };
+
+    $.find.removeSwipe = function (namespace) {
+        /// <summary>Removes swiping functionality from the given element.</summary>
+        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        
+        var ns = namespace && ("." + namespace),
+            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
+            etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns;
+
+        return this.each(function () {
+
+            // Disable extended touch events on ie.
+            // Unbind events.
+            $(this).css({ "-ms-touch-action": "", "touch-action": "" })
+                 .off(etouchstart).off(etouchmove).off(etouchend);
         });
     };
 

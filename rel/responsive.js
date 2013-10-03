@@ -60,13 +60,153 @@
 
     }());
 
-    $.support.touch = (function () {
-        /// <summary>Returns a value indicating whether the browser supports touch.</summary>
-        /// <returns type="Boolean">True if the current browser supports touch.</returns>
+    $.fn.swipe = function (namespace) {
+        /// <summary>Adds swiping functionality to the given element.</summary>
+        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        
+        var ns = namespace && ("." + namespace),
+            eswipestart = "swipestart" + ns,
+            eswipemove = "swipemove" + ns,
+            eswipeend = "swipeend" + ns,
+            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
+            etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns,
+            supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0) ||
+                (window.DocumentTouch && document instanceof DocumentTouch);
 
-        return ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch;
+        return this.each(function () {
 
-    }());
+            if (!supportTouch) {
+                return;
+            }
+
+            var $this = $(this);
+
+            // Enable extended touch events on ie.
+            $this.css({ "-ms-touch-action": "none", "touch-action": "none" });
+
+            var start = {},
+                delta,
+                move = function (event) {
+
+                    // Normalise the variables.
+                    var isPointer = event.type !== "touchmove",
+                        original = event.originalEvent,
+                        moveEvent = $.Event(eswipemove);
+
+                    // Ensure swiping with one touch and not pinching.
+                    if (isPointer) {
+                        if (original.pointerType && original.pointerType !== 2) {
+                            return;
+                        }
+                    } else {
+                        if (original.touches.length > 1) {
+                            return;
+                        }
+                    }
+                    if (event.scale && event.scale !== 1) {
+                        return;
+                    }
+
+                    $this.trigger(moveEvent);
+
+                    if (moveEvent.isDefaultPrevented()) {
+                        return;
+                    }
+
+                    var dx = isPointer ? original.clientX : original.touches[0].pageX,
+                        dy = isPointer ? original.clientY : original.touches[0].pageY;
+
+                    // Measure change in x and y.
+                    delta = {
+                        x: dx - start.x,
+                        y: dy - start.y
+                    };
+                },
+                end = function () {
+
+                    // Measure duration
+                    var duration = +new Date() - start.time,
+                        endEvent;
+
+                    // Determine if slide attempt triggers next/previous slide.
+                    // If slide duration is less than 1000ms
+                    // and if slide amount is greater than 20px
+                    // or if slide amount is greater than half the width
+                    var isValidSlide = (Number(duration) < 1000 &&
+                        (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
+                            Math.abs(delta.x) > $this[0].clientWidth / 2 ||
+                            Math.abs(delta.y) > $this[0].clientHeight / 2));
+
+                    if (isValidSlide) {
+
+                        // Set the direction and return it.
+                        var horizontal = delta.x < 0 ? "left" : "right",
+                            vertical = delta.y < 0 ? "up" : "down",
+                            direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
+
+                        endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
+
+                        $this.trigger(endEvent);
+                    }
+
+                    // Disable the touch events till next time.
+                    $this.off(etouchmove).off(etouchend);
+                };
+
+            $this.off(etouchstart).on(etouchstart, function (event) {
+
+                // Normalise the variables.
+                var isPointer = event.type !== "touchstart",
+                    original = event.originalEvent,
+                    startEvent = $.Event(eswipestart);
+
+                $this.trigger(startEvent);
+
+                if (startEvent.isDefaultPrevented()) {
+                    return;
+                }
+
+                // Measure start values.
+                start = {
+                    // Get initial touch coordinates.
+                    x: isPointer ? original.clientX : original.touches[0].pageX,
+                    y: isPointer ? original.clientY : original.touches[0].pageY,
+
+                    // Store time to determine touch duration.
+                    time: +new Date()
+                };
+
+                // Reset delta and end measurements.
+                delta = {};
+
+                // Attach touchmove and touchend listeners.
+                $this.on(etouchmove, move)
+                    .on(etouchend, end);
+            });
+        });
+    };
+
+    $.find.removeSwipe = function (namespace) {
+        /// <summary>Removes swiping functionality from the given element.</summary>
+        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        
+        var ns = namespace && ("." + namespace),
+            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
+            etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns;
+
+        return this.each(function () {
+
+            // Disable extended touch events on ie.
+            // Unbind events.
+            $(this).css({ "-ms-touch-action": "", "touch-action": "" })
+                 .off(etouchstart).off(etouchmove).off(etouchend);
+        });
+    };
 
     $.fn.redraw = function () {
         /// <summary>Forces the browser to redraw by measuring the given target.</summary>
@@ -362,12 +502,8 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        supportTouch = $.support.touch,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
-        etouchstart = "touchstart" + ns,
-        etouchmove = "touchmove" + ns,
-        etouchend = "touchend" + ns,
         eclick = "click" + ns,
         eready = "ready" + ns,
         eslide = "slide" + ns,
@@ -382,72 +518,17 @@
         return this.$items.index($activeItem);
     },
 
-        manageTouch = function () {
+    manageTouch = function () {
 
-            var move = function (event) {
+        this.$element.swipe("r.carousel").on("swipeend.r.carousel", $.proxy(function (event) {
 
-                var original = event.originalEvent;
+            var direction = event.direction,
+                method = (direction === "up" || direction === "left") ? "next" : "prev";
 
-                // Ensure swiping with one touch and not pinching.
-                if (original.touches.length > 1 || original.scale && original.scale !== 1) {
-                    return;
-                }
+            this[method]();
 
-                var touches = original.touches[0];
-
-                // Measure change in x and y.
-                this.touchDelta = {
-                    x: touches.pageX - this.touchStart.x,
-                    y: touches.pageY - this.touchStart.y
-                };
-
-            }, end = function () {
-
-                // Measure duration
-                var duration = +new Date - this.touchStart.time;
-
-                // Determine if slide attempt triggers next/previous slide.
-                // If slide duration is less than 1000ms
-                // and if slide amt is greater than 20px
-                // or if slide amt is greater than half the width
-                var isValidSlide = Number(duration) < 1000 && Math.abs(this.touchDelta.x) > 20 || Math.abs(this.touchDelta) > this.$element[0].clientWidth / 2;
-
-                if (isValidSlide) {
-
-                    // Set the direction.
-                    var direction = this.touchDelta.x < 0 ? "next" : "prev";
-
-                    // Disable the touch events till next time.
-                    this.$element.off(etouchmove).off(etouchend);
-
-                    this[direction]();
-                }
-            };
-
-            this.$element.on(etouchstart, $.proxy(function (event) {
-
-                var original = event.originalEvent,
-                    touches = original.touches[0];
-
-                // Measure start values.
-                this.touchStart = {
-                    // Get initial touch coordinates.
-                    x: touches.pageX,
-                    y: touches.pageY,
-
-                    // Store time to determine touch duration.
-                    time: +new Date
-                };
-
-                // Reset delta and end measurements.
-                this.touchDelta = {};
-
-                // Attach touchmove and touchend listeners.
-                this.$element.on(etouchmove, $.proxy(move, this))
-                             .on(etouchend, $.proxy(end, this));
-
-            }, this));
-        };
+        }, this));
+    };
 
     // AutoSize class definition
     var Carousel = function (element, options) {
@@ -457,7 +538,8 @@
             interval: 5000,
             mode: "slide",
             pause: "hover",
-            wrap: true
+            wrap: true,
+            enabletouch: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.$indicators = this.$element.find(".carousel-indicators");
@@ -474,7 +556,7 @@
                          .on(emouseleave, $.proxy(this.cycle, this));
         }
 
-        if (supportTouch) {
+        if (this.options.enabletouch) {
             manageTouch.call(this);
         }
     };
@@ -608,7 +690,6 @@
         if (this.sliding || slideEvent.isDefaultPrevented()) {
             return false;
         }
-
 
         // Good to go? Then let's slide.
         this.sliding = true;
@@ -1082,391 +1163,414 @@
         // If the regex doesn't match return true . 
         return !rexternalHost.test(locationParts[2]);
     },
-        create = function () {
 
-            // Calculate whether this is an external request and set the value.
-            this.options.external = !rhash.test(this.options.target);
+    create = function () {
 
-            var self = this,
-                title = this.options.title,
-                description = this.options.description,
-                close = this.options.close,
-                target = this.options.target,
-                local = !this.options.external && !isExternalUrl(target),
-                group = this.options.group,
-                nextText = this.options.next,
-                previousText = this.options.previous,
-                iframeScroll = this.options.iframeScroll,
-                iframe = this.options.iframe || !local ? isExternalUrl(target) && !rimage.test(target) : false,
-                $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media");
+        // Calculate whether this is an external request and set the value.
+        this.options.external = !rhash.test(this.options.target);
 
-            $content = $("<div/>").addClass("lightbox-content");
-            $iframe = $("<iframe/>"); // This needs to be assigned then unassigned or ie8 won't test against it.
-            $img = $("<img/>"); // ditto.
+        var self = this,
+            title = this.options.title,
+            description = this.options.description,
+            close = this.options.close,
+            target = this.options.target,
+            local = !this.options.external && !isExternalUrl(target),
+            group = this.options.group,
+            nextText = this.options.next,
+            previousText = this.options.previous,
+            iframeScroll = this.options.iframeScroll,
+            iframe = this.options.iframe || !local ? isExternalUrl(target) && !rimage.test(target) : false,
+            $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media");
 
-            // 1: Build the header
-            if (title || close) {
+        $content = $("<div/>").addClass("lightbox-content");
+        $iframe = $("<iframe/>"); // This needs to be assigned then unassigned or ie8 won't test against it.
+        $img = $("<img/>"); // ditto.
 
-                $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
-                       .appendTo($overlay);
+        // 1: Build the header
+        if (title || close) {
 
-                if (close) {
-                    $close.appendTo($overlay);
-                }
+            $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
+                   .appendTo($overlay);
+
+            if (close) {
+                $close.appendTo($overlay);
             }
+        }
 
-            // 2: Build the footer
-            if (description) {
+        // 2: Build the footer
+        if (description) {
 
-                // Add footer text if necessary
-                $footer.html("<div class=\"container\">" + description + "</div>")
-                       .appendTo($overlay);
-            }
+            // Add footer text if necessary
+            $footer.html("<div class=\"container\">" + description + "</div>")
+                   .appendTo($overlay);
+        }
 
-            // 3: Build the content
-            if (local) {
+        // 3: Build the content
+        if (local) {
+            $img = null;
+            $iframe = null;
+            $placeholder.detach().insertAfter(this.$element);
+            $(target).detach().appendTo($content).removeClass("hidden");
+            $content.appendTo($lightbox);
+            toggleFade.call(this);
+        } else {
+            if (iframe) {
 
-                $placeholder.detach().insertAfter(this.$element);
-                $(target).detach().appendTo($content).removeClass("hidden");
-                $content.appendTo($lightbox);
+                $img = null;
+                $content = null;
+                $lightbox.addClass("lightbox-iframe");
+
+                // Normalize the src.
+                var src = target.indexOf("http") !== 0 ? protocol + target : target;
+
+                // Have to add inline styles for older browsers.
+                $iframe.attr({
+                    "scrolling": iframeScroll ? "yes" : "no",
+                    "allowTransparency": true,
+                    "frameborder": 0,
+                    "hspace": 0,
+                    "vspace": 0,
+                    "webkitallowfullscreen": "",
+                    "mozallowfullscreen": "",
+                    "allowfullscreen": "",
+                    "src": src
+                })
+                    .appendTo($iframeWrap);
+
+                // Test and add additional media classes.
+                var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
+
+                $iframeWrap.addClass(mediaClasses).appendTo($lightbox);
+
+                // Not on load as can take forever.
                 toggleFade.call(this);
+
             } else {
-                if (iframe) {
 
-                    $img = null;
+                if (rimage.test(target)) {
+
+                    $iframe = null;
                     $content = null;
-                    $lightbox.addClass("lightbox-iframe");
+                    $lightbox.addClass("lightbox-image");
 
-                    // Normalize the src.
-                    var src = target.indexOf("http") !== 0 ? protocol + target : target;
-
-                    // Have to add inline styles for older browsers.
-                    $iframe.attr({
-                        "scrolling": iframeScroll ? "yes" : "no",
-                        "allowTransparency": true,
-                        "frameborder": 0,
-                        "hspace": 0,
-                        "vspace": 0,
-                        "webkitallowfullscreen": "",
-                        "mozallowfullscreen": "",
-                        "allowfullscreen": "",
-                        "src": src
-                    })
-                        .appendTo($iframeWrap);
-
-                    // Test and add additional media classes.
-                    var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
-
-                    $iframeWrap.addClass(mediaClasses).appendTo($lightbox);
-
-                    // Not on load as can take forever.
-                    toggleFade.call(this);
-
+                    $img.one("load", function () {
+                        toggleFade.call(self);
+                    }).attr("src", target)
+                        .appendTo($lightbox);
                 } else {
 
-                    if (rimage.test(target)) {
+                    $img = null;
+                    $iframe = null;
+                    $lightbox.addClass("lightbox-ajax");
 
-                        $iframe = null;
-                        $content = null;
-                        $lightbox.addClass("lightbox-image");
-
-                        $img.one("load", function () {
-                            toggleFade.call(self);
-                        }).attr("src", target)
-                            .appendTo($lightbox);
-                    } else {
-
-                        $img = null;
-                        $iframe = null;
-                        $lightbox.addClass("lightbox-ajax");
-
-                        // Standard ajax load.
-                        $content.load(target, function () {
-                            $content.appendTo($lightbox);
-                            toggleFade.call(self);
-                        });
-                    }
-                }
-            }
-
-            if (group) {
-                // Need to show next/previous.
-                $next.text(nextText).prependTo($lightbox).removeClass("hidden");
-                $previous.text(previousText).prependTo($lightbox).removeClass("hidden");
-            }
-
-            // Bind the click events.
-            $lightbox.off(eclick).on(eclick, $.proxy(function (event) {
-
-                var next = $next[0],
-                    previous = $previous[0],
-                    eventTarget = event.target;
-
-                if (eventTarget === next || eventTarget === previous) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    this[eventTarget === next ? "next" : "previous"]();
-                }
-
-            }, this));
-
-        },
-
-        destroy = function () {
-            if (!this.options.external) {
-                // Put that kid back where it came from or so help me.
-                $(this.options.target).addClass("hidden").detach().insertAfter($placeholder);
-                $placeholder.detach().insertAfter($overlay);
-            }
-
-            toggleFade.call(this);
-
-            // Clean up the header/footer.
-            $header.empty().detach();
-            $footer.empty().detach();
-            $close.detach();
-
-            // Clean up the lightbox.
-            $next.detach();
-            $previous.detach();
-
-            var self = this,
-                empty = function () {
-                    $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
-                        "max-height": "",
-                        "max-width": "",
-                        "margin-top": "",
-                        "margin-bottom": ""
-                    }).empty();
-
-                    // Unbind the keyboard actions.
-                    if (self.options.keyboard) {
-
-                        manageKeyboard.call(self, "hide");
-                    }
-                };
-
-            // Fix __flash__removeCallback' is undefined error.
-            $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
-        },
-
-        resize = function () {
-            // Bind the resize event and fade in.
-            var newWindowHeight,
-                oldWindowHeight,
-                maxWidth = parseInt($lightbox.css("max-width"), 10),
-                onResize = function () {
-
-                    var headerHeight,
-                        footerHeight,
-                        childHeight,
-                        $child = $iframe || $img || $content;
-
-                    if ($child) {
-
-                        newWindowHeight = $window.height();
-
-                        if (newWindowHeight !== oldWindowHeight) {
-
-                            headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                            footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
-
-                            childHeight = newWindowHeight - (headerHeight + footerHeight);
-
-                            if ($img) {
-
-                                $img.css("max-height", childHeight);
-
-                            }
-                            else if ($content) {
-                                $lightbox.css("max-height", childHeight);
-                                $content.css("max-height", childHeight);
-                            }
-                            else {
-
-                                var clientWidth = $iframe[0].clientWidth,
-                                    clientHeight = $iframe[0].clientHeight,
-                                    ratio = clientWidth / clientHeight,
-                                    childWidth = childHeight * ratio;
-
-                                $.each([$lightbox, $iframe], function () {
-
-                                    this.css({
-                                        "max-height": childHeight,
-                                        "max-width": childWidth > maxWidth ? maxWidth : childWidth
-                                    });
-                                });
-                            }
-
-                            $lightbox.css({
-                                "margin-top": headerHeight > 0 ? headerHeight : "",
-                                "margin-bottom": footerHeight > 0 ? footerHeight : ""
-                            });
-
-                            oldWindowHeight = newWindowHeight;
-                        }
-                    }
-                };
-
-            $window.off(eresize).on(eresize, onResize);
-
-            onResize();
-        },
-
-        toggleFade = function () {
-
-            // Resize the lightbox content.
-            if (this.isShown) {
-                resize();
-            }
-
-            $.each([$header, $footer, $close, $lightbox], function () {
-
-                this.toggleClass("fade-in")
-                    .redraw();
-            });
-
-            $overlay.toggleClass("lightbox-loader");
-        },
-
-        toggleOverlay = function (event) {
-
-            var fade = event === "show" ? "addClass" : "removeClass",
-                self = this,
-                complete = function () {
-
-                    if (event === "hide") {
-                        $overlay.addClass("hidden");
-                        $html.removeClass("lightbox-on");
-
-                        if (lastScroll !== $window.scrollTop) {
-                            $window.scrollTop(lastScroll);
-                            lastScroll = 0;
-                        }
-
-                        return;
-                    }
-
-                    $overlay.off(eclick).on(eclick, function (e) {
-
-                        var closeTarget = $close[0],
-                            eventTarget = e.target;
-
-                        if (eventTarget === closeTarget) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            self.hide();
-                        }
-
-                        if (eventTarget === $overlay[0]) {
-                            self.hide();
-                        }
+                    // Standard ajax load.
+                    $content.load(target, function () {
+                        $content.appendTo($lightbox);
+                        toggleFade.call(self);
                     });
+                }
+            }
+        }
+
+        if (group) {
+            // Need to show next/previous.
+            $next.text(nextText).prependTo($lightbox).removeClass("hidden");
+            $previous.text(previousText).prependTo($lightbox).removeClass("hidden");
+        }
+
+        // Bind the click events.
+        $lightbox.off(eclick).on(eclick, $.proxy(function (event) {
+
+            var next = $next[0],
+                previous = $previous[0],
+                eventTarget = event.target;
+
+            if (eventTarget === next || eventTarget === previous) {
+                event.preventDefault();
+                event.stopPropagation();
+                this[eventTarget === next ? "next" : "previous"]();
+            }
+
+        }, this));
+
+    },
+
+    destroy = function () {
+        if (!this.options.external) {
+            // Put that kid back where it came from or so help me.
+            $(this.options.target).addClass("hidden").detach().insertAfter($placeholder);
+            $placeholder.detach().insertAfter($overlay);
+        }
+
+        toggleFade.call(this);
+
+        // Clean up the header/footer.
+        $header.empty().detach();
+        $footer.empty().detach();
+        $close.detach();
+
+        // Clean up the lightbox.
+        $next.detach();
+        $previous.detach();
+
+        var self = this,
+            empty = function () {
+                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
+                    "max-height": "",
+                    "max-width": "",
+                    "margin-top": "",
+                    "margin-bottom": ""
+                }).empty();
+
+                // Unbind the keyboard actions.
+                if (self.options.keyboard) {
+
+                    manageKeyboard.call(self, "hide");
+                }
+            };
+
+        // Fix __flash__removeCallback' is undefined error.
+        $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
+    },
+
+    resize = function () {
+        // Bind the resize event and fade in.
+        var newWindowHeight,
+            oldWindowHeight,
+            maxWidth = parseInt($lightbox.css("max-width"), 10),
+            onResize = function () {
+
+                var headerHeight,
+                    footerHeight,
+                    closeHeight,
+                    childHeight,
+                    topHeight,
+                    bottomHeight,
+                    $child = $iframe || $img || $content;
+
+                if ($child) {
+
+                    newWindowHeight = $window.height();
+
+                    if (newWindowHeight !== oldWindowHeight) {
+
+                        // Magic number are determined from experimentation across different browsers.
+                        headerHeight = $header[0] ? $header[0].clientHeight : 0;
+                        footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
+                        closeHeight = $close[0] ? $close[0].clientHeight : 0;
+                        topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
+                        bottomHeight = footerHeight > 0 ? footerHeight : 1;
+
+                        childHeight = newWindowHeight - (topHeight + bottomHeight);
+
+                        if ($img) {
+                            $img.css("max-height", childHeight);
+                        }
+                        else if ($content) {
+                            $lightbox.css("max-height", childHeight);
+                            $content.css("max-height", childHeight);
+                        }
+                        else {
+
+                            var clientWidth = $iframe[0].clientWidth,
+                                clientHeight = $iframe[0].clientHeight,
+                                ratio = clientWidth / clientHeight,
+                                childWidth = childHeight * ratio;
+
+                            $.each([$lightbox, $iframe], function () {
+
+                                this.css({
+                                    "max-height": childHeight,
+                                    "max-width": childWidth > maxWidth ? maxWidth : childWidth
+                                });
+                            });
+                        }
+                        // Values are determined by border fix in css.
+                        $lightbox.css({
+                            "margin-top": topHeight > 0 ? topHeight : ""
+                        });
+
+                        oldWindowHeight = newWindowHeight;
+                    }
+                }
+            };
+
+        $window.off(eresize).on(eresize, onResize);
+
+        onResize();
+    },
+
+    toggleFade = function () {
+
+        // Resize the lightbox content.
+        if (this.isShown) {
+            resize();
+        }
+
+        $.each([$header, $footer, $close, $lightbox], function () {
+
+            this.toggleClass("fade-in")
+                .redraw();
+        });
+
+        $overlay.toggleClass("lightbox-loader");
+    },
+
+    toggleOverlay = function (event) {
+
+        var fade = event === "show" ? "addClass" : "removeClass",
+            self = this,
+            complete = function () {
+
+                if (event === "hide") {
+                    $overlay.addClass("hidden");
+                    $html.removeClass("lightbox-on");
+
+                    if (lastScroll !== $window.scrollTop) {
+                        $window.scrollTop(lastScroll);
+                        lastScroll = 0;
+                    }
+
+                    return;
+                }
+
+                $overlay.off(eclick).on(eclick, function (e) {
+
+                    var closeTarget = $close[0],
+                        eventTarget = e.target;
+
+                    if (eventTarget === closeTarget) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        self.hide();
+                    }
+
+                    if (eventTarget === $overlay[0]) {
+                        self.hide();
+                    }
+                });
+            };
+
+        // Add the overlay to the body if not done already.
+        if (!$("div.lightbox-overlay").length) {
+
+            $body.append($overlay);
+        }
+
+        if (lastScroll === 0) {
+            lastScroll = $window.scrollTop();
+        }
+        $html.addClass("lightbox-on");
+
+        $overlay.removeClass("hidden")
+            .redraw()[fade]("fade-in")
+            .redraw();
+
+        supportTransition ? $overlay.one(supportTransition.end, complete)
+              : complete();
+
+    },
+
+    direction = function (course) {
+
+        if (!this.isShown) {
+            return;
+        }
+
+        if (this.options.group) {
+            var self = this,
+                index = this.$group.index(this.$element),
+                length = this.$group.length,
+                position = course === "next" ? index + 1 : index - 1,
+                complete = function () {
+                    if (self.$sibling) {
+
+                        if (supportTransition) {
+                            self.$sibling.trigger(eclick);
+                        } else {
+                            w.setTimeout(function () {
+                                self.$sibling.trigger(eclick);
+                            }, 300);
+                        }
+                    }
                 };
 
-            // Add the overlay to the body if not done already.
-            if (!$("div.lightbox-overlay").length) {
+            if (course === "next") {
 
-                $body.append($overlay);
+                if (position >= length || position < 0) {
+
+                    position = 0;
+                }
+            } else {
+
+                if (position >= length) {
+
+                    position = 0;
+                }
+
+                if (position < 0) {
+                    position = length - 1;
+                }
             }
 
-            if (lastScroll === 0) {
-                lastScroll = $window.scrollTop();
-            }
-            $html.addClass("lightbox-on");
+            this.$sibling = $(this.$group[position]);
 
-            $overlay.removeClass("hidden")
-                .redraw()[fade]("fade-in")
-                .redraw();
+            destroy.call(this);
 
-            supportTransition ? $overlay.one(supportTransition.end, complete)
-                  : complete();
+            supportTransition ? $lightbox.one(supportTransition.end, complete)
+                : complete();
 
-        },
+            this.isShown = false;
+        }
+    },
 
-        direction = function (course) {
+    manageKeyboard = function (event) {
+        if (this.options.keyboard) {
 
-            if (!this.isShown) {
+            if (event === "hide") {
+                $body.off(ekeyup);
                 return;
             }
 
-            if (this.options.group) {
-                var self = this,
-                    index = this.$group.index(this.$element),
-                    length = this.$group.length,
-                    position = course === "next" ? index + 1 : index - 1,
-                    complete = function () {
+            $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
 
-                        self.isShown = false;
-                        if (self.$sibling) {
-
-                            if (supportTransition) {
-                                self.$sibling.trigger(eclick);
-                            } else {
-                                w.setTimeout(function () {
-                                    self.$sibling.trigger(eclick);
-                                }, 300);
-                            }
-                        }
-                    };
-
-                if (course === "next") {
-
-                    if (position >= length || position < 0) {
-
-                        position = 0;
-                    }
-                } else {
-
-                    if (position >= length) {
-
-                        position = 0;
-                    }
-
-                    if (position < 0) {
-                        position = length - 1;
-                    }
+                // Bind the escape key.
+                if (e.which === keys.ESCAPE) {
+                    this.hide();
                 }
 
-                this.$sibling = $(this.$group[position]);
+                // Bind the next/previous keys.
+                if (this.options.group) {
+                    // Bind the left arrow key.
+                    if (e.which === keys.LEFT) {
+                        this.previous();
+                    }
 
-                destroy.call(this);
+                    // Bind the right arrow key.
+                    if (e.which === keys.RIGHT) {
+                        this.next();
+                    }
+                }
+            }, this));
+        }
+    },
 
-                supportTransition ? $lightbox.one(supportTransition.end, complete)
-                    : complete();
-            }
-        },
+    manageTouch = function (off) {
 
-      manageKeyboard = function (event) {
-          if (this.options.keyboard) {
+        if (off) {
+            $lightbox.removeSwipe("r.lightbox");
+            return;
+        }
 
-              if (event === "hide") {
-                  $body.off(ekeyup);
-                  return;
-              }
+        $lightbox.swipe("r.lightbox").on("swipeend.r.lightbox", $.proxy(function (event) {
 
-              $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
+            var eventDirection = event.direction,
+                method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";
 
-                  // Bind the escape key.
-                  if (e.which === keys.ESCAPE) {
-                      this.hide();
-                  }
+            this[method]();
 
-                  // Bind the next/previous keys.
-                  if (this.options.group) {
-                      // Bind the left arrow key.
-                      if (e.which === keys.LEFT) {
-                          this.previous();
-                      }
-
-                      // Bind the right arrow key.
-                      if (e.which === keys.RIGHT) {
-                          this.next();
-                      }
-                  }
-              }, this));
-          }
-      };
+        }, this));
+    };
 
     // Lightbox class definition
     var LightBox = function (element, options) {
@@ -1482,7 +1586,8 @@
             next: ">",
             previous: "<",
             mobileTarget: null,
-            mobileViewportWidth: 480
+            mobileViewportWidth: 480,
+            enabletouch: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.title = null;
@@ -1508,6 +1613,7 @@
         // then redirect to that page instead.
         if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
             w.location.href = this.options.mobileTarget;
+            return;
         }
 
         var self = this,
@@ -1518,6 +1624,14 @@
                 // Bind the keyboard actions.
                 if (self.options.keyboard) {
                     manageKeyboard.call(self, "show");
+                }
+
+                if (self.options.group) {
+                    if (self.options.enabletouch) {
+                        manageTouch.call(self);
+                    } else {
+                        manageTouch.call(self, "off");
+                    }
                 }
 
                 self.$element.trigger(shownEvent);

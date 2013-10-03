@@ -3,8 +3,13 @@
     margin-left: 2%;
 }
 
+.row [class*="col-"].col-reset-m {
+    clear: none;
+}
+
 .row [class*="col-"].col-reset-l {
     margin-left: 0;
+    clear: both;
 }
 
 .row [class*="col-l"] {

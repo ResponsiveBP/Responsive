@@ -21,7 +21,10 @@
             background-color: #f357a1;
             color: #fff;
             font-size: 2em;
-            height: 400px;
+            height: 300px;
+            width: 300px;
+            text-align: center;
+            padding-top: 100px;
         }
     </style>
 </head>
@@ -29,6 +32,8 @@
     <article class="container">
         <h1>Swipe Tests</h1>
         <hr />
+
+        <h2>Swipe on the box to test directional detection.</h2>
         <div class="swipe"></div>
 
     </article>
@@ -54,6 +59,9 @@
     <script>
 
         $.fn.swipe = function (namespace) {
+            /// <summary>Adds swiping functionality to the given element.</summary>
+            /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
             var ns = namespace && ("." + namespace),
                 eswipestart = "swipestart" + ns,
@@ -63,8 +71,8 @@
                 etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
                 etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns,
                 supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
-                               (navigator.msMaxTouchPoints > 0) ||
-                               (window.DocumentTouch && document instanceof DocumentTouch);
+                    (navigator.msMaxTouchPoints > 0) ||
+                    (window.DocumentTouch && document instanceof DocumentTouch);
 
             return this.each(function () {
 
@@ -72,19 +80,31 @@
                     return;
                 }
 
-                var $this = $(this),
-                    start = {},
+                var $this = $(this);
+
+                // Enable extended touch events on ie.
+                $this.css({ "-ms-touch-action": "none", "touch-action": "none" });
+
+                var start = {},
                     delta,
                     move = function (event) {
 
                         // Normalise the variables.
-                        var isPointer = event.type === "pointermove" || event.type === "MSPointerMove",
+                        var isPointer = event.type !== "touchmove",
                             original = event.originalEvent,
                             moveEvent = $.Event(eswipemove);
 
                         // Ensure swiping with one touch and not pinching.
-                        if ((isPointer ? original.targetTouches > 1 : original.touches.length > 1) ||
-                            original.scale && original.scale !== 1) {
+                        if (isPointer) {
+                            if (original.pointerType && original.pointerType !== 2) {
+                                return;
+                            }
+                        } else {
+                            if (original.touches.length > 1) {
+                                return;
+                            }
+                        }
+                        if (event.scale && event.scale !== 1) {
                             return;
                         }
 
@@ -94,18 +114,19 @@
                             return;
                         }
 
-                        var touches = isPointer ? original.targetTouches[0] : original.touches[0];
+                        var dx = isPointer ? original.clientX : original.touches[0].pageX,
+                            dy = isPointer ? original.clientY : original.touches[0].pageY;
 
                         // Measure change in x and y.
                         delta = {
-                            x: touches.pageX - start.x,
-                            y: touches.pageY - start.y
+                            x: dx - start.x,
+                            y: dy - start.y
                         };
-
-                    }, end = function () {
+                    },
+                    end = function () {
 
                         // Measure duration
-                        var duration = +new Date - start.time,
+                        var duration = +new Date() - start.time,
                             endEvent;
 
                         // Determine if slide attempt triggers next/previous slide.
@@ -114,32 +135,30 @@
                         // or if slide amount is greater than half the width
                         var isValidSlide = (Number(duration) < 1000 &&
                             (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
-                            Math.abs(delta.x) > $this[0].clientWidth / 2 ||
-                            Math.abs(delta.y) > $this[0].clientHeight / 2));
+                                Math.abs(delta.x) > $this[0].clientWidth / 2 ||
+                                Math.abs(delta.y) > $this[0].clientHeight / 2));
 
                         if (isValidSlide) {
 
                             // Set the direction and return it.
-                            var horizontal = delta.x < 0 ? "right" : "left",
+                            var horizontal = delta.x < 0 ? "left" : "right",
                                 vertical = delta.y < 0 ? "up" : "down",
                                 direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
 
-                            endEvent = $.Event(eswipeend, { delta: delta, direction: direction });
+                            endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
 
                             $this.trigger(endEvent);
                         }
 
                         // Disable the touch events till next time.
                         $this.off(etouchmove).off(etouchend);
-
                     };
 
-                $this.on(etouchstart, function (event) {
+                $this.off(etouchstart).on(etouchstart, function (event) {
 
                     // Normalise the variables.
-                    var isPointer = event.type === "pointerdown" || event.type === "MSPointerDown",
+                    var isPointer = event.type !== "touchstart",
                         original = event.originalEvent,
-                        touches = isPointer ? original.targetTouches[0] : original.touches[0],
                         startEvent = $.Event(eswipestart);
 
                     $this.trigger(startEvent);
@@ -151,19 +170,19 @@
                     // Measure start values.
                     start = {
                         // Get initial touch coordinates.
-                        x: touches.pageX,
-                        y: touches.pageY,
+                        x: isPointer ? original.clientX : original.touches[0].pageX,
+                        y: isPointer ? original.clientY : original.touches[0].pageY,
 
                         // Store time to determine touch duration.
-                        time: +new Date
+                        time: +new Date()
                     };
 
                     // Reset delta and end measurements.
                     delta = {};
 
                     // Attach touchmove and touchend listeners.
-                    this.$element.on(etouchmove, move)
-                                 .on(etouchend, end);
+                    $this.on(etouchmove, move)
+                        .on(etouchend, end);
                 });
             });
         };
@@ -178,10 +197,10 @@
 
 
             var supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
-                               (navigator.msMaxTouchPoints > 0) ||
-                               (window.DocumentTouch && document instanceof DocumentTouch);
+                    (navigator.msMaxTouchPoints > 0) ||
+                    (window.DocumentTouch && document instanceof DocumentTouch);
 
-            $(".swipe").html(supportTouch === undefined ? "no touch" : "touch");
+            $(".swipe").html(supportTouch === undefined ? "no touch support detected" : "touch support detected");
 
 
             $(".swipe").swipe("r.swipe").on("swipeend.r.swipe", function (event) {

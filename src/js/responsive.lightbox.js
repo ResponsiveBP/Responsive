@@ -115,7 +115,8 @@
 
         // 3: Build the content
         if (local) {
-
+            $img = null;
+            $iframe = null;
             $placeholder.detach().insertAfter(this.$element);
             $(target).detach().appendTo($content).removeClass("hidden");
             $content.appendTo($lightbox);
@@ -249,7 +250,10 @@
 
                 var headerHeight,
                     footerHeight,
+                    closeHeight,
                     childHeight,
+                    topHeight,
+                    bottomHeight,
                     $child = $iframe || $img || $content;
 
                 if ($child) {
@@ -258,15 +262,17 @@
 
                     if (newWindowHeight !== oldWindowHeight) {
 
+                        // Magic number are determined from experimentation across different browsers.
                         headerHeight = $header[0] ? $header[0].clientHeight : 0;
                         footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
+                        closeHeight = $close[0] ? $close[0].clientHeight : 0;
+                        topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
+                        bottomHeight = footerHeight > 0 ? footerHeight : 1;
 
-                        childHeight = newWindowHeight - (headerHeight + footerHeight);
+                        childHeight = newWindowHeight - (topHeight + bottomHeight);
 
                         if ($img) {
-
                             $img.css("max-height", childHeight);
-
                         }
                         else if ($content) {
                             $lightbox.css("max-height", childHeight);
@@ -287,10 +293,9 @@
                                 });
                             });
                         }
-
+                        // Values are determined by border fix in css.
                         $lightbox.css({
-                            "margin-top": headerHeight > 0 ? headerHeight : "",
-                            "margin-bottom": footerHeight > 0 ? footerHeight : ""
+                            "margin-top": topHeight > 0 ? topHeight : ""
                         });
 
                         oldWindowHeight = newWindowHeight;
@@ -386,8 +391,6 @@
                 length = this.$group.length,
                 position = course === "next" ? index + 1 : index - 1,
                 complete = function () {
-
-                    self.isShown = false;
                     if (self.$sibling) {
 
                         if (supportTransition) {
@@ -424,6 +427,8 @@
 
             supportTransition ? $lightbox.one(supportTransition.end, complete)
                 : complete();
+
+            this.isShown = false;
         }
     },
 
@@ -458,7 +463,12 @@
         }
     },
 
-    manageTouch = function () {
+    manageTouch = function (off) {
+
+        if (off) {
+            $lightbox.removeSwipe("r.lightbox");
+            return;
+        }
 
         $lightbox.swipe("r.lightbox").on("swipeend.r.lightbox", $.proxy(function (event) {
 
@@ -511,15 +521,7 @@
         // then redirect to that page instead.
         if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
             w.location.href = this.options.mobileTarget;
-        }
-
-        if (this.options.enabletouch) {
-            // Enable extended touch events on ie.
-            $lightbox.css({ "-ms-touch-action": "none", "touch-action": "none" });
-            manageTouch.call(this);
-        } else {
-            // Disable extended touch events on ie.
-            $lightbox.css({ "-ms-touch-action": "", "touch-action": "" });
+            return;
         }
 
         var self = this,
@@ -530,6 +532,14 @@
                 // Bind the keyboard actions.
                 if (self.options.keyboard) {
                     manageKeyboard.call(self, "show");
+                }
+
+                if (self.options.group) {
+                    if (self.options.enabletouch) {
+                        manageTouch.call(self);
+                    } else {
+                        manageTouch.call(self, "off");
+                    }
                 }
 
                 self.$element.trigger(shownEvent);

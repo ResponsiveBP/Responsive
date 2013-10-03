@@ -45,6 +45,10 @@
         margin-left: 0;
     }
 
+.row [class*=".col-reset-"] {
+    clear: both;
+}
+
 .row [class*="col-xs"] {
     float: left;
 }
