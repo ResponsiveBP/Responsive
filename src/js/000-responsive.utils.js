@@ -60,13 +60,131 @@
 
     }());
 
-    $.support.touch = (function () {
-        /// <summary>Returns a value indicating whether the browser supports touch.</summary>
-        /// <returns type="Boolean">True if the current browser supports touch.</returns>
+    $.fn.swipe = function (namespace) {
 
-        return ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch;
+        var ns = namespace && ("." + namespace),
+            eswipestart = "swipestart" + ns,
+            eswipemove = "swipemove" + ns,
+            eswipeend = "swipeend" + ns,
+            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
+            etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns,
+            supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0) ||
+                (window.DocumentTouch && document instanceof DocumentTouch);
 
-    }());
+        return this.each(function () {
+
+            if (!supportTouch) {
+                return;
+            }
+
+            var $this = $(this);
+
+            // Enable extended touch events on ie.
+            $this.css({ "-ms-touch-action": "none", "touch-action": "none" });
+
+            var start = {},
+                delta,
+                move = function (event) {
+
+                    // Normalise the variables.
+                    var isPointer = event.type !== "touchmove",
+                        original = event.originalEvent,
+                        moveEvent = $.Event(eswipemove);
+
+                    // Ensure swiping with one touch and not pinching.
+                    if (isPointer) {
+                        if (original.pointerType && original.pointerType !== 2) {
+                            return;
+                        }
+                    } else {
+                        if (original.touches.length > 1) {
+                            return;
+                        }
+                    }
+                    if (event.scale && event.scale !== 1) {
+                        return;
+                    }
+
+                    $this.trigger(moveEvent);
+
+                    if (moveEvent.isDefaultPrevented()) {
+                        return;
+                    }
+
+                    var dx = isPointer ? original.clientX : original.touches[0].pageX,
+                        dy = isPointer ? original.clientY : original.touches[0].pageY;
+
+                    // Measure change in x and y.
+                    delta = {
+                        x: dx - start.x,
+                        y: dy - start.y
+                    };
+                },
+                end = function () {
+
+                    // Measure duration
+                    var duration = +new Date() - start.time,
+                        endEvent;
+
+                    // Determine if slide attempt triggers next/previous slide.
+                    // If slide duration is less than 1000ms
+                    // and if slide amount is greater than 20px
+                    // or if slide amount is greater than half the width
+                    var isValidSlide = (Number(duration) < 1000 &&
+                        (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
+                            Math.abs(delta.x) > $this[0].clientWidth / 2 ||
+                            Math.abs(delta.y) > $this[0].clientHeight / 2));
+
+                    if (isValidSlide) {
+
+                        // Set the direction and return it.
+                        var horizontal = delta.x < 0 ? "left" : "right",
+                            vertical = delta.y < 0 ? "up" : "down",
+                            direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
+
+                        endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
+
+                        $this.trigger(endEvent);
+                    }
+
+                    // Disable the touch events till next time.
+                    $this.off(etouchmove).off(etouchend);
+                };
+
+            $this.off(etouchstart).on(etouchstart, function (event) {
+
+                // Normalise the variables.
+                var isPointer = event.type !== "touchstart",
+                    original = event.originalEvent,
+                    startEvent = $.Event(eswipestart);
+
+                $this.trigger(startEvent);
+
+                if (startEvent.isDefaultPrevented()) {
+                    return;
+                }
+
+                // Measure start values.
+                start = {
+                    // Get initial touch coordinates.
+                    x: isPointer ? original.clientX : original.touches[0].pageX,
+                    y: isPointer ? original.clientY : original.touches[0].pageY,
+
+                    // Store time to determine touch duration.
+                    time: +new Date()
+                };
+
+                // Reset delta and end measurements.
+                delta = {};
+
+                // Attach touchmove and touchend listeners.
+                $this.on(etouchmove, move)
+                    .on(etouchend, end);
+            });
+        });
+    };
 
     $.fn.redraw = function () {
         /// <summary>Forces the browser to redraw by measuring the given target.</summary>

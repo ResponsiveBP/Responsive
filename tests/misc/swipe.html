@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Tests</title>
+
+    <!-- Combined CSS as respond.js cannot cater for imports-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="../test-assets/js/vendor/html5shiv.min.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+    <style type="text/css">
+        .swipe {
+            background-color: #f357a1;
+            color: #fff;
+            font-size: 2em;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <article class="container">
+        <h1>Swipe Tests</h1>
+        <hr />
+        <div class="swipe"></div>
+
+    </article>
+
+
+    <!--[if IE 8]>     
+    <script src="../test-assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="../test-assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <!-- Scripts kept separate for easier debugging-->
+    <!--    <script src="../../src/js/000-responsive.utils.js"></script>-->
+    <!--    <script src="../../src/js/responsive.autosize.js"></script>
+        <script src="../../src/js/responsive.carousel.js"></script>
+        <script src="../../src/js/responsive.dismiss.js"></script>
+        <script src="../../src/js/responsive.dropdown.js"></script>
+        <script src="../../src/js/responsive.lightbox.js"></script>
+        <script src="../../src/js/responsive.table.js"></script>
+        <script src="../../src/js/responsive.tabs.js"></script>-->
+
+    <script>
+
+        $.fn.swipe = function (namespace) {
+
+            var ns = namespace && ("." + namespace),
+                eswipestart = "swipestart" + ns,
+                eswipemove = "swipemove" + ns,
+                eswipeend = "swipeend" + ns,
+                etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+                etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
+                etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns,
+                supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
+                               (navigator.msMaxTouchPoints > 0) ||
+                               (window.DocumentTouch && document instanceof DocumentTouch);
+
+            return this.each(function () {
+
+                if (!supportTouch) {
+                    return;
+                }
+
+                var $this = $(this),
+                    start = {},
+                    delta,
+                    move = function (event) {
+
+                        // Normalise the variables.
+                        var isPointer = event.type === "pointermove" || event.type === "MSPointerMove",
+                            original = event.originalEvent,
+                            moveEvent = $.Event(eswipemove);
+
+                        // Ensure swiping with one touch and not pinching.
+                        if ((isPointer ? original.targetTouches > 1 : original.touches.length > 1) ||
+                            original.scale && original.scale !== 1) {
+                            return;
+                        }
+
+                        $this.trigger(moveEvent);
+
+                        if (moveEvent.isDefaultPrevented()) {
+                            return;
+                        }
+
+                        var touches = isPointer ? original.targetTouches[0] : original.touches[0];
+
+                        // Measure change in x and y.
+                        delta = {
+                            x: touches.pageX - start.x,
+                            y: touches.pageY - start.y
+                        };
+
+                    }, end = function () {
+
+                        // Measure duration
+                        var duration = +new Date - start.time,
+                            endEvent;
+
+                        // Determine if slide attempt triggers next/previous slide.
+                        // If slide duration is less than 1000ms
+                        // and if slide amount is greater than 20px
+                        // or if slide amount is greater than half the width
+                        var isValidSlide = (Number(duration) < 1000 &&
+                            (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
+                            Math.abs(delta.x) > $this[0].clientWidth / 2 ||
+                            Math.abs(delta.y) > $this[0].clientHeight / 2));
+
+                        if (isValidSlide) {
+
+                            // Set the direction and return it.
+                            var horizontal = delta.x < 0 ? "right" : "left",
+                                vertical = delta.y < 0 ? "up" : "down",
+                                direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
+
+                            endEvent = $.Event(eswipeend, { delta: delta, direction: direction });
+
+                            $this.trigger(endEvent);
+                        }
+
+                        // Disable the touch events till next time.
+                        $this.off(etouchmove).off(etouchend);
+
+                    };
+
+                $this.on(etouchstart, function (event) {
+
+                    // Normalise the variables.
+                    var isPointer = event.type === "pointerdown" || event.type === "MSPointerDown",
+                        original = event.originalEvent,
+                        touches = isPointer ? original.targetTouches[0] : original.touches[0],
+                        startEvent = $.Event(eswipestart);
+
+                    $this.trigger(startEvent);
+
+                    if (startEvent.isDefaultPrevented()) {
+                        return;
+                    }
+
+                    // Measure start values.
+                    start = {
+                        // Get initial touch coordinates.
+                        x: touches.pageX,
+                        y: touches.pageY,
+
+                        // Store time to determine touch duration.
+                        time: +new Date
+                    };
+
+                    // Reset delta and end measurements.
+                    delta = {};
+
+                    // Attach touchmove and touchend listeners.
+                    this.$element.on(etouchmove, move)
+                                 .on(etouchend, end);
+                });
+            });
+        };
+
+    </script>
+    <script>
+
+
+
+
+        $(document).on("ready", function () {
+
+
+            var supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
+                               (navigator.msMaxTouchPoints > 0) ||
+                               (window.DocumentTouch && document instanceof DocumentTouch);
+
+            $(".swipe").html(supportTouch === undefined ? "no touch" : "touch");
+
+
+            $(".swipe").swipe("r.swipe").on("swipeend.r.swipe", function (event) {
+
+                $(this).html(event.direction);
+
+            });
+
+        });
+
+    </script>
+</body>
+</html>

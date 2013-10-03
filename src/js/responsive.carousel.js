@@ -14,12 +14,8 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        supportTouch = $.support.touch,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
-        etouchstart = "touchstart" + ns,
-        etouchmove = "touchmove" + ns,
-        etouchend = "touchend" + ns,
         eclick = "click" + ns,
         eready = "ready" + ns,
         eslide = "slide" + ns,
@@ -34,72 +30,17 @@
         return this.$items.index($activeItem);
     },
 
-        manageTouch = function () {
+    manageTouch = function () {
 
-            var move = function (event) {
+        this.$element.swipe("r.carousel").on("swipeend.r.carousel", $.proxy(function (event) {
 
-                var original = event.originalEvent;
+            var direction = event.direction,
+                method = (direction === "up" || direction === "left") ? "next" : "prev";
 
-                // Ensure swiping with one touch and not pinching.
-                if (original.touches.length > 1 || original.scale && original.scale !== 1) {
-                    return;
-                }
+            this[method]();
 
-                var touches = original.touches[0];
-
-                // Measure change in x and y.
-                this.touchDelta = {
-                    x: touches.pageX - this.touchStart.x,
-                    y: touches.pageY - this.touchStart.y
-                };
-
-            }, end = function () {
-
-                // Measure duration
-                var duration = +new Date - this.touchStart.time;
-
-                // Determine if slide attempt triggers next/previous slide.
-                // If slide duration is less than 1000ms
-                // and if slide amt is greater than 20px
-                // or if slide amt is greater than half the width
-                var isValidSlide = Number(duration) < 1000 && Math.abs(this.touchDelta.x) > 20 || Math.abs(this.touchDelta) > this.$element[0].clientWidth / 2;
-
-                if (isValidSlide) {
-
-                    // Set the direction.
-                    var direction = this.touchDelta.x < 0 ? "next" : "prev";
-
-                    // Disable the touch events till next time.
-                    this.$element.off(etouchmove).off(etouchend);
-
-                    this[direction]();
-                }
-            };
-
-            this.$element.on(etouchstart, $.proxy(function (event) {
-
-                var original = event.originalEvent,
-                    touches = original.touches[0];
-
-                // Measure start values.
-                this.touchStart = {
-                    // Get initial touch coordinates.
-                    x: touches.pageX,
-                    y: touches.pageY,
-
-                    // Store time to determine touch duration.
-                    time: +new Date
-                };
-
-                // Reset delta and end measurements.
-                this.touchDelta = {};
-
-                // Attach touchmove and touchend listeners.
-                this.$element.on(etouchmove, $.proxy(move, this))
-                             .on(etouchend, $.proxy(end, this));
-
-            }, this));
-        };
+        }, this));
+    };
 
     // AutoSize class definition
     var Carousel = function (element, options) {
@@ -109,7 +50,8 @@
             interval: 5000,
             mode: "slide",
             pause: "hover",
-            wrap: true
+            wrap: true,
+            enabletouch: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.$indicators = this.$element.find(".carousel-indicators");
@@ -126,7 +68,7 @@
                          .on(emouseleave, $.proxy(this.cycle, this));
         }
 
-        if (supportTouch) {
+        if (this.options.enabletouch) {
             manageTouch.call(this);
         }
     };
@@ -260,7 +202,6 @@
         if (this.sliding || slideEvent.isDefaultPrevented()) {
             return false;
         }
-
 
         // Good to go? Then let's slide.
         this.sliding = true;
