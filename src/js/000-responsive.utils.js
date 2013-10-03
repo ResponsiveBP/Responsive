@@ -94,7 +94,7 @@
                     // Normalise the variables.
                     var isPointer = event.type !== "touchmove",
                         original = event.originalEvent,
-                        moveEvent = $.Event(eswipemove);
+                        moveEvent;
 
                     // Ensure swiping with one touch and not pinching.
                     if (isPointer) {
@@ -110,19 +110,21 @@
                         return;
                     }
 
+                    var dx = (isPointer ? original.clientX : original.touches[0].pageX) - start.x,
+                        dy = (isPointer ? original.clientY : original.touches[0].pageY) - start.y;
+                    
+                    moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
+
                     $this.trigger(moveEvent);
 
                     if (moveEvent.isDefaultPrevented()) {
                         return;
                     }
 
-                    var dx = isPointer ? original.clientX : original.touches[0].pageX,
-                        dy = isPointer ? original.clientY : original.touches[0].pageY;
-
                     // Measure change in x and y.
                     delta = {
-                        x: dx - start.x,
-                        y: dy - start.y
+                        x: dx,
+                        y: dy
                     };
                 },
                 end = function () {

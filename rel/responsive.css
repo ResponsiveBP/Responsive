@@ -1882,7 +1882,7 @@ label,
  * 1. Strip OS styling on IOS
  * 2. Add a dropdown indicator
  */
-@media screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
+@media all and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
     select,
     input[type="search"],
     input[type="datetime"],
@@ -2931,7 +2931,7 @@ pre code {
 /*
  * 769 > viewport < 991px
  */
-@media screen and (min-width: 48em) and (max-width: 61.9375em) {
+@media all and (min-width: 48em) and (max-width: 61.9375em) {
 
     .hidden-xs,
     .visible-s {
@@ -2984,7 +2984,7 @@ pre code {
 /*
  * 992px > viewport < 1200px
  */
-@media screen and (min-width: 62em) and (max-width: 74.9375em) {
+@media all and (min-width: 62em) and (max-width: 74.9375em) {
     .hidden-xs,
     .visible-m {
         display: block !important;
@@ -3036,7 +3036,7 @@ pre code {
 /*
  * viewport > 1200px
  */
-@media screen and (min-width: 75em) {
+@media all and (min-width: 75em) {
     .hidden-xs,
     .visible-l {
         display: block !important;

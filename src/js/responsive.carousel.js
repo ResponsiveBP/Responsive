@@ -32,14 +32,15 @@
 
     manageTouch = function () {
 
-        this.$element.swipe("r.carousel").on("swipeend.r.carousel", $.proxy(function (event) {
+        this.$element.swipe("r.carousel")
+            .on("swipeend.r.carousel", $.proxy(function (event) {
 
-            var direction = event.direction,
-                method = (direction === "up" || direction === "left") ? "next" : "prev";
+                var direction = event.direction,
+                    method = (direction === "up" || direction === "left") ? "next" : "prev";
 
-            this[method]();
+                this[method]();
 
-        }, this));
+            }, this));
     };
 
     // AutoSize class definition

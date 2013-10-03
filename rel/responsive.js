@@ -94,7 +94,7 @@
                     // Normalise the variables.
                     var isPointer = event.type !== "touchmove",
                         original = event.originalEvent,
-                        moveEvent = $.Event(eswipemove);
+                        moveEvent;
 
                     // Ensure swiping with one touch and not pinching.
                     if (isPointer) {
@@ -110,19 +110,21 @@
                         return;
                     }
 
+                    var dx = (isPointer ? original.clientX : original.touches[0].pageX) - start.x,
+                        dy = (isPointer ? original.clientY : original.touches[0].pageY) - start.y;
+                    
+                    moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
+
                     $this.trigger(moveEvent);
 
                     if (moveEvent.isDefaultPrevented()) {
                         return;
                     }
 
-                    var dx = isPointer ? original.clientX : original.touches[0].pageX,
-                        dy = isPointer ? original.clientY : original.touches[0].pageY;
-
                     // Measure change in x and y.
                     delta = {
-                        x: dx - start.x,
-                        y: dy - start.y
+                        x: dx,
+                        y: dy
                     };
                 },
                 end = function () {
@@ -520,14 +522,15 @@
 
     manageTouch = function () {
 
-        this.$element.swipe("r.carousel").on("swipeend.r.carousel", $.proxy(function (event) {
+        this.$element.swipe("r.carousel")
+            .on("swipeend.r.carousel", $.proxy(function (event) {
 
-            var direction = event.direction,
-                method = (direction === "up" || direction === "left") ? "next" : "prev";
+                var direction = event.direction,
+                    method = (direction === "up" || direction === "left") ? "next" : "prev";
 
-            this[method]();
+                this[method]();
 
-        }, this));
+            }, this));
     };
 
     // AutoSize class definition
@@ -1291,8 +1294,12 @@
                 this[eventTarget === next ? "next" : "previous"]();
             }
 
+            if ($img) {
+                if (eventTarget === $img[0] && this.options.group) {
+                    this.next();
+                }
+            }
         }, this));
-
     },
 
     destroy = function () {

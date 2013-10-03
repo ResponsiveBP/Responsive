@@ -199,8 +199,12 @@
                 this[eventTarget === next ? "next" : "previous"]();
             }
 
+            if ($img) {
+                if (eventTarget === $img[0] && this.options.group) {
+                    this.next();
+                }
+            }
         }, this));
-
     },
 
     destroy = function () {

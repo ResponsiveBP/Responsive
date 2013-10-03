@@ -3,7 +3,7 @@
 /*
  * 769 > viewport < 991px
  */
-@media screen and (min-width: 48em) and (max-width: 61.9375em) {
+@media all and (min-width: 48em) and (max-width: 61.9375em) {
 
     .hidden-xs,
     .visible-s {
@@ -56,7 +56,7 @@
 /*
  * 992px > viewport < 1200px
  */
-@media screen and (min-width: 62em) and (max-width: 74.9375em) {
+@media all and (min-width: 62em) and (max-width: 74.9375em) {
     .hidden-xs,
     .visible-m {
         display: block !important;
@@ -108,7 +108,7 @@
 /*
  * viewport > 1200px
  */
-@media screen and (min-width: 75em) {
+@media all and (min-width: 75em) {
     .hidden-xs,
     .visible-l {
         display: block !important;
