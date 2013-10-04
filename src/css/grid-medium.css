@@ -20,10 +20,6 @@
     float: right;
 }
 
-.row [class*="col-m"] {
-    float: left;
-}
-
 .col-m-12 {
     width: 100%;
     margin-left: 0;

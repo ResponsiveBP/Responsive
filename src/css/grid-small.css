@@ -20,10 +20,6 @@
     float: right;
 }
 
-.row [class*="col-s"] {
-    float: left;
-}
-
 .col-s-12 {
     width: 100%;
     margin-left: 0;

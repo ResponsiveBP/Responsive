@@ -27,34 +27,32 @@
 }
 
 /*cols*/
-.row [class*="col-"] {
+[class*="col-"] {
     position: relative;
     display: block;
     min-height: 1px;
+    float: left;
+    width: 100%;
 }
 
-    .row [class*="col-"] + [class*="col-"] {
-        margin-left: 2%;
-    }
+.row [class*="col-"] + [class*="col-"] {
+    margin-left: 2%;
+}
 
-    .row.no-gutter > [class*="col-"] + [class*="col-"],
-    .row [class*="col-"] + [class*="col-s"],
-    .row [class*="col-"] + [class*="col-m"],
-    .row [class*="col-"] + [class*="col-l"],
-    .row [class*="col-reset-"] {
-        margin-left: 0;
-    }
-
+.row.no-gutter > [class*="col-"] + [class*="col-"],
+.row [class*="col-"] + [class*="col-s"],
+.row [class*="col-"] + [class*="col-m"],
+.row [class*="col-"] + [class*="col-l"],
 .row [class*="col-reset-"] {
+    margin-left: 0;
+}
+
+.row [class*="col-reset-xs"] {
     clear: both;
 }
 
 .row [class*="col-"][class*="push-xs-right"] {
-    float: right
-}
-
-.row [class*="col-xs"] {
-    float: left;
+    float: right;
 }
 
 /* Full width calculated with margins */
