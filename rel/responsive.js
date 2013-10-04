@@ -60,12 +60,22 @@
 
     }());
 
-    $.fn.swipe = function (namespace) {
+    $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
-        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+        ///	<param name="options" type="Object" optional="true" parameterArray="true">
+        ///		 A collection of optional settings to apply.
+        ///      &#10;    1: namespace - The namespace for isolating the touch events.
+        ///      &#10;    2: timeLimit - The limit in ms to recognise touch events for. Default - 1000; 0 disables.
+        ///	</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        
-        var ns = namespace && ("." + namespace),
+
+        var defaults = {
+            namespace: null,
+            timeLimit: 1000
+        },
+            settings = $.extend({}, defaults, options);
+
+        var ns = settings.namespace && ("." + settings.namespace),
             eswipestart = "swipestart" + ns,
             eswipemove = "swipemove" + ns,
             eswipeend = "swipeend" + ns,
@@ -112,7 +122,7 @@
 
                     var dx = (isPointer ? original.clientX : original.touches[0].pageX) - start.x,
                         dy = (isPointer ? original.clientY : original.touches[0].pageY) - start.y;
-                    
+
                     moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
 
                     $this.trigger(moveEvent);
@@ -137,7 +147,7 @@
                     // If slide duration is less than 1000ms
                     // and if slide amount is greater than 20px
                     // or if slide amount is greater than half the width
-                    var isValidSlide = (Number(duration) < 1000 &&
+                    var isValidSlide = ((Number(duration) < settings.timeLimit || settings.timeLimit === 0) &&
                         (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
                             Math.abs(delta.x) > $this[0].clientWidth / 2 ||
                             Math.abs(delta.y) > $this[0].clientHeight / 2));
@@ -195,7 +205,7 @@
         /// <summary>Removes swiping functionality from the given element.</summary>
         /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        
+
         var ns = namespace && ("." + namespace),
             etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
@@ -522,7 +532,48 @@
 
     manageTouch = function () {
 
-        this.$element.swipe("r.carousel")
+        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0 })
+            .on("swipemove.r.carousel", $.proxy(function (event) {
+
+                if (this.options.mode !== "slide") {
+                    return;
+                }
+
+                var isNext = event.delta.x > 0,
+                    fallback = isNext ? "last" : "first",
+                    activePosition = getActiveIndex.call(this),
+                    $activeItem = $(this.$items[activePosition]),
+                    $nextItem = $(this.$items[isNext ? activePosition + 1 : activePosition - 1]),
+                    $prevItem = $(this.$items[isNext ? activePosition - 1 : activePosition + 1]);
+
+                if (!$nextItem.length) {
+
+                    if (!this.options.wrap) {
+                        return;
+                    }
+
+                    $nextItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
+                }
+
+                if (!$prevItem.length) {
+
+                    if (!this.options.wrap) {
+                        return;
+                    }
+
+                    $prevItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
+                }
+
+                var width = parseFloat($activeItem.width()),
+                    percent = (event.delta.x / width) * 100,
+                    diff = isNext ? 100 : -100;
+
+                if (percent > -100 && percent < 100) {
+                    $activeItem.addClass("no-transition").css({ "transform": "translateX(" + percent + "%)" });
+                    $nextItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent + diff) + "%)" });
+                    $prevItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent - diff) + "%)" });
+                }
+            }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
 
                 var direction = event.direction,
@@ -666,6 +717,16 @@
         if (isCycling) {
             // Pause if cycling.
             this.pause();
+        }
+
+        if (slideMode) {
+            console.log("clearing css");
+            console.log(this.$items);
+
+            // Clear the added css.
+            this.$items.each(function () {
+                $(this).removeClass("no-transition swipe").css({ "transform": "" });
+            });
         }
 
         // Work out which item to slide to.
@@ -1569,7 +1630,7 @@
             return;
         }
 
-        $lightbox.swipe("r.lightbox").on("swipeend.r.lightbox", $.proxy(function (event) {
+        $lightbox.swipe({ namespace: "r.lightbox" }).on("swipeend.r.lightbox", $.proxy(function (event) {
 
             var eventDirection = event.direction,
                 method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";

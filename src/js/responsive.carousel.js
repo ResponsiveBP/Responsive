@@ -32,7 +32,48 @@
 
     manageTouch = function () {
 
-        this.$element.swipe("r.carousel")
+        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0 })
+            .on("swipemove.r.carousel", $.proxy(function (event) {
+
+                if (this.options.mode !== "slide") {
+                    return;
+                }
+
+                var isNext = event.delta.x > 0,
+                    fallback = isNext ? "last" : "first",
+                    activePosition = getActiveIndex.call(this),
+                    $activeItem = $(this.$items[activePosition]),
+                    $nextItem = $(this.$items[isNext ? activePosition + 1 : activePosition - 1]),
+                    $prevItem = $(this.$items[isNext ? activePosition - 1 : activePosition + 1]);
+
+                if (!$nextItem.length) {
+
+                    if (!this.options.wrap) {
+                        return;
+                    }
+
+                    $nextItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
+                }
+
+                if (!$prevItem.length) {
+
+                    if (!this.options.wrap) {
+                        return;
+                    }
+
+                    $prevItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
+                }
+
+                var width = parseFloat($activeItem.width()),
+                    percent = (event.delta.x / width) * 100,
+                    diff = isNext ? 100 : -100;
+
+                if (percent > -100 && percent < 100) {
+                    $activeItem.addClass("no-transition").css({ "transform": "translateX(" + percent + "%)" });
+                    $nextItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent + diff) + "%)" });
+                    $prevItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent - diff) + "%)" });
+                }
+            }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
 
                 var direction = event.direction,
@@ -176,6 +217,13 @@
         if (isCycling) {
             // Pause if cycling.
             this.pause();
+        }
+
+        if (slideMode && this.$items) {
+            // Clear the added css.
+            this.$items.each(function () {
+                $(this).removeClass("no-transition swipe").css({ "transform": "" });
+            });
         }
 
         // Work out which item to slide to.

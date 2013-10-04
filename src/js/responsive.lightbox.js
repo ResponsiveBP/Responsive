@@ -474,7 +474,7 @@
             return;
         }
 
-        $lightbox.swipe("r.lightbox").on("swipeend.r.lightbox", $.proxy(function (event) {
+        $lightbox.swipe({ namespace: "r.lightbox" }).on("swipeend.r.lightbox", $.proxy(function (event) {
 
             var eventDirection = event.direction,
                 method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";
@@ -523,7 +523,7 @@
 
         // If the trigger has a mobile target and the viewport is smaller than the mobile limit
         // then redirect to that page instead.
-        if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
+        if (this.options.mobileTarget && this.options.mobileViewportWidth >= parseInt($window.width(), 10)) {
             w.location.href = this.options.mobileTarget;
             return;
         }

@@ -60,12 +60,22 @@
 
     }());
 
-    $.fn.swipe = function (namespace) {
+    $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
-        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+        ///	<param name="options" type="Object" optional="true" parameterArray="true">
+        ///		 A collection of optional settings to apply.
+        ///      &#10;    1: namespace - The namespace for isolating the touch events.
+        ///      &#10;    2: timeLimit - The limit in ms to recognise touch events for. Default - 1000; 0 disables.
+        ///	</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        
-        var ns = namespace && ("." + namespace),
+
+        var defaults = {
+            namespace: null,
+            timeLimit: 1000
+        },
+            settings = $.extend({}, defaults, options);
+
+        var ns = settings.namespace && ("." + settings.namespace),
             eswipestart = "swipestart" + ns,
             eswipemove = "swipemove" + ns,
             eswipeend = "swipeend" + ns,
@@ -112,7 +122,7 @@
 
                     var dx = (isPointer ? original.clientX : original.touches[0].pageX) - start.x,
                         dy = (isPointer ? original.clientY : original.touches[0].pageY) - start.y;
-                    
+
                     moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
 
                     $this.trigger(moveEvent);
@@ -137,7 +147,7 @@
                     // If slide duration is less than 1000ms
                     // and if slide amount is greater than 20px
                     // or if slide amount is greater than half the width
-                    var isValidSlide = (Number(duration) < 1000 &&
+                    var isValidSlide = ((Number(duration) < settings.timeLimit || settings.timeLimit === 0) &&
                         (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
                             Math.abs(delta.x) > $this[0].clientWidth / 2 ||
                             Math.abs(delta.y) > $this[0].clientHeight / 2));
@@ -195,7 +205,7 @@
         /// <summary>Removes swiping functionality from the given element.</summary>
         /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        
+
         var ns = namespace && ("." + namespace),
             etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
