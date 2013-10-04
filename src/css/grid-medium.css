@@ -12,6 +12,14 @@
     clear: both;
 }
 
+.row [class*="col-"][class*="push-s-right"] {
+    float: left;
+}
+
+.row [class*="col-"][class*="push-m-right"] {
+    float: right;
+}
+
 .row [class*="col-m"] {
     float: left;
 }
@@ -198,4 +206,95 @@
 
 .no-gutter .push-m-1 {
     left: 8.3333%;
+}
+
+
+/* offsetting cols */
+.pull-m-11 {
+    right: 93.5%;
+}
+
+.pull-m-10 {
+    right: 85%;
+}
+
+.pull-m-9 {
+    right: 76.5%;
+}
+
+.pull-m-8 {
+    right: 68%;
+}
+
+.pull-m-7 {
+    right: 59.5%;
+}
+
+.pull-m-6 {
+    right: 51%;
+}
+
+.pull-m-5 {
+    right: 42.5%;
+}
+
+.pull-m-4 {
+    right: 34%;
+}
+
+.pull-m-3 {
+    right: 25.5%;
+}
+
+.pull-m-2 {
+    right: 17%;
+}
+
+.pull-m-1 {
+    right: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .pull-m-11 {
+    right: 91.6667%;
+}
+
+.no-gutter .pull-m-10 {
+    right: 83.3333%;
+}
+
+.no-gutter .pull-m-9 {
+    right: 75%;
+}
+
+.no-gutter .pull-m-8 {
+    right: 66.6667%;
+}
+
+.no-gutter .pull-m-7 {
+    right: 58.3333%;
+}
+
+.no-gutter .pull-m-6 {
+    right: 50%;
+}
+
+.no-gutter .pull-m-5 {
+    right: 41.6667%;
+}
+
+.no-gutter .pull-m-4 {
+    right: 33.3333%;
+}
+
+.no-gutter .pull-m-3 {
+    right: 25%;
+}
+
+.no-gutter .pull-m-2 {
+    right: 16.6667%;
+}
+
+.no-gutter .pull-m-1 {
+    right: 8.3333%;
 }
