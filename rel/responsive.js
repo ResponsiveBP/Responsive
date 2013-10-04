@@ -719,10 +719,7 @@
             this.pause();
         }
 
-        if (slideMode) {
-            console.log("clearing css");
-            console.log(this.$items);
-
+        if (slideMode && this.$items) {
             // Clear the added css.
             this.$items.each(function () {
                 $(this).removeClass("no-transition swipe").css({ "transform": "" });
@@ -1679,7 +1676,7 @@
 
         // If the trigger has a mobile target and the viewport is smaller than the mobile limit
         // then redirect to that page instead.
-        if (this.options.mobileTarget && this.options.mobileViewportWidth >= $window.width()) {
+        if (this.options.mobileTarget && this.options.mobileViewportWidth >= parseInt($window.width(), 10)) {
             w.location.href = this.options.mobileTarget;
             return;
         }
