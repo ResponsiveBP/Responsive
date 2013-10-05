@@ -1934,6 +1934,7 @@ table {
         display: none;
     }
 
+        .table-list tbody,
         .table-list tr,
         .table-list td,
         .table-list th[scope="row"] {
@@ -1981,16 +1982,20 @@ table {
         table-layout: auto;
     }
 
-        .table-list tr {
-            display: table-row;
-        }
-
         .table-list thead {
             display: table-header-group;
         }
 
         .table-list tfoot {
             display: table-footer-group;
+        }
+
+        .table-list tbody {
+            display: table-row-group;
+        }
+
+        .table-list tr {
+            display: table-row;
         }
 
         .table-list td,

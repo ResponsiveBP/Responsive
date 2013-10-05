@@ -31,45 +31,62 @@
         </h1>
     </header>
     <hr />
-    <h1>The Grid</h1>
+    <div class="row">
+        <nav class="col-s-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#mediaqueries">Media Queries</a></li>
+    
+<ul>
+
+        </nav>
+        <section class="col-s-9">
+            <h1>The Grid</h1>
 <p>
     Responsive comes with 4 tiers of 12 column fluid grids that allow for granular control over layout across all 
     devices. The system is entirely mobile first with each level overwriting the previous one as the viewport width 
     scales up.
 </p>
-<p>The media queries breakdown as follows:</p>
-<table class="table-list table-bordered table-striped" data-table-list="">
-    <thead>
-        <tr>
-            <th scope="col">Level</th>
-            <th>Selector</th>
-            <th>Width</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Extra small (initial)</td>
-            <td><code>.col-xs-{number}</code></td>
-            <td>Up to 48em <small>(768px at 16px/1em)</small></td>
-        </tr>
-        <tr>
-            <td>Small</td>
-            <td><code>.col-s-{number}</code></td>
-            <td>48em to 62em <small>(768px to 992px at 16px/1em)</small> </td>
-        </tr>
-        <tr>
-            <td>Medium</td>
-            <td><code>.col-m-{number}</code></td>
-            <td>62em to 75em <small>(992px to 1200px at 16px/1em)</small> </td>
-        </tr>
-        <tr>
-            <td>Large</td>
-            <td><code>.col-l-{number}</code></td>
-            <td>75em and over <small>(1200px at 16px/1em)</small> </td>
-        </tr>
-    </tbody>
-</table>
+<section id="mediaqueries">
+    <h2>Media Queries</h2>
+    <p>The media queries breakdown as follows:</p>
+    <table class="table-list table-striped table-bordered" data-table-list="">
+        <thead>
+            <tr>
+                <th scope="col">Level</th>
+                <th>Selector</th>
+                <th>Width</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Extra small (initial)</td>
+                <td><code>.col-xs-{number}</code></td>
+                <td>Up to 48em <small>(768px at 16px/1em)</small></td>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td><code>.col-s-{number}</code></td>
+                <td>48em to 62em <small>(768px to 992px at 16px/1em)</small> </td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td><code>.col-m-{number}</code></td>
+                <td>62em to 75em <small>(992px to 1200px at 16px/1em)</small> </td>
+            </tr>
+            <tr>
+                <td>Large</td>
+                <td><code>.col-l-{number}</code></td>
+                <td>75em and over <small>(1200px at 16px/1em)</small> </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
+        </section>
+    </div>
 </article>
 ﻿    <!--[if IE 8]>     
             <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
