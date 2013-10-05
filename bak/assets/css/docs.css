@@ -30,27 +30,7 @@ nav[role="navigation"] {
         color: #fff;
     }
 
-header[role="banner"] h1 {
+.headline {
     font-size: 3em;
     margin-bottom: 0;
 }
-
-header[role="banner"] span {
-    display: block;
-    font-size: 55%;
-    color: #888;
-    margin: .34em 0;
-}
-
-.download {
-    font-size: 1.5em;
-}
-
-.download-links {
-    list-style: none;
-    padding: 0;
-}
-
-    .download-links li {
-        display: inline-block;
-    }

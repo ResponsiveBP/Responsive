@@ -1,16 +1,43 @@
----
-layout: default
-title: A real-world website developer framework
-heading: Responsive
-subheading: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites
----
-<section>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> A real-world website developer framework ::  Responsive</title>
+    <meta name="description" content="This is a sample Jekyll Blog." />
+
+    <link href="/assets/css/responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/assets/css/docs.css" rel="stylesheet" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/" rel="home">Responsive</a> <a href="/getting-started.html">Getting Started</a><a href="/css.html">css</a>
+            </div>
+        </div>
+    </nav>
+
+<article class="container" role="main">
+    <header role="banner">
+        <h1>Responsive
+        <span>A super lightweight HTML, CSS, and JavaScript framework for building responsive websites</span>
+        </h1>
+    </header>
+    <hr />
+    <section>
     <a href="http://github.com/JimBobSquarePants/Responsive/raw/master/rel/responsive.zip" role="button" class="download" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Framework Download">Download Responsive</a>
     <ul class="download-links">
         <li>
             <a href="http://github.com/JimBobSquarePants/Responsive" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="GitHub project" rel="external" target="_blank">GitHub project</a>
         </li>
-        <li>Version {{site.version}}
+        <li>Version 2.0.0
         </li>
     </ul>
 </section>
@@ -32,3 +59,15 @@ subheading: A super lightweight HTML, CSS, and JavaScript framework for building
             It's designed to be dropped-in, as-is to your website such as you would with <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">normalize.css</a>.
     </p>
 </section>
+
+</article>
+﻿    <!--[if IE 8]>     
+            <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.js"></script>
+</body>
+</html>
+

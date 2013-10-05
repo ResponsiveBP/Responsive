@@ -1,0 +1,18 @@
+{% include header.html %}
+<article class="container" role="main">
+    <header role="banner">
+        <h1>{{page.heading}}
+        <span>{{page.subheading}}</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-s-3" role="complementary">
+            {% include subnav.html param=page.root %}
+        </nav>
+        <section class="col-s-9">
+            {{ content }}
+        </section>
+    </div>
+</article>
+{% include footer.html %}

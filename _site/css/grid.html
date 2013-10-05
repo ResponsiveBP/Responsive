@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> The Grid ::  Responsive</title>
+    <meta name="description" content="This is a sample Jekyll Blog." />
+
+    <link href="/assets/css/responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/assets/css/docs.css" rel="stylesheet" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/" rel="home">Responsive</a> <a href="/getting-started.html">Getting Started</a><a href="/css.html">css</a>
+            </div>
+        </div>
+    </nav>
+
+<article class="container" role="main">
+    <header role="banner">
+        <h1>The Grid
+        <span>Flexible layouts across all devices.</span>
+        </h1>
+    </header>
+    <hr />
+    <h1>The Grid</h1>
+<p>
+    Responsive comes with 4 tiers of 12 column fluid grids that allow for granular control over layout across all 
+    devices. The system is entirely mobile first with each level overwriting the previous one as the viewport width 
+    scales up.
+</p>
+<p>The media queries breakdown as follows:</p>
+<table class="table-list table-bordered table-striped" data-table-list="">
+    <thead>
+        <tr>
+            <th scope="col">Level</th>
+            <th>Selector</th>
+            <th>Width</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Extra small (initial)</td>
+            <td><code>.col-xs-{number}</code></td>
+            <td>Up to 48em <small>(768px at 16px/1em)</small></td>
+        </tr>
+        <tr>
+            <td>Small</td>
+            <td><code>.col-s-{number}</code></td>
+            <td>48em to 62em <small>(768px to 992px at 16px/1em)</small> </td>
+        </tr>
+        <tr>
+            <td>Medium</td>
+            <td><code>.col-m-{number}</code></td>
+            <td>62em to 75em <small>(992px to 1200px at 16px/1em)</small> </td>
+        </tr>
+        <tr>
+            <td>Large</td>
+            <td><code>.col-l-{number}</code></td>
+            <td>75em and over <small>(1200px at 16px/1em)</small> </td>
+        </tr>
+    </tbody>
+</table>
+
+</article>
+﻿    <!--[if IE 8]>     
+            <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.js"></script>
+</body>
+</html>
+

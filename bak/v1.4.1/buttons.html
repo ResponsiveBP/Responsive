@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="A lightweight html, css, and javascript framework for building responsive websites." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive :: Buttons</title>
+
+    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
+      <link href="assets/css/docs.css" rel="stylesheet" />
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="clearfix">
+                <a href="/Responsive/" rel="home" class=" push-left">Responsive</a>
+                <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
+            </div>
+            <div class="menu collapse">
+                <div class="row">
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#css">CSS</a></h2>
+                        <ul id="css" class="no-bullets collapse">
+                            <li><a href="base.html">Base</a></li>
+                            <li><a href="grid.html">Grid</a></li>
+                            <li><a href="forms.html">Forms</a></li>
+                            <li><a href="buttons.html">Buttons</a></li>
+                            <li><a href="tables.html">Tables</a></li>
+                            <li><a href="lists.html">Lists</a></li>
+                            <li><a href="media.html">Media</a></li>
+                            <li><a href="code.html">Code</a></li>
+                            <li><a href="alerts.html">Alerts</a></li>
+                        </ul>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#js">JavaScript</a></h2>
+                        <ul id="js" class="no-bullets collapse">
+                            <li><a href="autosize.html">Autosize</a></li>
+                            <li><a href="carousel.html">Carousel</a></li>
+                            <li><a href="dismiss.html">Dismiss</a></li>
+                            <li><a href="dropdown.html">Dropdown</a></li>
+                            <li><a href="lightbox.html">Lightbox</a></li>
+                            <li><a href="tabs.html">Tabs</a></li>
+                        </ul>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="gallery.html">Gallery</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <article class="container" role="main">
+
+        <header role="banner">
+            <h1 class="masthead">Buttons</h1>
+            <p>
+                Button styling in Responsive has, like everything else, been designed with the bare minimum of CSS. 
+            Hook classes have been added to mimic focus <code>.focus</code>, active <code>.active</code>, and disabled <code>.disabled</code> states.
+            </p>
+        </header>
+        <hr />
+        <section>
+            <div class="alert alert-info">
+                <p>
+                    We strongly recommend using the <code>&lt;button&gt;&lt;/button&gt;</code> element over 
+                the <code>&lt;input /&gt;</code> element for all button style markup.
+                </p>
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h1>OS Default</h1>
+                    <div>
+                        <h2>Default</h2>
+                        <p>Standard <code>button</code> element.</p>
+                        <button>button</button>
+                    </div>
+                    <div>
+                        <h2>Default</h2>
+                        <p>Standard <code>input[type="submit"]</code> element.</p>
+                        <input type="submit" value="button" />
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h1>Styled</h1>
+                    <div>
+                        <h2>Default</h2>
+                        <p>Add the class <code>.btn</code>.</p>
+                        <button class="btn">button</button>
+                    </div>
+                    <div>
+                        <h2>Default</h2>
+                        <p>Standard <code>input[type="submit"]</code> element.</p>
+                        <input type="submit" value="button" class="btn" />
+                    </div>
+                    <div>
+                        <h2>Default</h2>
+                        <p>Standard <code>a</code> element.</p>
+                        <a href="#" class="btn">button</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <section class="row">
+            <h1>Styled button States</h1>
+            <div class="column-3">
+                <div>
+                    <h2>Hover</h2>
+                    <p>Add class <code>.hover</code> to force.</p>
+                    <button class="btn hover">button</button>
+                </div>
+                <div>
+                    <p><code>input[type="submit"]</code></p>
+                    <input type="submit" value="button" class="btn hover" />
+                </div>
+                <div>
+                    <p>Standard <code>a</code> element.</p>
+                    <a href="#" class="btn hover">button</a>
+                </div>
+            </div>
+            <div class="column-3">
+                <div>
+                    <h2>Active</h2>
+                    <p>Add class <code>.active</code> to force.</p>
+                    <button class="btn active">button</button>
+                </div>
+                <div>
+                    <p><code>input[type="submit"]</code></p>
+                    <input type="submit" value="button" class="btn active" />
+                </div>
+                <div>
+                    <p>Standard <code>a</code> element.</p>
+                    <a href="#" class="btn active">button</a>
+                </div>
+            </div>
+            <div class="column-3">
+                <div>
+                    <h2>Focus</h2>
+                    <p>Add class <code>.focus</code> to force.</p>
+                    <button class="btn focus">button</button>
+                </div>
+                <div>
+                    <p><code>input[type="submit"]</code></p>
+                    <input type="submit" value="button" class="btn focus" />
+                </div>
+                <div>
+                    <p>Standard <code>a</code> element.</p>
+                    <a href="#" class="btn focus">button</a>
+                </div>
+            </div>
+            <div class="column-3">
+                <div>
+                    <h2>Disabled</h2>
+                    <p>Add class <code>.disabled</code> to force.</p>
+                    <button class="btn" disabled="">button</button>
+                </div>
+                <div>
+                    <p><code>input[type="submit"]</code></p>
+                    <input type="submit" value="button" class="btn" disabled="" />
+                </div>
+                <div>
+                    <p>Standard <code>a</code> element.</p>
+                    <a href="#" class="btn disabled">button</a>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <section class="row">
+            <h1>Inline buttons</h1>
+            <p>Add the class <code>.btn-inline</code> </p>
+            <div class="column-6">
+                <div>
+                    <h2>OS Default</h2>
+                    <input type="text" />
+                    <button class="btn-inline">submit</button>
+                </div>
+                <div>
+                    <p><code>input[type="submit"]</code></p>
+                    <input type="text" />
+                    <input type="submit" value="submit" class="btn-inline" />
+                </div>
+            </div>
+            <div class="column-6">
+                <h2>Styled</h2>
+                <div>
+                    <input type="text" />
+                    <button class="btn btn-inline">submit</button>
+                </div>
+                <div>
+                    <p><code>input[type="submit"]</code></p>
+                    <input type="text" />
+                    <input type="submit" value="submit" class="btn btn-inline" />
+                </div>
+                <div>
+                    <p>Standard <code>a</code> element.</p>
+                    <input type="text" />
+                    <a href="#" class="btn btn-inline">submit</a>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <section class="row">
+            <h2>Grouped Buttons</h2>
+            <div class="column-6">
+                <p>Wrap the buttons in a div with class <code>.btn-group</code></p>
+                <div class="btn-group">
+                    <a href="#" class="btn">first</a>
+                    <a href="#" class="btn">second</a>
+                    <a href="#" class="btn">third</a>
+                    <a href="#" class="btn">fourth</a>
+                </div>
+            </div>
+        </section>
+    </article>
+    <footer role="contentinfo" class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" role="button" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+
+    <script src="assets/js/responsive.js"></script>
+
+    <!-- Google Analytics: -->
+    <script>
+        var _gaq = [['_setAccount', 'UA-42035025-1'], ['_trackPageview']];
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = '//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s);
+        }(document, 'script'));
+    </script>
+
+    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+</body>
+</html>
