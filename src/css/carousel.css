@@ -99,14 +99,15 @@ x::-ms-reveal,
 .carousel-control,
 .carousel-control:visited {
     position: absolute;
+    display: block;
+    width: 2em;
     top: 40%;
     left: 0;
-    padding: 0 .5em;
+    padding: .5em;
     margin-top: -1em;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    background-color: #111;
     color: #fff;
     text-decoration: none;
 }
@@ -218,6 +219,7 @@ x::-ms-reveal,
         text-indent: -9999px;
         cursor: pointer;
         border: 2px solid #111;
+        background-color: transparent;
     }
 
     .carousel-indicators .active {

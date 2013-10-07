@@ -60,6 +60,27 @@
 
     }());
 
+    $.support.ie8 = (function () {
+        $.ieVersion = (function (v, div, undef) {
+            /// <summary>
+            ///     Returns the version number of currently rendering version of Internet Explorer.
+            ///     Adapted from James Padolsey"s excellent script here:
+            ///     http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/
+            ///     https://gist.github.com/527683
+            ///     https://gist.github.com/devxdev/6506658
+            /// </summary>
+            while (
+                     div.innerHTML = "<!--[if gt IE " + (++v) + "]><i></i><![endif]-->",
+                     div.getElementsByTagName("i")[0]
+                 );
+
+            return v > 4 ? v : undef;
+
+        }(3, document.createElement('div'), undefined));
+
+        return $.ieVersion && $.ieVersion === 8;
+    }());
+
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
         ///	<param name="options" type="Object" optional="true" parameterArray="true">
@@ -1400,8 +1421,7 @@
 
     resize = function () {
         // Bind the resize event and fade in.
-        var newWindowHeight,
-            oldWindowHeight,
+        var windowHeight = parseInt($window.height(), 10),
             maxWidth = parseInt($lightbox.css("max-width"), 10),
             onResize = function () {
 
@@ -1415,48 +1435,55 @@
 
                 if ($child) {
 
-                    newWindowHeight = $window.height();
+                    // Defaulting to 1px on the footer prevents the address bar from
+                    // covering the lightbox on windows phone.
+                    headerHeight = $header[0] ? $header[0].clientHeight : 0;
+                    footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
+                    closeHeight = $close[0] ? $close[0].clientHeight : 0;
+                    topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
+                    bottomHeight = footerHeight > 0 ? footerHeight : 1;
 
-                    if (newWindowHeight !== oldWindowHeight) {
+                    childHeight = windowHeight - (topHeight + bottomHeight);
 
-                        // Magic number are determined from experimentation across different browsers.
-                        headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                        footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
-                        closeHeight = $close[0] ? $close[0].clientHeight : 0;
-                        topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
-                        bottomHeight = footerHeight > 0 ? footerHeight : 1;
+                    if ($img) {
+                        // IE8 doesn't change the width as max-width is ignored and will cause the 
+                        // The image width to be set to zero.
+                        if ($.support.ie8) {
+                            // This isn't getting updated?
+                            childHeight = parseInt($window.height(), 10) - (topHeight + bottomHeight);
 
-                        childHeight = newWindowHeight - (topHeight + bottomHeight);
+                            $img.css({
+                                "max-height": childHeight,
+                                "max-width": "100%"
+                            });
 
-                        if ($img) {
+                        } else {
                             $img.css("max-height", childHeight);
                         }
-                        else if ($content) {
-                            $lightbox.css("max-height", childHeight);
-                            $content.css("max-height", childHeight);
-                        }
-                        else {
-
-                            var clientWidth = $iframe[0].clientWidth,
-                                clientHeight = $iframe[0].clientHeight,
-                                ratio = clientWidth / clientHeight,
-                                childWidth = childHeight * ratio;
-
-                            $.each([$lightbox, $iframe], function () {
-
-                                this.css({
-                                    "max-height": childHeight,
-                                    "max-width": childWidth > maxWidth ? maxWidth : childWidth
-                                });
-                            });
-                        }
-                        // Values are determined by border fix in css.
-                        $lightbox.css({
-                            "margin-top": topHeight > 0 ? topHeight : ""
-                        });
-
-                        oldWindowHeight = newWindowHeight;
                     }
+                    else if ($content) {
+                        $lightbox.css("max-height", childHeight);
+                        $content.css("max-height", childHeight);
+                    }
+                    else {
+
+                        var clientWidth = $iframe[0].clientWidth,
+                            clientHeight = $iframe[0].clientHeight,
+                            ratio = clientWidth / clientHeight,
+                            childWidth = childHeight * ratio;
+
+                        $.each([$lightbox, $iframe], function () {
+
+                            this.css({
+                                "max-height": childHeight,
+                                "max-width": childWidth > maxWidth ? maxWidth : childWidth
+                            });
+                        });
+                    }
+                    // Values are determined by border fix in css.
+                    $lightbox.css({
+                        "margin-top": topHeight > 0 ? topHeight : ""
+                    });
                 }
             };
 

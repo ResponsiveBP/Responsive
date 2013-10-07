@@ -60,6 +60,27 @@
 
     }());
 
+    $.support.ie8 = (function () {
+        $.ieVersion = (function (v, div, undef) {
+            /// <summary>
+            ///     Returns the version number of currently rendering version of Internet Explorer.
+            ///     Adapted from James Padolsey"s excellent script here:
+            ///     http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/
+            ///     https://gist.github.com/527683
+            ///     https://gist.github.com/devxdev/6506658
+            /// </summary>
+            while (
+                     div.innerHTML = "<!--[if gt IE " + (++v) + "]><i></i><![endif]-->",
+                     div.getElementsByTagName("i")[0]
+                 );
+
+            return v > 4 ? v : undef;
+
+        }(3, document.createElement('div'), undefined));
+
+        return $.ieVersion && $.ieVersion === 8;
+    }());
+
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
         ///	<param name="options" type="Object" optional="true" parameterArray="true">
