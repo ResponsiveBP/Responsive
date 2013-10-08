@@ -31,6 +31,46 @@
 
     "use strict";
 
+    $.support.getVendorPrefix = (function () {
+        /// <summary>Gets the correct vendor prefix for the current browser.</summary>
+        /// <param name="prop" type="String">The property to return the name for.</param>
+        /// <returns type="Object">
+        ///      The object containing the correct vendor prefixes.
+        ///      &#10;    1: js - The vendor prefix for the JavaScript property.
+        ///      &#10;    2: css - The vendor prefix for the CSS property.  
+        /// </returns>
+
+        var rprefixes = /^(Moz|Webkit|O|ms)(?=[A-Z])/,
+            div = document.createElement("div");
+
+        for (var prop in div.style) {
+            if (rprefixes.test(prop)) {
+                // Test is faster than match, so it's better to perform
+                // that on the lot and match only when necessary.
+                var match = prop.match(rprefixes)[0];
+                return {
+                    js: match,
+                    css: "-" + match.toLowerCase() + "-"
+                };
+            }
+        }
+
+        // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
+        // However (prop in style) returns the correct value, so we'll have to test for
+        // the precence of a specific property.
+        if ("WebkitOpacity" in div.style) {
+            return {
+                js: "Webkit",
+                css: "-webkit-"
+            };
+        }
+
+        return {
+            js: "",
+            css: ""
+        };
+    }());
+
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
@@ -39,7 +79,7 @@
             /// <summary>Gets transition end event for the current browser.</summary>
             /// <returns type="Object">The transition end event for the current browser.</returns>
 
-            var el = document.createElement("responsive"),
+            var div = document.createElement("div"),
                 transEndEventNames = {
                     "transition": "transitionend",
                     "WebkitTransition": "webkitTransitionEnd",
@@ -47,8 +87,10 @@
                     "OTransition": "oTransitionEnd otransitionend"
                 };
 
+            // Could use the other method but I'm intentionally keeping them
+            // separate for now.
             for (var name in transEndEventNames) {
-                if (el.style[name] !== undefined) {
+                if (div.style[name] !== undefined) {
                     return { end: transEndEventNames[name] };
                 }
             }
@@ -76,7 +118,7 @@
 
             return v > 4 ? v : undef;
 
-        }(3, document.createElement('div'), undefined));
+        }(3, document.createElement("div"), undefined));
 
         return $.ieVersion && $.ieVersion === 8;
     }());

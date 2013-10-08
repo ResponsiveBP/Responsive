@@ -64,7 +64,7 @@
         }
 
         // Target is a local protocol.
-        if (locationParts === null || locationParts[2] === undefined || rlocalProtocol.test(locationParts[1])) {
+        if (!locationParts || !locationParts[2] || rlocalProtocol.test(locationParts[1])) {
             return false;
         }
 

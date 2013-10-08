@@ -56,11 +56,17 @@
         left: 0\9;
     }
 
+.carousel .carousel-active {
+    position: relative;
+    z-index: 1;
+}
+
 .carousel .next,
 .carousel .prev,
 .carousel .swipe {
     position: absolute;
     top: 0;
+    z-index: 0;
     width: 100%;
 }
 
@@ -110,6 +116,7 @@ x::-ms-reveal,
     text-align: center;
     color: #fff;
     text-decoration: none;
+    z-index: 3;
 }
 
     .carousel-control.right {

@@ -14,6 +14,7 @@
 
     // General variables.
     var supportTransition = $.support.transition,
+        vendorPrefixes = $.support.getVendorPrefix,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
@@ -39,12 +40,19 @@
                     return;
                 }
 
-                var isNext = event.delta.x > 0,
-                    fallback = isNext ? "last" : "first",
+                if (this.sliding) {
+                    return;
+                }
+
+                this.pause();
+
+                // Left is next.
+                var isNext = event.delta.x < 0,
+                    type = isNext ? "next" : "prev",
+                    fallback = isNext ? "first" : "last",
                     activePosition = getActiveIndex.call(this),
                     $activeItem = $(this.$items[activePosition]),
-                    $nextItem = $(this.$items[isNext ? activePosition + 1 : activePosition - 1]),
-                    $prevItem = $(this.$items[isNext ? activePosition - 1 : activePosition + 1]);
+                    $nextItem = $activeItem[type]();
 
                 if (!$nextItem.length) {
 
@@ -55,30 +63,61 @@
                     $nextItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
                 }
 
-                if (!$prevItem.length) {
-
-                    if (!this.options.wrap) {
-                        return;
-                    }
-
-                    $prevItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
-                }
-
+                // Get the distance swiped as a percentage.
                 var width = parseFloat($activeItem.width()),
-                    percent = (event.delta.x / width) * 100,
+                    percent = parseInt((event.delta.x / width) * 100, 10),
                     diff = isNext ? 100 : -100;
 
-                if (percent > -100 && percent < 100) {
+                // Shift the items but put a limit on sensitivity.
+                if (percent > -100 && percent < 100 && (percent < -10 || percent > 10)) {
                     $activeItem.addClass("no-transition").css({ "transform": "translateX(" + percent + "%)" });
                     $nextItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent + diff) + "%)" });
-                    $prevItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent - diff) + "%)" });
                 }
             }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
 
-                var direction = event.direction,
-                    method = (direction === "up" || direction === "left") ? "next" : "prev";
+                if (this.sliding) {
+                    return;
+                }
 
+                var direction = event.direction,
+                    method = null;
+
+                if (direction === "left") {
+                    method = "next";
+                } else if (direction === "right") {
+                    method = "prev";
+                }
+
+                // Re-enable the transitions.
+                this.$items.each(function () {
+                    $(this).removeClass("no-transition");
+                });
+
+                if (supportTransition) {
+
+                    // Trim the animation duration based on the current position.
+                    var activePosition = getActiveIndex.call(this),
+                        $activeItem = $(this.$items[activePosition]),
+                        prop = vendorPrefixes.css + "transition-duration",
+                        duration = $activeItem.css(prop),
+                        // Get the transform matrix and pull the right value.
+                        // index of 4 for translateX.
+                        matrix = $activeItem.css(vendorPrefixes.css + "transform"),
+                        translateX = (matrix.match(/-?[0-9\.]+/g))[4],
+
+                    // Now turn that into a percentage.
+                       width = parseFloat($activeItem.width()),
+                       percent = parseInt((Math.abs(translateX) / width) * 100, 10),
+                       newDuration = ((100 - percent) / 100) * parseFloat(duration);
+
+                    // Set the new temporary duration.
+                    this.$items.each(function () {
+                        $(this).css(prop, newDuration + "s");
+                    });
+                }
+
+                this.cycle();
                 this[method]();
 
             }, this));
@@ -101,8 +140,6 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
-        this.touchDelta = {};
-        this.touchStart = {};
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events
@@ -110,7 +147,7 @@
                          .on(emouseleave, $.proxy(this.cycle, this));
         }
 
-        if (this.options.enabletouch) {
+        if (this.options.enabletouch && this.options.mode === "slide") {
             manageTouch.call(this);
         }
     };
@@ -219,13 +256,6 @@
             this.pause();
         }
 
-        if (slideMode && this.$items) {
-            // Clear the added css.
-            this.$items.each(function () {
-                $(this).removeClass("no-transition swipe").css({ "transform": "" });
-            });
-        }
-
         // Work out which item to slide to.
         if (!$nextItem.length) {
 
@@ -268,8 +298,17 @@
         }
 
         var complete = function () {
+
+            if (slideMode && self.$items) {
+                // Clear the transition properties if set.
+                self.$items.each(function () {
+                    $(this).css({ "transition": "" });
+                });
+            }
+
             $activeItem.removeClass(["carousel-active", direction].join(" "));
             $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+
             self.sliding = false;
             self.$element.trigger(slidEvent);
         };
@@ -280,6 +319,13 @@
         // Do the slide.
         $activeItem.addClass(direction);
         $nextItem.addClass(direction);
+
+        if (slideMode && this.$items) {
+            // Clear the added css.
+            this.$items.each(function () {
+                $(this).removeClass("swipe").css({ "transform": "" });
+            });
+        }
 
         supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
 
