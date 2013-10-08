@@ -99,17 +99,20 @@
                     // Trim the animation duration based on the current position.
                     var activePosition = getActiveIndex.call(this),
                         $activeItem = $(this.$items[activePosition]),
-                        prop = vendorPrefixes.css + "transition-duration",
-                        duration = $activeItem.css(prop),
-                        // Get the transform matrix and pull the right value.
-                        // index of 4 for translateX.
-                        matrix = $activeItem.css(vendorPrefixes.css + "transform"),
-                        translateX = (matrix.match(/-?[0-9\.]+/g))[4],
+                        prop = vendorPrefixes.css + "transition-duration";
 
+                    if (!this.translationDuration) {
+                        this.translationDuration = parseFloat($activeItem.css(prop));
+                    }
+
+                    // Get the transform matrix and pull the right value.
+                    // index of 4 for translateX.
+                    var matrix = $activeItem.css(vendorPrefixes.css + "transform"),
+                           translateX = (matrix.match(/-?[0-9\.]+/g))[4],
                     // Now turn that into a percentage.
-                       width = parseFloat($activeItem.width()),
-                       percent = parseInt((Math.abs(translateX) / width) * 100, 10),
-                       newDuration = ((100 - percent) / 100) * parseFloat(duration);
+                        width = parseFloat($activeItem.width()),
+                        percent = parseInt((Math.abs(translateX) / width) * 100, 10),
+                        newDuration = ((100 - percent) / 100) * this.translationDuration;
 
                     // Set the new temporary duration.
                     this.$items.each(function () {
@@ -140,6 +143,7 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
+        this.translationDuration = null;
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events
