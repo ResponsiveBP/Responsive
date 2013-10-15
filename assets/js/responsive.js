@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.4.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.4.1 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -126,6 +126,7 @@
             this.$element = $(element);
             this.$clone = null;
             this.options = null;
+            this.sizing = null;
 
             // Initial setup.
             if ($.isPlainObject(options)) {
@@ -180,18 +181,20 @@
         size: function () {
 
             var transition = $.support.transition,
+                self = this,
                 $element = this.$element,
                 element = this.$element[0],
                 $clone = this.$clone,
                 clone = $clone[0],
                 height = 0,
+                startHeight,
+                endHeight,
                 sizeEvent = $.Event("size.autosize.responsive"),
                 sizedEvent = $.Event("sized.autosize.responsive"),
                 complete = function () {
+                    self.sizing = false;
                     $element.trigger(sizedEvent);
                 };
-
-            $element.trigger(sizeEvent);
 
             // Set the width of the clone to match.
             $clone.width($element.width());
@@ -200,7 +203,8 @@
             $clone.val($element.val());
 
             // Set the height so animation will work.
-            $element.height($clone.height());
+            startHeight = $clone.height();
+            $element.height(startHeight);
 
             // Shrink
             while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
@@ -214,18 +218,31 @@
             }
             clone.rows += 1;
 
-            // Reset the height
-            $element.height($clone.height());
+            endHeight = $clone.height();
 
-            // Do our callback
-            if (transition) {
+            if (startHeight !== endHeight) {
 
-                $element.one(transition.end, complete);
+                $element.trigger(sizeEvent);
 
-            } else {
+                if (this.sizing || sizeEvent.isDefaultPrevented()) {
+                    return;
+                }
 
-                complete();
+                this.sizing = true;
 
+                // Reset the height
+                $element.height($clone.height());
+
+                // Do our callback
+                if (transition) {
+
+                    $element.one(transition.end, complete);
+
+                } else {
+
+                    complete();
+
+                }
             }
         }
     };
@@ -369,6 +386,10 @@
                 this.paused = false;
             }
 
+            if (this.interval) {
+                w.clearInterval(this.interval);
+            }
+
             if (this.options.interval && !this.paused) {
 
                 // Cycle to the next item on the set interval
@@ -424,8 +445,7 @@
             }
 
             // Clear the interval and return the carousel for chaining.
-            w.clearInterval(this.interval);
-            this.interval = null;
+            this.interval = w.clearInterval(this.interval);
 
             return this;
 
@@ -462,9 +482,6 @@
                 index,
                 $thumbnails;
 
-            // Mark as sliding.
-            this.sliding = true;
-
             if (isCycling) {
                 // Pause if cycling.
                 this.pause();
@@ -477,57 +494,54 @@
                 return false;
             }
 
-            if (supportTransition && (slideMode || fadeMode)) {
+            if (this.interval) {
+                this.pause();
+            }
 
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
+            // Trigger the slide event.
+            this.$element.trigger(slideEvent);
 
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
+            if (this.sliding || slideEvent.isDefaultPrevented()) {
+                return false;
+            }
 
-                // Good to go? Then let's slide.
-                $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
+            // Mark as sliding.
+            this.sliding = true;
 
-                // Do the slide.
-                $activeItem.addClass(direction);
-                $nextItem.addClass(direction);
+            var complete = function () {
 
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
-
-                // Callback.
-                this.$element.one(supportTransition.end, function () {
-
-                    $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
-                    $activeItem.removeClass(["carousel-active", direction].join(" "));
-
-                    self.sliding = false;
-                    self.$element.trigger(slidEvent);
-
-                });
-            } else {
-
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
-
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
-
-                $activeItem.removeClass("carousel-active");
-                $nextItem.addClass("carousel-active");
-
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
+                $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+                $activeItem.removeClass(["carousel-active", direction].join(" "));
 
                 self.sliding = false;
                 self.$element.trigger(slidEvent);
-            }
+            };
+
+            // Tag the thumbnails.
+            index = $nextItem.index();
+            $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
+            $thumbnails.eq(index).addClass("on");
+
+            // Good to go? Then let's slide.
+            $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
+
+            // Do the slide.
+            $activeItem.addClass(direction);
+            $nextItem.addClass(direction);
+
+            supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
+
+            // Callback.
+            this.$element.one(supportTransition.end, function () {
+
+                $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+                $activeItem.removeClass(["carousel-active", direction].join(" "));
+
+                self.sliding = false;
+                self.$element.trigger(slidEvent);
+
+            });
+
 
             // Restart the cycle.
             if (isCycling) {
@@ -566,7 +580,6 @@
             }
 
         });
-
     };
 
     // Define the defaults.
@@ -591,39 +604,6 @@
 
         });
 
-    }).on("focus.carousel.responsive blur.carousel.responsive", function (event) {
-
-        var $this = $(this),
-             prevType = $this.data("prevType"),
-             action;
-
-        //  Reduce double fire issues
-        if (prevType !== event.type) {
-            switch (event.type) {
-                case "blur":
-                    action = "pause";
-                    break;
-                case "focus":
-                    action = "cycle";
-                    break;
-            }
-        }
-
-        $this.data("prevType", event.type);
-
-        if (action === "pause" || action === "cycle") {
-            $(".carousel").each(function () {
-
-                var $self = $(this),
-                    carousel = $self.data("carousel");
-
-                if (carousel && carousel[action]) {
-                    // It has data so perform the given action.
-                    carousel[action]();
-                }
-
-            });
-        }
     });
 
 }(jQuery, window));/*
@@ -658,6 +638,8 @@
                     $target.addClass("hidden").trigger(closedEvent);
 
                 };
+
+            $target.trigger(closeEvent);
 
             if (this.transitioning || closeEvent.isDefaultPrevented()) {
                 return;
@@ -790,7 +772,7 @@
 
             this.$element[dimension](this.endSize || "auto");
 
-            this.transition("removeClass", $.Event("show"), "shown");
+            this.transition("removeClass", $.Event("show.dropdown.responsive"), "shown");
         },
         hide: function () {
 
@@ -814,7 +796,7 @@
 
             this.$element.removeClass("expand");
             this.$element[dimension](0);
-            this.transition("addClass", $.Event("hide"), "hidden");
+            this.transition("addClass", $.Event("hide.dropdown.responsive"), "hidden");
 
         },
         transition: function (method, startEvent, completeEvent) {
@@ -928,7 +910,8 @@
             LEFT: 37,
             RIGHT: 39
         },
-        rexternalHost = new RegExp("//" + document.location.host + "($|/)"),
+        protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
+        rexternalHost = new RegExp("//" + w.location.host + "($|/)"),
         // Taken from Fancybox
         rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
         // Taken from jQuery.
@@ -945,11 +928,16 @@
 
     // Private methods.
     var isExternalUrl = function (url) {
+        // Handle different host types.
         // Split the url into it's various parts.
-        var locationParts = rurl.exec(url);
+        var locationParts = rurl.exec(url) || rurl.exec(protocol + url);
+
+        if (locationParts === undefined || rhash.test(url)) {
+            return false;
+        }
 
         // Target is a local protocol.
-        if (locationParts === null || rlocalProtocol.test(locationParts[1])) {
+        if (!locationParts || !locationParts[2] || rlocalProtocol.test(locationParts[1])) {
             return false;
         }
 
@@ -996,7 +984,7 @@
             description = this.options.description,
             close = this.options.close,
             target = this.options.target,
-            local = !this.options.external,
+            local = !this.options.external && !isExternalUrl(target),
             group = this.options.group,
             nextText = this.options.next,
             previousText = this.options.previous,
@@ -1047,6 +1035,9 @@
 
                 $lightbox.addClass("iframe");
 
+                // Normalize the src.
+                var src = target.indexOf("http") !== 0 ? protocol + target : target;
+
                 // Have to add inline styles for older browsers.
                 $iframe = $("<iframe/>")
                                    .attr({
@@ -1058,7 +1049,7 @@
                                        "webkitallowfullscreen": "",
                                        "mozallowfullscreen": "",
                                        "allowfullscreen": "",
-                                       "src": target
+                                       "src": src
                                    })
                                   .appendTo($iframeWrap);
 
