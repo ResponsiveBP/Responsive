@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v1.4.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v1.4.1 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -962,10 +962,27 @@ table {
         display: none;
     }
 
+        .table-list tbody,
         .table-list tr,
         .table-list td,
         .table-list th[scope="row"] {
             display: block;
+        }
+
+            .table-list tr:before,
+            .table-list tr:after {
+                content: " ";
+                display: table;
+            }
+
+            .table-list tr:after {
+                clear: both;
+            }
+
+        .table-list td,
+        .table-list th[scope="row"] {
+            float: left;
+            width: 100%;
         }
 
             .table-list td:before,
@@ -985,16 +1002,13 @@ table {
 
 @media (min-width: 48em) {
     /*
-             * Reset defaults.
-             */
+     * Reset defaults.
+     */
     .table-list {
         display: table;
         overflow: visible;
+        table-layout: auto;
     }
-
-        .table-list tr {
-            display: table-row;
-        }
 
         .table-list thead {
             display: table-header-group;
@@ -1004,10 +1018,20 @@ table {
             display: table-footer-group;
         }
 
+        .table-list tbody {
+            display: table-row-group;
+        }
+
+        .table-list tr {
+            display: table-row;
+        }
+
         .table-list td,
         .table-list th,
         .table-list th[scope="row"] {
             display: table-cell;
+            width: auto;
+            float: none;
         }
 
             .table-list td:before,
@@ -1478,7 +1502,8 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 input[type="range"]:focus,
 select:focus,
-.no-edit:focus textarea.focus,
+.no-edit:focus,
+textarea.focus,
 input[type="text"].focus,
 input[type="file"].focus,
 input[type="password"].focus,
@@ -1573,7 +1598,7 @@ textarea[readonly] {
 .form-horizontal input[type="color"],
 .form-horizontal select,
 .form-horizontal textarea,
-.form-horizontal .no-edit-input,
+.form-horizontal .no-edit,
 .form-horizontal .input-tamer,
 .form-horizontal fieldset > p,
 .form-horizontal fieldset > span {
@@ -1946,10 +1971,10 @@ pre code {
  */
 .carousel-fade .carousel-item,
 .carousel[data-carousel-mode="fade"] .carousel-item {
-    -webkit-transition: opacity 1.4s ease-in-out;
-    -moz-transition: opacity 1.4s ease-in-out;
-    -o-transition: opacity 1.4s ease-in-out;
-    transition: opacity 1.4s ease-in-out;
+    -webkit-transition: opacity .7s ease-in-out;
+    -moz-transition: opacity .7s ease-in-out;
+    -o-transition: opacity .7s ease-in-out;
+    transition: opacity .7s ease-in-out;
     position: absolute;
     top: 0;
     right: 0;
