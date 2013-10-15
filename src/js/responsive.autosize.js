@@ -15,6 +15,7 @@
             this.$element = $(element);
             this.$clone = null;
             this.options = null;
+            this.sizing = null;
 
             // Initial setup.
             if ($.isPlainObject(options)) {
@@ -69,18 +70,20 @@
         size: function () {
 
             var transition = $.support.transition,
+                self = this,
                 $element = this.$element,
                 element = this.$element[0],
                 $clone = this.$clone,
                 clone = $clone[0],
                 height = 0,
+                startHeight,
+                endHeight,
                 sizeEvent = $.Event("size.autosize.responsive"),
                 sizedEvent = $.Event("sized.autosize.responsive"),
                 complete = function () {
+                    self.sizing = false;
                     $element.trigger(sizedEvent);
                 };
-
-            $element.trigger(sizeEvent);
 
             // Set the width of the clone to match.
             $clone.width($element.width());
@@ -89,7 +92,8 @@
             $clone.val($element.val());
 
             // Set the height so animation will work.
-            $element.height($clone.height());
+            startHeight = $clone.height();
+            $element.height(startHeight);
 
             // Shrink
             while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
@@ -103,18 +107,31 @@
             }
             clone.rows += 1;
 
-            // Reset the height
-            $element.height($clone.height());
+            endHeight = $clone.height();
 
-            // Do our callback
-            if (transition) {
+            if (startHeight !== endHeight) {
 
-                $element.one(transition.end, complete);
+                $element.trigger(sizeEvent);
 
-            } else {
+                if (this.sizing || sizeEvent.isDefaultPrevented()) {
+                    return;
+                }
 
-                complete();
+                this.sizing = true;
 
+                // Reset the height
+                $element.height($clone.height());
+
+                // Do our callback
+                if (transition) {
+
+                    $element.one(transition.end, complete);
+
+                } else {
+
+                    complete();
+
+                }
             }
         }
     };

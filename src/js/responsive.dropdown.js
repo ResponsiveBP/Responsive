@@ -69,7 +69,7 @@
 
             this.$element[dimension](this.endSize || "auto");
 
-            this.transition("removeClass", $.Event("show"), "shown");
+            this.transition("removeClass", $.Event("show.dropdown.responsive"), "shown");
         },
         hide: function () {
 
@@ -93,7 +93,7 @@
 
             this.$element.removeClass("expand");
             this.$element[dimension](0);
-            this.transition("addClass", $.Event("hide"), "hidden");
+            this.transition("addClass", $.Event("hide.dropdown.responsive"), "hidden");
 
         },
         transition: function (method, startEvent, completeEvent) {

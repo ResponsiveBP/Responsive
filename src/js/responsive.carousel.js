@@ -66,6 +66,10 @@
                 this.paused = false;
             }
 
+            if (this.interval) {
+                w.clearInterval(this.interval);
+            }
+
             if (this.options.interval && !this.paused) {
 
                 // Cycle to the next item on the set interval
@@ -121,8 +125,7 @@
             }
 
             // Clear the interval and return the carousel for chaining.
-            w.clearInterval(this.interval);
-            this.interval = null;
+            this.interval = w.clearInterval(this.interval);
 
             return this;
 
@@ -159,9 +162,6 @@
                 index,
                 $thumbnails;
 
-            // Mark as sliding.
-            this.sliding = true;
-
             if (isCycling) {
                 // Pause if cycling.
                 this.pause();
@@ -174,57 +174,54 @@
                 return false;
             }
 
-            if (supportTransition && (slideMode || fadeMode)) {
+            if (this.interval) {
+                this.pause();
+            }
 
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
+            // Trigger the slide event.
+            this.$element.trigger(slideEvent);
 
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
+            if (this.sliding || slideEvent.isDefaultPrevented()) {
+                return false;
+            }
 
-                // Good to go? Then let's slide.
-                $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
+            // Mark as sliding.
+            this.sliding = true;
 
-                // Do the slide.
-                $activeItem.addClass(direction);
-                $nextItem.addClass(direction);
+            var complete = function () {
 
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
-
-                // Callback.
-                this.$element.one(supportTransition.end, function () {
-
-                    $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
-                    $activeItem.removeClass(["carousel-active", direction].join(" "));
-
-                    self.sliding = false;
-                    self.$element.trigger(slidEvent);
-
-                });
-            } else {
-
-                // Trigger the slide event.
-                this.$element.trigger(slideEvent);
-
-                if (slideEvent.isDefaultPrevented()) {
-                    return false;
-                }
-
-                $activeItem.removeClass("carousel-active");
-                $nextItem.addClass("carousel-active");
-
-                // Tag the thumbnails.
-                index = $nextItem.index();
-                $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
-                $thumbnails.eq(index).addClass("on");
+                $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+                $activeItem.removeClass(["carousel-active", direction].join(" "));
 
                 self.sliding = false;
                 self.$element.trigger(slidEvent);
-            }
+            };
+
+            // Tag the thumbnails.
+            index = $nextItem.index();
+            $thumbnails = this.$element.find("[data-carousel-slide]").parent("li").removeClass("on");
+            $thumbnails.eq(index).addClass("on");
+
+            // Good to go? Then let's slide.
+            $nextItem.addClass(type)[0].offsetWidth; // Force reflow.
+
+            // Do the slide.
+            $activeItem.addClass(direction);
+            $nextItem.addClass(direction);
+
+            supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
+
+            // Callback.
+            this.$element.one(supportTransition.end, function () {
+
+                $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+                $activeItem.removeClass(["carousel-active", direction].join(" "));
+
+                self.sliding = false;
+                self.$element.trigger(slidEvent);
+
+            });
+
 
             // Restart the cycle.
             if (isCycling) {
@@ -263,7 +260,6 @@
             }
 
         });
-
     };
 
     // Define the defaults.
@@ -288,39 +284,6 @@
 
         });
 
-    }).on("focus.carousel.responsive blur.carousel.responsive", function (event) {
-
-        var $this = $(this),
-             prevType = $this.data("prevType"),
-             action;
-
-        //  Reduce double fire issues
-        if (prevType !== event.type) {
-            switch (event.type) {
-                case "blur":
-                    action = "pause";
-                    break;
-                case "focus":
-                    action = "cycle";
-                    break;
-            }
-        }
-
-        $this.data("prevType", event.type);
-
-        if (action === "pause" || action === "cycle") {
-            $(".carousel").each(function () {
-
-                var $self = $(this),
-                    carousel = $self.data("carousel");
-
-                if (carousel && carousel[action]) {
-                    // It has data so perform the given action.
-                    carousel[action]();
-                }
-
-            });
-        }
     });
 
 }(jQuery, window));

@@ -111,10 +111,10 @@
  */
 .carousel-fade .carousel-item,
 .carousel[data-carousel-mode="fade"] .carousel-item {
-    -webkit-transition: opacity 1.4s ease-in-out;
-    -moz-transition: opacity 1.4s ease-in-out;
-    -o-transition: opacity 1.4s ease-in-out;
-    transition: opacity 1.4s ease-in-out;
+    -webkit-transition: opacity .7s ease-in-out;
+    -moz-transition: opacity .7s ease-in-out;
+    -o-transition: opacity .7s ease-in-out;
+    transition: opacity .7s ease-in-out;
     position: absolute;
     top: 0;
     right: 0;

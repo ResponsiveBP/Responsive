@@ -31,6 +31,8 @@
 
                 };
 
+            $target.trigger(closeEvent);
+
             if (this.transitioning || closeEvent.isDefaultPrevented()) {
                 return;
             }

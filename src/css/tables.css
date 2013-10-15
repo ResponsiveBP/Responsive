@@ -13,10 +13,27 @@
         display: none;
     }
 
+        .table-list tbody,
         .table-list tr,
         .table-list td,
         .table-list th[scope="row"] {
             display: block;
+        }
+
+            .table-list tr:before,
+            .table-list tr:after {
+                content: " ";
+                display: table;
+            }
+
+            .table-list tr:after {
+                clear: both;
+            }
+
+        .table-list td,
+        .table-list th[scope="row"] {
+            float: left;
+            width: 100%;
         }
 
             .table-list td:before,
@@ -36,16 +53,13 @@
 
 @media (min-width: 48em) {
     /*
-             * Reset defaults.
-             */
+     * Reset defaults.
+     */
     .table-list {
         display: table;
         overflow: visible;
+        table-layout: auto;
     }
-
-        .table-list tr {
-            display: table-row;
-        }
 
         .table-list thead {
             display: table-header-group;
@@ -55,10 +69,20 @@
             display: table-footer-group;
         }
 
+        .table-list tbody {
+            display: table-row-group;
+        }
+
+        .table-list tr {
+            display: table-row;
+        }
+
         .table-list td,
         .table-list th,
         .table-list th[scope="row"] {
             display: table-cell;
+            width: auto;
+            float: none;
         }
 
             .table-list td:before,
