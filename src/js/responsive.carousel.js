@@ -89,7 +89,7 @@
             // Since the index is zero based we need to subtract one.
             position -= 1;
 
-            if (position > ($children.length) || position < 0) {
+            if (position > ($children.length - 1) || position < 0) {
 
                 return false;
             }
@@ -125,7 +125,8 @@
             }
 
             // Clear the interval and return the carousel for chaining.
-            this.interval = w.clearInterval(this.interval);
+            w.clearInterval(this.interval);
+            this.interval = null;
 
             return this;
 
@@ -181,6 +182,8 @@
             // Trigger the slide event.
             this.$element.trigger(slideEvent);
 
+
+
             if (this.sliding || slideEvent.isDefaultPrevented()) {
                 return false;
             }
@@ -189,7 +192,6 @@
             this.sliding = true;
 
             var complete = function () {
-
                 $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
                 $activeItem.removeClass(["carousel-active", direction].join(" "));
 
@@ -209,19 +211,8 @@
             $activeItem.addClass(direction);
             $nextItem.addClass(direction);
 
-            supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
-
             // Callback.
-            this.$element.one(supportTransition.end, function () {
-
-                $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
-                $activeItem.removeClass(["carousel-active", direction].join(" "));
-
-                self.sliding = false;
-                self.$element.trigger(slidEvent);
-
-            });
-
+            supportTransition && (slideMode || fadeMode) ? this.$element.one(supportTransition.end, complete) : complete();
 
             // Restart the cycle.
             if (isCycling) {
