@@ -250,7 +250,7 @@
         var maxWidth = parseInt($lightbox.css("max-width"), 10),
             onResize = function () {
 
-                var windowHeight = parseInt($window.height(), 10),
+                var windowHeight = $window.height(),
                     headerHeight,
                     footerHeight,
                     closeHeight,
@@ -264,9 +264,9 @@
 
                     // Defaulting to 1px on the footer prevents the address bar from
                     // covering the lightbox on windows phone.
-                    headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                    footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
-                    closeHeight = $close[0] ? $close[0].clientHeight : 0;
+                    headerHeight = $header.height() || 0;
+                    footerHeight = $footer.height() || 0;
+                    closeHeight = $close.height() || 0;
                     topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
                     bottomHeight = footerHeight > 0 ? footerHeight : 1;
                     diff = topHeight + bottomHeight;
@@ -291,9 +291,9 @@
                     }
                     else {
 
-                        var clientWidth = $iframe[0].clientWidth,
-                            clientHeight = $iframe[0].clientHeight,
-                            ratio = clientWidth / clientHeight,
+                        var iframeWidth = $iframe.width(),
+                            iframeHeight = $iframe.height(),
+                            ratio = iframeWidth / iframeHeight,
                             childWidth = childHeight * ratio;
 
                         $.each([$lightbox, $iframe], function () {
@@ -326,7 +326,7 @@
                     bottom = top + childHeight;
 
                     $lightbox.css({
-                        "margin-top": footerHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? (top - margin) * -2 : ""
+                        "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? (top - margin) * -2 : -(topHeight)
                     });
                 }
             };
