@@ -323,7 +323,12 @@
                         top = parseInt($lightbox.offset().top);
                     }
 
-                    bottom = top + childHeight;
+                    bottom = top + $child.height(); //childHeight;
+
+                    console.log(top);
+                    console.log(bottom);
+                    console.log(childHeight);
+                    console.log(windowHeight);
 
                     $lightbox.css({
                         "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? (top - margin) * -2 : -(topHeight)
