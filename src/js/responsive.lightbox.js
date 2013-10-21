@@ -266,7 +266,7 @@
                     // covering the lightbox on windows phone.
                     headerHeight = $header.height() || 0;
                     footerHeight = $footer.height() || 0;
-                    closeHeight = $close.height() || 0;
+                    closeHeight = $close.outerHeight() || 0;
                     topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
                     bottomHeight = footerHeight > 0 ? footerHeight : 1;
                     diff = topHeight + bottomHeight;
@@ -323,15 +323,12 @@
                         top = parseInt($lightbox.offset().top);
                     }
 
-                    bottom = top + $child.height(); //childHeight;
+                    var fallback = footerHeight > 1 ? -((topHeight + bottomHeight) / 2) : "";
 
-                    console.log(top);
-                    console.log(bottom);
-                    console.log(childHeight);
-                    console.log(windowHeight);
+                    bottom = top + $child.height();
 
                     $lightbox.css({
-                        "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? (top - margin) * -2 : -(topHeight)
+                        "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? ((top - margin) * -2) + 4 : fallback
                     });
                 }
             };

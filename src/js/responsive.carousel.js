@@ -64,7 +64,7 @@
                 }
 
                 // Get the distance swiped as a percentage.
-                var width = parseFloat($activeItem.width()),
+                var width = $activeItem.width(),
                     percent = parseInt((event.delta.x / width) * 100, 10),
                     diff = isNext ? 100 : -100;
 
@@ -110,7 +110,7 @@
                     var matrix = $activeItem.css(vendorPrefixes.css + "transform"),
                            translateX = (matrix.match(/-?[0-9\.]+/g))[4],
                     // Now turn that into a percentage.
-                        width = parseFloat($activeItem.width()),
+                        width = $activeItem.width(),
                         percent = parseInt((Math.abs(translateX) / width) * 100, 10),
                         newDuration = ((100 - percent) / 100) * this.translationDuration;
 

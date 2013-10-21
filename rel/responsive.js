@@ -627,7 +627,7 @@
                 }
 
                 // Get the distance swiped as a percentage.
-                var width = parseFloat($activeItem.width()),
+                var width = $activeItem.width(),
                     percent = parseInt((event.delta.x / width) * 100, 10),
                     diff = isNext ? 100 : -100;
 
@@ -673,7 +673,7 @@
                     var matrix = $activeItem.css(vendorPrefixes.css + "transform"),
                            translateX = (matrix.match(/-?[0-9\.]+/g))[4],
                     // Now turn that into a percentage.
-                        width = parseFloat($activeItem.width()),
+                        width = $activeItem.width(),
                         percent = parseInt((Math.abs(translateX) / width) * 100, 10),
                         newDuration = ((100 - percent) / 100) * this.translationDuration;
 
@@ -1516,7 +1516,7 @@
         var maxWidth = parseInt($lightbox.css("max-width"), 10),
             onResize = function () {
 
-                var windowHeight = parseInt($window.height(), 10),
+                var windowHeight = $window.height(),
                     headerHeight,
                     footerHeight,
                     closeHeight,
@@ -1530,9 +1530,9 @@
 
                     // Defaulting to 1px on the footer prevents the address bar from
                     // covering the lightbox on windows phone.
-                    headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                    footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
-                    closeHeight = $close[0] ? $close[0].clientHeight : 0;
+                    headerHeight = $header.height() || 0;
+                    footerHeight = $footer.height() || 0;
+                    closeHeight = $close.outerHeight() || 0;
                     topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
                     bottomHeight = footerHeight > 0 ? footerHeight : 1;
                     diff = topHeight + bottomHeight;
@@ -1557,9 +1557,9 @@
                     }
                     else {
 
-                        var clientWidth = $iframe[0].clientWidth,
-                            clientHeight = $iframe[0].clientHeight,
-                            ratio = clientWidth / clientHeight,
+                        var iframeWidth = $iframe.width(),
+                            iframeHeight = $iframe.height(),
+                            ratio = iframeWidth / iframeHeight,
                             childWidth = childHeight * ratio;
 
                         $.each([$lightbox, $iframe], function () {
@@ -1589,10 +1589,12 @@
                         top = parseInt($lightbox.offset().top);
                     }
 
-                    bottom = top + childHeight;
+                    var fallback = footerHeight > 1 ? -((topHeight + bottomHeight) / 2) : "";
+
+                    bottom = top + $child.height();
 
                     $lightbox.css({
-                        "margin-top": footerHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? (top - margin) * -2 : ""
+                        "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? ((top - margin) * -2) + 4 : fallback
                     });
                 }
             };
