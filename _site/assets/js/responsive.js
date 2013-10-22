@@ -2011,7 +2011,7 @@
 
                 $this.attr("data-thead", theadAttribute);
 
-                if (self.$tfoot) {
+                if (self.$tfoot.length) {
 
                     var tfootAttribute = $(self.$footerColumns[index]).text();
                     $this.attr("data-tfoot", tfootAttribute);

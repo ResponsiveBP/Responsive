@@ -28,7 +28,13 @@ nav[role="navigation"] {
 
     nav[role="navigation"] a {
         color: #fff;
+        font-size: 1.5em;
+        text-decoration: none;
     }
+
+        nav[role="navigation"] a + a {
+            margin-left: .5em;
+        }
 
 header[role="banner"] h1 {
     font-size: 3em;
@@ -54,3 +60,23 @@ header[role="banner"] span {
     .download-links li {
         display: inline-block;
     }
+
+
+/*
+ * Grid
+ */
+
+.grid-demo .row {
+    text-align: center;
+    background: #ebebeb;
+}
+
+    .grid-demo .row + .row, .grid-test .row .row {
+        padding-top: .5em;
+    }
+
+.grid-demo [class*="col-"] {
+    line-height: 2em;
+    background-color: #3876a7;
+    color: #fff;
+}
