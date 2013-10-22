@@ -31,6 +31,46 @@
 
     "use strict";
 
+    $.support.getVendorPrefix = (function () {
+        /// <summary>Gets the correct vendor prefix for the current browser.</summary>
+        /// <param name="prop" type="String">The property to return the name for.</param>
+        /// <returns type="Object">
+        ///      The object containing the correct vendor prefixes.
+        ///      &#10;    1: js - The vendor prefix for the JavaScript property.
+        ///      &#10;    2: css - The vendor prefix for the CSS property.  
+        /// </returns>
+
+        var rprefixes = /^(Moz|Webkit|O|ms)(?=[A-Z])/,
+            div = document.createElement("div");
+
+        for (var prop in div.style) {
+            if (rprefixes.test(prop)) {
+                // Test is faster than match, so it's better to perform
+                // that on the lot and match only when necessary.
+                var match = prop.match(rprefixes)[0];
+                return {
+                    js: match,
+                    css: "-" + match.toLowerCase() + "-"
+                };
+            }
+        }
+
+        // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
+        // However (prop in style) returns the correct value, so we'll have to test for
+        // the precence of a specific property.
+        if ("WebkitOpacity" in div.style) {
+            return {
+                js: "Webkit",
+                css: "-webkit-"
+            };
+        }
+
+        return {
+            js: "",
+            css: ""
+        };
+    }());
+
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
@@ -39,7 +79,7 @@
             /// <summary>Gets transition end event for the current browser.</summary>
             /// <returns type="Object">The transition end event for the current browser.</returns>
 
-            var el = document.createElement("responsive"),
+            var div = document.createElement("div"),
                 transEndEventNames = {
                     "transition": "transitionend",
                     "WebkitTransition": "webkitTransitionEnd",
@@ -47,8 +87,10 @@
                     "OTransition": "oTransitionEnd otransitionend"
                 };
 
+            // Could use the other method but I'm intentionally keeping them
+            // separate for now.
             for (var name in transEndEventNames) {
-                if (el.style[name] !== undefined) {
+                if (div.style[name] !== undefined) {
                     return { end: transEndEventNames[name] };
                 }
             }
@@ -58,6 +100,27 @@
 
         return transitionEnd();
 
+    }());
+
+    $.support.ie8 = (function () {
+        $.ieVersion = (function (v, div, undef) {
+            /// <summary>
+            ///     Returns the version number of currently rendering version of Internet Explorer.
+            ///     Adapted from James Padolsey"s excellent script here:
+            ///     http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/
+            ///     https://gist.github.com/527683
+            ///     https://gist.github.com/devxdev/6506658
+            /// </summary>
+            while (
+                     div.innerHTML = "<!--[if gt IE " + (++v) + "]><i></i><![endif]-->",
+                     div.getElementsByTagName("i")[0]
+                 );
+
+            return v > 4 ? v : undef;
+
+        }(3, document.createElement("div"), undefined));
+
+        return $.ieVersion && $.ieVersion === 8;
     }());
 
     $.fn.swipe = function (options) {
@@ -514,6 +577,7 @@
 
     // General variables.
     var supportTransition = $.support.transition,
+        vendorPrefixes = $.support.getVendorPrefix,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
@@ -539,12 +603,19 @@
                     return;
                 }
 
-                var isNext = event.delta.x > 0,
-                    fallback = isNext ? "last" : "first",
+                if (this.sliding) {
+                    return;
+                }
+
+                this.pause();
+
+                // Left is next.
+                var isNext = event.delta.x < 0,
+                    type = isNext ? "next" : "prev",
+                    fallback = isNext ? "first" : "last",
                     activePosition = getActiveIndex.call(this),
                     $activeItem = $(this.$items[activePosition]),
-                    $nextItem = $(this.$items[isNext ? activePosition + 1 : activePosition - 1]),
-                    $prevItem = $(this.$items[isNext ? activePosition - 1 : activePosition + 1]);
+                    $nextItem = $activeItem[type]();
 
                 if (!$nextItem.length) {
 
@@ -555,30 +626,64 @@
                     $nextItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
                 }
 
-                if (!$prevItem.length) {
-
-                    if (!this.options.wrap) {
-                        return;
-                    }
-
-                    $prevItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
-                }
-
-                var width = parseFloat($activeItem.width()),
-                    percent = (event.delta.x / width) * 100,
+                // Get the distance swiped as a percentage.
+                var width = $activeItem.width(),
+                    percent = parseInt((event.delta.x / width) * 100, 10),
                     diff = isNext ? 100 : -100;
 
-                if (percent > -100 && percent < 100) {
+                // Shift the items but put a limit on sensitivity.
+                if (percent > -100 && percent < 100 && (percent < -10 || percent > 10)) {
                     $activeItem.addClass("no-transition").css({ "transform": "translateX(" + percent + "%)" });
                     $nextItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent + diff) + "%)" });
-                    $prevItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent - diff) + "%)" });
                 }
             }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
 
-                var direction = event.direction,
-                    method = (direction === "up" || direction === "left") ? "next" : "prev";
+                if (this.sliding) {
+                    return;
+                }
 
+                var direction = event.direction,
+                    method = null;
+
+                if (direction === "left") {
+                    method = "next";
+                } else if (direction === "right") {
+                    method = "prev";
+                }
+
+                // Re-enable the transitions.
+                this.$items.each(function () {
+                    $(this).removeClass("no-transition");
+                });
+
+                if (supportTransition) {
+
+                    // Trim the animation duration based on the current position.
+                    var activePosition = getActiveIndex.call(this),
+                        $activeItem = $(this.$items[activePosition]),
+                        prop = vendorPrefixes.css + "transition-duration";
+
+                    if (!this.translationDuration) {
+                        this.translationDuration = parseFloat($activeItem.css(prop));
+                    }
+
+                    // Get the transform matrix and pull the right value.
+                    // index of 4 for translateX.
+                    var matrix = $activeItem.css(vendorPrefixes.css + "transform"),
+                           translateX = (matrix.match(/-?[0-9\.]+/g))[4],
+                    // Now turn that into a percentage.
+                        width = $activeItem.width(),
+                        percent = parseInt((Math.abs(translateX) / width) * 100, 10),
+                        newDuration = ((100 - percent) / 100) * this.translationDuration;
+
+                    // Set the new temporary duration.
+                    this.$items.each(function () {
+                        $(this).css(prop, newDuration + "s");
+                    });
+                }
+
+                this.cycle();
                 this[method]();
 
             }, this));
@@ -601,8 +706,7 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
-        this.touchDelta = {};
-        this.touchStart = {};
+        this.translationDuration = null;
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events
@@ -610,7 +714,7 @@
                          .on(emouseleave, $.proxy(this.cycle, this));
         }
 
-        if (this.options.enabletouch) {
+        if (this.options.enabletouch && this.options.mode === "slide") {
             manageTouch.call(this);
         }
     };
@@ -719,13 +823,6 @@
             this.pause();
         }
 
-        if (slideMode && this.$items) {
-            // Clear the added css.
-            this.$items.each(function () {
-                $(this).removeClass("no-transition swipe").css({ "transform": "" });
-            });
-        }
-
         // Work out which item to slide to.
         if (!$nextItem.length) {
 
@@ -768,8 +865,17 @@
         }
 
         var complete = function () {
+
+            if (slideMode && self.$items) {
+                // Clear the transition properties if set.
+                self.$items.each(function () {
+                    $(this).css({ "transition": "" });
+                });
+            }
+
             $activeItem.removeClass(["carousel-active", direction].join(" "));
             $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+
             self.sliding = false;
             self.$element.trigger(slidEvent);
         };
@@ -780,6 +886,13 @@
         // Do the slide.
         $activeItem.addClass(direction);
         $nextItem.addClass(direction);
+
+        if (slideMode && this.$items) {
+            // Clear the added css.
+            this.$items.each(function () {
+                $(this).removeClass("swipe").css({ "transform": "" });
+            });
+        }
 
         supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
 
@@ -1217,7 +1330,7 @@
         }
 
         // Target is a local protocol.
-        if (locationParts === null || locationParts[2] === undefined || rlocalProtocol.test(locationParts[1])) {
+        if (!locationParts || !locationParts[2] || rlocalProtocol.test(locationParts[1])) {
             return false;
         }
 
@@ -1400,63 +1513,89 @@
 
     resize = function () {
         // Bind the resize event and fade in.
-        var newWindowHeight,
-            oldWindowHeight,
-            maxWidth = parseInt($lightbox.css("max-width"), 10),
+        var maxWidth = parseInt($lightbox.css("max-width"), 10),
             onResize = function () {
 
-                var headerHeight,
+                var windowHeight = $window.height(),
+                    headerHeight,
                     footerHeight,
                     closeHeight,
                     childHeight,
                     topHeight,
                     bottomHeight,
+                    diff,
                     $child = $iframe || $img || $content;
 
                 if ($child) {
 
-                    newWindowHeight = $window.height();
+                    // Defaulting to 1px on the footer prevents the address bar from
+                    // covering the lightbox on windows phone.
+                    headerHeight = $header.height() || 0;
+                    footerHeight = $footer.height() || 0;
+                    closeHeight = $close.outerHeight() || 0;
+                    topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
+                    bottomHeight = footerHeight > 0 ? footerHeight : 1;
+                    diff = topHeight + bottomHeight;
+                    childHeight = windowHeight - diff;
 
-                    if (newWindowHeight !== oldWindowHeight) {
+                    if ($img) {
+                        // IE8 doesn't change the width as max-width will cause the 
+                        // The image width to be set to zero.
+                        if ($.support.ie8) {
+                            $img.css({
+                                "max-height": childHeight,
+                                "max-width": "100%"
+                            });
 
-                        // Magic number are determined from experimentation across different browsers.
-                        headerHeight = $header[0] ? $header[0].clientHeight : 0;
-                        footerHeight = $footer[0] ? $footer[0].clientHeight : 0;
-                        closeHeight = $close[0] ? $close[0].clientHeight : 0;
-                        topHeight = (headerHeight > closeHeight ? headerHeight : closeHeight);
-                        bottomHeight = footerHeight > 0 ? footerHeight : 1;
-
-                        childHeight = newWindowHeight - (topHeight + bottomHeight);
-
-                        if ($img) {
+                        } else {
                             $img.css("max-height", childHeight);
                         }
-                        else if ($content) {
-                            $lightbox.css("max-height", childHeight);
-                            $content.css("max-height", childHeight);
-                        }
-                        else {
-
-                            var clientWidth = $iframe[0].clientWidth,
-                                clientHeight = $iframe[0].clientHeight,
-                                ratio = clientWidth / clientHeight,
-                                childWidth = childHeight * ratio;
-
-                            $.each([$lightbox, $iframe], function () {
-
-                                this.css({
-                                    "max-height": childHeight,
-                                    "max-width": childWidth > maxWidth ? maxWidth : childWidth
-                                });
-                            });
-                        }
-                        // Values are determined by border fix in css.
-                        $lightbox.css({
-                            "margin-top": topHeight > 0 ? topHeight : ""
-                        });
-
-                        oldWindowHeight = newWindowHeight;
                     }
+                    else if ($content) {
+                        $lightbox.css("max-height", childHeight);
+                        $content.css("max-height", childHeight);
+                    }
+                    else {
+
+                        var iframeWidth = $iframe.width(),
+                            iframeHeight = $iframe.height(),
+                            ratio = iframeWidth / iframeHeight,
+                            childWidth = childHeight * ratio;
+
+                        $.each([$lightbox, $iframe], function () {
+
+                            this.css({
+                                "max-height": childHeight,
+                                "max-width": childWidth > maxWidth ? maxWidth : childWidth
+                            });
+                        });
+                    }
+
+                    // Adjust the vertically aligned position if necessary to account for
+                    // overflow into the footer.
+                    var margin = topHeight,
+                        top,
+                        bottom;
+
+                    $overlay.css({
+                        "padding-top": topHeight > 0 ? topHeight : ""
+                    });
+
+                    top = parseInt($lightbox.offset().top);
+
+                    // Thaaanks IE8!
+                    if (top < 0) {
+                        $lightbox.css({ "margin-top": 1 });
+                        top = parseInt($lightbox.offset().top);
+                    }
+
+                    var fallback = footerHeight > 1 ? -((topHeight + bottomHeight) / 2) : "";
+
+                    bottom = top + $child.height();
+
+                    $lightbox.css({
+                        "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? ((top - margin) * -2) + 4 : fallback
+                    });
                 }
             };
 
