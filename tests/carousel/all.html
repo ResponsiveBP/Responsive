@@ -21,38 +21,38 @@
     <article class="container">
         <h1>Carousel</h1>
         <hr />
-        <section class="row">
+        <div class="row">
             <div class="col-s-6">
                 <h2>Slide Mode</h2>
-                <div id="carousel-1" class="carousel" data-carousel-interval="5000">
-                    <ol class="carousel-indicators">
+                <div id="carousel-1" class="carousel" data-carousel-interval="0">
+                    <ol>
                         <li data-carousel-target="#carousel-1" data-carousel-slide-to="0" class="active"></li>
                         <li data-carousel-target="#carousel-1" data-carousel-slide-to="1"></li>
                         <li data-carousel-target="#carousel-1" data-carousel-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item carousel-active">
-                            <img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas">
-                            <div class="carousel-caption">
-                                <h4>First Thumbnail label</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum">
-                            <div class="carousel-caption">
-                                <h4>Second Thumbnail label</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../test-assets/img/desert.jpg" alt="desert">
-                            <div class="carousel-caption">
-                                <h4>Third Thumbnail label</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <figure class="carousel-active">
+                        <img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas">
+                        <figcaption>
+                            <h4>First Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                        <figcaption>
+                            <h4>Second Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../test-assets/img/desert.jpg" alt="desert">
+                        <figcaption>
+                            <h4>Third Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+
                     <a class="left carousel-control" href="#carousel-1" data-carousel-slide="prev">&lt;</a>
                     <a class="right carousel-control" href="#carousel-1" data-carousel-slide="next">&gt;</a>
                 </div>
@@ -60,42 +60,40 @@
             <div class="col-s-6">
                 <h2>Fade Mode</h2>
                 <div id="carousel-2" class="carousel" data-carousel-mode="fade" data-carousel-interval="0">
-                    <ol class="carousel-indicators">
+                    <ol>
                         <li data-carousel-target="#carousel-2" data-carousel-slide-to="0" class="active"></li>
                         <li data-carousel-target="#carousel-2" data-carousel-slide-to="1"></li>
                         <li data-carousel-target="#carousel-2" data-carousel-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item carousel-active">
-                            <img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas">
-                            <div class="carousel-caption">
-                                <h4>First Thumbnail label</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum">
-                            <div class="carousel-caption">
-                                <h4>Second Thumbnail label</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../test-assets/img/desert.jpg" alt="desert">
-                            <div class="carousel-caption">
-                                <h4>Third Thumbnail label</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <figure class="carousel-active">
+                        <img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas">
+                        <figcaption>
+                            <h4>First Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                        <figcaption>
+                            <h4>Second Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../test-assets/img/desert.jpg" alt="desert">
+                        <figcaption>
+                            <h4>Third Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+
                     <a class="left carousel-control" href="#carousel-2" data-carousel-slide="prev">&lt;</a>
                     <a class="right carousel-control" href="#carousel-2" data-carousel-slide="next">&gt;</a>
                 </div>
 
             </div>
-        </section>
+        </div>
     </article>
 
     <!-- Scripts at the bottom for improved performance. -->
