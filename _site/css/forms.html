@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Forms ::  Responsive</title>
+    <meta name="description" content="This is a sample Jekyll Blog." />
+
+    <link href="/assets/css/responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/assets/css/docs.css" rel="stylesheet" />
+    <link href="/assets/css/vendor/prism.css" rel="stylesheet" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/" rel="home">Responsive</a> <a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a>
+            </div>
+        </div>
+    </nav>
+
+<article class="container" role="main">
+    <header role="banner">
+        <h1>Forms
+        <span>Cross browser normalized responsive forms.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-s-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#standard">Standard</a></li>
+    
+       
+       <li><a href="#typography">Typography</a></li>
+    
+       
+       <li><a href="#inlinetype">Inline Type</a></li>
+    
+       
+       <li><a href="#helpers">Helpers</a></li>
+    
+       
+       <li><a href="#extras">Extras</a></li>
+    
+<ul>
+
+        </nav>
+        <article class="col-s-9">
+            <section>
+    <h1>Form Elements</h1>
+    <p>Cross browser normalized responsive forms with minimal styling to allow easy overrides and lean CSS.</p>
+    <p>
+        All inputs are responsive with progressively enhanced fallbacks for unsupported types. A hook class <code>.no-edit</code> can be used to mimic non-editable inputs,
+        and all fields can be made to display inline by adding the class <code>.inline-block</code> or stretch to full width by adding the class <code>.full-width</code>.
+    </p>
+    <p>Smaller elements such as radio and checkbox inputs can be aligned by wrapping them in a div with the class <code>.input-group</code>.</p>
+    <hr />
+    <section id="standard">
+        <h1>Standard Layout</h1>
+        <form action="#">
+            <fieldset>
+                <legend>Standard Form</legend>
+                <div class="row">
+                    <div class="col-m-6">
+                        <label for="input1">Standard</label>
+                        <input type="text" id="input1" class="focus" value="standard input..." />
+                        <label for="input-disabled1">Disabled</label>
+                        <input type="text" id="input-disabled1" disabled value="disabled input..." />
+                        <p>Support text to help describe the input.</p>
+                        <label for="input-no-edit1">Non editable</label>
+                        <span id="input-no-edit1" class="no-edit">No edit</span>
+                        <label for="select-default1">Select</label>
+                        <select id="select-default1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <label for="input-file1">File upload</label>
+                        <input id="input-file1" type="file" />
+                        <label for="input-password1">Password</label>
+                        <input type="password" id="input-password1" />
+                        <label for="input-time1">Time</label>
+                        <input type="time" id="input-time1" />
+                        <label for="input-week1">Week</label>
+                        <input type="week" id="input-week1" />
+                        <label for="input-month1">Month</label>
+                        <input type="month" id="input-month1" />
+                        <label for="input-date1">Date</label>
+                        <input type="date" id="input-date1" />
+                    </div>
+                    <div class="col-m-6">
+                        <label for="input-datetime1">Datetime</label>
+                        <input type="datetime" id="input-datetime1" />
+                        <label for="input-datetime-local1">Datetime Local</label>
+                        <input type="datetime-local" id="input-datetime-local1" />
+                        <label for="input-search1">Search</label>
+                        <input type="search" id="input-search1" />
+                        <label for="input-color1">Color</label>
+                        <input type="color" id="input-color1" />
+                        <label for="input-range1">Range</label>
+                        <input type="range" id="input-range1" min="0" max="100" value="50" />
+                        <label for="input-email1">Email</label>
+                        <input type="email" id="input-email1" />
+                        <label for="check-disabled1">Disabled Checkbox</label>
+                        <div class="input-group">
+                            <input type="checkbox" id="check-disabled1" value="option1" disabled="" class="inline-block">
+                        </div>
+                        <label for="check1">Checkbox</label>
+                        <div class="input-group">
+                            <input type="checkbox" id="check1" value="option1" class="inline-block">
+                            <input type="checkbox" id="check3" value="option1" class="inline-block">
+                        </div>
+                        <label for="radio1">Radio</label>
+                        <div class="input-group">
+                            <input type="radio" id="radio1" name="radio" value="option1" class="inline-block">
+                            <input type="radio" id="radio3" name="radio" value="option1" class="inline-block">
+                        </div>
+                        <label for="default-textarea1">Textarea</label>
+                        <textarea id="default-textarea1"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit">Save changes</button>
+                <button>Cancel</button>
+            </div>
+        </form>
+    </section>
+    <hr />
+    <section>
+        <h1>Horizontal Layout</h1>
+        <p>Add class <code>.form-horizontal</code> to the form.</p>
+        <form action="#" class="form-horizontal">
+            <fieldset>
+                <legend>Standard Form</legend>
+                <label for="input2">Standard</label>
+                <input type="text" id="input2" class="focus" value="standard input..." />
+                <label for="input-disabled2">Disabled</label>
+                <input type="text" id="input-disabled2" disabled value="disabled input..." />
+                <p>Support text to help describe the input.</p>
+                <label for="input-no-edit2">Non editable</label>
+                <span id="input-no-edit2" class="no-edit">No edit</span>
+                <label for="select-default2">Select</label>
+                <select id="select-default2">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <label for="input-file2">File upload</label>
+                <input id="input-file2" type="file" />
+                <label for="input-password2">Password</label>
+                <input type="password" id="input-password2" />
+                <label for="input-time2">Time</label>
+                <input type="time" id="input-time2" />
+                <label for="input-week2">Week</label>
+                <input type="week" id="input-week2" />
+                <label for="input-month2">Month</label>
+                <input type="month" id="input-month2" />
+                <label for="input-date2">Date</label>
+                <input type="date" id="input-date2" />
+                <label for="input-datetime2">Datetime</label>
+                <input type="datetime" id="input-datetime2" />
+                <label for="input-datetime-local2">Datetime Local</label>
+                <input type="datetime-local" id="input-datetime-local2" />
+                <label for="input-search2">Search</label>
+                <input type="search" id="input-search2" />
+                <label for="input-color2">Color</label>
+                <input type="color" id="input-color2" />
+                <label for="input-range2">Range</label>
+                <input type="range" id="input-range2" min="0" max="100" value="50" />
+                <label for="input-email2">Email</label>
+                <input type="email" id="input-email2" />
+                <label for="check-disabled2">Disabled Checkbox</label>
+                <div class="input-group">
+                    <input type="checkbox" id="check-disabled2" value="option2" disabled="" class="inline-block">
+                </div>
+                <label for="check2">Checkbox</label>
+                <div class="input-group">
+                    <input type="checkbox" id="check2" value="option1" class="inline-block">
+                    <input type="checkbox" id="Checkbox1" value="option2" class="inline-block">
+                </div>
+                <label for="radio2">Radio</label>
+                <div class="input-group">
+                    <input type="radio" id="radio2" name="radio" value="option1" class="inline-block">
+                    <input type="radio" id="radio4" name="radio" value="option2" class="inline-block">
+                </div>
+                <label for="default-textarea2">Textarea</label>
+                <textarea id="default-textarea2"></textarea>
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit">Save changes</button>
+                <button>Cancel</button>
+            </div>
+        </form>
+    </section>
+</section>
+
+        </article>
+    </div>
+</article>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://getbootstrap.com/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <a href="#" role="button" class="push-right">Back to Top ^</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+            <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+   <![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<script src="/assets/js/vendor/prism.js"></script>
+<script src="/assets/js/responsive.js"></script>
+</body>
+</html>
+

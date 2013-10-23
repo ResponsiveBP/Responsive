@@ -589,7 +589,7 @@
     var getActiveIndex = function () {
 
         var $activeItem = this.$element.find(".carousel-active");
-        this.$items = $activeItem.parent().children();
+        this.$items = $activeItem.parent().children("figure");
 
         return this.$items.index($activeItem);
     },
@@ -615,7 +615,7 @@
                     fallback = isNext ? "first" : "last",
                     activePosition = getActiveIndex.call(this),
                     $activeItem = $(this.$items[activePosition]),
-                    $nextItem = $activeItem[type]();
+                    $nextItem = $activeItem[type]("figure");
 
                 if (!$nextItem.length) {
 
@@ -623,7 +623,7 @@
                         return;
                     }
 
-                    $nextItem = this.$element.find(".carousel-item:not(.carousel-active)")[fallback]();
+                    $nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
                 }
 
                 // Get the distance swiped as a percentage.
@@ -701,7 +701,7 @@
             enabletouch: true
         };
         this.options = $.extend({}, this.defaults, options);
-        this.$indicators = this.$element.find(".carousel-indicators");
+        this.$indicators = this.$element.children("ol:first");
         this.paused = null;
         this.interval = null;
         this.sliding = null;
@@ -807,8 +807,8 @@
 
     Carousel.prototype.slide = function (type, next) {
 
-        var $activeItem = this.$element.find(".carousel-active"),
-            $nextItem = next || $activeItem[type](),
+        var $activeItem = this.$element.children("figure.carousel-active"),
+            $nextItem = next || $activeItem[type]("figure"),
             isCycling = this.interval,
             isNext = type === "next",
             direction = isNext ? "left" : "right",
@@ -830,8 +830,10 @@
                 return false;
             }
 
-            $nextItem = this.$element.find(".carousel-item")[fallback]();
+            $nextItem = this.$element.children("figure")[fallback]();
         }
+
+        console.log($nextItem);
 
         if ($nextItem.hasClass("carousel-active")) {
             return false;
