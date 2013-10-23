@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title> CSS ::  Responsive</title>
+    <title> Buttons ::  Responsive</title>
     <meta name="description" content="This is a sample Jekyll Blog." />
 
     <link href="/assets/css/responsive.css" rel="stylesheet" />
@@ -27,8 +27,8 @@
 
 <article class="container" role="main">
     <header role="banner">
-        <h1>CSS
-        <span>Stuff about the css goodies</span>
+        <h1>Buttons
+        <span>Cross browser buttons with easy styling.</span>
         </h1>
     </header>
     <hr />
@@ -38,32 +38,70 @@
             <ul class="no-bullets">
     
        
-       <li><a href="/css/base.html">Base</a></li>
-      
+       <li><a href="#standard">Standard Layout</a></li>
     
        
-       <li><a href="/css/buttons.html">Buttons</a></li>
-      
+       <li><a href="#horizontal">Horizontal Layout</a></li>
     
        
-       <li><a href="/css/forms.html">Forms</a></li>
-      
+       <li><a href="#markup">The Markup</a></li>
     
        
-       <li><a href="/css/grid.html">Grid</a></li>
-      
+       <li><a href="#ios">IOS</a></li>
     
-      
-    
-      
-    
-      
-    
-</ul>
+<ul>
+
         </nav>
         <article class="col-s-9">
-            <h1>CSS</h1>
-<p>An introduction to the basics about the css framework</p>
+            <section>
+    <h1>Button Elements</h1>
+    <p>Button styling in Responsive has, like everything else, been designed with the bare minimum of CSS. Styles have been normalized across all button states with no extra css classes added.</p>
+    <hr />
+    <section id="standard">
+        <h1>Default Button Styles</h1>
+        <div class="row">
+            <p>All styles are attribute based.</p>
+            <p>
+                Button states are:
+               
+                <code>:hover</code>, <code>:focus</code>, <code>:active</code>, and <code>:disabled</code>.
+                Hyperlinks disabled state are styled by adding the class <code>.disabled</code>.
+           
+            </p>
+            <div class="col-s-6">
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <button>button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button">
+                </div>
+            </div>
+            <div class="col-s-6">
+                <div>
+                    <h3>Input : Submit </h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <input type="submit" value="button">
+                </div>
+                <div>
+                    <h3>Link</h3>
+                    <p>Standard <code>a[role="button]</code> element.</p>
+                    <a role="button" href="#">button</a>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-info">
+            <p>
+                We strongly recommend using the <code>&lt;button&gt;&lt;/button&gt;</code> element over 
+                the <code>&lt;input /&gt;</code> element for all button style markup.
+            </p>
+        </div>
+    </section>
+</section>
+
         </article>
     </div>
 </article>
@@ -99,3 +137,4 @@
 <script src="/assets/js/responsive.js"></script>
 </body>
 </html>
+

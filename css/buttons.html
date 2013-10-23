@@ -1,0 +1,59 @@
+---
+layout: subpage
+group: css
+title: Buttons
+heading: Buttons
+subheading: Cross browser buttons with easy styling.
+sublinks: ["#standard|Standard Layout",
+            "#horizontal|Horizontal Layout",
+            "#markup|The Markup",
+            "#ios|IOS"]
+---
+<section>
+    <h1>Button Elements</h1>
+    <p>Button styling in Responsive has, like everything else, been designed with the bare minimum of CSS. Styles have been normalized across all button states with no extra css classes added.</p>
+    <hr />
+    <section id="standard">
+        <h1>Default Button Styles</h1>
+        <div class="row">
+            <p>All styles are attribute based.</p>
+            <p>
+                Button states are:
+               
+                <code>:hover</code>, <code>:focus</code>, <code>:active</code>, and <code>:disabled</code>.
+                Hyperlinks disabled state are styled by adding the class <code>.disabled</code>.
+           
+            </p>
+            <div class="col-s-6">
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <button>button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button">
+                </div>
+            </div>
+            <div class="col-s-6">
+                <div>
+                    <h3>Input : Submit </h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <input type="submit" value="button">
+                </div>
+                <div>
+                    <h3>Link</h3>
+                    <p>Standard <code>a[role="button]</code> element.</p>
+                    <a role="button" href="#">button</a>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-info">
+            <p>
+                We strongly recommend using the <code>&lt;button&gt;&lt;/button&gt;</code> element over 
+                the <code>&lt;input /&gt;</code> element for all button style markup.
+            </p>
+        </div>
+    </section>
+</section>
