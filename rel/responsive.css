@@ -2494,12 +2494,12 @@ textarea[disabled] {
 .form-horizontal textarea,
 .form-horizontal .no-edit,
 .form-horizontal .input-group,
-.form-horizontal fieldset > p,
-.form-horizontal fieldset > span {
+.form-horizontal .input-support {
     margin-left: 176px;
     margin-bottom: 1em;
 }
 
+    .form-horizontal .input-group *,
     .form-horizontal .input-group * {
         margin-left: 0;
     }
