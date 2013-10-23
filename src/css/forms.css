@@ -19,13 +19,11 @@
 .form-horizontal select,
 .form-horizontal textarea,
 .form-horizontal .no-edit,
-.form-horizontal .input-group,
-.form-horizontal .input-support {
+.form-horizontal .input-group {
     margin-left: 176px;
     margin-bottom: 1em;
 }
 
-    .form-horizontal .input-group *,
     .form-horizontal .input-group * {
         margin-left: 0;
     }
