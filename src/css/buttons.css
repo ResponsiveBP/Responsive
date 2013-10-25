@@ -13,7 +13,6 @@ button,
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
     display: inline-block;
-    width: auto;
     max-width: none;
     padding: .5em 1em;
     margin-bottom: 0;
