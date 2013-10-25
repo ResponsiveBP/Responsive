@@ -2530,7 +2530,7 @@ button,
     padding: .5em 1em;
     margin-bottom: 0;
     line-height: normal;
-    text-decoration: none;
+    text-decoration: none!important;
     font-size: 1em;
     border: solid 1px #c0c0c0;
     background-color: #dadada;
@@ -2547,6 +2547,7 @@ button,
     [type="button"]:hover,
     [type="reset"]:hover,
     [role="button"]:hover {
+        color: #222;
         background-color: #cdcdcd;
     }
 
@@ -2555,6 +2556,7 @@ button,
     [type="button"]:focus,
     [type="reset"]:focus,
     [role="button"]:focus {
+        color: #222;
         outline: 1px solid #00a9ec;
         outline-offset: -1px;
     }
@@ -2564,6 +2566,7 @@ button,
     [type="button"]:active,
     [type="reset"]:active,
     [role="button"]:active {
+        color: #222;
         background-color: #e7e7e7;
         outline: none;
     }
