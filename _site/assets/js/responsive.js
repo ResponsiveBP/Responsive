@@ -975,7 +975,7 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));/*
+}(jQuery, window, ".r.carousel.data-api"));/*
  * Responsive Dismiss 
  */
 
@@ -1077,7 +1077,7 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss"));/*
+}(jQuery, window, ".r.dismiss.data-api"));/*
  * Responsive Dropdown 
  */
 
@@ -1266,7 +1266,7 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));/*
+}(jQuery, window, ".r.dropdown.data-api"));/*
  * Responsive Lightbox
  */
 
@@ -1950,7 +1950,7 @@
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".r.lightbox"));/*
+}(jQuery, window, ".r.lightbox.data-api"));/*
  * Responsive Tables
  */
 

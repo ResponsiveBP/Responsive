@@ -130,7 +130,7 @@
         </div>
 
         <h3>Mobile Redirect</h3>
-        <p>Should redirect on viewports of 768px and below. (settable)</p>
+        <p>Redirects on viewports of 768px and below. (settable)</p>
         <div class="row">
             <a href="../assets/img/768x900.jpg" data-lightbox-mobile-target="../assets/img/768x900.jpg" data-lightbox-mobile-viewport-width="768">
                 <img src="../assets/img/768x900_thumb.jpg" />
@@ -237,28 +237,32 @@ Lightbox trigger
     <section id="dataapi">
         <h1>Data API</h1>
         <p>
-            The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-                If you need to override this behaviour the following code will allow you to do so.
+            The lightbox's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+                    If you need to override this behaviour the following code will allow you to do so.
         </p>
-        <pre class="language-javascript"><code>// Override the default loading behaviour
-$(document).off("ready.r.carousel.data-api")
-           .on("ready.r.carousel.data-api", function () {
-             // Your custom behaviour...
-           }); 
-
-// Override the default carousel control click behaviour
-$("YOUR_SELECTOR").off("click.r.carousel.data-api")
-                  .on("click.r.carousel.data-api", "[data-carousel-slide], [data-carousel-slide-to]", function (event) {
-                      // Your custom behaviour...
-                  }); 
-
-// Bind to the slide event.
-$("YOUR_SELECTOR").on("slide.r.carousel.data-api", function(event) {
+        <pre class="language-javascript"><code>// Override the default behaviour
+$(document.body).off("click.r.lightbox.data-api")
+                .on("click.r.lightbox.data-api", ":attrStart(data-lightbox)", function (event) {    
+                    // Your custom behaviour...
+                });
+                    
+// Bind to the show event.
+$("YOUR_TRIGGER_SELECTOR").on("show.r.lightbox.data-api", function(event) {
     // Your custom behaviour...
 });
                                                
-// Bind to the slid event.
-$("YOUR_SELECTOR").on("slid.r.carousel.data-api", function(event) {
+// Bind to the shown event.
+$("YOUR_TRIGGER_SELECTOR").on("shown.r.lightbox.data-api", function(event) {
+    // Your custom behaviour...
+});
+
+// Bind to the hide event.
+$("YOUR_TRIGGER_SELECTOR").on("hide.r.lightbox.data-api", function(event) {
+    // Your custom behaviour...
+});
+
+// Bind to the hidden event.
+$("YOUR_TRIGGER_SELECTOR").on("hidden.r.lightbox.data-api", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>
