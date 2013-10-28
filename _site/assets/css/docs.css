@@ -28,12 +28,16 @@ nav[role="navigation"] {
 
     nav[role="navigation"] a {
         color: #fff;
-        font-size: 1.5em;
+        /*font-size: 1.17em;*/
         text-decoration: none;
     }
 
+        nav[role="navigation"] a[rel="home"] {
+            font-size: 1.5em;
+        }
+
         nav[role="navigation"] a + a {
-            margin-left: .5em;
+            margin-left: 1em;
         }
 
 header[role="banner"] h1 {
