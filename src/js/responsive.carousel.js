@@ -412,4 +412,4 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));
+}(jQuery, window, ".r.carousel.data-api"));

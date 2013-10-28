@@ -187,4 +187,4 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));
+}(jQuery, window, ".r.dropdown.data-api"));

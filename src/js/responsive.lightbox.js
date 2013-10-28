@@ -682,4 +682,4 @@
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".r.lightbox"));
+}(jQuery, window, ".r.lightbox.data-api"));
