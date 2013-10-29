@@ -264,7 +264,7 @@
         });
     };
 
-    $.find.removeSwipe = function (namespace) {
+    $.fn.removeSwipe = function (namespace) {
         /// <summary>Removes swiping functionality from the given element.</summary>
         /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
