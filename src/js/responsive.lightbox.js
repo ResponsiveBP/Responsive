@@ -275,15 +275,10 @@
                     if ($img) {
                         // IE8 doesn't change the width as max-width will cause the 
                         // The image width to be set to zero.
-                        if ($.support.ie8) {
-                            $img.css({
-                                "max-height": childHeight,
-                                "max-width": "100%"
-                            });
-
-                        } else {
-                            $img.css("max-height", childHeight);
-                        }
+                        $img.css({
+                            "max-height": childHeight,
+                            "max-width": "100%"
+                        });
                     }
                     else if ($content) {
                         $lightbox.css("max-height", childHeight);
@@ -682,4 +677,4 @@
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".r.lightbox.data-api"));
+}(jQuery, window, ".r.lightbox"));

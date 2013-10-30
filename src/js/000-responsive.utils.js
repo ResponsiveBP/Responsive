@@ -57,7 +57,7 @@
 
         // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
         // However (prop in style) returns the correct value, so we'll have to test for
-        // the precence of a specific property.
+        // the presence of a specific property.
         if ("WebkitOpacity" in div.style) {
             return {
                 js: "Webkit",
@@ -100,27 +100,6 @@
 
         return transitionEnd();
 
-    }());
-
-    $.support.ie8 = (function () {
-        $.ieVersion = (function (v, div, undef) {
-            /// <summary>
-            ///     Returns the version number of currently rendering version of Internet Explorer.
-            ///     Adapted from James Padolsey"s excellent script here:
-            ///     http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/
-            ///     https://gist.github.com/527683
-            ///     https://gist.github.com/devxdev/6506658
-            /// </summary>
-            while (
-                     div.innerHTML = "<!--[if gt IE " + (++v) + "]><i></i><![endif]-->",
-                     div.getElementsByTagName("i")[0]
-                 );
-
-            return v > 4 ? v : undef;
-
-        }(3, document.createElement("div"), undefined));
-
-        return $.ieVersion && $.ieVersion === 8;
     }());
 
     $.fn.swipe = function (options) {
@@ -279,7 +258,7 @@
             // Disable extended touch events on ie.
             // Unbind events.
             $(this).css({ "-ms-touch-action": "", "touch-action": "" })
-                 .off(etouchstart).off(etouchmove).off(etouchend);
+                   .off(etouchstart).off(etouchmove).off(etouchend);
         });
     };
 

@@ -123,4 +123,4 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.table.data-api"));
+}(jQuery, window, ".r.table"));

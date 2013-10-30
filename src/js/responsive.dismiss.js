@@ -100,4 +100,4 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss.data-api"));
+}(jQuery, window, ".r.dismiss"));

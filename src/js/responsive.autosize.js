@@ -213,4 +213,4 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize.data-api"));
+}(jQuery, window, ".r.autosize"));

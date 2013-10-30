@@ -57,7 +57,7 @@
 
         // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
         // However (prop in style) returns the correct value, so we'll have to test for
-        // the precence of a specific property.
+        // the presence of a specific property.
         if ("WebkitOpacity" in div.style) {
             return {
                 js: "Webkit",
@@ -100,27 +100,6 @@
 
         return transitionEnd();
 
-    }());
-
-    $.support.ie8 = (function () {
-        $.ieVersion = (function (v, div, undef) {
-            /// <summary>
-            ///     Returns the version number of currently rendering version of Internet Explorer.
-            ///     Adapted from James Padolsey"s excellent script here:
-            ///     http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/
-            ///     https://gist.github.com/527683
-            ///     https://gist.github.com/devxdev/6506658
-            /// </summary>
-            while (
-                     div.innerHTML = "<!--[if gt IE " + (++v) + "]><i></i><![endif]-->",
-                     div.getElementsByTagName("i")[0]
-                 );
-
-            return v > 4 ? v : undef;
-
-        }(3, document.createElement("div"), undefined));
-
-        return $.ieVersion && $.ieVersion === 8;
     }());
 
     $.fn.swipe = function (options) {
@@ -279,7 +258,7 @@
             // Disable extended touch events on ie.
             // Unbind events.
             $(this).css({ "-ms-touch-action": "", "touch-action": "" })
-                 .off(etouchstart).off(etouchmove).off(etouchend);
+                   .off(etouchstart).off(etouchmove).off(etouchend);
         });
     };
 
@@ -561,7 +540,7 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize.data-api"));/*
+}(jQuery, window, ".r.autosize"));/*
  * Responsive Carousel
  */
 
@@ -975,7 +954,7 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel.data-api"));/*
+}(jQuery, window, ".r.carousel"));/*
  * Responsive Dismiss 
  */
 
@@ -1077,7 +1056,7 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss.data-api"));/*
+}(jQuery, window, ".r.dismiss"));/*
  * Responsive Dropdown 
  */
 
@@ -1266,7 +1245,7 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown.data-api"));/*
+}(jQuery, window, ".r.dropdown"));/*
  * Responsive Lightbox
  */
 
@@ -1543,15 +1522,10 @@
                     if ($img) {
                         // IE8 doesn't change the width as max-width will cause the 
                         // The image width to be set to zero.
-                        if ($.support.ie8) {
-                            $img.css({
-                                "max-height": childHeight,
-                                "max-width": "100%"
-                            });
-
-                        } else {
-                            $img.css("max-height", childHeight);
-                        }
+                        $img.css({
+                            "max-height": childHeight,
+                            "max-width": "100%"
+                        });
                     }
                     else if ($content) {
                         $lightbox.css("max-height", childHeight);
@@ -1950,7 +1924,7 @@
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".r.lightbox.data-api"));/*
+}(jQuery, window, ".r.lightbox"));/*
  * Responsive Tables
  */
 
@@ -2075,7 +2049,7 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.table.data-api"));/*
+}(jQuery, window, ".r.table"));/*
  * Responsive tabs
  */
 
@@ -2137,7 +2111,7 @@
         this.$element = $(element);
         this.tabbing = null;
 
-        // TODO: Move this.
+        // TODO: Should we move this?
         this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
 
             event.preventDefault();
@@ -2221,4 +2195,4 @@
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".r.tabs.data-api"));
+}(jQuery, window, ".r.tabs"));

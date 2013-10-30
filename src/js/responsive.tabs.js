@@ -60,7 +60,7 @@
         this.$element = $(element);
         this.tabbing = null;
 
-        // TODO: Move this.
+        // TODO: Should we move this?
         this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
 
             event.preventDefault();
@@ -144,4 +144,4 @@
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".r.tabs.data-api"));
+}(jQuery, window, ".r.tabs"));
