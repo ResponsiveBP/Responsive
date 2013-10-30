@@ -176,15 +176,15 @@ Lightbox trigger
     <hr />
     <section id="events">
         <h1>Events</h1>
-        <p>The carousel exposes the following events allowing the developer to tap into its behaviour.</p>
+        <p>The lightbox exposes the following events allowing the developer to tap into its behaviour.</p>
         <dl>
-            <dt><strong>show.r.lightbox.data-api</strong></dt>
+            <dt><strong>show.r.lightbox</strong></dt>
             <dd>This event is fired immediately when the plugins <code>show</code> instance method is invoked.</dd>
-            <dt><strong>shown.r.lightbox.data-api</strong></dt>
+            <dt><strong>shown.r.lightbox</strong></dt>
             <dd>This event is fired when the plugins <code>shown</code> instance method is invoked once the target has completed the animation and is shown.</dd>
-            <dt><strong>hide.r.lightbox.data-api</strong></dt>
+            <dt><strong>hide.r.lightbox</strong></dt>
             <dd>This event is fired immediately when the plugins <code>hide</code> instance method is invoked.</dd>
-            <dt><strong>hidden.r.lightbox.data-api</strong></dt>
+            <dt><strong>hidden.r.lightbox</strong></dt>
             <dd>This event is fired when the plugins <code>hidden</code> instance method is invoked once the target has completed the animation and is hidden.</dd>
         </dl>
     </section>
@@ -196,28 +196,28 @@ Lightbox trigger
                     If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("click.r.lightbox.data-api")
-                .on("click.r.lightbox.data-api", ":attrStart(data-lightbox)", function (event) {    
+$(document.body).off("click.r.lightbox")
+                .on("click.r.lightbox", ":attrStart(data-lightbox)", function (event) {    
                     // Your custom behaviour...
                 });
                     
 // Bind to the show event.
-$("YOUR_TRIGGER_SELECTOR").on("show.r.lightbox.data-api", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("show.r.lightbox", function(event) {
     // Your custom behaviour...
 });
                                                
 // Bind to the shown event.
-$("YOUR_TRIGGER_SELECTOR").on("shown.r.lightbox.data-api", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("shown.r.lightbox", function(event) {
     // Your custom behaviour...
 });
 
 // Bind to the hide event.
-$("YOUR_TRIGGER_SELECTOR").on("hide.r.lightbox.data-api", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("hide.r.lightbox", function(event) {
     // Your custom behaviour...
 });
 
 // Bind to the hidden event.
-$("YOUR_TRIGGER_SELECTOR").on("hidden.r.lightbox.data-api", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("hidden.r.lightbox", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>

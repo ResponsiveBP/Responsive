@@ -234,7 +234,7 @@
         <h1>Events</h1>
         <p>The carousel exposes the following events allowing the developer to tap into its behaviour.</p>
         <dl>
-            <dt><strong>slide.r.carousel.data-api</strong></dt>
+            <dt><strong>slide.r.carousel</strong></dt>
             <dd>This event is fired immediately when the plugins <code>slide</code> instance method is invoked. The event data contains two custom properties:
                 <dl>
                     <dt><strong>relatedTarget</strong></dt>
@@ -243,7 +243,7 @@
                     <dd>The direction in which the carousel is transitioning.</dd>
                 </dl>
             </dd>
-            <dt><strong>slid.r.carousel.data-api</strong></dt>
+            <dt><strong>slid.r.carousel</strong></dt>
             <dd>This event is fired when the plugins <code>slide</code> instance method is invoked once the carousel has completed sliding.
             </dd>
         </dl>
@@ -256,24 +256,24 @@
                 If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default loading behaviour
-$(document).off("ready.r.carousel.data-api")
-           .on("ready.r.carousel.data-api", function () {
+$(document).off("ready.r.carousel")
+           .on("ready.r.carousel", function () {
              // Your custom behaviour...
            }); 
 
 // Override the default carousel control click behaviour
-$("YOUR_SELECTOR").off("click.r.carousel.data-api")
-                  .on("click.r.carousel.data-api", "[data-carousel-slide], [data-carousel-slide-to]", function (event) {
+$("YOUR_SELECTOR").off("click.r.carousel")
+                  .on("click.r.carousel", "[data-carousel-slide], [data-carousel-slide-to]", function (event) {
                       // Your custom behaviour...
                   }); 
 
 // Bind to the slide event.
-$("YOUR_SELECTOR").on("slide.r.carousel.data-api", function(event) {
+$("YOUR_SELECTOR").on("slide.r.carousel", function(event) {
     // Your custom behaviour...
 });
                                                
 // Bind to the slid event.
-$("YOUR_SELECTOR").on("slid.r.carousel.data-api", function(event) {
+$("YOUR_SELECTOR").on("slid.r.carousel", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>

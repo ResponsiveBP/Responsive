@@ -108,3 +108,11 @@ header[role="banner"] span {
     right: -1px;
     bottom: -1px;
 }
+
+/*
+ * Dropdown examples.
+ */
+.dropdown-width-example {
+    height: 246px;
+    width: 288px;
+}
