@@ -1,5 +1,5 @@
 <ul class="no-bullets">
-    {% assign sorted_pages = site.pages | sort: "name" %}
+    {% assign sorted_pages = site.pages %}
     {% for page in sorted_pages %}
     {% if page.group == {{include.param}} %} 
     <li><a href="{{ page.url }}">{{ page.title }}</a></li>

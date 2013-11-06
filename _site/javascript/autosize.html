@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title> Tabs ::  Responsive</title>
+    <title> Autosize ::  Responsive</title>
     <meta name="description" content="This is a sample Jekyll Blog." />
 
     <link href="/assets/css/responsive.css" rel="stylesheet" />
@@ -27,8 +27,8 @@
 
 <article class="container" role="main">
     <header role="banner">
-        <h1>Tabs
-        <span>Responsive tabbed content.</span>
+        <h1>Autosize
+        <span>A plugin for adding automatic vertical resizing to textareas.</span>
         </h1>
     </header>
     <hr />
@@ -57,100 +57,106 @@
         </nav>
         <article class="col-s-9">
             <section id="normalize">
-    <h1>Tabs</h1>
-    <p>A jQuery plugin that provides dynamic tab functionality to transition through panes of local content. Uses CSS transitions to perform the animation.</p>
+    <h1>Autosize</h1>
     <p>
-        Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+        A jQuery plugin that provides automatic vertical resize functionality to textareas. Useful for ensuring that textareas do not clutter the page.
+        Uses CSS transitions to perform the animation.
+    </p>
+    <p>
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
     <hr />
     <section id="examples">
         <h1>Examples</h1>
-        <div class="row">
+        <section class="row">
             <div class="col-s-6">
-                <div data-tabs="">
-                    <ul class="tabs">
-                        <li class="tab-active"><a href="#">tab1</a></li>
-                        <li><a href="#">tab2</a></li>
-                        <li><a href="#">tab3</a></li>
-                    </ul>
-                    <div class="tab-pane-active">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                    <div>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-                    </div>
-                    <div>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-                    </div>
-                </div>
+                <h2>Standard</h2>
+                <textarea id="textarea1" name="textarea1" data-autosize="" class="full-width"></textarea>
             </div>
+            <div class="col-s-6">
+                <h2>Extra Data-Attributes</h2>
+                <textarea id="textarea2" name="textarea2" data-autosize="" data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate" class="full-width validate" data-val-message="Generic error message"></textarea>
+                <p>Extra data-attributes configured to allow removal of problematic classes or attributes that could affect the cloned element used for calculating size.</p>
+            </div>
+        </section>
+        <div class="alert alert-info">
+            <p>If running the plugin without using the markup API, add the class <code>.autosize</code> to the plugin to get the desired style behaviour.</p>
         </div>
     </section>
     <hr />
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>&lt;div data-tabs=""&gt;
-    &lt;ul class="tabs"&gt;
-        &lt;li class="tab-active"&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;tab2&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;div class="tab-pane-active"&gt;
-        ....
-    &lt;/div&gt;
-    &lt;div&gt;...&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+        <pre class="language-markup"><code>&lt;!-- Standard markup --&gt;
+&lt;textarea id="textarea1" name="textarea1" data-autosize="" &gt;&lt;/textarea &gt;
+&lt;!-- Additional remove attributes/classes markup (space separated values) --&gt;
+&lt;textarea id="textarea2" name="textarea2" data-autosize="" data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate error" &gt;&lt;/textarea &gt;</code></pre>
     </section>
     <hr />
     <section id="methods">
         <h1>Methods</h1>
-        <p>The tabs plugin exposes the following method signatures.</p>
+        <p>The autosize exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.tabs(index)</strong>  </dt>
-            <dd>Initialises the plugin with an optional
-                <var>index</var>
-                parameter. A zero based indicator for which tab to show.</dd>
+            <dt><strong>.autosize(options)</strong>  </dt>
+            <dd>
+                Initialises the plugin with an optional options <code>object</code>
+                <dl class="dl-horizontal">
+                    <dt><strong>options</strong></dt>
+                    <dd>
+                        Contains parameters to pass to the plugin.
+                        <dl>
+                            <dt><strong>removeAttributes</strong></dt>
+                            <dd>A space separated list of attributes to remove from the cloned textarea</dd>
+                            <dt><strong>removeClasses</strong></dt>
+                            <dd>A space separated list of CSS classes to remove from the cloned textarea</dd>
+                        </dl>
+                    </dd>
+                </dl>
+            </dd>
+            <dt><strong>.autosize("size")</strong>  </dt>
+            <dd>Triggers the plugin to resize to match its text.</dd>
         </dl>
     </section>
     <hr />
     <section id="events">
         <h1>Events</h1>
-        <p>The tabs plugin exposes the following events allowing the developer to tap into its behaviour.</p>
+        <p>The autosize plugin exposes the following events allowing the developer to tap into its behaviour.</p>
         <dl>
-            <dt><strong>show.r.tabs</strong></dt>
-            <dd>This event is fired immediately when the plugins <code>show</code> instance method is invoked.</dd>
-            <dt><strong>shown.r.tabs</strong></dt>
-            <dd>This event is fired when the plugins <code>shown</code> instance method is invoked once the tab has completed the animation and the new pane is visible.</dd>
+            <dt><strong>size.r.autosize</strong></dt>
+            <dd>This event is fired immediately when the plugins <code>size</code> instance method is invoked.</dd>
+            <dt><strong>sized.r.autosize</strong></dt>
+            <dd>This event is fired when the plugins <code>sized</code> instance method is invoked once the textarea has completed the animation and is resized.</dd>
         </dl>
     </section>
     <hr />
     <section id="dataapi">
         <h1>Data API</h1>
         <p>
-            The tabs plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-                If you need to override this behaviour the following code will allow you to do so.
+            The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.tabs")
-           .on("ready.r.tabs", function (event) {
+$(document).off("ready.r.autosize")
+           .on("ready.r.autosize", function () {
                // Your custom behaviour...
            }); 
-
-// Override the default tabs control click behaviour
-$("[data-tabs]").off("click.r.tabs")
-                .on("click.r.tabs", "ul.tabs > li > a", function (event) {
+// Override the default textarea control cut/paste/keyup behaviour
+$(document.body).off("keyup.r.autosize paste.r.autosize cut.r.autosize")
+                .on("keyup.r.autosize paste.r.autosize cut.r.autosize", "textarea[data-autosize]", function (event) {
                     // Your custom behaviour...
                 }); 
-
-// Bind to the show event.
-$("YOUR_SELECTOR").on("show.r.tabs", function(event) {
+// Override the default window resize behaviour
+$(window).off("resize.r.autosize")
+         .on("resize.r.autosize", function () {
+             // Your custom behaviour...
+         }); 
+// Bind to the size event.
+$("YOUR_SELECTOR").on("size.r.autosize", function(event) {
     // Your custom behaviour...
 });
                                                
-// Bind to the shown event.
-$("YOUR_SELECTOR").on("shown.r.tabs", function(event) {
+// Bind to the sized event.
+$("YOUR_SELECTOR").on("sized.r.autosize", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>

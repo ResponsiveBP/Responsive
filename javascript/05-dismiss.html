@@ -1,62 +1,17 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title> Dismiss ::  Responsive</title>
-    <meta name="description" content="This is a sample Jekyll Blog." />
-
-    <link href="/assets/css/responsive.css" rel="stylesheet" />
-    <!--[if lt IE 9 &!(IEMobile)]>
-        <script src="/assets/js/vendor/html5shiv.min.js"></script>
-        <script src="/assets/js/vendor/respond.min.js"></script>
-    <![endif]-->
-
-    <link href="/assets/css/docs.css" rel="stylesheet" />
-    <link href="/assets/css/vendor/prism.css" rel="stylesheet" />
-</head>
-<body>
-    <nav role="navigation">
-        <div class="container">
-            <div class="row">
-                <a href="/" rel="home">Responsive</a><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a>
-            </div>
-        </div>
-    </nav>
-
-<article class="container" role="main">
-    <header role="banner">
-        <h1>Dismiss
-        <span>Responsive content toggler.</span>
-        </h1>
-    </header>
-    <hr />
-    <div class="row">
-        <nav class="col-s-3" role="complementary">
-            <h3>Contents</h3>
-            <ul class="no-bullets">
-    
-       
-       <li><a href="#examples">Examples</a></li>
-    
-       
-       <li><a href="#markup">Markup</a></li>
-    
-       
-       <li><a href="#methods">Methods</a></li>
-    
-       
-       <li><a href="#events">Events</a></li>
-    
-       
-       <li><a href="#dataapi">Data API</a></li>
-    
-</ul>
-
-        </nav>
-        <article class="col-s-9">
-            <section id="normalize">
+---
+permalink: dismiss.html
+layout: subpage
+group: javascript
+title: Dismiss
+heading: Dismiss
+subheading: Responsive content toggler.
+sublinks: ["#examples|Examples",
+            "#markup|Markup",
+            "#methods|Methods",
+            "#events|Events",
+            "#dataapi|Data API"]
+---
+<section id="normalize">
     <h1>Dismiss</h1>
     <p>A jQuery plugin that adds the functionality to hide to any parent element it targets. Uses CSS transitions to perform the animation.</p>
     <p>
@@ -139,40 +94,3 @@ $("YOUR_PARENT_SELECTOR").on("dismissed.r.dismiss", function(event) {
 });</code></pre>
     </section>
 </section>
-
-        </article>
-    </div>
-</article>
-﻿<footer role="contentinfo" class="container">
-    <hr>
-    <div class="row">
-        <div class="col-s-8">
-            <p>
-                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
-            </p>
-            <p>
-                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
-                    <a href="http://getbootstrap.com/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
-            </p>
-            <p>
-                Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
-            </p>
-        </div>
-        <div class="col-s-4">
-            <div class="clearfix">
-                <a href="#" role="button" class="push-right">Back to Top ^</a>
-            </div>
-        </div>
-    </div>
-</footer>
-<!--[if IE 8]>     
-            <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
-   <![endif]-->
-<!--[if gt IE 8]><!-->
-<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
-<!--<![endif]-->
-<script src="/assets/js/vendor/prism.js"></script>
-<script src="/assets/js/responsive.js"></script>
-</body>
-</html>
-
