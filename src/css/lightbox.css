@@ -113,7 +113,6 @@
     overflow: auto;
 }
 
-.lightbox > img,
 .lightbox > .media {
     background-color: #111;
 }

@@ -2529,13 +2529,21 @@ button,
     padding: .5em 1em;
     margin-bottom: 0;
     line-height: normal;
-    text-decoration: none!important;
+    text-decoration: none !important;
     font-size: 1em;
     border: solid 1px #c0c0c0;
     background-color: #dadada;
     color: #222;
     cursor: pointer;
     position: relative;
+}
+
+/*
+ * Reset width for inputs
+ */
+[type="submit"],
+[type="button"] {
+    width: auto;
 }
 
     /*
@@ -3144,7 +3152,6 @@ pre code {
     overflow: auto;
 }
 
-.lightbox > img,
 .lightbox > .media {
     background-color: #111;
 }

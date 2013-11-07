@@ -207,24 +207,7 @@
         }, this));
     },
 
-    destroy = function () {
-        if (!this.options.external) {
-            // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass("hidden").detach().insertAfter($placeholder);
-            $placeholder.detach().insertAfter($overlay);
-        }
-
-        toggleFade.call(this);
-
-        // Clean up the header/footer.
-        $header.empty().detach();
-        $footer.empty().detach();
-        $close.detach();
-
-        // Clean up the lightbox.
-        $next.detach();
-        $previous.detach();
-
+    destroy = function (callback) {
         var self = this,
             empty = function () {
                 $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
@@ -239,10 +222,35 @@
 
                     manageKeyboard.call(self, "hide");
                 }
+
+                callback && callback();
+
+            }, cleanUp = function () {
+
+                if (!self.options.external) {
+                    // Put that kid back where it came from or so help me.
+                    $(self.options.target).addClass("hidden").detach().insertAfter($placeholder);
+                    $placeholder.detach().insertAfter($overlay);
+                }
+
+                // Clean up the header/footer.
+                $header.empty().detach();
+                $footer.empty().detach();
+                $close.detach();
+
+                // Clean up the lightbox.
+                $next.detach();
+                $previous.detach();
+
+                // Fix __flash__removeCallback' is undefined error.
+                $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
+
             };
 
-        // Fix __flash__removeCallback' is undefined error.
-        $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
+        toggleFade.call(this);
+
+        supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
+            : cleanUp();
     },
 
     resize = function () {
@@ -448,10 +456,7 @@
 
             this.$sibling = $(this.$group[position]);
 
-            destroy.call(this);
-
-            supportTransition ? $lightbox.one(supportTransition.end, complete)
-                : complete();
+            destroy.call(this, complete);
 
             this.isShown = false;
         }
