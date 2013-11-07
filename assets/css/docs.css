@@ -11,13 +11,9 @@ blockquote {
     border-left: 5px solid #c0c0c0;
 }
 
-/*
- * 1: Fix webkit position fixed issues.
- */
 nav[role="navigation"] {
     color: #fff;
     background: #222;
-    -webkit-transform: translateZ(0); /* 1 */
     position: fixed;
     top: 0;
     left: 0;
@@ -28,7 +24,6 @@ nav[role="navigation"] {
 
     nav[role="navigation"] a {
         color: #fff;
-        /*font-size: 1.17em;*/
         text-decoration: none;
     }
 
