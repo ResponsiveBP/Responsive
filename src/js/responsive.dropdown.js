@@ -140,8 +140,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.dropdown;
-
     $.fn.dropdown = function (options) {
         return this.each(function () {
             var $this = $(this),
@@ -164,6 +162,7 @@
     $.fn.dropdown.Constructor = Dropdown;
 
     // No conflict.
+    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;

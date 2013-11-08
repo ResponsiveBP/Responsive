@@ -634,8 +634,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.lightbox;
-
     $.fn.lightbox = function (options) {
 
         return this.each(function () {
@@ -660,7 +658,11 @@
         });
     };
 
+    // Set the public constructor.
+    $.fn.lightbox.Constructor = LightBox;
+
     // No conflict.
+    var old = $.fn.lightbox;
     $.fn.lightbox.noConflict = function () {
         $.fn.lightbox = old;
         return this;

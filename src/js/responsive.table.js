@@ -17,6 +17,7 @@
         eadd = "add" + ns,
         eadded = "added" + ns;
 
+    // Table class definition.
     var Table = function (element) {
 
         this.$element = $(element);
@@ -76,8 +77,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.table;
-
     $.fn.table = function (options) {
 
         return this.each(function () {
@@ -102,6 +101,7 @@
     $.fn.table.Constructor = Table;
 
     // No conflict.
+    var old = $.fn.table;
     $.fn.table.noConflict = function () {
         $.fn.table = old;
         return this;

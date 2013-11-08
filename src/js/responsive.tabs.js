@@ -105,8 +105,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.tabs;
-
     $.fn.tabs = function (options) {
 
         return this.each(function () {
@@ -126,11 +124,12 @@
 
         });
     };
-
+    
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
     // No conflict.
+    var old = $.fn.tabs;
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;

@@ -126,7 +126,7 @@
             }, this));
     };
 
-    // AutoSize class definition
+    // Carousel class definition
     var Carousel = function (element, options) {
 
         this.$element = $(element);
@@ -345,8 +345,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.carousel;
-
     $.fn.carousel = function (options) {
 
         return this.each(function () {
@@ -378,6 +376,7 @@
     $.fn.carousel.Constructor = Carousel;
 
     // No conflict.
+    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;

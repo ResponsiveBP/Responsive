@@ -146,8 +146,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.autoSize;
-
     $.fn.autoSize = function (options) {
 
         return this.each(function () {
@@ -172,6 +170,7 @@
     $.fn.autoSize.Constructor = AutoSize;
 
     // No conflict.
+    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;

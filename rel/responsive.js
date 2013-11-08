@@ -473,8 +473,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.autoSize;
-
     $.fn.autoSize = function (options) {
 
         return this.each(function () {
@@ -499,6 +497,7 @@
     $.fn.autoSize.Constructor = AutoSize;
 
     // No conflict.
+    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;
@@ -668,7 +667,7 @@
             }, this));
     };
 
-    // AutoSize class definition
+    // Carousel class definition
     var Carousel = function (element, options) {
 
         this.$element = $(element);
@@ -887,8 +886,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.carousel;
-
     $.fn.carousel = function (options) {
 
         return this.each(function () {
@@ -920,6 +917,7 @@
     $.fn.carousel.Constructor = Carousel;
 
     // No conflict.
+    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;
@@ -1010,8 +1008,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.dismiss;
-
     $.fn.dismiss = function (target) {
 
         return this.each(function () {
@@ -1033,6 +1029,7 @@
     $.fn.dismiss.Constructor = Dismiss;
 
     // No conflict.
+    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;
@@ -1198,8 +1195,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.dropdown;
-
     $.fn.dropdown = function (options) {
         return this.each(function () {
             var $this = $(this),
@@ -1222,6 +1217,7 @@
     $.fn.dropdown.Constructor = Dropdown;
 
     // No conflict.
+    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;
@@ -1881,8 +1877,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.lightbox;
-
     $.fn.lightbox = function (options) {
 
         return this.each(function () {
@@ -1907,7 +1901,11 @@
         });
     };
 
+    // Set the public constructor.
+    $.fn.lightbox.Constructor = LightBox;
+
     // No conflict.
+    var old = $.fn.lightbox;
     $.fn.lightbox.noConflict = function () {
         $.fn.lightbox = old;
         return this;
@@ -1948,6 +1946,7 @@
         eadd = "add" + ns,
         eadded = "added" + ns;
 
+    // Table class definition.
     var Table = function (element) {
 
         this.$element = $(element);
@@ -2007,8 +2006,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.table;
-
     $.fn.table = function (options) {
 
         return this.each(function () {
@@ -2033,6 +2030,7 @@
     $.fn.table.Constructor = Table;
 
     // No conflict.
+    var old = $.fn.table;
     $.fn.table.noConflict = function () {
         $.fn.table = old;
         return this;
@@ -2161,8 +2159,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.tabs;
-
     $.fn.tabs = function (options) {
 
         return this.each(function () {
@@ -2182,11 +2178,12 @@
 
         });
     };
-
+    
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
     // No conflict.
+    var old = $.fn.tabs;
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;

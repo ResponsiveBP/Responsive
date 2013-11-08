@@ -54,8 +54,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.dismiss;
-
     $.fn.dismiss = function (target) {
 
         return this.each(function () {
@@ -77,6 +75,7 @@
     $.fn.dismiss.Constructor = Dismiss;
 
     // No conflict.
+    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;
