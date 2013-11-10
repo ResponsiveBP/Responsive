@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="A lightweight html, css, and javascript framework for building responsive websites." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive :: Alerts</title>
+
+    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
+      <link href="assets/css/docs.css" rel="stylesheet" />
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="clearfix">
+                <a href="../v1/" rel="home" class=" push-left">Responsive</a>
+                <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
+            </div>
+            <div class="menu collapse">
+                <div class="row">
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#css">CSS</a></h2>
+                        <ul id="css" class="no-bullets collapse">
+                            <li><a href="base.html">Base</a></li>
+                            <li><a href="grid.html">Grid</a></li>
+                            <li><a href="forms.html">Forms</a></li>
+                            <li><a href="buttons.html">Buttons</a></li>
+                            <li><a href="tables.html">Tables</a></li>
+                            <li><a href="lists.html">Lists</a></li>
+                            <li><a href="media.html">Media</a></li>
+                            <li><a href="code.html">Code</a></li>
+                            <li><a href="alerts.html">Alerts</a></li>
+                        </ul>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#js">JavaScript</a></h2>
+                        <ul id="js" class="no-bullets collapse">
+                            <li><a href="autosize.html">Autosize</a></li>
+                            <li><a href="carousel.html">Carousel</a></li>
+                            <li><a href="dismiss.html">Dismiss</a></li>
+                            <li><a href="dropdown.html">Dropdown</a></li>
+                            <li><a href="lightbox.html">Lightbox</a></li>
+                            <li><a href="tabs.html">Tabs</a></li>
+                        </ul>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="gallery.html">Gallery</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <article class="container" role="main">
+        <header role="banner">
+            <h1 class="masthead">Alerts</h1>
+            <p>
+                Alert info boxes for various scenarios. Whilst these contain opinionated styling they only posses the minimum of css to allow you
+            to easier hook into and override those styles.
+            </p>
+            <p>
+                The dismiss functionality is added by a <a href="dismiss.html">JavaScript plugin</a> which comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+            This is Responsive's first class API and should be your first consideration when using a plugin.
+            </p>
+        </header>
+        <hr />
+        <section>
+            <div class="row">
+                <div class="column-6">
+                    <h1>Default</h1>
+                    <div class="alert">
+                        <a data-dismiss-target=".alert" href="#" class="close">x</a>
+                        <h4 class="alert-heading">Alert block</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h1>Success</h1>
+                    <p>Add class <code>.alert-success</code>.</p>
+                    <div class="alert alert-success">
+                        <a data-dismiss-target=".alert" href="#" class="close">x</a>
+                        <p><strong>Success</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h1>Warning</h1>
+                    <p>Add class <code>.alert-warning</code>.</p>
+                    <div class="alert alert-warning">
+                        <a data-dismiss-target=".alert" href="#" class="close">x</a>
+                        <p><strong>Warning</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h1>Error</h1>
+                    <p>Add class <code>.alert-error</code>.</p>
+                    <div class="alert alert-error">
+                        <a data-dismiss-target=".alert" href="#" class="close">x</a>
+                        <p><strong>Error</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h1>Info</h1>
+                    <p>Add class <code>.alert-info</code>.</p>
+                    <div class="alert alert-info">
+                        <a data-dismiss-target=".alert" href="#" class="close">x</a>
+                        <p><strong>Info</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h1>The Markup</h1>
+            <pre class="language-markup"><code>&lt;div class="alert"&gt;
+    &lt;a data-dismiss-target=".alert" href="#" class="close"&gt;x&lt;/a&gt;
+        &lt;h4 class="alert-heading"&gt;Alert block&lt;/h4&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+        &lt;p&gt;Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+    </article>
+    <footer role="contentinfo" class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" role="button" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+
+    <script src="assets/js/responsive.js"></script>
+
+    <!-- Google Analytics: -->
+    <script>
+        var _gaq = [['_setAccount', 'UA-42035025-1'], ['_trackPageview']];
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = '//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s);
+        }(document, 'script'));
+    </script>
+
+    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+</body>
+</html>

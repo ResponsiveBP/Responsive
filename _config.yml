@@ -1,0 +1,18 @@
+﻿# Allows the running of the site in a subdirectory on Github Pages
+# Note - if you enable this, and attempt to view your site locally you have to 
+# pass the  --baseurl parameter when serving as an empty string e.g jekyll serve --baseurl ''
+# http://jekyllrb.com/docs/github-pages/
+baseurl : /Responsive
+
+relative_permalinks: true
+
+# Name of the website
+name: Responsive
+
+# Short description (goes below the title)
+description: This is a sample Jekyll Blog.
+
+# Your name, as you want it to appear underneath each post and in the footer
+author: James South
+
+version: "2.0.0"

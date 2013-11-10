@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Alerts ::  Responsive</title>
+    <meta name="description" content="This is a sample Jekyll Blog." />
+
+    <link href="/assets/css/responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/assets/css/docs.css" rel="stylesheet" />
+    <link href="/assets/css/vendor/prism.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+
+<article class="container" role="main">
+    <header role="banner">
+        <a href="/css.html">&lt;&lt; Back</a>
+        <h1>
+            Alerts
+            <span>Alert info boxes for various scenarios.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-s-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#examples">Examples</a></li>
+    
+</ul>
+
+        </nav>
+        <article class="col-s-9">
+            <section>
+    <h1 class="masthead">Alerts</h1>
+    <p>
+        Whilst these contain opinionated styling they only posses the minimum of css to allow you to easier hook into and override those styles.
+    </p>
+    <p>
+        The dismiss functionality is added by a <a href="dismiss.html">JavaScript plugin</a>.
+    </p>
+    <hr />
+    <section id="examples">
+        <h2>Default</h2>
+        <div class="alert">
+            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+            <h4 class="alert-heading">Alert block</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+        </div>
+
+        <h2>Success</h2>
+        <p>Add class <code>.alert-success</code>.</p>
+        <div class="alert alert-success">
+            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+            <p><strong>Success</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+        </div>
+
+        <h2>Warning</h2>
+        <p>Add class <code>.alert-warning</code>.</p>
+        <div class="alert alert-warning">
+            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+            <p><strong>Warning</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+        </div>
+
+        <h1>Error</h1>
+        <p>Add class <code>.alert-error</code>.</p>
+        <div class="alert alert-error">
+            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+            <p><strong>Error</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+        </div>
+
+
+        <h2>Info</h2>
+        <p>Add class <code>.alert-info</code>.</p>
+        <div class="alert alert-info">
+            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+            <p><strong>Info</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+        </div>
+
+        <h2>The Markup</h2>
+        <pre class="language-markup"><code>&lt;div class="alert"&gt;
+    &lt;a data-dismiss-target=".alert" href="#" class="close"&gt;x&lt;/a&gt;
+        &lt;h4 class="alert-heading"&gt;Alert block&lt;/h4&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+        &lt;p&gt;Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+</section>
+
+        </article>
+    </div>
+</article>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://getbootstrap.com/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <a href="#" role="button" class="push-right">Back to Top ^</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+    <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<script src="/assets/js/vendor/prism.js"></script>
+<script src="/assets/js/responsive.js"></script>
+
+<!-- Google Analytics: -->
+<script>
+    var _gaq = [['_setAccount', 'UA-42035025-1'], ['_trackPageview']];
+    (function (d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = '//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+
+<script src="/assets/js/jquery.googleanalytics.min.js"></script>
+
+</body>
+</html>
+

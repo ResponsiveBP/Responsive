@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="A lightweight html, css, and javascript framework for building responsive websites." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive :: Media</title>
+
+    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
+      <link href="assets/css/docs.css" rel="stylesheet" />
+      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="assets/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="clearfix">
+                <a href="../v1/" rel="home" class=" push-left">Responsive</a>
+                <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
+            </div>
+            <div class="menu collapse">
+                <div class="row">
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#css">CSS</a></h2>
+                        <ul id="css" class="no-bullets collapse">
+                            <li><a href="base.html">Base</a></li>
+                            <li><a href="grid.html">Grid</a></li>
+                            <li><a href="forms.html">Forms</a></li>
+                            <li><a href="buttons.html">Buttons</a></li>
+                            <li><a href="tables.html">Tables</a></li>
+                            <li><a href="lists.html">Lists</a></li>
+                            <li><a href="media.html">Media</a></li>
+                            <li><a href="code.html">Code</a></li>
+                            <li><a href="alerts.html">Alerts</a></li>
+                        </ul>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="#" data-dropdown-target="#js">JavaScript</a></h2>
+                        <ul id="js" class="no-bullets collapse">
+                            <li><a href="autosize.html">Autosize</a></li>
+                            <li><a href="carousel.html">Carousel</a></li>
+                            <li><a href="dismiss.html">Dismiss</a></li>
+                            <li><a href="dropdown.html">Dropdown</a></li>
+                            <li><a href="lightbox.html">Lightbox</a></li>
+                            <li><a href="tabs.html">Tabs</a></li>
+                        </ul>
+                    </div>
+                    <div class="column-3">
+                        <h2><a href="gallery.html">Gallery</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <article class="container" role="main">
+        <header role="banner">
+            <h1 class="masthead">Media</h1>
+            <p>Responsive images and video that scale to your viewport.</p>
+        </header>
+        <hr />
+        <section>
+            <h1>Images</h1>
+            <p>All images are responsive by default and will not overflow the boundaries of their container.</p>
+            <div class="row">
+                <div class="column-4">
+                    <img src="assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="column-4">
+                    <img src="assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="column-4">
+                    <img src="assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                </div>
+            </div>
+        </section>
+        <section>
+            <h1>Constrained Images</h1>
+            <p>Wrap the image in a container with the class <code>.media</code> to vertically center align any images.</p>
+            <div class="row">
+                <div class="column-4">
+                    <div class="media">
+                        <img src="assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="media">
+                        <img src="assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="column-4">
+                    <div class="media">
+                        <img src="assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <hr />
+        <section>
+            <h1>Iframes</h1>
+            <p>Containers are scaled when embedding an object from YouTube, Vimeo, or another site that uses iframe, embed or object elements.</p>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Youtube</h2>
+                    <p>Add class <code>.media</code> to the media container.</p>
+                    <div class="media">
+                        <iframe src="http://www.youtube.com/embed/eRW84aVCMWo" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Dailymotion</h2>
+                    <p>Add class <code>.media</code> to the media container.</p>
+                    <div class="media">
+                        <iframe src="http://www.dailymotion.com/embed/video/x10o8jk" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Google Maps</h2>
+                    <p>Add classes <code>.media</code> to the media container.</p>
+                    <div class="media">
+                        <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;output=embed"></iframe>
+                        <br />
+                        <small><a href="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;source=embed" style="color: #0000FF; text-align: left">View Larger Map</a></small>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Vimeo</h2>
+                    <p>Add classes <code>.media</code> and <code>.vimeo</code> to the media container.</p>
+                    <div class="media vimeo">
+                        <iframe src="http://player.vimeo.com/video/24954567" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <h2>Vine</h2>
+                    <p>Add classes <code>.media</code> and <code>.vine</code> to the media container.</p>
+                    <div class="media vine">
+                        <iframe src="https://vine.co/v/bYwPIluIipH/embed/simple" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+                <div class="column-6">
+                    <h2>Instagram</h2>
+                    <p>Add classes <code>.media</code> and <code>.instagram</code> to the media container.</p>
+                    <div class="media instagram">
+                        <iframe src="http://instagram.com/p/dJJvzMI4X8/embed/" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+            </div>
+            <aside>
+                <h1>The Markup</h1>
+                <pre class="language-markup"><code>&lt;div class="media instagram"&gt;
+    &lt;iframe src="http://instagram.com/p/dJJvzMI4X8/embed/" frameborder="0" scrolling="no" allowtransparency="true"&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+            </aside>
+        </section>
+        <hr />
+        <section>
+            <h1>Video</h1>
+            <div class="row">
+                <p>Wrap the video element in a container marked with classes <code>.media</code> and <code>.video</code>.</p>
+                <p>Embed code taken from <a href="http://camendesign.com/code/video_for_everybody">"Video For Everybody"</a>.</p>
+                <div class="column-6">
+                    <div class="media video">
+                        <!-- "Video For Everybody" http://camendesign.com/code/video_for_everybody -->
+                        <video controls="controls" poster="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360">
+                            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
+                            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" />
+                            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" />
+                            <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
+                                <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                                <param name="allowFullScreen" value="true" />
+                                <param name="wmode" value="transparent" />
+                                <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fsandbox.thewikies.com%2Fvfe-generator%2Fimages%2Fbig-buck-bunny_poster.jpg',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />
+                                <img alt="Big Buck Bunny" src="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360" title="No video playback capabilities, please download the video below" />
+                            </object>
+                        </video>
+                    </div>
+                    <p>
+                        <strong>Download video:</strong> <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">MP4 format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv">Ogg format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm">WebM format</a>
+                    </p>
+                    <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
+                </div>
+            </div>
+        </section>
+    </article>
+    <footer role="contentinfo" class="container">
+        <hr />
+        <div class="row">
+            <div class="column-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                </p>
+                <p>
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                </p>
+            </div>
+            <div class="column-2 push-right">
+                <a href="#" role="button" class="btn">Back to top ^</a>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>     
+        <script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+
+    <script src="assets/js/responsive.js"></script>
+
+    <!-- Google Analytics: -->
+    <script>
+        var _gaq = [['_setAccount', 'UA-42035025-1'], ['_trackPageview']];
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = '//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s);
+        }(document, 'script'));
+    </script>
+
+    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+</body>
+</html>

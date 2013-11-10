@@ -1,0 +1,98 @@
+---
+layout: default
+title: Getting Started
+heading: Getting Started
+subheading: An introduction to Responsive, how to use it, with basic templates and examples.
+---
+<div class="row">
+    <nav class="col-s-3" role="complementary">
+        <ul class="no-bullets">
+            <li><a href="#download">Download Responsive</a></li>
+            <li><a href="#html">The HTML</a></li>
+            <li><a href="#support">Browser Support</a></li>
+        </ul>
+    </nav>
+    <section class="col-s-9">
+        <div class="alert alert-info">
+            <p>Looking for the v1 documentation? You can find them <a href="v1/">here</a>.</p>
+        </div>
+        <section id="download">
+            <h1>Download Responsive</h1>
+            <p>
+                The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
+                No documentation or original source code files are included.
+            </p>
+            <a href="http://github.com/JimBobSquarePants/Responsive/raw/master/rel/responsive.zip" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Framework Download">Download Responsive</a>
+            <ul class="download-links">
+                <li>
+                    Version {{site.version}}
+                </li>
+            </ul>
+        </section>
+        <hr />
+        <section id="html">
+            <h1>Setting up your HTML</h1>
+            <p>
+                Inside the zip file you will also find a HTML file containing the default template for including
+                responsive in your webpage.<br /> Set up your layout as follows.
+            </p>
+            <pre class="language-markup"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" /&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+        &lt;meta name="description" content="Your Page Description." /&gt;
+        &lt;title&gt;Your Page Title&lt;/title&gt;
+        &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
+        &lt;!-- 
+             HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
+             and media queries 
+             WARNING: Respond.js doesn't work if you view the 
+             page via file:// 
+        --&gt;
+        &lt;!--[if lt IE 9 &!(IEMobile)]&gt;
+            &lt;script src="vendor/html5shiv.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/respond.min.js"&gt;&lt;/script&gt;
+        &lt;![endif]--&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Your Body Content
+    
+        &lt;!-- Scripts at the bottom for improved performance. --&gt;
+        &lt;!-- jQuery, required for all responsive plugins. --&gt;
+        &lt;!--[if IE 8]&gt;     
+            &lt;script src="vendor/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+        &lt;![endif]--&gt;
+        &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
+            &lt;script src="vendor/jquery-2.0.3.min.js"&gt;&lt;/script&gt;
+        &lt;!--&lt;![endif]--&gt;
+        &lt;script src="responsive.min.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+        <hr />
+        <section id="support">
+            <h1>Browser Support</h1>
+            <p>
+                Responsive is built to work best in the latest desktop and mobile browsers. Everything though has been built with progressive
+                enhancement in mind, meaning older browsers might display differently styled, though fully functional, renderings of certain components.
+            </p>
+            <h3>Supported browsers</h3>
+            <p>Specifically, latest versions of the following browsers are supported:</p>
+
+            <ul>
+                <li>Chrome (Mac, Windows, iOS, and Android)</li>
+                <li>Internet Explorer</li>
+                <li>Firefox (Mac, Windows)</li>
+                <li>Opera (Mac, Windows)</li>
+                <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
+            </ul>
+            <h2>Internet Explorer 8</h2>
+            <p>
+                Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.
+                In addition, Internet Explorer 8 requires the use of <a href="https://github.com/scottjehl/Respond" rel="external nofollow" target="_blank">Respond.js</a>  to enable media query support.
+            </p>
+        </section>
+    </section>
+</div>
