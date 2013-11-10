@@ -25,8 +25,8 @@
         $iframe = null,
         $content = null,
         $close = $("<a/>").attr({ "href": "#", "title": "Close (Esc)" }).addClass("lightbox-close fade-out").html("x"),
-        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)" }).addClass("lightbox-direction left hidden"),
+        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         lastScroll = 0,
         supportTransition = $.support.transition,
@@ -51,7 +51,8 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns + " orientationchange" + ns;
+        eresize = "resize" + ns + " orientationchange" + ns,
+        efocusin = "focusin" + ns;
 
     // Private methods.
     var isExternalUrl = function (url) {
@@ -216,6 +217,8 @@
                     "margin-top": "",
                     "margin-bottom": ""
                 }).empty();
+
+                manageFocus("hide");
 
                 // Unbind the keyboard actions.
                 if (self.options.keyboard) {
@@ -508,6 +511,23 @@
             this[method]();
 
         }, this));
+    },
+
+    manageFocus = function (off) {
+
+        if (off) {
+            $(document).off(efocusin);
+            return;
+        }
+
+        $(document).off(efocusin).on(efocusin, function (event) {
+            if (!$.contains($overlay[0], event.target)) {
+                var newTarget = $lightbox.find("input, select, a, button, iframe").first();
+                newTarget.length ? newTarget.focus() : $close.focus();
+                return false;
+            }
+        });
+
     };
 
     // Lightbox class definition
@@ -558,6 +578,8 @@
             showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown),
             complete = function () {
+
+                manageFocus();
 
                 // Bind the keyboard actions.
                 if (self.options.keyboard) {

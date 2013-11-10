@@ -1268,8 +1268,8 @@
         $iframe = null,
         $content = null,
         $close = $("<a/>").attr({ "href": "#", "title": "Close (Esc)" }).addClass("lightbox-close fade-out").html("x"),
-        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)" }).addClass("lightbox-direction left hidden"),
+        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         lastScroll = 0,
         supportTransition = $.support.transition,
@@ -1294,7 +1294,8 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns + " orientationchange" + ns;
+        eresize = "resize" + ns + " orientationchange" + ns,
+        efocusin = "focusin" + ns;
 
     // Private methods.
     var isExternalUrl = function (url) {
@@ -1459,6 +1460,8 @@
                     "margin-top": "",
                     "margin-bottom": ""
                 }).empty();
+
+                manageFocus("hide");
 
                 // Unbind the keyboard actions.
                 if (self.options.keyboard) {
@@ -1751,6 +1754,23 @@
             this[method]();
 
         }, this));
+    },
+
+    manageFocus = function (off) {
+
+        if (off) {
+            $(document).off(efocusin);
+            return;
+        }
+
+        $(document).off(efocusin).on(efocusin, function (event) {
+            if (!$.contains($overlay[0], event.target)) {
+                var newTarget = $lightbox.find("input, select, a, button, iframe").first();
+                newTarget.length ? newTarget.focus() : $close.focus();
+                return false;
+            }
+        });
+
     };
 
     // Lightbox class definition
@@ -1801,6 +1821,8 @@
             showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown),
             complete = function () {
+
+                manageFocus();
 
                 // Bind the keyboard actions.
                 if (self.options.keyboard) {
@@ -2078,8 +2100,8 @@
 
         var showEvent = $.Event(eshow),
             $element = this.$element,
-            $childTabs = $element.find("ul.tabs > li"),
-            $childPanes = $element.children("div"),
+            $childTabs = $element.find("ul > li"),
+            $childPanes = $element.children(":not(ul)"),
             $nextTab = $childTabs.eq(postion),
             $currentPane = $childPanes.eq(activePosition),
             $nextPane = $childPanes.eq(postion);
@@ -2115,7 +2137,7 @@
         this.tabbing = null;
 
         // TODO: Should we move this?
-        this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
+        this.$element.off(eclick).on(eclick, "ul > li > a", function (event) {
 
             event.preventDefault();
 
@@ -2131,9 +2153,9 @@
     Tabs.prototype.show = function (position) {
 
         var $activeItem = this.$element.find(".tab-active"),
-             $children = $activeItem.parent().children(),
-             activePosition = $children.index($activeItem),
-             self = this;
+            $children = $activeItem.parent().children(),
+            activePosition = $children.index($activeItem),
+            self = this;
 
         if (position > ($children.length - 1) || position < 0) {
 
@@ -2178,7 +2200,7 @@
 
         });
     };
-    
+
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
@@ -2191,7 +2213,6 @@
 
     // Data API
     $(document).on(eready, function () {
-
         $("[data-tabs]").tabs();
     });
 

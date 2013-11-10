@@ -2982,58 +2982,62 @@ pre code {
     }
 
 /* Responsive Tabs*/
-
-[data-tabs] ul.tabs {
-    list-style: none;
-    border-bottom: 1px solid #c0c0c0;
-    padding: 0;
-    margin-top: 0;
+[data-tabs] {
+    position: relative;
 }
 
-    [data-tabs] ul.tabs:before, [data-tabs] ul.tabs:after {
-        content: "";
-        display: table;
+    [data-tabs] > ul {
+        list-style: none;
+        border-bottom: 1px solid #c0c0c0;
+        padding: 0;
+        margin-top: 0;
     }
 
-    [data-tabs] ul.tabs:after {
-        clear: both;
-    }
-
-    [data-tabs] ul.tabs > li {
-        float: left;
-        margin-bottom: -1px;
-    }
-
-        [data-tabs] ul.tabs > li > a {
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
-            padding: 0 1em;
-            line-height: 2em;
-            border: 1px solid transparent;
-            margin-right: .2em;
-            outline: none;
+        [data-tabs] > ul:before, [data-tabs] > ul:after {
+            content: "";
+            display: table;
         }
 
-            [data-tabs] ul.tabs > li > a:hover {
-                background: #ebebeb;
-                border-color: #c0c0c0;
+        [data-tabs] > ul:after {
+            clear: both;
+        }
+
+        [data-tabs] > ul > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+            [data-tabs] > ul > li > a {
+                text-decoration: none;
+                display: block;
+                cursor: pointer;
+                padding: 0 1em;
+                line-height: 2em;
+                border: 1px solid transparent;
+                margin-right: .2em;
+                outline: none;
             }
 
-        [data-tabs] ul.tabs > li.tab-active > a,
-        [data-tabs] ul.tabs > li.tab-active > a:hover {
-            color: #454545;
-            cursor: default;
-            background: #fff;
-            border: 1px solid #c0c0c0;
-            border-bottom-color: transparent;
-        }
+                [data-tabs] > ul > li > a:hover {
+                    background: #ebebeb;
+                    border-color: #c0c0c0;
+                }
 
-[data-tabs] > div {
-    display: none;
-}
+            [data-tabs] > ul > li.tab-active > a,
+            [data-tabs] > ul > li.tab-active > a:hover {
+                color: #454545;
+                cursor: default;
+                background: #fff;
+                border: 1px solid #c0c0c0;
+                border-bottom-color: transparent;
+            }
 
-    [data-tabs] > div.tab-pane-active {
+    [data-tabs] > * {
+        display: none;
+    }
+
+    [data-tabs] > ul,
+    [data-tabs] > section.tab-pane-active {
         display: block;
     }
 
@@ -3209,15 +3213,9 @@ pre code {
         right: 0;
     }
 
-    .lightbox-direction,
-    .lightbox-direction:visited,
-    .lightbox-direction:focus {
-        outline: 0;
+    .lightbox-direction:hover {
+        text-decoration: underline;
     }
-
-        .lightbox-direction:hover {
-            text-decoration: underline;
-        }
 
 /* Responsive Helpers Base */
 

@@ -24,8 +24,8 @@
 
         var showEvent = $.Event(eshow),
             $element = this.$element,
-            $childTabs = $element.find("ul.tabs > li"),
-            $childPanes = $element.children("div"),
+            $childTabs = $element.find("ul > li"),
+            $childPanes = $element.children(":not(ul)"),
             $nextTab = $childTabs.eq(postion),
             $currentPane = $childPanes.eq(activePosition),
             $nextPane = $childPanes.eq(postion);
@@ -61,7 +61,7 @@
         this.tabbing = null;
 
         // TODO: Should we move this?
-        this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
+        this.$element.off(eclick).on(eclick, "ul > li > a", function (event) {
 
             event.preventDefault();
 
@@ -77,9 +77,9 @@
     Tabs.prototype.show = function (position) {
 
         var $activeItem = this.$element.find(".tab-active"),
-             $children = $activeItem.parent().children(),
-             activePosition = $children.index($activeItem),
-             self = this;
+            $children = $activeItem.parent().children(),
+            activePosition = $children.index($activeItem),
+            self = this;
 
         if (position > ($children.length - 1) || position < 0) {
 
@@ -124,7 +124,7 @@
 
         });
     };
-    
+
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
@@ -137,7 +137,6 @@
 
     // Data API
     $(document).on(eready, function () {
-
         $("[data-tabs]").tabs();
     });
 

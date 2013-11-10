@@ -170,12 +170,6 @@
         right: 0;
     }
 
-    .lightbox-direction,
-    .lightbox-direction:visited,
-    .lightbox-direction:focus {
-        outline: 0;
+    .lightbox-direction:hover {
+        text-decoration: underline;
     }
-
-        .lightbox-direction:hover {
-            text-decoration: underline;
-        }
