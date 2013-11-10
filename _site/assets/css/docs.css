@@ -39,7 +39,7 @@ nav[role="navigation"] {
         }
 
     nav[role="navigation"] [data-dropdown-target] {
-        display: inline-block;
+        border: 1px solid #222;
         background: transparent url(/assets/css/mobile-nav.png) no-repeat center center;
         width: 24px;
         height: 27px;

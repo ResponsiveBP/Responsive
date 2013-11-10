@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <a href="/" rel="home">Responsive</a>
-                <button data-dropdown-target="#navigation" class="ir visible-xs">Toggle Navigation</button>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
                 <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a></div>
             </div>
         </div>
@@ -142,13 +142,26 @@
     </div>
 </footer>
 <!--[if IE 8]>     
-            <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
-   <![endif]-->
+    <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+<![endif]-->
 <!--[if gt IE 8]><!-->
 <script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 <script src="/assets/js/vendor/prism.js"></script>
 <script src="/assets/js/responsive.js"></script>
+
+<!-- Google Analytics: -->
+<script>
+    var _gaq = [['_setAccount', 'UA-42035025-1'], ['_trackPageview']];
+    (function (d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = '//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+
+<script src="/assets/js/jquery.googleanalytics.min.js"></script>
+
 </body>
 </html>
 
