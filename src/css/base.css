@@ -19,6 +19,9 @@ html {
     -webkit-overflow-scrolling: touch; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
+    font-size: 16px;
+    line-height: 1.4;
+    font-family: Arial, sans-serif;
 }
 
 html,
@@ -29,27 +32,20 @@ textarea {
     color: #222;
 }
 
-body {
-    font-size: 16px;
-    line-height: 1.4;
-}
-
 /*
  * Headers
  * 1: Improve rendering of screen fonts.
- * 2: Ensure class driven versions act appropriately.
+ * 2: Prevent page breaking.
  */
 h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility; /* 1 */
-    display: block; /* 2 */
-    font-weight: bold; /* 2 */
     page-break-after: avoid; /* 2 */
 }
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
- * Customize the background color to match your design.
+ * Customize the background colour to match your design.
  */
 
 ::-moz-selection {

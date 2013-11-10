@@ -16,11 +16,6 @@ start /b cruncherconsole.exe -in:..\..\src\css\responsive.css -out:..\..\rel\res
 echo Building responsive.min.css
 start /b cruncherconsole.exe -in:..\..\src\css\responsive.css -out:..\..\rel\responsive.min.css -t:css -m 
 
-echo Building responsive-legacy.css
-start /b cruncherconsole.exe -in:..\..\src\css\responsive-legacy.css -out:..\..\rel\responsive-legacy.css -t:css 
-
-echo Building responsive-legacy.min.css
-start /b cruncherconsole.exe -in:..\..\src\css\responsive-legacy.css -out:..\..\rel\responsive-legacy.min.css -t:css -m 
 echo.
 echo CSS build complete.
 
@@ -42,4 +37,3 @@ echo.
 echo.
 
 echo All builds complete, check the rel folder for output.
-PAUSE

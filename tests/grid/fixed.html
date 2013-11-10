@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Grid Tests</title>
 
-    <!-- Conditional statements are blocking so download modern styles first -->
-    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!-- Combined CSS as respond.js cannot cater for imports-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
-    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/html5shiv.min.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
@@ -22,96 +22,97 @@
         <h1>Grid</h1>
         <hr />
         <h3>Fixed Container</h3>
+        <p>Add class <code>.fixed</code> to the container and use <code>.col-xs-{number}</code> on the columns.</p>
         <div class="row">
-            <div class="column-12">
+            <div class="col-xs-12">
                 12
             </div>
         </div>
         <div class="row">
-            <div class="column-11">
+            <div class="col-xs-11">
                 11
             </div>
-            <div class="column-1">
+            <div class="col-xs-1">
                 1
             </div>
         </div>
         <div class="row">
-            <div class="column-10">
+            <div class="col-xs-10">
                 10
             </div>
-            <div class="column-2">
+            <div class="col-xs-2">
                 2
             </div>
         </div>
         <div class="row">
-            <div class="column-9">
+            <div class="col-xs-9">
                 9
             </div>
-            <div class="column-3">
+            <div class="col-xs-3">
                 3
             </div>
         </div>
         <div class="row">
-            <div class="column-8">
+            <div class="col-xs-8">
                 8
             </div>
-            <div class="column-4">
+            <div class="col-xs-4">
                 4
             </div>
         </div>
         <div class="row">
-            <div class="column-7">
+            <div class="col-xs-7">
                 7
             </div>
-            <div class="column-5">
+            <div class="col-xs-5">
                 5
             </div>
         </div>
         <div class="row">
-            <div class="column-6">
+            <div class="col-xs-6">
                 6
             </div>
-            <div class="column-6">
+            <div class="col-xs-6">
                 6
             </div>
         </div>
         <div class="row">
-            <div class="column-5">
+            <div class="col-xs-5">
                 5
             </div>
-            <div class="column-7">
+            <div class="col-xs-7">
                 7
             </div>
         </div>
         <div class="row">
-            <div class="column-4">
+            <div class="col-xs-4">
                 4
             </div>
-            <div class="column-8">
+            <div class="col-xs-8">
                 8
             </div>
         </div>
         <div class="row">
-            <div class="column-3">
+            <div class="col-xs-3">
                 3
             </div>
-            <div class="column-9">
+            <div class="col-xs-9">
                 9
             </div>
         </div>
         <div class="row">
-            <div class="column-2">
+            <div class="col-xs-2">
                 2
             </div>
-            <div class="column-10">
+            <div class="col-xs-10">
                 10
             </div>
         </div>
         <div class="row">
-            <div class="column-1">
+            <div class="col-xs-1">
                 1
             </div>
-            <div class="column-11">
+            <div class="col-xs-11">
                 11
             </div>
         </div>

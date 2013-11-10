@@ -1,21 +1,16 @@
 ﻿/* Responsive Forms Base */
 
+/* Normalize  */
 .form {
     margin: 1em 0;
 }
 
-/*
- * Normalize fieldsets.
- */
 fieldset {
     padding: 0;
     margin: 0;
     border: 0;
 }
 
-/*
- * Normalize legends.
- */
 legend {
     display: block;
     width: 100%;
@@ -27,47 +22,26 @@ label[for] {
     cursor: pointer;
 }
 
-/* Normalize  */
 select,
 textarea,
-input {
+input,
+.no-edit {
+    font-family: inherit;
+    padding: .25em;
+    background-color: #fff;
     border-radius: 0;
+    border: 1px solid #c0c0c0;
+    max-width: 210px;
+    width: 100%;
+    display: block;
+    margin-bottom: 1em;
 }
 
-    select,
-    textarea,
-    input[type="text"],
-    input[type="password"],
-    input[type="datetime"],
-    input[type="datetime-local"],
-    input[type="date"],
-    input[type="month"],
-    input[type="time"],
-    input[type="week"],
-    input[type="number"],
-    input[type="email"],
-    input[type="url"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="color"],
-    input[type="checkbox"],
-    .no-edit {
-        font-family: inherit;
-        padding: .25em;
-        background-color: #fff;
-        border: 1px solid #c0c0c0;
-    }
-
-    /*
-     * Add range styles for IE8 and IE9
-     */
-    input[type="range"] {
-        font-family: inherit;
-        padding: .25em \9;
-        background-color: #fff \9;
-        border: 1px solid transparent;
-        border: 1px solid #c0c0c0 \9;
-    }
+label,
+.input-group {
+    display: block;
+    margin-bottom: 1em;
+}
 
 /*
  * Fix field styling on iPhone and iPad.
@@ -75,7 +49,7 @@ input {
  * 1. Strip OS styling on IOS
  * 2. Add a dropdown indicator
  */
-@media screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
+@media all and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
     select,
     input[type="search"],
     input[type="datetime"],
@@ -100,8 +74,18 @@ input {
 }
 
 /*
+ * Add range styles for IE8 and IE9
+ */
+input[type="range"] {
+    padding: .25em 0;
+    padding: .25em \9;
+    background-color: #fff \9;
+    border: 1px solid transparent;
+    border: 1px solid #c0c0c0 \9;
+}
+
+/*
  * 1. Remove borders and padding on range controls in IE10+
- * 2. Remove borders and padding on range controls in Opera
  */
 x::-ms-reveal,
 input[type="range"] { /* 1 */
@@ -109,55 +93,26 @@ input[type="range"] { /* 1 */
     padding: .25em 0;
 }
 
-x:-o-prefocus,
-input[type="range"] { /* 2 */
-    border: 1px solid transparent;
-}
-
-
-/* Standard layout */
-form label,
-form input,
-form textarea,
-form select,
-form .no-edit,
-.input-tamer {
-    display: block;
-    margin-bottom: 1em;
-}
-
-input[type="text"],
-input[type="file"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-input[type="range"],
-textarea,
-.no-edit {
-    max-width: 210px;
-    width: 100%;
-}
-
 /*
  * 1. Remove excess padding in Webkit
  */
 input[type="color"] {
-    -webkit-padding-start: 0; /* 1 */
+    -webkit-appearance: none; /* 1 */
+    -webkit-padding-start: 0;
     -webkit-padding-end: 0;
     -webkit-padding-before: 0;
     -webkit-padding-after: 0;
     max-width: 105px;
 }
+
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        -webkit-appearance: none; /* 1 */
+        padding: 0;
+    }
+
+    input[type="color"]::-webkit-color-swatch {
+        border: none; /* 1 */
+    }
 
 /*
  * Declared separately to reduce selector duplication
@@ -173,6 +128,10 @@ input[type="checkbox"] {
     line-height: inherit;
 }
 
+input[type="radio"] {
+    border-color: transparent;
+}
+
 /*
  * Textareas : Multiple resizable options.
  * 1: Horizontal
@@ -185,7 +144,7 @@ textarea {
     max-width: 100%;
     height: auto;
     resize: both;
-    min-height: 84px;
+    min-height: 5.25em;
 }
 
     textarea.horizontal {
@@ -200,29 +159,57 @@ textarea {
         resize: none; /* 3 */
     }
 
-.no-edit {
+select option {
+    height: 100%;
+}
+
+/* 
+ * Focus 
+ */
+textarea:focus,
+input:focus,
+select:focus,
+.no-edit:focus {
+    border: 1px solid #00a9ec;
+    outline: 0;
+}
+
+input[type="range"]:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+input:checked {
+    border-color: transparent;
+    outline: 1px solid #00a9ec;
+    outline-offset: -1px;
+}
+
+input[type="checkbox"]:focus,
+input[type="checkbox"]:checked {
+    border-color: #c0c0c0;
+}
+
+/*
+ * Read only
+ */
+.no-edit,
+[readonly] {
     cursor: not-allowed;
     border-color: #ebebeb;
 }
 
-select {
-    max-width: 210px;
-    width: 100%;
-    border: 1px solid #c0c0c0;
-}
-
-    select option {
-        height: 100%;
-    }
-
-/*
- * Full Width
+/* 
+ * Disabled 
+ * 1. Override the value set in normalize.css
  */
-.full-width {
-    max-width: 100% !important;
-    width: 100% !important;
+input[disabled],
+select[disabled],
+textarea[disabled] {
+    cursor: not-allowed!important; /* 1 */
+    background-color: #ebebeb;
+    border-color: #c0c0c0;
+    color: #c0c0c0;
+    outline: 0!important;
 }
-
 
 /* 
  * Placeholder : These have to be kept separate
@@ -247,78 +234,12 @@ select {
     color: #c0c0c0; /* 4 */
 }
 
-/* 
- * Focus 
+/*
+ * Full Width
  */
-textarea:focus,
-input[type="text"]:focus,
-input[type="file"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-input[type="range"]:focus,
-select:focus,
-.no-edit:focus,
-textarea.focus,
-input[type="text"].focus,
-input[type="file"].focus,
-input[type="password"].focus,
-input[type="datetime"].focus,
-input[type="datetime-local"].focus,
-input[type="date"].focus,
-input[type="month"].focus,
-input[type="time"].focus,
-input[type="week"].focus,
-input[type="number"].focus,
-input[type="email"].focus,
-input[type="url"].focus,
-input[type="search"].focus,
-input[type="tel"].focus,
-input[type="color"].focus,
-input[type="range"].focus,
-select.focus,
-.no-edit.focus {
-    border: 1px solid #00a9ec;
-    outline: 0;
-}
-
-input[type="checkbox"]:focus,
-input[type="checkbox"].focus,
-input[type="checkbox"]:checked,
-input[type="checkbox"].checked,
-input[type="radio"]:focus,
-input[type="radio"].focus,
-input[type="radio"]:checked,
-input[type="radio"].checked {
-    outline: 1px solid #00a9ec;
-    outline-offset: -1px;
-}
-
-/* 
- * Disabled 
- * 1. Override the value set in normalize.css
- */
-input[disabled],
-select[disabled],
-textarea[disabled],
-input[readonly],
-select[readonly],
-textarea[readonly] {
-    cursor: not-allowed!important; /* 1 */
-    background-color: #ebebeb;
-    border-color: #c0c0c0;
-    color: #c0c0c0;
-    outline: 0!important;
+.full-width {
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 /*

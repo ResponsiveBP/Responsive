@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>List Tests</title>
 
-    <!-- Conditional statements are blocking so download modern styles first -->
-    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!-- Combined CSS as respond.js cannot cater for imports-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
-    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/html5shiv.min.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
@@ -22,7 +22,7 @@
         <h1>Lists</h1>
         <hr />
         <section class="row">
-            <div class="column-4">
+            <div class="col-s-4">
                 <h3>Standard</h3>
                 <ul>
                     <li>first</li>
@@ -52,7 +52,7 @@
                     <li>fourth</li>
                 </ol>
             </div>
-            <div class="column-4">
+            <div class="col-s-4">
                 <h3>No bullets</h3>
                 <p>Add class <code>.no-bullets</code></p>
                 <ul class="no-bullets">
@@ -83,7 +83,7 @@
                     <li>fourth</li>
                 </ol>
             </div>
-            <div class="column-4">
+            <div class="col-s-4">
                 <h3>Coloured</h3>
                 <p>Add class <code>.colored</code></p>
                 <ul class="colored">
@@ -117,7 +117,7 @@
         </section>
         <section class="row">
             <h2>Definition Lists</h2>
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>Standard</h3>
                 <dl>
                     <dt>Description list</dt>
@@ -131,7 +131,7 @@
                     </dd>
                 </dl>
             </div>
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>Horizontal Layout</h3>
                 <p>Add class <code>.dl-horizontal</code></p>
                 <dl class="dl-horizontal">

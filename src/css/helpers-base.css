@@ -138,18 +138,12 @@
 /*
  * Responsive helpers to toggle visibility. 
  */
-.visible-phone {
+
+.hidden-xs,
+.visible-s,
+.visible-m,
+.visible-l {
     display: none !important;
 }
 
-.visible-tablet {
-    display: none !important;
-}
 
-.hidden-desktop {
-    display: none !important;
-}
-
-.visible-desktop {
-    display: inherit !important;
-}

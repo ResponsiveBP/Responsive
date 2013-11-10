@@ -1,0 +1,332 @@
+﻿/* Responsive Grid */
+
+.container {
+    margin: 0 auto;
+    /* Manages width in a single place */
+    width: 95%;
+    max-width: 1140px;
+}
+
+    .fixed .container,
+    .container.fixed {
+        /* Manages width in a single place */
+        width: 1140px;
+    }
+
+/*
+ * Clearfix: contain floats
+ */
+.row:before,
+.row:after {
+    content: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+/*cols*/
+[class*="col-"] {
+    position: relative;
+    display: block;
+    min-height: 1px;
+    float: left;
+    width: 100%;
+}
+
+.row [class*="col-"] + [class*="col-"] {
+    margin-left: 2%;
+}
+
+.row.no-gutter > [class*="col-"] + [class*="col-"],
+.row [class*="col-"] + [class*="col-s"],
+.row [class*="col-"] + [class*="col-m"],
+.row [class*="col-"] + [class*="col-l"],
+.row [class*="col-reset-"] {
+    margin-left: 0;
+}
+
+.row [class*="col-reset-xs"] {
+    clear: both;
+}
+
+.row [class*="col-"][class*="push-xs-right"] {
+    float: right;
+}
+
+/* Full width calculated with margins */
+.col-xs-12 {
+    width: 100%;
+    margin-left: 0;
+}
+
+.col-xs-11 {
+    width: 91.5%;
+}
+
+.col-xs-10 {
+    width: 83%;
+}
+
+.col-xs-9 {
+    width: 74.5%;
+}
+
+.col-xs-8 {
+    width: 66%;
+}
+
+.col-xs-7 {
+    width: 57.5%;
+}
+
+.col-xs-6 {
+    width: 49%;
+}
+
+.col-xs-5 {
+    width: 40.5%;
+}
+
+.col-xs-4 {
+    width: 32%;
+}
+
+.col-xs-3 {
+    width: 23.5%;
+}
+
+.col-xs-2 {
+    width: 15%;
+}
+
+.col-xs-1 {
+    width: 6.5%;
+}
+
+/* No gutter margins */
+.no-gutter .col-xs-11 {
+    width: 91.6667%;
+}
+
+.no-gutter .col-xs-10 {
+    width: 83.3333%;
+}
+
+.no-gutter .col-xs-9 {
+    width: 75%;
+}
+
+.no-gutter .col-xs-8 {
+    width: 66.6667%;
+}
+
+.no-gutter .col-xs-7 {
+    width: 58.3333%;
+}
+
+.no-gutter .col-xs-6 {
+    width: 50%;
+}
+
+.no-gutter .col-xs-5 {
+    width: 41.6667%;
+}
+
+.no-gutter .col-xs-4 {
+    width: 33.3333%;
+}
+
+.no-gutter .col-xs-3 {
+    width: 25%;
+}
+
+.no-gutter .col-xs-2 {
+    width: 16.6667%;
+}
+
+.no-gutter .col-xs-1 {
+    width: 8.3333%;
+}
+
+/* offsetting cols */
+.push-xs-11 {
+    left: 93.5%;
+}
+
+.push-xs-10 {
+    left: 85%;
+}
+
+.push-xs-9 {
+    left: 76.5%;
+}
+
+.push-xs-8 {
+    left: 68%;
+}
+
+.push-xs-7 {
+    left: 59.5%;
+}
+
+.push-xs-6 {
+    left: 51%;
+}
+
+.push-xs-5 {
+    left: 42.5%;
+}
+
+.push-xs-4 {
+    left: 34%;
+}
+
+.push-xs-3 {
+    left: 25.5%;
+}
+
+.push-xs-2 {
+    left: 17%;
+}
+
+.push-xs-1 {
+    left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .push-xs-11 {
+    left: 91.6667%;
+}
+
+.no-gutter .push-xs-10 {
+    left: 83.3333%;
+}
+
+.no-gutter .push-xs-9 {
+    left: 75%;
+}
+
+.no-gutter .push-xs-8 {
+    left: 66.6667%;
+}
+
+.no-gutter .push-xs-7 {
+    left: 58.3333%;
+}
+
+.no-gutter .push-xs-6 {
+    left: 50%;
+}
+
+.no-gutter .push-xs-5 {
+    left: 41.6667%;
+}
+
+.no-gutter .push-xs-4 {
+    left: 33.3333%;
+}
+
+.no-gutter .push-xs-3 {
+    left: 25%;
+}
+
+.no-gutter .push-xs-2 {
+    left: 16.6667%;
+}
+
+.no-gutter .push-xs-1 {
+    left: 8.3333%;
+}
+
+
+/* offsetting cols */
+.pull-xs-11 {
+    right: 93.5%;
+}
+
+.pull-xs-10 {
+    right: 85%;
+}
+
+.pull-xs-9 {
+    right: 76.5%;
+}
+
+.pull-xs-8 {
+    right: 68%;
+}
+
+.pull-xs-7 {
+    right: 59.5%;
+}
+
+.pull-xs-6 {
+    right: 51%;
+}
+
+.pull-xs-5 {
+    right: 42.5%;
+}
+
+.pull-xs-4 {
+    right: 34%;
+}
+
+.pull-xs-3 {
+    right: 25.5%;
+}
+
+.pull-xs-2 {
+    right: 17%;
+}
+
+.pull-xs-1 {
+    right: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .pull-xs-11 {
+    right: 91.6667%;
+}
+
+.no-gutter .pull-xs-10 {
+    right: 83.3333%;
+}
+
+.no-gutter .pull-xs-9 {
+    right: 75%;
+}
+
+.no-gutter .pull-xs-8 {
+    right: 66.6667%;
+}
+
+.no-gutter .pull-xs-7 {
+    right: 58.3333%;
+}
+
+.no-gutter .pull-xs-6 {
+    right: 50%;
+}
+
+.no-gutter .pull-xs-5 {
+    right: 41.6667%;
+}
+
+.no-gutter .pull-xs-4 {
+    right: 33.3333%;
+}
+
+.no-gutter .pull-xs-3 {
+    right: 25%;
+}
+
+.no-gutter .pull-xs-2 {
+    right: 16.6667%;
+}
+
+.no-gutter .pull-xs-1 {
+    right: 8.3333%;
+}

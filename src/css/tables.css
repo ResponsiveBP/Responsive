@@ -3,6 +3,10 @@
 /*
  * Basic layout.
  */
+[data-table-list] {
+    opacity: 0;
+}
+
 .table-list {
     display: block;
 }
@@ -22,7 +26,7 @@
 
             .table-list tr:before,
             .table-list tr:after {
-                content: " ";
+                content: "";
                 display: table;
             }
 
@@ -76,6 +80,11 @@
         .table-list tr {
             display: table-row;
         }
+
+            .table-list tr:before,
+            .table-list tr:after {
+                content: none;
+            }
 
         .table-list td,
         .table-list th,

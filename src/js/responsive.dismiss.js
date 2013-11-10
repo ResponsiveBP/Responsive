@@ -4,55 +4,56 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($) {
+(function ($, w, ns) {
 
     "use strict";
 
+    if (w.RESPONSIVE_DISMISS) {
+        return;
+    }
+
+    // General variables.
+    var eclick = "click" + ns,
+        edismiss = "dismiss" + ns,
+        edismissed = "dismissed" + ns;
+
+    // Dismiss class definition
     var Dismiss = function (element, target) {
 
         this.$element = $(element);
         this.$target = this.$element.parents(target);
-
+        this.dismissing = null;
     };
 
-    Dismiss.prototype = {
-        constructor: Dismiss,
-        close: function () {
+    Dismiss.prototype.close = function () {
 
-            var supportTransition = $.support.transition,
-                closeEvent = $.Event("close.dismiss.responsive"),
-                closedEvent = $.Event("closed.dismiss.responsive"),
-                $target = this.$target,
-                self = this,
-                complete = function () {
+        var supportTransition = $.support.transition,
+            dismissEvent = $.Event(edismiss),
+            $target = this.$target,
+            self = this,
+            complete = function () {
 
-                    self.transitioning = false;
-                    $target.addClass("hidden").trigger(closedEvent);
+                self.dismissing = false;
+                $target.addClass("hidden").trigger($.Event(edismissed));
+            };
 
-                };
+        $target.trigger(dismissEvent);
 
-            $target.trigger(closeEvent);
-
-            if (this.transitioning || closeEvent.isDefaultPrevented()) {
-                return;
-            }
-
-            this.transitioning = true;
-
-            $target.addClass("fade-in fade-out");
-
-            $target[0].offsetWidth; // reflow
-
-            $target.removeClass("fade-in");
-
-            // Do our callback
-            supportTransition ? this.$target.one(supportTransition.end, complete)
-                              : complete();
-
+        if (this.dismissing || dismissEvent.isDefaultPrevented()) {
+            return;
         }
+
+        this.dismissing = true;
+
+        $target.addClass("fade-in fade-out")
+               .redraw()
+               .removeClass("fade-in");
+
+        // Do our callback
+        supportTransition ? this.$target.one(supportTransition.end, complete) : complete();
     };
 
-    /* Plug-in definition */
+    // Plug-in definition 
     $.fn.dismiss = function (target) {
 
         return this.each(function () {
@@ -67,30 +68,35 @@
 
             // Close the element.
             data.close();
-
         });
     };
 
     // Set the public constructor.
     $.fn.dismiss.Constructor = Dismiss;
 
-    // Dismiss data api initialisation.
-    $(function () {
-        $(document.body).on("click.dismiss.responsive", ":attrStart(data-dismiss)", function (event) {
+    // No conflict.
+    var old = $.fn.dismiss;
+    $.fn.dismiss.noConflict = function () {
+        $.fn.dismiss = old;
+        return this;
+    };
 
-            event.preventDefault();
+    // Data API
+    $("body").on(eclick, ":attrStart(data-dismiss)", function (event) {
 
-            var $this = $(this),
-                data = $this.data("dismissOptions"),
-                options = data || $.buildDataOptions($this, {}, "dismiss"),
-                target = options.target || (options.target = $this.attr("href"));
+        event.preventDefault();
 
-            // Run the dismiss method.
-            if (target) {
-                $(this).dismiss(options.target);
-            }
+        var $this = $(this),
+            data = $this.data("r.dismissOptions"),
+            options = data || $.buildDataOptions($this, {}, "dismiss", "r"),
+            target = options.target || (options.target = $this.attr("href"));
 
-        });
+        // Run the dismiss method.
+        if (target) {
+            $(this).dismiss(options.target);
+        }
     });
 
-}(jQuery));
+    w.RESPONSIVE_DISMISS = true;
+
+}(jQuery, window, ".r.dismiss"));

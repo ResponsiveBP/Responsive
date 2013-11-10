@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Table Tests</title>
 
-    <!-- Conditional statements are blocking so download modern styles first -->
-    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!-- Combined CSS as respond.js cannot cater for imports-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
-    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/html5shiv.min.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
@@ -23,9 +23,10 @@
         <h1>Tables</h1>
         <hr />
         <section class="row">
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>TableList</h3>
-                <table class="table-list">
+                <p>JavaScript enabled, add attribute <code>data-table-list</code></p>
+                <table class="table-list" data-table-list="">
                     <thead>
                         <tr>
                             <th scope="col">Header1</th>
@@ -44,33 +45,33 @@
                     </tfoot>
                     <tbody>
                         <tr>
-                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
-                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
-                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                            <th scope="row">Data1</th>
+                            <td>Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
+                            <td>Data3</td>
+                            <td>Data4</td>
                         </tr>
                         <tr>
-                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
-                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
-                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                            <th scope="row">Data1</th>
+                            <td>Data2</td>
+                            <td>Data3</td>
+                            <td>Data4</td>
                         </tr>
                         <tr>
-                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
-                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
-                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                            <th scope="row">Data1</th>
+                            <td>Data2</td>
+                            <td>Data3</td>
+                            <td>Data4</td>
                         </tr>
                         <tr>
-                            <th scope="row" data-thead="Header1" data-tfoot="Footer1">Data1</th>
-                            <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
-                            <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
-                            <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                            <th scope="row">Data1</th>
+                            <td>Data2</td>
+                            <td>Data3</td>
+                            <td>Data4</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>TableList Striped</h3>
                 <table class="table-list table-striped">
                     <thead>
@@ -119,7 +120,7 @@
             </div>
         </section>
         <section class="row">
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>TableList Bordered</h3>
                 <table class="table-list table-bordered">
                     <thead>
@@ -166,7 +167,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>TableList Bordered</h3>
                 <table class="table-list table-striped table-bordered">
                     <thead>
@@ -215,7 +216,7 @@
             </div>
         </section>
         <section class="row">
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>Table with overflow wrapper</h3>
                 <p>Wrap the table in a container with the class <code>.table-scrollable</code>.</p>
                 <div class="table-scrollable">
@@ -282,6 +283,7 @@
     <script src="../../src/js/responsive.dismiss.js"></script>
     <script src="../../src/js/responsive.dropdown.js"></script>
     <script src="../../src/js/responsive.lightbox.js"></script>
+    <script src="../../src/js/responsive.table.js"></script>
     <script src="../../src/js/responsive.tabs.js"></script>
 </body>
 </html>

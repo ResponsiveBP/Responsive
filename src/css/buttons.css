@@ -6,91 +6,89 @@
  */
 
 button,
-input[type="submit"],
-.btn {
+[type="submit"],
+[type="button"],
+[type="reset"],
+[role="button"] {
+    -webkit-appearance: none; /* 1 */
+    border-radius: 0; /* 1 */
     display: inline-block;
-    text-decoration: none;
+    max-width: none;
     padding: .5em 1em;
     margin-bottom: 0;
     line-height: normal;
+    text-decoration: none !important;
     font-size: 1em;
+    border: solid 1px #c0c0c0;
+    background-color: #dadada;
     color: #222;
     cursor: pointer;
     position: relative;
-    -webkit-appearance: none; /* 1 */
-    border-radius: 0; /* 1 */
 }
 
-    /*
-     * Disabled state.
-     */
-    button.disabled,
-    button[disabled],
-    input[type="submit"].disabled,
-    input[type="submit"][disabled],
-    .btn.disabled {
-        cursor: not-allowed;
-    }
-
-
 /*
- * Simple button style.
+ * Reset width for inputs
  */
-.btn {
-    border: solid 1px #c0c0c0;
-    background-color: #dadada;
+[type="submit"],
+[type="button"] {
+    width: auto;
 }
 
     /*
      * Button states.
      */
-    .btn:hover,
-    .btn.hover,
-    .btn:active,
-    .btn.active,
-    .btn:focus,
-    .btn.focus,
-    .btn[disabled],
-    .btn.disabled {
+    button:hover,
+    [type="submit"]:hover,
+    [type="button"]:hover,
+    [type="reset"]:hover,
+    [role="button"]:hover {
+        color: #222;
         background-color: #cdcdcd;
     }
 
-    .btn:focus,
-    .btn.focus {
+    button:focus,
+    [type="submit"]:focus,
+    [type="button"]:focus,
+    [type="reset"]:focus,
+    [role="button"]:focus {
+        color: #222;
         outline: 1px solid #00a9ec;
         outline-offset: -1px;
     }
 
-    .btn:active,
-    .btn.active {
+    button:active,
+    [type="submit"]:active,
+    [type="button"]:active,
+    [type="reset"]:active,
+    [role="button"]:active {
+        color: #222;
         background-color: #e7e7e7;
         outline: none;
     }
 
-    .btn.disabled,
-    .btn[disabled] {
+    button[disabled],
+    [type="submit"][disabled],
+    [type="button"][disabled],
+    [type="reset"][disabled],
+    [role="button"].disabled {
         color: #5d5d5d;
         background-color: #e7e7e7;
+        cursor: not-allowed;
     }
 
-/*
- * Inline buttons designed for rendering next to inputs.
- * 1. Fix inline-block margin.
- * 2. Padd buttons.
- * 3. Fix alignment for anchors
- */
-
-button.btn-inline,
-input[type="submit"].btn-inline,
-.btn-inline {
-    margin-left: -5px; /* 1 */
-    padding: .25em 1em; /* 2 */
-}
-
-input[type="submit"].btn.btn-inline,
-.btn.btn-inline {
-    margin-left: -4px; /* 1 */
-}
+    /*
+     * Inline buttons designed for rendering next to inputs.
+     * 1. Fix inline-block margin.
+     * 2. Pad buttons.
+     */
+    button.btn-inline,
+    [type="submit"].btn-inline,
+    [type="button"].btn-inline,
+    [type="reset"].btn-inline,
+    [role="button"].btn-inline {
+        margin-left: -4px; /* 1 */
+        padding: .25em 1em; /* 2 */
+    }
 
 /*
  * Grouped buttons.
@@ -98,14 +96,6 @@ input[type="submit"].btn.btn-inline,
 
 /*
  * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
  */
 .btn-group:before,
 .btn-group:after {
@@ -124,6 +114,6 @@ input[type="submit"].btn.btn-inline,
     vertical-align: middle;
 }
 
-    .btn-group > .btn {
+    .btn-group > * {
         float: left;
     }

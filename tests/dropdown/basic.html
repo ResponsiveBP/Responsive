@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dropdown Tests</title>
 
-    <!-- Conditional statements are blocking so download modern styles first -->
-    <link href="../../src/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <!-- Combined CSS as respond.js cannot cater for imports-->
+    <link href="../../rel/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="../../src/css/responsive-legacy.css" rel="stylesheet" />
-    <script src="../test-assets/js/vendor/html5shiv.js"></script>
+        <script src="../test-assets/js/vendor/html5shiv.min.js"></script>
+        <script src="../test-assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link href="../test-assets/css/tests.css" rel="stylesheet" />
@@ -23,9 +23,9 @@
         <hr />
         <section class="row">
             <h2>Vertical</h2>
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>Below</h3>
-                <button data-dropdown-target="#Div1" class="btn">Click me to toggle</button>
+                <button data-dropdown-target="#Div1" >Click me to toggle</button>
                 <div class="collapse" id="Div1">
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
@@ -37,7 +37,7 @@
                     </p>
                 </div>
             </div>
-            <div class="column-6">
+            <div class="col-s-6">
                 <h3>Above</h3>
                 <div class="collapse" id="Div2">
                     <p>
@@ -49,7 +49,7 @@
                         deserunt mollit anim id est laborum.                              
                     </p>
                 </div>
-                <button data-dropdown-target="#Div2" class="btn">Click me to toggle</button>
+                <button data-dropdown-target="#Div2" >Click me to toggle</button>
             </div>
         </section>
         <section class="row">
@@ -57,8 +57,8 @@
             <div class="alert alert-info">
                 <p>Note: To prevent word wrap fix the height and width of the item within your target container.</p>
             </div>
-            <div class="column-6">
-                <button data-dropdown-target="#Div3" data-dropdown-dimension="width" class="btn">Click me to toggle</button>
+            <div class="col-s-6">
+                <button data-dropdown-target="#Div3" data-dropdown-dimension="width" >Click me to toggle</button>
                 <div id="Div3" class="collapse width">
                     <div class="dropdown-filler">
                         <p>
