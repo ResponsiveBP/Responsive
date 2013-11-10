@@ -11,6 +11,10 @@ blockquote {
     border-left: 5px solid #c0c0c0;
 }
 
+/*
+ * Navigation.
+ */
+
 nav[role="navigation"] {
     color: #fff;
     background: #222;
@@ -25,15 +29,58 @@ nav[role="navigation"] {
     nav[role="navigation"] a {
         color: #fff;
         text-decoration: none;
+        display: block;
+        float: left;
     }
 
         nav[role="navigation"] a[rel="home"] {
             font-size: 1.5em;
+            margin-right: 1em;
         }
 
-        nav[role="navigation"] a + a {
-            margin-left: 1em;
+    nav[role="navigation"] [data-dropdown-target] {
+        display: inline-block;
+        background: transparent url(/assets/css/mobile-nav.png) no-repeat center center;
+        width: 24px;
+        height: 27px;
+        float: right;
+    }
+
+#navigation {
+    clear: left;
+}
+
+    #navigation a {
+        display: block;
+        float: none;
+        padding: .5em 0;
+    }
+
+        #navigation a:hover {
+            background-color: #333;
         }
+
+@media all and (min-width: 48em) {
+    #navigation {
+        clear: none;
+        float: left;
+    }
+
+        #navigation.collapse {
+            height: auto !important;
+            overflow: visible !important;
+        }
+
+        #navigation a {
+            line-height: 2.15em;
+            float: left;
+            padding: 0 .5em;
+        }
+
+    nav[role="navigation"] a + a {
+        margin-left: 1em;
+    }
+}
 
 header[role="banner"] h1 {
     font-size: 3em;
@@ -60,6 +107,10 @@ header[role="banner"] span {
         display: inline-block;
     }
 
+        .download-links li + li:before {
+            content: "|";
+            padding: 0 .5em;
+        }
 
 /*
  * Grid

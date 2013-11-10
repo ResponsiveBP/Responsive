@@ -473,8 +473,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.autoSize;
-
     $.fn.autoSize = function (options) {
 
         return this.each(function () {
@@ -499,6 +497,7 @@
     $.fn.autoSize.Constructor = AutoSize;
 
     // No conflict.
+    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;
@@ -668,7 +667,7 @@
             }, this));
     };
 
-    // AutoSize class definition
+    // Carousel class definition
     var Carousel = function (element, options) {
 
         this.$element = $(element);
@@ -887,8 +886,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.carousel;
-
     $.fn.carousel = function (options) {
 
         return this.each(function () {
@@ -920,6 +917,7 @@
     $.fn.carousel.Constructor = Carousel;
 
     // No conflict.
+    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;
@@ -1010,8 +1008,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.dismiss;
-
     $.fn.dismiss = function (target) {
 
         return this.each(function () {
@@ -1033,6 +1029,7 @@
     $.fn.dismiss.Constructor = Dismiss;
 
     // No conflict.
+    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;
@@ -1198,8 +1195,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.dropdown;
-
     $.fn.dropdown = function (options) {
         return this.each(function () {
             var $this = $(this),
@@ -1222,6 +1217,7 @@
     $.fn.dropdown.Constructor = Dropdown;
 
     // No conflict.
+    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;
@@ -1272,8 +1268,8 @@
         $iframe = null,
         $content = null,
         $close = $("<a/>").attr({ "href": "#", "title": "Close (Esc)" }).addClass("lightbox-close fade-out").html("x"),
-        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)" }).addClass("lightbox-direction left hidden"),
+        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         lastScroll = 0,
         supportTransition = $.support.transition,
@@ -1298,7 +1294,8 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns + " orientationchange" + ns;
+        eresize = "resize" + ns + " orientationchange" + ns,
+        efocusin = "focusin" + ns;
 
     // Private methods.
     var isExternalUrl = function (url) {
@@ -1454,24 +1451,7 @@
         }, this));
     },
 
-    destroy = function () {
-        if (!this.options.external) {
-            // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass("hidden").detach().insertAfter($placeholder);
-            $placeholder.detach().insertAfter($overlay);
-        }
-
-        toggleFade.call(this);
-
-        // Clean up the header/footer.
-        $header.empty().detach();
-        $footer.empty().detach();
-        $close.detach();
-
-        // Clean up the lightbox.
-        $next.detach();
-        $previous.detach();
-
+    destroy = function (callback) {
         var self = this,
             empty = function () {
                 $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
@@ -1481,15 +1461,42 @@
                     "margin-bottom": ""
                 }).empty();
 
+                manageFocus("hide");
+
                 // Unbind the keyboard actions.
                 if (self.options.keyboard) {
 
                     manageKeyboard.call(self, "hide");
                 }
+
+                callback && callback();
+
+            }, cleanUp = function () {
+
+                if (!self.options.external) {
+                    // Put that kid back where it came from or so help me.
+                    $(self.options.target).addClass("hidden").detach().insertAfter($placeholder);
+                    $placeholder.detach().insertAfter($overlay);
+                }
+
+                // Clean up the header/footer.
+                $header.empty().detach();
+                $footer.empty().detach();
+                $close.detach();
+
+                // Clean up the lightbox.
+                $next.detach();
+                $previous.detach();
+
+                // Fix __flash__removeCallback' is undefined error.
+                $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
+
             };
 
-        // Fix __flash__removeCallback' is undefined error.
-        $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
+        toggleFade.call(this);
+
+        supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
+            : cleanUp();
     },
 
     resize = function () {
@@ -1695,10 +1702,7 @@
 
             this.$sibling = $(this.$group[position]);
 
-            destroy.call(this);
-
-            supportTransition ? $lightbox.one(supportTransition.end, complete)
-                : complete();
+            destroy.call(this, complete);
 
             this.isShown = false;
         }
@@ -1750,6 +1754,23 @@
             this[method]();
 
         }, this));
+    },
+
+    manageFocus = function (off) {
+
+        if (off) {
+            $(document).off(efocusin);
+            return;
+        }
+
+        $(document).off(efocusin).on(efocusin, function (event) {
+            if (!$.contains($overlay[0], event.target)) {
+                var newTarget = $lightbox.find("input, select, a, button, iframe").first();
+                newTarget.length ? newTarget.focus() : $close.focus();
+                return false;
+            }
+        });
+
     };
 
     // Lightbox class definition
@@ -1800,6 +1821,8 @@
             showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown),
             complete = function () {
+
+                manageFocus();
 
                 // Bind the keyboard actions.
                 if (self.options.keyboard) {
@@ -1876,8 +1899,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.lightbox;
-
     $.fn.lightbox = function (options) {
 
         return this.each(function () {
@@ -1902,7 +1923,11 @@
         });
     };
 
+    // Set the public constructor.
+    $.fn.lightbox.Constructor = LightBox;
+
     // No conflict.
+    var old = $.fn.lightbox;
     $.fn.lightbox.noConflict = function () {
         $.fn.lightbox = old;
         return this;
@@ -1943,6 +1968,7 @@
         eadd = "add" + ns,
         eadded = "added" + ns;
 
+    // Table class definition.
     var Table = function (element) {
 
         this.$element = $(element);
@@ -2002,8 +2028,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.table;
-
     $.fn.table = function (options) {
 
         return this.each(function () {
@@ -2028,6 +2052,7 @@
     $.fn.table.Constructor = Table;
 
     // No conflict.
+    var old = $.fn.table;
     $.fn.table.noConflict = function () {
         $.fn.table = old;
         return this;
@@ -2075,8 +2100,8 @@
 
         var showEvent = $.Event(eshow),
             $element = this.$element,
-            $childTabs = $element.find("ul.tabs > li"),
-            $childPanes = $element.children("div"),
+            $childTabs = $element.find("ul > li"),
+            $childPanes = $element.children(":not(ul)"),
             $nextTab = $childTabs.eq(postion),
             $currentPane = $childPanes.eq(activePosition),
             $nextPane = $childPanes.eq(postion);
@@ -2112,7 +2137,7 @@
         this.tabbing = null;
 
         // TODO: Should we move this?
-        this.$element.off(eclick).on(eclick, "ul.tabs > li > a", function (event) {
+        this.$element.off(eclick).on(eclick, "ul > li > a", function (event) {
 
             event.preventDefault();
 
@@ -2128,9 +2153,9 @@
     Tabs.prototype.show = function (position) {
 
         var $activeItem = this.$element.find(".tab-active"),
-             $children = $activeItem.parent().children(),
-             activePosition = $children.index($activeItem),
-             self = this;
+            $children = $activeItem.parent().children(),
+            activePosition = $children.index($activeItem),
+            self = this;
 
         if (position > ($children.length - 1) || position < 0) {
 
@@ -2156,8 +2181,6 @@
     };
 
     // Plug-in definition 
-    var old = $.fn.tabs;
-
     $.fn.tabs = function (options) {
 
         return this.each(function () {
@@ -2182,6 +2205,7 @@
     $.fn.tabs.Constructor = Tabs;
 
     // No conflict.
+    var old = $.fn.tabs;
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;
@@ -2189,7 +2213,6 @@
 
     // Data API
     $(document).on(eready, function () {
-
         $("[data-tabs]").tabs();
     });
 

@@ -15,20 +15,31 @@
 
     <link href="/assets/css/docs.css" rel="stylesheet" />
     <link href="/assets/css/vendor/prism.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
         <div class="container">
             <div class="row">
-                <a href="/" rel="home">Responsive</a><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a>
+                <a href="/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="ir visible-xs">Toggle Navigation</button>
+                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a></div>
             </div>
         </div>
     </nav>
 
 <article class="container" role="main">
     <header role="banner">
-        <h1>Tabs
-        <span>Responsive tabbed content.</span>
+        <a href="/javascript.html">&lt;&lt; Back</a>
+        <h1>
+            Tabs
+            <span>Responsive tabbed content.</span>
         </h1>
     </header>
     <hr />
@@ -69,22 +80,22 @@
         <div class="row">
             <div class="col-s-6">
                 <div data-tabs="">
-                    <ul class="tabs">
+                    <ul>
                         <li class="tab-active"><a href="#">tab1</a></li>
                         <li><a href="#">tab2</a></li>
                         <li><a href="#">tab3</a></li>
                     </ul>
-                    <div class="tab-pane-active">
+                    <section class="tab-pane-active">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                         Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -93,14 +104,14 @@
     <section id="markup">
         <h1>Markup</h1>
         <pre class="language-markup"><code>&lt;div data-tabs=""&gt;
-    &lt;ul class="tabs"&gt;
+    &lt;ul&gt;
         &lt;li class="tab-active"&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#"&gt;tab2&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
-    &lt;div class="tab-pane-active"&gt;
+    &lt;section class="tab-pane-active"&gt;
         ....
-    &lt;/div&gt;
-    &lt;div&gt;...&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section&gt;...&lt;/section&gt;
 &lt;/div&gt;</code></pre>
     </section>
     <hr />

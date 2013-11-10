@@ -15,12 +15,21 @@
 
     <link href="/assets/css/docs.css" rel="stylesheet" />
     <link href="/assets/css/vendor/prism.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
         <div class="container">
             <div class="row">
-                <a href="/" rel="home">Responsive</a><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a>
+                <a href="/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="ir visible-xs">Toggle Navigation</button>
+                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a></div>
             </div>
         </div>
     </nav>
@@ -28,7 +37,7 @@
 <article class="container" role="main">
     <header role="banner">
         <h1>CSS
-        <span>Responsive CSS goodness</span>
+        <span>Clean, Normalized, Responsive CSS</span>
         </h1>
     </header>
     <hr />
