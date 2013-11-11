@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title> Dismiss ::  Responsive</title>
+    <title> TableList ::  Responsive</title>
     <meta name="description" content="This is a sample Jekyll Blog." />
 
     <link href="/assets/css/responsive.css" rel="stylesheet" />
@@ -38,8 +38,8 @@
     <header role="banner">
         <a href="/javascript.html">&lt;&lt; Back</a>
         <h1>
-            Dismiss
-            <span>Responsive content toggler.</span>
+            TableList
+            <span>Responsive table layout.</span>
         </h1>
     </header>
     <hr />
@@ -68,8 +68,8 @@
         </nav>
         <article class="col-s-9">
             <section id="normalize">
-    <h1>Dismiss</h1>
-    <p>A jQuery plugin that adds the functionality to hide to any parent element it targets. Uses CSS transitions to perform the animation.</p>
+    <h1>TableList</h1>
+    <p>A jQuery plugin that populates a table with the necessary data attributes in order to display as a list on smaller viewports.</p>
     <p>
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
@@ -77,77 +77,132 @@
     <hr />
     <section id="examples">
         <h1>Examples</h1>
-        <div class="alert alert-info">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
-            <p>
-                <strong>Adding the plugin inside any element will hide the closest parent to the plugin matching the given selector on click.</strong>
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo leo, tincidunt at nulla sed, aliquam fermentum mauris.
-                Quisque laoreet, enim et volutpat faucibus, nisi ante gravida dolor, nec ornare libero sapien quis est. Curabitur nec aliquet
-                lacus, sed suscipit neque. Etiam ut sapien tempus, malesuada enim ut, semper diam. Aliquam erat volutpat. Donec eget posuere ligula.
-                Proin fermentum et turpis ut rutrum. Nunc vitae nunc fermentum, aliquam mauris ac, tincidunt dui.
-            </p>
-            <p>
-                Cras at laoreet enim. Etiam tincidunt mi ut mi tristique facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Cras sed nunc ut nisl laoreet adipiscing. Quisque a fermentum libero. Nam at facilisis neque, quis tempus purus. Quisque ultrices
-                est at augue ultricies, vitae rutrum nisl imperdiet. Nullam non erat non mauris eleifend laoreet. Ut nibh nisl, consequat id eleifend
-                nec, tristique quis mauris. Maecenas cursus mi nec lorem elementum pulvinar. Vestibulum eu sem quam.
-            </p>
-        </div>
+        <table data-table-list="" class="table-list table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Header1</th>
+                    <th>Header2</th>
+                    <th>Header3</th>
+                    <th>Header4</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th scope="col">Footer1</th>
+                    <th>Footer2</th>
+                    <th>Footer3</th>
+                    <th>Footer4</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <th scope="row">Data1</th>
+                    <td>Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.</td>
+                    <td>Data3</td>
+                    <td>Data4</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data1</th>
+                    <td data-thead="Header2" data-tfoot="Footer2">Data2</td>
+                    <td data-thead="Header3" data-tfoot="Footer3">Data3</td>
+                    <td data-thead="Header4" data-tfoot="Footer4">Data4</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data1</th>
+                    <td>Data2</td>
+                    <td>Data3</td>
+                    <td>Data4</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data1</th>
+                    <td>Data2</td>
+                    <td>Data3</td>
+                    <td>Data4</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     <hr />
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>/* Add inside any element. */
-&lt;a href="#" data-dismiss-target="YOUR_PARENT_SELECTOR"&gt;x&lt;/a&gt;</code></pre>
+        <pre class="language-markup"><code>&lt;table data-table-list="" class="table-list table-striped table-bordered"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;Header1&lt;/th&gt;
+            &lt;th&gt;Header2&lt;/th&gt;
+            &lt;th&gt;Header3&lt;/th&gt;
+            &lt;th&gt;Header4&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;Footer1&lt;/th&gt;
+            &lt;th&gt;Footer2&lt;/th&gt;
+            &lt;th&gt;Footer3&lt;/th&gt;
+            &lt;th&gt;Footer4&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;Data1&lt;/th&gt;
+            &lt;td&gt;Data2 with a larger amount of copy to demonstrate what happens when we drop down the display width to less than 48em.&lt;/td&gt;
+            &lt;td&gt;Data3&lt;/td&gt;
+            &lt;td&gt;Data4&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;Data1&lt;/th&gt;
+            &lt;td data-thead="Header2" data-tfoot="Footer2"&gt;Data2&lt;/td&gt;
+            &lt;td data-thead="Header3" data-tfoot="Footer3"&gt;Data3&lt;/td&gt;
+            &lt;td data-thead="Header4" data-tfoot="Footer4"&gt;Data4&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;Data1&lt;/th&gt;
+            &lt;td&gt;Data2&lt;/td&gt;
+            &lt;td&gt;Data3&lt;/td&gt;
+            &lt;td&gt;Data4&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;Data1&lt;/th&gt;
+            &lt;td&gt;Data2&lt;/td&gt;
+            &lt;td&gt;Data3&lt;/td&gt;
+            &lt;td&gt;Data4&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
     </section>
     <hr />
     <section id="methods">
         <h1>Methods</h1>
-        <p>The dismiss plugin exposes the following method signatures.</p>
+        <p>The tablelist plugin exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.dismiss(target)</strong>  </dt>
-            <dd>
-                Initialises the plugin with a
-                <var>target</var>
-                parameter. A jQuery selector indicating which target to hide.
+            <dt><strong>.add()</strong></dt>
+            <dd>Initialises the plugin adding the necessary data attributes to the table.
             </dd>
         </dl>
     </section>
     <hr />
     <section id="events">
         <h1>Events</h1>
-        <p>The dismiss plugin exposes the following events allowing the developer to tap into its behaviour.</p>
+        <p>The tablelist plugin exposes the following events allowing the developer to tap into its behaviour.</p>
         <dl>
-            <dt><strong>dismiss.r.dismiss</strong></dt>
-            <dd>This event is fired immediately when the plugins <code>dismiss</code> instance method is invoked.</dd>
-            <dt><strong>dismissed.r.dismiss</strong></dt>
-            <dd>This event is fired when the plugins <code>dismissed</code> instance method is invoked once the target has completed the animation and is hidden.</dd>
+            <dt><strong>add.r.table</strong></dt>
+            <dd>This event is fired immediately when the plugins <code>add</code> instance method is invoked.</dd>
+            <dt><strong>added.r.table</strong></dt>
+            <dd>This event is fired when the plugins <code>added</code> instance method is invoked once the target has had all the attributes added.</dd>
         </dl>
     </section>
     <hr />
     <section id="dataapi">
         <h1>Data API</h1>
         <p>
-            The dismiss plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            The tablelist's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("click.r.dismiss")
-                .on("click.r.dismiss", ":attrStart(data-dismiss)", function (event) {    
-                    // Your custom behaviour...
-                });
-                
-// Bind to the close event.
-$("YOUR_PARENT_SELECTOR").on("dismiss.r.dismiss", function(event) {
-    // Your custom behaviour...
-});
-                                               
-// Bind to the closed event.
-$("YOUR_PARENT_SELECTOR").on("dismissed.r.dismiss", function(event) {
-    // Your custom behaviour...
-});</code></pre>
+$(document).off("ready.r.table")
+           .on("ready.r.table", "[data-tablelist]", function (event) {    
+               // Your custom behaviour...
+           });</code></pre>
     </section>
 </section>
 
