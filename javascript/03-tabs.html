@@ -94,10 +94,10 @@ $(document).off("ready.r.tabs")
            }); 
 
 // Override the default tabs control click behaviour
-$("[data-tabs]").off("click.r.tabs")
-                .on("click.r.tabs", "ul.tabs > li > a", function (event) {
-                    // Your custom behaviour...
-                }); 
+$(document).off("click.r.tabs")
+           .on("click.r.tabs", "[data-tabs] > ul > li > a", function (event) {
+               // Your custom behaviour...
+           }); 
 
 // Bind to the show event.
 $("YOUR_SELECTOR").on("show.r.tabs", function(event) {
