@@ -10,7 +10,7 @@ relative_permalinks: true
 name: Responsive
 
 # Short description (goes below the title)
-description: This is a sample Jekyll Blog.
+description: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites.
 
 # Your name, as you want it to appear underneath each post and in the footer
 author: James South
