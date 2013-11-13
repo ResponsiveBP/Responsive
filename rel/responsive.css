@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v2.0.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v2.0.1 | Apache v2.0 License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -1978,7 +1978,6 @@ table {
      */
     .table-list {
         display: table;
-        overflow: visible;
         table-layout: auto;
     }
 
@@ -2031,7 +2030,6 @@ table {
         border-top-style: solid;
     }
 }
-
 /* Responsive Alert */
 
 .alert {
@@ -3037,7 +3035,7 @@ pre code {
     }
 
     [data-tabs] > ul,
-    [data-tabs] > section.tab-pane-active {
+    [data-tabs] > *.tab-pane-active {
         display: block;
     }
 
@@ -3317,14 +3315,6 @@ pre code {
 }
 
 /*
- * Fade opacity with animation
- */
-.fade-out {
-    -moz-opacity: 0!important;
-    opacity: 0!important;
-}
-
-/*
  * Layout helpers
  */
 .block {
@@ -3337,6 +3327,14 @@ pre code {
 
 .inline {
     display: inline!important;
+}
+
+/*
+ * Fade opacity with animation
+ */
+.fade-out {
+    -moz-opacity: 0!important;
+    opacity: 0!important;
 }
 
 /*

@@ -61,7 +61,6 @@
      */
     .table-list {
         display: table;
-        overflow: visible;
         table-layout: auto;
     }
 

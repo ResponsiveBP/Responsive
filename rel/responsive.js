@@ -19,7 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-/*! Responsive v2.0.0 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v2.0.1 | Apache v2.0 License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
