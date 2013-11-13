@@ -98,14 +98,6 @@
 }
 
 /*
- * Fade opacity with animation
- */
-.fade-out {
-    -moz-opacity: 0!important;
-    opacity: 0!important;
-}
-
-/*
  * Layout helpers
  */
 .block {
@@ -118,6 +110,14 @@
 
 .inline {
     display: inline!important;
+}
+
+/*
+ * Fade opacity with animation
+ */
+.fade-out {
+    -moz-opacity: 0!important;
+    opacity: 0!important;
 }
 
 /*
