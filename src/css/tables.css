@@ -1,116 +1,61 @@
 ﻿/* Responsive Tables*/
 
-/*
- * Basic layout.
+/* 
+ *  Make it responsive
  */
-[data-table-list] {
-    opacity: 0;
+table {
+    max-width: 100%;
+    width: 100%;
+    margin: 1em 0;
 }
 
-.table-list {
-    display: block;
-}
-
-    .table-list thead,
-    .table-list tfoot,
-    .table-list th {
-        display: none;
+    table th, table td {
+        padding: .5em;
+        text-align: left;
+        vertical-align: top;
     }
 
-        .table-list tbody,
-        .table-list tr,
-        .table-list td,
-        .table-list th[scope="row"] {
-            display: block;
-        }
+/* 
+ *  Bordered tables
+ */
+.table-bordered {
+    border-collapse: separate;
+    border: solid 1px #c0c0c0;
+    border-left-width: 0;
+}
 
-            .table-list tr:before,
-            .table-list tr:after {
-                content: "";
-                display: table;
-            }
-
-            .table-list tr:after {
-                clear: both;
-            }
-
-        .table-list td,
-        .table-list th[scope="row"] {
-            float: left;
-            width: 100%;
-        }
-
-            .table-list td:before,
-            .table-list td:after,
-            .table-list th[scope="row"]:before,
-            .table-list th[scope="row"]:after {
-                content: attr(data-thead);
-                font-weight: bold;
-                display: block;
-                padding: .5em 0;
-            }
-
-            .table-list td:after,
-            .table-list th[scope="row"]:after {
-                content: attr(data-tfoot);
-            }
-
-@media (min-width: 48em) {
-    /*
-     * Reset defaults.
-     */
-    .table-list {
-        display: table;
-        overflow: visible;
-        table-layout: auto;
+    .table-bordered th,
+    .table-bordered td {
+        border-top: 1px solid #c0c0c0;
+        border-left: 1px solid #c0c0c0;
     }
 
-        .table-list thead {
-            display: table-header-group;
-        }
+    .table-bordered thead:first-child tr:first-child th,
+    .table-bordered tbody:first-child tr:first-child td {
+        border-top-width: 0;
+    }
 
-        .table-list tfoot {
-            display: table-footer-group;
-        }
-
-        .table-list tbody {
-            display: table-row-group;
-        }
-
-        .table-list tr {
-            display: table-row;
-        }
-
-            .table-list tr:before,
-            .table-list tr:after {
-                content: none;
-            }
-
-        .table-list td,
-        .table-list th,
-        .table-list th[scope="row"] {
-            display: table-cell;
-            width: auto;
-            float: none;
-        }
-
-            .table-list td:before,
-            .table-list td:after,
-            .table-list th[scope="row"]:before,
-            .table-list th[scope="row"]:after {
-                content: none;
-            }
+/* 
+ *  Striped tables
+ */
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th,
+.table-row-alt > td,
+.table-row-alt > th {
+    background-color: #e7e7e7;
 }
+
 
 /*
- * Bordered
+ * Overflow helpers
  */
-.table-list.table-bordered {
-    border-top-style: none;
+.table-scrollable {
+    width: 100%;
+    margin: 1em 0;
+    overflow: auto;
+    overflow-y: hidden;
 }
 
-@media (min-width: 48em) {
-    .table-list.table-bordered {
-        border-top-style: solid;
+    .table-scrollable table {
+        margin: 0;
     }
-}

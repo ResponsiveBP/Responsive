@@ -54,6 +54,6 @@
     }
 
     [data-tabs] > ul,
-    [data-tabs] > section.tab-pane-active {
+    [data-tabs] > *.tab-pane-active {
         display: block;
     }

@@ -1,0 +1,116 @@
+﻿/* Responsive Tables*/
+
+/*
+ * Basic layout.
+ */
+[data-table-list] {
+    opacity: 0;
+}
+
+.table-list {
+    display: block;
+}
+
+    .table-list thead,
+    .table-list tfoot,
+    .table-list th {
+        display: none;
+    }
+
+        .table-list tbody,
+        .table-list tr,
+        .table-list td,
+        .table-list th[scope="row"] {
+            display: block;
+        }
+
+            .table-list tr:before,
+            .table-list tr:after {
+                content: "";
+                display: table;
+            }
+
+            .table-list tr:after {
+                clear: both;
+            }
+
+        .table-list td,
+        .table-list th[scope="row"] {
+            float: left;
+            width: 100%;
+        }
+
+            .table-list td:before,
+            .table-list td:after,
+            .table-list th[scope="row"]:before,
+            .table-list th[scope="row"]:after {
+                content: attr(data-thead);
+                font-weight: bold;
+                display: block;
+                padding: .5em 0;
+            }
+
+            .table-list td:after,
+            .table-list th[scope="row"]:after {
+                content: attr(data-tfoot);
+            }
+
+@media (min-width: 48em) {
+    /*
+     * Reset defaults.
+     */
+    .table-list {
+        display: table;
+        overflow: visible;
+        table-layout: auto;
+    }
+
+        .table-list thead {
+            display: table-header-group;
+        }
+
+        .table-list tfoot {
+            display: table-footer-group;
+        }
+
+        .table-list tbody {
+            display: table-row-group;
+        }
+
+        .table-list tr {
+            display: table-row;
+        }
+
+            .table-list tr:before,
+            .table-list tr:after {
+                content: none;
+            }
+
+        .table-list td,
+        .table-list th,
+        .table-list th[scope="row"] {
+            display: table-cell;
+            width: auto;
+            float: none;
+        }
+
+            .table-list td:before,
+            .table-list td:after,
+            .table-list th[scope="row"]:before,
+            .table-list th[scope="row"]:after {
+                content: none;
+            }
+}
+
+/*
+ * Bordered
+ */
+.table-list.table-bordered {
+    border-top-style: none;
+}
+
+@media (min-width: 48em) {
+    .table-list.table-bordered {
+        border-top-style: solid;
+    }
+}

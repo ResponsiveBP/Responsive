@@ -3372,7 +3372,7 @@ pre code {
 /*
  * 769 > viewport < 991px
  */
-@media all and (min-width: 48em) and (max-width: 61.9375em) {
+@media all and (min-width: 48em) and (max-width: 61.99em) {
 
     .hidden-xs,
     .visible-s {
@@ -3425,7 +3425,7 @@ pre code {
 /*
  * 992px > viewport < 1200px
  */
-@media all and (min-width: 62em) and (max-width: 74.9375em) {
+@media all and (min-width: 62em) and (max-width: 74.99em) {
     .hidden-xs,
     .visible-m {
         display: block !important;
