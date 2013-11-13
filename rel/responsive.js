@@ -19,11 +19,7 @@
     Licensed under the Apache License v2.0.
     ============================================================================== */
 
-<<<<<<< HEAD
-/*! Responsive v2.0.0 | Apache v2.0 License | git.io/rRNRLA */
-=======
 /*! Responsive v2.0.1 | Apache v2.0 License | git.io/rRNRLA */
->>>>>>> origin/v2
 
 /*
  * Responsive Utils
@@ -1557,7 +1553,6 @@
                             });
                         });
                     }
-<<<<<<< HEAD
 
                     // Adjust the vertically aligned position if necessary to account for
                     // overflow into the footer.
@@ -1571,21 +1566,6 @@
 
                     top = parseInt($lightbox.offset().top);
 
-=======
-
-                    // Adjust the vertically aligned position if necessary to account for
-                    // overflow into the footer.
-                    var margin = topHeight,
-                        top,
-                        bottom;
-
-                    $overlay.css({
-                        "padding-top": topHeight > 0 ? topHeight : ""
-                    });
-
-                    top = parseInt($lightbox.offset().top);
-
->>>>>>> origin/v2
                     // Thaaanks IE8!
                     if (top < 0) {
                         $lightbox.css({ "margin-top": 1 });
@@ -1642,7 +1622,6 @@
                 }
 
                 $overlay.off(eclick).on(eclick, function (e) {
-<<<<<<< HEAD
 
                     var closeTarget = $close[0],
                         eventTarget = e.target;
@@ -1653,18 +1632,6 @@
                         self.hide();
                     }
 
-=======
-
-                    var closeTarget = $close[0],
-                        eventTarget = e.target;
-
-                    if (eventTarget === closeTarget) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        self.hide();
-                    }
-
->>>>>>> origin/v2
                     if (eventTarget === $overlay[0]) {
                         self.hide();
                     }
@@ -1736,19 +1703,11 @@
             this.$sibling = $(this.$group[position]);
 
             destroy.call(this, complete);
-<<<<<<< HEAD
 
             this.isShown = false;
         }
     },
 
-=======
-
-            this.isShown = false;
-        }
-    },
-
->>>>>>> origin/v2
     manageKeyboard = function (event) {
         if (this.options.keyboard) {
 
@@ -1756,15 +1715,9 @@
                 $body.off(ekeyup);
                 return;
             }
-<<<<<<< HEAD
 
             $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
 
-=======
-
-            $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
-
->>>>>>> origin/v2
                 // Bind the escape key.
                 if (e.which === keys.ESCAPE) {
                     this.hide();
@@ -1863,7 +1816,6 @@
             w.location.href = this.options.mobileTarget;
             return;
         }
-<<<<<<< HEAD
 
         var self = this,
             showEvent = $.Event(eshow),
@@ -1877,21 +1829,6 @@
                     manageKeyboard.call(self, "show");
                 }
 
-=======
-
-        var self = this,
-            showEvent = $.Event(eshow),
-            shownEvent = $.Event(eshown),
-            complete = function () {
-
-                manageFocus();
-
-                // Bind the keyboard actions.
-                if (self.options.keyboard) {
-                    manageKeyboard.call(self, "show");
-                }
-
->>>>>>> origin/v2
                 if (self.options.group) {
                     if (self.options.enabletouch) {
                         manageTouch.call(self);
@@ -2144,7 +2081,6 @@
 /*global jQuery*/
 /*jshint expr:true*/
 (function ($, w, ns) {
-<<<<<<< HEAD
 
     "use strict";
 
@@ -2199,75 +2135,6 @@
 
         this.$element = $(element);
         this.tabbing = null;
-
-        // TODO: Should we move this?
-        this.$element.off(eclick).on(eclick, "ul > li > a", function (event) {
-
-            event.preventDefault();
-
-            var $this = $(this),
-                $li = $this.parent(),
-                index = $li.index();
-
-            $(event.delegateTarget).tabs(index);
-
-        });
-=======
-
-    "use strict";
-
-    if (w.RESPONSIVE_TABS) {
-        return;
-    }
-
-    // General variables.
-    var supportTransition = $.support.transition,
-        eready = "ready" + ns,
-        eclick = "click" + ns,
-        eshow = "show" + ns,
-        eshown = "shown" + ns;
-
-    // Private methods.
-    var tab = function (activePosition, postion, callback) {
-
-        var showEvent = $.Event(eshow),
-            $element = this.$element,
-            $childTabs = $element.find("ul > li"),
-            $childPanes = $element.children(":not(ul)"),
-            $nextTab = $childTabs.eq(postion),
-            $currentPane = $childPanes.eq(activePosition),
-            $nextPane = $childPanes.eq(postion);
-
-        $element.trigger(showEvent);
-
-        if (this.tabbing || showEvent.isDefaultPrevented()) {
-            return;
-        }
-
-        this.tabbing = true;
-
-        $childTabs.removeClass("tab-active");
-        $nextTab.addClass("tab-active");
-
-        // Do some class shuffling to allow the transition.
-        $currentPane.addClass("fade-out fade-in");
-        $nextPane.addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").removeClass("tab-pane-active fade-in");
-
-        // Force redraw.
-        $nextPane.redraw().addClass("fade-in");
-
-        // Do the callback
-        callback.call(this);
-
-    };
-
-    // Tabs class definition
-    var Tabs = function (element) {
-
-        this.$element = $(element);
-        this.tabbing = null;
->>>>>>> origin/v2
     };
 
     Tabs.prototype.show = function (position) {
@@ -2280,21 +2147,12 @@
         if (position > ($children.length - 1) || position < 0) {
 
             return false;
-<<<<<<< HEAD
         }
 
         if (activePosition === position) {
             return false;
         }
 
-=======
-        }
-
-        if (activePosition === position) {
-            return false;
-        }
-
->>>>>>> origin/v2
         // Call the function with the callback
         return tab.call(this, activePosition, position, function () {
 
@@ -2343,8 +2201,6 @@
     // Data API
     $(document).on(eready, function () {
         $("[data-tabs]").tabs();
-<<<<<<< HEAD
-=======
     });
 
     $(document).on(eclick, "[data-tabs] ul > li > a", function (event) {
@@ -2357,7 +2213,6 @@
             index = $li.index();
 
         $tabs.tabs(index);
->>>>>>> origin/v2
     });
 
     w.RESPONSIVE_TABS = true;

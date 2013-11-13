@@ -3,11 +3,7 @@
 /*
  * 769 > viewport < 991px
  */
-<<<<<<< HEAD
-@media all and (min-width: 48em) and (max-width: 61.9375em) {
-=======
 @media all and (min-width: 48em) and (max-width: 61.99em) {
->>>>>>> origin/v2
 
     .hidden-xs,
     .visible-s {
@@ -60,11 +56,7 @@
 /*
  * 992px > viewport < 1200px
  */
-<<<<<<< HEAD
-@media all and (min-width: 62em) and (max-width: 74.9375em) {
-=======
 @media all and (min-width: 62em) and (max-width: 74.99em) {
->>>>>>> origin/v2
     .hidden-xs,
     .visible-m {
         display: block !important;

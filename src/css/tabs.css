@@ -54,10 +54,6 @@
     }
 
     [data-tabs] > ul,
-<<<<<<< HEAD
-    [data-tabs] > section.tab-pane-active {
-=======
     [data-tabs] > *.tab-pane-active {
->>>>>>> origin/v2
         display: block;
     }

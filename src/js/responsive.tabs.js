@@ -37,7 +37,6 @@
         }
 
         this.tabbing = true;
-<<<<<<< HEAD
 
         $childTabs.removeClass("tab-active");
         $nextTab.addClass("tab-active");
@@ -60,43 +59,6 @@
 
         this.$element = $(element);
         this.tabbing = null;
-
-        // TODO: Should we move this?
-        this.$element.off(eclick).on(eclick, "ul > li > a", function (event) {
-
-            event.preventDefault();
-
-            var $this = $(this),
-                $li = $this.parent(),
-                index = $li.index();
-
-            $(event.delegateTarget).tabs(index);
-
-        });
-=======
-
-        $childTabs.removeClass("tab-active");
-        $nextTab.addClass("tab-active");
-
-        // Do some class shuffling to allow the transition.
-        $currentPane.addClass("fade-out fade-in");
-        $nextPane.addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").removeClass("tab-pane-active fade-in");
-
-        // Force redraw.
-        $nextPane.redraw().addClass("fade-in");
-
-        // Do the callback
-        callback.call(this);
-
-    };
-
-    // Tabs class definition
-    var Tabs = function (element) {
-
-        this.$element = $(element);
-        this.tabbing = null;
->>>>>>> origin/v2
     };
 
     Tabs.prototype.show = function (position) {
@@ -163,8 +125,6 @@
     // Data API
     $(document).on(eready, function () {
         $("[data-tabs]").tabs();
-<<<<<<< HEAD
-=======
     });
 
     $(document).on(eclick, "[data-tabs] ul > li > a", function (event) {
@@ -177,7 +137,6 @@
             index = $li.index();
 
         $tabs.tabs(index);
->>>>>>> origin/v2
     });
 
     w.RESPONSIVE_TABS = true;
