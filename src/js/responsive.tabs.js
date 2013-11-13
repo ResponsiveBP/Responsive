@@ -59,19 +59,6 @@
 
         this.$element = $(element);
         this.tabbing = null;
-
-        // TODO: Should we move this?
-        this.$element.off(eclick).on(eclick, "ul > li > a", function (event) {
-
-            event.preventDefault();
-
-            var $this = $(this),
-                $li = $this.parent(),
-                index = $li.index();
-
-            $(event.delegateTarget).tabs(index);
-
-        });
     };
 
     Tabs.prototype.show = function (position) {
@@ -138,6 +125,18 @@
     // Data API
     $(document).on(eready, function () {
         $("[data-tabs]").tabs();
+    });
+
+    $(document).on(eclick, "[data-tabs] ul > li > a", function (event) {
+
+        event.preventDefault();
+
+        var $this = $(this),
+            $li = $this.parent(),
+            $tabs = $this.parents("[data-tabs]:first"),
+            index = $li.index();
+
+        $tabs.tabs(index);
     });
 
     w.RESPONSIVE_TABS = true;
