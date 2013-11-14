@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/</loc>
+    <lastmod>2013-11-14T16:16:40+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>/css/base.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/grid.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/forms.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/buttons.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/tables.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/media.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/lists.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/alerts.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css/code.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/css.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/getting-started.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/index.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/carousel.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/lightbox.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/dropdown.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/tabs.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/autosize.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/dismiss.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript/tablelist.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/javascript.html</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/sitemap.xml</loc>
+    
+    <lastmod>2013-11-14</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+</urlset>
