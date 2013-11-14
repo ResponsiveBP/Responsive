@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/</loc>
-    <lastmod>2013-11-14T16:16:40+00:00</lastmod>
+    <loc>http://jimbobsquarepants.github.io/</loc>
+    <lastmod>2013-11-14T16:52:03+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>/css/base.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/base.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -21,7 +21,7 @@
   </url>
   
   <url>
-    <loc>/css/grid.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/grid.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -34,7 +34,7 @@
   </url>
   
   <url>
-    <loc>/css/forms.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/forms.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>/css/buttons.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/buttons.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -60,7 +60,7 @@
   </url>
   
   <url>
-    <loc>/css/tables.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/tables.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -73,7 +73,7 @@
   </url>
   
   <url>
-    <loc>/css/media.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/media.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -86,7 +86,7 @@
   </url>
   
   <url>
-    <loc>/css/lists.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/lists.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -99,7 +99,7 @@
   </url>
   
   <url>
-    <loc>/css/alerts.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/alerts.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -112,7 +112,7 @@
   </url>
   
   <url>
-    <loc>/css/code.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css/code.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -125,7 +125,7 @@
   </url>
   
   <url>
-    <loc>/css.html</loc>
+    <loc>http://jimbobsquarepants.github.io/css.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -138,7 +138,7 @@
   </url>
   
   <url>
-    <loc>/getting-started.html</loc>
+    <loc>http://jimbobsquarepants.github.io/getting-started.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -151,7 +151,7 @@
   </url>
   
   <url>
-    <loc>/index.html</loc>
+    <loc>http://jimbobsquarepants.github.io/index.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -164,7 +164,7 @@
   </url>
   
   <url>
-    <loc>/javascript/carousel.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/carousel.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -177,7 +177,7 @@
   </url>
   
   <url>
-    <loc>/javascript/lightbox.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/lightbox.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -190,7 +190,7 @@
   </url>
   
   <url>
-    <loc>/javascript/dropdown.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/dropdown.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -203,7 +203,7 @@
   </url>
   
   <url>
-    <loc>/javascript/tabs.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/tabs.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -216,7 +216,7 @@
   </url>
   
   <url>
-    <loc>/javascript/autosize.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/autosize.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -229,7 +229,7 @@
   </url>
   
   <url>
-    <loc>/javascript/dismiss.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/dismiss.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -242,7 +242,7 @@
   </url>
   
   <url>
-    <loc>/javascript/tablelist.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript/tablelist.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -255,7 +255,7 @@
   </url>
   
   <url>
-    <loc>/javascript.html</loc>
+    <loc>http://jimbobsquarepants.github.io/javascript.html</loc>
     
     <lastmod>2013-11-14</lastmod>
     
@@ -268,7 +268,7 @@
   </url>
   
   <url>
-    <loc>/sitemap.xml</loc>
+    <loc>http://jimbobsquarepants.github.io/sitemap.xml</loc>
     
     <lastmod>2013-11-14</lastmod>
     
