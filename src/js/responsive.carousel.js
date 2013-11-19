@@ -270,8 +270,6 @@
             $nextItem = this.$element.children("figure")[fallback]();
         }
 
-        console.log($nextItem);
-
         if ($nextItem.hasClass("carousel-active")) {
             return false;
         }

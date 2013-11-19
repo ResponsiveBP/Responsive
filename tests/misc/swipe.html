@@ -83,8 +83,6 @@
                     (navigator.msMaxTouchPoints > 0) ||
                     (window.DocumentTouch && document instanceof DocumentTouch);
 
-            console.log(supportTouch);
-
             $(".swipe-1").html(supportTouch === undefined ? "<p>no touch support detected</p>" : "<p>touch support detected</p>");
 
 
