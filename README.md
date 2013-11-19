@@ -42,3 +42,7 @@ James South [@james_m_south](http://twitter.com/james_m_south)
 ##Community
 
 Follow [@responsivebp](http://twitter.com/responsivebp) on Twitter.
+
+###Copyright and license
+
+Copyright 2013 James South under the [MIT license](http://opensource.org/licenses/MIT).
