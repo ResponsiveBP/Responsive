@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.0.2 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.1.0 | MIT License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -660,6 +660,96 @@ abbr {
 }
 
 /* offsetting cols */
+.offset-xs-11 {
+    margin-left: 93.5%;
+}
+
+.offset-xs-10 {
+    margin-left: 85%;
+}
+
+.offset-xs-9 {
+    margin-left: 76.5%;
+}
+
+.offset-xs-8 {
+    margin-left: 68%;
+}
+
+.offset-xs-7 {
+    margin-left: 59.5%;
+}
+
+.offset-xs-6 {
+    margin-left: 51%;
+}
+
+.offset-xs-5 {
+    margin-left: 42.5%;
+}
+
+.offset-xs-4 {
+    margin-left: 34%;
+}
+
+.offset-xs-3 {
+    margin-left: 25.5%;
+}
+
+.offset-xs-2 {
+    margin-left: 17%;
+}
+
+.offset-xs-1 {
+    margin-left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .offset-xs-11 {
+    margin-left: 91.6667%;
+}
+
+.no-gutter .offset-xs-10 {
+    margin-left: 83.3333%;
+}
+
+.no-gutter .offset-xs-9 {
+    margin-left: 75%;
+}
+
+.no-gutter .offset-xs-8 {
+    margin-left: 66.6667%;
+}
+
+.no-gutter .offset-xs-7 {
+    margin-left: 58.3333%;
+}
+
+.no-gutter .offset-xs-6 {
+    margin-left: 50%;
+}
+
+.no-gutter .offset-xs-5 {
+    margin-left: 41.6667%;
+}
+
+.no-gutter .offset-xs-4 {
+    margin-left: 33.3333%;
+}
+
+.no-gutter .offset-xs-3 {
+    margin-left: 25%;
+}
+
+.no-gutter .offset-xs-2 {
+    margin-left: 16.6667%;
+}
+
+.no-gutter .offset-xs-1 {
+    margin-left: 8.3333%;
+}
+
+/* pushing cols */
 .push-xs-11 {
     left: 93.5%;
 }
@@ -749,8 +839,7 @@ abbr {
     left: 8.3333%;
 }
 
-
-/* offsetting cols */
+/* pulling cols */
 .pull-xs-11 {
     right: 93.5%;
 }
@@ -958,6 +1047,96 @@ abbr {
 }
 
 /* offsetting cols */
+.offset-s-11 {
+    margin-left: 93.5%;
+}
+
+.offset-s-10 {
+    margin-left: 85%;
+}
+
+.offset-s-9 {
+    margin-left: 76.5%;
+}
+
+.offset-s-8 {
+    margin-left: 68%;
+}
+
+.offset-s-7 {
+    margin-left: 59.5%;
+}
+
+.offset-s-6 {
+    margin-left: 51%;
+}
+
+.offset-s-5 {
+    margin-left: 42.5%;
+}
+
+.offset-s-4 {
+    margin-left: 34%;
+}
+
+.offset-s-3 {
+    margin-left: 25.5%;
+}
+
+.offset-s-2 {
+    margin-left: 17%;
+}
+
+.offset-s-1 {
+    margin-left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .offset-s-11 {
+    margin-left: 91.6667%;
+}
+
+.no-gutter .offset-s-10 {
+    margin-left: 83.3333%;
+}
+
+.no-gutter .offset-s-9 {
+    margin-left: 75%;
+}
+
+.no-gutter .offset-s-8 {
+    margin-left: 66.6667%;
+}
+
+.no-gutter .offset-s-7 {
+    margin-left: 58.3333%;
+}
+
+.no-gutter .offset-s-6 {
+    margin-left: 50%;
+}
+
+.no-gutter .offset-s-5 {
+    margin-left: 41.6667%;
+}
+
+.no-gutter .offset-s-4 {
+    margin-left: 33.3333%;
+}
+
+.no-gutter .offset-s-3 {
+    margin-left: 25%;
+}
+
+.no-gutter .offset-s-2 {
+    margin-left: 16.6667%;
+}
+
+.no-gutter .offset-s-1 {
+    margin-left: 8.3333%;
+}
+
+/* pushing cols */
 .push-s-11 {
     left: 93.5%;
 }
@@ -1047,8 +1226,7 @@ abbr {
     left: 8.3333%;
 }
 
-
-/* offsetting cols */
+/* pulling cols */
 .pull-s-11 {
     right: 93.5%;
 }
@@ -1257,6 +1435,96 @@ abbr {
 }
 
 /* offsetting cols */
+.offset-m-11 {
+    margin-left: 93.5%;
+}
+
+.offset-m-10 {
+    margin-left: 85%;
+}
+
+.offset-m-9 {
+    margin-left: 76.5%;
+}
+
+.offset-m-8 {
+    margin-left: 68%;
+}
+
+.offset-m-7 {
+    margin-left: 59.5%;
+}
+
+.offset-m-6 {
+    margin-left: 51%;
+}
+
+.offset-m-5 {
+    margin-left: 42.5%;
+}
+
+.offset-m-4 {
+    margin-left: 34%;
+}
+
+.offset-m-3 {
+    margin-left: 25.5%;
+}
+
+.offset-m-2 {
+    margin-left: 17%;
+}
+
+.offset-m-1 {
+    margin-left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .offset-m-11 {
+    margin-left: 91.6667%;
+}
+
+.no-gutter .offset-m-10 {
+    margin-left: 83.3333%;
+}
+
+.no-gutter .offset-m-9 {
+    margin-left: 75%;
+}
+
+.no-gutter .offset-m-8 {
+    margin-left: 66.6667%;
+}
+
+.no-gutter .offset-m-7 {
+    margin-left: 58.3333%;
+}
+
+.no-gutter .offset-m-6 {
+    margin-left: 50%;
+}
+
+.no-gutter .offset-m-5 {
+    margin-left: 41.6667%;
+}
+
+.no-gutter .offset-m-4 {
+    margin-left: 33.3333%;
+}
+
+.no-gutter .offset-m-3 {
+    margin-left: 25%;
+}
+
+.no-gutter .offset-m-2 {
+    margin-left: 16.6667%;
+}
+
+.no-gutter .offset-m-1 {
+    margin-left: 8.3333%;
+}
+
+/* pushing cols */
 .push-m-11 {
     left: 93.5%;
 }
@@ -1346,8 +1614,7 @@ abbr {
     left: 8.3333%;
 }
 
-
-/* offsetting cols */
+/* pulling cols */
 .pull-m-11 {
     right: 93.5%;
 }
@@ -1556,6 +1823,96 @@ abbr {
 }
 
 /* offsetting cols */
+.offset-l-11 {
+    margin-left: 93.5%;
+}
+
+.offset-l-10 {
+    margin-left: 85%;
+}
+
+.offset-l-9 {
+    margin-left: 76.5%;
+}
+
+.offset-l-8 {
+    margin-left: 68%;
+}
+
+.offset-l-7 {
+    margin-left: 59.5%;
+}
+
+.offset-l-6 {
+    margin-left: 51%;
+}
+
+.offset-l-5 {
+    margin-left: 42.5%;
+}
+
+.offset-l-4 {
+    margin-left: 34%;
+}
+
+.offset-l-3 {
+    margin-left: 25.5%;
+}
+
+.offset-l-2 {
+    margin-left: 17%;
+}
+
+.offset-l-1 {
+    margin-left: 8.5%;
+}
+
+/*No gutter margin*/
+.no-gutter .offset-l-11 {
+    margin-left: 91.6667%;
+}
+
+.no-gutter .offset-l-10 {
+    margin-left: 83.3333%;
+}
+
+.no-gutter .offset-l-9 {
+    margin-left: 75%;
+}
+
+.no-gutter .offset-l-8 {
+    margin-left: 66.6667%;
+}
+
+.no-gutter .offset-l-7 {
+    margin-left: 58.3333%;
+}
+
+.no-gutter .offset-l-6 {
+    margin-left: 50%;
+}
+
+.no-gutter .offset-l-5 {
+    margin-left: 41.6667%;
+}
+
+.no-gutter .offset-l-4 {
+    margin-left: 33.3333%;
+}
+
+.no-gutter .offset-l-3 {
+    margin-left: 25%;
+}
+
+.no-gutter .offset-l-2 {
+    margin-left: 16.6667%;
+}
+
+.no-gutter .offset-l-1 {
+    margin-left: 8.3333%;
+}
+
+/* pushing cols */
 .push-l-11 {
     left: 93.5%;
 }
@@ -1645,8 +2002,7 @@ abbr {
     left: 8.3333%;
 }
 
-
-/* offsetting cols */
+/* pulling cols */
 .pull-l-11 {
     right: 93.5%;
 }
@@ -2513,6 +2869,7 @@ textarea[disabled] {
 /*
  * Normalize button borders, colour, and padding.
  * 1: Remove rounded corners on iPhone.
+ * 2: Remove 300ms touch delay.
  */
 
 button,
@@ -2534,6 +2891,8 @@ button,
     color: #222;
     cursor: pointer;
     position: relative;
+    -ms-touch-action: none; /* 2 */
+    touch-action: none;     /* 2 */
 }
 
 /*
