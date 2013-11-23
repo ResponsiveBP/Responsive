@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.1.1 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.1.2 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
