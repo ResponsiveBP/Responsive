@@ -1,23 +1,16 @@
-﻿.row [class*="col-"] + [class*="col-l"],
-.row [class*="col-"].col-reset-m {
+﻿.row [class*="col-"] + [class*="col-l"] {
     margin-left: 2%;
 }
 
-.row [class*="col-"].col-reset-m {
-    clear: none;
-}
+@media all and (min-width: 75em) {
+    .row [class*="col-"].col-reset-l {
+        margin-left: 0 !important;
+        clear: both;
+    }
 
-.row [class*="col-"].col-reset-l {
-    margin-left: 0;
-    clear: both;
-}
-
-.row [class*="col-"][class*="push-m-right"] {
-    float: left;
-}
-
-.row [class*="col-"][class*="push-l-right"] {
-    float: right;
+    .row [class*="col-"][class*="push-l-right"] {
+        float: right;
+    }
 }
 
 .col-l-12 {

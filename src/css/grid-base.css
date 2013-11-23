@@ -42,17 +42,19 @@
 .row.no-gutter > [class*="col-"] + [class*="col-"],
 .row [class*="col-"] + [class*="col-s"],
 .row [class*="col-"] + [class*="col-m"],
-.row [class*="col-"] + [class*="col-l"],
-.row [class*="col-reset-"] {
+.row [class*="col-"] + [class*="col-l"] {
     margin-left: 0;
 }
 
-.row [class*="col-reset-xs"] {
-    clear: both;
-}
+@media all and (max-width: 47.99em) {
+    .row [class*="col-reset-xs"] {
+        margin-left: 0 !important;
+        clear: both;
+    }
 
-.row [class*="col-"][class*="push-xs-right"] {
-    float: right;
+    .row [class*="col-"][class*="push-xs-right"] {
+        float: right;
+    }
 }
 
 /* Full width calculated with margins */

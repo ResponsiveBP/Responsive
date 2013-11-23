@@ -4,10 +4,10 @@
  * Fix the box model
  */
 *, *:before, *:after {
-    -webkit-box-sizing: border-box!important;
-    -moz-box-sizing: border-box!important;
-    -ms-box-sizing: border-box!important;
-    box-sizing: border-box!important;
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+    box-sizing: border-box !important;
 }
 
 
@@ -76,4 +76,18 @@ hr {
  */
 abbr {
     cursor: help;
+}
+
+/*
+ * Remove 300ms touch delay.
+ */
+
+a[href],
+button,
+[type="submit"],
+[type="button"],
+[type="reset"],
+[role="button"] {
+    -ms-touch-action: none;
+    touch-action: none;
 }

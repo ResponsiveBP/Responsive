@@ -1,23 +1,16 @@
-﻿.row [class*="col-"] + [class*="col-m"],
-.row [class*="col-"].col-reset-s {
+﻿.row [class*="col-"] + [class*="col-m"] {
     margin-left: 2%;
 }
 
-.row [class*="col-"].col-reset-s {
-    clear: none;
-}
+@media all and (min-width: 62em) and (max-width: 74.99em) {
+    .row [class*="col-"].col-reset-m {
+        margin-left: 0 !important;
+        clear: both;
+    }
 
-.row [class*="col-"].col-reset-m {
-    margin-left: 0;
-    clear: both;
-}
-
-.row [class*="col-"][class*="push-s-right"] {
-    float: left;
-}
-
-.row [class*="col-"][class*="push-m-right"] {
-    float: right;
+    .row [class*="col-"][class*="push-m-right"] {
+        float: right;
+    }
 }
 
 .col-m-12 {
