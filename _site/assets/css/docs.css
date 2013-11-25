@@ -162,3 +162,16 @@ header[role="banner"] span {
     height: 246px;
     width: 288px;
 }
+
+/*
+ * Force the spans to break words on the pre tag
+ */
+pre[class*="language-"] {
+    white-space: nowrap;
+    -moz-word-break: break-all;
+    -o-word-break: break-all;
+    -ms-word-break: break-all;
+    word-break: break-all;
+}
+
+

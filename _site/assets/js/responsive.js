@@ -16,10 +16,10 @@
     twitter : http://twitter.com/James_M_South
     github : https://github.com/JimBobSquarePants/Responsive
     Copyright (c),  James South.
-    Licensed under the Apache License v2.0.
+    Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.0.1 | Apache v2.0 License | git.io/rRNRLA */
+/*! Responsive v2.1.2 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -810,8 +810,6 @@
 
             $nextItem = this.$element.children("figure")[fallback]();
         }
-
-        console.log($nextItem);
 
         if ($nextItem.hasClass("carousel-active")) {
             return false;
