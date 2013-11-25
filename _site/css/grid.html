@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title> Grid ::  Responsive</title>
-    <meta name="description" content=" Flexible layouts across all devices. " />
+    <meta name="description" content=" Flexible grid layouts across all devices. " />
 
     <link href="/assets/css/responsive.css" rel="stylesheet" />
     <!--[if lt IE 9 &!(IEMobile)]>
@@ -39,7 +39,7 @@
         <a href="/css.html">&lt;&lt; Back</a>
         <h1>
             The Grid
-            <span>Flexible layouts across all devices.</span>
+            <span>Flexible grid layouts across all devices.</span>
         </h1>
     </header>
     <hr />
@@ -82,7 +82,7 @@
             <h1>The Grid System</h1>
 <p>
     Responsive comes, not with one but with 4 tiers of 12 column fluid grids in two variants that allow for granular control over layout across all 
-    devices. The system has been written from an entirely mobile first perspective with each level overwriting the previous one as the viewport width 
+    devices. The system has been written from an <strong>entirely mobile first</strong> perspective with each level overwriting the previous one as the viewport width 
     scales up.
 </p>
 <p>
@@ -94,7 +94,7 @@
 <hr />
 <section id="mediaqueries">
     <h1>Media Queries</h1>
-    <p>The media queries specifying breakpoints are follows:</p>
+    <p>The media queries specifying breakpoints are as follows:</p>
     <table class="table-list table-striped table-bordered" data-table-list="">
         <thead>
             <tr>
@@ -442,25 +442,25 @@
     </section>
     <section id="offsetting">
         <h3>Offsetting Columns</h3>
-        <p>Columns can be offset in each direction by each column width or to the extreme right or left of their container.</p>
+        <p>Columns can be offset by each column width.</p>
         <p>
-            Use classes <code>.push-[size]-[number]</code> to push by column width. <code>.push-[size]-[direction]</code> to move to the extremes.
+            Use classes <code>.offset-[size]-[number]</code> to push by column width. 
         </p>
         <div class="grid-demo">
             <div class="row">
                 <div class="col-xs-4">4</div>
-                <div class="col-xs-4 push-xs-4">4</div>
+                <div class="col-xs-4 offset-xs-4">4</div>
             </div>
             <div class="row">
-                <div class="col-xs-4 push-xs-4">4</div>
+                <div class="col-xs-4 offset-xs-4">4</div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
     &lt;div class="col-xs-4"&gt;4&lt;/div&gt;
-    &lt;div class="col-xs-4 push-xs-4"&gt;4&lt;/div&gt;
+    &lt;div class="col-xs-4 offset-xs-4"&gt;4&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
-    &lt;div class="col-xs-4 push-xs-4"&gt;4&lt;/div&gt;
+    &lt;div class="col-xs-4 offset-xs-4"&gt;4&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
     <section id="ordering">
@@ -480,7 +480,7 @@
     <section id="resetting">
         <h3>Resets</h3>
         <p>
-            Each tier comes with a <code>.col-[size]-reset</code> class which allows you to reset the flow of the layout as the viewport scales. 
+            Each tier comes with a <code>.col-reset-[size]</code> class which allows you to reset the flow of the layout as the viewport scales. 
             This allows you to perform more complicated layouts with relative ease.
         </p>
         <div class="grid-demo">
@@ -536,7 +536,7 @@
                     <a href="http://getbootstrap.com/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
             </p>
             <p>
-                Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
+                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external" target="_blank">MIT License</a>.
             </p>
         </div>
         <div class="col-s-4">
