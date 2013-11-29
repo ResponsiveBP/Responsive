@@ -49,7 +49,7 @@ label,
  * 1. Strip OS styling on IOS
  * 2. Add a dropdown indicator
  */
-@media all and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
+@media (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : landscape), screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width: 1024px) and (orientation : portrait) {
     select,
     input[type="search"],
     input[type="datetime"],
@@ -177,7 +177,7 @@ select:focus,
 input[type="range"]:focus,
 input[type="checkbox"]:focus,
 input[type="radio"]:focus,
-input:checked {
+input[type="checkbox"]:checked {
     border-color: transparent;
     outline: 1px solid #00a9ec;
     outline-offset: -1px;
@@ -209,6 +209,11 @@ textarea[disabled] {
     border-color: #c0c0c0;
     color: #c0c0c0;
     outline: 0!important;
+}
+
+label > input,
+label > select {
+    display: inline-block;
 }
 
 /* 

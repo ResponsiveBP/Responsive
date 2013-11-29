@@ -46,7 +46,7 @@
     margin-left: 0;
 }
 
-@media all and (max-width: 47.99em) {
+@media (max-width: 47.99em) {
     .row [class*="col-reset-xs"] {
         margin-left: 0 !important;
         clear: both;
