@@ -19,22 +19,22 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.1.2 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.1.3 | MIT License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 @import url(normalize.css);
 @import url(base.css);
 @import url(grid-base.css);
-@import url(grid-small.css) all and (min-width: 48em);
-@import url(grid-medium.css) all and (min-width: 62em);
-@import url(grid-large.css) all and (min-width: 75em);
+@import url(grid-small.css);
+@import url(grid-medium.css);
+@import url(grid-large.css);
 @import url(lists-base.css);
-@import url(lists.css) all and (min-width: 48em);
+@import url(lists.css);
 @import url(tables.css);
 @import url(tablelist.css);
 @import url(alerts.css);
 @import url(media.css);
 @import url(forms-base.css);
-@import url(forms.css) all and (min-width: 30em);
+@import url(forms.css);
 @import url(buttons.css);
 @import url(code.css);
 @import url(dropdown.css);

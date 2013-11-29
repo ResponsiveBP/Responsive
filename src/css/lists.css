@@ -1,23 +1,24 @@
-﻿/* Responsive Lists */
+﻿@media (min-width: 48em) {
 
-/* Definition lists */
+    /* Definition lists */
 
-/* 
+    /* 
  * Horizontally styled definition list 
  */
 
-.dl-horizontal > dt {
-    float: left;
-    clear: left;
-    width: 150px;
-    overflow: hidden;
-    text-align: right;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    .dl-horizontal > dt {
+        float: left;
+        clear: left;
+        width: 150px;
+        overflow: hidden;
+        text-align: right;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-.dl-horizontal > dd {
-    margin-left: 166px;
+    .dl-horizontal > dd {
+        margin-left: 166px;
+    }
 }
