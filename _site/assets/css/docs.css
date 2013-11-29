@@ -60,7 +60,7 @@ nav[role="navigation"] {
             background-color: #333;
         }
 
-@media all and (min-width: 48em) {
+@media (min-width: 48em) {
     #navigation {
         clear: none;
         float: left;
@@ -172,6 +172,5 @@ pre[class*="language-"] {
     -o-word-break: break-all;
     -ms-word-break: break-all;
     word-break: break-all;
+    overflow: hidden;
 }
-
-

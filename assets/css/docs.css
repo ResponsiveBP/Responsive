@@ -60,7 +60,7 @@ nav[role="navigation"] {
             background-color: #333;
         }
 
-@media all and (min-width: 48em) {
+@media (min-width: 48em) {
     #navigation {
         clear: none;
         float: left;
