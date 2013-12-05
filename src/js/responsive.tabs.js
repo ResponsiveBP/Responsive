@@ -127,7 +127,7 @@
         $("[data-tabs]").tabs();
     });
 
-    $(document).on(eclick, "[data-tabs] ul > li > a", function (event) {
+    $(document).on(eclick, "[data-tabs] > ul > li > a", function (event) {
 
         event.preventDefault();
 
