@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.1.3 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.2.0 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -2201,7 +2201,7 @@
         $("[data-tabs]").tabs();
     });
 
-    $(document).on(eclick, "[data-tabs] ul > li > a", function (event) {
+    $(document).on(eclick, "[data-tabs] > ul > li > a", function (event) {
 
         event.preventDefault();
 
