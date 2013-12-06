@@ -1,5 +1,16 @@
 ﻿@media (min-width: 48em) and (max-width: 61.99em) {
-    .row [class*="col-"].col-reset-s {
+    .row [class*="col-"].reset-s-only {
+        margin-left: 0 !important;
+        clear: both;
+    }
+
+    .row [class*="col-"][class*="push-s-right-only"] {
+        float: right;
+    }
+}
+
+@media (min-width: 48em) {
+    .row [class*="col-"].reset-s {
         margin-left: 0 !important;
         clear: both;
     }
@@ -7,9 +18,7 @@
     .row [class*="col-"][class*="push-s-right"] {
         float: right;
     }
-}
 
-@media (min-width: 48em) {
     .row [class*="col-"] + [class*="col-s"] {
         margin-left: 2%;
     }

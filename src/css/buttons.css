@@ -86,7 +86,7 @@ button,
     [type="button"].btn-inline,
     [type="reset"].btn-inline,
     [role="button"].btn-inline {
-        margin-left: -4px; /* 1 */
+        margin-left: -.27em; /* 1 */
         padding: .25em 1em; /* 2 */
     }
 
