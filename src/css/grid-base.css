@@ -47,14 +47,23 @@
 }
 
 @media (max-width: 47.99em) {
-    .row [class*="col-reset-xs"] {
+    .row [class*="col-"].reset-xs-only {
         margin-left: 0 !important;
         clear: both;
     }
 
-    .row [class*="col-"][class*="push-xs-right"] {
+    .row [class*="col-"][class*="push-xs-right-only"] {
         float: right;
     }
+}
+
+.row [class*="col-"].reset-xs {
+    margin-left: 0 !important;
+    clear: both;
+}
+
+.row [class*="col-"][class*="push-xs-right"] {
+    float: right;
 }
 
 /* Full width calculated with margins */

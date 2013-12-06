@@ -1,5 +1,16 @@
 ﻿@media (min-width: 62em) and (max-width: 74.99em) {
-    .row [class*="col-"].col-reset-m {
+    .row [class*="col-"].reset-m-only {
+        margin-left: 0 !important;
+        clear: both;
+    }
+
+    .row [class*="col-"][class*="push-m-right-only"] {
+        float: right;
+    }
+}
+
+@media (min-width: 62em) {
+    .row [class*="col-"].reset-m {
         margin-left: 0 !important;
         clear: both;
     }
@@ -7,9 +18,7 @@
     .row [class*="col-"][class*="push-m-right"] {
         float: right;
     }
-}
 
-@media (min-width: 62em) {
     .row [class*="col-"] + [class*="col-m"] {
         margin-left: 2%;
     }
