@@ -510,8 +510,6 @@ abbr {
 /*
  * Remove 300ms touch delay.
  */
-
-a[href],
 button,
 [type="submit"],
 [type="button"],
@@ -2796,8 +2794,8 @@ input,
     background-color: #fff;
     border-radius: 0;
     border: 1px solid #c0c0c0;
-    max-width: 210px;
     width: 100%;
+    max-width: none;
     display: block;
     margin-bottom: 1em;
 }
@@ -2904,9 +2902,6 @@ input[type="radio"] {
  * 3: None
  */
 textarea {
-    width: auto;
-    min-width: 210px;
-    max-width: 100%;
     height: auto;
     resize: both;
     min-height: 5.25em;
@@ -3013,11 +3008,45 @@ label > select {
 }
 
 /*
+ * Inline
+ */
+input.inline-block,
+select.inline-block {
+    max-width: 210px;
+}
+
+/*
  * Actions - Contains buttons 
  */
 .form-actions {
     margin: 1em 0;
     padding: 1em 0;
+}
+
+/*
+ * No Grid based forms
+ */
+.form-no-grid select,
+.form-no-grid textarea,
+.form-no-grid input,
+.form-no-grid .no-edit {
+    max-width: 210px;
+    width: 100%;
+}
+
+.form-no-grid input[type="color"] {
+    max-width: 105px;
+}
+    .form-no-grid input[type="radio"],
+    .form-no-grid input[type="checkbox"] {
+        width: auto;
+        max-width: 15px;
+    }
+
+.form-no-grid textarea {
+    width: auto;
+    min-width: 210px;
+    max-width: 100%;
 }
 
 @media (min-width: 30em) {
@@ -3074,7 +3103,6 @@ button,
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
     display: inline-block;
-    max-width: none;
     padding: .5em 1em;
     margin-bottom: 0;
     line-height: normal;
@@ -3091,8 +3119,13 @@ button,
  * Reset width for inputs
  */
 [type="submit"],
-[type="button"] {
+[type="reset"],
+[type="button"],
+.form-no-grid [type="submit"],
+.form-no-grid [type="reset"],
+.form-no-grid [type="button"] {
     width: auto;
+    max-width: none;
 }
 
     /*
@@ -3215,17 +3248,17 @@ pre samp {
 }
 
 /*
- * Reassert wrapping.
+ * Reassert no wrapping.
  */
-pre code {
-    -ms-word-break: break-all;
-    word-break: break-all; /* webkit */
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    white-space: pre;
-    white-space: -moz-pre-wrap; /* fennec */
-    white-space: pre-wrap;
+pre {
+    overflow-x: auto;
 }
+
+    pre code {
+        -ms-word-wrap: normal;
+        word-wrap: normal;
+        white-space: pre;
+    }
 
 /*
  * Fixed height with overflow.

@@ -34,17 +34,17 @@ pre samp {
 }
 
 /*
- * Reassert wrapping.
+ * Reassert no wrapping.
  */
-pre code {
-    -ms-word-break: break-all;
-    word-break: break-all; /* webkit */
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    white-space: pre;
-    white-space: -moz-pre-wrap; /* fennec */
-    white-space: pre-wrap;
+pre {
+    overflow-x: auto;
 }
+
+    pre code {
+        -ms-word-wrap: normal;
+        word-wrap: normal;
+        white-space: pre;
+    }
 
 /*
  * Fixed height with overflow.

@@ -31,8 +31,8 @@ input,
     background-color: #fff;
     border-radius: 0;
     border: 1px solid #c0c0c0;
-    max-width: 210px;
     width: 100%;
+    max-width: none;
     display: block;
     margin-bottom: 1em;
 }
@@ -139,9 +139,6 @@ input[type="radio"] {
  * 3: None
  */
 textarea {
-    width: auto;
-    min-width: 210px;
-    max-width: 100%;
     height: auto;
     resize: both;
     min-height: 5.25em;
@@ -248,9 +245,43 @@ label > select {
 }
 
 /*
+ * Inline
+ */
+input.inline-block,
+select.inline-block {
+    max-width: 210px;
+}
+
+/*
  * Actions - Contains buttons 
  */
 .form-actions {
     margin: 1em 0;
     padding: 1em 0;
+}
+
+/*
+ * No Grid based forms
+ */
+.form-no-grid select,
+.form-no-grid textarea,
+.form-no-grid input,
+.form-no-grid .no-edit {
+    max-width: 210px;
+    width: 100%;
+}
+
+.form-no-grid input[type="color"] {
+    max-width: 105px;
+}
+    .form-no-grid input[type="radio"],
+    .form-no-grid input[type="checkbox"] {
+        width: auto;
+        max-width: 15px;
+    }
+
+.form-no-grid textarea {
+    width: auto;
+    min-width: 210px;
+    max-width: 100%;
 }

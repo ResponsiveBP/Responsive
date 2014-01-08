@@ -13,7 +13,6 @@ button,
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
     display: inline-block;
-    max-width: none;
     padding: .5em 1em;
     margin-bottom: 0;
     line-height: normal;
@@ -30,8 +29,13 @@ button,
  * Reset width for inputs
  */
 [type="submit"],
-[type="button"] {
+[type="reset"],
+[type="button"],
+.form-no-grid [type="submit"],
+.form-no-grid [type="reset"],
+.form-no-grid [type="button"] {
     width: auto;
+    max-width: none;
 }
 
     /*
