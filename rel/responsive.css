@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.2.0 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.0 | MIT License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -565,6 +565,10 @@ button,
 .row [class*="col-"] + [class*="col-m"],
 .row [class*="col-"] + [class*="col-l"] {
     margin-left: 0;
+}
+
+.row.no-gutter.pad-gutter [class*="col-"] {
+    padding: 0 1%;
 }
 
 @media (max-width: 47.99em) {
