@@ -8,6 +8,7 @@ subheading: Flexible grid layouts across all devices.
 sublinks: ["#mediaqueries|Media Queries",
             "#basic|Example : Basic",
             "#nogutter|Example : No Gutter",
+            "#padded|Example : Padded",
             "#fixed|Example : Fixed",
             "#nested|Example : Nested",
             "#resizing|Example : Resizing",
@@ -17,8 +18,8 @@ sublinks: ["#mediaqueries|Media Queries",
 ---
 <h1>The Grid System</h1>
 <p>
-    Responsive comes, not with one but with 4 tiers of 12 column fluid grids in two variants that allow for granular control over layout across all 
-    devices. The system has been written from an <strong>entirely mobile first</strong> perspective with each level overwriting the previous one as the viewport width 
+    Responsive comes, not with one but with <strong>4 tiers of 12 column fluid grids in three variants</strong> that allow for granular control over layout across all
+    devices. The system has been written from an <strong>entirely mobile first</strong> perspective with each level overwriting the previous one as the viewport width
     scales up.
 </p>
 <p>
@@ -63,13 +64,19 @@ sublinks: ["#mediaqueries|Media Queries",
         </tbody>
     </table>
 </section>
+<div class="alert alert-info">
+    <p>
+        The grid system is designed to be used as a wrapping scaffold only.
+        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
+    </p>
+</div>
 <hr />
 <section id="examples">
     <h1>Examples</h1>
     <section id="basic">
         <h3>Basic</h3>
         <p>
-            Here is a very basic example of the grid system. In this example the columns are styled using the <code>.col-s-{number}</code> tier meaning that on viewport widths 
+            Here is a very basic example of the grid system. In this example the columns are styled using the <code>.col-s-{number}</code> tier meaning that on viewport widths
             below 48em <small>(768px at 16px/1em)</small> the columns will collapse to a horizontal layout.
         </p>
         <div class="grid-demo">
@@ -255,6 +262,80 @@ sublinks: ["#mediaqueries|Media Queries",
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <section id="padded">
+        <h3>Padded</h3>
+        <p>
+            Adding the classes <code>.no-gutter .pad-gutter</code> to a row triggers the padded column layout similar to that of Bootstrap.
+        </p>
+        <div class="grid-demo">
+            <div class="row no-gutter pad-gutter ">
+                <div class="col-s-12">
+                    <div>12</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-11">
+                    <div>11</div>
+                </div>
+                <div class="col-s-1">
+                    <div>1</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-10">
+                    <div>10</div>
+                </div>
+                <div class="col-s-2">
+                    <div>2</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-9">
+                    <div>9</div>
+                </div>
+                <div class="col-s-3">
+                    <div>3</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-8">
+                    <div>8</div>
+                </div>
+                <div class="col-s-4">
+                    <div>4</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-7">
+                    <div>7</div>
+                </div>
+                <div class="col-s-5">
+                    <div>5</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-6">
+                    <div>6</div>
+                </div>
+                <div class="col-s-6">
+                    <div>6</div>
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row no-gutter pad-gutter"&gt;
+    &lt;div class="col-s-12"&gt;
+        &lt;div&gt;12&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-s-11"&gt;
+        &lt;div&gt;11&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-s-1"&gt;
+        &lt;div&gt;1&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
     <section id="fixed">
         <h3>Fixed</h3>
         <p>In this example the columns will persist their width from the base view all the way up. This is performed using the <code>.col-xs-{number}</code> tier system.</p>
@@ -284,37 +365,37 @@ sublinks: ["#mediaqueries|Media Queries",
             <div class="row">
                 <div class="col-s-6">
                     6
-                               
-               
+
+
 
                     <div class="row">
                         <div class="col-s-6">
                             6
-                                   
-                   
+
+
                         </div>
                         <div class="col-s-6">
                             6
-                                   
-                   
+
+
                         </div>
                     </div>
                 </div>
                 <div class="col-s-6">
                     6
-                               
-               
+
+
 
                     <div class="row">
                         <div class="col-s-6">
                             6
-                                   
-                   
+
+
                         </div>
                         <div class="col-s-6">
                             6
-                                   
-                   
+
+
                         </div>
                     </div>
                 </div>
@@ -380,7 +461,7 @@ sublinks: ["#mediaqueries|Media Queries",
         <h3>Offsetting Columns</h3>
         <p>Columns can be offset by each column width.</p>
         <p>
-            Use classes <code>.offset-[size]-[number]</code> to push by column width. 
+            Use classes <code>.offset-[size]-[number]</code> to push by column width.
         </p>
         <div class="grid-demo">
             <div class="row">
@@ -416,7 +497,7 @@ sublinks: ["#mediaqueries|Media Queries",
     <section id="resetting">
         <h3>Resets</h3>
         <p>
-            Each tier comes with a <code>.reset-[size]</code> and <code>.reset-[size]-only</code> class which allows you to reset the flow of the layout as the viewport scales. 
+            Each tier comes with a <code>.reset-[size]</code> and <code>.reset-[size]-only</code> class which allows you to reset the flow of the layout as the viewport scales.
             This allows you to perform more complicated layouts with relative ease.
         </p>
         <div class="grid-demo">

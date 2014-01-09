@@ -118,7 +118,7 @@ header[role="banner"] span {
 
 .grid-demo .row {
     text-align: center;
-    background: #ebebeb;
+    background: #f0d3d5;
 }
 
     .grid-demo .row + .row, .grid-test .row .row {
@@ -127,8 +127,18 @@ header[role="banner"] span {
 
 .grid-demo [class*="col-"] {
     line-height: 2em;
-    background-color: #3876a7;
+    background-color: #c44e55;
     color: #fff;
+}
+
+.grid-demo .pad-gutter [class*="col-"] {
+    line-height: 2em;
+    background-color: #de9a9f;
+    color: #fff;
+}
+
+.grid-demo .pad-gutter [class*="col-"] > div{
+    background-color: #c44e55;
 }
 
     .grid-demo [class*="col-"] [class*="col-"] {
@@ -163,14 +173,3 @@ header[role="banner"] span {
     width: 288px;
 }
 
-/*
- * Force the spans to break words on the pre tag
- */
-pre[class*="language-"] {
-    white-space: nowrap;
-    -moz-word-break: break-all;
-    -o-word-break: break-all;
-    -ms-word-break: break-all;
-    word-break: break-all;
-    overflow: hidden;
-}
