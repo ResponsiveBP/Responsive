@@ -19,9 +19,9 @@
     "tests"
   ],
   "dependencies": {
-    "html5shiv": "3.6.2",
+    "html5shiv": "3.7.0",
     "jquery": "2.0.3",
     "jquery-legacy": "jquery#1.10",
-    "respond": "1.4.0"
+    "respond": "1.4.2"
   }
 }
