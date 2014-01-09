@@ -2783,7 +2783,6 @@ legend {
 
 label[for] {
     cursor: pointer;
-    margin-bottom: 1em;
 }
 
 select,
@@ -2800,21 +2799,14 @@ input,
     margin-bottom: 1em;
 }
 
+label,
 .input-group {
     display: block;
     margin-bottom: 1em;
 }
 
-/*
- * Fix field styling on iPhone and iPad.
- * 1. Strip OS styling on IOS
- * 2. Add a dropdown indicator
- */
-select {
-    -webkit-appearance: none; /* 1 */
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);
-    background-repeat: no-repeat;
-    background-position: right center;
+input[type="color"] {
+    max-width: 105px;
 }
 
 /*
@@ -2838,25 +2830,70 @@ input[type="range"] { /* 1 */
 }
 
 /*
- * 1. Remove excess padding in Webkit
+ * Fix field styling on iPhone and iPad.
+ * 1. Strip OS styling on IOS
  */
+select,
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="week"],
+input[type="month"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
 input[type="color"] {
     -webkit-appearance: none; /* 1 */
-    -webkit-padding-start: 0;
-    -webkit-padding-end: 0;
-    -webkit-padding-before: 0;
-    -webkit-padding-after: 0;
-    max-width: 105px;
 }
 
-    input[type="color"]::-webkit-color-swatch-wrapper {
-        -webkit-appearance: none; /* 1 */
+@media (-webkit-min-device-pixel-ratio:0) {
+
+    /*
+     * Fix field styling on iPhone and iPad.
+     * 1. Add a dropdown indicator
+     */
+    select {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==); /* 1 */
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+
+    /*
+     * Fix changing height issues on iOS7.
+     */
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"] {
+        min-height: 2em;
+    }
+
+    input[type="color"] {
+        min-height: 1.8em;
+    }
+
+    /*
+     * 1. Remove excess padding in Webkit
+     */
+    input[type="color"] {
         padding: 0;
     }
 
-    input[type="color"]::-webkit-color-swatch {
-        border: none; /* 1 */
-    }
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+        }
+}
 
 /*
  * Declared separately to reduce selector duplication
@@ -2866,13 +2903,16 @@ input[type="radio"],
 input[type="checkbox"] {
     padding: 0;
     display: block;
-    margin: 3px 3px 3px 0!important;
-    width: 13px;
+    margin: .1875em .1875em .1875em 0;
+    width: auto;
+    min-height: 1em;
+    min-width: 1em;
     line-height: inherit;
 }
 
 input[type="radio"] {
-    border-color: transparent;
+    border-color: transparent \9;
+    border-radius: 1em;
 }
 
 /*
@@ -2940,6 +2980,7 @@ input[type="checkbox"]:checked {
 /* 
  * Disabled 
  * 1. Override the value set in normalize.css
+ * 2. Fix IOS 6/7 opacity issue
  */
 input[disabled],
 select[disabled],
@@ -2949,6 +2990,7 @@ textarea[disabled] {
     border-color: #c0c0c0;
     color: #c0c0c0;
     outline: 0!important;
+    opacity: 1;
 }
 
 label > input,
@@ -3011,17 +3053,10 @@ select.inline-block {
 .form-no-grid input,
 .form-no-grid .no-edit {
     max-width: 210px;
-    width: 100%;
 }
 
     .form-no-grid input[type="color"] {
         max-width: 105px;
-    }
-
-    .form-no-grid input[type="radio"],
-    .form-no-grid input[type="checkbox"] {
-        width: auto;
-        max-width: 15px;
     }
 
 .form-no-grid textarea {
@@ -3141,6 +3176,9 @@ button,
         outline: none;
     }
 
+    /*
+     * 1. Fix IOS 6/7 opacity issue
+     */
     button[disabled],
     [type="submit"][disabled],
     [type="button"][disabled],
@@ -3149,6 +3187,7 @@ button,
         color: #5d5d5d;
         background-color: #e7e7e7;
         cursor: not-allowed;
+        opacity: 1;
     }
 
     /*
