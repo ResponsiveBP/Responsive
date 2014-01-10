@@ -1359,8 +1359,9 @@
         if (local) {
             $img = null;
             $iframe = null;
-            $placeholder.detach().insertAfter(this.$element);
-            $(target).detach().appendTo($content).removeClass("hidden");
+            var $target = $(target);
+            $placeholder.detach().insertAfter($target);
+            $target.detach().appendTo($content).removeClass("hidden");
             $content.appendTo($lightbox);
             toggleFade.call(this);
         } else {

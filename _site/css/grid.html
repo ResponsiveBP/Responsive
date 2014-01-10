@@ -145,7 +145,10 @@
             Here is a very basic example of the grid system. In this example the columns are styled using the <code>.col-s-{number}</code> tier meaning that on viewport widths
             below 48em <small>(768px at 16px/1em)</small> the columns will collapse to a horizontal layout.
         </p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#basic-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="basic-test" class="grid-demo">
             <div class="row">
                 <div class="col-s-12">
                     12
@@ -259,7 +262,10 @@
         <p>
             Adding the class <code>.no-gutter</code> to a row triggers the gutterless column layout.
         </p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#nogutter-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="nogutter-test" class="grid-demo">
             <div class="row no-gutter">
                 <div class="col-s-12">
                     12
@@ -333,7 +339,10 @@
         <p>
             Adding the classes <code>.no-gutter .pad-gutter</code> to a row triggers the padded column layout similar to that of Bootstrap.
         </p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#padded-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="padded-test" class="grid-demo">
             <div class="row no-gutter pad-gutter ">
                 <div class="col-s-12">
                     <div>12</div>
@@ -405,7 +414,10 @@
     <section id="fixed">
         <h3>Fixed</h3>
         <p>In this example the columns will persist their width from the base view all the way up. This is performed using the <code>.col-xs-{number}</code> tier system.</p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#fixed-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="fixed-test" class="grid-demo">
             <div class="row">
                 <div class="col-xs-6">
                     6
@@ -426,32 +438,25 @@
     </section>
     <section id="nested">
         <h3>Nesting</h3>
-        <p>Nesting, of course, is supported. Just add a new <code>.row</code> class to a div to designate a new level.</p>
-        <div class="grid-demo">
+        <p>Nesting is supported. Add a new <code>.row</code> class to a div to designate a new level.</p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#nested-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="nested-test" class="grid-demo">
             <div class="row">
                 <div class="col-s-6">
                     6
-
-
-
                     <div class="row">
                         <div class="col-s-6">
                             6
-
-
                         </div>
                         <div class="col-s-6">
                             6
-
-
                         </div>
                     </div>
                 </div>
                 <div class="col-s-6">
                     6
-
-
-
                     <div class="row">
                         <div class="col-s-6">
                             6
@@ -495,7 +500,10 @@
     <section id="resizing">
         <h3>Resizing</h3>
         <p>In this example the grid from each tier is being overwritten as the viewport scales up.</p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#resizing-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="resizing-test" class="grid-demo">
             <div class="row">
                 <div class="col-xs-6 col-s-4">
                     <div class="visible-xs">6</div>
@@ -529,7 +537,10 @@
         <p>
             Use classes <code>.offset-[size]-[number]</code> to push by column width.
         </p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#offsetting-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="offsetting-test" class="grid-demo">
             <div class="row">
                 <div class="col-xs-4">4</div>
                 <div class="col-xs-4 offset-xs-4">4</div>
@@ -549,7 +560,10 @@
     <section id="ordering">
         <h3>Ordering Columns</h3>
         <p>The order of columns can be flipped by combining classes <code>.push-[size]-[number]</code> and <code>.pull-[size]-[number]</code>.</p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#ordering-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="ordering-test" class="grid-demo">
             <div class="row">
                 <div class="col-xs-4 push-xs-8">4</div>
                 <div class="col-xs-8 pull-xs-4">8</div>
@@ -566,7 +580,10 @@
             Each tier comes with a <code>.reset-[size]</code> and <code>.reset-[size]-only</code> class which allows you to reset the flow of the layout as the viewport scales.
             This allows you to perform more complicated layouts with relative ease.
         </p>
-        <div class="grid-demo">
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#resetting-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="resetting-test" class="grid-demo">
             <div class="row">
                 <div class="col-s-3 col-m-6">
                     <div class="visible-xs">12</div>
@@ -600,7 +617,6 @@
     &lt;div class="col-s-3 col-m-6"&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-
     </section>
 </section>
 
@@ -637,6 +653,7 @@
 <!--<![endif]-->
 <script src="/assets/js/vendor/prism.js"></script>
 <script src="/assets/js/responsive.js"></script>
+<script src="/assets/js/docs.js"></script>
 
 <!-- Google Analytics: -->
 <script>
