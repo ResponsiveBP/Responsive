@@ -118,8 +118,11 @@
         if (local) {
             $img = null;
             $iframe = null;
-            $placeholder.detach().insertAfter(this.$element);
-            $(target).detach().appendTo($content).removeClass("hidden");
+            var $target = $(target);
+            this.isLocalHidden = $target.is(":hidden");
+            $lightbox.addClass(this.options.fitViewport ? "container" : "");
+            $placeholder.detach().insertAfter($target);
+            $target.detach().appendTo($content).removeClass("hidden");
             $content.appendTo($lightbox);
             toggleFade.call(this);
         } else {
@@ -211,7 +214,7 @@
     destroy = function (callback) {
         var self = this,
             empty = function () {
-                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
+                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image container").css({
                     "max-height": "",
                     "max-width": "",
                     "margin-top": "",
@@ -232,7 +235,7 @@
 
                 if (!self.options.external) {
                     // Put that kid back where it came from or so help me.
-                    $(self.options.target).addClass("hidden").detach().insertAfter($placeholder);
+                    $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
                     $placeholder.detach().insertAfter($overlay);
                 }
 
@@ -253,7 +256,8 @@
         toggleFade.call(this);
 
         supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
-            : cleanUp();
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
+        : cleanUp();
     },
 
     resize = function () {
@@ -411,6 +415,7 @@
             .redraw();
 
         supportTransition ? $overlay.one(supportTransition.end, complete)
+        .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
               : complete();
 
     },
@@ -544,6 +549,7 @@
             next: ">",
             previous: "<",
             mobileTarget: null,
+            fitViewport: true,
             mobileViewportWidth: 480,
             enabletouch: true
         };
@@ -552,6 +558,7 @@
         this.description = null;
         this.isShown = null;
         this.$group = null;
+        this.isLocalHidden = false;
 
         // Make a list of grouped lightbox targets.
         if (this.options.group) {
@@ -610,6 +617,7 @@
 
         // Call the callback.
         supportTransition ? $lightbox.one(supportTransition.end, complete)
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
                           : complete();
     };
 
@@ -640,6 +648,7 @@
         destroy.call(this);
 
         supportTransition ? $lightbox.one(supportTransition.end, complete)
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
                           : complete();
     };
 

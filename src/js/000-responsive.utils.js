@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.0 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.1 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -27,7 +27,7 @@
 
 /*global jQuery*/
 /*jshint forin:false*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -101,6 +101,20 @@
         return transitionEnd();
 
     }());
+
+    $.fn.ensureTransitionEnd = function (duration) {
+        /// <summary>
+        /// Ensures that the transition end callback is triggered.
+        /// http://blog.alexmaccaw.com/css-transitions
+        ///</summary>
+        var called = false,
+            $this = $(this),
+            callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
+
+        $this.one($.support.transition.end, function () { called = true; });        
+        w.setTimeout(callback, duration);
+        return this;
+    }
 
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
@@ -324,4 +338,4 @@
         return options;
     };
 
-}(jQuery));
+}(jQuery, window));

@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.0 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.1 | MIT License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -3362,7 +3362,7 @@ pre {
     margin-bottom: 1em;
 }
 
-    /* 
+/* 
  * Default slide version
  */
     .carousel > figure {
@@ -3380,10 +3380,10 @@ pre {
         }
 
     .carousel .no-transition {
-        -moz-transition-duration: 0!important;
-        -o-transition-duration: 0!important;
-        -webkit-transition-duration: 0!important;
-        transition-duration: 0!important;
+        -moz-transition-duration: 0 !important;
+        -o-transition-duration: 0 !important;
+        -webkit-transition-duration: 0 !important;
+        transition-duration: 0 !important;
     }
 
     /* 
@@ -3408,7 +3408,7 @@ pre {
         }
 
     .carousel .carousel-active {
-        position: relative!important;
+        position: relative !important;
         z-index: 1;
     }
 

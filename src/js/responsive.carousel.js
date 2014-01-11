@@ -15,6 +15,8 @@
     // General variables.
     var supportTransition = $.support.transition,
         vendorPrefixes = $.support.getVendorPrefix,
+        // Match the transition.
+        rtransition = /\d+(.\d+)/,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
@@ -331,7 +333,9 @@
             });
         }
 
-        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
+        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete)
+        .ensureTransitionEnd($activeItem.css("transition-duration").match(rtransition)[0] * 1000)
+        : complete();
 
         // Restart the cycle.
         if (isCycling) {

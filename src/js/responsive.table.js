@@ -73,7 +73,9 @@
         this.$element.addClass("fade-in").redraw();
 
         // Do our callback
-        supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
+        supportTransition ? this.$element.one(supportTransition.end, complete)
+        .ensureTransitionEnd(this.$element.css("transition-duration").slice(0, -1) * 1000)
+        : complete();
     };
 
     // Plug-in definition 

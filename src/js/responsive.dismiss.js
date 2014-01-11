@@ -50,7 +50,9 @@
                .removeClass("fade-in");
 
         // Do our callback
-        supportTransition ? this.$target.one(supportTransition.end, complete) : complete();
+        supportTransition ? this.$target.one(supportTransition.end, complete)
+        .ensureTransitionEnd(this.$target.css("transition-duration").slice(0, -1) * 1000)
+        : complete();
     };
 
     // Plug-in definition 

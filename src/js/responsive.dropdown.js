@@ -13,6 +13,8 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        // Match the transition.
+        rtransition = /\d+(.\d+)/,
         eclick = "click" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
@@ -45,7 +47,9 @@
         this.$element.trigger(startEvent)[method]("collapse");
         this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
-        supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
+        supportTransition ? this.$element.one(supportTransition.end, complete)
+        .ensureTransitionEnd(this.$element.css("transition-duration").match(rtransition)[0] * 1000)
+        : complete();
     };
 
     // The Dropdown class definition
