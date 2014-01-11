@@ -1,14 +1,16 @@
 ﻿(function ($) {
-    // Show grid examples in the lightbox to allow for resizing.
-    // Bind to the show event.
-    $(".demo-trigger").on("shown.r.lightbox", function (event) {
-        $(".lightbox").addClass("container");
-    });
-    
-    // Bind to the hidden event.
-    $(".demo-trigger").on("hidden.r.lightbox", function (event) {
-        var $this = $(this),
-            $target = $($this.data("lightboxTarget"));
-        $target.removeClass("hidden");
+    //Back to Top scroll
+    $("button.to-top").on("click", function (event) {
+        event.preventDefault();
+
+        // Normalize the velocity. Lets's say 100ms to travel 1000px.
+        var baseVelocity = 1000 / 100,
+            distance = $(this).offset().top,
+            relativeTime = (distance / baseVelocity);
+
+        $("html, body").animate({
+            scrollTop: 0
+        }, relativeTime);
+
     });
 }(jQuery));
