@@ -137,13 +137,13 @@ header[role="banner"] span {
     color: #fff;
 }
 
-.grid-demo .pad-gutter [class*="col-"] > div{
-    background-color: #c44e55;
-}
-
-    .grid-demo [class*="col-"] [class*="col-"] {
-        background-color: #434343;
+    .grid-demo .pad-gutter [class*="col-"] > div {
+        background-color: #c44e55;
     }
+
+.grid-demo [class*="col-"] [class*="col-"] {
+    background-color: #434343;
+}
 
 /*
  * Helper examples.
@@ -173,3 +173,11 @@ header[role="banner"] span {
     width: 288px;
 }
 
+.social-icons {
+    list-style: none;
+    padding: 0;
+}
+
+    .social-icons li {
+        display: inline-block;
+    }
