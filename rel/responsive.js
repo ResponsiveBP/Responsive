@@ -27,7 +27,7 @@
 
 /*global jQuery*/
 /*jshint forin:false*/
-(function ($) {
+(function ($, w) {
 
     "use strict";
 
@@ -101,6 +101,20 @@
         return transitionEnd();
 
     }());
+
+    $.fn.ensureTransitionEnd = function (duration) {
+        /// <summary>
+        /// Ensures that the transition end callback is triggered.
+        /// http://blog.alexmaccaw.com/css-transitions
+        ///</summary>
+        var called = false,
+            $this = $(this),
+            callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
+
+        $this.one($.support.transition.end, function () { called = true; });        
+        w.setTimeout(callback, duration);
+        return this;
+    }
 
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
@@ -324,7 +338,7 @@
         return options;
     };
 
-}(jQuery));
+}(jQuery, window));
 /*
  * Responsive AutoSize
  */
@@ -468,7 +482,9 @@
             $element.height($clone.height());
 
             // Do our callback
-            supportTransition ? $element.one(supportTransition.end, complete) : complete();
+            supportTransition ? $element.one(supportTransition.end, complete)
+            .ensureTransitionEnd($element.css("transition-duration").slice(0, -1) * 1000)
+            : complete();
         }
     };
 
@@ -556,6 +572,8 @@
     // General variables.
     var supportTransition = $.support.transition,
         vendorPrefixes = $.support.getVendorPrefix,
+        // Match the transition.
+        rtransition = /\d+(.\d+)/,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
@@ -872,7 +890,9 @@
             });
         }
 
-        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete) : complete();
+        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete)
+        .ensureTransitionEnd($activeItem.css("transition-duration").match(rtransition)[0] * 1000)
+        : complete();
 
         // Restart the cycle.
         if (isCycling) {
@@ -1002,7 +1022,9 @@
                .removeClass("fade-in");
 
         // Do our callback
-        supportTransition ? this.$target.one(supportTransition.end, complete) : complete();
+        supportTransition ? this.$target.one(supportTransition.end, complete)
+        .ensureTransitionEnd(this.$target.css("transition-duration").slice(0, -1) * 1000)
+        : complete();
     };
 
     // Plug-in definition 
@@ -1066,6 +1088,8 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        // Match the transition.
+        rtransition = /\d+(.\d+)/,
         eclick = "click" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
@@ -1098,7 +1122,9 @@
         this.$element.trigger(startEvent)[method]("collapse");
         this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
-        supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
+        supportTransition ? this.$element.one(supportTransition.end, complete)
+        .ensureTransitionEnd(this.$element.css("transition-duration").match(rtransition)[0] * 1000)
+        : complete();
     };
 
     // The Dropdown class definition
@@ -1361,6 +1387,7 @@
             $iframe = null;
             var $target = $(target);
             this.isLocalHidden = $target.is(":hidden");
+            $lightbox.addClass(this.options.fitViewport ? "container" : "");
             $placeholder.detach().insertAfter($target);
             $target.detach().appendTo($content).removeClass("hidden");
             $content.appendTo($lightbox);
@@ -1454,7 +1481,7 @@
     destroy = function (callback) {
         var self = this,
             empty = function () {
-                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
+                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image container").css({
                     "max-height": "",
                     "max-width": "",
                     "margin-top": "",
@@ -1496,7 +1523,8 @@
         toggleFade.call(this);
 
         supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
-            : cleanUp();
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
+        : cleanUp();
     },
 
     resize = function () {
@@ -1654,6 +1682,7 @@
             .redraw();
 
         supportTransition ? $overlay.one(supportTransition.end, complete)
+        .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
               : complete();
 
     },
@@ -1787,6 +1816,7 @@
             next: ">",
             previous: "<",
             mobileTarget: null,
+            fitViewport: true,
             mobileViewportWidth: 480,
             enabletouch: true
         };
@@ -1854,6 +1884,7 @@
 
         // Call the callback.
         supportTransition ? $lightbox.one(supportTransition.end, complete)
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
                           : complete();
     };
 
@@ -1884,6 +1915,7 @@
         destroy.call(this);
 
         supportTransition ? $lightbox.one(supportTransition.end, complete)
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
                           : complete();
     };
 
@@ -2025,7 +2057,9 @@
         this.$element.addClass("fade-in").redraw();
 
         // Do our callback
-        supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
+        supportTransition ? this.$element.one(supportTransition.end, complete)
+        .ensureTransitionEnd(this.$element.css("transition-duration").slice(0, -1) * 1000)
+        : complete();
     };
 
     // Plug-in definition 
@@ -2164,7 +2198,9 @@
             };
 
             // Do our callback
-            supportTransition ? this.$element.one(supportTransition.end, complete) : complete();
+            supportTransition ? this.$element.one(supportTransition.end, complete)
+            .ensureTransitionEnd(this.$element.css("transition-duration").slice(0, -1) * 1000)
+            : complete();
         });
     };
 

@@ -120,6 +120,7 @@
             $iframe = null;
             var $target = $(target);
             this.isLocalHidden = $target.is(":hidden");
+            $lightbox.addClass(this.options.fitViewport ? "container" : "");
             $placeholder.detach().insertAfter($target);
             $target.detach().appendTo($content).removeClass("hidden");
             $content.appendTo($lightbox);
@@ -213,7 +214,7 @@
     destroy = function (callback) {
         var self = this,
             empty = function () {
-                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image").css({
+                $lightbox.removeClass("lightbox-iframe lightbox-ajax lightbox-image container").css({
                     "max-height": "",
                     "max-width": "",
                     "margin-top": "",
@@ -255,7 +256,8 @@
         toggleFade.call(this);
 
         supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
-            : cleanUp();
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
+        : cleanUp();
     },
 
     resize = function () {
@@ -413,6 +415,7 @@
             .redraw();
 
         supportTransition ? $overlay.one(supportTransition.end, complete)
+        .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
               : complete();
 
     },
@@ -546,6 +549,7 @@
             next: ">",
             previous: "<",
             mobileTarget: null,
+            fitViewport: true,
             mobileViewportWidth: 480,
             enabletouch: true
         };
@@ -613,6 +617,7 @@
 
         // Call the callback.
         supportTransition ? $lightbox.one(supportTransition.end, complete)
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
                           : complete();
     };
 
@@ -643,6 +648,7 @@
         destroy.call(this);
 
         supportTransition ? $lightbox.one(supportTransition.end, complete)
+        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
                           : complete();
     };
 

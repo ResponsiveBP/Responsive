@@ -141,7 +141,9 @@
             $element.height($clone.height());
 
             // Do our callback
-            supportTransition ? $element.one(supportTransition.end, complete) : complete();
+            supportTransition ? $element.one(supportTransition.end, complete)
+            .ensureTransitionEnd($element.css("transition-duration").slice(0, -1) * 1000)
+            : complete();
         }
     };
 

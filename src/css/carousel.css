@@ -6,7 +6,7 @@
     margin-bottom: 1em;
 }
 
-    /* 
+/* 
  * Default slide version
  */
     .carousel > figure {
@@ -24,10 +24,10 @@
         }
 
     .carousel .no-transition {
-        -moz-transition-duration: 0!important;
-        -o-transition-duration: 0!important;
-        -webkit-transition-duration: 0!important;
-        transition-duration: 0!important;
+        -moz-transition-duration: 0 !important;
+        -o-transition-duration: 0 !important;
+        -webkit-transition-duration: 0 !important;
+        transition-duration: 0 !important;
     }
 
     /* 
@@ -52,7 +52,7 @@
         }
 
     .carousel .carousel-active {
-        position: relative!important;
+        position: relative !important;
         z-index: 1;
     }
 
