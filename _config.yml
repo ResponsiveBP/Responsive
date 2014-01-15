@@ -4,7 +4,7 @@
 # http://jekyllrb.com/docs/github-pages/
 baseurl : /
 
-relative_permalinks: true
+relative_permalinks: false
 
 # Name of the website
 name: Responsive
