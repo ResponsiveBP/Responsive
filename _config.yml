@@ -2,7 +2,7 @@
 # Note - if you enable this, and attempt to view your site locally you have to 
 # pass the  --baseurl parameter when serving as an empty string e.g jekyll serve --baseurl ''
 # http://jekyllrb.com/docs/github-pages/
-baseurl : /
+baseurl : ""
 
 relative_permalinks: false
 
@@ -10,9 +10,7 @@ relative_permalinks: false
 name: Responsive
 
 # Server
-#destination:      ./_gh_pages
 exclude:          ["CNAME"]
-# port:             9001
 
 # Short description (goes below the title)
 description: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites.
@@ -20,4 +18,9 @@ description: A super lightweight HTML, CSS, and JavaScript framework for buildin
 # Your name, as you want it to appear underneath each post and in the footer
 author: James South
 
-version: "2.3.1"
+
+
+# Custom variables
+version: 2.3.1
+repo: https://github.com/responsivebp/responsive
+release: https://github.com/responsivebp/responsive/raw/master/rel/responsive.zip
