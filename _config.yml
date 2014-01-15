@@ -10,9 +10,9 @@ relative_permalinks: false
 name: Responsive
 
 # Server
-destination:      ./_gh_pages
+#destination:      ./_gh_pages
 exclude:          ["CNAME"]
-port:             9001
+# port:             9001
 
 # Short description (goes below the title)
 description: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites.
