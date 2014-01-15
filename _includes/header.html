@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% if page.title %} {{ page.title }} :: {% endif %} {{ site.name }}</title>
     <meta name="description" content="{% if page.subheading %} {{ page.subheading }} {% else %} {{ site.description }} {% endif %}" />
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="author" content="{{ site.author }}">
 
     <link href="{{ site.baseurl }}/assets/css/responsive.css" rel="stylesheet" />
     <link href="{{ site.baseurl }}/assets/css/docs.css" rel="stylesheet" />
