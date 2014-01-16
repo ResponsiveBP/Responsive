@@ -20,6 +20,8 @@ author: "James South, and Responsive contributers"
 
 
 # Custom variables
-version: 2.3.1
+version: 2.3.2
+buildsize : 20.5
 repo: https://github.com/responsivebp/responsive
 release: https://github.com/responsivebp/responsive/raw/master/rel/responsive.zip
+

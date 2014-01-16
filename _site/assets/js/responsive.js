@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.1 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.2 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -114,7 +114,7 @@
         $this.one($.support.transition.end, function () { called = true; });        
         w.setTimeout(callback, duration);
         return this;
-    }
+    };
 
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
@@ -1295,7 +1295,7 @@
         $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)" }).addClass("lightbox-direction left hidden"),
         $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
-        lastScroll = 0,
+        scrollbarWidth = 0,
         supportTransition = $.support.transition,
         keys = {
             ESCAPE: 27,
@@ -1604,8 +1604,20 @@
 
                     bottom = top + $child.height();
 
+                    var getTopMargin = function () {
+                        if (bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight) {
+                            var newMargin = ((top - margin) * -2) + 4;
+
+                            if ((newMargin * -1) + childHeight < windowHeight - bottom) {
+                                return newMargin;
+                            }
+                        }
+
+                        return fallback;
+                    };
+
                     $lightbox.css({
-                        "margin-top": bottomHeight > 1 && top > margin && windowHeight - bottom < bottomHeight ? ((top - margin) * -2) + 4 : fallback
+                        "margin-top": getTopMargin()
                     });
                 }
             };
@@ -1635,16 +1647,20 @@
 
         var fade = event === "show" ? "addClass" : "removeClass",
             self = this,
+            getScrollbarWidth = function () {
+                var $scroll = $("<div/>").css({ width: 99, height: 99, overflow: "scroll", position: "absolute", top: -9999 });
+                $body.append($scroll);
+                scrollbarWidth = $scroll[0].offsetWidth - $scroll[0].clientWidth;
+                $scroll.remove();
+
+                return scrollbarWidth;
+            },
             complete = function () {
 
                 if (event === "hide") {
                     $overlay.addClass("hidden");
-                    $html.removeClass("lightbox-on");
-
-                    if (lastScroll !== $window.scrollTop) {
-                        $window.scrollTop(lastScroll);
-                        lastScroll = 0;
-                    }
+                    $html.removeClass("lightbox-on")
+                         .css("margin-right", "");
 
                     return;
                 }
@@ -1672,10 +1688,9 @@
             $body.append($overlay);
         }
 
-        if (lastScroll === 0) {
-            lastScroll = $window.scrollTop();
-        }
-        $html.addClass("lightbox-on");
+        // Remove the scrollbar.
+        $html.addClass("lightbox-on")
+             .css("margin-right", getScrollbarWidth());
 
         $overlay.removeClass("hidden")
             .redraw()[fade]("fade-in")
@@ -1798,6 +1813,7 @@
                 newTarget.length ? newTarget.focus() : $close.focus();
                 return false;
             }
+            return true;
         });
 
     };
