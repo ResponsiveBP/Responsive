@@ -1,16 +1,14 @@
-﻿/* Responsive LightBox Base */
+﻿/* Responsive LightBox */
 
-.lightbox-on,
-.lightbox-on body {
-    height: 100%;
+.lightbox-on {
     overflow: hidden;
 }
-
 
 /* 
  * 1: Average browser max z-index.
  * 2: IE8 transparent background. 
  * 3. Use the iOS devices hardware accelerator to provide native scrolling.
+ * 4. Prevent font rendering issues on webkit.
  */
 .lightbox-overlay {
     position: fixed;
@@ -26,6 +24,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGDYDAAAuAC0TCbBxgAAAABJRU5ErkJggg==');
     background-repeat: repeat;
     -webkit-overflow-scrolling: touch; /* 3 */
+    -webkit-backface-visibility: hidden; /* 4 */
 }
 
 /*
@@ -35,7 +34,6 @@
     padding: 1px 1em; /* 1 */
     margin: -1px 0; /* 1 */
     width: 100%;
-    background-color: #111;
     color: #fff;
     position: fixed;
     top: 0;
