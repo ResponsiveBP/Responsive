@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.1 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.2 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -114,7 +114,7 @@
         $this.one($.support.transition.end, function () { called = true; });        
         w.setTimeout(callback, duration);
         return this;
-    }
+    };
 
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
