@@ -2,6 +2,8 @@
 
 .lightbox-on {
     overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
 }
 
 /* 
