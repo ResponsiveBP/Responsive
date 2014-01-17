@@ -116,10 +116,6 @@
     overflow: auto;
 }
 
-.lightbox > .media {
-    background-color: #111;
-}
-
 .lightbox > img {
     max-height: 100%;
     max-width: none\9;
@@ -131,6 +127,7 @@
     }
 
 .lightbox > .media {
+    background-color: #111;
     margin: 0 auto;
 }
 
