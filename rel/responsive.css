@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.2 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.3 | MIT License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -440,19 +440,10 @@ table {
 }
 
 /*
-// IE10 in Windows (Phone) 8
-//
-// Support for responsive views via media queries do not work in IE10 on mobile for
-// versions prior to WP8 Update 3 (GDR3).
-// To support older versions the CSS must be accompanied by JavaScript to sniff the user agent and
-// apply some conditional CSS to only WP8. 
-//
-// For more information, see the following:
-//
-// Source: http://timkadlec.com/2013/01/windows-phone-8-and-device-width/
-//         http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html#the-fix
-//         http://blogs.windows.com/windows_phone/b/wpdev/archive/2013/10/14/introducing-windows-phone-preview-for-developers.aspx
-*/
+ * IE10 in Windows (Phone) 8
+ * Support for responsive views via media queries do not work in IE10 on mobile for
+ * versions prior to WP8 Update 3 (GDR3).
+ */
 @-ms-viewport {
     width: device-width;
 }
@@ -2525,8 +2516,6 @@ table {
     margin: 1em 0;
     overflow: auto;
     overflow-y: hidden;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    -webkit-overflow-scrolling: touch;
 }
 
     .table-scrollable table {
@@ -3295,8 +3284,6 @@ pre samp {
  */
 pre {
     overflow-x: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    -webkit-overflow-scrolling: touch;
 }
 
     pre code {

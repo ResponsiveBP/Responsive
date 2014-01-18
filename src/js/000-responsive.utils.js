@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.2 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.3 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -33,18 +33,18 @@
 
     $(function () {
 
-        // IE10 viewport hack for Surface/desktop Windows 8 bug
-        // Source: http://www.markadrake.com/blog/2013/05/31/responsive-design-concerns-for-windows-phone-and-ie-compatibility-modes/
-        // See Getting Started docs for more information
-        if ("-ms-user-select" in document.documentElement.style &&
-        (navigator.userAgent.match(/IEMobile/) ||
-        navigator.userAgent.match(/ZuneWP7/) ||
-        navigator.userAgent.match(/WPDesktop/))) {
+        // IE10 in Windows (Phone) 8
+        // Support for responsive views via media queries do not work in IE10 on mobile for
+        // versions prior to WP8 Update 3 (GDR3).
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
             var msViewportStyle = document.createElement("style");
             msViewportStyle.appendChild(
-            document.createTextNode("@-ms-viewport{width:auto!important}")
+              document.createTextNode(
+                "@-ms-viewport{width:auto!important}"
+              )
             );
-            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+            document.querySelector("head").
+              appendChild(msViewportStyle);
         }
     });
 

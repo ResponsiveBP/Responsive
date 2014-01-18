@@ -215,7 +215,7 @@
         }
 
         // Ensure that transition end is triggered.
-        if (this.$element.find(".next, .prev").length && $.support.transition.end) {
+        if (this.$element.find(".next, .prev").length && $.support.transition) {
             this.$element.trigger($.support.transition.end);
             this.cycle(true);
         }
