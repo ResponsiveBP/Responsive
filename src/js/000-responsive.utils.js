@@ -31,6 +31,23 @@
 
     "use strict";
 
+    $(function () {
+
+        // IE10 viewport hack for Surface/desktop Windows 8 bug
+        // Source: http://www.markadrake.com/blog/2013/05/31/responsive-design-concerns-for-windows-phone-and-ie-compatibility-modes/
+        // See Getting Started docs for more information
+        if ("-ms-user-select" in document.documentElement.style &&
+        (navigator.userAgent.match(/IEMobile/) ||
+        navigator.userAgent.match(/ZuneWP7/) ||
+        navigator.userAgent.match(/WPDesktop/))) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(
+            document.createTextNode("@-ms-viewport{width:auto!important}")
+            );
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+        }
+    });
+
     $.support.getVendorPrefix = (function () {
         /// <summary>Gets the correct vendor prefix for the current browser.</summary>
         /// <param name="prop" type="String">The property to return the name for.</param>
@@ -111,7 +128,7 @@
             $this = $(this),
             callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
 
-        $this.one($.support.transition.end, function () { called = true; });        
+        $this.one($.support.transition.end, function () { called = true; });
         w.setTimeout(callback, duration);
         return this;
     };

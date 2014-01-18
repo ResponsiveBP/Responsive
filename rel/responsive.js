@@ -31,6 +31,23 @@
 
     "use strict";
 
+    $(function () {
+
+        // IE10 viewport hack for Surface/desktop Windows 8 bug
+        // Source: http://www.markadrake.com/blog/2013/05/31/responsive-design-concerns-for-windows-phone-and-ie-compatibility-modes/
+        // See Getting Started docs for more information
+        if ("-ms-user-select" in document.documentElement.style &&
+        (navigator.userAgent.match(/IEMobile/) ||
+        navigator.userAgent.match(/ZuneWP7/) ||
+        navigator.userAgent.match(/WPDesktop/))) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(
+            document.createTextNode("@-ms-viewport{width:auto!important}")
+            );
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+        }
+    });
+
     $.support.getVendorPrefix = (function () {
         /// <summary>Gets the correct vendor prefix for the current browser.</summary>
         /// <param name="prop" type="String">The property to return the name for.</param>
@@ -111,7 +128,7 @@
             $this = $(this),
             callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
 
-        $this.one($.support.transition.end, function () { called = true; });        
+        $this.one($.support.transition.end, function () { called = true; });
         w.setTimeout(callback, duration);
         return this;
     };
@@ -1296,6 +1313,7 @@
         $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         scrollbarWidth = 0,
+        lastScroll = 0,
         supportTransition = $.support.transition,
         keys = {
             ESCAPE: 27,
@@ -1565,6 +1583,16 @@
                     else if ($content) {
                         $lightbox.css("max-height", childHeight);
                         $content.css("max-height", childHeight);
+
+                        // Prevent IEMobile10 scrolling when content overflows the lightbox.
+                        // This causes the content to jump behind the model but it's all I can
+                        // find for now.
+                        if ($content && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+
+                            if ($content.children("*:first")[0].scrollHeight > $lightbox.height()) {
+                                $html.addClass("lightbox-lock-body");
+                            }
+                        }
                     }
                     else {
 
@@ -1662,6 +1690,14 @@
                     $html.removeClass("lightbox-on")
                          .css("margin-right", "");
 
+                    if ($html.hasClass("lightbox-lock-body")) {
+
+                        $html.removeClass("lightbox-lock-body");
+                        if (lastScroll !== $window.scrollTop()) {
+                            $window.scrollTop(lastScroll);
+                            lastScroll = 0;
+                        }
+                    }
                     return;
                 }
 
@@ -1686,6 +1722,10 @@
         if (!$("div.lightbox-overlay").length) {
 
             $body.append($overlay);
+        }
+
+        if (lastScroll === 0) {
+            lastScroll = $window.scrollTop();
         }
 
         // Remove the scrollbar.

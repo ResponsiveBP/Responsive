@@ -1,9 +1,9 @@
 ﻿/* Responsive LightBox */
 
-.lightbox-on {
+.lightbox-on,
+.lightbox-lock-body > body {
+    height: 100%;
     overflow: hidden;
-    -ms-touch-action: none;
-    touch-action: none;
 }
 
 /* 

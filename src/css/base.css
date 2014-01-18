@@ -10,6 +10,23 @@
     box-sizing: border-box !important;
 }
 
+/*
+// IE10 in Windows (Phone) 8
+//
+// Support for responsive views via media queries do not work in IE10 on mobile for
+// versions prior to WP8 Update 3 (GDR3).
+// To support older versions the CSS must be accompanied by JavaScript to sniff the user agent and
+// apply some conditional CSS to only WP8. 
+//
+// For more information, see the following:
+//
+// Source: http://timkadlec.com/2013/01/windows-phone-8-and-device-width/
+//         http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html#the-fix
+//         http://blogs.windows.com/windows_phone/b/wpdev/archive/2013/10/14/introducing-windows-phone-preview-for-developers.aspx
+*/
+@-ms-viewport {
+    width: device-width;
+}
 
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
