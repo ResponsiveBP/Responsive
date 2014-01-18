@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.2 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.3 | MIT License | git.io/rRNRLA */
 
 /*
  * Responsive Utils
@@ -30,6 +30,23 @@
 (function ($, w) {
 
     "use strict";
+
+    $(function () {
+
+        // IE10 in Windows (Phone) 8
+        // Support for responsive views via media queries do not work in IE10 on mobile for
+        // versions prior to WP8 Update 3 (GDR3).
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(
+              document.createTextNode(
+                "@-ms-viewport{width:auto!important}"
+              )
+            );
+            document.querySelector("head").
+              appendChild(msViewportStyle);
+        }
+    });
 
     $.support.getVendorPrefix = (function () {
         /// <summary>Gets the correct vendor prefix for the current browser.</summary>
@@ -111,7 +128,7 @@
             $this = $(this),
             callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
 
-        $this.one($.support.transition.end, function () { called = true; });        
+        $this.one($.support.transition.end, function () { called = true; });
         w.setTimeout(callback, duration);
         return this;
     };

@@ -63,7 +63,6 @@
                     if (classes) {
                         self.$clone.removeData(classes);
                     }
-
                 };
 
             $.when(clone()).then(this.size());

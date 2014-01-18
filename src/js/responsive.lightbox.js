@@ -29,6 +29,7 @@
         $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         scrollbarWidth = 0,
+        lastScroll = 0,
         supportTransition = $.support.transition,
         keys = {
             ESCAPE: 27,
@@ -298,6 +299,16 @@
                     else if ($content) {
                         $lightbox.css("max-height", childHeight);
                         $content.css("max-height", childHeight);
+
+                        // Prevent IEMobile10 scrolling when content overflows the lightbox.
+                        // This causes the content to jump behind the model but it's all I can
+                        // find for now.
+                        if ($content && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+
+                            if ($content.children("*:first")[0].scrollHeight > $lightbox.height()) {
+                                $html.addClass("lightbox-lock-body");
+                            }
+                        }
                     }
                     else {
 
@@ -395,6 +406,14 @@
                     $html.removeClass("lightbox-on")
                          .css("margin-right", "");
 
+                    if ($html.hasClass("lightbox-lock-body")) {
+
+                        $html.removeClass("lightbox-lock-body");
+                        if (lastScroll !== $window.scrollTop()) {
+                            $window.scrollTop(lastScroll);
+                            lastScroll = 0;
+                        }
+                    }
                     return;
                 }
 
@@ -419,6 +438,10 @@
         if (!$("div.lightbox-overlay").length) {
 
             $body.append($overlay);
+        }
+
+        if (lastScroll === 0) {
+            lastScroll = $window.scrollTop();
         }
 
         // Remove the scrollbar.
