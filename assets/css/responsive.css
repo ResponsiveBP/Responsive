@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.2 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.3.3 | MIT License | git.io/rRNRLA */
 /* All CSS files combined. This should be ran through a preprocessor */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -439,6 +439,14 @@ table {
     box-sizing: border-box !important;
 }
 
+/*
+ * IE10 in Windows (Phone) 8
+ * Support for responsive views via media queries do not work in IE10 on mobile for
+ * versions prior to WP8 Update 3 (GDR3).
+ */
+@-ms-viewport {
+    width: device-width;
+}
 
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
@@ -3649,7 +3657,9 @@ pre {
 
 /* Responsive LightBox */
 
-.lightbox-on {
+.lightbox-on,
+.lightbox-lock-body > body {
+    height: 100%;
     overflow: hidden;
 }
 
@@ -3763,10 +3773,6 @@ pre {
     overflow: auto;
 }
 
-.lightbox > .media {
-    background-color: #111;
-}
-
 .lightbox > img {
     max-height: 100%;
     max-width: none\9;
@@ -3778,6 +3784,7 @@ pre {
     }
 
 .lightbox > .media {
+    background-color: #111;
     margin: 0 auto;
 }
 
