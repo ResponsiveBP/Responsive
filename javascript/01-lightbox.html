@@ -24,25 +24,51 @@ sublinks: ["#examples|Examples",
         <h1>Examples</h1>
         <h3>Relatively loaded target</h3>
 
-        <a href="../css/base.html #typography" data-lightbox-title="Relative url">Launch relative overlay</a>
+        <a href="../css/alerts.html #examples" data-lightbox-title="Relative url">Launch relative overlay</a>
+        <pre class="language-markup"><code>&lt;a href="../css/alerts.html #examples" data-lightbox-title="Relative url"&gt;
+    Launch relative overlay
+&lt;/a&gt;</code></pre>
 
         <h3>External target with iframe header and footer</h3>
         <a href="//bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>">Launch external overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//bbc.co.uk" data-lightbox-title="BBC" 
+   data-lightbox-description="&lt;p&gt;sample text or the footer.&lt;/p&gt;"&gt;
+    Launch external overlay
+&lt;/a&gt;</code></pre>
 
         <h3>External target with iframe header and footer and scrollbars</h3>
         <a href="//bbc.co.uk" data-lightbox-title="BBC" data-lightbox-description="<p>sample text or the footer.</p>" data-lightbox-iframe-scroll="true">Launch external overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//bbc.co.uk" data-lightbox-title="BBC" 
+   data-lightbox-description="&lt;p&gt;sample text or the footer.&lt;/p&gt;" 
+   data-lightbox-iframe-scroll="true"&gt;
+    Launch external overlay
+&lt;/a&gt;</code></pre>
 
         <h3>Youtube</h3>
         <a href="//www.youtube.com/embed/eRW84aVCMWo" data-lightbox-title="Youtube">Launch Youtube overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//www.youtube.com/embed/eRW84aVCMWo" data-lightbox-title="Youtube"&gt;
+Launch Youtube overlay
+&lt;/a&gt;</code></pre>
 
         <h3>Vimeo</h3>
         <a href="//player.vimeo.com/video/24954567" data-lightbox-title="Vimeo">Launch Vimeo overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//player.vimeo.com/video/24954567" data-lightbox-title="Vimeo"&gt;
+    Launch Vimeo overlay
+&lt;/a&gt;</code></pre>
 
         <h3>Google Maps</h3>
         <a href="//maps.google.co.uk/maps?safe=off&amp;q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=h&amp;z=11&amp;ll=55.864237,-4.251806&amp;output=embed" data-lightbox-title="Google Maps">Launch Google Map overlay</a>
 
+        <pre class="language-markup"><code>&lt;a href="//maps.google.co.uk/maps?safe=off&amp;q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=h&amp;z=11&amp;ll=55.864237,-4.251806&amp;output=embed" 
+   data-lightbox-title="Google Maps"&gt;
+    Launch Google Map overlay
+&lt;/a&gt;</code></pre>
+
         <h3>Internal target</h3>
         <a href="#" data-lightbox-target="#overlay1">Launch internal overlay</a>
+        <div class="alert alert-info">
+            <p>Internal overlays can contain both hidden and unhidden content.</p>
+        </div>
         <div id="overlay1" class="hidden">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
@@ -53,6 +79,13 @@ sublinks: ["#examples|Examples",
                 deserunt mollit anim id est laborum.
             </p>
         </div>
+
+        <pre class="language-markup"><code>&lt;a href="#" data-lightbox-target="#overlay1"&gt;Launch internal overlay&lt;/a&gt;
+&lt;div id="overlay1" class="hidden"&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet...
+    &lt;/p&gt;
+&lt;/div&gt;</code></pre>
 
         <h3>Form</h3>
         <a href="#" data-lightbox-target="#form-overlay" data-lightbox-fit-viewport="false">Launch internal overlay containing a form</a>
@@ -73,16 +106,21 @@ sublinks: ["#examples|Examples",
                 </fieldset>
                 <div class="form-actions">
                     <button type="submit">Save changes</button>
-                    <button>Cancel</button>
+                    <button type="button">Cancel</button>
                 </div>
             </form>
         </div>
+
         <h3>Wrapped Image</h3>
         <div class="row">
             <a href="../assets/img/768x900.jpg" data-lightbox-title="Kittens!">
                 <img src="../assets/img/768x900_thumb.jpg" />
             </a>
         </div>
+
+<pre class="language-markup"><code>&lt;a href="../assets/img/768x900.jpg" data-lightbox-title="Kittens!"&gt;
+    &lt;img src="../assets/img/768x900_thumb.jpg" /&gt;
+&lt;/a&gt;</code></pre>
 
         <h3>Mobile Redirect</h3>
         <p>Redirects on viewports of 768px and below. (settable)</p>
@@ -91,6 +129,11 @@ sublinks: ["#examples|Examples",
                 <img src="../assets/img/768x900_thumb.jpg" />
             </a>
         </div>
+        <pre class="language-markup"><code>&lt;a href="../assets/img/768x900.jpg" 
+   data-lightbox-mobile-target="../assets/img/768x900.jpg" 
+   data-lightbox-mobile-viewport-width="768"&gt;
+    &lt;img src="../assets/img/768x900_thumb.jpg" /&gt;
+&lt;/a&gt;</code></pre>
 
         <h3>Grouped</h3>
         <div class="row">
@@ -107,12 +150,19 @@ sublinks: ["#examples|Examples",
                 <a href="../assets/img/768x900.jpg" data-lightbox-title="Large image with a longer title to see what happens when the title wraps." data-lightbox-group="grouped">Grouped Item 4</a>
             </div>
         </div>
+
+<pre class="language-markup"><code>&lt;a href="../assets/img/hydrangeas.jpg" 
+   data-lightbox-title="Hydrangeas with a long title appended" 
+   data-lightbox-group="grouped"&gt;
+    Grouped Item 1
+&lt;/a&gt;</code></pre>
     </section>
     <hr />
     <section id="markup">
         <h1>Markup</h1>
         <pre class="language-markup"><code>/* Add inside any element. */
-&lt;a href="YOUR_TARGET" or data-lightbox-target="YOUR_TARGET" data-lightbox-title="YOUR_TITLE" data-lightbox-group="YOUR_GROUP_NAME" &gt;
+&lt;a href="YOUR_TARGET" or data-lightbox-target="YOUR_TARGET" 
+   data-lightbox-title="YOUR_TITLE"&gt;
 Lightbox trigger
 &lt;/a&gt;</code></pre>
     </section>
