@@ -35,7 +35,8 @@
     width: 100%;
 }
 
-.row [class*="col-"] + [class*="col-"] {
+.row [class*="col-"] + [class*="col-"]
+ {
     margin-left: 2%;
 }
 
@@ -46,7 +47,17 @@
     margin-left: 0;
 }
 
-.row.no-gutter.pad-gutter [class*="col-"] {
+.row [class*="col-xs"] + [class*="col-"]
+ {
+    margin-left: 2%;
+}
+
+.row [class*="col-xs-12"] + [class*="col-xs-"],
+.row [class*="col-xs-"] + [class*="col-xs-12"] {
+    margin-left: 0;
+}
+
+.row.no-gutter.pad-gutter > [class*="col-"] {
     padding: 0 1%;
 }
 
