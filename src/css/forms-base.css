@@ -231,8 +231,12 @@ textarea[disabled] {
 }
 
 label > input,
+label > input[type="checkbox"],
+label > input[type="radio"],
 label > select {
     display: inline-block;
+    margin: 0 1em 0 0;
+    vertical-align: text-top;
 }
 
 /* 
