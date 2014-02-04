@@ -276,10 +276,6 @@
             return false;
         }
 
-        if (this.interval) {
-            this.pause();
-        }
-
         // Trigger the slide event with positional data.
         var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
@@ -290,6 +286,10 @@
 
         // Good to go? Then let's slide.
         this.sliding = true;
+
+        if (isCycling) {
+            this.pause();
+        }
 
         // Highlight the correct indicator.
         if (this.$indicators.length) {
