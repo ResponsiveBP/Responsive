@@ -419,6 +419,10 @@
 
                 $overlay.off(eclick).on(eclick, function (e) {
 
+                    if (!self.options.close) {
+                        return;
+                    }
+
                     var closeTarget = $close[0],
                         eventTarget = e.target;
 
@@ -513,6 +517,10 @@
 
             if (event === "hide") {
                 $body.off(ekeyup);
+                return;
+            }
+
+            if (!this.options.close) {
                 return;
             }
 
@@ -739,17 +747,49 @@
     };
 
     // Data API
-    $body.on(eclick, ":attrStart(data-lightbox)", function (event) {
+    $body.on(eclick, ":attrStart(data-lightbox)", function(event) {
 
         event.preventDefault();
 
-        var $this = $(this),
-            data = $this.data("r.lightboxOptions"),
+        // Handle close events.
+        var $this = $(this);
+
+        // If it's a close instruction we want to ignore it.
+        if ($this.is("[data-lightbox-modal]")) {
+            return;
+        }
+
+        var data = $this.data("r.lightboxOptions"),
             options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
             params = $this.data("r.lightbox") ? "toggle" : options;
 
         // Run the lightbox method.
         $this.lightbox(params);
+
+    }).on(eclick, "[data-lightbox-modal]", function (event) {
+
+        event.preventDefault();
+
+        // Handle close events.
+        var $this = $(this),
+            data = $this.data("r.lightboxOptions"),
+            options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
+            $closeTarget = $(options.modal || (options.modal = $this.attr("href")));
+
+        $closeTarget.each(function() {
+
+            var lightbox = $(this).data("r.lightbox");
+
+            if (lightbox) {
+                // Compare the elements.
+                if (lightbox.$element[0] === this) {
+                    lightbox.hide();
+                    return true;
+                }
+            }
+
+            return false;
+        });
     });
 
     w.RESPONSIVE_LIGHTBOX = true;
