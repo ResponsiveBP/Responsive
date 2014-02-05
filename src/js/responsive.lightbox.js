@@ -82,7 +82,7 @@
         var self = this,
             title = this.options.title,
             description = this.options.description,
-            close = this.options.close,
+            modal = this.options.modal,
             target = this.options.target,
             local = !this.options.external && !isExternalUrl(target),
             group = this.options.group,
@@ -97,12 +97,12 @@
         $img = $("<img/>"); // ditto.
 
         // 1: Build the header
-        if (title || close) {
+        if (title || !modal) {
 
             $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
                    .appendTo($overlay);
 
-            if (close) {
+            if (!modal) {
                 $close.appendTo($overlay);
             }
         }
@@ -419,7 +419,7 @@
 
                 $overlay.off(eclick).on(eclick, function (e) {
 
-                    if (!self.options.close) {
+                    if (self.options.modal) {
                         return;
                     }
 
@@ -520,7 +520,7 @@
                 return;
             }
 
-            if (!this.options.close) {
+            if (this.options.modal) {
                 return;
             }
 
@@ -587,7 +587,7 @@
 
         this.$element = $(element);
         this.defaults = {
-            close: true,
+            modal: false,
             external: false,
             group: null,
             iframe: false,
@@ -754,8 +754,8 @@
         // Handle close events.
         var $this = $(this);
 
-        // If it's a close instruction we want to ignore it.
-        if ($this.is("[data-lightbox-modal]")) {
+        // If it's a modal close instruction we want to ignore it.
+        if ($this.is("[data-lightbox-modal-trigger]")) {
             return;
         }
 
@@ -766,7 +766,7 @@
         // Run the lightbox method.
         $this.lightbox(params);
 
-    }).on(eclick, "[data-lightbox-modal]", function (event) {
+    }).on(eclick, "[data-lightbox-modal-trigger]", function (event) {
 
         event.preventDefault();
 
@@ -774,7 +774,7 @@
         var $this = $(this),
             data = $this.data("r.lightboxOptions"),
             options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
-            $closeTarget = $(options.modal || (options.modal = $this.attr("href")));
+            $closeTarget = $(options.modalTrigger || (options.modalTrigger = $this.attr("href")));
 
         $closeTarget.each(function() {
 
