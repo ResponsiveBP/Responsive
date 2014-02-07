@@ -14,12 +14,12 @@
 /*  ==|== Responsive =============================================================
     Author: James South
     twitter : http://twitter.com/James_M_South
-    github : https://github.com/JimBobSquarePants/Responsive
+    github : https://github.com/ResponsiveBP/Responsive
     Copyright (c),  James South.
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.4 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.4.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils

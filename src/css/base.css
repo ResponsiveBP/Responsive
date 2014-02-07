@@ -2,12 +2,13 @@
 
 /*
  * Fix the box model
+ * Overwrite Normalize rather than edit it.
  */
-*, *:before, *:after {
-    -webkit-box-sizing: border-box !important;
-    -moz-box-sizing: border-box !important;
-    -ms-box-sizing: border-box !important;
-    box-sizing: border-box !important;
+*, *:before, *:after,
+hr, input[type="search"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /*
@@ -21,15 +22,11 @@
 
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
- * 2. Prevents iOS and MS text size adjust after orientation change, without disabling user zoom.
  */
 html {
     -webkit-overflow-scrolling: touch; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-    -ms-text-size-adjust: 100%; /* 2 */
     font-size: 16px;
     line-height: 1.4;
-    font-family: Arial, sans-serif;
 }
 
 html,
