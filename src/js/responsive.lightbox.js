@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Responsive Lightbox
  */
 

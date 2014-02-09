@@ -1,7 +1,7 @@
-﻿/*
+/*
  * Responsive Dropdown 
  */
-
+/*jshint expr:true*/
 /*global jQuery*/
 (function ($, w, ns) {
 

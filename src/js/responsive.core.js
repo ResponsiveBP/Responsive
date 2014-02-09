@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Responsive framework
  *
  * Responsive is a minimalist framework for rapidly creating responsive websites specifically 
@@ -118,11 +118,11 @@
 
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
-        ///	<param name="options" type="Object" optional="true" parameterArray="true">
-        ///		 A collection of optional settings to apply.
+        /// <param name="options" type="Object" optional="true" parameterArray="true">
+        ///      A collection of optional settings to apply.
         ///      &#10;    1: namespace - The namespace for isolating the touch events.
         ///      &#10;    2: timeLimit - The limit in ms to recognise touch events for. Default - 1000; 0 disables.
-        ///	</param>
+        /// </param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
         var defaults = {
