@@ -1,0 +1,79 @@
+<h1>Responsive</h1>
+
+<h2>A super lightweight HTML, CSS, and JavaScript framework for building responsive websites</h2>
+
+<h3><a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://foundation.zurb.com">Foundation</a> both do a good job but they're too heavy.</h3>
+
+<p>They're great for prototyping but every time you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the functionality of the website. That's annoying!</p>
+
+<p><strong>Responsive</strong> has been built with that in mind. It has been specifically designed and coded to be as lightweight as possible to prevent the need to undo styles set by the framework itself and allow developers to write efficient code and speed up development time.</p>
+
+<p><strong>Responsive</strong> is tiny. The combined CSS and JavaScript is <strong>only 20.8kb minified and gzipped</strong> but there is a lot of functionality built into the framework. It's designed to be dropped-in, as-is to your website such as you would with <a href="http://necolas.github.io/normalize.css/">normalize.css</a>.</p>
+
+<p>Browser support covers IE8+ as well as all other modern browsers.</p>
+
+<h2>Documentation</h2>
+
+<p>Responsives's documentation, included in the <a href="https://github.com/ResponsiveBP/Responsive/tree/gh-pages">v2-documentation</a> repo. It is built with <a href="http://jekyllrb.com">Jekyll</a> and publicly hosted on GitHub Pages at <a href="http://responsivebp.com">http://responsivebp.com</a>. The docs may also be run locally.</p>
+
+<ol>
+<li>If necessary, <a href="http://jekyllrb.com/docs/installation">install Jekyll</a> (requires v1.x).</li>
+<li><p>From the root <code>/Responsive</code> directory, run <code>jekyll serve --baseurl '' --watch</code> in the command line.</p>
+
+<ul>
+<li><strong>Windows users:</strong> run <code>chcp 65001</code> first to change the command prompt's character encoding (<a href="http://en.wikipedia.org/wiki/Windows_code_page">code page</a>) to UTF-8 so Jekyll runs without errors.</li>
+<li>Open <a href="http://localhost:4000">http://localhost:4000</a> in your browser to view the compiled docs.</li>
+</ul></li>
+</ol>
+
+<p>Learn more about using Jekyll by reading its <a href="http://jekyllrb.com/docs/home/">documentation</a>.</p>
+
+<h2>Contributing</h2>
+
+<p>Contribution is most welcome, that's the whole idea! Together as a community we can build a boilerplate for building responsive sites that will ensure that high standards can be delivered across all devices.   </p>
+
+<p>Please adhere to existing JavaScript and CSS styles though when submitting code and ensure that you test thoroughly on multiple devices, we don't want another Semicolongate ;)</p>
+
+<h2>Building</h2>
+
+<p>The build process for Responsive is powered by <a href="http://gulpjs.com/">gulpjs</a>. To build Responsive you will need to first install the required plugins using the following commands from the root <code>/Responsive</code> directory:</p>
+
+<p><strong>Install gulp globally</strong></p>
+
+<pre><code>npm install -g gulp
+</code></pre>
+
+<p><strong>Install gulp and gulp-util in your project devDependencies:</strong></p>
+
+<pre><code>npm install --save-dev gulp gulp-util
+</code></pre>
+
+<p><strong>Install the other dependencies in your project devDependencies:</strong></p>
+
+<pre><code>npm install --save-dev gulp-rename gulp-concat gulp-minify-css gulp-zip gulp-uglify gulp-jshint gulp-clean
+</code></pre>
+
+<p>There are two types of build available:</p>
+
+<ol>
+<li>`gulp`` For debug purposes. Compiles the framework and watches for further changes</li>
+<li><code>gulp release</code> Compiles the framework and zips up the build for release.</li>
+</ol>
+
+<p><strong>Note</strong> You may have to install the node package "event-stream" <code>npm install event-stream</code></p>
+
+<h2>Bugs and feature requests</h2>
+
+<p>Have a bug or a feature request? Please open a new <a href="https://github.com/JimBobSquarePants/Responsive/issues">issue</a>. Before opening any issue, please search for existing issues and read the Issue Guidelines, written by <a href="https://github.com/necolas/">Nicolas Gallagher</a>.</p>
+
+<h2>Authors</h2>
+
+<p>James South <a href="http://twitter.com/james_m_south">@james<em>m</em>south</a></p>
+
+<h2>Community</h2>
+
+<p>Follow <a href="http://twitter.com/responsivebp">@responsivebp</a> on Twitter.</p>
+
+<h3>Copyright and license</h3>
+
+<p>Copyright 2013 James South under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>

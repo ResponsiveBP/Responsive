@@ -216,3 +216,5 @@ pip-log.txt
 
 #node
 node_modules/
+
+dist/vendor/

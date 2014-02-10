@@ -1,4 +1,4 @@
-﻿/* Responsive Forms Base */
+/* Responsive Forms Base */
 
 /* Normalize  */
 .form {
@@ -108,7 +108,8 @@ input[type="color"] {
     input[type="date"],
     input[type="week"],
     input[type="month"],
-    input[type="time"] {
+    input[type="time"],
+    input[type="number"] {
         min-height: 2em;
     }
 

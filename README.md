@@ -31,6 +31,29 @@ Contribution is most welcome, that's the whole idea! Together as a community we 
 
 Please adhere to existing JavaScript and CSS styles though when submitting code and ensure that you test thoroughly on multiple devices, we don't want another Semicolongate ;)
 
+##Building
+
+The build process for Responsive is powered by [gulpjs](http://gulpjs.com/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
+
+**Install gulp globally**
+
+    npm install -g gulp
+
+**Install gulp and gulp-util in your project devDependencies:**
+
+    npm install --save-dev gulp gulp-util
+
+**Install the other dependencies in your project devDependencies:**
+
+    npm install --save-dev gulp-rename gulp-concat gulp-minify-css gulp-zip gulp-uglify gulp-jshint gulp-clean
+
+There are two types of build available:
+
+ 1. `gulp`` For debug purposes. Compiles the framework and watches for further changes
+ 2. `gulp release` Compiles the framework and zips up the build for release.
+
+**Note** You may have to install the node package "event-stream" `npm install event-stream`
+
 ##Bugs and feature requests
 
 Have a bug or a feature request? Please open a new [issue](https://github.com/JimBobSquarePants/Responsive/issues). Before opening any issue, please search for existing issues and read the Issue Guidelines, written by [Nicolas Gallagher](https://github.com/necolas/).
