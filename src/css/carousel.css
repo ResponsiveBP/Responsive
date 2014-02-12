@@ -6,10 +6,11 @@
     margin-bottom: 1em;
 }
 
-/* 
- * Default slide version
- */
+    /* 
+     * Default slide version
+     */
     .carousel > figure {
+        margin: 0;
         display: none;
         position: relative;
         -webkit-transition: .7s ease-in-out -webkit-transform,.7s ease-in-out left;
