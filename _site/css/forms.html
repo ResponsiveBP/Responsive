@@ -49,13 +49,7 @@
             <ul class="no-bullets">
     
        
-       <li><a href="#standard">Standard</a></li>
-    
-       
-       <li><a href="#legacystandard">Legacy Standard</a></li>
-    
-       
-       <li><a href="#horizontal">Legacy Horizontal</a></li>
+       <li><a href="#examples">Examples</a></li>
     
        
        <li><a href="#markup">The Markup</a></li>
@@ -76,12 +70,12 @@
     </p>
     <p>Smaller elements such as radio and checkbox inputs can be aligned by wrapping them in a div with the class <code>.input-group</code>.</p>
     <hr />
-    <section id="standard">
+    <section id="examples">
         <h1>Standard</h1>
         <p>Responsive form elements span 100% by default; their width is designed to be constrained by the existing grid system. This makes them extremely flexible.</p>
         <form action="#">
             <fieldset>
-                <legend>Horizontal Form</legend>
+                <legend>Standard Form spanning two columns</legend>
                 <div class="row">
                     <div class="col-s-6">
                         <div class="row">
@@ -273,169 +267,12 @@
         </form>
     </section>
     <hr />
-    <div class="alert ">
-        <p>The following layouts exist for backwards compatibility only (versions prior to v2.3.0). They will be removed from the codebase soon.</p>
-    </div>
-    <section id="legacystandard">
-        <h1>Legacy Standard</h1>
-        <p>Add class <code>.form-no-grid</code> to the form.</p>
-        <form action="#" class="form-no-grid">
-            <fieldset>
-                <legend>Standard Form</legend>
-                <div class="row">
-                    <div class="col-m-6">
-                        <label for="input1">Standard</label>
-                        <input type="text" id="input1" class="focus" value="standard input..." />
-                        <label for="input-disabled1">Disabled</label>
-                        <input type="text" id="input-disabled1" disabled value="disabled input..." />
-                        <p>Support text to help describe the input.</p>
-                        <label for="input-no-edit1">Non editable</label>
-                        <span id="input-no-edit1" class="no-edit">No edit</span>
-                        <label for="select-default1">Select</label>
-                        <select id="select-default1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                        <label for="input-file1">File upload</label>
-                        <input id="input-file1" type="file" />
-                        <label for="input-number1">Number</label>
-                        <input type="number" id="input-number1" />
-                        <label for="input-password1">Password</label>
-                        <input type="password" id="input-password1" />
-                        <label for="input-time1">Time</label>
-                        <input type="time" id="input-time1" />
-                        <label for="input-week1">Week</label>
-                        <input type="week" id="input-week1" />
-                        <label for="input-month1">Month</label>
-                        <input type="month" id="input-month1" />
-                        <label for="input-date1">Date</label>
-                        <input type="date" id="input-date1" />
-                    </div>
-                    <div class="col-m-6">
-                        <label for="input-datetime1">Datetime</label>
-                        <input type="datetime" id="input-datetime1" />
-                        <label for="input-datetime-local1">Datetime Local</label>
-                        <input type="datetime-local" id="input-datetime-local1" />
-                        <label for="input-search1">Search</label>
-                        <input type="search" id="input-search1" />
-                        <label for="input-color1">Color</label>
-                        <input type="color" id="input-color1" />
-                        <label for="input-range1">Range</label>
-                        <input type="range" id="input-range1" min="0" max="100" value="50" />
-                        <label for="input-email1">Email</label>
-                        <input type="email" id="input-email1" />
-                        <label for="check-disabled1">Disabled Checkbox</label>
-                        <div class="input-group">
-                            <input type="checkbox" id="check-disabled1" value="option1" disabled="" class="inline-block">
-                        </div>
-                        <label for="check1">Checkbox</label>
-                        <div class="input-group">
-                            <input type="checkbox" id="check1" value="option1" class="inline-block">
-                            <input type="checkbox" id="check2" value="option2" class="inline-block">
-                        </div>
-                        <label for="radio1">Radio</label>
-                        <div class="input-group">
-                            <input type="radio" id="radio1" name="radio" value="option1" class="inline-block">
-                            <input type="radio" id="radio2" name="radio" value="option2" class="inline-block">
-                        </div>
-                        <label for="textarea1">Textarea</label>
-                        <textarea id="textarea1"></textarea>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="form-actions">
-                <button type="submit">Save changes</button>
-                <button type="button">Cancel</button>
-            </div>
-        </form>
-    </section>
-    <hr />
-    <section id="legacyhorizontal">
-        <h1>Legacy Horizontal</h1>
-        <p>Add class <code>.form-no-grid .form-horizontal</code> to the form.</p>
-        <form action="#" class="form-no-grid form-horizontal">
-            <fieldset>
-                <legend>Horizontal Form</legend>
-                <div class="row">
-                    <div class="col-l-6">
-                        <label for="input2">Standard</label>
-                        <input type="text" id="input2" class="focus" value="standard input..." />
-                        <label for="input-disabled2">Disabled</label>
-                        <input type="text" id="input-disabled2" disabled value="disabled input..." />
-                        <p>Support text to help describe the input.</p>
-                        <label for="input-no-edit2">Non editable</label>
-                        <span id="input-no-edit2" class="no-edit">No edit</span>
-                        <label for="select-default2">Select</label>
-                        <select id="select-default2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                        <label for="input-file2">File upload</label>
-                        <input id="input-file2" type="file" />
-                        <label for="input-number2">Number</label>
-                        <input type="number" id="input-number2" />
-                        <label for="input-password2">Password</label>
-                        <input type="password" id="input-password2" />
-                        <label for="input-time2">Time</label>
-                        <input type="time" id="input-time2" />
-                        <label for="input-week2">Week</label>
-                        <input type="week" id="input-week2" />
-                        <label for="input-month2">Month</label>
-                        <input type="month" id="input-month2" />
-                        <label for="input-date2">Date</label>
-                        <input type="date" id="input-date2" />
-                    </div>
-                    <div class="col-l-6">
-                        <label for="input-datetime2">Datetime</label>
-                        <input type="datetime" id="input-datetime2" />
-                        <label for="input-datetime-local2">Datetime Local</label>
-                        <input type="datetime-local" id="input-datetime-local2" />
-                        <label for="input-search2">Search</label>
-                        <input type="search" id="input-search2" />
-                        <label for="input-color2">Color</label>
-                        <input type="color" id="input-color2" />
-                        <label for="input-range2">Range</label>
-                        <input type="range" id="input-range2" min="0" max="100" value="50" />
-                        <label for="input-email2">Email</label>
-                        <input type="email" id="input-email2" />
-                        <label for="check-disabled2">Disabled Checkbox</label>
-                        <div class="input-group">
-                            <input type="checkbox" id="check-disabled2" value="option2" disabled="" class="inline-block">
-                        </div>
-                        <label for="check3">Checkbox</label>
-                        <div class="input-group">
-                            <input type="checkbox" id="check3" value="option1" class="inline-block">
-                            <input type="checkbox" id="check4" value="option2" class="inline-block">
-                        </div>
-                        <label for="radio3">Radio</label>
-                        <div class="input-group">
-                            <input type="radio" id="radio3" name="radio" value="option1" class="inline-block">
-                            <input type="radio" id="radio4" name="radio" value="option2" class="inline-block">
-                        </div>
-                        <label for="textarea2">Textarea</label>
-                        <textarea id="textarea2"></textarea>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="form-actions">
-                <button type="submit">Save changes</button>
-                <button type="button">Cancel</button>
-            </div>
-        </form>
-    </section>
-    <hr />
     <section id="markup">
         <h1>The Markup</h1>
         <p>The entire markup for the first form. Note the grid wrappers required for arranging inputs.</p>
         <pre class="language-markup"><code>&lt;form action="#"&gt;
     &lt;fieldset&gt;
-        &lt;legend&gt;Horizontal Form&lt;/legend&gt;
+        &lt;legend&gt;Standard Form spanning two columns&lt;/legend&gt;
         &lt;div class="row"&gt;
             &lt;div class="col-s-6"&gt;
                 &lt;div class="row"&gt;
