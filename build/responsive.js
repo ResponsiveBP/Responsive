@@ -2219,7 +2219,7 @@
 
         var showEvent = $.Event(eshow),
             $element = this.$element,
-            $childTabs = $element.find("ul > li"),
+            $childTabs = $element.children("ul").find("li"),
             $childPanes = $element.children(":not(ul)"),
             $nextTab = $childTabs.eq(postion),
             $currentPane = $childPanes.eq(activePosition),
