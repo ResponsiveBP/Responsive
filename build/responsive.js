@@ -1309,7 +1309,7 @@
         protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
         // Regular expression.
         rexternalHost = new RegExp("//" + w.location.host + "($|/)"),
-        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
+        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(ff|f)|webp|svg)((\?|#).*)?$)/i,
         // Taken from jQuery.
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,

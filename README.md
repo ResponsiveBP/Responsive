@@ -1,14 +1,14 @@
 #Responsive
 ##A super lightweight HTML, CSS, and JavaScript framework for building responsive websites
 
-###[Bootstrap](http://getbootstrap.com/) and [Foundation](http://foundation.zurb.com) both do a good job but they're too heavy.
+###[Bootstrap](http://getbootstrap.com/) and [Foundation](http://foundation.zurb.com) are too heavy.
 
 
 They're great for prototyping but every time you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the functionality of the website. That's annoying!
 
 **Responsive** has been built with that in mind. It has been specifically designed and coded to be as lightweight as possible to prevent the need to undo styles set by the framework itself and allow developers to write efficient code and speed up development time.
 
-**Responsive** is tiny. The combined CSS and JavaScript is **only 20.8kb minified and gzipped** but there is a lot of functionality built into the framework. It's designed to be dropped-in, as-is to your website such as you would with [normalize.css](http://necolas.github.io/normalize.css/).
+**Responsive** is tiny. The combined CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality built into the framework. It's designed to be dropped-in, as-is to your website such as you would with [normalize.css](http://necolas.github.io/normalize.css/).
 
 Browser support covers IE8+ as well as all other modern browsers.
 
@@ -19,7 +19,7 @@ Responsives's documentation, included in the [v2-documentation](https://github.c
 1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v1.x).
 2. From the root `/Responsive` directory, run `jekyll serve --baseurl '' --watch` in the command line.
 
- - **Windows users:** run `chcp 65001` first to change the command prompt's character encoding ([code page](http://en.wikipedia.org/wiki/Windows_code_page)) to UTF-8 so Jekyll runs without errors.
+ - **Windows users:** For Ruby 2.0.0, run `chcp 65001` first. For Ruby 1.9.3, you can alternatively do ``SET LANG=en_EN.UTF-8` first to change the command prompt's character encoding ([code page](http://en.wikipedia.org/wiki/Windows_code_page)) to `UTF-8` so Jekyll runs without errors.
  - Open [http://localhost:4000](http://localhost:4000) in your browser to view the compiled docs.
 
 
@@ -31,32 +31,25 @@ Contribution is most welcome, that's the whole idea! Together as a community we 
 
 Please adhere to existing JavaScript and CSS styles though when submitting code and ensure that you test thoroughly on multiple devices, we don't want another Semicolongate ;)
 
-##Building
+##Building the CSS and Javascript
 
 The build process for Responsive is powered by [gulpjs](http://gulpjs.com/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
 
-**Install gulp globally**
+1. `npm install -g gulp` To install gulp globally.
+2. `npm install` to install the necessary build dependencies based on the contents of the `package.json` file.
 
-    npm install -g gulp
+If you are adding new functionality to the build process use:
 
-**Install gulp and gulp-util in your project devDependencies:**
-
-    npm install --save-dev gulp gulp-util
-
-**Install the other dependencies in your project devDependencies:**
-
-    npm install --save-dev gulp-rename gulp-concat gulp-minify-css gulp-zip gulp-uglify gulp-jshint gulp-clean
+    npm install {your_new_build_dependency} --save-dev
 
 There are two types of build available:
 
- 1. `gulp`` For debug purposes. Compiles the framework and watches for further changes
+ 1. `gulp` For debug purposes. Compiles the framework and watches for further changes
  2. `gulp release` Compiles the framework and zips up the build for release.
-
-**Note** You may have to install the node package "event-stream" `npm install event-stream`
 
 ##Bugs and feature requests
 
-Have a bug or a feature request? Please open a new [issue](https://github.com/JimBobSquarePants/Responsive/issues). Before opening any issue, please search for existing issues and read the Issue Guidelines, written by [Nicolas Gallagher](https://github.com/necolas/).
+Have a bug or a feature request? Please open a new [issue](https://github.com/JimBobSquarePants/Responsive/issues) or even better submit a pull request. Before opening any issue, please search for existing issues and read the Issue Guidelines, written by [Nicolas Gallagher](https://github.com/necolas/).
 
 ##Authors
 
