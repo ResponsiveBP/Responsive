@@ -15,7 +15,7 @@ sublinks: ["#examples|Examples",
     <h1>Tabs</h1>
     <p>A jQuery plugin that provides dynamic tab functionality to transition through panes of local content. Uses CSS transitions to perform the animation.</p>
     <p>
-        Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
     <hr />
@@ -33,11 +33,28 @@ sublinks: ["#examples|Examples",
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </section>
                     <section>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                        <h3>I am nested</h3>
+                        <div data-tabs="">
+                            <ul>
+                                <li class="tab-active"><a href="#">tab1</a></li>
+                                <li><a href="#">tab2</a></li>
+                                <li><a href="#">tab3</a></li>
+                            </ul>
+                            <section class="tab-pane-active">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </section>
+                            <section>
+                                Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                            <section>
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                        </div>
                     </section>
                     <section>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
                     </section>
                 </div>
@@ -64,9 +81,11 @@ sublinks: ["#examples|Examples",
         <p>The tabs plugin exposes the following method signatures.</p>
         <dl>
             <dt><strong>.tabs(index)</strong>  </dt>
-            <dd>Initialises the plugin with an optional
+            <dd>
+                Initialises the plugin with an optional
                 <var>index</var>
-                parameter. A zero based indicator for which tab to show.</dd>
+                parameter. A zero based indicator for which tab to show.
+            </dd>
         </dl>
     </section>
     <hr />
@@ -85,20 +104,18 @@ sublinks: ["#examples|Examples",
         <h1>Data API</h1>
         <p>
             The tabs plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-                If you need to override this behaviour the following code will allow you to do so.
+            If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
 $(document).off("ready.r.tabs")
            .on("ready.r.tabs", function (event) {
                // Your custom behaviour...
            }); 
-
 // Override the default tabs control click behaviour
 $(document).off("click.r.tabs")
            .on("click.r.tabs", "[data-tabs] > ul > li > a", function (event) {
                // Your custom behaviour...
            }); 
-
 // Bind to the show event.
 $("YOUR_SELECTOR").on("show.r.tabs", function(event) {
     // Your custom behaviour...

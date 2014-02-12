@@ -13,7 +13,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         </ul>
     </nav>
     <section class="col-s-9">
-        <div class="alert alert-info">
+        <div class="alert ">
             <p>Looking for the v1 documentation? You can find it <a href="v1/">here</a>.</p>
         </div>
         <section id="download">
@@ -49,6 +49,11 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         &lt;title&gt;Your Page Title&lt;/title&gt;
         &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
         &lt;!-- 
+             IE10 Mobile ignores the meta viewport tag. 
+             This fix needs to be in the head.
+        --&gt;
+        &lt;script src="responsive.ie10mobilefix.min.js"&gt;&lt;/script&gt;
+        &lt;!-- 
              HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
              and media queries 
              WARNING: Respond.js doesn't work if you view the 
@@ -65,10 +70,10 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         &lt;!-- Scripts at the bottom for improved performance. --&gt;
         &lt;!-- jQuery, required for all responsive plugins. --&gt;
         &lt;!--[if IE 8]&gt;     
-            &lt;script src="vendor/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
         &lt;![endif]--&gt;
         &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
-            &lt;script src="vendor/jquery-2.0.3.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/jquery-2.1.0.min.js"&gt;&lt;/script&gt;
         &lt;!--&lt;![endif]--&gt;
         &lt;script src="responsive.min.js"&gt;&lt;/script&gt;
     &lt;/body&gt;
@@ -91,6 +96,21 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                 <li>Opera (Mac, Windows)</li>
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
             </ul>
+            <h2>Internet Explorer 10 Mobile</h2>
+            <p>
+                Internet Explorer 10 on Windows 8 phones do not render content to the correct width due to a css fix used to allow "snap mode" on the desktop.
+                Responsive comes bundled with a JavaScript fix that should be referenced in the head of your document.
+
+                For more information see:
+                <ul>
+                    <li>
+                        Matt Stow: <a href="http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html" rel="external nofollow" target="_blank">Responsive Design in IE10 on Windows Phone 8</a>
+                    </li>
+                    <li>
+                        Tim Kadlec: <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/" rel="external nofollow" target="_blank">Windows Phone 8 and Device-Width</a>
+                    </li>
+                </ul>
+            </p>
             <h2>Internet Explorer 8</h2>
             <p>
                 Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.

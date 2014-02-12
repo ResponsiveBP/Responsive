@@ -13,6 +13,8 @@
     <link href="/assets/css/docs.min.css" rel="stylesheet" />
     <link href="/assets/css/vendor/prism.min.css" rel="stylesheet" />
 
+    <script src="/assets/js/vendor/responsive.ie10mobilefix.min.js"></script>
+
     <!--[if lt IE 9 &!(IEMobile)]>
         <script src="/assets/js/vendor/html5shiv.js"></script>
         <script src="/assets/js/vendor/respond.min.js"></script>
@@ -20,10 +22,6 @@
     
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
@@ -93,7 +91,7 @@
                 <p>Extra data-attributes configured to allow removal of problematic classes or attributes that could affect the cloned element used for calculating size.</p>
             </div>
         </section>
-        <div class="alert alert-info">
+        <div class="alert ">
             <p>If running the plugin without using the markup API, add the class <code>.autosize</code> to the plugin to get the desired style behaviour.</p>
         </div>
     </section>
@@ -201,10 +199,10 @@ $("YOUR_SELECTOR").on("sized.r.autosize", function(event) {
     </div>
 </footer>
 <!--[if IE 8]>     
-    <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/vendor/jquery-1.11.0.min.js"></script>
 <![endif]-->
 <!--[if gt IE 8]><!-->
-<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/vendor/jquery-2.1.0.min.js"></script>
 <!--<![endif]-->
 <script src="/assets/js/vendor/prism.js"></script>
 <script src="/assets/js/responsive.min.js"></script>

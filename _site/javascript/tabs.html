@@ -13,6 +13,8 @@
     <link href="/assets/css/docs.min.css" rel="stylesheet" />
     <link href="/assets/css/vendor/prism.min.css" rel="stylesheet" />
 
+    <script src="/assets/js/vendor/responsive.ie10mobilefix.min.js"></script>
+
     <!--[if lt IE 9 &!(IEMobile)]>
         <script src="/assets/js/vendor/html5shiv.js"></script>
         <script src="/assets/js/vendor/respond.min.js"></script>
@@ -20,10 +22,6 @@
     
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
@@ -73,7 +71,7 @@
     <h1>Tabs</h1>
     <p>A jQuery plugin that provides dynamic tab functionality to transition through panes of local content. Uses CSS transitions to perform the animation.</p>
     <p>
-        Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
     <hr />
@@ -91,11 +89,28 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </section>
                     <section>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                        <h3>I am nested</h3>
+                        <div data-tabs="">
+                            <ul>
+                                <li class="tab-active"><a href="#">tab1</a></li>
+                                <li><a href="#">tab2</a></li>
+                                <li><a href="#">tab3</a></li>
+                            </ul>
+                            <section class="tab-pane-active">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </section>
+                            <section>
+                                Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                            <section>
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                        </div>
                     </section>
                     <section>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
                     </section>
                 </div>
@@ -122,9 +137,11 @@
         <p>The tabs plugin exposes the following method signatures.</p>
         <dl>
             <dt><strong>.tabs(index)</strong>  </dt>
-            <dd>Initialises the plugin with an optional
+            <dd>
+                Initialises the plugin with an optional
                 <var>index</var>
-                parameter. A zero based indicator for which tab to show.</dd>
+                parameter. A zero based indicator for which tab to show.
+            </dd>
         </dl>
     </section>
     <hr />
@@ -143,20 +160,18 @@
         <h1>Data API</h1>
         <p>
             The tabs plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-                If you need to override this behaviour the following code will allow you to do so.
+            If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
 $(document).off("ready.r.tabs")
            .on("ready.r.tabs", function (event) {
                // Your custom behaviour...
            }); 
-
 // Override the default tabs control click behaviour
 $(document).off("click.r.tabs")
            .on("click.r.tabs", "[data-tabs] > ul > li > a", function (event) {
                // Your custom behaviour...
            }); 
-
 // Bind to the show event.
 $("YOUR_SELECTOR").on("show.r.tabs", function(event) {
     // Your custom behaviour...
@@ -195,10 +210,10 @@ $("YOUR_SELECTOR").on("shown.r.tabs", function(event) {
     </div>
 </footer>
 <!--[if IE 8]>     
-    <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/vendor/jquery-1.11.0.min.js"></script>
 <![endif]-->
 <!--[if gt IE 8]><!-->
-<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/vendor/jquery-2.1.0.min.js"></script>
 <!--<![endif]-->
 <script src="/assets/js/vendor/prism.js"></script>
 <script src="/assets/js/responsive.min.js"></script>

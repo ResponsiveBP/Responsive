@@ -13,6 +13,8 @@
     <link href="/assets/css/docs.min.css" rel="stylesheet" />
     <link href="/assets/css/vendor/prism.min.css" rel="stylesheet" />
 
+    <script src="/assets/js/vendor/responsive.ie10mobilefix.min.js"></script>
+
     <!--[if lt IE 9 &!(IEMobile)]>
         <script src="/assets/js/vendor/html5shiv.js"></script>
         <script src="/assets/js/vendor/respond.min.js"></script>
@@ -20,10 +22,6 @@
     
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
@@ -52,7 +50,7 @@
         </ul>
     </nav>
     <section class="col-s-9">
-        <div class="alert alert-info">
+        <div class="alert ">
             <p>Looking for the v1 documentation? You can find it <a href="v1/">here</a>.</p>
         </div>
         <section id="download">
@@ -61,13 +59,13 @@
                 The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
                 No documentation or original source code files are included.
             </p>
-            <a href="https://github.com/ResponsiveBP/Responsive/releases/download/2.3.3/responsive.zip" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Framework Download">Download Responsive</a>
+            <a href="https://github.com/ResponsiveBP/Responsive/releases/download/2.4.0/responsive.zip" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Framework Download">Download Responsive</a>
             <ul class="download-links">
                 <li>
                     <a href="https://github.com/responsivebp/responsive" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="GitHub project" rel="external">GitHub project</a>
                 </li>
                 <li>
-                    Version 2.3.3
+                    Version 2.4.0
                 </li>
             </ul>
         </section>
@@ -88,6 +86,11 @@
         &lt;title&gt;Your Page Title&lt;/title&gt;
         &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
         &lt;!-- 
+             IE10 Mobile ignores the meta viewport tag. 
+             This fix needs to be in the head.
+        --&gt;
+        &lt;script src="responsive.ie10mobilefix.min.js"&gt;&lt;/script&gt;
+        &lt;!-- 
              HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
              and media queries 
              WARNING: Respond.js doesn't work if you view the 
@@ -104,10 +107,10 @@
         &lt;!-- Scripts at the bottom for improved performance. --&gt;
         &lt;!-- jQuery, required for all responsive plugins. --&gt;
         &lt;!--[if IE 8]&gt;     
-            &lt;script src="vendor/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
         &lt;![endif]--&gt;
         &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
-            &lt;script src="vendor/jquery-2.0.3.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/jquery-2.1.0.min.js"&gt;&lt;/script&gt;
         &lt;!--&lt;![endif]--&gt;
         &lt;script src="responsive.min.js"&gt;&lt;/script&gt;
     &lt;/body&gt;
@@ -130,6 +133,21 @@
                 <li>Opera (Mac, Windows)</li>
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
             </ul>
+            <h2>Internet Explorer 10 Mobile</h2>
+            <p>
+                Internet Explorer 10 on Windows 8 phones do not render content to the correct width due to a css fix used to allow "snap mode" on the desktop.
+                Responsive comes bundled with a JavaScript fix that should be referenced in the head of your document.
+
+                For more information see:
+                <ul>
+                    <li>
+                        Matt Stow: <a href="http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html" rel="external nofollow" target="_blank">Responsive Design in IE10 on Windows Phone 8</a>
+                    </li>
+                    <li>
+                        Tim Kadlec: <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/" rel="external nofollow" target="_blank">Windows Phone 8 and Device-Width</a>
+                    </li>
+                </ul>
+            </p>
             <h2>Internet Explorer 8</h2>
             <p>
                 Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.
@@ -163,10 +181,10 @@
     </div>
 </footer>
 <!--[if IE 8]>     
-    <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/vendor/jquery-1.11.0.min.js"></script>
 <![endif]-->
 <!--[if gt IE 8]><!-->
-<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/vendor/jquery-2.1.0.min.js"></script>
 <!--<![endif]-->
 <script src="/assets/js/vendor/prism.js"></script>
 <script src="/assets/js/responsive.min.js"></script>

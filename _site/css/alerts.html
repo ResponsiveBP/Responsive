@@ -13,6 +13,8 @@
     <link href="/assets/css/docs.min.css" rel="stylesheet" />
     <link href="/assets/css/vendor/prism.min.css" rel="stylesheet" />
 
+    <script src="/assets/js/vendor/responsive.ie10mobilefix.min.js"></script>
+
     <!--[if lt IE 9 &!(IEMobile)]>
         <script src="/assets/js/vendor/html5shiv.js"></script>
         <script src="/assets/js/vendor/respond.min.js"></script>
@@ -20,10 +22,6 @@
     
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
@@ -60,51 +58,18 @@
             <section>
     <h1 class="masthead">Alerts</h1>
     <p>
-        Whilst these contain opinionated styling they only posses the minimum of css to allow you to easier hook into and override those styles.
+        Alert boxes are used to bring information to a users perspective, Responsive bundles a pattern that provides a flexible layout across all viewport sizes that can easily be extended.
     </p>
     <p>
         The dismiss functionality is added via the <a href="/javascript/dismiss.html">JavaScript Data API</a>.
     </p>
     <hr />
     <section id="examples">
-        <h2>Default</h2>
+        <h2>Alert Box</h2>
         <div class="alert">
             <a data-dismiss-target=".alert" href="#" class="close">x</a>
             <h4 class="alert-heading">Alert block</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
-        </div>
-
-        <h2>Success</h2>
-        <p>Add class <code>.alert-success</code>.</p>
-        <div class="alert alert-success">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
-            <p><strong>Success</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
-        </div>
-
-        <h2>Warning</h2>
-        <p>Add class <code>.alert-warning</code>.</p>
-        <div class="alert alert-warning">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
-            <p><strong>Warning</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
-        </div>
-
-        <h1>Error</h1>
-        <p>Add class <code>.alert-error</code>.</p>
-        <div class="alert alert-error">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
-            <p><strong>Error</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
-        </div>
-
-
-        <h2>Info</h2>
-        <p>Add class <code>.alert-info</code>.</p>
-        <div class="alert alert-info">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
-            <p><strong>Info</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
         </div>
 
@@ -144,10 +109,10 @@
     </div>
 </footer>
 <!--[if IE 8]>     
-    <script src="/assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/vendor/jquery-1.11.0.min.js"></script>
 <![endif]-->
 <!--[if gt IE 8]><!-->
-<script src="/assets/js/vendor/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/vendor/jquery-2.1.0.min.js"></script>
 <!--<![endif]-->
 <script src="/assets/js/vendor/prism.js"></script>
 <script src="/assets/js/responsive.min.js"></script>

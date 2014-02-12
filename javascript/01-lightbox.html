@@ -66,7 +66,7 @@ Launch Youtube overlay
 
         <h3>Internal target</h3>
         <a href="#" data-lightbox-target="#overlay1">Launch internal overlay</a>
-        <div class="alert alert-info">
+        <div class="alert ">
             <p>Internal overlays can contain both hidden and unhidden content.</p>
         </div>
         <div id="overlay1" class="hidden">
@@ -88,7 +88,10 @@ Launch Youtube overlay
 &lt;/div&gt;</code></pre>
 
         <h3>Form</h3>
-        <a href="#" data-lightbox-target="#form-overlay" data-lightbox-fit-viewport="false">Launch internal overlay containing a form</a>
+        <a href="#" data-lightbox-target="#form-overlay" data-lightbox-fit-viewport="false">Launch internal overlay containing a form that should not stretch to the full viewport width.</a>
+        <pre class="language-markup"><code>&lt;a href="#" data-lightbox-target="#form-overlay" data-lightbox-fit-viewport="false"&gt;
+    Launch internal overlay containing a form
+&lt;/a&gt;</code></pre>
         <div id="form-overlay" class="hidden">
             <form method="POST" action="#">
                 <fieldset>
@@ -110,6 +113,36 @@ Launch Youtube overlay
                 </div>
             </form>
         </div>
+
+        <h3>Modal</h3>
+        <a href="#" class="modal" data-lightbox-target="#modal" data-lightbox-modal="true">Launch modal overlay</a>
+        <div id="modal" class="hidden">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            <p>
+                <button role="button" data-lightbox-modal-trigger=".modal">Click to close.</button>
+            </p>
+        </div>
+        <pre class="language-markup"><code>&lt;a href="#" class="modal" data-lightbox-target="#modal" data-lightbox-modal="true"&gt;
+    Launch modal overlay
+&lt;/a&gt;
+&lt;div id="modal" class="hidden"&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet...
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;button role="button" data-lightbox-modal-trigger=".modal"&gt;
+            Click to close.
+        &lt;/button&gt;
+    &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
 
         <h3>Wrapped Image</h3>
         <div class="row">
@@ -179,8 +212,11 @@ Lightbox trigger
                     <dd>
                         Contains parameters to pass to the plugin.
                         <dl>
-                            <dt><strong>close</strong></dt>
-                            <dd>Whether to add a close indicator to the lightbox.</dd>
+                            <dt><strong>modal</strong></dt>
+                            <dd>
+                                Whether to the lightbox should be in modal mode.
+                                Defaults to <var>false</var>
+                            </dd>
                             <dt><strong>external</strong></dt>
                             <dd>Whether the target is on a different page.</dd>
                             <dt><strong>group</strong></dt>
