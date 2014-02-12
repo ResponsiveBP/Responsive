@@ -14,12 +14,12 @@
 /*  ==|== Responsive =============================================================
     Author: James South
     twitter : http://twitter.com/James_M_South
-    github : https://github.com/JimBobSquarePants/Responsive
+    github : https://github.com/ResponsiveBP/Responsive
     Copyright (c),  James South.
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.4 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.4.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -30,23 +30,6 @@
 (function ($, w) {
 
     "use strict";
-
-    $(function () {
-
-        // IE10 in Windows (Phone) 8
-        // Support for responsive views via media queries do not work in IE10 on mobile for
-        // versions prior to WP8 Update 3 (GDR3).
-        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-            var msViewportStyle = document.createElement("style");
-            msViewportStyle.appendChild(
-              document.createTextNode(
-                "@-ms-viewport{width:auto!important}"
-              )
-            );
-            document.querySelector("head").
-              appendChild(msViewportStyle);
-        }
-    });
 
     $.support.getVendorPrefix = (function () {
         /// <summary>Gets the correct vendor prefix for the current browser.</summary>
@@ -135,11 +118,11 @@
 
     $.fn.swipe = function (options) {
         /// <summary>Adds swiping functionality to the given element.</summary>
-        ///	<param name="options" type="Object" optional="true" parameterArray="true">
-        ///		 A collection of optional settings to apply.
+        /// <param name="options" type="Object" optional="true" parameterArray="true">
+        ///      A collection of optional settings to apply.
         ///      &#10;    1: namespace - The namespace for isolating the touch events.
         ///      &#10;    2: timeLimit - The limit in ms to recognise touch events for. Default - 1000; 0 disables.
-        ///	</param>
+        /// </param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
         var defaults = {
@@ -571,7 +554,8 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize"));/*
+}(jQuery, window, ".r.autosize"));
+/*
  * Responsive Carousel
  */
 
@@ -849,10 +833,6 @@
             return false;
         }
 
-        if (this.interval) {
-            this.pause();
-        }
-
         // Trigger the slide event with positional data.
         var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
@@ -863,6 +843,10 @@
 
         // Good to go? Then let's slide.
         this.sliding = true;
+
+        if (isCycling) {
+            this.pause();
+        }
 
         // Highlight the correct indicator.
         if (this.$indicators.length) {
@@ -986,7 +970,8 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));/*
+}(jQuery, window, ".r.carousel"));
+/*
  * Responsive Dismiss 
  */
 
@@ -1089,10 +1074,11 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss"));/*
+}(jQuery, window, ".r.dismiss"));
+/*
  * Responsive Dropdown 
  */
-
+/*jshint expr:true*/
 /*global jQuery*/
 (function ($, w, ns) {
 
@@ -1281,7 +1267,8 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));/*
+}(jQuery, window, ".r.dropdown"));
+/*
  * Responsive Lightbox
  */
 
@@ -1322,7 +1309,7 @@
         protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
         // Regular expression.
         rexternalHost = new RegExp("//" + w.location.host + "($|/)"),
-        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
+        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(ff|f)|webp|svg)((\?|#).*)?$)/i,
         // Taken from jQuery.
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
@@ -1365,7 +1352,7 @@
         var self = this,
             title = this.options.title,
             description = this.options.description,
-            close = this.options.close,
+            modal = this.options.modal,
             target = this.options.target,
             local = !this.options.external && !isExternalUrl(target),
             group = this.options.group,
@@ -1380,12 +1367,12 @@
         $img = $("<img/>"); // ditto.
 
         // 1: Build the header
-        if (title || close) {
+        if (title || !modal) {
 
             $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
                    .appendTo($overlay);
 
-            if (close) {
+            if (!modal) {
                 $close.appendTo($overlay);
             }
         }
@@ -1702,6 +1689,10 @@
 
                 $overlay.off(eclick).on(eclick, function (e) {
 
+                    if (self.options.modal) {
+                        return;
+                    }
+
                     var closeTarget = $close[0],
                         eventTarget = e.target;
 
@@ -1799,6 +1790,10 @@
                 return;
             }
 
+            if (this.options.modal) {
+                return;
+            }
+
             $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
 
                 // Bind the escape key.
@@ -1862,7 +1857,7 @@
 
         this.$element = $(element);
         this.defaults = {
-            close: true,
+            modal: false,
             external: false,
             group: null,
             iframe: false,
@@ -2022,22 +2017,55 @@
     };
 
     // Data API
-    $body.on(eclick, ":attrStart(data-lightbox)", function (event) {
+    $body.on(eclick, ":attrStart(data-lightbox)", function(event) {
 
         event.preventDefault();
 
-        var $this = $(this),
-            data = $this.data("r.lightboxOptions"),
+        // Handle close events.
+        var $this = $(this);
+
+        // If it's a modal close instruction we want to ignore it.
+        if ($this.is("[data-lightbox-modal-trigger]")) {
+            return;
+        }
+
+        var data = $this.data("r.lightboxOptions"),
             options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
             params = $this.data("r.lightbox") ? "toggle" : options;
 
         // Run the lightbox method.
         $this.lightbox(params);
+
+    }).on(eclick, "[data-lightbox-modal-trigger]", function (event) {
+
+        event.preventDefault();
+
+        // Handle close events.
+        var $this = $(this),
+            data = $this.data("r.lightboxOptions"),
+            options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
+            $closeTarget = $(options.modalTrigger || (options.modalTrigger = $this.attr("href")));
+
+        $closeTarget.each(function() {
+
+            var lightbox = $(this).data("r.lightbox");
+
+            if (lightbox) {
+                // Compare the elements.
+                if (lightbox.$element[0] === this) {
+                    lightbox.hide();
+                    return true;
+                }
+            }
+
+            return false;
+        });
     });
 
     w.RESPONSIVE_LIGHTBOX = true;
 
-}(jQuery, window, ".r.lightbox"));/*
+}(jQuery, window, ".r.lightbox"));
+/*
  * Responsive Tables
  */
 
@@ -2164,7 +2192,8 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.table"));/*
+}(jQuery, window, ".r.table"));
+/*
  * Responsive tabs
  */
 
@@ -2190,7 +2219,7 @@
 
         var showEvent = $.Event(eshow),
             $element = this.$element,
-            $childTabs = $element.find("ul > li"),
+            $childTabs = $element.children("ul").find("li"),
             $childPanes = $element.children(":not(ul)"),
             $nextTab = $childTabs.eq(postion),
             $currentPane = $childPanes.eq(activePosition),
