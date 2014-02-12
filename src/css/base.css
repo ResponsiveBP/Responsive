@@ -27,13 +27,6 @@ html {
     -webkit-overflow-scrolling: touch; /* 1 */
     font-size: 16px;
     line-height: 1.4;
-}
-
-html,
-button,
-input,
-select,
-textarea {
     color: #222;
 }
 
@@ -81,16 +74,4 @@ hr {
  */
 abbr {
     cursor: help;
-}
-
-/*
- * Remove 300ms touch delay.
- */
-button,
-[type="submit"],
-[type="button"],
-[type="reset"],
-[role="button"] {
-    -ms-touch-action: none;
-    touch-action: none;
 }

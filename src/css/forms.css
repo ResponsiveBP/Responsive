@@ -28,6 +28,7 @@ input,
 .no-edit {
     font-family: inherit;
     padding: .25em;
+    color: #222;
     background-color: #fff;
     border-radius: 0;
     border: 1px solid #c0c0c0;
@@ -113,14 +114,11 @@ input[type="color"] {
         min-height: 2em;
     }
 
-    input[type="color"] {
-        min-height: 1.8em;
-    }
-
     /*
-     * 1. Remove excess padding in Webkit
+     * Remove excess padding in Webkit
      */
     input[type="color"] {
+        min-height: 1.8em;
         padding: 0;
     }
 

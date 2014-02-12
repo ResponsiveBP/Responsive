@@ -3,6 +3,7 @@
 /*
  * Normalize button borders, colour, and padding.
  * 1: Remove rounded corners on iPhone.
+ * 2: Remove 300ms touch delay.
  */
 
 button,
@@ -23,6 +24,8 @@ button,
     color: #222;
     cursor: pointer;
     position: relative;
+    -ms-touch-action: none; /* 2 */
+    touch-action: none;  /* 2 */
 }
 
 /*
