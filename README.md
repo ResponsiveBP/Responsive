@@ -19,7 +19,7 @@ Responsives's documentation, included in the [v2-documentation](https://github.c
 1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v1.x).
 2. From the root `/Responsive` directory, run `jekyll serve --baseurl '' --watch` in the command line.
 
- - **Windows users:** For Ruby 2.0.0, run `chcp 65001` first. For Ruby 1.9.3, you can alternatively do ``SET LANG=en_EN.UTF-8` first to change the command prompt's character encoding ([code page](http://en.wikipedia.org/wiki/Windows_code_page)) to `UTF-8` so Jekyll runs without errors.
+ - **Windows users:** For Ruby 2.0.0, run `chcp 65001` first. For Ruby 1.9.3, you can alternatively do `SET LANG=en_EN.UTF-8` first to change the command prompt's character encoding ([code page](http://en.wikipedia.org/wiki/Windows_code_page)) to `UTF-8` so Jekyll runs without errors.
  - Open [http://localhost:4000](http://localhost:4000) in your browser to view the compiled docs.
 
 
@@ -42,10 +42,11 @@ If you are adding new functionality to the build process use:
 
     npm install {your_new_build_dependency} --save-dev
 
-There are two types of build available:
+There are three types of build available:
 
- 1. `gulp` For debug purposes. Compiles the framework and watches for further changes
- 2. `gulp release` Compiles the framework and zips up the build for release.
+ 1. `gulp` Compiles the framework to the **build** folder.
+ 2. `gulp watch` For debug purposes. Compiles the framework to the **build** folder and watches for further changes
+ 3. `gulp release` Compiles the framework to the **build** folder and zips up the build in the **dist** folder for release.
 
 ##Bugs and feature requests
 

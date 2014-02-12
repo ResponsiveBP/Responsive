@@ -115,6 +115,6 @@ gulp.task("watch", function () {
     gulp.watch("./src/css/*.css", ["css"]);
 });
 
-gulp.task("default", ["watch"]);
+gulp.task("default", ["css", "scripts"]);
 
 gulp.task("release", ["finalize"]);
