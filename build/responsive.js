@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.4.0 | MIT License | responsivebp.com */
+/*! Responsive v2.4.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
