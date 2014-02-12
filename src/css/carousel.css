@@ -1,4 +1,4 @@
-﻿/* Responsive Carousel */
+/* Responsive Carousel */
 
 .carousel {
     position: relative;
@@ -151,13 +151,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    -moz-opacity: 0;
     opacity: 0;
 }
 
 .carousel-fade .carousel-active,
 .carousel[data-carousel-mode="fade"] .carousel-active {
-    -moz-opacity: 1;
     opacity: 1;
 }
 
@@ -171,7 +169,6 @@
         -o-transform: translateX(0);
         transform: translateX(0);
         left: 0\9;
-        -moz-opacity: 0;
         opacity: 0;
         z-index: 2;
     }
@@ -187,7 +184,6 @@
     transform: translateX(0);
     left: 0\9;
     z-index: 1;
-    -moz-opacity: 1;
     opacity: 1;
 }
 

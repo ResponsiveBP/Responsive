@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Responsive Lightbox
  */
 
@@ -39,7 +39,7 @@
         protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
         // Regular expression.
         rexternalHost = new RegExp("//" + w.location.host + "($|/)"),
-        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(f|ff)|webp|svg)((\?|#).*)?$)/,
+        rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(ff|f)|webp|svg)((\?|#).*)?$)/i,
         // Taken from jQuery.
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
@@ -82,7 +82,7 @@
         var self = this,
             title = this.options.title,
             description = this.options.description,
-            close = this.options.close,
+            modal = this.options.modal,
             target = this.options.target,
             local = !this.options.external && !isExternalUrl(target),
             group = this.options.group,
@@ -97,12 +97,12 @@
         $img = $("<img/>"); // ditto.
 
         // 1: Build the header
-        if (title || close) {
+        if (title || !modal) {
 
             $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
                    .appendTo($overlay);
 
-            if (close) {
+            if (!modal) {
                 $close.appendTo($overlay);
             }
         }
@@ -419,6 +419,10 @@
 
                 $overlay.off(eclick).on(eclick, function (e) {
 
+                    if (self.options.modal) {
+                        return;
+                    }
+
                     var closeTarget = $close[0],
                         eventTarget = e.target;
 
@@ -516,6 +520,10 @@
                 return;
             }
 
+            if (this.options.modal) {
+                return;
+            }
+
             $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
 
                 // Bind the escape key.
@@ -579,7 +587,7 @@
 
         this.$element = $(element);
         this.defaults = {
-            close: true,
+            modal: false,
             external: false,
             group: null,
             iframe: false,
@@ -739,17 +747,49 @@
     };
 
     // Data API
-    $body.on(eclick, ":attrStart(data-lightbox)", function (event) {
+    $body.on(eclick, ":attrStart(data-lightbox)", function(event) {
 
         event.preventDefault();
 
-        var $this = $(this),
-            data = $this.data("r.lightboxOptions"),
+        // Handle close events.
+        var $this = $(this);
+
+        // If it's a modal close instruction we want to ignore it.
+        if ($this.is("[data-lightbox-modal-trigger]")) {
+            return;
+        }
+
+        var data = $this.data("r.lightboxOptions"),
             options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
             params = $this.data("r.lightbox") ? "toggle" : options;
 
         // Run the lightbox method.
         $this.lightbox(params);
+
+    }).on(eclick, "[data-lightbox-modal-trigger]", function (event) {
+
+        event.preventDefault();
+
+        // Handle close events.
+        var $this = $(this),
+            data = $this.data("r.lightboxOptions"),
+            options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
+            $closeTarget = $(options.modalTrigger || (options.modalTrigger = $this.attr("href")));
+
+        $closeTarget.each(function() {
+
+            var lightbox = $(this).data("r.lightbox");
+
+            if (lightbox) {
+                // Compare the elements.
+                if (lightbox.$element[0] === this) {
+                    lightbox.hide();
+                    return true;
+                }
+            }
+
+            return false;
+        });
     });
 
     w.RESPONSIVE_LIGHTBOX = true;

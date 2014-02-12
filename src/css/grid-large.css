@@ -1,4 +1,4 @@
-﻿@media (min-width: 75em) {
+@media (min-width: 75em) {
     .row [class*="col-"].reset-l {
         margin-left: 0 !important;
         clear: both;

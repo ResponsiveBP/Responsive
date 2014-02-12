@@ -1,4 +1,4 @@
-﻿/* Responsive Alert */
+/* Responsive Alert */
 
 .alert {
     background-color: #FCF8E3;
@@ -36,27 +36,3 @@
     .alert .close:hover {
         text-decoration: underline;
     }
-
-.alert-success {
-    background-color: #C5E6C5;
-    border: 1px solid #A2D6A2;
-    color: #347834;
-}
-
-.alert-warning {
-    background-color: #FEE7C7;
-    border: 1px solid #FCD296;
-    color: #C17305;
-}
-
-.alert-error {
-    background-color: #F4CAC8;
-    border: 1px solid #EBA19E;
-    color: #DA4F49;
-}
-
-.alert-info {
-    background-color: #D9EDF7;
-    border: 1px solid #85C5E5;
-    color: #247FAD;
-}

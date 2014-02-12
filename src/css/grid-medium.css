@@ -1,4 +1,4 @@
-﻿@media (min-width: 62em) and (max-width: 74.99em) {
+@media (min-width: 62em) and (max-width: 74.99em) {
     .row [class*="col-"].reset-m-only {
         margin-left: 0 !important;
         clear: both;

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Responsive framework
  *
  * Responsive is a minimalist framework for rapidly creating responsive websites specifically 
@@ -14,12 +14,12 @@
 /*  ==|== Responsive =============================================================
     Author: James South
     twitter : http://twitter.com/James_M_South
-    github : https://github.com/JimBobSquarePants/Responsive
+    github : https://github.com/ResponsiveBP/Responsive
     Copyright (c),  James South.
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.3.4 | MIT License | git.io/rRNRLA */
+/*! Responsive v2.4.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -30,23 +30,6 @@
 (function ($, w) {
 
     "use strict";
-
-    $(function () {
-
-        // IE10 in Windows (Phone) 8
-        // Support for responsive views via media queries do not work in IE10 on mobile for
-        // versions prior to WP8 Update 3 (GDR3).
-        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-            var msViewportStyle = document.createElement("style");
-            msViewportStyle.appendChild(
-              document.createTextNode(
-                "@-ms-viewport{width:auto!important}"
-              )
-            );
-            document.querySelector("head").
-              appendChild(msViewportStyle);
-        }
-    });
 
     $.support.getVendorPrefix = (function () {
         /// <summary>Gets the correct vendor prefix for the current browser.</summary>
