@@ -19,7 +19,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.4.1 | MIT License | responsivebp.com */
+/*! Responsive v2.4.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -135,9 +135,9 @@
             eswipestart = "swipestart" + ns,
             eswipemove = "swipemove" + ns,
             eswipeend = "swipeend" + ns,
-            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+            etouchstart = "touchstart" + ns + "pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns,
+            etouchend = "touchend" + ns + "pointerup" + ns + "  MSPointerUp" + ns,
             supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
                 (navigator.msMaxTouchPoints > 0) ||
                 (window.DocumentTouch && document instanceof DocumentTouch);
@@ -145,7 +145,9 @@
         return this.each(function () {
 
             if (!supportTouch) {
-                return;
+                etouchstart += " mousedown" + ns;
+                etouchmove += " mousemove" + ns;
+                etouchend += (" mouseup" + ns + " mouseleave" + ns);
             }
 
             var $this = $(this);
@@ -155,10 +157,11 @@
 
             var start = {},
                 delta,
-                move = function (event) {
+                onMove = function (event) {
 
                     // Normalise the variables.
-                    var isPointer = event.type !== "touchmove",
+                    var isMouse = event.type === "mousemove",
+                        isPointer = event.type !== "touchmove" && !isMouse,
                         original = event.originalEvent,
                         moveEvent;
 
@@ -168,7 +171,7 @@
                             return;
                         }
                     } else {
-                        if (original.touches.length > 1) {
+                        if (original.touches && original.touches.length > 1) {
                             return;
                         }
                     }
@@ -176,8 +179,8 @@
                         return;
                     }
 
-                    var dx = (isPointer ? original.clientX : original.touches[0].pageX) - start.x,
-                        dy = (isPointer ? original.clientY : original.touches[0].pageY) - start.y;
+                    var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
+                        dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
 
                     moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
 
@@ -193,13 +196,13 @@
                         y: dy
                     };
                 },
-                end = function () {
+                onEnd = function () {
 
                     // Measure duration
                     var duration = +new Date() - start.time,
                         endEvent;
 
-                    // Determine if slide attempt triggers next/previous slide.
+                    // Determine if slide attempt triggers slide.
                     // If slide duration is less than 1000ms
                     // and if slide amount is greater than 20px
                     // or if slide amount is greater than half the width
@@ -227,9 +230,22 @@
             $this.off(etouchstart).on(etouchstart, function (event) {
 
                 // Normalise the variables.
-                var isPointer = event.type !== "touchstart",
+                var isMouse = event.type === "mousedown",
+                    isPointer = event.type !== "touchstart" && !isMouse,
                     original = event.originalEvent,
-                    startEvent = $.Event(eswipestart);
+                    startEvent;
+
+                // Measure start values.
+                start = {
+                    // Get initial touch coordinates.
+                    x: isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX,
+                    y: isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY,
+
+                    // Store time to determine touch duration.
+                    time: +new Date()
+                };
+
+                startEvent = $.Event(eswipestart, { start: {} });
 
                 $this.trigger(startEvent);
 
@@ -237,22 +253,17 @@
                     return;
                 }
 
-                // Measure start values.
-                start = {
-                    // Get initial touch coordinates.
-                    x: isPointer ? original.clientX : original.touches[0].pageX,
-                    y: isPointer ? original.clientY : original.touches[0].pageY,
-
-                    // Store time to determine touch duration.
-                    time: +new Date()
-                };
+                // Prevent bounce on iProducts.
+                if (!isPointer) {
+                    event.preventDefault();
+                }
 
                 // Reset delta and end measurements.
                 delta = {};
 
                 // Attach touchmove and touchend listeners.
-                $this.on(etouchmove, move)
-                    .on(etouchend, end);
+                $this.on(etouchmove, onMove)
+                     .on(etouchend, onEnd);
             });
         });
     };
@@ -263,9 +274,9 @@
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
         var ns = namespace && ("." + namespace),
-            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
-            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns;
+            etouchstart = "mousedown" + ns + " touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
+            etouchmove = "mousemove" + ns + " touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
+            etouchend = "mouseup" + ns + " mouseleave" + ns + " touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns;
 
         return this.each(function () {
 
