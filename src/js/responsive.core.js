@@ -236,7 +236,7 @@
 
             $this.off(etouchstart).on(etouchstart, function (event) {
 
-                // Normalise the variables.
+                // Normalize the variables.
                 var isMouse = event.type === "mousedown",
                     isPointer = event.type !== "touchstart" && !isMouse,
                     original = event.originalEvent,
