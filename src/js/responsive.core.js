@@ -167,6 +167,11 @@
                         original = event.originalEvent,
                         moveEvent;
 
+                    // Prevent bounce on iProducts.
+                    if (!isPointer) {
+                        event.preventDefault();
+                    }
+
                     // Ensure swiping with one touch and not pinching.
                     if (isPointer) {
                         if (original.pointerType && original.pointerType !== 2) {
@@ -258,11 +263,6 @@
 
                 if (startEvent.isDefaultPrevented()) {
                     return;
-                }
-
-                // Prevent bounce on iProducts.
-                if (!isPointer) {
-                    event.preventDefault();
                 }
 
                 // Reset delta and end measurements.

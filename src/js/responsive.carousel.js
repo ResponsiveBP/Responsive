@@ -67,13 +67,15 @@
 
                 // Get the distance swiped as a percentage.
                 var width = $activeItem.width(),
-                    percent = parseInt((event.delta.x / width) * 100, 10),
+                    percent = parseFloat((event.delta.x / width) * 100),
                     diff = isNext ? 100 : -100;
 
                 // Shift the items but put a limit on sensitivity.
                 if (percent > -100 && percent < 100 && (percent < -10 || percent > 10)) {
-                    $activeItem.addClass("no-transition").css({ "transform": "translateX(" + percent + "%)" });
-                    $nextItem.addClass("no-transition swipe").css({ "transform": "translateX(" + (percent + diff) + "%)" });
+
+                    this.$element.addClass("no-transition");
+                    $activeItem.css({ "transform": "translate3d(" + percent + "%, 0, 0)" });
+                    $nextItem.addClass("swipe").css({ "transform": "translate3d(" + (percent + diff) + "%, 0, 0)" });
                 }
             }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
@@ -92,9 +94,7 @@
                 }
 
                 // Re-enable the transitions.
-                this.$items.each(function () {
-                    $(this).removeClass("no-transition");
-                });
+                this.$element.removeClass("no-transition");
 
                 if (supportTransition) {
 

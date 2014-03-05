@@ -106,7 +106,6 @@ gulp.task("finalize", ["zip"], function () {
         .pipe(clean({ force: true }));
 });
 
-// Default Task
 gulp.task("watch", function () {
     // Watch For Changes To Our JS
     gulp.watch("./src/js/*.js", ["scripts"]);
@@ -115,6 +114,7 @@ gulp.task("watch", function () {
     gulp.watch("./src/css/*.css", ["css"]);
 });
 
-gulp.task("default", ["css", "scripts"]);
-
 gulp.task("release", ["finalize"]);
+
+// Default Task
+gulp.task("default", ["css", "scripts"]);
