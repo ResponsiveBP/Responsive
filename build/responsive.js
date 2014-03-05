@@ -127,6 +127,7 @@
 
         var defaults = {
             namespace: null,
+            touchAction: "none",
             timeLimit: 1000
         },
             settings = $.extend({}, defaults, options);
@@ -155,7 +156,7 @@
             var $this = $(this);
 
             // Enable extended touch events on ie.
-            $this.css({ "-ms-touch-action": "none", "touch-action": "none" });
+            $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
 
             var start = {},
                 delta,
@@ -613,7 +614,7 @@
 
     manageTouch = function () {
 
-        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0 })
+        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0, touchAction: "pan-y" })
             .on("swipemove.r.carousel", $.proxy(function (event) {
 
                 if (this.options.mode !== "slide") {

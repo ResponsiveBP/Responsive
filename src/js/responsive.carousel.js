@@ -35,7 +35,7 @@
 
     manageTouch = function () {
 
-        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0 })
+        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0, touchAction: "pan-y" })
             .on("swipemove.r.carousel", $.proxy(function (event) {
 
                 if (this.options.mode !== "slide") {
