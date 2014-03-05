@@ -137,7 +137,9 @@
             eswipeend = "swipeend" + ns,
             etouchstart = "touchstart" + ns + "pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "touchend" + ns + "pointerup" + ns + "  MSPointerUp" + ns,
+            etouchend = "touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
+                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns +
+                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns,
             supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
                 (navigator.msMaxTouchPoints > 0) ||
                 (window.DocumentTouch && document instanceof DocumentTouch);
@@ -159,7 +161,7 @@
                 delta,
                 onMove = function (event) {
 
-                    // Normalise the variables.
+                    // Normalize the variables.
                     var isMouse = event.type === "mousemove",
                         isPointer = event.type !== "touchmove" && !isMouse,
                         original = event.originalEvent,
@@ -171,6 +173,11 @@
                             return;
                         }
                     } else {
+                        // Only left click allowed.
+                        if (isMouse && event.which !== 1) {
+                            return;
+                        }
+
                         if (original.touches && original.touches.length > 1) {
                             return;
                         }
@@ -276,7 +283,10 @@
         var ns = namespace && ("." + namespace),
             etouchstart = "mousedown" + ns + " touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "mousemove" + ns + " touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "mouseup" + ns + " mouseleave" + ns + " touchend" + ns + " pointerup" + ns + "  MSPointerUp" + ns;
+            etouchend = "mouseup" + ns + " mouseleave" + ns +
+                        " touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
+                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns +
+                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns;
 
         return this.each(function () {
 

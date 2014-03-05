@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Responsive Tests</title>
 
+    <script src="../../build/responsive.ie10mobilefix.js"></script>
+
     <!-- Combined CSS as respond.js cannot cater for imports-->
     <link href="../../build/responsive.css" rel="stylesheet" />
 
@@ -24,16 +26,33 @@
 
         .swipe {
             background-color: #f357a1;
+            cursor: pointer;
             color: #fff;
             font-size: 2em;
             height: 300px;
             width: 300px;
             text-align: center;
             padding-top: 100px;
+            /* Make drag better */
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -moz-backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .swipe-2 {
+            background-color: #5764f3;
+            cursor: move;
             position: absolute;
+            height: 150px;
+            width: 150px;
+            padding-top: 50px;
             top: 0;
             right: 0;
             bottom: 0;
@@ -45,46 +64,134 @@
 <body>
     <article class="container">
         <h1>Swipe Tests</h1>
+        <p>Swipe the pink box to test directional detection support.</p>
+        <p>Swipe the blue box to test draggable support.</p>
         <hr />
 
-        <h2>Swipe on the box to test directional detection.</h2>
         <div class="swipe-wrap">
-            <div class="swipe swipe-1"></div>
+            <div class="swipe swipe-1">
+                Swipe Me
+            </div>
         </div>
 
         <div class="swipe-wrap">
-            <div class="swipe swipe-2"></div>
+            <div class="swipe swipe-2">
+                Drag Me
+            </div>
         </div>
 
     </article>
 
 
-    <!--[if IE 8]>     
+    <!--[if IE 8]>
     <script src="../../build/vendor/jquery-1.11.0.min.js"></script>
     <![endif]-->
     <!--[if gt IE 8]><!-->
     <script src="../../build/vendor/jquery-2.1.0.min.js"></script>
     <!--<![endif]-->
-
     <!-- Scripts kept separate for easier debugging-->
     <script src="../../build/responsive.js"></script>
-    
-    
-    
-    
-    
 
-    
     <script>
+        (function ($) {
+
+            $.fn.makeDraggable = function () {
+
+                // Check if CSS properties are available
+                var supports = (function () {
+                    var div = document.createElement("div"),
+                        vendors = "Moz Webkit O Ms".split(" "),
+                        len = vendors.length;
+
+                    return function (prop) {
+                        if (prop in div.style) return true;
+
+                        prop = prop.replace(/^[a-z]/, function (val) {
+                            return val.toUpperCase();
+                        });
+
+                        while (len--) {
+                            if (vendors[len] + prop in div.style) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    };
+                }());
+
+                // Create variable for checking compatibility
+                var supportsTransform = supports("transform");
+
+                return this.each(function () {
+
+                    var $this = $(this),
+                        dragging = false,
+                        $parent = $this.parent(),
+                        offsetLeft,
+                        offsetTop,
+                        cacheVal;
+
+                    // Container element mustn't be set to position static in order for position caching to work properly
+                    $parent.css("position", "relative");
+
+                    // Cache position values adjacent to [X-Axis, Y-Axis]
+                    cacheVal = $this.is(":visible") ? [$this.position().left, $this.position().top] : [0, 0];
+
+                    // Set object properties to work with later
+                    offsetLeft = cacheVal[0];
+                    offsetTop = cacheVal[1];
+
+                    if (supportsTransform) {
+                        // Reset css values to 0 for transform
+                        $this[0].style.top = 0;
+                        $this[0].style.left = 0;
+
+                        // Keep the element on the same position.
+                        $this.css("transform", "matrix(1, 0, 0, 1, " + cacheVal[0] + ", " + cacheVal[1] + ")");
+                    }
+
+                    // Use the responsive swipe functionality to normalize events across devices.
+                    $parent.swipe({ namespace: "drag", timeLimit: 0 })
+                           .on("swipestart.drag", function () {
+
+                               if ($this.is(":visible")) {
+                                   // User starts to drag
+                                   dragging = true;
+                               }
+
+                           }).on("swipemove.drag", function (e) {
+
+                               // Only if the user is currently dragging, execute the following
+                               if (dragging) {
+
+                                   // Provide value for styling
+                                   offsetLeft = cacheVal[0] + e.delta.x;
+                                   offsetTop = cacheVal[1] + e.delta.y;
+
+                                   // Style it
+                                   if (supportsTransform) {
+                                       // Using jQuery"s .css() method for automatic prefixing
+                                       $this.css("transform", "matrix(1, 0, 0, 1, " + offsetLeft + ", " + offsetTop + ")");
+                                   } else {
+                                       // Using plain JavaScript for better performance
+                                       $this[0].style.left = $this.offsetLeft + "px";
+                                       $this[0].style.top = $this.offsetTop + "px";
+                                   }
+                               }
+                           }).on("swipeend.drag", function () {
+                               // User stopped dragging
+                               dragging = false;
+                               // Cache the offset values in order to prevent the element from returning to 0
+                               cacheVal[0] = offsetLeft;
+                               cacheVal[1] = offsetTop;
+                           });
+                });
+            };
+
+        }(jQuery));
+
+
         $(document).on("ready", function () {
-
-
-            var supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
-                    (navigator.msMaxTouchPoints > 0) ||
-                    (window.DocumentTouch && document instanceof DocumentTouch);
-
-            $(".swipe-1").html(supportTouch === undefined ? "<p>no touch support detected</p>" : "<p>touch support detected</p>");
-
 
             $(".swipe-1").swipe({ namespace: "r.swipe" }).on("swipeend.r.swipe", function (event) {
 
@@ -92,11 +199,7 @@
 
             });
 
-            $(".swipe-2").swipe({ namespace: "r.swipe" }).on("swipemove.r.swipe", function (event) {
-
-                $(this).css("transform", "translate(" + event.delta.x + "px," + event.delta.y + "px)");
-
-            });
+            $(".swipe-2").makeDraggable();
 
         });
 
