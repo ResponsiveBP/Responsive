@@ -17,17 +17,6 @@
         -moz-transition: .7s ease-in-out -moz-transform,.7s ease-in-out left;
         -o-transition: .7s ease-in-out -o-transform,.7s ease-in-out left;
         transition: .7s ease-in-out transform,.7s ease-in-out left;
-        /* Make drag better */
-        -moz-transform: translate3d(0, 0, 0);
-        -ms-transform: translate3d(0, 0, 0);
-        -o-transform: translate3d(0, 0, 0);
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-        -moz-backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
     }
 
         .carousel > figure > img {

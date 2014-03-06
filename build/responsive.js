@@ -160,6 +160,7 @@
 
             var start = {},
                 delta,
+                isScrolling,
                 onMove = function (event) {
 
                     // Normalize the variables.
@@ -167,11 +168,6 @@
                         isPointer = event.type !== "touchmove" && !isMouse,
                         original = event.originalEvent,
                         moveEvent;
-
-                    // Prevent bounce on iProducts.
-                    if (!isPointer) {
-                        event.preventDefault();
-                    }
 
                     // Ensure swiping with one touch and not pinching.
                     if (isPointer) {
@@ -194,6 +190,51 @@
 
                     var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
                         dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
+
+                    // Mimic touch action on iProducts.
+                    // Should also prevent bounce.
+                    if (!isPointer) {
+                        switch (settings.touchAction) {
+                            case "pan-x":
+
+                                if (typeof isScrolling === "undefined") {
+                                    isScrolling = Math.abs(dy) > Math.abs(dx);
+                                }
+
+                                if (Math.abs(dx) > 10) {
+                                    event.stopPropagation();
+                                    return;
+                                }
+
+                                if (isScrolling) {
+                                    event.preventDefault();
+                                }
+
+                                break;
+                            case "pan-y":
+                                if (typeof isScrolling === "undefined") {
+                                    isScrolling = Math.abs(dx) > Math.abs(dy);
+                                }
+
+                                if (isScrolling) {
+                                    event.preventDefault();
+                                }
+
+                                if (Math.abs(dy) > 10) {
+                                    event.stopPropagation();
+                                    return;
+                                }
+
+                                if (isScrolling) {
+                                    event.preventDefault();
+                                }
+
+                                break;
+                            default:
+                                event.preventDefault();
+                                break;
+                        }
+                    }
 
                     moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
 
@@ -248,6 +289,9 @@
                     original = event.originalEvent,
                     startEvent;
 
+                // used for testing first move event
+                isScrolling = undefined;
+
                 // Measure start values.
                 start = {
                     // Get initial touch coordinates.
@@ -258,7 +302,7 @@
                     time: +new Date()
                 };
 
-                startEvent = $.Event(eswipestart, { start: {} });
+                startEvent = $.Event(eswipestart, { start: start });
 
                 $this.trigger(startEvent);
 
@@ -653,8 +697,8 @@
                 if (percent > -100 && percent < 100 && (percent < -10 || percent > 10)) {
 
                     this.$element.addClass("no-transition");
-                    $activeItem.css({ "transform": "translate3d(" + percent + "%, 0, 0)" });
-                    $nextItem.addClass("swipe").css({ "transform": "translate3d(" + (percent + diff) + "%, 0, 0)" });
+                    $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
+                    $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
                 }
             }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
