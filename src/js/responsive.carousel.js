@@ -85,11 +85,9 @@
                 }
 
                 var direction = event.direction,
-                    method = null;
-
-                if (direction === "left") {
                     method = "next";
-                } else if (direction === "right") {
+
+                if (direction === "right") {
                     method = "prev";
                 }
 

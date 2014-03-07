@@ -197,9 +197,7 @@
                         switch (settings.touchAction) {
                             case "pan-x":
 
-                                if (isScrolling === undefined) {
-                                    isScrolling = !!(isScrolling || Math.abs(dy) < Math.abs(dx));
-                                }
+                                isScrolling = Math.abs(dy) < Math.abs(dx);
 
                                 if (!isScrolling) {
                                     event.preventDefault();
@@ -210,9 +208,8 @@
 
                                 break;
                             case "pan-y":
-                                if (isScrolling === undefined) {
-                                    isScrolling = !!(isScrolling || Math.abs(dx) < Math.abs(dy));
-                                }
+
+                                isScrolling = Math.abs(dx) < Math.abs(dy);
 
                                 if (!isScrolling) {
                                     event.preventDefault();
@@ -243,7 +240,7 @@
                     };
                 },
                 onEnd = function () {
-                    
+
                     // Measure duration
                     var duration = +new Date() - start.time,
                         endEvent;
@@ -255,7 +252,7 @@
                     var isValidSlide = ((Number(duration) < settings.timeLimit || settings.timeLimit === 0) &&
                         (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
                             Math.abs(delta.x) > $this[0].clientWidth / 2 ||
-                            Math.abs(delta.y) > $this[0].clientHeight / 2));                   
+                            Math.abs(delta.y) > $this[0].clientHeight / 2));
 
                     if (isValidSlide) {
 
@@ -267,7 +264,7 @@
                         endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
 
                         $this.trigger(endEvent);
-                    } 
+                    }
 
                     // Disable the touch events till next time.
                     $this.off(etouchmove).off(etouchend);
