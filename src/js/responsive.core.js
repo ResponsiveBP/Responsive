@@ -139,8 +139,8 @@
             etouchstart = "touchstart" + ns + "pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
             etouchend = "touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
-                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns +
-                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns,
+                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
+                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns + " MSPointerLeave" + ns,
             supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
                 (navigator.msMaxTouchPoints > 0) ||
                 (window.DocumentTouch && document instanceof DocumentTouch);
@@ -197,36 +197,28 @@
                         switch (settings.touchAction) {
                             case "pan-x":
 
-                                if (typeof isScrolling === "undefined") {
-                                    isScrolling = Math.abs(dy) > Math.abs(dx);
+                                if (isScrolling === undefined) {
+                                    isScrolling = !!(isScrolling || Math.abs(dy) < Math.abs(dx));
                                 }
 
-                                if (Math.abs(dx) > 10) {
+                                if (!isScrolling) {
+                                    event.preventDefault();
+                                } else {
                                     event.stopPropagation();
                                     return;
-                                }
-
-                                if (isScrolling) {
-                                    event.preventDefault();
                                 }
 
                                 break;
                             case "pan-y":
-                                if (typeof isScrolling === "undefined") {
-                                    isScrolling = Math.abs(dx) > Math.abs(dy);
+                                if (isScrolling === undefined) {
+                                    isScrolling = !!(isScrolling || Math.abs(dx) < Math.abs(dy));
                                 }
 
-                                if (isScrolling) {
+                                if (!isScrolling) {
                                     event.preventDefault();
-                                }
-
-                                if (Math.abs(dy) > 10) {
+                                } else {
                                     event.stopPropagation();
                                     return;
-                                }
-
-                                if (isScrolling) {
-                                    event.preventDefault();
                                 }
 
                                 break;
@@ -251,7 +243,7 @@
                     };
                 },
                 onEnd = function () {
-
+                    
                     // Measure duration
                     var duration = +new Date() - start.time,
                         endEvent;
@@ -263,7 +255,7 @@
                     var isValidSlide = ((Number(duration) < settings.timeLimit || settings.timeLimit === 0) &&
                         (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
                             Math.abs(delta.x) > $this[0].clientWidth / 2 ||
-                            Math.abs(delta.y) > $this[0].clientHeight / 2));
+                            Math.abs(delta.y) > $this[0].clientHeight / 2));                   
 
                     if (isValidSlide) {
 
@@ -275,7 +267,7 @@
                         endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
 
                         $this.trigger(endEvent);
-                    }
+                    } 
 
                     // Disable the touch events till next time.
                     $this.off(etouchmove).off(etouchend);
@@ -289,7 +281,11 @@
                     original = event.originalEvent,
                     startEvent;
 
-                // used for testing first move event
+                if (isMouse && original.target.nodeName.toUpperCase() === "IMG") {
+                    event.preventDefault();
+                }
+
+                // Used for testing first move event
                 isScrolling = undefined;
 
                 // Measure start values.
@@ -330,8 +326,8 @@
             etouchmove = "mousemove" + ns + " touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
             etouchend = "mouseup" + ns + " mouseleave" + ns +
                         " touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
-                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns +
-                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns;
+                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
+                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns + " MSPointerLeave" + ns;
 
         return this.each(function () {
 

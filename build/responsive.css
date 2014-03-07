@@ -3315,10 +3315,10 @@ pre {
         }
 
     .carousel.no-transition > figure {
-        -moz-transition-duration: 0 !important;
-        -o-transition-duration: 0 !important;
-        -webkit-transition-duration: 0 !important;
-        transition-duration: 0 !important;
+        -moz-transition-duration: 0s !important;
+        -o-transition-duration: 0s !important;
+        -webkit-transition-duration: 0s !important;
+        transition-duration: 0s !important;
     }
 
 /* 
