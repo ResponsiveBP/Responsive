@@ -1,16 +1,18 @@
 /* Responsive LightBox */
 
 .lightbox-on,
-.lightbox-lock-body > body {
+.lightbox-lock > body {
     height: 100%;
     overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
 }
 
 /* 
  * 1: Average browser max z-index.
  * 2: IE8 transparent background. 
  * 3. Use the iOS devices hardware accelerator to provide native scrolling.
- * 4. Prevent font rendering issues on webkit.
+ * 4. Prevent font rendering issues on Webkit.
  */
 .lightbox-overlay {
     position: fixed;

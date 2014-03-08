@@ -32,8 +32,8 @@
     }
 
     /* 
- * Next Last version
- */
+     * Next Last version
+     */
     .carousel .carousel-active,
     .carousel .next,
     .carousel .prev,
@@ -139,8 +139,7 @@
 /* 
  * Fade version
  */
-.carousel-fade > figure,
-.carousel[data-carousel-mode="fade"] > figure {
+.carousel-fade > figure {
     -webkit-transition: opacity .7s ease-in-out;
     -moz-transition: opacity .7s ease-in-out;
     -o-transition: opacity .7s ease-in-out;
@@ -155,45 +154,40 @@
     opacity: 0;
 }
 
-.carousel-fade .carousel-active,
-.carousel[data-carousel-mode="fade"] .carousel-active {
+.carousel-fade .carousel-active {
     opacity: 1;
 }
 
     .carousel-fade .carousel-active.left,
-    .carousel-fade .carousel-active.right,
-    .carousel[data-carousel-mode="fade"] .carousel-active.left,
-    .carousel[data-carousel-mode="fade"] .carousel-active.right {
-        -webkit-transform: translateX(0);
-        -moz-transform: translateX(0);
-        -ms-transform: translateX(0);
-        -o-transform: translateX(0);
-        transform: translateX(0);
+    .carousel-fade .carousel-active.right {
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
         left: 0\9;
         opacity: 0;
         z-index: 2;
     }
 
+.carousel-fade > figure.swipe,
 .carousel-fade > figure.next,
-.carousel-fade > figure.prev,
-.carousel[data-carousel-mode="fade"] > figure.next,
-.carousel[data-carousel-mode="fade"] > figure.prev {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
+.carousel-fade > figure.prev {
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
     left: 0\9;
     z-index: 1;
     opacity: 1;
 }
 
-.carousel-fade > figure .carousel-active,
-.carousel[data-carousel-mode="fade"] > figure .carousel-active {
+.carousel-fade > figure .carousel-active {
     position: relative;
 }
 
-.carousel[data-carousel-mode="fade"] .carousel-control,
+.carousel-fade .carousel-control,
 .carousel-fade .carousel-control:visited {
     z-index: 3;
 }

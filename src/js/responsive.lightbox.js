@@ -289,13 +289,6 @@
                     childHeight = windowHeight - diff;
                     var ie10Mobile = navigator.userAgent.match(/IEMobile\/10\.0/);
 
-                    // Prevent IEMobile10 scrolling when content overflows the lightbox.
-                    // This causes the content to jump behind the model but it's all I can
-                    // find for now.
-                    if (ie10Mobile) {
-                        $html.addClass("lightbox-lock-body");
-                    }
-
                     if ($img) {
                         // IE8 doesn't change the width as max-width will cause the 
                         // The image width to be set to zero.
@@ -311,11 +304,11 @@
                         // Prevent IEMobile10 scrolling when content overflows the lightbox.
                         // This causes the content to jump behind the model but it's all I can
                         // find for now.
-                        //if (ie10Mobile) {
-                        //    if ($content.children("*:first")[0].scrollHeight > $lightbox.height()) {
-                        //        $html.addClass("lightbox-lock-body");
-                        //    }
-                        //}
+                        if (ie10Mobile) {
+                            if ($content.children("*:first")[0].scrollHeight > $content.height()) {
+                                $html.addClass("lightbox-lock");
+                            }
+                        }
                     }
                     else {
 
@@ -413,9 +406,9 @@
                     $html.removeClass("lightbox-on")
                          .css("margin-right", "");
 
-                    if ($html.hasClass("lightbox-lock-body")) {
+                    if ($html.hasClass("lightbox-lock")) {
 
-                        $html.removeClass("lightbox-lock-body");
+                        $html.removeClass("lightbox-lock");
                         if (lastScroll !== $window.scrollTop()) {
                             $window.scrollTop(lastScroll);
                             lastScroll = 0;
@@ -754,7 +747,7 @@
     };
 
     // Data API
-    $body.on(eclick, ":attrStart(data-lightbox)", function(event) {
+    $body.on(eclick, ":attrStart(data-lightbox)", function (event) {
 
         event.preventDefault();
 
@@ -783,7 +776,7 @@
             options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
             $closeTarget = $(options.modalTrigger || (options.modalTrigger = $this.attr("href")));
 
-        $closeTarget.each(function() {
+        $closeTarget.each(function () {
 
             var lightbox = $(this).data("r.lightbox");
 

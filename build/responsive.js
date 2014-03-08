@@ -31,46 +31,6 @@
 
     "use strict";
 
-    $.support.getVendorPrefix = (function () {
-        /// <summary>Gets the correct vendor prefix for the current browser.</summary>
-        /// <param name="prop" type="String">The property to return the name for.</param>
-        /// <returns type="Object">
-        ///      The object containing the correct vendor prefixes.
-        ///      &#10;    1: js - The vendor prefix for the JavaScript property.
-        ///      &#10;    2: css - The vendor prefix for the CSS property.  
-        /// </returns>
-
-        var rprefixes = /^(Moz|Webkit|O|ms)(?=[A-Z])/,
-            div = document.createElement("div");
-
-        for (var prop in div.style) {
-            if (rprefixes.test(prop)) {
-                // Test is faster than match, so it's better to perform
-                // that on the lot and match only when necessary.
-                var match = prop.match(rprefixes)[0];
-                return {
-                    js: match,
-                    css: "-" + match.toLowerCase() + "-"
-                };
-            }
-        }
-
-        // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
-        // However (prop in style) returns the correct value, so we'll have to test for
-        // the presence of a specific property.
-        if ("WebkitOpacity" in div.style) {
-            return {
-                js: "Webkit",
-                css: "-webkit-"
-            };
-        }
-
-        return {
-            js: "",
-            css: ""
-        };
-    }());
-
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
@@ -630,7 +590,6 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        vendorPrefixes = $.support.getVendorPrefix,
         // Match the transition.
         rtransition = /\d+(.\d+)/,
         emouseenter = "mouseenter" + ns,
@@ -654,10 +613,6 @@
         this.$element.swipe({ namespace: "r.carousel", timeLimit: 0, touchAction: "pan-y" })
             .on("swipemove.r.carousel", $.proxy(function (event) {
 
-                if (this.options.mode !== "slide") {
-                    return;
-                }
-
                 if (this.sliding) {
                     return;
                 }
@@ -667,6 +622,7 @@
                 // Left is next.
                 var isNext = event.delta.x < 0,
                     type = isNext ? "next" : "prev",
+                    direction = isNext ? "left" : "right",
                     fallback = isNext ? "first" : "last",
                     activePosition = getActiveIndex.call(this),
                     $activeItem = $(this.$items[activePosition]),
@@ -687,16 +643,21 @@
                     diff = isNext ? 100 : -100;
 
                 // Shift the items but put a limit on sensitivity.
-                if (percent > -100 && percent < 100 && (percent < -10 || percent > 10)) {
-
+                if (Math.abs(percent) < 100 && Math.abs(percent) > 10) {
                     this.$element.addClass("no-transition");
-                    $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
-                    $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
+                    if (this.options.mode === "slide") {
+                        $activeItem.addClass(direction).css({ "transform": "translate(" + percent + "%, 0)" });
+                        $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
+                    } else {
+                        $activeItem.addClass(direction).css({ "opacity": 1 - Math.abs((percent / 100)) });
+                        $nextItem.addClass("swipe");
+                    }
                 }
+
             }, this))
             .on("swipeend.r.carousel", $.proxy(function (event) {
 
-                if (this.sliding) {
+                if (this.sliding || !this.$element.hasClass("no-transition")) {
                     return;
                 }
 
@@ -714,25 +675,22 @@
 
                     // Trim the animation duration based on the current position.
                     var activePosition = getActiveIndex.call(this),
-                        $activeItem = $(this.$items[activePosition]),
-                        prop = vendorPrefixes.css + "transition-duration";
+                        $activeItem = $(this.$items[activePosition]);
 
                     if (!this.translationDuration) {
-                        this.translationDuration = parseFloat($activeItem.css(prop));
+                        this.translationDuration = parseFloat($activeItem.css("transition-duration"));
                     }
 
-                    // Get the transform matrix and pull the right value.
-                    // index of 4 for translateX.
-                    var matrix = $activeItem.css(vendorPrefixes.css + "transform"),
-                           translateX = (matrix.match(/-?[0-9\.]+/g))[4],
-                    // Now turn that into a percentage.
-                        width = $activeItem.width(),
-                        percent = parseInt((Math.abs(translateX) / width) * 100, 10),
-                        newDuration = ((100 - percent) / 100) * this.translationDuration;
+                    // Get the distance and turn it into into a percentage
+                    // to calculate the duration. Whichever is lowest is used.
+                    var width = $activeItem.width(),
+                        percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
+                        swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
+                        newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
 
                     // Set the new temporary duration.
                     this.$items.each(function () {
-                        $(this).css(prop, newDuration + "s");
+                        $(this).css({ "transition-duration": newDuration + "s" });
                     });
                 }
 
@@ -767,7 +725,10 @@
                          .on(emouseleave, $.proxy(this.cycle, this));
         }
 
-        if (this.options.enabletouch && this.options.mode === "slide") {
+        // Add the css class to support fade.
+        this.options.mode === "fade" && this.$element.addClass("carousel-fade");
+
+        if (this.options.enabletouch) {
             manageTouch.call(this);
         }
     };
@@ -919,10 +880,10 @@
 
         var complete = function () {
 
-            if (slideMode && self.$items) {
+            if (self.$items) {
                 // Clear the transition properties if set.
                 self.$items.each(function () {
-                    $(this).css({ "transition": "" });
+                    $(this).css({ "transition": "", "opacity": "" });
                 });
             }
 
@@ -940,12 +901,10 @@
         $activeItem.addClass(direction);
         $nextItem.addClass(direction);
 
-        if (slideMode && this.$items) {
-            // Clear the added css.
-            this.$items.each(function () {
-                $(this).removeClass("swipe").css({ "transform": "" });
-            });
-        }
+        // Clear the added css.
+        this.$items.each(function () {
+            $(this).removeClass("swipe").css({ "transform": "", "opacity": "" });
+        });
 
         supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete)
         .ensureTransitionEnd($activeItem.css("transition-duration").match(rtransition)[0] * 1000)
@@ -1616,13 +1575,6 @@
                     childHeight = windowHeight - diff;
                     var ie10Mobile = navigator.userAgent.match(/IEMobile\/10\.0/);
 
-                    // Prevent IEMobile10 scrolling when content overflows the lightbox.
-                    // This causes the content to jump behind the model but it's all I can
-                    // find for now.
-                    if (ie10Mobile) {
-                        $html.addClass("lightbox-lock-body");
-                    }
-
                     if ($img) {
                         // IE8 doesn't change the width as max-width will cause the 
                         // The image width to be set to zero.
@@ -1638,11 +1590,11 @@
                         // Prevent IEMobile10 scrolling when content overflows the lightbox.
                         // This causes the content to jump behind the model but it's all I can
                         // find for now.
-                        //if (ie10Mobile) {
-                        //    if ($content.children("*:first")[0].scrollHeight > $lightbox.height()) {
-                        //        $html.addClass("lightbox-lock-body");
-                        //    }
-                        //}
+                        if (ie10Mobile) {
+                            if ($content.children("*:first")[0].scrollHeight > $content.height()) {
+                                $html.addClass("lightbox-lock");
+                            }
+                        }
                     }
                     else {
 
@@ -1740,9 +1692,9 @@
                     $html.removeClass("lightbox-on")
                          .css("margin-right", "");
 
-                    if ($html.hasClass("lightbox-lock-body")) {
+                    if ($html.hasClass("lightbox-lock")) {
 
-                        $html.removeClass("lightbox-lock-body");
+                        $html.removeClass("lightbox-lock");
                         if (lastScroll !== $window.scrollTop()) {
                             $window.scrollTop(lastScroll);
                             lastScroll = 0;
@@ -2081,7 +2033,7 @@
     };
 
     // Data API
-    $body.on(eclick, ":attrStart(data-lightbox)", function(event) {
+    $body.on(eclick, ":attrStart(data-lightbox)", function (event) {
 
         event.preventDefault();
 
@@ -2110,7 +2062,7 @@
             options = data || $.buildDataOptions($this, {}, "lightbox", "r"),
             $closeTarget = $(options.modalTrigger || (options.modalTrigger = $this.attr("href")));
 
-        $closeTarget.each(function() {
+        $closeTarget.each(function () {
 
             var lightbox = $(this).data("r.lightbox");
 

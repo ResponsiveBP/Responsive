@@ -31,46 +31,6 @@
 
     "use strict";
 
-    $.support.getVendorPrefix = (function () {
-        /// <summary>Gets the correct vendor prefix for the current browser.</summary>
-        /// <param name="prop" type="String">The property to return the name for.</param>
-        /// <returns type="Object">
-        ///      The object containing the correct vendor prefixes.
-        ///      &#10;    1: js - The vendor prefix for the JavaScript property.
-        ///      &#10;    2: css - The vendor prefix for the CSS property.  
-        /// </returns>
-
-        var rprefixes = /^(Moz|Webkit|O|ms)(?=[A-Z])/,
-            div = document.createElement("div");
-
-        for (var prop in div.style) {
-            if (rprefixes.test(prop)) {
-                // Test is faster than match, so it's better to perform
-                // that on the lot and match only when necessary.
-                var match = prop.match(rprefixes)[0];
-                return {
-                    js: match,
-                    css: "-" + match.toLowerCase() + "-"
-                };
-            }
-        }
-
-        // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
-        // However (prop in style) returns the correct value, so we'll have to test for
-        // the presence of a specific property.
-        if ("WebkitOpacity" in div.style) {
-            return {
-                js: "Webkit",
-                css: "-webkit-"
-            };
-        }
-
-        return {
-            js: "",
-            css: ""
-        };
-    }());
-
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
