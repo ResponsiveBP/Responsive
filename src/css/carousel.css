@@ -31,7 +31,7 @@
         transition-duration: 0s !important;
     }
 
-/* 
+    /* 
  * Next Last version
  */
     .carousel .carousel-active,
@@ -87,8 +87,8 @@
     }
 
     /*
- * 1.  IE10 is picking up on the left positioning :(
- */
+     * 1.  IE10 is picking up on the left positioning :(
+     */
     x::-ms-reveal,
     .carousel .next,
     .carousel .prev,
