@@ -34,7 +34,7 @@
 
     manageTouch = function () {
 
-        this.$element.swipe({ namespace: "r.carousel", timeLimit: 0, touchAction: "pan-y" })
+        this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
             .on("swipemove.r.carousel", $.proxy(function (event) {
 
                 if (this.sliding) {
@@ -70,10 +70,10 @@
                 if (Math.abs(percent) < 100 && Math.abs(percent) > 10) {
                     this.$element.addClass("no-transition");
                     if (this.options.mode === "slide") {
-                        $activeItem.addClass(direction).css({ "transform": "translate(" + percent + "%, 0)" });
+                        $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
                         $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
                     } else {
-                        $activeItem.addClass(direction).css({ "opacity": 1 - Math.abs((percent / 100)) });
+                        $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
                         $nextItem.addClass("swipe");
                     }
                 }
@@ -326,9 +326,11 @@
         $nextItem.addClass(direction);
 
         // Clear the added css.
-        this.$items.each(function () {
-            $(this).removeClass("swipe").css({ "transform": "", "opacity": "" });
-        });
+        if (this.$items) {
+            this.$items.each(function () {
+                $(this).removeClass("swipe").css({ "transform": "", "opacity": "" });
+            });
+        }
 
         supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete)
         .ensureTransitionEnd($activeItem.css("transition-duration").match(rtransition)[0] * 1000)

@@ -1,5 +1,3 @@
-/* Responsive Carousel */
-
 .carousel {
     position: relative;
     overflow: hidden;
@@ -181,6 +179,10 @@
     left: 0\9;
     z-index: 1;
     opacity: 1;
+}
+
+.carousel-fade > .carousel-active.swipe {
+    z-index: 2;
 }
 
 .carousel-fade > figure .carousel-active {

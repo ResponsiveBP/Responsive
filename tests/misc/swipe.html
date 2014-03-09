@@ -168,7 +168,7 @@
                     }
 
                     // Use the responsive swipe functionality to normalize events across devices.
-                    $parent.swipe({ namespace: "drag", timeLimit: 0 })
+                    $parent.swipe({ namespace: "drag" })
                            .on("swipestart.drag", function () {
 
                                if ($this.is(":visible")) {
@@ -212,7 +212,8 @@
 
             $(".swipe-1").swipe({ namespace: "r.swipe" }).on("swipeend.r.swipe", function (event) {
 
-                $(this).html(event.direction);
+
+                $(this).html(event.direction + "<br/>" + event.delta.x + "<br/>" + event.delta.y);
 
             });
 

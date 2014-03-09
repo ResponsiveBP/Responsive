@@ -1,16 +1,3 @@
-/*
- * Responsive framework
- *
- * Responsive is a minimalist framework for rapidly creating responsive websites specifically 
- * written to prevent the need to undo styles set by the framework itself and allow 
- * developers to write streamlined code.
- *
- * Portions of this CSS and JS are based on the incredibly hard work that has been 
- * done creating the HTML5 Boilerplate, Twitter Bootstrap, Zurb Foundation, and Normalize.css 
- * and all credit for that work is due to them.
- * 
- */
-
 /*  ==|== Responsive =============================================================
     Author: James South
     twitter : http://twitter.com/James_M_South
@@ -19,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.4.2 | MIT License | responsivebp.com */
+/*! Responsive v2.5.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -81,14 +68,13 @@
         /// <param name="options" type="Object" optional="true" parameterArray="true">
         ///      A collection of optional settings to apply.
         ///      &#10;    1: namespace - The namespace for isolating the touch events.
-        ///      &#10;    2: timeLimit - The limit in ms to recognise touch events for. Default - 1000; 0 disables.
+        ///      &#10;    2: timeLimit - The limit in ms to recognize touch events for. Default - 1000; 0 disables.
         /// </param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
         var defaults = {
             namespace: null,
-            touchAction: "none",
-            timeLimit: 1000
+            touchAction: "none"
         },
             settings = $.extend({}, defaults, options);
 
@@ -115,11 +101,11 @@
 
             var $this = $(this);
 
-            // Enable extended touch events on ie.
+            // Enable extended touch events on IE.
             $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
 
             var start = {},
-                delta,
+                delta = {},
                 isScrolling,
                 onMove = function (event) {
 
@@ -200,19 +186,16 @@
                     };
                 },
                 onEnd = function () {
-
                     // Measure duration
                     var duration = +new Date() - start.time,
                         endEvent;
 
                     // Determine if slide attempt triggers slide.
-                    // If slide duration is less than 1000ms
-                    // and if slide amount is greater than 20px
+                    // If if slide amount is greater than 5px
                     // or if slide amount is greater than half the width
-                    var isValidSlide = ((Number(duration) < settings.timeLimit || settings.timeLimit === 0) &&
-                        (Math.abs(delta.x) > 20 || Math.abs(delta.y) > 20 ||
-                            Math.abs(delta.x) > $this[0].clientWidth / 2 ||
-                            Math.abs(delta.y) > $this[0].clientHeight / 2));
+                    var isValidSlide = (Math.abs(delta.x) > 5 || Math.abs(delta.y) > 5 ||
+                                        Math.abs(delta.x) > $this[0].clientWidth / 2 ||
+                                        Math.abs(delta.y) > $this[0].clientHeight / 2);
 
                     if (isValidSlide) {
 
@@ -238,7 +221,7 @@
                     original = event.originalEvent,
                     startEvent;
 
-                if (isMouse && original.target.nodeName.toUpperCase() === "IMG") {
+                if (isMouse && $(event.target).is("img")) {
                     event.preventDefault();
                 }
 
@@ -264,7 +247,7 @@
                 }
 
                 // Reset delta and end measurements.
-                delta = {};
+                delta = { x: 0, y: 0 };
 
                 // Attach touchmove and touchend listeners.
                 $this.on(etouchmove, onMove)
