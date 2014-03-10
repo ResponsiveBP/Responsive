@@ -109,6 +109,8 @@
                 isScrolling,
                 onMove = function (event) {
 
+                    console.log("touch move start");
+
                     // Normalize the variables.
                     var isMouse = event.type === "mousemove",
                         isPointer = event.type !== "touchmove" && !isMouse,
@@ -118,7 +120,9 @@
                     // Ensure swiping with one touch and not pinching.
                     if (isPointer) {
                         if (original.pointerType && original.pointerType !== 2) {
-                            return;
+                            if (original.pointerType !== "touch") {
+                                return;
+                            }
                         }
                     } else {
                         // Only left click allowed.
@@ -184,8 +188,13 @@
                         x: dx,
                         y: dy
                     };
+
+                    console.log("touch move end");
                 },
                 onEnd = function () {
+
+                    console.log("touch end start");
+
                     // Measure duration
                     var duration = +new Date() - start.time,
                         endEvent;
@@ -211,9 +220,13 @@
 
                     // Disable the touch events till next time.
                     $this.off(etouchmove).off(etouchend);
+
+                    console.log("touch end end");
                 };
 
             $this.off(etouchstart).on(etouchstart, function (event) {
+
+                console.log("touch down start");
 
                 // Normalize the variables.
                 var isMouse = event.type === "mousedown",
@@ -252,6 +265,8 @@
                 // Attach touchmove and touchend listeners.
                 $this.on(etouchmove, onMove)
                      .on(etouchend, onEnd);
+
+                console.log("touch down end");
             });
         });
     };
