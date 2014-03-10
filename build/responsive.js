@@ -82,7 +82,7 @@
             eswipestart = "swipestart" + ns,
             eswipemove = "swipemove" + ns,
             eswipeend = "swipeend" + ns,
-            etouchstart = "touchstart" + ns + "pointerdown" + ns + " MSPointerDown" + ns,
+            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
             etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
             etouchend = "touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
                         " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
@@ -109,31 +109,23 @@
                 isScrolling,
                 onMove = function (event) {
 
-                    console.log("touch move start");
-
                     // Normalize the variables.
                     var isMouse = event.type === "mousemove",
                         isPointer = event.type !== "touchmove" && !isMouse,
                         original = event.originalEvent,
                         moveEvent;
 
-                    // Ensure swiping with one touch and not pinching.
-                    if (isPointer) {
-                        if (original.pointerType && original.pointerType !== 2) {
-                            if (original.pointerType !== "touch") {
-                                return;
-                            }
-                        }
-                    } else {
-                        // Only left click allowed.
-                        if (isMouse && event.which !== 1) {
-                            return;
-                        }
-
-                        if (original.touches && original.touches.length > 1) {
-                            return;
-                        }
+                    // Only left click allowed.
+                    if (isMouse && event.which !== 1) {
+                        return;
                     }
+
+                    // One touch allowed.
+                    if (original.touches && original.touches.length > 1) {
+                        return;
+                    }
+
+                    // Ensure swiping with one touch and not pinching.
                     if (event.scale && event.scale !== 1) {
                         return;
                     }
@@ -188,25 +180,15 @@
                         x: dx,
                         y: dy
                     };
-
-                    console.log("touch move end");
                 },
                 onEnd = function () {
-
-                    console.log("touch end start");
 
                     // Measure duration
                     var duration = +new Date() - start.time,
                         endEvent;
 
                     // Determine if slide attempt triggers slide.
-                    // If if slide amount is greater than 5px
-                    // or if slide amount is greater than half the width
-                    var isValidSlide = (Math.abs(delta.x) > 5 || Math.abs(delta.y) > 5 ||
-                                        Math.abs(delta.x) > $this[0].clientWidth / 2 ||
-                                        Math.abs(delta.y) > $this[0].clientHeight / 2);
-
-                    if (isValidSlide) {
+                    if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
 
                         // Set the direction and return it.
                         var horizontal = delta.x < 0 ? "left" : "right",
@@ -220,13 +202,9 @@
 
                     // Disable the touch events till next time.
                     $this.off(etouchmove).off(etouchend);
-
-                    console.log("touch end end");
                 };
 
             $this.off(etouchstart).on(etouchstart, function (event) {
-
-                console.log("touch down start");
 
                 // Normalize the variables.
                 var isMouse = event.type === "mousedown",
@@ -234,7 +212,7 @@
                     original = event.originalEvent,
                     startEvent;
 
-                if (isMouse && $(event.target).is("img")) {
+                if ($(event.target).is("img")) {
                     event.preventDefault();
                 }
 
@@ -265,8 +243,6 @@
                 // Attach touchmove and touchend listeners.
                 $this.on(etouchmove, onMove)
                      .on(etouchend, onEnd);
-
-                console.log("touch down end");
             });
         });
     };

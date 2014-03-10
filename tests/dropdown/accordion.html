@@ -164,7 +164,16 @@
     
     
     
-    
+    <script>
+        // Bind to the shown event.
+        $(".accordion-body").on("shown.r.dropdown", function (event) {
+            // Your custom behavior...
+            console.log(event);
+            event.stopPropagation();
+            console.log(this);
+        });
+
+    </script>
     
     
 </body>
