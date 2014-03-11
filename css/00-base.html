@@ -15,15 +15,15 @@ sublinks: ["#normalize|Normalize",
     <h1>Normalize</h1>
     <p>Responsive provides lots of building blocks that are specifically designed to speed up your development by boilerplating common components from normalized styles.</p>
     <p>
-        The base CSS for this comes from <a href="http://necolas.github.com/normalize.css/" target="_blank" rel="external">Normalize.css</a>; an open-source project by 
-                <a href="http://twitter.com/necolas" target="_blank" rel="external">Nicolas Gallagher</a> and <a href="http://twitter.com/jon_neal" target="_blank" rel="external">Jonathan Neal</a>. 
+        The base CSS for this comes from <a href="http://necolas.github.com/normalize.css/" target="_blank" rel="external">Normalize.css</a>; an open-source project by
+        <a href="http://twitter.com/necolas" target="_blank" rel="external">Nicolas Gallagher</a> and <a href="http://twitter.com/jon_neal" target="_blank" rel="external">Jonathan Neal</a>.
     </p>
     <p>
-        <a href="http://nicolasgallagher.com/about-normalize-css/" target="_blank" rel="external">In their own words</a>:             
+        <a href="http://nicolasgallagher.com/about-normalize-css/" target="_blank" rel="external">In their own words</a>:
     </p>
     <blockquote>
-        Normalize.css is a small CSS file that provides better cross-browser consistency in the default styling of HTML elements. 
-            It's a modern, HTML5-ready, alternative to the traditional CSS reset.
+        Normalize.css is a small CSS file that provides better cross-browser consistency in the default styling of HTML elements.
+        It's a modern, HTML5-ready, alternative to the traditional CSS reset.
     </blockquote>
 </section>
 <hr />
@@ -149,40 +149,40 @@ margin: 2.33em 0;</code></pre>
     <div class="row">
         <h3>Visible Example: Green means visible</h3>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>&lt; 48em</h3>
                 <code>.visible-xs</code>
-                <div class="visible-xs responsive-helper-alert alert-success">
+                <div class="visible-xs responsive-helper-alert isShown">
                     <h3>&lt; 48em</h3>
                     <code>.visible-xs</code>
                 </div>
             </div>
         </div>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>48em to 62em</h3>
                 <code>.visible-s</code>
-                <div class="visible-s responsive-helper-alert alert-success">
+                <div class="visible-s responsive-helper-alert isShown">
                     <h3>48em to 62em</h3>
                     <code>.visible-s</code>
                 </div>
             </div>
         </div>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>62em to 75em</h3>
                 <code>.visible-m</code>
-                <div class="visible-m responsive-helper-alert alert-success">
+                <div class="visible-m responsive-helper-alert isShown">
                     <h3>62em to 75em</h3>
                     <code>.visible-m</code>
                 </div>
             </div>
         </div>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>&gt; 75em</h3>
                 <code>.visible-l</code>
-                <div class="visible-l responsive-helper-alert alert-success">
+                <div class="visible-l responsive-helper-alert isShown">
                     <h3>&gt; 75em</h3>
                     <code>.visible-l</code>
                 </div>
@@ -192,40 +192,40 @@ margin: 2.33em 0;</code></pre>
     <div class="row">
         <h3>Hidden Example: Red means hidden</h3>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>&lt; 48em</h3>
                 <code>.hidden-xs</code>
-                <div class="hidden-xs responsive-helper-alert alert-success">
+                <div class="hidden-xs responsive-helper-alert isShown">
                     <h3>&lt; 48em</h3>
                     <code>.hidden-xs</code>
                 </div>
             </div>
         </div>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>48em to 62em</h3>
                 <code>.hidden-s</code>
-                <div class="hidden-s responsive-helper-alert alert-success">
+                <div class="hidden-s responsive-helper-alert isShown">
                     <h3>48em to 62em</h3>
                     <code>.hidden-s</code>
                 </div>
             </div>
         </div>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>62em to 75em</h3>
                 <code>.hidden-m</code>
-                <div class="hidden-m responsive-helper-alert alert-success">
+                <div class="hidden-m responsive-helper-alert isShown">
                     <h3>62em to 75em</h3>
                     <code>.hidden-m</code>
                 </div>
             </div>
         </div>
         <div class="col-s-3">
-            <div class="responsive-helper-pane alert-error">
+            <div class="responsive-helper-pane isHidden">
                 <h3>&gt; 75em</h3>
                 <code>.hidden-l</code>
-                <div class="hidden-l responsive-helper-alert alert-success">
+                <div class="hidden-l responsive-helper-alert isShown">
                     <h3>&gt; 75em</h3>
                     <code>.hidden-l</code>
                 </div>
@@ -253,21 +253,31 @@ margin: 2.33em 0;</code></pre>
         <dt><code>.ir</code></dt>
         <dd>Hides an elements text so that a background image can be used instead. Useful for logos.</dd>
         <dt><code>.block</code></dt>
-        <dd>Changes an elements display style to
-                    <var>block</var>.</dd>
+        <dd>
+            Changes an elements display style to
+            <var>block</var>.
+        </dd>
         <dt><code>.inline-block</code></dt>
-        <dd>Changes an elements display style to
-                    <var>inline-block</var>.</dd>
+        <dd>
+            Changes an elements display style to
+            <var>inline-block</var>.
+        </dd>
         <dt><code>.inline</code></dt>
-        <dd>Changes an elements display style to
-                    <var>inline</var>.</dd>
+        <dd>
+            Changes an elements display style to
+            <var>inline</var>.
+        </dd>
         <dt><code>.fade-out</code></dt>
-        <dd>Changes an elements opacity to
-                    <var>0</var>
-            fading it out with a CSS animation.</dd>
+        <dd>
+            Changes an elements opacity to
+            <var>0</var>
+            fading it out with a CSS animation.
+        </dd>
         <dt><code>.fade-in</code></dt>
-        <dd>Changes an elements opacity to
-                    <var>1</var>
-            fading it in with a CSS animation.</dd>
+        <dd>
+            Changes an elements opacity to
+            <var>1</var>
+            fading it in with a CSS animation.
+        </dd>
     </dl>
 </section>

@@ -1,16 +1,3 @@
-/*
- * Responsive framework
- *
- * Responsive is a minimalist framework for rapidly creating responsive websites specifically 
- * written to prevent the need to undo styles set by the framework itself and allow 
- * developers to write streamlined code.
- *
- * Portions of this CSS and JS are based on the incredibly hard work that has been 
- * done creating the HTML5 Boilerplate, Twitter Bootstrap, Zurb Foundation, and Normalize.css 
- * and all credit for that work is due to them.
- * 
- */
-
 /*  ==|== Responsive =============================================================
     Author: James South
     twitter : http://twitter.com/James_M_South
@@ -19,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.4.1 | MIT License | responsivebp.com */
+/*! Responsive v2.5.0 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 
 /**
@@ -443,8 +430,6 @@ td,
 th {
   padding: 0;
 }
-/* Responsive Base */
-
 /*
  * Fix the box model
  * Overwrite Normalize rather than edit it.
@@ -520,8 +505,6 @@ hr {
 abbr {
     cursor: help;
 }
-/* Responsive Grid */
-
 .container {
     margin: 0 auto;
     /* Manages width in a single place */
@@ -2349,8 +2332,6 @@ abbr {
     }
 }
 
-/* Responsive Lists*/
-
 /* 
  * Unordered and ordered lists 
  * Scale the padding/margin with the base font.
@@ -2465,8 +2446,6 @@ dt, dd {
     }
 }
 
-/* Responsive Tables*/
-
 /* 
  *  Make it responsive
  */
@@ -2527,7 +2506,6 @@ table {
         margin: 0;
     }
 
-/* Responsive Tables*/
 @media (max-width: 47.99em) {
     /*
  * Basic layout.
@@ -2592,8 +2570,6 @@ table {
         }
 }
 
-/* Responsive Alert */
-
 .alert {
     background-color: #FCF8E3;
     border: 1px solid #F2E187;
@@ -2630,8 +2606,6 @@ table {
     .alert .close:hover {
         text-decoration: underline;
     }
-/* Responsive Media */
-
 /*
  * Remove the gap between images, videos, audio and canvas and the bottom of
  * their containers: h5bp.com/i/440
@@ -2753,8 +2727,6 @@ a img {
     width: 100%;
 }
 
-/* Responsive Forms Base */
-
 /* Normalize  */
 .form {
     margin: 1em 0;
@@ -2849,12 +2821,13 @@ input[type="color"] {
 
     /*
      * Fix field styling on iPhone and iPad.
-     * 1. Add a dropdown indicator
+     * 1. Add a select indicator
      */
     select {
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==); /* 1 */
         background-repeat: no-repeat;
         background-position: right center;
+        padding-right: 1.67em;
     }
 
     /*
@@ -2976,11 +2949,11 @@ input[type="checkbox"]:checked {
 input[disabled],
 select[disabled],
 textarea[disabled] {
-    cursor: not-allowed!important; /* 1 */
+    cursor: not-allowed !important; /* 1 */
     background-color: #ebebeb;
     border-color: #c0c0c0;
     color: #c0c0c0;
-    outline: 0!important;
+    outline: 0 !important;
     opacity: 1;
 }
 
@@ -3039,18 +3012,17 @@ select.inline-block {
     margin: 1em 0;
     padding: 1em 0;
 }
-/* Responsive Buttons */
 
 /*
- * Normalize button borders, colour, and padding.
+ * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
  * 2: Remove 300ms touch delay.
  */
 
 button,
-[type="submit"],
-[type="button"],
-[type="reset"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
 [role="button"] {
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
@@ -3066,18 +3038,18 @@ button,
     cursor: pointer;
     position: relative;
     -ms-touch-action: none; /* 2 */
-    touch-action: none;  /* 2 */
+    touch-action: none; /* 2 */
 }
 
 /*
  * Reset width for inputs
  */
-[type="submit"],
-[type="reset"],
-[type="button"],
-.form-no-grid [type="submit"],
-.form-no-grid [type="reset"],
-.form-no-grid [type="button"] {
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+.form-no-grid input[type="submit"],
+.form-no-grid input[type="reset"],
+.form-no-grid input[type="button"] {
     width: auto;
     max-width: none;
 }
@@ -3086,18 +3058,18 @@ button,
      * Button states.
      */
     button:hover,
-    [type="submit"]:hover,
-    [type="button"]:hover,
-    [type="reset"]:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    input[type="reset"]:hover,
     [role="button"]:hover {
         color: #222;
         background-color: #cdcdcd;
     }
 
     button:focus,
-    [type="submit"]:focus,
-    [type="button"]:focus,
-    [type="reset"]:focus,
+    input[type="submit"]:focus,
+    input[type="button"]:focus,
+    input[type="reset"]:focus,
     [role="button"]:focus {
         color: #222;
         outline: 1px solid #00a9ec;
@@ -3105,9 +3077,9 @@ button,
     }
 
     button:active,
-    [type="submit"]:active,
-    [type="button"]:active,
-    [type="reset"]:active,
+    input[type="submit"]:active,
+    input[type="button"]:active,
+    input[type="reset"]:active,
     [role="button"]:active {
         color: #222;
         background-color: #e7e7e7;
@@ -3118,9 +3090,9 @@ button,
      * 1. Fix IOS 6/7 opacity issue
      */
     button[disabled],
-    [type="submit"][disabled],
-    [type="button"][disabled],
-    [type="reset"][disabled],
+    input[type="submit"][disabled],
+    input[type="button"][disabled],
+    input[type="reset"][disabled],
     [role="button"].disabled {
         color: #5d5d5d;
         background-color: #e7e7e7;
@@ -3134,9 +3106,9 @@ button,
      * 2. Pad buttons.
      */
     button.btn-inline,
-    [type="submit"].btn-inline,
-    [type="button"].btn-inline,
-    [type="reset"].btn-inline,
+    input[type="submit"].btn-inline,
+    input[type="button"].btn-inline,
+    input[type="reset"].btn-inline,
     [role="button"].btn-inline {
         margin-left: -.27em; /* 1 */
         padding: .25em 1em; /* 2 */
@@ -3170,10 +3142,8 @@ button,
         float: left;
     }
 
-/* Responsive Code */
-
 /*
- * Colours and padding.
+ * Colors and padding.
  */
 pre, code, samp, kbd {
     background-color: #f7f7f9;
@@ -3226,8 +3196,6 @@ pre {
     overflow-y: scroll;
 }
 
-/* Responsive Dropdown */
-
 .accordion {
     border: solid 1px #c0c0c0;
     margin-bottom: .125em;
@@ -3277,8 +3245,6 @@ pre {
         width: 0;
     }
 
-/* Responsive Autosize */
-
 .autosize,
 [data-autosize] {
     overflow: hidden;
@@ -3287,8 +3253,6 @@ pre {
     -o-transition: height 0.3s linear;
     transition: height 0.3s linear;
 }
-
-/* Responsive Carousel */
 
 .carousel {
     position: relative;
@@ -3314,16 +3278,16 @@ pre {
             width: 100%;
         }
 
-    .carousel .no-transition {
-        -moz-transition-duration: 0 !important;
-        -o-transition-duration: 0 !important;
-        -webkit-transition-duration: 0 !important;
-        transition-duration: 0 !important;
+    .carousel.no-transition > figure {
+        -moz-transition-duration: 0s !important;
+        -o-transition-duration: 0s !important;
+        -webkit-transition-duration: 0s !important;
+        transition-duration: 0s !important;
     }
 
     /* 
- * Next Last version
- */
+     * Next Last version
+     */
     .carousel .carousel-active,
     .carousel .next,
     .carousel .prev,
@@ -3377,8 +3341,8 @@ pre {
     }
 
     /*
- * 1.  IE10 is picking up on the left positioning :(
- */
+     * 1.  IE10 is picking up on the left positioning :(
+     */
     x::-ms-reveal,
     .carousel .next,
     .carousel .prev,
@@ -3429,8 +3393,7 @@ pre {
 /* 
  * Fade version
  */
-.carousel-fade > figure,
-.carousel[data-carousel-mode="fade"] > figure {
+.carousel-fade > figure {
     -webkit-transition: opacity .7s ease-in-out;
     -moz-transition: opacity .7s ease-in-out;
     -o-transition: opacity .7s ease-in-out;
@@ -3445,45 +3408,44 @@ pre {
     opacity: 0;
 }
 
-.carousel-fade .carousel-active,
-.carousel[data-carousel-mode="fade"] .carousel-active {
+.carousel-fade .carousel-active {
     opacity: 1;
 }
 
     .carousel-fade .carousel-active.left,
-    .carousel-fade .carousel-active.right,
-    .carousel[data-carousel-mode="fade"] .carousel-active.left,
-    .carousel[data-carousel-mode="fade"] .carousel-active.right {
-        -webkit-transform: translateX(0);
-        -moz-transform: translateX(0);
-        -ms-transform: translateX(0);
-        -o-transform: translateX(0);
-        transform: translateX(0);
+    .carousel-fade .carousel-active.right {
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
         left: 0\9;
         opacity: 0;
         z-index: 2;
     }
 
+.carousel-fade > figure.swipe,
 .carousel-fade > figure.next,
-.carousel-fade > figure.prev,
-.carousel[data-carousel-mode="fade"] > figure.next,
-.carousel[data-carousel-mode="fade"] > figure.prev {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
+.carousel-fade > figure.prev {
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
     left: 0\9;
     z-index: 1;
     opacity: 1;
 }
 
-.carousel-fade > figure .carousel-active,
-.carousel[data-carousel-mode="fade"] > figure .carousel-active {
+.carousel-fade > .carousel-active.swipe {
+    z-index: 2;
+}
+
+.carousel-fade > figure .carousel-active {
     position: relative;
 }
 
-.carousel[data-carousel-mode="fade"] .carousel-control,
+.carousel-fade .carousel-control,
 .carousel-fade .carousel-control:visited {
     z-index: 3;
 }
@@ -3518,33 +3480,32 @@ pre {
         background-color: #fff;
     }
 
-/* Responsive Tabs*/
-[data-tabs] {
+.tabs {
     position: relative;
 }
 
-    [data-tabs] > ul {
+    .tabs > ul {
         list-style: none;
         border-bottom: 1px solid #c0c0c0;
         padding: 0;
         margin-top: 0;
     }
 
-        [data-tabs] > ul:before, [data-tabs] > ul:after {
+        .tabs > ul:before, .tabs > ul:after {
             content: "";
             display: table;
         }
 
-        [data-tabs] > ul:after {
+        .tabs > ul:after {
             clear: both;
         }
 
-        [data-tabs] > ul > li {
+        .tabs > ul > li {
             float: left;
             margin-bottom: -1px;
         }
 
-            [data-tabs] > ul > li > a {
+            .tabs > ul > li > a {
                 text-decoration: none;
                 display: block;
                 cursor: pointer;
@@ -3555,13 +3516,13 @@ pre {
                 outline: none;
             }
 
-                [data-tabs] > ul > li > a:hover {
+                .tabs > ul > li > a:hover {
                     background: #ebebeb;
                     border-color: #c0c0c0;
                 }
 
-            [data-tabs] > ul > li.tab-active > a,
-            [data-tabs] > ul > li.tab-active > a:hover {
+            .tabs > ul > li.tab-active > a,
+            .tabs > ul > li.tab-active > a:hover {
                 color: #454545;
                 cursor: default;
                 background: #fff;
@@ -3569,28 +3530,28 @@ pre {
                 border-bottom-color: transparent;
             }
 
-    [data-tabs] > * {
+    .tabs > * {
         display: none;
     }
 
-    [data-tabs] > ul,
-    [data-tabs] > *.tab-pane-active {
-        display: block;
-    }
-
-/* Responsive LightBox */
+        .tabs > ul,
+        .tabs > *.tab-pane-active {
+            display: block;
+        }
 
 .lightbox-on,
-.lightbox-lock-body > body {
+.lightbox-lock > body {
     height: 100%;
     overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
 }
 
 /* 
  * 1: Average browser max z-index.
  * 2: IE8 transparent background. 
  * 3. Use the iOS devices hardware accelerator to provide native scrolling.
- * 4. Prevent font rendering issues on webkit.
+ * 4. Prevent font rendering issues on Webkit.
  */
 .lightbox-overlay {
     position: fixed;
@@ -3754,12 +3715,9 @@ pre {
         text-decoration: underline;
     }
 
-/* Responsive Helpers Base */
-
 /*
  * Image replacement
  */
-
 .ir {
     background-color: transparent;
     border: 0;
@@ -3903,8 +3861,6 @@ pre {
 }
 
 
-
-/* Responsive Helpers */
 
 /*
  * 769 > viewport < 991px
@@ -4062,8 +4018,6 @@ pre {
         display: none !important;
     }
 }
-
-/* Responsive Print */
 
 @media print {
     * {
