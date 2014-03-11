@@ -165,13 +165,13 @@ header[role="banner"] span {
     bottom: -1px;
 }
 
-.isShown {
+.is-shown {
     background-color: #C5E6C5;
     border: 1px solid #A2D6A2;
     color: #347834;
 }
 
-.isHidden {
+.is-hidden {
     background-color: #F4CAC8;
     border: 1px solid #EBA19E;
     color: #DA4F49;
