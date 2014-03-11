@@ -1,5 +1,3 @@
-/* Responsive Print */
-
 @media print {
     * {
         background: transparent !important;

@@ -1,15 +1,13 @@
-/* Responsive Buttons */
-
 /*
- * Normalize button borders, colour, and padding.
+ * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
  * 2: Remove 300ms touch delay.
  */
 
 button,
-[type="submit"],
-[type="button"],
-[type="reset"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
 [role="button"] {
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
@@ -25,18 +23,18 @@ button,
     cursor: pointer;
     position: relative;
     -ms-touch-action: none; /* 2 */
-    touch-action: none;  /* 2 */
+    touch-action: none; /* 2 */
 }
 
 /*
  * Reset width for inputs
  */
-[type="submit"],
-[type="reset"],
-[type="button"],
-.form-no-grid [type="submit"],
-.form-no-grid [type="reset"],
-.form-no-grid [type="button"] {
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+.form-no-grid input[type="submit"],
+.form-no-grid input[type="reset"],
+.form-no-grid input[type="button"] {
     width: auto;
     max-width: none;
 }
@@ -45,18 +43,18 @@ button,
      * Button states.
      */
     button:hover,
-    [type="submit"]:hover,
-    [type="button"]:hover,
-    [type="reset"]:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    input[type="reset"]:hover,
     [role="button"]:hover {
         color: #222;
         background-color: #cdcdcd;
     }
 
     button:focus,
-    [type="submit"]:focus,
-    [type="button"]:focus,
-    [type="reset"]:focus,
+    input[type="submit"]:focus,
+    input[type="button"]:focus,
+    input[type="reset"]:focus,
     [role="button"]:focus {
         color: #222;
         outline: 1px solid #00a9ec;
@@ -64,9 +62,9 @@ button,
     }
 
     button:active,
-    [type="submit"]:active,
-    [type="button"]:active,
-    [type="reset"]:active,
+    input[type="submit"]:active,
+    input[type="button"]:active,
+    input[type="reset"]:active,
     [role="button"]:active {
         color: #222;
         background-color: #e7e7e7;
@@ -77,9 +75,9 @@ button,
      * 1. Fix IOS 6/7 opacity issue
      */
     button[disabled],
-    [type="submit"][disabled],
-    [type="button"][disabled],
-    [type="reset"][disabled],
+    input[type="submit"][disabled],
+    input[type="button"][disabled],
+    input[type="reset"][disabled],
     [role="button"].disabled {
         color: #5d5d5d;
         background-color: #e7e7e7;
@@ -93,9 +91,9 @@ button,
      * 2. Pad buttons.
      */
     button.btn-inline,
-    [type="submit"].btn-inline,
-    [type="button"].btn-inline,
-    [type="reset"].btn-inline,
+    input[type="submit"].btn-inline,
+    input[type="button"].btn-inline,
+    input[type="reset"].btn-inline,
     [role="button"].btn-inline {
         margin-left: -.27em; /* 1 */
         padding: .25em 1em; /* 2 */
