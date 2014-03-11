@@ -596,7 +596,6 @@
                 // Left is next.
                 var isNext = event.delta.x < 0,
                     type = isNext ? "next" : "prev",
-                    direction = isNext ? "left" : "right",
                     fallback = isNext ? "first" : "last",
                     activePosition = getActiveIndex.call(this),
                     $activeItem = $(this.$items[activePosition]),
@@ -617,7 +616,7 @@
                     diff = isNext ? 100 : -100;
 
                 // Shift the items but put a limit on sensitivity.
-                if (Math.abs(percent) < 100 && Math.abs(percent) > 10) {
+                if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
                     this.$element.addClass("no-transition");
                     if (this.options.mode === "slide") {
                         $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
