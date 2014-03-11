@@ -191,7 +191,7 @@
             callback = function () {
                 if (!newWin) {
                     // Trigger the elements click event.
-                    $element.off("click.ga").click();
+                    $element.off("click.ga")[0].click();
                 }
             };
 
