@@ -75,7 +75,7 @@
         The carousel also supports touch events on browsers that support touch.
     </p>
     <p>
-        Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
     <hr />
@@ -165,7 +165,6 @@
         &lt;li data-carousel-target="#carousel-2" data-carousel-slide-to="1"&gt;&lt;/li&gt;
         &lt;li data-carousel-target="#carousel-2" data-carousel-slide-to="2"&gt;&lt;/li&gt;
     &lt;/ol&gt;
-
     &lt;!-- Carousel Items--&gt;
     &lt;figure class="carousel-active"&gt;
         &lt;img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas"&gt;
@@ -188,7 +187,6 @@
             &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
         &lt;/figcaption&gt;
     &lt;/figure&gt;
-
     &lt;!-- Carousel Controls--&gt;
     &lt;a class="left carousel-control" href="#carousel-2" data-carousel-slide="prev"&gt;&lt;&lt;/a&gt;
     &lt;a class="right carousel-control" href="#carousel-2" data-carousel-slide="next"&gt;&gt;&lt;/a&gt;
@@ -200,30 +198,52 @@
         <p>The carousel exposes the following method signatures.</p>
         <dl>
             <dt><strong>.carousel(options)</strong>  </dt>
-            <dd>Initialises the plugin with an optional options <code>object</code>
-                <dl class="dl-horizontal">
-                    <dt><strong>options</strong></dt>
-                    <dd>Contains parameters to pass to the plugin.
-                        <dl>
-                            <dt><strong>mode</strong></dt>
-                            <dd>A string containing either the values
-                                <var>fade</var>
-                                or
-                                <var>slide</var>.</dd>
-                            <dt><strong>interval</strong></dt>
-                            <dd>The time in milliseconds between carousel transitions.</dd>
-                            <dt><strong>pause</strong></dt>
-                            <dd>The event to bind the pause behaviour to - defaults to
-                                <var>hover</var>.</dd>
-                            <dt><strong>wrap</strong></dt>
-                            <dd>Whether the carousel items should wrap - defaults to
-                                <var>true</var>.</dd>
-                            <dt><strong>enabletouch</strong></dt>
-                            <dd>Whether the carousel respond to touch events - defaults to
-                                <var>true</var>.</dd>
-                        </dl>
-                    </dd>
-                </dl>
+            <dd>
+                Initialises the plugin with an optional options <code>object</code>
+                <div class="table-scrollable">
+                    <table class="table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">mode</th>
+                                <td>string</td>
+                                <td>A string containing either the values <var>fade</var> or <var>slide</var>.</td>
+                                <td><var>slide</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">interval</th>
+                                <td>number</td>
+                                <td>The time in milliseconds between carousel transitions.</td>
+                                <td><var>5000</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">pause</th>
+                                <td>string</td>
+                                <td>The event to bind the pause behaviour to</td>
+                                <td><var>hover</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">wrap</th>
+                                <td>boolean</td>
+                                <td>Whether the carousel items should wrap</td>
+                                <td><var>true</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">enabletouch</th>
+                                <td>boolean</td>
+                                <td>Whether the carousel responds to touch events</td>
+                                <td><var>true</var></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </dd>
             <dt><strong>.carousel("cycle")</strong></dt>
             <dd>Cycles through the carousel instance items in a logical order.</dd>
@@ -243,7 +263,8 @@
         <p>The carousel exposes the following events allowing the developer to tap into its behaviour.</p>
         <dl>
             <dt><strong>slide.r.carousel</strong></dt>
-            <dd>This event is fired immediately when the plugins <code>slide</code> instance method is invoked. The event data contains two custom properties:
+            <dd>
+                This event is fired immediately when the plugins <code>slide</code> instance method is invoked. The event data contains two custom properties:
                 <dl>
                     <dt><strong>relatedTarget</strong></dt>
                     <dd>The carousel item that will be next in the logical order.</dd>
@@ -252,7 +273,8 @@
                 </dl>
             </dd>
             <dt><strong>slid.r.carousel</strong></dt>
-            <dd>This event is fired when the plugins <code>slid</code> instance method is invoked once the carousel has completed sliding.
+            <dd>
+                This event is fired when the plugins <code>slid</code> instance method is invoked once the carousel has completed sliding.
             </dd>
         </dl>
     </section>
@@ -261,20 +283,18 @@
         <h1>Data API</h1>
         <p>
             The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-                If you need to override this behaviour the following code will allow you to do so.
+            If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default loading behaviour
 $(document).off("ready.r.carousel")
            .on("ready.r.carousel", function () {
              // Your custom behaviour...
            }); 
-
 // Override the default carousel control click behaviour
 $("YOUR_SELECTOR").off("click.r.carousel")
                   .on("click.r.carousel", "[data-carousel-slide], [data-carousel-slide-to]", function (event) {
                       // Your custom behaviour...
                   }); 
-
 // Bind to the slide event.
 $("YOUR_SELECTOR").on("slide.r.carousel", function(event) {
     // Your custom behaviour...
