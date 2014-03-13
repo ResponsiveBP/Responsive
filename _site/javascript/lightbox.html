@@ -29,14 +29,35 @@
             <div class="row">
                 <a href="/" rel="home">Responsive</a>
                 <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
-                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a></div>
+                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css/">CSS</a><a href="/javascript/">JavaScript</a></div>
             </div>
         </div>
     </nav>
 
 <main class="container" role="main">
     <header role="banner">
-        <a href="/javascript.html">&lt;&lt; Back</a>
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/javascript">javascript</a> &#187; </li>
+
+    
+    
+    
+    <li>lightbox</li>
+</ol>
+
+ 
         <h1>
             Lightbox
             <span>A responsive lightbox for presenting modal content.</span>
@@ -71,6 +92,7 @@
     <h1>Lightbox</h1>
     <p>A jQuery plugin that adds lightbox functionality to any element it targets. Uses CSS transitions to perform the animation.</p>
     <p>Comes with keyboard controls <kbd>ESC</kbd>, <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> to help navigation.</p>
+    <p>On devices that support touch, grouped items will iterate though their collection via swiping <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd></p>
     <p>
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
@@ -263,60 +285,105 @@ Lightbox trigger
             <dt><strong>.lightbox(options)</strong>  </dt>
             <dd>
                 Initialises the plugin with an optional options <code>object</code>
-                <dl class="dl-horizontal">
-                    <dt><strong>options</strong></dt>
-                    <dd>
-                        Contains parameters to pass to the plugin.
-                        <dl>
-                            <dt><strong>modal</strong></dt>
-                            <dd>
-                                Whether to the lightbox should be in modal mode.
-                                Defaults to <var>false</var>
-                            </dd>
-                            <dt><strong>external</strong></dt>
-                            <dd>Whether the target is on a different page.</dd>
-                            <dt><strong>group</strong></dt>
-                            <dd>A string containing a group identifier for creating galleries.</dd>
-                            <dt><strong>iframe</strong></dt>
-                            <dd>Whether to use an iframe.</dd>
-                            <dt><strong>iframeScroll</strong></dt>
-                            <dd>Whether the iframe should have scrollbars.</dd>
-                            <dt><strong>fitViewport</strong></dt>
-                            <dd>
-                                Whether locally loaded content width should be forced to fit the viewport.
-                                Defaults to <var>true</var>
-                            </dd>
-                            <dt><strong>keyboard</strong></dt>
-                            <dd>Whether to enable keyboard control.</dd>
-                            <dt><strong>title</strong></dt>
-                            <dd>The text to insert as the title of the lightbox</dd>
-                            <dt><strong>description</strong></dt>
-                            <dd>The text to insert as the description of the lightbox in the footer</dd>
-                            <dt><strong>next</strong></dt>
-                            <dd>
-                                The text to insert into the next indicator. Defaults to
-                                <var>&gt;</var>
-                            </dd>
-                            <dt><strong>previous</strong></dt>
-                            <dd>
-                                The text to insert into the previous indicator. Defaults to
-                                <var>&lt;</var>
-                            </dd>
-                            <dt><strong>mobileTarget</strong></dt>
-                            <dd>An alternative url for mobile views.</dd>
-                            <dt><strong>mobileViewportWidth</strong></dt>
-                            <dd>
-                                The maximum viewport width in pixels to present the alternative url for. Defaults to
-                                <var>480</var>.
-                            </dd>
-                            <dt><strong>enabletouch</strong></dt>
-                            <dd>
-                                Whether the lightbox respond to touch events - defaults to
-                                <var>true</var>.
-                            </dd>
-                        </dl>
-                    </dd>
-                </dl>
+
+                <div class="table-scrollable">
+                    <table class="table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">modal</th>
+                                <td>boolean</td>
+                                <td>Whether to the lightbox should be in modal mode.</td>
+                                <td><var>false</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">external</th>
+                                <td>boolean</td>
+                                <td>Whether the target is on a different page..</td>
+                                <td><var>false</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">group</th>
+                                <td>string</td>
+                                <td>A string containing a group identifier for creating galleries.</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">iframe</th>
+                                <td>boolean</td>
+                                <td>Whether to use an iframe.</td>
+                                <td><var>false</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">iframeScroll</th>
+                                <td>boolean</td>
+                                <td>Whether the iframe should have scrollbars.</td>
+                                <td><var>false</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">fitViewport</th>
+                                <td>boolean</td>
+                                <td>Whether locally loaded content width should be forced to fit the viewport.</td>
+                                <td><var>true</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">keyboard</th>
+                                <td>boolean</td>
+                                <td>Whether to enable keyboard control.</td>
+                                <td><var>true</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">title</th>
+                                <td>string</td>
+                                <td>The text to insert as the title of the lightbox.</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">description</th>
+                                <td>string</td>
+                                <td>The text to insert as the description of the lightbox in the footer.</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">next</th>
+                                <td>string</td>
+                                <td>The text to insert into the next indicator.</td>
+                                <td><var>&gt;</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">previous</th>
+                                <td>string</td>
+                                <td>The text to insert into the previous indicator.</td>
+                                <td><var>&gt;</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">mobileTarget</th>
+                                <td>string</td>
+                                <td>An alternative url for mobile views.</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">mobileViewportWidth</th>
+                                <td>number</td>
+                                <td>The maximum viewport width in pixels to present the alternative url for.</td>
+                                <td><var>480</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">enabletouch</th>
+                                <td>boolean</td>
+                                <td>Whether the carousel responds to touch events</td>
+                                <td><var>true</var></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </dd>
             <dt><strong>.lightbox(toggle)</strong></dt>
             <dd>Toggle the visibility of the lightbox.</dd>
@@ -428,4 +495,3 @@ $("YOUR_TRIGGER_SELECTOR").on("hidden.r.lightbox", function(event) {
 
 </body>
 </html>
-

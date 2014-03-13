@@ -1,7 +1,7 @@
 {% include header.html %}
 <main class="container" role="main">
     <header role="banner">
-        <a href="{{ site.baseurl }}/{{page.group}}.html">&lt;&lt; Back</a>
+        {% include breadcrumb.html %} 
         <h1>
             {{page.heading}}
             <span>{{page.subheading}}</span>

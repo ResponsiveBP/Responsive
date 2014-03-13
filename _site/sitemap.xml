@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://responsivebp.com</loc>
-    <lastmod>2014-03-12T19:18:10+00:00</lastmod>
+    <lastmod>2014-03-13T17:56:40+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -10,7 +10,7 @@
   <url>
     <loc>http://responsivebp.com/css/base.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -23,7 +23,7 @@
   <url>
     <loc>http://responsivebp.com/css/grid.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -36,7 +36,7 @@
   <url>
     <loc>http://responsivebp.com/css/forms.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -49,7 +49,7 @@
   <url>
     <loc>http://responsivebp.com/css/buttons.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -62,7 +62,7 @@
   <url>
     <loc>http://responsivebp.com/css/tables.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -75,7 +75,7 @@
   <url>
     <loc>http://responsivebp.com/css/media.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -88,7 +88,7 @@
   <url>
     <loc>http://responsivebp.com/css/lists.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -101,7 +101,7 @@
   <url>
     <loc>http://responsivebp.com/css/alerts.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -114,7 +114,7 @@
   <url>
     <loc>http://responsivebp.com/css/code.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -125,9 +125,9 @@
   </url>
   
   <url>
-    <loc>http://responsivebp.com/css.html</loc>
+    <loc>http://responsivebp.com/css/index.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -140,7 +140,7 @@
   <url>
     <loc>http://responsivebp.com/getting-started.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -153,7 +153,7 @@
   <url>
     <loc>http://responsivebp.com/index.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -166,7 +166,7 @@
   <url>
     <loc>http://responsivebp.com/javascript/carousel.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -179,7 +179,7 @@
   <url>
     <loc>http://responsivebp.com/javascript/lightbox.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -192,7 +192,7 @@
   <url>
     <loc>http://responsivebp.com/javascript/dropdown.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -205,7 +205,7 @@
   <url>
     <loc>http://responsivebp.com/javascript/tabs.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -218,7 +218,7 @@
   <url>
     <loc>http://responsivebp.com/javascript/autosize.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -231,7 +231,7 @@
   <url>
     <loc>http://responsivebp.com/javascript/dismiss.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -244,7 +244,7 @@
   <url>
     <loc>http://responsivebp.com/tablelist.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -255,9 +255,9 @@
   </url>
   
   <url>
-    <loc>http://responsivebp.com/javascript.html</loc>
+    <loc>http://responsivebp.com/javascript/index.html</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>
@@ -270,7 +270,7 @@
   <url>
     <loc>http://responsivebp.com/sitemap.xml</loc>
     
-    <lastmod>2014-03-12</lastmod>
+    <lastmod>2014-03-13</lastmod>
     
     
     <changefreq>monthly</changefreq>

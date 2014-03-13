@@ -82,6 +82,16 @@ nav[role="navigation"] {
     }
 }
 
+.breadcrumb {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .breadcrumb li {
+        display: inline-block;
+        text-transform: capitalize;
+    }
+
 header[role="banner"] h1 {
     font-size: 3em;
     margin-bottom: 0;

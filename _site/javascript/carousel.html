@@ -29,14 +29,35 @@
             <div class="row">
                 <a href="/" rel="home">Responsive</a>
                 <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
-                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css.html">CSS</a><a href="/javascript.html">JavaScript</a></div>
+                <div id="navigation" class="collapse"><a href="/getting-started.html">Getting Started</a><a href="/css/">CSS</a><a href="/javascript/">JavaScript</a></div>
             </div>
         </div>
     </nav>
 
 <main class="container" role="main">
     <header role="banner">
-        <a href="/javascript.html">&lt;&lt; Back</a>
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/javascript">javascript</a> &#187; </li>
+
+    
+    
+    
+    <li>carousel</li>
+</ol>
+
+ 
         <h1>
             Carousel
             <span>A responsive carousel for cycling through objects.</span>
@@ -72,8 +93,8 @@
     <p>A jQuery plugin that creates a carousel for cycling through elements. Uses CSS transitions to perform the animation.</p>
     <p>
         The carousel comes in two modes: Slide and Fade, both animated via CSS3 transitions. On browsers that do not support transitions they simply change without special effects.
-        The carousel also supports touch events on browsers that support touch.
     </p>
+    <p>On devices that support touch, grouped items will iterate though their collection via swiping <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd></p>
     <p>
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
@@ -357,4 +378,3 @@ $("YOUR_SELECTOR").on("slid.r.carousel", function(event) {
 
 </body>
 </html>
-
