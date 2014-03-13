@@ -92,6 +92,19 @@ nav[role="navigation"] {
         text-transform: capitalize;
     }
 
+@media (max-width: 61.99em) {
+    nav[role="complementary"] a {
+        line-height: 44px;
+        display: block;
+        padding: 0 .5em;
+        border: 1px solid #c0c0c0;
+    }
+
+    nav[role="complementary"] li + li a {
+        border-top: none;
+    }
+}
+
 header[role="banner"] h1 {
     font-size: 3em;
     margin-bottom: 0;
