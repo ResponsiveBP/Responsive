@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.0 | MIT License | responsivebp.com */
+/*! Responsive v2.5.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -212,7 +212,7 @@
                     original = event.originalEvent,
                     startEvent;
 
-                if ($(event.target).is("img")) {
+                if ((isPointer || isMouse) && $(event.target).is("img")) {
                     event.preventDefault();
                 }
 

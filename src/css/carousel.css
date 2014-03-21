@@ -2,6 +2,8 @@
     position: relative;
     overflow: hidden;
     margin-bottom: 1em;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
 }
 
     /* 
@@ -15,6 +17,7 @@
         -moz-transition: .7s ease-in-out -moz-transform,.7s ease-in-out left;
         -o-transition: .7s ease-in-out -o-transform,.7s ease-in-out left;
         transition: .7s ease-in-out transform,.7s ease-in-out left;
+        -webkit-transform:translate3d(0,0,0);
     }
 
         .carousel > figure > img {
@@ -130,7 +133,7 @@
 
 .carousel > figure > figcaption {
     padding: 1px 1em;
-    background: #111;
+    background-color: #111;
     color: #fff;
 }
 

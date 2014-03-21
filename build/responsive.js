@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.0 | MIT License | responsivebp.com */
+/*! Responsive v2.5.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -212,7 +212,7 @@
                     original = event.originalEvent,
                     startEvent;
 
-                if ($(event.target).is("img")) {
+                if ((isPointer || isMouse) && $(event.target).is("img")) {
                     event.preventDefault();
                 }
 
@@ -1513,6 +1513,7 @@
                 // Fix __flash__removeCallback' is undefined error.
                 $.when($lightbox.find("iframe").attr("src", "")).then(w.setTimeout(empty, 100));
 
+                $lightbox.removeData("currentLightbox");
             };
 
         toggleFade.call(this);
@@ -1919,6 +1920,7 @@
         }
 
         this.isShown = true;
+        $lightbox.data("currentLightbox", this.$element);
 
         toggleOverlay.call(this, "show");
         create.call(this);
@@ -1969,6 +1971,31 @@
     };
 
     LightBox.prototype.toggle = function () {
+
+        // Check to see if there is a current instance running. Useful for 
+        // nested triggers.
+        var $currentLightbox = $lightbox.data("currentLightbox");
+
+        if ($currentLightbox && $currentLightbox[0] !== this.element) {
+            var data = $currentLightbox.data("r.lightbox"),
+                self = this,
+                complete = function () {
+                    data.isShown = false;
+                    if (supportTransition) {
+                        return self[!self.isShown ? "show" : "hide"]();
+                    } else {
+                        return w.setTimeout(function () {
+                            return self[!self.isShown ? "show" : "hide"]();
+                        }, 300);
+                    }
+                };
+
+            if (data) {
+                destroy.call(data, complete);
+                return true;
+            }
+        }
+
         return this[!this.isShown ? "show" : "hide"]();
     };
 
