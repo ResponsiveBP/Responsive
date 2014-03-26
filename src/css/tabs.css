@@ -35,7 +35,7 @@
             }
 
                 .tabs > ul > li > a:hover {
-                    background: #ebebeb;
+                    background-color: #ebebeb;
                     border-color: #c0c0c0;
                 }
 
@@ -43,7 +43,7 @@
             .tabs > ul > li.tab-active > a:hover {
                 color: #454545;
                 cursor: default;
-                background: #fff;
+                background-color: #fff;
                 border: 1px solid #c0c0c0;
                 border-bottom-color: transparent;
             }
