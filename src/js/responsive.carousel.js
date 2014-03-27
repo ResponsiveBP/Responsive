@@ -24,104 +24,113 @@
         eslid = "slid" + ns;
 
     // Private methods.
-    var getActiveIndex = function () {
+    var getActiveIndex = function() {
 
-        var $activeItem = this.$element.find(".carousel-active");
-        this.$items = $activeItem.parent().children("figure");
+            var $activeItem = this.$element.find(".carousel-active");
+            this.$items = $activeItem.parent().children("figure");
 
-        return this.$items.index($activeItem);
-    },
+            return this.$items.index($activeItem);
+        },
 
-    manageTouch = function () {
+        manageTouch = function() {
 
-        this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
-            .on("swipemove.r.carousel", $.proxy(function (event) {
+            this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
+                .on("swipemove.r.carousel", $.proxy(function(event) {
 
-                if (this.sliding) {
-                    return;
-                }
-
-                this.pause();
-
-                // Left is next.
-                var isNext = event.delta.x < 0,
-                    type = isNext ? "next" : "prev",
-                    fallback = isNext ? "first" : "last",
-                    activePosition = getActiveIndex.call(this),
-                    $activeItem = $(this.$items[activePosition]),
-                    $nextItem = $activeItem[type]("figure");
-
-                if (!$nextItem.length) {
-
-                    if (!this.options.wrap) {
+                    if (this.sliding) {
                         return;
                     }
 
-                    $nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
-                }
+                    this.pause();
 
-                // Get the distance swiped as a percentage.
-                var width = $activeItem.width(),
-                    percent = parseFloat((event.delta.x / width) * 100),
-                    diff = isNext ? 100 : -100;
+                    // Left is next.
+                    var isNext = event.delta.x < 0,
+                        type = isNext ? "next" : "prev",
+                        fallback = isNext ? "first" : "last",
+                        activePosition = getActiveIndex.call(this),
+                        $activeItem = $(this.$items[activePosition]),
+                        $nextItem = $activeItem[type]("figure");
 
-                // Shift the items but put a limit on sensitivity.
-                if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
-                    this.$element.addClass("no-transition");
-                    if (this.options.mode === "slide") {
-                        $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
-                        $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
-                    } else {
-                        $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
-                        $nextItem.addClass("swipe");
-                    }
-                }
+                    if (!$nextItem.length) {
 
-            }, this))
-            .on("swipeend.r.carousel", $.proxy(function (event) {
+                        if (!this.options.wrap) {
+                            return;
+                        }
 
-                if (this.sliding || !this.$element.hasClass("no-transition")) {
-                    return;
-                }
-
-                var direction = event.direction,
-                    method = "next";
-
-                if (direction === "right") {
-                    method = "prev";
-                }
-
-                // Re-enable the transitions.
-                this.$element.removeClass("no-transition");
-
-                if (supportTransition) {
-
-                    // Trim the animation duration based on the current position.
-                    var activePosition = getActiveIndex.call(this),
-                        $activeItem = $(this.$items[activePosition]);
-
-                    if (!this.translationDuration) {
-                        this.translationDuration = parseFloat($activeItem.css("transition-duration"));
+                        $nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
                     }
 
-                    // Get the distance and turn it into into a percentage
-                    // to calculate the duration. Whichever is lowest is used.
+                    // Get the distance swiped as a percentage.
                     var width = $activeItem.width(),
-                        percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
-                        swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
-                        newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
+                        percent = parseFloat((event.delta.x / width) * 100),
+                        diff = isNext ? 100 : -100;
 
-                    // Set the new temporary duration.
-                    this.$items.each(function () {
-                        $(this).css({ "transition-duration": newDuration + "s" });
-                    });
-                }
+                    // Shift the items but put a limit on sensitivity.
+                    if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
+                        this.$element.addClass("no-transition");
+                        if (this.options.mode === "slide") {
+                            $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
+                            $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
+                        } else {
+                            $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
+                            $nextItem.addClass("swipe");
+                        }
+                    }
 
-                this.cycle();
-                this[method]();
+                }, this))
+                .on("swipeend.r.carousel", $.proxy(function(event) {
 
-            }, this));
-    };
+                    if (this.sliding || !this.$element.hasClass("no-transition")) {
+                        return;
+                    }
+
+                    var direction = event.direction,
+                        method = "next";
+
+                    if (direction === "right") {
+                        method = "prev";
+                    }
+
+                    // Re-enable the transitions.
+                    this.$element.removeClass("no-transition");
+
+                    if (supportTransition) {
+
+                        // Trim the animation duration based on the current position.
+                        var activePosition = getActiveIndex.call(this),
+                            $activeItem = $(this.$items[activePosition]);
+
+                        if (!this.translationDuration) {
+                            this.translationDuration = parseFloat($activeItem.css("transition-duration"));
+                        }
+
+                        // Get the distance and turn it into into a percentage
+                        // to calculate the duration. Whichever is lowest is used.
+                        var width = $activeItem.width(),
+                            percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
+                            swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
+                            newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
+
+                        // Set the new temporary duration.
+                        this.$items.each(function() {
+                            $(this).css({ "transition-duration": newDuration + "s" });
+                        });
+                    }
+
+                    this.cycle();
+                    this[method]();
+
+                }, this));
+        },
+
+        manageLazyImages = function() {
+            var self = this;
+            $(w).on("load", function() {
+                self.$element.find("img[data-src]").each(function() {
+                    this.src = this.getAttribute("data-src");
+                });
+            });
+        };
 
     // Carousel class definition
     var Carousel = function (element, options) {
@@ -132,7 +141,8 @@
             mode: "slide",
             pause: "hover",
             wrap: true,
-            enabletouch: true
+            enabletouch: true,
+            lazyLoadImages: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.$indicators = this.$element.children("ol:first");
@@ -153,6 +163,10 @@
 
         if (this.options.enabletouch) {
             manageTouch.call(this);
+        }
+
+        if (this.options.lazyLoadImages) {
+            manageLazyImages.call(this);
         }
     };
 
