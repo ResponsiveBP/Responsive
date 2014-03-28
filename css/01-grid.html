@@ -26,7 +26,22 @@ sublinks: ["#mediaqueries|Media Queries",
     By standard all grids are wrapped in a div with the class <code>.container</code> which constrains the grid to 95% of the viewport width up to a maximum of 1140px.
 </p>
 <div class="alert">
-    <p>Adding class <code>.fixed</code> to the container and using <code>.col-xs-{number}</code> on the columns will force the grid into a non-responsive layout.</p>
+    <h4>Fixed Layout</h4>
+    <p>
+        To disable the default fluid grid behaviour and force the grid into a non-responsive layout do the following:
+
+    </p>
+    <ol>
+        <li>
+            Remove the <code>&lt;meta name="viewport" /&gt;</code> meta tag from the head of your document.
+        </li>
+        <li>
+            Add the class <code>.fixed</code> to the container.
+        </li>
+        <li>
+            Use <code>.col-xs-{number}</code> range on the columns.
+        </li>
+    </ol>
 </div>
 <hr />
 <section id="mediaqueries">
