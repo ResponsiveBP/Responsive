@@ -14,7 +14,7 @@
 
 /*global jQuery*/
 /*jshint forin:false*/
-(function ($, w) {
+(function ($, w, d) {
 
     "use strict";
 
@@ -26,7 +26,7 @@
             /// <summary>Gets transition end event for the current browser.</summary>
             /// <returns type="Object">The transition end event for the current browser.</returns>
 
-            var div = document.createElement("div"),
+            var div = d.createElement("div"),
                 transEndEventNames = {
                     "transition": "transitionend",
                     "WebkitTransition": "webkitTransitionEnd",
@@ -49,6 +49,14 @@
 
     }());
 
+    $.support.touchEvents = (function () {
+        return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);
+    }());
+
+    $.support.pointerEvents = (function () {
+        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
+    }());
+
     $.fn.ensureTransitionEnd = function (duration) {
         /// <summary>
         /// Ensures that the transition end callback is triggered.
@@ -63,211 +71,239 @@
         return this;
     };
 
-    $.fn.swipe = function (options) {
-        /// <summary>Adds swiping functionality to the given element.</summary>
-        /// <param name="options" type="Object" optional="true" parameterArray="true">
-        ///      A collection of optional settings to apply.
-        ///      &#10;    1: namespace - The namespace for isolating the touch events.
-        ///      &#10;    2: timeLimit - The limit in ms to recognize touch events for. Default - 1000; 0 disables.
-        /// </param>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+    (function () {
+        var supportTouch = $.support.touchEvents,
+            supportPointer = $.support.pointerEvents;
 
-        var defaults = {
-            namespace: null,
-            touchAction: "none"
-        },
-            settings = $.extend({}, defaults, options);
+        var pointerStart = ["pointerdown", "MSPointerDown"],
+            pointerMove = ["pointermove", "MSPointerMove"],
+            pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave",
+                          "MSPointerUp", "MSPointerOut", "MSPointerCancel", "MSPointerLeave"];
 
-        var ns = settings.namespace && ("." + settings.namespace),
-            eswipestart = "swipestart" + ns,
-            eswipemove = "swipemove" + ns,
-            eswipeend = "swipeend" + ns,
-            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
-            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
-                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
-                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns + " MSPointerLeave" + ns,
-            supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
-                (navigator.msMaxTouchPoints > 0) ||
-                (window.DocumentTouch && document instanceof DocumentTouch);
+        var touchStart = "touchstart",
+            touchMove = "touchmove",
+            touchEnd = ["touchend", "touchleave", "touchcancel"];
 
-        return this.each(function () {
+        var mouseStart = "mousedown",
+            mouseMove = "mousemove",
+            mouseEnd = ["mouseup", "mouseleave"];
 
-            if (!supportTouch) {
-                etouchstart += " mousedown" + ns;
-                etouchmove += " mousemove" + ns;
-                etouchend += (" mouseup" + ns + " mouseleave" + ns);
+        var getEvents = function (ns) {
+            var estart,
+                emove,
+                eend;
+
+            // Keep the events separate since support could be crazy.
+            if (supportPointer) {
+                estart = (pointerStart.join(ns + " ")) + ns;
+                emove = (pointerMove.join(ns + " ")) + ns;
+                eend = (pointerEnd.join(ns + " ")) + ns;
+
+            } else if (supportTouch) {
+                estart = touchStart + ns;
+                emove = touchMove + ns;
+                eend = (touchEnd.join(ns + " ")) + ns;
+            } else {
+                estart = mouseStart + ns;
+                emove = mouseMove + ns;
+                eend = (mouseEnd.join(ns + " ")) + ns;
             }
 
-            var $this = $(this);
+            return {
+                start: estart,
+                move: emove,
+                end: eend
+            }
+        };
 
-            // Enable extended touch events on IE.
-            $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
+        $.fn.swipe = function (options) {
+            /// <summary>Adds swiping functionality to the given element.</summary>
+            /// <param name="options" type="Object" optional="true" parameterArray="true">
+            ///      A collection of optional settings to apply.
+            ///      &#10;    1: namespace - The namespace for isolating the touch events.
+            /// </param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-            var start = {},
-                delta = {},
-                isScrolling,
-                onMove = function (event) {
+            var defaults = {
+                namespace: null,
+                touchAction: "none"
+            },
+                settings = $.extend({}, defaults, options);
+
+            var ns = settings.namespace ? "." + settings.namespace : "",
+                eswipestart = "swipestart" + ns,
+                eswipemove = "swipemove" + ns,
+                eswipeend = "swipeend" + ns,
+                etouch = getEvents(ns);
+
+            return this.each(function () {
+                var $this = $(this);
+
+                if (supportPointer) {
+                    // Enable extended touch events on IE.
+                    $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
+                }
+
+                var start = {},
+                    delta = {},
+                    isScrolling,
+                    onMove = function (event) {
+
+                        // Normalize the variables.
+                        var isMouse = !supportPointer && !supportTouch,
+                            original = event.originalEvent,
+                            moveEvent;
+
+                        // Only left click allowed.
+                        if (isMouse && event.which !== 1) {
+                            return;
+                        }
+
+                        // One touch allowed.
+                        if (original.touches && original.touches.length > 1) {
+                            return;
+                        }
+
+                        // Ensure swiping with one touch and not pinching.
+                        if (event.scale && event.scale !== 1) {
+                            return;
+                        }
+
+                        var dx = (isMouse ? original.pageX : supportPointer ? original.clientX : original.touches[0].pageX) - start.x,
+                            dy = (isMouse ? original.pageY : supportPointer ? original.clientY : original.touches[0].pageY) - start.y;
+
+                        // Mimic touch action on iProducts.
+                        // Should also prevent bounce.
+                        if (!supportPointer) {
+                            switch (settings.touchAction) {
+                                case "pan-x":
+
+                                    isScrolling = Math.abs(dy) < Math.abs(dx);
+
+                                    if (!isScrolling) {
+                                        event.preventDefault();
+                                    } else {
+                                        event.stopPropagation();
+                                        return;
+                                    }
+
+                                    break;
+                                case "pan-y":
+
+                                    isScrolling = Math.abs(dx) < Math.abs(dy);
+
+                                    if (!isScrolling) {
+                                        event.preventDefault();
+                                    } else {
+                                        event.stopPropagation();
+                                        return;
+                                    }
+
+                                    break;
+                                default:
+                                    event.preventDefault();
+                                    break;
+                            }
+                        }
+
+                        moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
+
+                        $this.trigger(moveEvent);
+
+                        if (moveEvent.isDefaultPrevented()) {
+                            return;
+                        }
+
+                        // Measure change in x and y.
+                        delta = {
+                            x: dx,
+                            y: dy
+                        };
+                    },
+                    onEnd = function () {
+
+                        // Measure duration
+                        var duration = +new Date() - start.time,
+                            endEvent;
+
+                        // Determine if slide attempt triggers slide.
+                        if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
+
+                            // Set the direction and return it.
+                            var horizontal = delta.x < 0 ? "left" : "right",
+                                vertical = delta.y < 0 ? "up" : "down",
+                                direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
+
+                            endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
+
+                            $this.trigger(endEvent);
+                        }
+
+                        // Disable the touch events till next time.
+                        $this.off(etouch.move).off(etouch.end);
+                    };
+
+                $this.off(etouch.start).on(etouch.start, function (event) {
 
                     // Normalize the variables.
-                    var isMouse = event.type === "mousemove",
-                        isPointer = event.type !== "touchmove" && !isMouse,
+                    var isMouse = event.type === "mousedown",
+                        isPointer = event.type !== "touchstart" && !isMouse,
                         original = event.originalEvent,
-                        moveEvent;
+                        startEvent;
 
-                    // Only left click allowed.
-                    if (isMouse && event.which !== 1) {
-                        return;
+                    if ((isPointer || isMouse) && $(event.target).is("img")) {
+                        event.preventDefault();
                     }
 
-                    // One touch allowed.
-                    if (original.touches && original.touches.length > 1) {
-                        return;
-                    }
+                    // Used for testing first move event
+                    isScrolling = undefined;
 
-                    // Ensure swiping with one touch and not pinching.
-                    if (event.scale && event.scale !== 1) {
-                        return;
-                    }
+                    // Measure start values.
+                    start = {
+                        // Get initial touch coordinates.
+                        x: isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX,
+                        y: isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY,
 
-                    var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
-                        dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
-
-                    // Mimic touch action on iProducts.
-                    // Should also prevent bounce.
-                    if (!isPointer) {
-                        switch (settings.touchAction) {
-                            case "pan-x":
-
-                                isScrolling = Math.abs(dy) < Math.abs(dx);
-
-                                if (!isScrolling) {
-                                    event.preventDefault();
-                                } else {
-                                    event.stopPropagation();
-                                    return;
-                                }
-
-                                break;
-                            case "pan-y":
-
-                                isScrolling = Math.abs(dx) < Math.abs(dy);
-
-                                if (!isScrolling) {
-                                    event.preventDefault();
-                                } else {
-                                    event.stopPropagation();
-                                    return;
-                                }
-
-                                break;
-                            default:
-                                event.preventDefault();
-                                break;
-                        }
-                    }
-
-                    moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
-
-                    $this.trigger(moveEvent);
-
-                    if (moveEvent.isDefaultPrevented()) {
-                        return;
-                    }
-
-                    // Measure change in x and y.
-                    delta = {
-                        x: dx,
-                        y: dy
+                        // Store time to determine touch duration.
+                        time: +new Date()
                     };
-                },
-                onEnd = function () {
 
-                    // Measure duration
-                    var duration = +new Date() - start.time,
-                        endEvent;
+                    startEvent = $.Event(eswipestart, { start: start });
 
-                    // Determine if slide attempt triggers slide.
-                    if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
+                    $this.trigger(startEvent);
 
-                        // Set the direction and return it.
-                        var horizontal = delta.x < 0 ? "left" : "right",
-                            vertical = delta.y < 0 ? "up" : "down",
-                            direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
-
-                        endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
-
-                        $this.trigger(endEvent);
+                    if (startEvent.isDefaultPrevented()) {
+                        return;
                     }
 
-                    // Disable the touch events till next time.
-                    $this.off(etouchmove).off(etouchend);
-                };
+                    // Reset delta and end measurements.
+                    delta = { x: 0, y: 0 };
 
-            $this.off(etouchstart).on(etouchstart, function (event) {
-
-                // Normalize the variables.
-                var isMouse = event.type === "mousedown",
-                    isPointer = event.type !== "touchstart" && !isMouse,
-                    original = event.originalEvent,
-                    startEvent;
-
-                if ((isPointer || isMouse) && $(event.target).is("img")) {
-                    event.preventDefault();
-                }
-
-                // Used for testing first move event
-                isScrolling = undefined;
-
-                // Measure start values.
-                start = {
-                    // Get initial touch coordinates.
-                    x: isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX,
-                    y: isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY,
-
-                    // Store time to determine touch duration.
-                    time: +new Date()
-                };
-
-                startEvent = $.Event(eswipestart, { start: start });
-
-                $this.trigger(startEvent);
-
-                if (startEvent.isDefaultPrevented()) {
-                    return;
-                }
-
-                // Reset delta and end measurements.
-                delta = { x: 0, y: 0 };
-
-                // Attach touchmove and touchend listeners.
-                $this.on(etouchmove, onMove)
-                     .on(etouchend, onEnd);
+                    // Attach touchmove and touchend listeners.
+                    $this.on(etouch.move, onMove)
+                         .on(etouch.end, onEnd);
+                });
             });
-        });
-    };
+        };
 
-    $.fn.removeSwipe = function (namespace) {
-        /// <summary>Removes swiping functionality from the given element.</summary>
-        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        $.fn.removeSwipe = function (namespace) {
+            /// <summary>Removes swiping functionality from the given element.</summary>
+            /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-        var ns = namespace && ("." + namespace),
-            etouchstart = "mousedown" + ns + " touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
-            etouchmove = "mousemove" + ns + " touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "mouseup" + ns + " mouseleave" + ns +
-                        " touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
-                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
-                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns + " MSPointerLeave" + ns;
+            var ns = namespace ? "." + namespace : "",
+                etouch = getEvents(ns);
 
-        return this.each(function () {
+            return this.each(function () {
 
-            // Disable extended touch events on ie.
-            // Unbind events.
-            $(this).css({ "-ms-touch-action": "", "touch-action": "" })
-                   .off(etouchstart).off(etouchmove).off(etouchend);
-        });
-    };
+                // Disable extended touch events on ie.
+                // Unbind events.
+                $(this).css({ "-ms-touch-action": "", "touch-action": "" })
+                       .off(etouch.start).off(etouch.move).off(etouch.end);
+            });
+        };
+
+    }());
 
     $.fn.redraw = function () {
         /// <summary>Forces the browser to redraw by measuring the given target.</summary>
@@ -331,4 +367,4 @@
         return options;
     };
 
-}(jQuery, window));
+}(jQuery, window, document));

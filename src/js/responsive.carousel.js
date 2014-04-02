@@ -154,8 +154,10 @@
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events
-            this.$element.on(emouseenter, $.proxy(this.pause, this))
-                         .on(emouseleave, $.proxy(this.cycle, this));
+            if (!$.support.touchEvents && $.support.pointerEvents) {
+                this.$element.on(emouseenter, $.proxy(this.pause, this))
+                    .on(emouseleave, $.proxy(this.cycle, this));
+            }
         }
 
         // Add the css class to support fade.

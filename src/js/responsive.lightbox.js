@@ -337,12 +337,12 @@
                         "padding-top": topHeight > 0 ? topHeight : ""
                     });
 
-                    top = parseInt($lightbox.offset().top);
+                    top = parseInt($lightbox.offset().top, 10);
 
                     // Thaaanks IE8!
                     if (top < 0) {
                         $lightbox.css({ "margin-top": 1 });
-                        top = parseInt($lightbox.offset().top);
+                        top = parseInt($lightbox.offset().top, 10);
                     }
 
                     var fallback = footerHeight > 1 ? -((topHeight + bottomHeight) / 2) : "";
