@@ -113,7 +113,7 @@
                 start: estart,
                 move: emove,
                 end: eend
-            }
+            };
         };
 
         $.fn.swipe = function (options) {
