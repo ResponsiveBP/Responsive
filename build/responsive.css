@@ -3273,7 +3273,7 @@ pre {
         -moz-transition: .7s ease-in-out -moz-transform,.7s ease-in-out left;
         -o-transition: .7s ease-in-out -o-transform,.7s ease-in-out left;
         transition: .7s ease-in-out transform,.7s ease-in-out left;
-        -webkit-transform:translate3d(0,0,0);
+        -webkit-transform: translate3d(0,0,0);
     }
 
         .carousel > figure > img {
@@ -3321,6 +3321,7 @@ pre {
         top: 0;
         z-index: 0;
         width: 100%;
+        height: 100%;
     }
 
     .carousel .next,
@@ -3377,20 +3378,20 @@ pre {
         right: 0;
     }
 
-    .carousel-control,
-    .carousel-control:visited,
-    .carousel-control:focus {
-        outline: 0;
+    .carousel-control:hover {
+        text-decoration: underline;
     }
-
-        .carousel-control:hover {
-            text-decoration: underline;
-        }
 
 .carousel > figure > figcaption {
     padding: 1px 1em;
     background-color: #111;
     color: #fff;
+    position: absolute;
+    bottom: 0;
+}
+
+.carousel > .carousel-active > figcaption {
+    position: static;
 }
 
 /* 
@@ -3444,7 +3445,7 @@ pre {
     z-index: 2;
 }
 
-.carousel-fade > figure .carousel-active {
+.carousel-fade > .carousel-active {
     position: relative;
 }
 

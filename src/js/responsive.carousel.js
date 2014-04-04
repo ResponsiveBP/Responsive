@@ -24,18 +24,31 @@
         eslid = "slid" + ns;
 
     // Private methods.
-    var getActiveIndex = function() {
+    var getActiveIndex = function () {
 
-            var $activeItem = this.$element.find(".carousel-active");
-            this.$items = $activeItem.parent().children("figure");
+        var $activeItem = this.$element.find(".carousel-active");
+        this.$items = $activeItem.parent().children("figure");
 
-            return this.$items.index($activeItem);
+        return this.$items.index($activeItem);
+    },
+
+        manageLazyImages = function () {
+            if (!this.data("lazyLoaded")) {
+
+                this.find("img[data-src]").each(function () {
+                    if (this.src.length === 0) {
+                        this.src = this.getAttribute("data-src");
+                    }
+                });
+
+                this.data("lazyLoaded", true);
+            }
         },
 
-        manageTouch = function() {
+        manageTouch = function () {
 
             this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
-                .on("swipemove.r.carousel", $.proxy(function(event) {
+                .on("swipemove.r.carousel", $.proxy(function (event) {
 
                     if (this.sliding) {
                         return;
@@ -51,13 +64,27 @@
                         $activeItem = $(this.$items[activePosition]),
                         $nextItem = $activeItem[type]("figure");
 
+                    if (this.$items.length === 1) {
+                        return;
+                    }
+
                     if (!$nextItem.length) {
 
                         if (!this.options.wrap) {
                             return;
                         }
 
-                        $nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
+                        //$nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
+                        $nextItem = this.$element.children("figure")[fallback]();
+                    }
+
+                    if ($nextItem.hasClass("carousel-active")) {
+                        return;
+                    }
+
+                    if (this.options.lazyLoadImages && this.options.lazyOnDemand) {
+                        // Load the next image.
+                        manageLazyImages.call($nextItem);
                     }
 
                     // Get the distance swiped as a percentage.
@@ -78,7 +105,7 @@
                     }
 
                 }, this))
-                .on("swipeend.r.carousel", $.proxy(function(event) {
+                .on("swipeend.r.carousel", $.proxy(function (event) {
 
                     if (this.sliding || !this.$element.hasClass("no-transition")) {
                         return;
@@ -112,7 +139,7 @@
                             newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
 
                         // Set the new temporary duration.
-                        this.$items.each(function() {
+                        this.$items.each(function () {
                             $(this).css({ "transition-duration": newDuration + "s" });
                         });
                     }
@@ -121,15 +148,6 @@
                     this[method]();
 
                 }, this));
-        },
-
-        manageLazyImages = function() {
-            var self = this;
-            $(w).on("load", function() {
-                self.$element.find("img[data-src]").each(function() {
-                    this.src = this.getAttribute("data-src");
-                });
-            });
         };
 
     // Carousel class definition
@@ -142,7 +160,8 @@
             pause: "hover",
             wrap: true,
             enabletouch: true,
-            lazyLoadImages: true
+            lazyLoadImages: true,
+            lazyOnDemand: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.$indicators = this.$element.children("ol:first");
@@ -167,8 +186,11 @@
             manageTouch.call(this);
         }
 
-        if (this.options.lazyLoadImages) {
-            manageLazyImages.call(this);
+        if (this.options.lazyLoadImages && !this.options.lazyOnDemand) {
+            var self = this;
+            $(w).on("load", function () {
+                manageLazyImages.call(self.$element);
+            });
         }
     };
 
@@ -296,6 +318,11 @@
 
         if (this.sliding || slideEvent.isDefaultPrevented()) {
             return false;
+        }
+
+        if (this.options.lazyLoadImages && this.options.lazyOnDemand) {
+            // Load the next image.
+            manageLazyImages.call($nextItem);
         }
 
         // Good to go? Then let's slide.
