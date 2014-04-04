@@ -16,7 +16,7 @@
     <link href="/assets/css/vendor/prism.min.css" rel="stylesheet" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-        <script src="/assets/js/vendor/html5shiv.js"></script>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
         <script src="/assets/js/vendor/respond.min.js"></script>
     <![endif]-->
     
@@ -177,6 +177,11 @@
         </div>
     </section>
     <hr />
+    <div class="alert">
+        <p>
+            Replace image <code>src</code> attributes with <code>data-src</code> to allow lazy loading of images.
+        </p>
+    </div>
     <section id="markup">
         <h1>Markup</h1>
         <pre class="language-markup"><code>&lt;div id="carousel-2" class="carousel" data-carousel-mode="fade" data-carousel-interval="5000"&gt;
@@ -260,6 +265,18 @@
                                 <th scope="row">enabletouch</th>
                                 <td>boolean</td>
                                 <td>Whether the carousel responds to touch events</td>
+                                <td><var>true</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">lazyLoadImages</th>
+                                <td>boolean</td>
+                                <td>Whether to lazily load any images on page load.</td>
+                                <td><var>true</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">lazyOnDemand</th>
+                                <td>boolean</td>
+                                <td>Whether to lazily load any images on demand when sliding. Overwrites <var>lazyLoadImages</var></td>
                                 <td><var>true</var></td>
                             </tr>
                         </tbody>

@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.1 | MIT License | responsivebp.com */
+/*! Responsive v2.5.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -14,7 +14,7 @@
 
 /*global jQuery*/
 /*jshint forin:false*/
-(function ($, w) {
+(function ($, w, d) {
 
     "use strict";
 
@@ -26,7 +26,7 @@
             /// <summary>Gets transition end event for the current browser.</summary>
             /// <returns type="Object">The transition end event for the current browser.</returns>
 
-            var div = document.createElement("div"),
+            var div = d.createElement("div"),
                 transEndEventNames = {
                     "transition": "transitionend",
                     "WebkitTransition": "webkitTransitionEnd",
@@ -49,6 +49,14 @@
 
     }());
 
+    $.support.touchEvents = (function () {
+        return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);
+    }());
+
+    $.support.pointerEvents = (function () {
+        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
+    }());
+
     $.fn.ensureTransitionEnd = function (duration) {
         /// <summary>
         /// Ensures that the transition end callback is triggered.
@@ -63,211 +71,239 @@
         return this;
     };
 
-    $.fn.swipe = function (options) {
-        /// <summary>Adds swiping functionality to the given element.</summary>
-        /// <param name="options" type="Object" optional="true" parameterArray="true">
-        ///      A collection of optional settings to apply.
-        ///      &#10;    1: namespace - The namespace for isolating the touch events.
-        ///      &#10;    2: timeLimit - The limit in ms to recognize touch events for. Default - 1000; 0 disables.
-        /// </param>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+    (function () {
+        var supportTouch = $.support.touchEvents,
+            supportPointer = $.support.pointerEvents;
 
-        var defaults = {
-            namespace: null,
-            touchAction: "none"
-        },
-            settings = $.extend({}, defaults, options);
+        var pointerStart = ["pointerdown", "MSPointerDown"],
+            pointerMove = ["pointermove", "MSPointerMove"],
+            pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave",
+                          "MSPointerUp", "MSPointerOut", "MSPointerCancel", "MSPointerLeave"];
 
-        var ns = settings.namespace && ("." + settings.namespace),
-            eswipestart = "swipestart" + ns,
-            eswipemove = "swipemove" + ns,
-            eswipeend = "swipeend" + ns,
-            etouchstart = "touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
-            etouchmove = "touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
-                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
-                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns + " MSPointerLeave" + ns,
-            supportTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0) ||
-                (navigator.msMaxTouchPoints > 0) ||
-                (window.DocumentTouch && document instanceof DocumentTouch);
+        var touchStart = "touchstart",
+            touchMove = "touchmove",
+            touchEnd = ["touchend", "touchleave", "touchcancel"];
 
-        return this.each(function () {
+        var mouseStart = "mousedown",
+            mouseMove = "mousemove",
+            mouseEnd = ["mouseup", "mouseleave"];
 
-            if (!supportTouch) {
-                etouchstart += " mousedown" + ns;
-                etouchmove += " mousemove" + ns;
-                etouchend += (" mouseup" + ns + " mouseleave" + ns);
+        var getEvents = function (ns) {
+            var estart,
+                emove,
+                eend;
+
+            // Keep the events separate since support could be crazy.
+            if (supportPointer) {
+                estart = (pointerStart.join(ns + " ")) + ns;
+                emove = (pointerMove.join(ns + " ")) + ns;
+                eend = (pointerEnd.join(ns + " ")) + ns;
+
+            } else if (supportTouch) {
+                estart = touchStart + ns;
+                emove = touchMove + ns;
+                eend = (touchEnd.join(ns + " ")) + ns;
+            } else {
+                estart = mouseStart + ns;
+                emove = mouseMove + ns;
+                eend = (mouseEnd.join(ns + " ")) + ns;
             }
 
-            var $this = $(this);
+            return {
+                start: estart,
+                move: emove,
+                end: eend
+            };
+        };
 
-            // Enable extended touch events on IE.
-            $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
+        $.fn.swipe = function (options) {
+            /// <summary>Adds swiping functionality to the given element.</summary>
+            /// <param name="options" type="Object" optional="true" parameterArray="true">
+            ///      A collection of optional settings to apply.
+            ///      &#10;    1: namespace - The namespace for isolating the touch events.
+            /// </param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-            var start = {},
-                delta = {},
-                isScrolling,
-                onMove = function (event) {
+            var defaults = {
+                namespace: null,
+                touchAction: "none"
+            },
+                settings = $.extend({}, defaults, options);
+
+            var ns = settings.namespace ? "." + settings.namespace : "",
+                eswipestart = "swipestart" + ns,
+                eswipemove = "swipemove" + ns,
+                eswipeend = "swipeend" + ns,
+                etouch = getEvents(ns);
+
+            return this.each(function () {
+                var $this = $(this);
+
+                if (supportPointer) {
+                    // Enable extended touch events on IE.
+                    $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
+                }
+
+                var start = {},
+                    delta = {},
+                    isScrolling,
+                    onMove = function (event) {
+
+                        // Normalize the variables.
+                        var isMouse = !supportPointer && !supportTouch,
+                            original = event.originalEvent,
+                            moveEvent;
+
+                        // Only left click allowed.
+                        if (isMouse && event.which !== 1) {
+                            return;
+                        }
+
+                        // One touch allowed.
+                        if (original.touches && original.touches.length > 1) {
+                            return;
+                        }
+
+                        // Ensure swiping with one touch and not pinching.
+                        if (event.scale && event.scale !== 1) {
+                            return;
+                        }
+
+                        var dx = (isMouse ? original.pageX : supportPointer ? original.clientX : original.touches[0].pageX) - start.x,
+                            dy = (isMouse ? original.pageY : supportPointer ? original.clientY : original.touches[0].pageY) - start.y;
+
+                        // Mimic touch action on iProducts.
+                        // Should also prevent bounce.
+                        if (!supportPointer) {
+                            switch (settings.touchAction) {
+                                case "pan-x":
+
+                                    isScrolling = Math.abs(dy) < Math.abs(dx);
+
+                                    if (!isScrolling) {
+                                        event.preventDefault();
+                                    } else {
+                                        event.stopPropagation();
+                                        return;
+                                    }
+
+                                    break;
+                                case "pan-y":
+
+                                    isScrolling = Math.abs(dx) < Math.abs(dy);
+
+                                    if (!isScrolling) {
+                                        event.preventDefault();
+                                    } else {
+                                        event.stopPropagation();
+                                        return;
+                                    }
+
+                                    break;
+                                default:
+                                    event.preventDefault();
+                                    break;
+                            }
+                        }
+
+                        moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
+
+                        $this.trigger(moveEvent);
+
+                        if (moveEvent.isDefaultPrevented()) {
+                            return;
+                        }
+
+                        // Measure change in x and y.
+                        delta = {
+                            x: dx,
+                            y: dy
+                        };
+                    },
+                    onEnd = function () {
+
+                        // Measure duration
+                        var duration = +new Date() - start.time,
+                            endEvent;
+
+                        // Determine if slide attempt triggers slide.
+                        if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
+
+                            // Set the direction and return it.
+                            var horizontal = delta.x < 0 ? "left" : "right",
+                                vertical = delta.y < 0 ? "up" : "down",
+                                direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
+
+                            endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
+
+                            $this.trigger(endEvent);
+                        }
+
+                        // Disable the touch events till next time.
+                        $this.off(etouch.move).off(etouch.end);
+                    };
+
+                $this.off(etouch.start).on(etouch.start, function (event) {
 
                     // Normalize the variables.
-                    var isMouse = event.type === "mousemove",
-                        isPointer = event.type !== "touchmove" && !isMouse,
+                    var isMouse = event.type === "mousedown",
+                        isPointer = event.type !== "touchstart" && !isMouse,
                         original = event.originalEvent,
-                        moveEvent;
+                        startEvent;
 
-                    // Only left click allowed.
-                    if (isMouse && event.which !== 1) {
-                        return;
+                    if ((isPointer || isMouse) && $(event.target).is("img")) {
+                        event.preventDefault();
                     }
 
-                    // One touch allowed.
-                    if (original.touches && original.touches.length > 1) {
-                        return;
-                    }
+                    // Used for testing first move event
+                    isScrolling = undefined;
 
-                    // Ensure swiping with one touch and not pinching.
-                    if (event.scale && event.scale !== 1) {
-                        return;
-                    }
+                    // Measure start values.
+                    start = {
+                        // Get initial touch coordinates.
+                        x: isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX,
+                        y: isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY,
 
-                    var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
-                        dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
-
-                    // Mimic touch action on iProducts.
-                    // Should also prevent bounce.
-                    if (!isPointer) {
-                        switch (settings.touchAction) {
-                            case "pan-x":
-
-                                isScrolling = Math.abs(dy) < Math.abs(dx);
-
-                                if (!isScrolling) {
-                                    event.preventDefault();
-                                } else {
-                                    event.stopPropagation();
-                                    return;
-                                }
-
-                                break;
-                            case "pan-y":
-
-                                isScrolling = Math.abs(dx) < Math.abs(dy);
-
-                                if (!isScrolling) {
-                                    event.preventDefault();
-                                } else {
-                                    event.stopPropagation();
-                                    return;
-                                }
-
-                                break;
-                            default:
-                                event.preventDefault();
-                                break;
-                        }
-                    }
-
-                    moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
-
-                    $this.trigger(moveEvent);
-
-                    if (moveEvent.isDefaultPrevented()) {
-                        return;
-                    }
-
-                    // Measure change in x and y.
-                    delta = {
-                        x: dx,
-                        y: dy
+                        // Store time to determine touch duration.
+                        time: +new Date()
                     };
-                },
-                onEnd = function () {
 
-                    // Measure duration
-                    var duration = +new Date() - start.time,
-                        endEvent;
+                    startEvent = $.Event(eswipestart, { start: start });
 
-                    // Determine if slide attempt triggers slide.
-                    if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
+                    $this.trigger(startEvent);
 
-                        // Set the direction and return it.
-                        var horizontal = delta.x < 0 ? "left" : "right",
-                            vertical = delta.y < 0 ? "up" : "down",
-                            direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
-
-                        endEvent = $.Event(eswipeend, { delta: delta, direction: direction, duration: duration });
-
-                        $this.trigger(endEvent);
+                    if (startEvent.isDefaultPrevented()) {
+                        return;
                     }
 
-                    // Disable the touch events till next time.
-                    $this.off(etouchmove).off(etouchend);
-                };
+                    // Reset delta and end measurements.
+                    delta = { x: 0, y: 0 };
 
-            $this.off(etouchstart).on(etouchstart, function (event) {
-
-                // Normalize the variables.
-                var isMouse = event.type === "mousedown",
-                    isPointer = event.type !== "touchstart" && !isMouse,
-                    original = event.originalEvent,
-                    startEvent;
-
-                if ((isPointer || isMouse) && $(event.target).is("img")) {
-                    event.preventDefault();
-                }
-
-                // Used for testing first move event
-                isScrolling = undefined;
-
-                // Measure start values.
-                start = {
-                    // Get initial touch coordinates.
-                    x: isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX,
-                    y: isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY,
-
-                    // Store time to determine touch duration.
-                    time: +new Date()
-                };
-
-                startEvent = $.Event(eswipestart, { start: start });
-
-                $this.trigger(startEvent);
-
-                if (startEvent.isDefaultPrevented()) {
-                    return;
-                }
-
-                // Reset delta and end measurements.
-                delta = { x: 0, y: 0 };
-
-                // Attach touchmove and touchend listeners.
-                $this.on(etouchmove, onMove)
-                     .on(etouchend, onEnd);
+                    // Attach touchmove and touchend listeners.
+                    $this.on(etouch.move, onMove)
+                         .on(etouch.end, onEnd);
+                });
             });
-        });
-    };
+        };
 
-    $.fn.removeSwipe = function (namespace) {
-        /// <summary>Removes swiping functionality from the given element.</summary>
-        /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        $.fn.removeSwipe = function (namespace) {
+            /// <summary>Removes swiping functionality from the given element.</summary>
+            /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-        var ns = namespace && ("." + namespace),
-            etouchstart = "mousedown" + ns + " touchstart" + ns + " pointerdown" + ns + " MSPointerDown" + ns,
-            etouchmove = "mousemove" + ns + " touchmove" + ns + " pointermove" + ns + "  MSPointerMove" + ns,
-            etouchend = "mouseup" + ns + " mouseleave" + ns +
-                        " touchend" + ns + " touchleave" + ns + " touchcancel" + ns +
-                        " pointerup" + ns + " pointerout" + ns + " pointercancel" + ns + " pointerleave" + ns +
-                        " MSPointerUp" + ns + "  MSPointerOut" + ns + "  MSPointerCancel" + ns + " MSPointerLeave" + ns;
+            var ns = namespace ? "." + namespace : "",
+                etouch = getEvents(ns);
 
-        return this.each(function () {
+            return this.each(function () {
 
-            // Disable extended touch events on ie.
-            // Unbind events.
-            $(this).css({ "-ms-touch-action": "", "touch-action": "" })
-                   .off(etouchstart).off(etouchmove).off(etouchend);
-        });
-    };
+                // Disable extended touch events on ie.
+                // Unbind events.
+                $(this).css({ "-ms-touch-action": "", "touch-action": "" })
+                       .off(etouch.start).off(etouch.move).off(etouch.end);
+            });
+        };
+
+    }());
 
     $.fn.redraw = function () {
         /// <summary>Forces the browser to redraw by measuring the given target.</summary>
@@ -331,7 +367,7 @@
         return options;
     };
 
-}(jQuery, window));
+}(jQuery, window, document));
 /*
  * Responsive AutoSize
  */
@@ -582,96 +618,123 @@
         return this.$items.index($activeItem);
     },
 
-    manageTouch = function () {
+        manageLazyImages = function () {
+            if (!this.data("lazyLoaded")) {
 
-        this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
-            .on("swipemove.r.carousel", $.proxy(function (event) {
+                this.find("img[data-src]").each(function () {
+                    if (this.src.length === 0) {
+                        this.src = this.getAttribute("data-src");
+                    }
+                });
 
-                if (this.sliding) {
-                    return;
-                }
+                this.data("lazyLoaded", true);
+            }
+        },
 
-                this.pause();
+        manageTouch = function () {
 
-                // Left is next.
-                var isNext = event.delta.x < 0,
-                    type = isNext ? "next" : "prev",
-                    fallback = isNext ? "first" : "last",
-                    activePosition = getActiveIndex.call(this),
-                    $activeItem = $(this.$items[activePosition]),
-                    $nextItem = $activeItem[type]("figure");
+            this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
+                .on("swipemove.r.carousel", $.proxy(function (event) {
 
-                if (!$nextItem.length) {
-
-                    if (!this.options.wrap) {
+                    if (this.sliding) {
                         return;
                     }
 
-                    $nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
-                }
+                    this.pause();
 
-                // Get the distance swiped as a percentage.
-                var width = $activeItem.width(),
-                    percent = parseFloat((event.delta.x / width) * 100),
-                    diff = isNext ? 100 : -100;
+                    // Left is next.
+                    var isNext = event.delta.x < 0,
+                        type = isNext ? "next" : "prev",
+                        fallback = isNext ? "first" : "last",
+                        activePosition = getActiveIndex.call(this),
+                        $activeItem = $(this.$items[activePosition]),
+                        $nextItem = $activeItem[type]("figure");
 
-                // Shift the items but put a limit on sensitivity.
-                if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
-                    this.$element.addClass("no-transition");
-                    if (this.options.mode === "slide") {
-                        $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
-                        $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
-                    } else {
-                        $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
-                        $nextItem.addClass("swipe");
-                    }
-                }
-
-            }, this))
-            .on("swipeend.r.carousel", $.proxy(function (event) {
-
-                if (this.sliding || !this.$element.hasClass("no-transition")) {
-                    return;
-                }
-
-                var direction = event.direction,
-                    method = "next";
-
-                if (direction === "right") {
-                    method = "prev";
-                }
-
-                // Re-enable the transitions.
-                this.$element.removeClass("no-transition");
-
-                if (supportTransition) {
-
-                    // Trim the animation duration based on the current position.
-                    var activePosition = getActiveIndex.call(this),
-                        $activeItem = $(this.$items[activePosition]);
-
-                    if (!this.translationDuration) {
-                        this.translationDuration = parseFloat($activeItem.css("transition-duration"));
+                    if (this.$items.length === 1) {
+                        return;
                     }
 
-                    // Get the distance and turn it into into a percentage
-                    // to calculate the duration. Whichever is lowest is used.
+                    if (!$nextItem.length) {
+
+                        if (!this.options.wrap) {
+                            return;
+                        }
+
+                        //$nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
+                        $nextItem = this.$element.children("figure")[fallback]();
+                    }
+
+                    if ($nextItem.hasClass("carousel-active")) {
+                        return;
+                    }
+
+                    if (this.options.lazyLoadImages && this.options.lazyOnDemand) {
+                        // Load the next image.
+                        manageLazyImages.call($nextItem);
+                    }
+
+                    // Get the distance swiped as a percentage.
                     var width = $activeItem.width(),
-                        percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
-                        swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
-                        newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
+                        percent = parseFloat((event.delta.x / width) * 100),
+                        diff = isNext ? 100 : -100;
 
-                    // Set the new temporary duration.
-                    this.$items.each(function () {
-                        $(this).css({ "transition-duration": newDuration + "s" });
-                    });
-                }
+                    // Shift the items but put a limit on sensitivity.
+                    if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
+                        this.$element.addClass("no-transition");
+                        if (this.options.mode === "slide") {
+                            $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
+                            $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
+                        } else {
+                            $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
+                            $nextItem.addClass("swipe");
+                        }
+                    }
 
-                this.cycle();
-                this[method]();
+                }, this))
+                .on("swipeend.r.carousel", $.proxy(function (event) {
 
-            }, this));
-    };
+                    if (this.sliding || !this.$element.hasClass("no-transition")) {
+                        return;
+                    }
+
+                    var direction = event.direction,
+                        method = "next";
+
+                    if (direction === "right") {
+                        method = "prev";
+                    }
+
+                    // Re-enable the transitions.
+                    this.$element.removeClass("no-transition");
+
+                    if (supportTransition) {
+
+                        // Trim the animation duration based on the current position.
+                        var activePosition = getActiveIndex.call(this),
+                            $activeItem = $(this.$items[activePosition]);
+
+                        if (!this.translationDuration) {
+                            this.translationDuration = parseFloat($activeItem.css("transition-duration"));
+                        }
+
+                        // Get the distance and turn it into into a percentage
+                        // to calculate the duration. Whichever is lowest is used.
+                        var width = $activeItem.width(),
+                            percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
+                            swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
+                            newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
+
+                        // Set the new temporary duration.
+                        this.$items.each(function () {
+                            $(this).css({ "transition-duration": newDuration + "s" });
+                        });
+                    }
+
+                    this.cycle();
+                    this[method]();
+
+                }, this));
+        };
 
     // Carousel class definition
     var Carousel = function (element, options) {
@@ -682,7 +745,9 @@
             mode: "slide",
             pause: "hover",
             wrap: true,
-            enabletouch: true
+            enabletouch: true,
+            lazyLoadImages: true,
+            lazyOnDemand: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.$indicators = this.$element.children("ol:first");
@@ -694,8 +759,10 @@
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events
-            this.$element.on(emouseenter, $.proxy(this.pause, this))
-                         .on(emouseleave, $.proxy(this.cycle, this));
+            if (!$.support.touchEvents && $.support.pointerEvents) {
+                this.$element.on(emouseenter, $.proxy(this.pause, this))
+                    .on(emouseleave, $.proxy(this.cycle, this));
+            }
         }
 
         // Add the css class to support fade.
@@ -703,6 +770,13 @@
 
         if (this.options.enabletouch) {
             manageTouch.call(this);
+        }
+
+        if (this.options.lazyLoadImages && !this.options.lazyOnDemand) {
+            var self = this;
+            $(w).on("load", function () {
+                manageLazyImages.call(self.$element);
+            });
         }
     };
 
@@ -830,6 +904,11 @@
 
         if (this.sliding || slideEvent.isDefaultPrevented()) {
             return false;
+        }
+
+        if (this.options.lazyLoadImages && this.options.lazyOnDemand) {
+            // Load the next image.
+            manageLazyImages.call($nextItem);
         }
 
         // Good to go? Then let's slide.
@@ -1408,8 +1487,7 @@
                     "mozallowfullscreen": "",
                     "allowfullscreen": "",
                     "src": src
-                })
-                    .appendTo($iframeWrap);
+                }).appendTo($iframeWrap);
 
                 // Test and add additional media classes.
                 var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
@@ -1427,7 +1505,7 @@
                     $content = null;
                     $lightbox.addClass("lightbox-image");
 
-                    $img.one("load", function () {
+                    $img.one("load error", function () {
                         toggleFade.call(self);
                     }).attr("src", target)
                         .appendTo($lightbox);
@@ -1558,8 +1636,7 @@
                             "max-height": childHeight,
                             "max-width": "100%"
                         });
-                    }
-                    else if ($content) {
+                    } else if ($content) {
                         $lightbox.css("max-height", childHeight);
                         $content.css("max-height", childHeight);
 
@@ -1571,8 +1648,7 @@
                                 $html.addClass("lightbox-lock");
                             }
                         }
-                    }
-                    else {
+                    } else {
 
                         var iframeWidth = $iframe.width(),
                             iframeHeight = $iframe.height(),
@@ -1598,12 +1674,12 @@
                         "padding-top": topHeight > 0 ? topHeight : ""
                     });
 
-                    top = parseInt($lightbox.offset().top);
+                    top = parseInt($lightbox.offset().top, 10);
 
                     // Thaaanks IE8!
                     if (top < 0) {
                         $lightbox.css({ "margin-top": 1 });
-                        top = parseInt($lightbox.offset().top);
+                        top = parseInt($lightbox.offset().top, 10);
                     }
 
                     var fallback = footerHeight > 1 ? -((topHeight + bottomHeight) / 2) : "";
@@ -1721,7 +1797,6 @@
         supportTransition ? $overlay.one(supportTransition.end, complete)
         .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
               : complete();
-
     },
 
     direction = function (course) {
@@ -1944,7 +2019,6 @@
 
                 self.$element.trigger(hiddenEvent);
             };
-
 
         this.$element.trigger(hideEvent);
 

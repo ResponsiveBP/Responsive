@@ -10,7 +10,7 @@ relative_permalinks: false
 name: Responsive
 
 # Server
-exclude:          ["CNAME"]
+exclude:          ["CNAME","node_modules"]
 
 # Meta Details
 description: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites.
@@ -20,8 +20,8 @@ author: "James South, and Responsive contributers"
 
 
 # Custom variables
-version: 2.5.1
-buildsize : 20.4
+version: 2.5.2
+buildsize : 20.6
 repo: https://github.com/responsivebp/responsive
-release: https://github.com/ResponsiveBP/Responsive/releases/download/2.5.1/responsive.zip
+release: https://github.com/ResponsiveBP/Responsive/releases/download/2.5.2/responsive.zip
 
