@@ -147,8 +147,7 @@
                     "mozallowfullscreen": "",
                     "allowfullscreen": "",
                     "src": src
-                })
-                    .appendTo($iframeWrap);
+                }).appendTo($iframeWrap);
 
                 // Test and add additional media classes.
                 var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
@@ -166,7 +165,7 @@
                     $content = null;
                     $lightbox.addClass("lightbox-image");
 
-                    $img.one("load", function () {
+                    $img.one("load error", function () {
                         toggleFade.call(self);
                     }).attr("src", target)
                         .appendTo($lightbox);
@@ -297,8 +296,7 @@
                             "max-height": childHeight,
                             "max-width": "100%"
                         });
-                    }
-                    else if ($content) {
+                    } else if ($content) {
                         $lightbox.css("max-height", childHeight);
                         $content.css("max-height", childHeight);
 
@@ -310,8 +308,7 @@
                                 $html.addClass("lightbox-lock");
                             }
                         }
-                    }
-                    else {
+                    } else {
 
                         var iframeWidth = $iframe.width(),
                             iframeHeight = $iframe.height(),
@@ -337,12 +334,12 @@
                         "padding-top": topHeight > 0 ? topHeight : ""
                     });
 
-                    top = parseInt($lightbox.offset().top);
+                    top = parseInt($lightbox.offset().top, 10);
 
                     // Thaaanks IE8!
                     if (top < 0) {
                         $lightbox.css({ "margin-top": 1 });
-                        top = parseInt($lightbox.offset().top);
+                        top = parseInt($lightbox.offset().top, 10);
                     }
 
                     var fallback = footerHeight > 1 ? -((topHeight + bottomHeight) / 2) : "";
@@ -460,7 +457,6 @@
         supportTransition ? $overlay.one(supportTransition.end, complete)
         .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
               : complete();
-
     },
 
     direction = function (course) {
@@ -683,7 +679,6 @@
 
                 self.$element.trigger(hiddenEvent);
             };
-
 
         this.$element.trigger(hideEvent);
 
