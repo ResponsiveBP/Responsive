@@ -1,14 +1,14 @@
 #Responsive
 ##A super lightweight HTML, CSS, and JavaScript framework for building responsive websites
 
-###[Bootstrap](http://getbootstrap.com/) and [Foundation](http://foundation.zurb.com) are too heavy.
+###Bootstrap and Foundation are too heavy.
 
 
 They're great for prototyping but every time you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the functionality of the website. That's annoying!
 
 **Responsive** has been built with that in mind. It has been specifically designed and coded to be as lightweight as possible to prevent the need to undo styles set by the framework itself and allow developers to write efficient code and speed up development time.
 
-**Responsive** is tiny. The combined CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality built into the framework. It's designed to be dropped-in, as-is to your website such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
+**Responsive** is tiny. The combined CSS and JavaScript is **only 20.6kb minified and gzipped** but there is a lot of functionality built into the framework. It's designed to be dropped-in, as-is to your website such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
 
 Browser support covers IE8+ as well as all other modern browsers.
 
