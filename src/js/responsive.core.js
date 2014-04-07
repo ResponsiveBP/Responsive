@@ -6,14 +6,14 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.2 | MIT License | responsivebp.com */
+/*! Responsive v2.5.3 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
  */
 
 /*global jQuery*/
-/*jshint forin:false*/
+/*jshint forin:false, expr:true*/
 (function ($, w, d) {
 
     "use strict";
@@ -49,13 +49,14 @@
 
     }());
 
-    $.support.touchEvents = (function () {
-        return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);
-    }());
-
-    $.support.pointerEvents = (function () {
-        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
-    }());
+    $.fn.redraw = function () {
+        /// <summary>Forces the browser to redraw by measuring the given target.</summary>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        var redraw;
+        return this.each(function () {
+            redraw = this.offsetWidth;
+        });
+    };
 
     $.fn.ensureTransitionEnd = function (duration) {
         /// <summary>
@@ -70,6 +71,35 @@
         w.setTimeout(callback, duration);
         return this;
     };
+
+    $.fn.onTransitionEnd = function (callback) {
+        /// <summary>Performs the given callback at the end of a css transition.</summary>
+        /// <param name="callback" type="Function">The function to call on transition end.</param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        var supportTransition = $.support.transition;
+        
+        return this.each(function () {
+
+            if (!$.isFunction(callback)) {
+                return;
+            }
+
+            var $this = $(this).redraw(),
+                rtransition = /\d+(.\d+)/;
+
+         supportTransition ? $this.one(supportTransition.end, callback)
+                                  .ensureTransitionEnd($this.css("transition-duration").match(rtransition)[0] * 1000)
+                           : callback();
+        });
+    };
+
+    $.support.touchEvents = (function () {
+        return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);
+    }());
+
+    $.support.pointerEvents = (function () {
+        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
+    }());
 
     (function () {
         var supportTouch = $.support.touchEvents,
@@ -305,15 +335,6 @@
 
     }());
 
-    $.fn.redraw = function () {
-        /// <summary>Forces the browser to redraw by measuring the given target.</summary>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        var redraw;
-        return this.each(function () {
-            redraw = this.offsetWidth;
-        });
-    };
-
     $.extend($.expr[":"], {
         attrStart: function (el, i, props) {
             /// <summary>Custom selector extension to allow attribute starts with selection.</summary>
@@ -366,5 +387,4 @@
 
         return options;
     };
-
 }(jQuery, window, document));

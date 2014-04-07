@@ -87,42 +87,40 @@
  * Float helpers
  */
 .push-left {
-    float: left!important;
+    float: left !important;
 }
 
 .push-right {
-    float: right!important;
+    float: right !important;
 }
 
 /*
  * Layout helpers
  */
 .block {
-    display: block!important;
+    display: block !important;
 }
 
 .inline-block {
-    display: inline-block!important;
+    display: inline-block !important;
 }
 
 .inline {
-    display: inline!important;
+    display: inline !important;
 }
 
 /*
  * Fade opacity with animation
  */
 .fade-out {
-    -moz-opacity: 0!important;
-    opacity: 0!important;
+    opacity: 0 !important;
 }
 
 /*
  * Opacity helper to add to elements to allow fade animation
  */
 .fade-in {
-    -moz-opacity: 1!important;
-    opacity: 1!important;
+    opacity: 1 !important;
 }
 
 .fade-out, .fade-in {
@@ -143,4 +141,37 @@
     display: none !important;
 }
 
+@media (max-width: 47.99em) {
+    .visible-xs {
+        display: block !important;
+    }
 
+    table.visible-xs {
+        display: table;
+    }
+
+    thead.visible-xs {
+        display: table-header-group !important;
+    }
+
+    tfoot.visible-xs {
+        display: table-footer-group !important;
+    }
+
+    tr.visible-xs {
+        display: table-row !important;
+    }
+
+    th.visible-xs,
+    td.visible-xs {
+        display: table-cell !important;
+    }
+
+    col.visible-xs {
+        display: table-column !important;
+    }
+
+    caption.visible-xs {
+        display: table-caption !important;
+    }
+}

@@ -14,8 +14,6 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        // Match the transition.
-        rtransition = /\d+(.\d+)/,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
@@ -289,9 +287,7 @@
             direction = isNext ? "left" : "right",
             fallback = isNext ? "first" : "last",
             self = this,
-            slidEvent = $.Event(eslid),
-            slideMode = this.options.mode === "slide",
-            fadeMode = this.options.mode === "fade";
+            slidEvent = $.Event(eslid);
 
         if (isCycling) {
             // Pause if cycling.
@@ -374,9 +370,7 @@
             });
         }
 
-        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete)
-        .ensureTransitionEnd($activeItem.css("transition-duration").match(rtransition)[0] * 1000)
-        : complete();
+        $activeItem.onTransitionEnd(complete);
 
         // Restart the cycle.
         if (isCycling) {

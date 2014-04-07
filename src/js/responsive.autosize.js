@@ -87,8 +87,7 @@
 
     AutoSize.prototype.size = function () {
 
-        var supportTransition = $.support.transition,
-            self = this,
+        var self = this,
             $element = this.$element,
             element = this.$element[0],
             $clone = this.$clone,
@@ -140,9 +139,7 @@
             $element.height($clone.height());
 
             // Do our callback
-            supportTransition ? $element.one(supportTransition.end, complete)
-            .ensureTransitionEnd($element.css("transition-duration").slice(0, -1) * 1000)
-            : complete();
+            $element.onTransitionEnd(complete);
         }
     };
 

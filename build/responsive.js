@@ -6,14 +6,14 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.2 | MIT License | responsivebp.com */
+/*! Responsive v2.5.3 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
  */
 
 /*global jQuery*/
-/*jshint forin:false*/
+/*jshint forin:false, expr:true*/
 (function ($, w, d) {
 
     "use strict";
@@ -49,13 +49,14 @@
 
     }());
 
-    $.support.touchEvents = (function () {
-        return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);
-    }());
-
-    $.support.pointerEvents = (function () {
-        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
-    }());
+    $.fn.redraw = function () {
+        /// <summary>Forces the browser to redraw by measuring the given target.</summary>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        var redraw;
+        return this.each(function () {
+            redraw = this.offsetWidth;
+        });
+    };
 
     $.fn.ensureTransitionEnd = function (duration) {
         /// <summary>
@@ -70,6 +71,35 @@
         w.setTimeout(callback, duration);
         return this;
     };
+
+    $.fn.onTransitionEnd = function (callback) {
+        /// <summary>Performs the given callback at the end of a css transition.</summary>
+        /// <param name="callback" type="Function">The function to call on transition end.</param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+        var supportTransition = $.support.transition;
+        
+        return this.each(function () {
+
+            if (!$.isFunction(callback)) {
+                return;
+            }
+
+            var $this = $(this).redraw(),
+                rtransition = /\d+(.\d+)/;
+
+         supportTransition ? $this.one(supportTransition.end, callback)
+                                  .ensureTransitionEnd($this.css("transition-duration").match(rtransition)[0] * 1000)
+                           : callback();
+        });
+    };
+
+    $.support.touchEvents = (function () {
+        return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);
+    }());
+
+    $.support.pointerEvents = (function () {
+        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
+    }());
 
     (function () {
         var supportTouch = $.support.touchEvents,
@@ -305,15 +335,6 @@
 
     }());
 
-    $.fn.redraw = function () {
-        /// <summary>Forces the browser to redraw by measuring the given target.</summary>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        var redraw;
-        return this.each(function () {
-            redraw = this.offsetWidth;
-        });
-    };
-
     $.extend($.expr[":"], {
         attrStart: function (el, i, props) {
             /// <summary>Custom selector extension to allow attribute starts with selection.</summary>
@@ -366,7 +387,6 @@
 
         return options;
     };
-
 }(jQuery, window, document));
 /*
  * Responsive AutoSize
@@ -457,8 +477,7 @@
 
     AutoSize.prototype.size = function () {
 
-        var supportTransition = $.support.transition,
-            self = this,
+        var self = this,
             $element = this.$element,
             element = this.$element[0],
             $clone = this.$clone,
@@ -510,9 +529,7 @@
             $element.height($clone.height());
 
             // Do our callback
-            supportTransition ? $element.one(supportTransition.end, complete)
-            .ensureTransitionEnd($element.css("transition-duration").slice(0, -1) * 1000)
-            : complete();
+            $element.onTransitionEnd(complete);
         }
     };
 
@@ -600,8 +617,6 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        // Match the transition.
-        rtransition = /\d+(.\d+)/,
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
@@ -875,9 +890,7 @@
             direction = isNext ? "left" : "right",
             fallback = isNext ? "first" : "last",
             self = this,
-            slidEvent = $.Event(eslid),
-            slideMode = this.options.mode === "slide",
-            fadeMode = this.options.mode === "fade";
+            slidEvent = $.Event(eslid);
 
         if (isCycling) {
             // Pause if cycling.
@@ -960,9 +973,7 @@
             });
         }
 
-        supportTransition && (slideMode || fadeMode) ? $activeItem.one(supportTransition.end, complete)
-        .ensureTransitionEnd($activeItem.css("transition-duration").match(rtransition)[0] * 1000)
-        : complete();
+        $activeItem.onTransitionEnd(complete);
 
         // Restart the cycle.
         if (isCycling) {
@@ -1070,8 +1081,7 @@
 
     Dismiss.prototype.close = function () {
 
-        var supportTransition = $.support.transition,
-            dismissEvent = $.Event(edismiss),
+        var dismissEvent = $.Event(edismiss),
             $target = this.$target,
             self = this,
             complete = function () {
@@ -1093,9 +1103,7 @@
                .removeClass("fade-in");
 
         // Do our callback
-        supportTransition ? this.$target.one(supportTransition.end, complete)
-        .ensureTransitionEnd(this.$target.css("transition-duration").slice(0, -1) * 1000)
-        : complete();
+        this.$target.onTransitionEnd(complete);
     };
 
     // Plug-in definition 
@@ -1160,8 +1168,6 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
-        // Match the transition.
-        rtransition = /\d+(.\d+)/,
         eclick = "click" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
@@ -1194,9 +1200,7 @@
         this.$element.trigger(startEvent)[method]("collapse");
         this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
-        supportTransition ? this.$element.one(supportTransition.end, complete)
-        .ensureTransitionEnd(this.$element.css("transition-duration").match(rtransition)[0] * 1000)
-        : complete();
+        this.$element.onTransitionEnd(complete);
     };
 
     // The Dropdown class definition
@@ -1596,9 +1600,7 @@
 
         toggleFade.call(this);
 
-        supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
-        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
-        : cleanUp();
+        $lightbox.onTransitionEnd(cleanUp);
     },
 
     resize = function () {
@@ -1794,9 +1796,7 @@
             .redraw()[fade]("fade-in")
             .redraw();
 
-        supportTransition ? $overlay.one(supportTransition.end, complete)
-        .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
-              : complete();
+        $overlay.onTransitionEnd(complete);
     },
 
     direction = function (course) {
@@ -2001,9 +2001,7 @@
         create.call(this);
 
         // Call the callback.
-        supportTransition ? $lightbox.one(supportTransition.end, complete)
-        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
-                          : complete();
+        $lightbox.onTransitionEnd(complete);
     };
 
     LightBox.prototype.hide = function () {
@@ -2031,9 +2029,7 @@
         toggleOverlay.call(this, "hide");
         destroy.call(this);
 
-        supportTransition ? $lightbox.one(supportTransition.end, complete)
-        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
-                          : complete();
+        $lightbox.onTransitionEnd(complete);
     };
 
     LightBox.prototype.next = function () {
@@ -2300,8 +2296,7 @@
     }
 
     // General variables.
-    var supportTransition = $.support.transition,
-        eready = "ready" + ns,
+    var eready = "ready" + ns,
         eclick = "click" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns;
@@ -2374,9 +2369,7 @@
             };
 
             // Do our callback
-            supportTransition ? this.$element.one(supportTransition.end, complete)
-            .ensureTransitionEnd(this.$element.css("transition-duration").slice(0, -1) * 1000)
-            : complete();
+            this.$element.onTransitionEnd(complete);
         });
     };
 
