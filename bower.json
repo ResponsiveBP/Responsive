@@ -1,25 +1,26 @@
 {
   "name": "responsive",
   "version": "2.5.2",
-  "homepage": "https://responsivebp.com",
+  "homepage": "http://responsivebp.com",
   "authors": [
     "James South"
   ],
   "license": "MIT",
   "main": [
     "./build/responsive.ie10mobilefix.js",
-	"./build/responsive.ie10mobilefix.min.js",
+	  "./build/responsive.ie10mobilefix.min.js",
     "./build/responsive.js",
-	"./build/responsive.min.js",
+	  "./build/responsive.min.js",
     "./build/responsive.css",
-	"./build/responsive.min.css"
+	  "./build/responsive.min.css",
+    "./build/template.html"
   ],
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "builder",
     "src",
+    "dist",
     "tests"
   ],
   "dependencies": {
