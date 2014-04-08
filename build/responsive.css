@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.2 | MIT License | responsivebp.com */
+/*! Responsive v2.5.3 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 
 /**
@@ -1006,7 +1006,6 @@ abbr {
 .no-gutter .pull-xs-1 {
     right: 8.3333%;
 }
-
 @media (min-width: 48em) and (max-width: 61.99em) {
     .row [class*="col-"].reset-s-only {
         margin-left: 0 !important;
@@ -1451,7 +1450,6 @@ abbr {
         right: 8.3333%;
     }
 }
-
 @media (min-width: 62em) and (max-width: 74.99em) {
     .row [class*="col-"].reset-m-only {
         margin-left: 0 !important;
@@ -1896,7 +1894,6 @@ abbr {
         right: 8.3333%;
     }
 }
-
 @media (min-width: 75em) {
     .row [class*="col-"].reset-l {
         margin-left: 0 !important;
@@ -2331,7 +2328,6 @@ abbr {
         right: 8.3333%;
     }
 }
-
 /* 
  * Unordered and ordered lists 
  * Scale the padding/margin with the base font.
@@ -2445,7 +2441,6 @@ dt, dd {
         margin-left: 166px;
     }
 }
-
 /* 
  *  Make it responsive
  */
@@ -2505,9 +2500,8 @@ table {
     .table-scrollable table {
         margin: 0;
     }
-
 @media (max-width: 47.99em) {
-    /*
+/*
  * Basic layout.
  */
     [data-table-list] {
@@ -2569,7 +2563,6 @@ table {
             border-top-style: none;
         }
 }
-
 .alert {
     background-color: #FCF8E3;
     border: 1px solid #F2E187;
@@ -2688,6 +2681,14 @@ a img {
     padding-bottom: 100%;
 }
 
+/*
+ * Getty
+ */
+.media.getty {
+    height: auto;
+    padding-bottom: 79.96632996632997%;
+}
+
 .media.video {
     padding-top: 0;
 }
@@ -2726,7 +2727,6 @@ a img {
     margin: auto;
     width: 100%;
 }
-
 /* Normalize  */
 .form {
     margin: 1em 0;
@@ -3012,7 +3012,6 @@ select.inline-block {
     margin: 1em 0;
     padding: 1em 0;
 }
-
 /*
  * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
@@ -3141,7 +3140,6 @@ input[type="button"],
     .btn-group > * {
         float: left;
     }
-
 /*
  * Colors and padding.
  */
@@ -3195,7 +3193,6 @@ pre {
     max-height: 20em;
     overflow-y: scroll;
 }
-
 .accordion {
     border: solid 1px #c0c0c0;
     margin-bottom: .125em;
@@ -3244,7 +3241,6 @@ pre {
         height: auto;
         width: 0;
     }
-
 .autosize,
 [data-autosize] {
     overflow: hidden;
@@ -3253,7 +3249,6 @@ pre {
     -o-transition: height 0.3s linear;
     transition: height 0.3s linear;
 }
-
 .carousel {
     position: relative;
     overflow: hidden;
@@ -3483,7 +3478,6 @@ pre {
     .carousel > ol .active {
         background-color: #fff;
     }
-
 .tabs {
     position: relative;
 }
@@ -3542,7 +3536,6 @@ pre {
         .tabs > *.tab-pane-active {
             display: block;
         }
-
 .lightbox-on,
 .lightbox-lock > body {
     height: 100%;
@@ -3718,7 +3711,6 @@ pre {
     .lightbox-direction:hover {
         text-decoration: underline;
     }
-
 /*
  * Image replacement
  */
@@ -3808,42 +3800,40 @@ pre {
  * Float helpers
  */
 .push-left {
-    float: left!important;
+    float: left !important;
 }
 
 .push-right {
-    float: right!important;
+    float: right !important;
 }
 
 /*
  * Layout helpers
  */
 .block {
-    display: block!important;
+    display: block !important;
 }
 
 .inline-block {
-    display: inline-block!important;
+    display: inline-block !important;
 }
 
 .inline {
-    display: inline!important;
+    display: inline !important;
 }
 
 /*
  * Fade opacity with animation
  */
 .fade-out {
-    -moz-opacity: 0!important;
-    opacity: 0!important;
+    opacity: 0 !important;
 }
 
 /*
  * Opacity helper to add to elements to allow fade animation
  */
 .fade-in {
-    -moz-opacity: 1!important;
-    opacity: 1!important;
+    opacity: 1 !important;
 }
 
 .fade-out, .fade-in {
@@ -3864,12 +3854,48 @@ pre {
     display: none !important;
 }
 
+@media (max-width: 47.99em) {
+    .visible-xs {
+        display: block !important;
+    }
 
+    table.visible-xs {
+        display: table;
+    }
 
+    thead.visible-xs {
+        display: table-header-group !important;
+    }
+
+    tfoot.visible-xs {
+        display: table-footer-group !important;
+    }
+
+    tr.visible-xs {
+        display: table-row !important;
+    }
+
+    th.visible-xs,
+    td.visible-xs {
+        display: table-cell !important;
+    }
+
+    col.visible-xs {
+        display: table-column !important;
+    }
+
+    caption.visible-xs {
+        display: table-caption !important;
+    }
+}
 /*
  * 769 > viewport < 991px
  */
 @media (min-width: 48em) and (max-width: 61.99em) {
+    .visible-xs,
+    .hidden-s {
+        display: none !important;
+    }
 
     .hidden-xs,
     .visible-s {
@@ -3912,17 +3938,17 @@ pre {
     caption.visible-s {
         display: table-caption !important;
     }
-
-    .visible-xs,
-    .hidden-s {
-        display: none !important;
-    }
 }
 
 /*
  * 992px > viewport < 1200px
  */
 @media (min-width: 62em) and (max-width: 74.99em) {
+    .visible-xs,
+    .hidden-m {
+        display: none !important;
+    }
+
     .hidden-xs,
     .visible-m {
         display: block !important;
@@ -3964,17 +3990,17 @@ pre {
     caption.visible-m {
         display: table-caption !important;
     }
-
-    .visible-xs,
-    .hidden-m {
-        display: none !important;
-    }
 }
 
 /*
  * viewport > 1200px
  */
 @media (min-width: 75em) {
+    .visible-xs,
+    .hidden-l {
+        display: none !important;
+    }
+
     .hidden-xs,
     .visible-l {
         display: block !important;
@@ -4016,13 +4042,7 @@ pre {
     caption.visible-l {
         display: table-caption !important;
     }
-
-    .visible-xs,
-    .hidden-l {
-        display: none !important;
-    }
 }
-
 @media print {
     * {
         background: transparent !important;

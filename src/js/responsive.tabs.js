@@ -13,8 +13,7 @@
     }
 
     // General variables.
-    var supportTransition = $.support.transition,
-        eready = "ready" + ns,
+    var eready = "ready" + ns,
         eclick = "click" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns;
@@ -87,9 +86,7 @@
             };
 
             // Do our callback
-            supportTransition ? this.$element.one(supportTransition.end, complete)
-            .ensureTransitionEnd(this.$element.css("transition-duration").slice(0, -1) * 1000)
-            : complete();
+            this.$element.onTransitionEnd(complete);
         });
     };
 

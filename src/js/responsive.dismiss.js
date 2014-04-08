@@ -27,8 +27,7 @@
 
     Dismiss.prototype.close = function () {
 
-        var supportTransition = $.support.transition,
-            dismissEvent = $.Event(edismiss),
+        var dismissEvent = $.Event(edismiss),
             $target = this.$target,
             self = this,
             complete = function () {
@@ -50,9 +49,7 @@
                .removeClass("fade-in");
 
         // Do our callback
-        supportTransition ? this.$target.one(supportTransition.end, complete)
-        .ensureTransitionEnd(this.$target.css("transition-duration").slice(0, -1) * 1000)
-        : complete();
+        this.$target.onTransitionEnd(complete);
     };
 
     // Plug-in definition 

@@ -256,9 +256,7 @@
 
         toggleFade.call(this);
 
-        supportTransition ? $lightbox.one(supportTransition.end, cleanUp)
-        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
-        : cleanUp();
+        $lightbox.onTransitionEnd(cleanUp);
     },
 
     resize = function () {
@@ -454,9 +452,7 @@
             .redraw()[fade]("fade-in")
             .redraw();
 
-        supportTransition ? $overlay.one(supportTransition.end, complete)
-        .ensureTransitionEnd($overlay.css("transition-duration").slice(0, -1) * 1000)
-              : complete();
+        $overlay.onTransitionEnd(complete);
     },
 
     direction = function (course) {
@@ -661,9 +657,7 @@
         create.call(this);
 
         // Call the callback.
-        supportTransition ? $lightbox.one(supportTransition.end, complete)
-        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
-                          : complete();
+        $lightbox.onTransitionEnd(complete);
     };
 
     LightBox.prototype.hide = function () {
@@ -691,9 +685,7 @@
         toggleOverlay.call(this, "hide");
         destroy.call(this);
 
-        supportTransition ? $lightbox.one(supportTransition.end, complete)
-        .ensureTransitionEnd($lightbox.css("transition-duration").slice(0, -1) * 1000)
-                          : complete();
+        $lightbox.onTransitionEnd(complete);
     };
 
     LightBox.prototype.next = function () {
