@@ -4,6 +4,8 @@
 # http://jekyllrb.com/docs/github-pages/
 baseurl : ""
 
+markdown: kramdown
+
 relative_permalinks: false
 
 # Name of the website
