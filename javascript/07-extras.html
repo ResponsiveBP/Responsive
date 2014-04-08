@@ -1,0 +1,120 @@
+---
+permalink: extras.html
+layout: subpage
+group: javascript
+title: Extras
+heading: Extras
+subheading: Bundled JavaScript tools.
+sublinks: ["#transition|Transition Support",
+           "#touch|Touch Support"]
+---
+<article id="normalize">
+    <h1>Overview</h1>
+    <p>
+        Responsive utilizes several advanced techniques in order to provide a true cross browser experience.
+        Within the core these are exposed as jQuery functions to all the plugins and to all developers allowing them to expand
+        upon the framework.
+    </p>
+    <hr />
+    <section id="transition">
+        <h1>Transition Tools</h1>
+        <p>The following methods aid with the management of CSS transitions.</p>
+        <dl>
+            <dt><strong>$.support.transition</strong></dt>
+            <dd>Returns an object with a single property <code>.end</code> if the browser supports CSS transitions. Otherwise; false.</dd>
+            <dt><strong>$(target).redraw()</strong></dt>
+            <dd>Forces the browser to repaint which will trigger a CSS transition.</dd>
+            <dt><strong>$.(target).ensureTransitionEnd(duration)</strong></dt>
+            <dd>Ensures that the transition end callback is triggered af the given duration in milliseconds.</dd>
+            <dt><strong>$.(target).onTransitionEnd(callback)</strong></dt>
+            <dd>Performs the given callback function at the end of a CSS transition.</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="touch">
+        <h1>Touch Tools</h1>
+        <p>The following methods aid with the management of touch detection and support.</p>
+        <dl>
+            <dt><strong>$.support.touchEvents</strong></dt>
+            <dd>Returns true if the browser supports <a href="https://dvcs.w3.org/hg/webevents/raw-file/v1/touchevents.html">touch events</a>. Otherwise; false.</dd>
+            <dt><strong>$.support.pointerEvents</strong></dt>
+            <dd>Returns true if the browser supports <a href="https://dvcs.w3.org/hg/pointerevents/raw-file/tip/pointerEvents.html">pointer events</a>. Otherwise; false.</dd>
+            <dt><strong>$.(target).swipe(options)</strong></dt>
+            <dd>
+                <p>
+                    This plugin allows for the handling of simple swipe actions (single pointer) across multiple devices. Behaviour is normalized over both touch and pointer event
+                    specification plus mouse interation on the desktop. 
+                </p>
+                <p>Initialises the plugin with an optional options <code>object</code></p>
+                <div class="table-scrollable">
+                    <table class="table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">namespace</th>
+                                <td>string</td>
+                                <td>A namespace to add to the fired evens to isolate them to a particular plugin.</td>
+                                <td><var>null</var></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">touchAction</th>
+                                <td>string</td>
+                                <td>
+                                    The <a href="https://dvcs.w3.org/hg/pointerevents/raw-file/tip/pointerEvents.html#the-touch-action-css-property">CSS touch-action</a> to apply to the target.
+                                    The behavior
+                                </td>
+                                <td><var>"none"</var></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>The plugin exposes the following events. These can be suffixed on initialization.</p>
+                <dl>
+                    <dt><strong>swipestart</strong></dt>
+                    <dd>
+                        This event is fired immediately when a swipe instance is detected on pointer down. The event data contains three custom properties:
+                        <dl>
+                            <dt><strong>x</strong></dt>
+                            <dd>The horizontal position in pixels within the current viewport.</dd>
+                            <dt><strong>y</strong></dt>
+                            <dd>The vertical position in pixels within the current viewport.</dd>
+                            <dt><strong>time</strong></dt>
+                            <dd>The current <code>Date</code>.</dd>
+                        </dl>
+                    </dd>
+                    <dt><strong>swipemove</strong></dt>
+                    <dd>
+                        This event is fired when the pointer is moved across the surface of the device. The event data contain the custom property <code>delta</code>:
+                        <dl>
+                            <dt><strong>x</strong></dt>
+                            <dd>The horizontal position in pixels within the current viewport.</dd>
+                            <dt><strong>y</strong></dt>
+                            <dd>The vertical position in pixels within the current viewport.</dd>
+                        </dl>
+                    </dd>
+                    <dt><strong>swipeend</strong></dt>
+                    <dd>
+                        This event is fired immediately when on pointer up or mouse leave. The event data contains three custom properties:
+                        <dl>
+                            <dt><strong>delta</strong></dt>
+                            <dd>The horizontal and vertical position in pixels within the current viewport.</dd>
+                            <dt><strong>direction</strong></dt>
+                            <dd>The direction of the swipe: <var>up, down, left, right</var>.</dd>
+                            <dt><strong>duration</strong></dt>
+                            <dd>The time in milliseconds between the beginning and end of a swipe action instance.</dd>
+                        </dl>
+                    </dd>
+                </dl>
+            </dd>
+            <dt><strong>$.(target).removeSwipe()</strong></dt>
+            <dd>Forces the removal of any bound swipe functionality from the given target.</dd>
+        </dl>
+    </section>
+</article>

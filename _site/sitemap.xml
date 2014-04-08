@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://responsivebp.com</loc>
-    <lastmod>2014-04-08T14:08:11+01:00</lastmod>
+    <lastmod>2014-04-08T19:05:34+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -243,6 +243,19 @@
   
   <url>
     <loc>http://responsivebp.com/tablelist.html</loc>
+    
+    <lastmod>2014-04-08</lastmod>
+    
+    
+    <changefreq>monthly</changefreq>
+    
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://responsivebp.com/extras.html</loc>
     
     <lastmod>2014-04-08</lastmod>
     
