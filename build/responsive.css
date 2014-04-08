@@ -2681,6 +2681,14 @@ a img {
     padding-bottom: 100%;
 }
 
+/*
+ * Getty
+ */
+.media.getty {
+    height: auto;
+    padding-bottom: 79.96632996632997%;
+}
+
 .media.video {
     padding-top: 0;
 }
