@@ -134,7 +134,7 @@
  * Responsive helpers to toggle visibility. 
  */
 
-.hidden-xs,
+.visible-xs,
 .visible-s,
 .visible-m,
 .visible-l {
@@ -142,6 +142,10 @@
 }
 
 @media (max-width: 47.99em) {
+    .hidden-xs {
+        display: none !important;
+    }
+
     .visible-xs {
         display: block !important;
     }

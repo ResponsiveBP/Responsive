@@ -131,6 +131,7 @@
     background-color: #111;
     color: #fff;
     position: absolute;
+    width: 100%;
     bottom: 0;
 }
 
