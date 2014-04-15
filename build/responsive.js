@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.3 | MIT License | responsivebp.com */
+/*! Responsive v2.5.4 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -1629,7 +1629,7 @@
                     bottomHeight = footerHeight > 0 ? footerHeight : 1;
                     diff = topHeight + bottomHeight;
                     childHeight = windowHeight - diff;
-                    var ie10Mobile = navigator.userAgent.match(/IEMobile\/10\.0/);
+                    var ieMobile = navigator.userAgent.match(/IEMobile\//);
 
                     if ($img) {
                         // IE8 doesn't change the width as max-width will cause the 
@@ -1645,7 +1645,7 @@
                         // Prevent IEMobile10 scrolling when content overflows the lightbox.
                         // This causes the content to jump behind the model but it's all I can
                         // find for now.
-                        if (ie10Mobile) {
+                        if (ieMobile) {
                             if ($content.children("*:first")[0].scrollHeight > $content.height()) {
                                 $html.addClass("lightbox-lock");
                             }

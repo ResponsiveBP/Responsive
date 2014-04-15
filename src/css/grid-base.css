@@ -33,8 +33,7 @@
     width: 100%;
 }
 
-.row [class*="col-"] + [class*="col-"]
- {
+.row [class*="col-"] + [class*="col-"] {
     margin-left: 2%;
 }
 
@@ -45,8 +44,7 @@
     margin-left: 0;
 }
 
-.row [class*="col-xs"] + [class*="col-"]
- {
+.row [class*="col-xs"] + [class*="col-"] {
     margin-left: 2%;
 }
 
@@ -80,6 +78,7 @@
 }
 
 /* Full width calculated with margins */
+.row [class*="col-"] + [class*="col-xs-12"],
 .col-xs-12 {
     width: 100%;
     margin-left: 0;

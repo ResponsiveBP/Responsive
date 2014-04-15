@@ -12,6 +12,7 @@
         margin-left: 2%;
     }
 
+    .row [class*="col-"] + [class*="col-l-12"],
     .col-l-12 {
         width: 100%;
         margin-left: 0;

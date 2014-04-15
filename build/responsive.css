@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.3 | MIT License | responsivebp.com */
+/*! Responsive v2.5.4 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 
 /**
@@ -540,8 +540,7 @@ abbr {
     width: 100%;
 }
 
-.row [class*="col-"] + [class*="col-"]
- {
+.row [class*="col-"] + [class*="col-"] {
     margin-left: 2%;
 }
 
@@ -552,8 +551,7 @@ abbr {
     margin-left: 0;
 }
 
-.row [class*="col-xs"] + [class*="col-"]
- {
+.row [class*="col-xs"] + [class*="col-"] {
     margin-left: 2%;
 }
 
@@ -587,6 +585,7 @@ abbr {
 }
 
 /* Full width calculated with margins */
+.row [class*="col-"] + [class*="col-xs-12"],
 .col-xs-12 {
     width: 100%;
     margin-left: 0;
@@ -1006,6 +1005,7 @@ abbr {
 .no-gutter > .pull-xs-1 {
     right: 8.3333%;
 }
+
 @media (min-width: 48em) and (max-width: 61.99em) {
     .row [class*="col-"].reset-s-only {
         margin-left: 0 !important;
@@ -1031,6 +1031,7 @@ abbr {
         margin-left: 2%;
     }
 
+    .row [class*="col-"] + [class*="col-s-12"],
     .col-s-12 {
         width: 100%;
         margin-left: 0;
@@ -1450,6 +1451,7 @@ abbr {
         right: 8.3333%;
     }
 }
+
 @media (min-width: 62em) and (max-width: 74.99em) {
     .row [class*="col-"].reset-m-only {
         margin-left: 0 !important;
@@ -1475,6 +1477,7 @@ abbr {
         margin-left: 2%;
     }
 
+    .row [class*="col-"] + [class*="col-m-12"],
     .col-m-12 {
         width: 100%;
         margin-left: 0;
@@ -1894,6 +1897,7 @@ abbr {
         right: 8.3333%;
     }
 }
+
 @media (min-width: 75em) {
     .row [class*="col-"].reset-l {
         margin-left: 0 !important;
@@ -1908,6 +1912,7 @@ abbr {
         margin-left: 2%;
     }
 
+    .row [class*="col-"] + [class*="col-l-12"],
     .col-l-12 {
         width: 100%;
         margin-left: 0;
@@ -2328,6 +2333,7 @@ abbr {
         right: 8.3333%;
     }
 }
+
 /* 
  * Unordered and ordered lists 
  * Scale the padding/margin with the base font.

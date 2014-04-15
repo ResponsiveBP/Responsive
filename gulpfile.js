@@ -94,16 +94,10 @@ gulp.task("clean", ["css", "scripts"], function (cb) {
 
 gulp.task("zip", ["clean"], function (cb) {
 
-    gulp.src(["*", "vendor/*"], { cwd: path.join(process.cwd(), "build") })
+    gulp.src("./build/**/*")
         .pipe(zip("responsive.zip"))
         .pipe(gulp.dest("./dist"))
         .on("end", cb);
-});
-
-gulp.task("finalize", ["zip"], function () {
-    // Cleanup rogue vendor folder production.
-    gulp.src("./dist/vendor/", { read: false })
-        .pipe(clean({ force: true }));
 });
 
 gulp.task("watch", function () {
@@ -114,7 +108,7 @@ gulp.task("watch", function () {
     gulp.watch("./src/css/*.css", ["css"]);
 });
 
-gulp.task("release", ["finalize"]);
+gulp.task("release", ["zip"]);
 
 // Default Task
 gulp.task("default", ["css", "scripts"]);

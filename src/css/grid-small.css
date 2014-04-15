@@ -23,6 +23,7 @@
         margin-left: 2%;
     }
 
+    .row [class*="col-"] + [class*="col-s-12"],
     .col-s-12 {
         width: 100%;
         margin-left: 0;
