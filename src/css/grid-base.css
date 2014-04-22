@@ -80,8 +80,11 @@
 /* Full width calculated with margins */
 .row [class*="col-"] + [class*="col-xs-12"],
 .col-xs-12 {
-    width: 100%;
     margin-left: 0;
+}
+
+.col-xs-12 {
+    width: 100%;
 }
 
 .col-xs-11 {
