@@ -587,8 +587,11 @@ abbr {
 /* Full width calculated with margins */
 .row [class*="col-"] + [class*="col-xs-12"],
 .col-xs-12 {
-    width: 100%;
     margin-left: 0;
+}
+
+.col-xs-12 {
+    width: 100%;
 }
 
 .col-xs-11 {
@@ -1033,8 +1036,11 @@ abbr {
 
     .row [class*="col-"] + [class*="col-s-12"],
     .col-s-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-s-12 {
+        width: 100%;
     }
 
     .col-s-11 {
@@ -1479,8 +1485,11 @@ abbr {
 
     .row [class*="col-"] + [class*="col-m-12"],
     .col-m-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-m-12 {
+        width: 100%;
     }
 
     .col-m-11 {
@@ -1914,8 +1923,11 @@ abbr {
 
     .row [class*="col-"] + [class*="col-l-12"],
     .col-l-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-l-12 {
+        width: 100%;
     }
 
     .col-l-11 {
