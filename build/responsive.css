@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.4 | MIT License | responsivebp.com */
+/*! Responsive v2.5.5 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 
 /**
@@ -3857,10 +3857,10 @@ pre {
 }
 
 .fade-out, .fade-in {
-    -moz-transition: opacity 0.3s linear 0s;
-    -o-transition: opacity 0.3s linear 0s;
-    -webkit-transition: opacity 0.3s linear 0s;
-    transition: opacity 0.3s linear 0s;
+    -moz-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
 }
 
 /*

@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.4 | MIT License | responsivebp.com */
+/*! Responsive v2.5.5 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -77,7 +77,7 @@
         /// <param name="callback" type="Function">The function to call on transition end.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
         var supportTransition = $.support.transition;
-        
+
         return this.each(function () {
 
             if (!$.isFunction(callback)) {
@@ -87,9 +87,9 @@
             var $this = $(this).redraw(),
                 rtransition = /\d+(.\d+)/;
 
-         supportTransition ? $this.one(supportTransition.end, callback)
-                                  .ensureTransitionEnd($this.css("transition-duration").match(rtransition)[0] * 1000)
-                           : callback();
+            supportTransition ? $this.one(supportTransition.end, callback)
+                                     .ensureTransitionEnd((rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000)
+                              : callback();
         });
     };
 
@@ -207,20 +207,11 @@
                         if (!supportPointer) {
                             switch (settings.touchAction) {
                                 case "pan-x":
-
-                                    isScrolling = Math.abs(dy) < Math.abs(dx);
-
-                                    if (!isScrolling) {
-                                        event.preventDefault();
-                                    } else {
-                                        event.stopPropagation();
-                                        return;
-                                    }
-
-                                    break;
                                 case "pan-y":
 
-                                    isScrolling = Math.abs(dx) < Math.abs(dy);
+                                    isScrolling = settings.touchAction = "pan-x" ?
+                                                  Math.abs(dy) < Math.abs(dx) :
+                                                  Math.abs(dx) < Math.abs(dy);
 
                                     if (!isScrolling) {
                                         event.preventDefault();
@@ -675,7 +666,6 @@
                             return;
                         }
 
-                        //$nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
                         $nextItem = this.$element.children("figure")[fallback]();
                     }
 
@@ -890,7 +880,8 @@
             direction = isNext ? "left" : "right",
             fallback = isNext ? "first" : "last",
             self = this,
-            slidEvent = $.Event(eslid);
+            slideEvent,
+            slidEvent;
 
         if (isCycling) {
             // Pause if cycling.
@@ -912,7 +903,7 @@
         }
 
         // Trigger the slide event with positional data.
-        var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
+        slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
 
         if (this.sliding || slideEvent.isDefaultPrevented()) {
@@ -956,6 +947,7 @@
             $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
 
             self.sliding = false;
+            slidEvent = $.Event(eslid, { relatedTarget: $nextItem[0], direction: direction });
             self.$element.trigger(slidEvent);
         };
 
@@ -2349,7 +2341,7 @@
         $nextPane.redraw().addClass("fade-in");
 
         // Do the callback
-        callback.call(this);
+        callback.call(this, $nextPane);
 
     };
 
@@ -2377,7 +2369,7 @@
         }
 
         // Call the function with the callback
-        return tab.call(this, activePosition, position, function () {
+        return tab.call(this, activePosition, position, function ($item) {
 
             var complete = function () {
 
@@ -2386,7 +2378,7 @@
             };
 
             // Do our callback
-            this.$element.onTransitionEnd(complete);
+            $item.onTransitionEnd(complete);
         });
     };
 
