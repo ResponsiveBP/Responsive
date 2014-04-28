@@ -209,7 +209,7 @@
                                 case "pan-x":
                                 case "pan-y":
 
-                                    isScrolling = settings.touchAction = "pan-x" ?
+                                    isScrolling = settings.touchAction === "pan-x" ?
                                                   Math.abs(dy) < Math.abs(dx) :
                                                   Math.abs(dx) < Math.abs(dy);
 
