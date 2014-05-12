@@ -49,7 +49,7 @@
         $nextPane.redraw().addClass("fade-in");
 
         // Do the callback
-        callback.call(this);
+        callback.call(this, $nextPane);
 
     };
 
@@ -77,7 +77,7 @@
         }
 
         // Call the function with the callback
-        return tab.call(this, activePosition, position, function () {
+        return tab.call(this, activePosition, position, function ($item) {
 
             var complete = function () {
 
@@ -86,7 +86,7 @@
             };
 
             // Do our callback
-            this.$element.onTransitionEnd(complete);
+            $item.onTransitionEnd(complete);
         });
     };
 

@@ -44,7 +44,6 @@
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
-        rembedProvider = /vimeo|vine|instagram|instagr\.am/i,
         // Events
         eclick = "click" + ns,
         ekeyup = "keyup" + ns,
@@ -72,6 +71,24 @@
 
         // If the regex doesn't match return true . 
         return !rexternalHost.test(locationParts[2]);
+    },
+
+    getMediaProvider = function (url) {
+        var providers = {
+            youtube: /youtu(be\.com|be\.googleapis\.com|\.be)/i,
+            vimeo: /vimeo/i,
+            vine: /vine/i,
+            instagram: /instagram|instagr\.am/i,
+            getty: /embed\.gettyimages\.com/i
+        };
+
+        for (var p in providers) {
+            if (providers.hasOwnProperty(p) && providers[p].test(url)) {
+                return p;
+            }
+        }
+
+        return false;
     },
 
     create = function () {
@@ -150,7 +167,7 @@
                 }).appendTo($iframeWrap);
 
                 // Test and add additional media classes.
-                var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
+                var mediaClasses = getMediaProvider(target) || "";
 
                 $iframeWrap.addClass(mediaClasses).appendTo($lightbox);
 

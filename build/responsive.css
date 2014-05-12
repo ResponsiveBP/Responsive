@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.4 | MIT License | responsivebp.com */
+/*! Responsive v2.5.5 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 
 /**
@@ -455,7 +455,7 @@ hr, input[type="search"] {
  */
 html {
     -webkit-overflow-scrolling: touch; /* 1 */
-    font-size: 16px;
+    font-size: 100%;
     line-height: 1.4;
     color: #222;
 }
@@ -587,8 +587,11 @@ abbr {
 /* Full width calculated with margins */
 .row [class*="col-"] + [class*="col-xs-12"],
 .col-xs-12 {
-    width: 100%;
     margin-left: 0;
+}
+
+.col-xs-12 {
+    width: 100%;
 }
 
 .col-xs-11 {
@@ -1033,8 +1036,11 @@ abbr {
 
     .row [class*="col-"] + [class*="col-s-12"],
     .col-s-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-s-12 {
+        width: 100%;
     }
 
     .col-s-11 {
@@ -1479,8 +1485,11 @@ abbr {
 
     .row [class*="col-"] + [class*="col-m-12"],
     .col-m-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-m-12 {
+        width: 100%;
     }
 
     .col-m-11 {
@@ -1914,8 +1923,11 @@ abbr {
 
     .row [class*="col-"] + [class*="col-l-12"],
     .col-l-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-l-12 {
+        width: 100%;
     }
 
     .col-l-11 {
@@ -2780,6 +2792,17 @@ input[type="color"] {
     max-width: 105px;
 }
 
+@-moz-document url-prefix() {
+    /*
+     * Remove excess padding in Firefox
+     */
+    input[type="color"] {
+        min-height: 1.8em;
+        padding: 0;
+    }
+}
+
+
 /*
  * Add range styles for IE8 and IE9
  */
@@ -3018,6 +3041,7 @@ select.inline-block {
     margin: 1em 0;
     padding: 1em 0;
 }
+
 /*
  * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
@@ -3845,10 +3869,10 @@ pre {
 }
 
 .fade-out, .fade-in {
-    -moz-transition: opacity 0.3s linear 0s;
-    -o-transition: opacity 0.3s linear 0s;
-    -webkit-transition: opacity 0.3s linear 0s;
-    transition: opacity 0.3s linear 0s;
+    -moz-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
 }
 
 /*

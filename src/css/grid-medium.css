@@ -25,8 +25,11 @@
 
     .row [class*="col-"] + [class*="col-m-12"],
     .col-m-12 {
-        width: 100%;
         margin-left: 0;
+    }
+
+    .col-m-12 {
+        width: 100%;
     }
 
     .col-m-11 {

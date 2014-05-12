@@ -72,7 +72,6 @@
                             return;
                         }
 
-                        //$nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
                         $nextItem = this.$element.children("figure")[fallback]();
                     }
 
@@ -287,7 +286,8 @@
             direction = isNext ? "left" : "right",
             fallback = isNext ? "first" : "last",
             self = this,
-            slidEvent = $.Event(eslid);
+            slideEvent,
+            slidEvent;
 
         if (isCycling) {
             // Pause if cycling.
@@ -309,7 +309,7 @@
         }
 
         // Trigger the slide event with positional data.
-        var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
+        slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
 
         if (this.sliding || slideEvent.isDefaultPrevented()) {
@@ -353,6 +353,7 @@
             $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
 
             self.sliding = false;
+            slidEvent = $.Event(eslid, { relatedTarget: $nextItem[0], direction: direction });
             self.$element.trigger(slidEvent);
         };
 

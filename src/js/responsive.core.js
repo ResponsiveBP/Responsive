@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.4 | MIT License | responsivebp.com */
+/*! Responsive v2.5.5 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -77,7 +77,7 @@
         /// <param name="callback" type="Function">The function to call on transition end.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
         var supportTransition = $.support.transition;
-        
+
         return this.each(function () {
 
             if (!$.isFunction(callback)) {
@@ -87,9 +87,9 @@
             var $this = $(this).redraw(),
                 rtransition = /\d+(.\d+)/;
 
-         supportTransition ? $this.one(supportTransition.end, callback)
-                                  .ensureTransitionEnd($this.css("transition-duration").match(rtransition)[0] * 1000)
-                           : callback();
+            supportTransition ? $this.one(supportTransition.end, callback)
+                                     .ensureTransitionEnd((rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000)
+                              : callback();
         });
     };
 
@@ -207,20 +207,11 @@
                         if (!supportPointer) {
                             switch (settings.touchAction) {
                                 case "pan-x":
-
-                                    isScrolling = Math.abs(dy) < Math.abs(dx);
-
-                                    if (!isScrolling) {
-                                        event.preventDefault();
-                                    } else {
-                                        event.stopPropagation();
-                                        return;
-                                    }
-
-                                    break;
                                 case "pan-y":
 
-                                    isScrolling = Math.abs(dx) < Math.abs(dy);
+                                    isScrolling = settings.touchAction === "pan-x" ?
+                                                  Math.abs(dy) < Math.abs(dx) :
+                                                  Math.abs(dx) < Math.abs(dy);
 
                                     if (!isScrolling) {
                                         event.preventDefault();

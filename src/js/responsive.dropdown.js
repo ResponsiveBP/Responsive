@@ -105,7 +105,7 @@
             this.$element[dimension](0).redraw();
         }
 
-        this.$element[dimension](this.endSize || "auto");
+        this.$element[dimension](this.endSize || "");
 
         transition.call(this, "removeClass", $.Event(eshow), eshown);
     };

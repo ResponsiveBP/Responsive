@@ -72,7 +72,7 @@ gulp.task("scripts", function (cb) {
         .pipe(concat("responsive.ie10mobilefix.js"))
         .pipe(gulp.dest("./build"))
         .pipe(rename("responsive.ie10mobilefix.min.js"))
-        .pipe(uglify())
+        .pipe(uglify({ preserveComments: "some" }))
         .pipe(gulp.dest("./build")),
 
     gulp.src(jsSrc)

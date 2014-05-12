@@ -45,6 +45,17 @@ input[type="color"] {
     max-width: 105px;
 }
 
+@-moz-document url-prefix() {
+    /*
+     * Remove excess padding in Firefox
+     */
+    input[type="color"] {
+        min-height: 1.8em;
+        padding: 0;
+    }
+}
+
+
 /*
  * Add range styles for IE8 and IE9
  */
