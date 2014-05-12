@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.4 | MIT License | responsivebp.com */
+/*! Responsive v2.5.5 | MIT License | responsivebp.com */
 
 /*
  * Responsive Utils
@@ -77,7 +77,7 @@
         /// <param name="callback" type="Function">The function to call on transition end.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
         var supportTransition = $.support.transition;
-        
+
         return this.each(function () {
 
             if (!$.isFunction(callback)) {
@@ -87,9 +87,9 @@
             var $this = $(this).redraw(),
                 rtransition = /\d+(.\d+)/;
 
-         supportTransition ? $this.one(supportTransition.end, callback)
-                                  .ensureTransitionEnd($this.css("transition-duration").match(rtransition)[0] * 1000)
-                           : callback();
+            supportTransition ? $this.one(supportTransition.end, callback)
+                                     .ensureTransitionEnd((rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000)
+                              : callback();
         });
     };
 
@@ -207,20 +207,11 @@
                         if (!supportPointer) {
                             switch (settings.touchAction) {
                                 case "pan-x":
-
-                                    isScrolling = Math.abs(dy) < Math.abs(dx);
-
-                                    if (!isScrolling) {
-                                        event.preventDefault();
-                                    } else {
-                                        event.stopPropagation();
-                                        return;
-                                    }
-
-                                    break;
                                 case "pan-y":
 
-                                    isScrolling = Math.abs(dx) < Math.abs(dy);
+                                    isScrolling = settings.touchAction === "pan-x" ?
+                                                  Math.abs(dy) < Math.abs(dx) :
+                                                  Math.abs(dx) < Math.abs(dy);
 
                                     if (!isScrolling) {
                                         event.preventDefault();
@@ -675,7 +666,6 @@
                             return;
                         }
 
-                        //$nextItem = this.$element.children("figure:not(.carousel-active)")[fallback]();
                         $nextItem = this.$element.children("figure")[fallback]();
                     }
 
@@ -890,7 +880,8 @@
             direction = isNext ? "left" : "right",
             fallback = isNext ? "first" : "last",
             self = this,
-            slidEvent = $.Event(eslid);
+            slideEvent,
+            slidEvent;
 
         if (isCycling) {
             // Pause if cycling.
@@ -912,7 +903,7 @@
         }
 
         // Trigger the slide event with positional data.
-        var slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
+        slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
 
         if (this.sliding || slideEvent.isDefaultPrevented()) {
@@ -956,6 +947,7 @@
             $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
 
             self.sliding = false;
+            slidEvent = $.Event(eslid, { relatedTarget: $nextItem[0], direction: direction });
             self.$element.trigger(slidEvent);
         };
 
@@ -1260,7 +1252,7 @@
             this.$element[dimension](0).redraw();
         }
 
-        this.$element[dimension](this.endSize || "auto");
+        this.$element[dimension](this.endSize || "");
 
         transition.call(this, "removeClass", $.Event(eshow), eshown);
     };
@@ -1388,7 +1380,6 @@
         rhash = /^#.*$/, // Altered to only match beginning.
         rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
-        rembedProvider = /vimeo|vine|instagram|instagr\.am/i,
         // Events
         eclick = "click" + ns,
         ekeyup = "keyup" + ns,
@@ -1416,6 +1407,24 @@
 
         // If the regex doesn't match return true . 
         return !rexternalHost.test(locationParts[2]);
+    },
+
+    getMediaProvider = function (url) {
+        var providers = {
+            youtube: /youtu(be\.com|be\.googleapis\.com|\.be)/i,
+            vimeo: /vimeo/i,
+            vine: /vine/i,
+            instagram: /instagram|instagr\.am/i,
+            getty: /embed\.gettyimages\.com/i
+        };
+
+        for (var p in providers) {
+            if (providers.hasOwnProperty(p) && providers[p].test(url)) {
+                return p;
+            }
+        }
+
+        return false;
     },
 
     create = function () {
@@ -1494,7 +1503,7 @@
                 }).appendTo($iframeWrap);
 
                 // Test and add additional media classes.
-                var mediaClasses = rembedProvider.test(target) ? target.match(rembedProvider)[0].toLowerCase() : "";
+                var mediaClasses = getMediaProvider(target) || "";
 
                 $iframeWrap.addClass(mediaClasses).appendTo($lightbox);
 
@@ -2332,7 +2341,7 @@
         $nextPane.redraw().addClass("fade-in");
 
         // Do the callback
-        callback.call(this);
+        callback.call(this, $nextPane);
 
     };
 
@@ -2360,7 +2369,7 @@
         }
 
         // Call the function with the callback
-        return tab.call(this, activePosition, position, function () {
+        return tab.call(this, activePosition, position, function ($item) {
 
             var complete = function () {
 
@@ -2369,7 +2378,7 @@
             };
 
             // Do our callback
-            this.$element.onTransitionEnd(complete);
+            $item.onTransitionEnd(complete);
         });
     };
 
