@@ -2792,6 +2792,17 @@ input[type="color"] {
     max-width: 105px;
 }
 
+@-moz-document url-prefix() {
+    /*
+     * Remove excess padding in Firefox
+     */
+    input[type="color"] {
+        min-height: 1.8em;
+        padding: 0;
+    }
+}
+
+
 /*
  * Add range styles for IE8 and IE9
  */
@@ -3030,6 +3041,7 @@ select.inline-block {
     margin: 1em 0;
     padding: 1em 0;
 }
+
 /*
  * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
