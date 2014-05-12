@@ -235,8 +235,13 @@ sublinks: ["#examples|Examples",
             </dd>
             <dt><strong>slid.r.carousel</strong></dt>
             <dd>
-                This event is fired when the plugins <code>slid</code> instance method is invoked once the carousel has completed sliding.
-            </dd>
+                This event is fired when the plugins <code>slid</code> instance method is invoked once the carousel has completed sliding. The event data contains two custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The carousel item that will be next in the logical order.</dd>
+                    <dt><strong>direction</strong></dt>
+                    <dd>The direction in which the carousel is transitioning.</dd>
+                </dl>
         </dl>
     </section>
     <hr />
