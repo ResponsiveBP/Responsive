@@ -16,10 +16,9 @@ Browser support covers IE8+ as well as all other modern browsers.
 
 Responsives' documentation, included in the [gh-pages](https://github.com/ResponsiveBP/Responsive/tree/gh-pages) repo. It is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at [http://responsivebp.com](http://responsivebp.com). The docs may also be run locally.
 
-1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v1.x).
+1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v1.5).
+ - **If you are running Windows** please read this [unofficial guide](https://github.com/juthilo/run-jekyll-on-windows/) to get Jekyll up and running without problems.
 2. From the root `/Responsive` directory, run `jekyll serve --baseurl '' --watch` in the command line.
-
- - **Windows users:** For Ruby 2.0.0, run `chcp 65001` first. For Ruby 1.9.3, you can alternatively do `SET LANG=en_EN.UTF-8` first to change the command prompt's character encoding ([code page](http://en.wikipedia.org/wiki/Windows_code_page)) to `UTF-8` so Jekyll runs without errors.
  - Open [http://localhost:4000](http://localhost:4000) in your browser to view the compiled docs.
 
 
