@@ -98,7 +98,7 @@
     }());
 
     $.support.pointerEvents = (function () {
-        return (navigator.maxTouchPoints) || (navigator.msMaxTouchPoints);
+        return (navigator.maxTouchPoints || navigator.msMaxTouchPoints) && (w.PointerEvent || w.MSPointerEvent);
     }());
 
     (function () {
@@ -124,15 +124,16 @@
                 eend;
 
             // Keep the events separate since support could be crazy.
-            if (supportPointer) {
+            if (supportTouch) {
+                estart = touchStart + ns;
+                emove = touchMove + ns;
+                eend = (touchEnd.join(ns + " ")) + ns;
+            }
+            else if (supportPointer) {
                 estart = (pointerStart.join(ns + " ")) + ns;
                 emove = (pointerMove.join(ns + " ")) + ns;
                 eend = (pointerEnd.join(ns + " ")) + ns;
 
-            } else if (supportTouch) {
-                estart = touchStart + ns;
-                emove = touchMove + ns;
-                eend = (touchEnd.join(ns + " ")) + ns;
             } else {
                 estart = mouseStart + ns;
                 emove = mouseMove + ns;
@@ -180,7 +181,8 @@
                     onMove = function (event) {
 
                         // Normalize the variables.
-                        var isMouse = !supportPointer && !supportTouch,
+                        var isMouse = event.type === "mousemove",
+                            isPointer = event.type !== "touchmove" && !isMouse,
                             original = event.originalEvent,
                             moveEvent;
 
@@ -199,12 +201,12 @@
                             return;
                         }
 
-                        var dx = (isMouse ? original.pageX : supportPointer ? original.clientX : original.touches[0].pageX) - start.x,
-                            dy = (isMouse ? original.pageY : supportPointer ? original.clientY : original.touches[0].pageY) - start.y;
+                        var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
+                            dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
 
                         // Mimic touch action on iProducts.
                         // Should also prevent bounce.
-                        if (!supportPointer) {
+                        if (!isPointer) {
                             switch (settings.touchAction) {
                                 case "pan-x":
                                 case "pan-y":
@@ -755,7 +757,6 @@
             lazyOnDemand: true
         };
         this.options = $.extend({}, this.defaults, options);
-        this.$indicators = this.$element.children("ol:first");
         this.paused = null;
         this.interval = null;
         this.sliding = null;
@@ -922,18 +923,6 @@
             this.pause();
         }
 
-        // Highlight the correct indicator.
-        if (this.$indicators.length) {
-            this.$indicators.find(".active").removeClass("active");
-
-            this.$element.one(eslid, function () {
-                var $nextIndicator = $(self.$indicators.children()[getActiveIndex.call(self)]);
-                if ($nextIndicator) {
-                    $nextIndicator.addClass("active");
-                }
-            });
-        }
-
         var complete = function () {
 
             if (self.$items) {
@@ -1024,11 +1013,21 @@
             options = data || $.buildDataOptions($this, {}, "carousel", "r"),
             $target = $(options.target || (options.target = $this.attr("href"))),
             slideIndex = options.slideTo,
+            numeric = typeof slideIndex === "number",
             carousel = $target.data("r.carousel");
 
         if (carousel) {
-            typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
+
+            numeric ? carousel.to(slideIndex) : carousel[options.slide]();
+
+            $target.one(eslid, function () {
+                if (numeric) {
+                    // Show the correct highlight
+                    $this.addClass("active").siblings().removeClass("active");
+                }
+            });
         }
+
     }).on(eready, function () {
 
         $(".carousel").each(function () {

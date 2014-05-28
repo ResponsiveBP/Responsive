@@ -161,7 +161,6 @@
             lazyOnDemand: true
         };
         this.options = $.extend({}, this.defaults, options);
-        this.$indicators = this.$element.children("ol:first");
         this.paused = null;
         this.interval = null;
         this.sliding = null;
@@ -328,18 +327,6 @@
             this.pause();
         }
 
-        // Highlight the correct indicator.
-        if (this.$indicators.length) {
-            this.$indicators.find(".active").removeClass("active");
-
-            this.$element.one(eslid, function () {
-                var $nextIndicator = $(self.$indicators.children()[getActiveIndex.call(self)]);
-                if ($nextIndicator) {
-                    $nextIndicator.addClass("active");
-                }
-            });
-        }
-
         var complete = function () {
 
             if (self.$items) {
@@ -430,11 +417,21 @@
             options = data || $.buildDataOptions($this, {}, "carousel", "r"),
             $target = $(options.target || (options.target = $this.attr("href"))),
             slideIndex = options.slideTo,
+            numeric = typeof slideIndex === "number",
             carousel = $target.data("r.carousel");
 
         if (carousel) {
-            typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
+
+            numeric ? carousel.to(slideIndex) : carousel[options.slide]();
+
+            $target.one(eslid, function () {
+                if (numeric) {
+                    // Show the correct highlight
+                    $this.addClass("active").siblings().removeClass("active");
+                }
+            });
         }
+
     }).on(eready, function () {
 
         $(".carousel").each(function () {
