@@ -263,7 +263,7 @@
                         }
 
                         // Disable the touch events till next time.
-                        $this.off(etouch.move).off(etouch.end);;
+                        $this.off(etouch.move).off(etouch.end);
                     };
 
                 $this.off(etouch.start).on(etouch.start, function (event) {
