@@ -98,7 +98,7 @@
     }());
 
     $.support.pointerEvents = (function () {
-        return (navigator.maxTouchPoints || navigator.msMaxTouchPoints) && (w.PointerEvent || w.MSPointerEvent);
+        return (w.PointerEvent || w.MSPointerEvent);
     }());
 
     (function () {
@@ -263,7 +263,7 @@
                         }
 
                         // Disable the touch events till next time.
-                        $this.off(etouch.move).off(etouch.end);
+                        $this.off(etouch.move).off(etouch.end);;
                     };
 
                 $this.off(etouch.start).on(etouch.start, function (event) {
