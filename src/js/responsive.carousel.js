@@ -165,6 +165,7 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
+        this.$indicators = [];
         this.translationDuration = null;
 
         if (this.options.pause === "hover") {
@@ -182,12 +183,25 @@
             manageTouch.call(this);
         }
 
+        var self = this;
         if (this.options.lazyLoadImages && !this.options.lazyOnDemand) {
-            var self = this;
             $(w).on("load", function () {
                 manageLazyImages.call(self.$element);
             });
         }
+
+        // Find and bind indicators.
+        $("[data-carousel-slide-to]").each(function () {
+            var $this = $(this),
+                $target = $($this.attr("data-carousel-target") || $this.attr("href"));
+
+            if ($target[0] === element) {
+                var $parent = $this.parents("ol:first");
+                if ($.inArray($parent[0], self.$indicators) === -1) {
+                    self.$indicators.push($parent[0]);
+                }
+            }
+        });
     };
 
     Carousel.prototype.cycle = function (event) {
@@ -327,6 +341,20 @@
             this.pause();
         }
 
+        // Highlight the correct indicator.
+        if (this.$indicators.length) {
+            $.each(this.$indicators, function () {
+                var $this = $(this);
+                $this.find(".active").removeClass("active");
+                self.$element.one(eslid, function () {
+                    var $nextIndicator = $($this.children()[getActiveIndex.call(self)]);
+                    if ($nextIndicator) {
+                        $nextIndicator.addClass("active");
+                    }
+                });
+            });
+        }
+
         var complete = function () {
 
             if (self.$items) {
@@ -417,19 +445,10 @@
             options = data || $.buildDataOptions($this, {}, "carousel", "r"),
             $target = $(options.target || (options.target = $this.attr("href"))),
             slideIndex = options.slideTo,
-            numeric = typeof slideIndex === "number",
             carousel = $target.data("r.carousel");
 
         if (carousel) {
-
-            numeric ? carousel.to(slideIndex) : carousel[options.slide]();
-
-            $target.one(eslid, function () {
-                if (numeric) {
-                    // Show the correct highlight
-                    $this.addClass("active").siblings().removeClass("active");
-                }
-            });
+            typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
         }
 
     }).on(eready, function () {
