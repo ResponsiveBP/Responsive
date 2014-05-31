@@ -1,4 +1,4 @@
-/*! Responsive v2.5.5 | MIT License | responsivebp.com */
+/*! Responsive v2.5.6 | MIT License | responsivebp.com */
 
 (function () {
 
