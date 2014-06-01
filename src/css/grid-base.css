@@ -25,7 +25,7 @@
 }
 
 /*cols*/
-[class*="col-"]{
+[class*="col-"] {
     position: relative;
     display: block;
     min-height: 1px;
@@ -251,58 +251,47 @@
 }
 
 /*No gutter margin*/
-.no-gutter > .offset-xs-11,
-.no-gutter > [class*="col-"] + .offset-xs-11 {
+.no-gutter > .offset-xs-11 {
     margin-left: 91.6667%;
 }
 
-.no-gutter > .offset-xs-10,
-.no-gutter > [class*="col-"] + .offset-xs-10 {
+.no-gutter > .offset-xs-10 {
     margin-left: 83.3333%;
 }
 
-.no-gutter > .offset-xs-9,
-.no-gutter > [class*="col-"] + .offset-xs-9 {
+.no-gutter > .offset-xs-9 {
     margin-left: 75%;
 }
 
-.no-gutter > .offset-xs-8,
-.no-gutter > [class*="col-"] + .offset-xs-8 {
+.no-gutter > .offset-xs-8 {
     margin-left: 66.6667%;
 }
 
-.no-gutter > .offset-xs-7,
-.no-gutter > [class*="col-"] + .offset-xs-7 {
+.no-gutter > .offset-xs-7 {
     margin-left: 58.3333%;
 }
 
-.no-gutter > .offset-xs-6,
-.no-gutter > [class*="col-"] + .offset-xs-6 {
+.no-gutter > .offset-xs-6 {
     margin-left: 50%;
 }
 
-.no-gutter > .offset-xs-5,
-.no-gutter > [class*="col-"] + .offset-xs-5 {
+.no-gutter > .offset-xs-5 {
     margin-left: 41.6667%;
 }
 
-.no-gutter > .offset-xs-4,
-.no-gutter > [class*="col-"] + .offset-xs-4 {
+.no-gutter > .offset-xs-4 {
     margin-left: 33.3333%;
 }
 
-.no-gutter > .offset-xs-3,
-.no-gutter > [class*="col-"] + .offset-xs-3 {
+.no-gutter > .offset-xs-3 {
     margin-left: 25%;
 }
 
-.no-gutter > .offset-xs-2,
-.no-gutter > [class*="col-"] + .offset-xs-2 {
+.no-gutter > .offset-xs-2 {
     margin-left: 16.6667%;
 }
 
-.no-gutter > .offset-xs-1,
-.no-gutter > [class*="col-"] + .offset-xs-1 {
+.no-gutter > .offset-xs-1 {
     margin-left: 8.3333%;
 }
 
