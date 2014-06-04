@@ -19,14 +19,18 @@
         float: right;
     }
 
-    [class*="col-s"] {
+    [class*="col-s"] + [class*="col-s"] {
         margin-left: 2%;
     }
 
+    .no-gutter > [class*="col-s"] {
+        margin-left: 0;
+    }
+
     /* Full width calculated with margins */
+    [class*="col-"] + [class*="col-s-12"],
     .col-s-12 {
         margin-left: 0;
-        width: 100%;
     }
 
     .col-s-11 {
@@ -120,7 +124,7 @@
 
 
     /* offsetting cols */
-    .offset-s-11:first-child {
+    .offset-s-11 {
         margin-left: 93.5%;
     }
 
@@ -128,7 +132,7 @@
         margin-left: 95.5%;
     }
 
-    .offset-s-10:first-child {
+    .offset-s-10 {
         margin-left: 85%;
     }
 
@@ -136,7 +140,7 @@
         margin-left: 87%;
     }
 
-    .offset-s-9:first-child {
+    .offset-s-9 {
         margin-left: 76.5%;
     }
 
@@ -144,7 +148,7 @@
         margin-left: 78.5%;
     }
 
-    .offset-s-8:first-child {
+    .offset-s-8 {
         margin-left: 68%;
     }
 
@@ -152,7 +156,7 @@
         margin-left: 70%;
     }
 
-    .offset-s-7:first-child {
+    .offset-s-7 {
         margin-left: 59.5%;
     }
 
@@ -160,7 +164,7 @@
         margin-left: 61.5%;
     }
 
-    .offset-s-6:first-child {
+    .offset-s-6 {
         margin-left: 51%;
     }
 
@@ -168,7 +172,7 @@
         margin-left: 53%;
     }
 
-    .offset-s-5:first-child {
+    .offset-s-5 {
         margin-left: 42.5%;
     }
 
@@ -176,7 +180,7 @@
         margin-left: 44.5%;
     }
 
-    .offset-s-4:first-child {
+    .offset-s-4 {
         margin-left: 34%;
     }
 
@@ -184,7 +188,7 @@
         margin-left: 36%;
     }
 
-    .offset-s-3:first-child {
+    .offset-s-3 {
         margin-left: 25.5%;
     }
 
@@ -192,7 +196,7 @@
         margin-left: 27.5%;
     }
 
-    .offset-s-2:first-child {
+    .offset-s-2 {
         margin-left: 17%;
     }
 
@@ -200,7 +204,7 @@
         margin-left: 19%;
     }
 
-    .offset-s-1:first-child {
+    .offset-s-1 {
         margin-left: 8.5%;
     }
 

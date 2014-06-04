@@ -8,14 +8,18 @@
         float: right;
     }
 
-    [class*="col-l"] {
+    [class*="col-l"] + [class*="col-l"] {
         margin-left: 2%;
     }
 
+    .no-gutter > [class*="col-l"] {
+        margin-left: 0;
+    }
+
     /* Full width calculated with margins */
+    [class*="col-"] + [class*="col-l-12"],
     .col-l-12 {
         margin-left: 0;
-        width: 100%;
     }
 
     .col-l-11 {
