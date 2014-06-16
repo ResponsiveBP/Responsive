@@ -2527,7 +2527,7 @@ table {
 .alert {
     background-color: #FCF8E3;
     border: 1px solid #F2E187;
-    color: #9C8611;
+    color: #766210;
     margin: 1em 0;
     padding: 0 2.17em 0 1em;
 }
@@ -3559,6 +3559,7 @@ pre {
 
 .lightbox-header {
     padding-right: 4.555em;
+    padding-left: 4.555em;
 }
 
 .lightbox-footer {
@@ -3654,10 +3655,14 @@ pre {
     font-size: 1.5em;
     font-weight: bold;
     text-decoration: none;
+    background-color: transparent;
+    border: none;
 }
 
     .lightbox-close:hover {
         text-decoration: underline;
+        color: #fff;
+        background-color: transparent;
     }
 
 
@@ -3675,6 +3680,8 @@ pre {
     color: #fff;
     text-decoration: none;
     z-index: 2;
+    background-color: transparent;
+    border: none;
 }
 
     .lightbox-direction.right {
@@ -3684,7 +3691,10 @@ pre {
 
     .lightbox-direction:hover {
         text-decoration: underline;
+        color: #fff;
+        background-color: transparent;
     }
+
 /*
  * Image replacement
  */

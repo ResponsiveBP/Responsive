@@ -47,6 +47,7 @@
 
 .lightbox-header {
     padding-right: 4.555em;
+    padding-left: 4.555em;
 }
 
 .lightbox-footer {
@@ -142,10 +143,14 @@
     font-size: 1.5em;
     font-weight: bold;
     text-decoration: none;
+    background-color: transparent;
+    border: none;
 }
 
     .lightbox-close:hover {
         text-decoration: underline;
+        color: #fff;
+        background-color: transparent;
     }
 
 
@@ -163,6 +168,8 @@
     color: #fff;
     text-decoration: none;
     z-index: 2;
+    background-color: transparent;
+    border: none;
 }
 
     .lightbox-direction.right {
@@ -172,4 +179,6 @@
 
     .lightbox-direction:hover {
         text-decoration: underline;
+        color: #fff;
+        background-color: transparent;
     }
