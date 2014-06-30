@@ -1,0 +1,65 @@
+.container {
+	@extend .clearfix;
+	margin: 0 auto;
+	max-width: $site-width; /* Manages width in a single place */
+	width: 95%;
+
+	&.fixed,
+	.fixed & { width: $site-width; /* Manages width in a single place */ }
+}
+
+/*
+ * Clearfix: contain floats
+ */
+.row { @extend .clearfix; }
+
+/* Columns */
+[class*=col-] {
+	display: block;
+	float: left;
+	min-height: 1px;
+	position: relative;
+	width: 100%;
+}
+
+.no-gutter.pad-gutter > [class*=col-] { padding: 0 1%; }
+
+/*
+ * Extra small (phones)
+ */
+@include grid-base(xs);
+
+@include grid-columns(xs);
+
+/*
+ * Small (tablets)
+ */
+@include bp-min(s) {
+
+	@include grid-base(s);
+
+	@include grid-columns(s);
+
+}
+
+/*
+ * Medium (desktop)
+ */
+@include bp-min(m) {
+
+	@include grid-base(m);
+
+	@include grid-columns(m);
+
+}
+
+/*
+ * Large (desktop)
+ */
+@include bp-min(l) {
+
+	@include grid-base(l);
+
+	@include grid-columns(l);
+
+}

@@ -1,0 +1,53 @@
+.tabs {
+	position: relative;
+
+	> {
+		* { display: none; }
+
+		ul {
+			@extend .clearfix;
+			border-bottom: 1px solid $tabs-nav-border-color;
+			list-style: none;
+			margin-top: 0;
+			padding: 0;
+
+			> li {
+				float: left;
+				margin-bottom: -1px;
+
+				> a {
+					background-color: $tabs-nav-item-background-color;
+					border: 1px solid $tabs-nav-item-border-color;
+					color: $tabs-nav-item-color;
+					cursor: pointer;
+					display: block;
+					line-height: 2em;
+					margin-right: .2em;
+					outline: none;
+					padding: 0 1em;
+					text-decoration: none;
+
+					&:hover {
+						background-color: $tabs-nav-item-background-color-hover;
+						border-color: $tabs-nav-item-border-color-hover;
+						color: $tabs-nav-item-color-hover;
+					}
+				}
+
+				&.tab-active > a {
+					&,
+					&:hover {
+						background-color: $tabs-nav-item-background-color-active;
+						border-bottom-color: transparent;
+						border: 1px solid $tabs-nav-item-border-color-active;
+						color: $tabs-nav-item-color-active;
+						cursor: default;
+					}
+				}
+			}
+		}
+
+		ul,
+		.tab-pane-active { display: block; }
+	}
+}

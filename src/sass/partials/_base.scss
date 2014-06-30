@@ -1,0 +1,168 @@
+/*
+ * Fix the box model
+ * Overwrite Normalize rather than edit it.
+ */
+*,
+*:before,
+*:after,
+hr,
+input[type=search] {
+    box-sizing: border-box;
+}
+
+/*
+ * IE10 in Windows (Phone) 8
+ * Support for responsive views via media queries do not work in IE10 on mobile for
+ * versions prior to WP8 Update 3 (GDR3).
+ */
+@-ms-viewport {
+    width: device-width;
+}
+
+/*
+ * 1. Use the iOS devices hardware accelerator to provide native scrolling.
+ */
+html {
+    background: $site-background;
+    color: $base-text-color;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    min-width: $site-min-width;
+    -webkit-overflow-scrolling: touch; /* 1 */
+}
+
+/*
+ * Headers
+ * 1: Improve rendering of screen fonts.
+ * 2: Prevent page breaking.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $heading-font-family;
+    page-break-after: avoid; /* 2 */
+    text-rendering: optimizeLegibility; /* 1 */
+}
+
+h1 {
+    color: $h1-color;
+    font-family: $h1-font-family;
+    font-size: $h1-font-size;
+    line-height: $h1-line-height;
+    text-decoration: $h1-text-decoration;
+    text-transform: $h1-text-transform;
+}
+
+h2 {
+    color: $h2-color;
+    font-family: $h2-font-family;
+    font-size: $h2-font-size;
+    line-height: $h2-line-height;
+    text-decoration: $h2-text-decoration;
+    text-transform: $h2-text-transform;
+}
+
+h3 {
+    color: $h3-color;
+    font-family: $h3-font-family;
+    font-size: $h3-font-size;
+    line-height: $h3-line-height;
+    text-decoration: $h3-text-decoration;
+    text-transform: $h3-text-transform;
+}
+
+h4 {
+    color: $h4-color;
+    font-family: $h4-font-family;
+    font-size: $h4-font-size;
+    line-height: $h4-line-height;
+    text-decoration: $h4-text-decoration;
+    text-transform: $h4-text-transform;
+}
+
+h5 {
+    color: $h5-color;
+    font-family: $h5-font-family;
+    font-size: $h5-font-size;
+    line-height: $h5-line-height;
+    text-decoration: $h5-text-decoration;
+    text-transform: $h5-text-transform;
+}
+
+h6 {
+    color: $h6-color;
+    font-family: $h6-font-family;
+    font-size: $h6-font-size;
+    line-height: $h6-line-height;
+    text-decoration: $h6-text-decoration;
+    text-transform: $h6-text-transform;
+}
+
+/*
+ * Default margin for paragraph
+ */
+p {
+    margin: $paragraph-margin;
+}
+
+/*
+ * Basic styles for links
+ */
+a {
+    color: $link-color;
+    text-decoration: $link-text-decoration;
+}
+
+a:hover {
+    color: $link-color-hover;
+    text-decoration: $link-text-decoration-hover;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+hr {
+    border-top: $horizontal-line-height solid $horizontal-line-color;
+    border: 0;
+    display: block;
+    height: $horizontal-line-height;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * A better looking default blockquote
+ */
+blockquote {
+    background: $blockquote-background;
+    border-left: $blockquote-border-left;
+    padding: 1em 1em 1em 1.5em;
+}
+
+/*
+ * Add query indicator to abbr
+ */
+abbr {
+    cursor: help;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background colour to match your design.
+ */
+::-moz-selection {
+    background: $selection-background;
+    color: $selection-color;
+    text-shadow: none;
+}
+
+::selection {
+    background: $selection-background;
+    color: $selection-color;
+    text-shadow: none;
+}

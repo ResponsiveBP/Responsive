@@ -1,0 +1,204 @@
+// General Styles
+$site-background: #fff !default;
+$site-width: 1140px !default;
+$site-min-width: 320px !default;
+
+$base-font-family: "Helvetica Neue", Arial, Helvetica, sans-serif !default;
+$base-font-size: 100% !default;
+$base-font-size-px: 16px !default; // used for calculations 
+$base-line-height: 1.4 !default;
+$base-text-color: #222 !default;
+
+$selection-background: #b3d4fc !default;
+$selection-color: #fff !default;
+
+// Typography
+$paragraph-margin: null !default;
+
+$heading-font-family: null !default;
+
+$h1-color: null !default;
+$h1-font-family: null !default;
+$h1-font-size: null !default;
+$h1-line-height: null !default;
+$h1-text-decoration: null !default;
+$h1-text-transform: null !default;
+
+$h2-color: null !default;
+$h2-font-family: null !default;
+$h2-font-size: null !default;
+$h2-line-height: null !default;
+$h2-text-decoration: null !default;
+$h2-text-transform: null !default;
+
+$h3-color: null !default;
+$h3-font-family: null !default;
+$h3-font-size: null !default;
+$h3-line-height: null !default;
+$h3-text-decoration: null !default;
+$h3-text-transform: null !default;
+
+$h4-color: null !default;
+$h4-font-family: null !default;
+$h4-font-size: null !default;
+$h4-line-height: null !default;
+$h4-text-decoration: null !default;
+$h4-text-transform: null !default;
+
+$h5-color: null !default;
+$h5-font-family: null !default;
+$h5-font-size: null !default;
+$h5-line-height: null !default;
+$h5-text-decoration: null !default;
+$h5-text-transform: null !default;
+
+$h6-color: null !default;
+$h6-font-family: null !default;
+$h6-font-size: null !default;
+$h6-line-height: null !default;
+$h6-text-decoration: null !default;
+$h6-text-transform: null !default;
+
+//==
+// Basic Elements
+//##
+
+// Links
+$link-color: #0000ee !default;
+$link-text-decoration: none !default;
+$link-color-hover: #000 !default;
+$link-text-decoration-hover: underline !default;
+
+// Horizontal Rule
+$horizontal-line-color: #c0c0c0 !default;
+$horizontal-line-height: 1px !default;
+
+// Blockquote
+$blockquote-background: null !default;
+$blockquote-border-left: 5px solid #c0c0c0 !default;
+
+// Tables
+$table-bordered-border: 1px solid #c0c0c0 !default;
+$table-striped-background-color: #e7e7e7 !default;
+
+// Grid System
+$grid-column-margin: 2% !default;
+
+//==
+// CSS Components
+//##
+
+// Forms
+$form-placeholder: #c0c0c0 !default;
+
+$form-input-background: #fff !default;
+$form-input-border: 1px solid #c0c0c0 !default;
+$form-input-border-radius: 0 !default;
+$form-input-color: #222 !default;
+
+$form-input-background-focus: null !default;
+$form-input-border-color-focus: #00a9ec !default;
+$form-input-color-focus: null !default;
+
+$form-input-background-disabled: #ebebeb !default;
+$form-input-border-color-disabled: #c0c0c0 !default;
+$form-input-color-disabled: #c0c0c0 !default;
+
+$form-input-background-readonly: null !default;
+$form-input-border-color-readonly: #ebebeb !default;
+$form-input-color-readonly: null !default;
+
+// Buttons
+$button-background: #dadada !default;
+$button-border: solid 1px #c0c0c0 !default;
+$button-border-radius: 0 !default;
+$button-color: #222 !default;
+
+$button-background-hover: #cdcdcd !default;
+$button-border-color-hover: null !default;
+$button-color-hover: null !default;
+
+$button-background-focus: #cdcdcd !default;
+$button-border-color-focus: #00a9ec !default;
+$button-color-focus: null !default;
+
+$button-background-active: #e7e7e7 !default;
+$button-border-color-active: transparent !default;
+$button-color-active: null !default;
+
+$button-background-disabled: #e7e7e7 !default;
+$button-border-color-disabled: #c0c0c0 !default;
+$button-color-disabled: #5d5d5d !default;
+
+// Lists
+$list-colored-bullet: #00a9ec !default;
+
+// Alerts
+$alert-color-scheme: #f2e187 !default;
+
+//==
+// JS Plugins
+//##
+
+// Lightbox
+$lightbox-header-background: transparent !default;
+$lightbox-header-color: #fff !default;
+
+$lightbox-footer-background: transparent !default;
+$lightbox-footer-color: #fff !default;
+
+$lightbox-content-background-color: #fff !default;
+
+$lightbox-media-background-color: #111 !default;
+
+$carousel-control-color: #fff !default;
+$carousel-control-text-decoration: none !default;
+
+$carousel-control-color-hover: #fff !default;
+$carousel-control-text-decoration-hover: underline !default;
+
+// Carousel
+$carousel-caption-background-color: #111 !default;
+$carousel-caption-color: #fff !default;
+
+$carousel-control-color: #fff !default;
+$carousel-control-text-decoration: none !default;
+
+$carousel-control-color-hover: #fff !default;
+$carousel-control-text-decoration-hover: underline !default;
+
+$carousel-nav-background-color: transparent !default;
+$carousel-nav-border: 2px solid #111 !default;
+
+$carousel-nav-background-color-hover: null !default;
+$carousel-nav-border-color-hover: null !default;
+
+$carousel-nav-background-color-active: #fff !default;
+$carousel-nav-border-color-active: null !default;
+
+// Tabs
+$tabs-nav-border-color: #c0c0c0 !default;
+
+$tabs-nav-item-background-color: null !default;
+$tabs-nav-item-border-color: transparent !default;
+$tabs-nav-item-color: null !default;
+
+$tabs-nav-item-background-color-hover: #ebebeb !default;
+$tabs-nav-item-border-color-hover: #c0c0c0 !default;
+$tabs-nav-item-color-hover: null !default;
+
+$tabs-nav-item-background-color-active: #fff !default;
+$tabs-nav-item-border-color-active: #c0c0c0 !default;
+$tabs-nav-item-color-active: #454545 !default;
+
+// Dropdown
+$accordion-border-color: #c0c0c0 !default;
+
+$accordion-head-background-color: null !default;
+$accordion-body-background-color: null !default;
+
+$accordion-link-color: null !default;
+$accordion-link-text-decoration: null !default;
+
+$accordion-link-color-hover: null !default;
+$accordion-link-text-decoration-hover: null !default;

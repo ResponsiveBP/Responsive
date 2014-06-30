@@ -1,0 +1,35 @@
+// Strip Unit
+@function num($value) {
+	@return $value / ($value * 0 + 1);
+}
+
+// PX to EM
+@function em($value, $base: $base-font-size-px) {
+	@return (num($value) / num($base)) + em;
+}
+
+// PX to REM + Fallback for IE8
+// Credits: https://gist.github.com/4976589
+@mixin rem($property, $values) {
+	$px-values: ();
+	$rem-values: ();
+
+	@each $value in $values {
+		@if $value == 0 or $value == 0px {
+			$px-values: join($px-values, 0);
+			$rem-values: join($rem-values, 0);
+		} @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+			$new-rem-value: $value / $base-font-size-px;
+			$px-values: join($px-values, round($value));
+			$rem-values: join($rem-values, #{$new-rem-value}rem);
+		} @else {
+			$px-values: join($px-values, $value);
+			$rem-values: join($rem-values, $value);
+		}
+	}
+
+	#{$property}: $px-values;
+	@if $px-values != $rem-values {
+		#{$property}: $rem-values;
+	}
+}

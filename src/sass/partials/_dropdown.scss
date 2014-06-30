@@ -1,0 +1,52 @@
+.accordion {
+	border: solid 1px $accordion-border-color;
+	margin-bottom: .125em;
+}
+
+.accordion-head {
+	background-color: $accordion-head-background-color;
+	border-bottom: solid 1px $accordion-border-color;
+	display: block;
+
+	a {
+		color: $accordion-link-color;
+		text-decoration: $accordion-link-text-decoration;
+		display: block;
+		outline: none;
+		padding: .5em;
+
+		&:hover {
+			color: $accordion-link-color-hover;
+			text-decoration: $accordion-link-text-decoration-hover;
+		}
+	}
+}
+
+.accordion-body {
+	background-color: $accordion-body-background-color;
+	padding: 0 .5em;
+
+	&.collapse { margin-top: -1px; }
+}
+
+.trans,
+.collapse { transition: height .5s ease, width .5s ease; }
+
+.expand,
+.collapse {
+	display: block;
+	height: auto;
+	margin-top: 0;
+	overflow: hidden;
+	position: relative;
+	width: auto;
+}
+
+.collapse {
+	height: 0;
+
+	&.width {
+		height: auto;
+		width: 0;
+	}
+}

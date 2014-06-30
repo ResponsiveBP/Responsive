@@ -1,0 +1,104 @@
+/*
+ * Normalize button borders, color, and padding.
+ * 1: Remove rounded corners on iPhone.
+ * 2: Remove 300ms touch delay.
+ */
+button,
+input[type=submit],
+input[type=button],
+input[type=reset],
+[role=button],
+.button {
+	-webkit-appearance: none; /* 1 */
+	background: $button-background;
+	border: $button-border;
+	border-radius: $button-border-radius; /* 1 */
+	color: $button-color;
+	cursor: pointer;
+	display: inline-block;
+	line-height: normal;
+	margin-bottom: 0;
+	outline: 1px solid transparent;
+	outline-offset: -1px;
+	padding: .5em 1em;
+	touch-action: none; /* 2 */
+
+	/*
+	 * Button states.
+	 */
+	&:hover {
+		background-color: $button-background-hover;
+		color: $button-color-hover;
+		outline-color: $button-border-color-hover;
+	}
+
+	&:focus {
+		background-color: $button-background-focus;
+		color: $button-color-focus;
+		outline-color: $button-border-color-focus;
+	}
+
+	&:active {
+		background-color: $button-background-active;
+		color: $button-color-active;
+		outline-color: $button-border-color-active;
+	}
+
+	/*
+	 * Inline buttons designed for rendering next to inputs.
+	 * 1. Fix inline-block margin.
+	 * 2. Pad buttons.
+	 */
+	&.btn-inline {
+		margin-left: -.27em; /* 1 */
+		padding: .25em 1em; /* 2 */
+	}
+}
+
+	[role=button],
+	.button {
+		&:hover,
+		&:focus,
+		&:active { text-decoration: none; }
+	}
+
+	/*
+	 * 1. Fix IOS 6/7 opacity issue
+	 */
+	button[disabled],
+	input[type=submit][disabled],
+	input[type=button][disabled],
+	input[type=reset][disabled],
+	[role=button].disabled,
+	.button.disabled {
+		background-color: $button-background-disabled;
+		border-color: $button-border-color-disabled;
+		color: $button-color-disabled;
+		cursor: not-allowed;
+		opacity: 1; /* 1 */
+	}
+
+/*
+ * Reset width for inputs
+ */
+input {
+	&[type=submit],
+	&[type=reset],
+	&[type=button] {
+		max-width: none;
+		width: auto;
+	}
+}
+
+/*
+ * Grouped buttons.
+ */
+.btn-group {
+	@extend .clearfix;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	white-space: nowrap;
+
+	> * { float: left; }
+}

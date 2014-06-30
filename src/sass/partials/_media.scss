@@ -1,0 +1,116 @@
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+audio,
+canvas,
+img,
+video { vertical-align: middle; }
+
+/*
+ * Make the image responsive.
+ */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/*
+ * Remove the border around images in anchors.
+ */
+a img { border: none; }
+
+/*
+ * Properly scale your video on any device based on YouTube/Dailymotion ratio.
+ */
+.media {
+	height: 0;
+	height: auto;
+	margin-bottom: 1em;
+	max-width: 100%;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	position: relative;
+
+	/*
+	 * Widescreen mode.
+	 */
+	&.widescreen { padding-bottom: 45%; }
+
+	/*
+	 * Vimeo places the controls on the player itself.
+	 */
+	&.vimeo { padding-top: 0; }
+
+	/*
+	 * Instagram
+	 */
+	&.instagram {
+		height: auto;
+		max-width: none;
+		padding-bottom: 120%;
+	}
+
+	/*
+	 * Vine
+	 */
+	&.vine {
+		height: auto;
+		max-width: none;
+		padding-bottom: 100%;
+	}
+
+	/*
+	 * Getty
+	 */
+	&.getty {
+		height: auto;
+		padding-bottom: 79.96632996632997%;
+	}
+
+	&.video { padding-top: 0; }
+
+	/*
+	 * The actual player.
+	 */
+	iframe,
+	object,
+	embed,
+	video {
+		background-color: transparent;
+		border: 0;
+		height: 100%;
+		left: 0;
+		margin: 0;
+		outline: none;
+		padding: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	/*
+	 * Position the image absolutely and then move it's four positions
+	 * 1000000% out of the container. This with an auto margin is the core of the trick.
+	 * Why such a large number? Firefox seems to have issue when using larger images even
+	 * at 100%.
+	 */
+	img {
+		bottom: -1000000%;
+		left: -1000000%;
+		margin: auto;
+		position: absolute;
+		right: -1000000%;
+		top: -1000000%;
+		width: 100%;
+	}
+}
+
+/*
+ *  Scrollable media
+ */
+.media-scroll {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}

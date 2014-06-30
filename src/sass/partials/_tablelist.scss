@@ -1,0 +1,65 @@
+@include bp(xs) {
+
+	/*
+	 * Basic layout.
+	 */
+	[data-table-list] { opacity: 0; }
+
+	.table-list {
+		display: block;
+
+		thead,
+		tfoot,
+		th { display: none; }
+
+		tbody,
+		tr,
+		td,
+		th[scope=row] { display: block; }
+
+		tr {
+			&:before,
+			&:after {
+				content: ' ';
+				display: table;
+			}
+
+			&:after { clear: both; }
+		}
+
+		td,
+		th[scope=row] {
+			float: left;
+			width: 100%;
+		}
+
+		td {
+			&:before,
+			&:after {
+				content: attr(data-thead);
+				display: block;
+				font-weight: bold;
+				padding: .5em 0;
+			}
+		}
+
+		th[scope=row] {
+			&:before,
+			&:after {
+				content: attr(data-thead);
+				display: block;
+				font-weight: bold;
+				padding: .5em 0;
+			}
+		}
+
+		td:after,
+		th[scope=row]:after { content: attr(data-tfoot); }
+
+        /*
+         * Bordered
+         */
+		&.table-bordered { border-top-style: none; }
+	}
+
+}
