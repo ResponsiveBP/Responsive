@@ -346,14 +346,11 @@ td, th {
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
 html {
-  background: #fff;
-  color: #222;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 100%;
-  line-height: 1.4;
-  min-width: 320px;
   -webkit-overflow-scrolling: touch;
-  /* 1 */ }
+  /* 1 */
+  color: #222;
+  font-size: 100%;
+  line-height: 1.4; }
 
 /*
  * Headers
@@ -361,101 +358,10 @@ html {
  * 2: Prevent page breaking.
  */
 h1, h2, h3, h4, h5, h6 {
-  font-family: null;
-  page-break-after: avoid;
-  /* 2 */
   text-rendering: optimizeLegibility;
-  /* 1 */ }
-
-h1 {
-  color: null;
-  font-family: null;
-  font-size: null;
-  line-height: null;
-  text-decoration: null;
-  text-transform: null; }
-
-h2 {
-  color: null;
-  font-family: null;
-  font-size: null;
-  line-height: null;
-  text-decoration: null;
-  text-transform: null; }
-
-h3 {
-  color: null;
-  font-family: null;
-  font-size: null;
-  line-height: null;
-  text-decoration: null;
-  text-transform: null; }
-
-h4 {
-  color: null;
-  font-family: null;
-  font-size: null;
-  line-height: null;
-  text-decoration: null;
-  text-transform: null; }
-
-h5 {
-  color: null;
-  font-family: null;
-  font-size: null;
-  line-height: null;
-  text-decoration: null;
-  text-transform: null; }
-
-h6 {
-  color: null;
-  font-family: null;
-  font-size: null;
-  line-height: null;
-  text-decoration: null;
-  text-transform: null; }
-
-/*
- * Default margin for paragraph
- */
-p {
-  margin: null; }
-
-/*
- * Basic styles for links
- */
-a {
-  color: #0000ee;
-  text-decoration: none; }
-
-a:hover {
-  color: #000;
-  text-decoration: underline; }
-
-/*
- * A better looking default horizontal rule
- */
-hr {
-  border-top: 1px solid #c0c0c0;
-  border: 0;
-  display: block;
-  height: 1px;
-  margin: 1em 0;
-  padding: 0; }
-
-/*
- * A better looking default blockquote
- */
-blockquote {
-  background: null;
-  border-left: 5px solid #c0c0c0;
-  padding: 1em 1em 1em 1.5em; }
-
-/*
- * Add query indicator to abbr
- */
-abbr {
-  cursor: help; }
+  /* 1 */
+  page-break-after: avoid;
+  /* 2 */ }
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -464,13 +370,28 @@ abbr {
  */
 ::-moz-selection {
   background: #b3d4fc;
-  color: #fff;
   text-shadow: none; }
 
 ::selection {
   background: #b3d4fc;
-  color: #fff;
   text-shadow: none; }
+
+/*
+ * A better looking default horizontal rule
+ */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #c0c0c0;
+  margin: 1em 0;
+  padding: 0; }
+
+/*
+ * Add query indicator to abbr
+ */
+abbr {
+  cursor: help; }
 
 .container {
   margin: 0 auto;
@@ -496,7 +417,7 @@ abbr {
   padding: 0 1%; }
 
 /*
- * Extra small (phones)
+ * Extra small 
  */
 [class*=col-xs] + [class*=col-xs] {
   margin-left: 2%; }
@@ -778,7 +699,7 @@ abbr {
   right: 91.66667%; }
 
 /*
- * Small (tablets)
+ * Small 
  */
 @media (min-width: 48em) {
   [class*=col-s] + [class*=col-s] {
@@ -1000,7 +921,7 @@ abbr {
     right: 91.66667%; } }
 
 /*
- * Medium (desktop)
+ * Medium 
  */
 @media (min-width: 62em) {
   [class*=col-m] + [class*=col-m] {
@@ -1222,7 +1143,7 @@ abbr {
     right: 91.66667%; } }
 
 /*
- * Large (desktop)
+ * Large 
  */
 @media (min-width: 75em) {
   [class*=col-l] + [class*=col-l] {
@@ -1436,6 +1357,263 @@ abbr {
     left: 91.66667%; }
   .no-gutter > .pull-l-11 {
     right: 91.66667%; } }
+
+/*
+ * Unordered and ordered lists
+ * Scale the padding/margin with the base font.
+ */
+ul, ol {
+  margin: 1em 0;
+  padding-left: 2.5em; }
+
+ul ul, ol ol {
+  margin: 0; }
+
+/*
+ * No bullets on first level.
+ */
+ul.no-bullets, ol.no-bullets {
+  padding-left: 0; }
+
+ul.no-bullets > li, ol.no-bullets > li {
+  list-style: none; }
+
+/*
+ * Coloured lists.
+ */
+ul.colored, ol.colored {
+  padding-left: 40px; }
+
+ul.colored > li, ol.colored > li {
+  list-style-type: none;
+  position: relative; }
+
+/*
+ * 1. Escaped unicode coloured circle.
+ * 2. Edit this property to change all colored class lists.
+ * 3. Normalize funky webkit margin
+ */
+ul.colored > li:before, ol.colored > li:before {
+  color: #00a9ec;
+  /* 2 */
+  content: '\25cf';
+  /* 1 */
+  font-size: 1em;
+  font-weight: bold;
+  left: -1em;
+  -webkit-margin-start: -0.25em;
+  /* 3 */
+  position: absolute;
+  text-align: right;
+  text-decoration: none;
+  top: 0; }
+
+/*
+ * Counter increment to replace standard numbers.
+ */
+ol.colored {
+  counter-reset: foo; }
+  ol.colored > li {
+    counter-increment: foo;
+    /*
+		 * Use the :before pseudo element to supply numbers.
+		 * 1. The counter value.
+		 * 2. Normalize funky webkit margin
+		 */ }
+    ol.colored > li:before {
+      content: counter(foo) '.';
+      /* 1 */
+      font-weight: normal;
+      left: -3.125em;
+      -webkit-margin-start: 0;
+      /* 2 */
+      width: 2.5em; }
+
+/* Definition lists */
+/*
+ * Prevent dt and dd collapse.
+ */
+dt, dd {
+  min-height: 1.4em; }
+
+@media (min-width: 48em) {
+  /*
+	 * Horizontally styled definition list
+	 */
+  .dl-horizontal > dt {
+    clear: left;
+    float: left;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px; }
+  .dl-horizontal > dd {
+    margin-left: 166px; } }
+
+/*
+ *  Make it responsive
+ */
+table {
+  margin: 1em 0;
+  max-width: 100%;
+  width: 100%; }
+  table th, table td {
+    padding: 0.5em;
+    text-align: left;
+    vertical-align: top; }
+
+/*
+ *  Bordered tables
+ */
+.table-bordered {
+  border: 1px solid #c0c0c0;
+  border-left-width: 0;
+  border-collapse: separate; }
+  .table-bordered th, .table-bordered td {
+    border-top: 1px solid #c0c0c0;
+    border-left: 1px solid #c0c0c0; }
+  .table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
+    border-top-width: 0; }
+
+/*
+ *  Striped tables
+ */
+.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th, .table-row-alt > td, .table-row-alt > th {
+  background-color: #e7e7e7; }
+
+/*
+ * Overflow helpers
+ */
+.table-scrollable {
+  margin: 1em 0;
+  overflow-y: hidden;
+  overflow: auto;
+  width: 100%; }
+  .table-scrollable table {
+    margin: 0; }
+
+.alert {
+  background-color: #fcf8e3;
+  border: 1px solid #f2e187;
+  color: #6e5e0c;
+  margin: 1em 0;
+  padding: 0 2.17em 0 1em; }
+  .alert .close {
+    color: inherit;
+    float: right;
+    font-size: 1.17em;
+    font-weight: bold;
+    line-height: 1em;
+    position: relative;
+    right: -1.17em;
+    text-decoration: none;
+    top: 0.33em; }
+    .alert .close:hover {
+      text-decoration: underline; }
+
+.alert-heading {
+  color: inherit; }
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+audio, canvas, img, video {
+  vertical-align: middle; }
+
+/*
+ * Make the image responsive.
+ */
+img {
+  max-width: 100%;
+  height: auto; }
+
+/*
+ * Remove the border around images in anchors.
+ */
+a img {
+  border: none; }
+
+/*
+ * Properly scale your video on any device based on YouTube/Dailymotion ratio.
+ */
+.media {
+  height: 0;
+  height: auto;
+  margin-bottom: 1em;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  position: relative;
+  /*
+	 * Widescreen mode.
+	 */
+  /*
+	 * Vimeo places the controls on the player itself.
+	 */
+  /*
+	 * Instagram
+	 */
+  /*
+	 * Vine
+	 */
+  /*
+	 * Getty
+	 */
+  /*
+	 * The actual player.
+	 */
+  /*
+	 * Position the image absolutely and then move it's four positions
+	 * 1000000% out of the container. This with an auto margin is the core of the trick.
+	 * Why such a large number? Firefox seems to have issue when using larger images even
+	 * at 100%.
+	 */ }
+  .media.widescreen {
+    padding-bottom: 45%; }
+  .media.vimeo {
+    padding-top: 0; }
+  .media.instagram {
+    height: auto;
+    max-width: none;
+    padding-bottom: 120%; }
+  .media.vine {
+    height: auto;
+    max-width: none;
+    padding-bottom: 100%; }
+  .media.getty {
+    height: auto;
+    padding-bottom: 79.96633%; }
+  .media.video {
+    padding-top: 0; }
+  .media iframe, .media object, .media embed, .media video {
+    background-color: transparent;
+    border: 0;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%; }
+  .media img {
+    bottom: -1000000%;
+    left: -1000000%;
+    margin: auto;
+    position: absolute;
+    right: -1000000%;
+    top: -1000000%;
+    width: 100%; }
+
+/*
+ *  Scrollable media
+ */
+.media-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
 
 /* Normalize  */
 .form {
@@ -1663,23 +1841,19 @@ textarea {
 button, input[type=submit], input[type=button], input[type=reset], [role=button], .button {
   -webkit-appearance: none;
   /* 1 */
-  background: #dadada;
-  border: solid 1px #c0c0c0;
   border-radius: 0;
   /* 1 */
-  color: #222;
+  color: inherit;
   cursor: pointer;
   display: inline-block;
+  padding: 0.5em 1em;
   line-height: normal;
   margin-bottom: 0;
-  outline: 1px solid transparent;
-  outline-offset: -1px;
-  padding: 0.5em 1em;
+  background: #dadada;
+  border: solid 1px #c0c0c0;
   touch-action: none;
   /* 2 */
-  /*
-	 * Button states.
-	 */
+  text-decoration: none;
   /*
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.
@@ -1687,31 +1861,27 @@ button, input[type=submit], input[type=button], input[type=reset], [role=button]
 	 */ }
   button:hover, input[type=submit]:hover, input[type=button]:hover, input[type=reset]:hover, [role=button]:hover, .button:hover {
     background-color: #cdcdcd;
-    color: null;
     outline-color: null; }
   button:focus, input[type=submit]:focus, input[type=button]:focus, input[type=reset]:focus, [role=button]:focus, .button:focus {
-    background-color: #cdcdcd;
-    color: null;
-    outline-color: #00a9ec; }
+    outline: 1px solid #00a9ec;
+    outline-offset: -1px; }
   button:active, input[type=submit]:active, input[type=button]:active, input[type=reset]:active, [role=button]:active, .button:active {
     background-color: #e7e7e7;
-    color: null;
-    outline-color: transparent; }
+    outline: none; }
   button.btn-inline, input[type=submit].btn-inline, input[type=button].btn-inline, input[type=reset].btn-inline, [role=button].btn-inline, .button.btn-inline {
     margin-left: -0.27em;
     /* 1 */
     padding: 0.25em 1em;
     /* 2 */ }
 
-[role=button]:hover, [role=button]:focus, [role=button]:active, .button:hover, .button:focus, .button:active {
+[role=button]:hover, [role=button]:focus, [role=button]:active {
   text-decoration: none; }
 
 /*
-	 * 1. Fix IOS 6/7 opacity issue
-	 */
+ * 1. Fix IOS 6/7 opacity issue
+ */
 button[disabled], input[type=submit][disabled], input[type=button][disabled], input[type=reset][disabled], [role=button].disabled, .button.disabled {
   background-color: #e7e7e7;
-  border-color: #c0c0c0;
   color: #5d5d5d;
   cursor: not-allowed;
   opacity: 1;
@@ -1736,270 +1906,13 @@ input[type=submit], input[type=reset], input[type=button] {
     float: left; }
 
 /*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
-audio, canvas, img, video {
-  vertical-align: middle; }
-
-/*
- * Make the image responsive.
- */
-img {
-  max-width: 100%;
-  height: auto; }
-
-/*
- * Remove the border around images in anchors.
- */
-a img {
-  border: none; }
-
-/*
- * Properly scale your video on any device based on YouTube/Dailymotion ratio.
- */
-.media {
-  height: 0;
-  height: auto;
-  margin-bottom: 1em;
-  max-width: 100%;
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  position: relative;
-  /*
-	 * Widescreen mode.
-	 */
-  /*
-	 * Vimeo places the controls on the player itself.
-	 */
-  /*
-	 * Instagram
-	 */
-  /*
-	 * Vine
-	 */
-  /*
-	 * Getty
-	 */
-  /*
-	 * The actual player.
-	 */
-  /*
-	 * Position the image absolutely and then move it's four positions
-	 * 1000000% out of the container. This with an auto margin is the core of the trick.
-	 * Why such a large number? Firefox seems to have issue when using larger images even
-	 * at 100%.
-	 */ }
-  .media.widescreen {
-    padding-bottom: 45%; }
-  .media.vimeo {
-    padding-top: 0; }
-  .media.instagram {
-    height: auto;
-    max-width: none;
-    padding-bottom: 120%; }
-  .media.vine {
-    height: auto;
-    max-width: none;
-    padding-bottom: 100%; }
-  .media.getty {
-    height: auto;
-    padding-bottom: 79.96633%; }
-  .media.video {
-    padding-top: 0; }
-  .media iframe, .media object, .media embed, .media video {
-    background-color: transparent;
-    border: 0;
-    height: 100%;
-    left: 0;
-    margin: 0;
-    outline: none;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    width: 100%; }
-  .media img {
-    bottom: -1000000%;
-    left: -1000000%;
-    margin: auto;
-    position: absolute;
-    right: -1000000%;
-    top: -1000000%;
-    width: 100%; }
-
-/*
- *  Scrollable media
- */
-.media-scroll {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; }
-
-/*
- * Unordered and ordered lists
- * Scale the padding/margin with the base font.
- */
-ul, ol {
-  margin: 1em 0;
-  padding-left: 2.5em; }
-
-ul ul, ol ol {
-  margin: 0; }
-
-/*
- * No bullets on first level.
- */
-ul.no-bullets, ol.no-bullets {
-  padding-left: 0; }
-
-ul.no-bullets > li, ol.no-bullets > li {
-  list-style: none; }
-
-/*
- * Coloured lists.
- */
-ul.colored, ol.colored {
-  padding-left: 40px; }
-
-ul.colored > li, ol.colored > li {
-  list-style-type: none;
-  position: relative; }
-
-/*
- * 1. Escaped unicode coloured circle.
- * 2. Edit this property to change all colored class lists.
- * 3. Normalize funky webkit margin
- */
-ul.colored > li:before, ol.colored > li:before {
-  color: #00a9ec;
-  /* 2 */
-  content: '\25cf';
-  /* 1 */
-  font-size: 1em;
-  font-weight: bold;
-  left: -1em;
-  -webkit-margin-start: -0.25em;
-  /* 3 */
-  position: absolute;
-  text-align: right;
-  text-decoration: none;
-  top: 0; }
-
-/*
- * Counter increment to replace standard numbers.
- */
-ol.colored {
-  counter-reset: foo; }
-  ol.colored > li {
-    counter-increment: foo;
-    /*
-		 * Use the :before pseudo element to supply numbers.
-		 * 1. The counter value.
-		 * 2. Normalize funky webkit margin
-		 */ }
-    ol.colored > li:before {
-      content: counter(foo) '.';
-      /* 1 */
-      font-weight: normal;
-      left: -3.125em;
-      -webkit-margin-start: 0;
-      /* 2 */
-      width: 2.5em; }
-
-/* Definition lists */
-/*
- * Prevent dt and dd collapse.
- */
-dt, dd {
-  min-height: 1.4em; }
-
-@media (min-width: 48em) {
-  /*
-	 * Horizontally styled definition list
-	 */
-  .dl-horizontal > dt {
-    clear: left;
-    float: left;
-    overflow: hidden;
-    text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 150px; }
-  .dl-horizontal > dd {
-    margin-left: 166px; } }
-
-/*
- *  Make it responsive
- */
-table {
-  margin: 1em 0;
-  max-width: 100%;
-  width: 100%; }
-  table th, table td {
-    padding: 0.5em;
-    text-align: left;
-    vertical-align: top; }
-
-/*
- *  Bordered tables
- */
-.table-bordered {
-  border: 1px solid #c0c0c0;
-  border-left-width: 0;
-  border-collapse: separate; }
-  .table-bordered th, .table-bordered td {
-    border-top: 1px solid #c0c0c0;
-    border-left: 1px solid #c0c0c0; }
-  .table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
-    border-top-width: 0; }
-
-/*
- *  Striped tables
- */
-.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th, .table-row-alt > td, .table-row-alt > th {
-  background-color: #e7e7e7; }
-
-/*
- * Overflow helpers
- */
-.table-scrollable {
-  margin: 1em 0;
-  overflow-y: hidden;
-  overflow: auto;
-  width: 100%; }
-  .table-scrollable table {
-    margin: 0; }
-
-.alert {
-  background-color: #fcf8e3;
-  border: 1px solid #f2e187;
-  color: #9c8511;
-  margin: 1em 0;
-  padding: 0 2.17em 0 1em; }
-  .alert .close {
-    color: inherit;
-    float: right;
-    font-size: 1.17em;
-    font-weight: bold;
-    line-height: 1em;
-    position: relative;
-    right: -1.17em;
-    text-decoration: none;
-    top: 0.33em; }
-    .alert .close:hover {
-      text-decoration: underline; }
-
-.alert-heading {
-  color: inherit; }
-
-/*
  * Colors and padding.
  */
 pre, code, samp, kbd {
+  padding: 0.5em;
   background-color: #f7f7f9;
   border: 1px solid #c0c0c0;
-  color: #ad0d36;
-  padding: 0.5em; }
+  color: #ad0d36; }
 
 /*
  * Prevent overlap on concurrent lines.
@@ -2022,11 +1935,11 @@ pre {
 	 * Remove borders etc in pre.
 	 */ }
   pre code, pre samp {
-    border: none;
-    padding: 0; }
+    padding: 0;
+    border: none; }
   pre code {
-    white-space: pre;
-    word-wrap: normal; }
+    word-wrap: normal;
+    white-space: pre; }
 
 /*
  * Fixed height with overflow.
@@ -2034,6 +1947,223 @@ pre {
 .pre-scrollable {
   max-height: 20em;
   overflow-y: scroll; }
+
+.accordion {
+  border: solid 1px #c0c0c0;
+  margin-bottom: 0.125em; }
+
+.accordion-head {
+  border-bottom: solid 1px #c0c0c0;
+  display: block; }
+  .accordion-head a {
+    display: block;
+    outline: none;
+    padding: 0.5em; }
+
+.accordion-body {
+  padding: 0 0.5em; }
+  .accordion-body.collapse {
+    margin-top: -1px; }
+
+.trans, .collapse {
+  transition: height 0.5s ease, width 0.5s ease; }
+
+.expand, .collapse {
+  display: block;
+  height: auto;
+  margin-top: 0;
+  overflow: hidden;
+  position: relative;
+  width: auto; }
+
+.collapse {
+  height: 0; }
+  .collapse.width {
+    height: auto;
+    width: 0; }
+
+.autosize, [data-autosize] {
+  overflow: hidden;
+  transition: height 0.3s linear; }
+
+.carousel {
+  margin-bottom: 1em;
+  overflow: hidden;
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  /*
+	 * Default slide version
+	 */
+  /*
+	 * Indicators
+	 */
+  /*
+	 * Next Last version
+	 */
+  /*
+	 * 1.  IE10 is picking up on the left positioning :(
+	 */ }
+  .carousel.no-transition > figure {
+    transition-duration: 0s !important; }
+  .carousel > figure {
+    margin: 0;
+    display: none;
+    position: relative;
+    transition: 0.7s ease-in-out transform, 0.7s ease-in-out left;
+    -webkit-transform: translate3d(0, 0, 0); }
+    .carousel > figure > img {
+      display: block;
+      width: 100%; }
+    .carousel > figure > figcaption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 1px 1em;
+      background-color: #222;
+      color: #fff; }
+  .carousel > ol {
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 1em;
+    z-index: 3; }
+    .carousel > ol li {
+      background-color: transparent;
+      border: 2px solid #222;
+      cursor: pointer;
+      display: inline-block;
+      height: 1em;
+      margin: 1px;
+      text-indent: -9999px;
+      width: 1em; }
+      .carousel > ol li:hover {
+        background-color: #c0c0c0;
+        border-color: null; }
+    .carousel > ol .active {
+      background-color: #fff;
+      border-color: null; }
+      .carousel > ol .active:hover {
+        background-color: #fff;
+        border-color: null; }
+  .carousel .carousel-active, .carousel .next, .carousel .prev, .carousel .swipe {
+    display: block; }
+  .carousel .carousel-active, .carousel .next.left, .carousel .prev.right {
+    left: 0\9;
+    transform: translateX(0); }
+  .carousel .carousel-active {
+    position: relative !important;
+    z-index: 1; }
+    .carousel .carousel-active > figcaption {
+      position: static; }
+  .carousel .next, .carousel .prev, .carousel .swipe {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+  .carousel .next, .carousel .carousel-active.right {
+    left: 100% \9;
+    transform: translateX(100%); }
+  .carousel .prev, .carousel .carousel-active.left {
+    left: -100% \9;
+    transform: translateX(-100%); }
+  .carousel x::-ms-reveal, .carousel .next, .carousel .prev, .carousel .carousel-active.left, .carousel .carousel-active.right {
+    left: 0;
+    /* 1 */ }
+
+.carousel-control, .carousel-control:visited {
+  position: absolute;
+  left: 0;
+  top: 40%;
+  z-index: 3;
+  display: block;
+  width: 2em;
+  margin-top: -1em;
+  padding: 0.5em;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  text-decoration: none; }
+.carousel-control.right {
+  left: auto;
+  right: 0; }
+.carousel-control:hover {
+  color: #fff;
+  text-decoration: underline; }
+
+/*
+ * Fade version
+ */
+.carousel-fade > figure {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out; }
+.carousel-fade > figure.swipe, .carousel-fade > figure.next, .carousel-fade > figure.prev {
+  z-index: 1;
+  left: 0\9;
+  transform: none;
+  opacity: 1; }
+.carousel-fade > .carousel-active.swipe {
+  z-index: 2; }
+.carousel-fade > .carousel-active {
+  position: relative; }
+.carousel-fade .carousel-active {
+  opacity: 1; }
+  .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {
+    left: 0\9;
+    z-index: 2;
+    transform: none;
+    opacity: 0; }
+.carousel-fade .carousel-control, .carousel-fade .carousel-control:visited {
+  z-index: 3; }
+
+.tabs {
+  position: relative; }
+  .tabs > * {
+    display: none; }
+  .tabs > ul {
+    border-bottom: 1px solid #c0c0c0;
+    list-style: none;
+    margin-top: 0;
+    padding: 0; }
+    .tabs > ul > li {
+      float: left;
+      margin-bottom: -1px; }
+      .tabs > ul > li > a {
+        background-color: null;
+        border: 1px solid transparent;
+        color: null;
+        cursor: pointer;
+        display: block;
+        line-height: 2em;
+        margin-right: 0.2em;
+        outline: none;
+        padding: 0 1em;
+        text-decoration: none; }
+        .tabs > ul > li > a:hover {
+          background-color: #ebebeb;
+          border-color: #c0c0c0;
+          color: null; }
+      .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
+        background-color: #fff;
+        border-bottom-color: transparent;
+        border: 1px solid #c0c0c0;
+        color: #454545;
+        cursor: default; }
+  .tabs > ul, .tabs > .tab-pane-active {
+    display: block; }
 
 .lightbox-on, .lightbox-lock > body {
   touch-action: none;
@@ -2188,223 +2318,6 @@ pre {
   color: #fff;
   text-decoration: underline; }
 
-.carousel {
-  -webkit-backface-visibility: hidden;
-  margin-bottom: 1em;
-  overflow: hidden;
-  position: relative;
-  -webkit-perspective: 1000;
-  /*
-	 * Default slide version
-	 */
-  /*
-	 * Indicators
-	 */
-  /*
-	 * Next Last version
-	 */
-  /*
-	 * 1.  IE10 is picking up on the left positioning :(
-	 */ }
-  .carousel.no-transition > figure {
-    transition-duration: 0s !important; }
-  .carousel > figure {
-    display: none;
-    margin: 0;
-    -webkit-transform: translate3d(0, 0, 0);
-    transition: 0.7s ease-in-out transform, 0.7s ease-in-out left;
-    position: relative; }
-    .carousel > figure > img {
-      display: block;
-      width: 100%; }
-    .carousel > figure > figcaption {
-      background-color: #111;
-      bottom: 0;
-      color: #fff;
-      padding: 1px 1em;
-      position: absolute;
-      width: 100%; }
-  .carousel > ol {
-    left: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 1em;
-    z-index: 3; }
-    .carousel > ol li {
-      background-color: transparent;
-      border: 2px solid #111;
-      cursor: pointer;
-      display: inline-block;
-      height: 1em;
-      margin: 1px;
-      text-indent: -9999px;
-      width: 1em; }
-      .carousel > ol li:hover {
-        background-color: null;
-        border-color: null; }
-    .carousel > ol .active {
-      background-color: #fff;
-      border-color: null; }
-  .carousel .carousel-active, .carousel .next, .carousel .prev, .carousel .swipe {
-    display: block; }
-  .carousel .carousel-active, .carousel .next.left, .carousel .prev.right {
-    left: 0\9;
-    transform: translateX(0); }
-  .carousel .carousel-active {
-    position: relative !important;
-    z-index: 1; }
-    .carousel .carousel-active > figcaption {
-      position: static; }
-  .carousel .next, .carousel .prev, .carousel .swipe {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 0; }
-  .carousel .next, .carousel .carousel-active.right {
-    left: 100% \9;
-    transform: translateX(100%); }
-  .carousel .prev, .carousel .carousel-active.left {
-    left: -100% \9;
-    transform: translateX(-100%); }
-  .carousel x::-ms-reveal, .carousel .next, .carousel .prev, .carousel .carousel-active.left, .carousel .carousel-active.right {
-    left: 0;
-    /* 1 */ }
-
-.carousel-control, .carousel-control:visited {
-  color: #fff;
-  display: block;
-  font-size: 2em;
-  font-weight: bold;
-  left: 0;
-  margin-top: -1em;
-  padding: 0.5em;
-  position: absolute;
-  text-align: center;
-  text-decoration: none;
-  top: 40%;
-  width: 2em;
-  z-index: 3; }
-.carousel-control.right {
-  left: auto;
-  right: 0; }
-.carousel-control:hover {
-  color: #fff;
-  text-decoration: underline; }
-
-/*
- * Fade version
- */
-.carousel-fade > figure {
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  transition: opacity 0.7s ease-in-out;
-  top: 0;
-  width: 100%; }
-.carousel-fade > figure.swipe, .carousel-fade > figure.next, .carousel-fade > figure.prev {
-  left: 0\9;
-  transform: none;
-  opacity: 1;
-  z-index: 1; }
-.carousel-fade > .carousel-active.swipe {
-  z-index: 2; }
-.carousel-fade > .carousel-active {
-  position: relative; }
-.carousel-fade .carousel-active {
-  opacity: 1; }
-  .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {
-    left: 0\9;
-    transform: none;
-    opacity: 0;
-    z-index: 2; }
-.carousel-fade .carousel-control, .carousel-fade .carousel-control:visited {
-  z-index: 3; }
-
-.tabs {
-  position: relative; }
-  .tabs > * {
-    display: none; }
-  .tabs > ul {
-    border-bottom: 1px solid #c0c0c0;
-    list-style: none;
-    margin-top: 0;
-    padding: 0; }
-    .tabs > ul > li {
-      float: left;
-      margin-bottom: -1px; }
-      .tabs > ul > li > a {
-        background-color: null;
-        border: 1px solid transparent;
-        color: null;
-        cursor: pointer;
-        display: block;
-        line-height: 2em;
-        margin-right: 0.2em;
-        outline: none;
-        padding: 0 1em;
-        text-decoration: none; }
-        .tabs > ul > li > a:hover {
-          background-color: #ebebeb;
-          border-color: #c0c0c0;
-          color: null; }
-      .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
-        background-color: #fff;
-        border-bottom-color: transparent;
-        border: 1px solid #c0c0c0;
-        color: #454545;
-        cursor: default; }
-  .tabs > ul, .tabs > .tab-pane-active {
-    display: block; }
-
-.accordion {
-  border: solid 1px #c0c0c0;
-  margin-bottom: 0.125em; }
-
-.accordion-head {
-  background-color: null;
-  border-bottom: solid 1px #c0c0c0;
-  display: block; }
-  .accordion-head a {
-    color: null;
-    text-decoration: null;
-    display: block;
-    outline: none;
-    padding: 0.5em; }
-    .accordion-head a:hover {
-      color: null;
-      text-decoration: null; }
-
-.accordion-body {
-  background-color: null;
-  padding: 0 0.5em; }
-  .accordion-body.collapse {
-    margin-top: -1px; }
-
-.trans, .collapse {
-  transition: height 0.5s ease, width 0.5s ease; }
-
-.expand, .collapse {
-  display: block;
-  height: auto;
-  margin-top: 0;
-  overflow: hidden;
-  position: relative;
-  width: auto; }
-
-.collapse {
-  height: 0; }
-  .collapse.width {
-    height: auto;
-    width: 0; }
-
 @media (max-width: 47.99em) {
   /*
 	 * Basic layout.
@@ -2442,10 +2355,6 @@ pre {
       content: attr(data-tfoot); }
     .table-list.table-bordered {
       border-top-style: none; } }
-
-.autosize, [data-autosize] {
-  overflow: hidden;
-  transition: height 0.3s linear; }
 
 /*
  * Image replacement
@@ -2508,12 +2417,12 @@ pre {
  * 2. The use of `table` rather than `block` is only necessary if using
  *	`:before` to contain the top-margins of child elements.
  */
-.clearfix:before, .container:before, .row:before, .btn-group:before, .alert:before, .tabs > ul:before, .clearfix:after, .container:after, .row:after, .btn-group:after, .alert:after, .tabs > ul:after {
+.clearfix:before, .row:before, .alert:before, .btn-group:before, .tabs > ul:before, .clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
   content: ' ';
   /* 1 */
   display: table;
   /* 2 */ }
-.clearfix:after, .container:after, .row:after, .btn-group:after, .alert:after, .tabs > ul:after {
+.clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
   clear: both; }
 
 /*

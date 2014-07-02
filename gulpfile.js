@@ -1,19 +1,10 @@
 // Include gulp
 var gulp = require("gulp");
 
-// Install tools
+// Install tools and plugins.
 var es = require("event-stream"),
-    path = require("path");
-
-// Include our plugins
-var jshint = require("gulp-jshint"),
-    concat = require("gulp-concat"),
-    minifyCSS = require("gulp-minify-css"),
-    sass = require("gulp-ruby-sass"),
-    uglify = require("gulp-uglify"),
-    rename = require("gulp-rename"),
-    clean = require("gulp-clean"),
-    zip = require("gulp-zip");
+    path = require("path"),
+    plugins = require("gulp-load-plugins")();
 
 // Set paths
 var basePath = {
@@ -86,10 +77,10 @@ var jsSrc = [
 // Concatenate & Minify CSS
 gulp.task("css", function (cb) {
     gulp.src(cssSrc)
-        .pipe(concat("responsive.css"))
+        .pipe(plugins.concat("responsive.css"))
         .pipe(gulp.dest(path.css.build))
-        .pipe(rename("responsive.min.css"))
-        .pipe(minifyCSS())
+        .pipe(plugins.rename({ suffix: ".min" }))
+        .pipe(plugins.minifyCss())
         .pipe(gulp.dest(path.css.build))
         .on("end", cb);
 });
@@ -97,10 +88,11 @@ gulp.task("css", function (cb) {
 // Concatenate & Minify SCSS
 gulp.task("sass", function (cb) {
     gulp.src(sassSrc)
-        .pipe(sass({ unixNewlines: true, precision: 4, noCache: true }))
+        .pipe(plugins.rubySass({ unixNewlines: true, precision: 4, noCache: true }))
+        .pipe(plugins.autoprefixer("last 2 version", "> 1%", "ie 8", { cascade: true }))
         .pipe(gulp.dest(path.sass.build))
-        .pipe(rename("responsive.min.css"))
-        .pipe(minifyCSS())
+        .pipe(plugins.rename({ suffix: ".min" }))
+        .pipe(plugins.minifyCss())
         .pipe(gulp.dest(path.sass.build))
         .on("end", cb);
 });
@@ -111,21 +103,20 @@ gulp.task("scripts", function (cb) {
     es.concat(
     // Lint
     gulp.src(path.js.src + "*.js")
-        .pipe(jshint())
-        .pipe(jshint.reporter("default")),
+        .pipe(plugins.jshint())
+        .pipe(plugins.jshint.reporter("default")),
 
     gulp.src(path.js.src + "responsive.ie10mobilefix.js")
-        .pipe(concat("responsive.ie10mobilefix.js"))
         .pipe(gulp.dest(path.js.build))
-        .pipe(rename("responsive.ie10mobilefix.min.js"))
-        .pipe(uglify({ preserveComments: "some" }))
+        .pipe(plugins.rename({ suffix: ".min" }))
+        .pipe(plugins.uglify({ preserveComments: "some" }))
         .pipe(gulp.dest(path.js.build)),
 
     gulp.src(jsSrc)
-        .pipe(concat("responsive.js"))
+        .pipe(plugins.concat("responsive.js"))
         .pipe(gulp.dest(path.js.build))
-        .pipe(rename("responsive.min.js"))
-        .pipe(uglify({ preserveComments: "some" }))
+        .pipe(plugins.rename({ suffix: ".min" }))
+        .pipe(plugins.uglify({ preserveComments: "some" }))
         .pipe(gulp.dest(path.js.build))
 
         ).on("end", cb);
@@ -141,7 +132,7 @@ gulp.task("clean", ["css", "sass", "scripts"], function (cb) {
 gulp.task("zip", ["clean"], function (cb) {
 
     gulp.src(basePath.build + "**/*")
-        .pipe(zip("responsive.zip"))
+        .pipe(plugins.zip("responsive.zip"))
         .pipe(gulp.dest(basePath.dist))
         .on("end", cb);
 });

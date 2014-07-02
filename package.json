@@ -35,6 +35,8 @@
     "gulp-jshint": "~1.5.6",
     "gulp-clean": "~0.2.4",
     "event-stream": "~3.1.5",
-    "gulp-ruby-sass": "~0.5.0"
+    "gulp-ruby-sass": "~0.5.0",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-load-plugins": "~0.5.3"
   }
 }

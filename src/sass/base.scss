@@ -12,21 +12,21 @@
 @import "partials/grid";
 
 // CSS Components
-@import	"partials/forms";
-@import	"partials/buttons";
-@import	"partials/media";
 @import	"partials/lists";
 @import	"partials/tables";
 @import	"partials/alerts";
+@import	"partials/media";
+@import	"partials/forms";
+@import	"partials/buttons";
 @import	"partials/code";
 
 // JS Plugins
-@import	"partials/lightbox";
+@import	"partials/dropdown";
+@import	"partials/autosize";
 @import	"partials/carousel";
 @import	"partials/tabs";
-@import	"partials/dropdown";
+@import	"partials/lightbox";
 @import	"partials/tablelist";
-@import	"partials/autosize";
 
 // Helpers
 @import "partials/helpers-base";

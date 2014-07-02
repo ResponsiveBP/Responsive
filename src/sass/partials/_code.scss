@@ -5,10 +5,10 @@ pre,
 code,
 samp,
 kbd {
-	background-color: #f7f7f9;
-	border: 1px solid #c0c0c0;
-	color: #ad0d36;
-	padding: .5em;
+    padding: .5em;
+    background-color: #f7f7f9;
+    border: 1px solid #c0c0c0;
+    color: #ad0d36;
 }
 
 /*
@@ -16,38 +16,41 @@ kbd {
  */
 code,
 samp,
-kbd { padding: .067em .25em; }
+kbd {
+    padding: .067em .25em;
+}
 
 /*
  * Prevent wrapping.
  */
-kbd { white-space: nowrap; }
+kbd {
+    white-space: nowrap;
+}
 
 /*
  * Reassert no wrapping.
  */
 pre {
-	overflow-x: auto;
-
-	/*
+    overflow-x: auto;
+    /*
 	 * Remove borders etc in pre.
 	 */
-	code,
-	samp {
-		border: none;
-		padding: 0;
-	}
+    code,
+    samp {
+        padding: 0;
+        border: none;
+    }
 
-	code {
-		white-space: pre;
-		word-wrap: normal;
-	}
+    code {
+        word-wrap: normal;
+        white-space: pre;
+    }
 }
 
 /*
  * Fixed height with overflow.
  */
 .pre-scrollable {
-	max-height: 20em;
-	overflow-y: scroll;
+    max-height: 20em;
+    overflow-y: scroll;
 }

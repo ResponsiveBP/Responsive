@@ -1,199 +1,215 @@
 .carousel {
-	-webkit-backface-visibility: hidden;
-	margin-bottom: 1em;
-	overflow: hidden;
-	position: relative;
-	-webkit-perspective: 1000;
+    margin-bottom: 1em;
+    overflow: hidden;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
 
-	&.no-transition > figure { transition-duration: 0s !important; }
-
-	/*
+    &.no-transition > figure {
+        transition-duration: 0s !important;
+    }
+    /*
 	 * Default slide version
 	 */
-	 > figure {
-		display: none;
-		margin: 0;
-		-webkit-transform: translate3d(0, 0, 0);
-		transition: .7s ease-in-out transform, .7s ease-in-out left;
-		position: relative;
+    > figure {
+        margin: 0;
+        display: none;
+        position: relative;
+        transition: .7s ease-in-out transform, .7s ease-in-out left;
+        -webkit-transform: translate3d(0, 0, 0);
 
-		> img {
-			display: block;
-			width: 100%;
-		}
 
-		> figcaption {
-			background-color: $carousel-caption-background-color;
-			bottom: 0;
-			color: $carousel-caption-color;
-			padding: 1px 1em;
-			position: absolute;
-			width: 100%;
-		}
-	}
+        > img {
+            display: block;
+            width: 100%;
+        }
 
-	/*
+        > figcaption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1px 1em;
+            background-color: $carousel-caption-background-color;
+            color: $carousel-caption-color;
+        }
+    }
+    /*
 	 * Indicators
 	 */
-	> ol {
-		left: 0;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		position: absolute;
-		right: 0;
-		text-align: center;
-		top: 1em;
-		z-index: 3;
+    > ol {
+        left: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 1em;
+        z-index: 3;
 
-		li {
-			background-color: $carousel-nav-background-color;
-			border: $carousel-nav-border;
-			cursor: pointer;
-			display: inline-block;
-			height: 1em;
-			margin: 1px;
-			text-indent: -9999px;
-			width: 1em;
+        li {
+            background-color: $carousel-nav-background-color;
+            border: $carousel-nav-border;
+            cursor: pointer;
+            display: inline-block;
+            height: 1em;
+            margin: 1px;
+            text-indent: -9999px;
+            width: 1em;
 
-			&:hover {
-				background-color: $carousel-nav-background-color-hover;
-				border-color: $carousel-nav-border-color-hover;
-			}
-		}
+            &:hover {
+                background-color: $carousel-nav-background-color-hover;
+                border-color: $carousel-nav-border-color-hover;
+            }
+        }
 
-		.active {
-			background-color: $carousel-nav-background-color-active;
-			border-color: $carousel-nav-border-color-active;
-		}
-	}
+        .active {
+            background-color: $carousel-nav-background-color-active;
+            border-color: $carousel-nav-border-color-active;
 
-	/*
+            &:hover {
+                background-color: $carousel-nav-background-color-active;
+                border-color: $carousel-nav-border-color-active;
+            }
+        }
+    }
+    /*
 	 * Next Last version
 	 */
-	.carousel-active,
-	.next,
-	.prev,
-	.swipe { display: block; }
+    .carousel-active,
+    .next,
+    .prev,
+    .swipe {
+        display: block;
+    }
 
-	.carousel-active,
-	.next.left,
-	.prev.right {
-		left: 0\9;
-		transform: translateX(0);
-	}
+    .carousel-active,
+    .next.left,
+    .prev.right {
+        left: 0\9;
+        transform: translateX(0);
+    }
 
-	.carousel-active {
-		position: relative !important;
-		z-index: 1;
+    .carousel-active {
+        position: relative !important;
+        z-index: 1;
 
-		> figcaption { position: static; }
-	}
+        > figcaption {
+            position: static;
+        }
+    }
 
-	.next,
-	.prev,
-	.swipe {
-		height: 100%;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: 0;
-	}
+    .next,
+    .prev,
+    .swipe {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-	.next,
-	.carousel-active.right {
-		left: 100%\9;
-		transform: translateX(100%);
-	}
+    .next,
+    .carousel-active.right {
+        left: 100%\9;
+        transform: translateX(100%);
+    }
 
-	.prev,
-	.carousel-active.left {
-		left: -100%\9;
-		transform: translateX(-100%);
-	}
-
-	/*
+    .prev,
+    .carousel-active.left {
+        left: -100%\9;
+        transform: translateX(-100%);
+    }
+    /*
 	 * 1.  IE10 is picking up on the left positioning :(
 	 */
-	x::-ms-reveal,
-	.next,
-	.prev,
-	.carousel-active.left,
-	.carousel-active.right { left: 0; /* 1 */ }
+    x::-ms-reveal,
+    .next,
+    .prev,
+    .carousel-active.left,
+    .carousel-active.right {
+        left: 0; /* 1 */
+    }
 }
 
 .carousel-control {
-	&,
-	&:visited {
-		color: $carousel-control-color;
-		display: block;
-		font-size: 2em;
-		font-weight: bold;
-		left: 0;
-		margin-top: -1em;
-		padding: .5em;
-		position: absolute;
-		text-align: center;
-		text-decoration: $carousel-control-text-decoration;
-		top: 40%;
-		width: 2em;
-		z-index: 3;
-	}
+    &,
+    &:visited {
+        position: absolute;
+        left: 0;
+        top: 40%;
+        z-index: 3;
+        display: block;
+        width: 2em;
+        margin-top: -1em;
+        padding: .5em;
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        color: $carousel-control-color;
+        text-decoration: none;
+    }
 
-	&.right {
-		left: auto;
-		right: 0;
-	}
+    &.right {
+        left: auto;
+        right: 0;
+    }
 
-	&:hover {
-		color: $carousel-control-color-hover;
-		text-decoration: $carousel-control-text-decoration-hover;
-	}
+    &:hover {
+        color: $carousel-control-color;
+        text-decoration: underline;
+    }
 }
 
 /*
  * Fade version
  */
 .carousel-fade {
-	> figure {
-		bottom: 0;
-		height: 100%;
-		left: 0;
-		opacity: 0;
-		position: absolute;
-		right: 0;
-		transition: opacity .7s ease-in-out;
-		top: 0;
-		width: 100%;
-	}
+    > figure {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity .7s ease-in-out;
+    }
 
-	> figure.swipe,
-	> figure.next,
-	> figure.prev {
-		left: 0\9;
-		transform: none;
-		opacity: 1;
-		z-index: 1;
-	}
+    > figure.swipe,
+    > figure.next,
+    > figure.prev {
+        z-index: 1;
+        left: 0\9;
+        transform: none;
+        opacity: 1;
+    }
 
-	> .carousel-active.swipe { z-index: 2; }
+    > .carousel-active.swipe {
+        z-index: 2;
+    }
 
-	> .carousel-active { position: relative; }
+    > .carousel-active {
+        position: relative;
+    }
 
-	.carousel-active {
-		opacity: 1;
+    .carousel-active {
+        opacity: 1;
 
-		&.left,
-		&.right {
-			left: 0\9;
-			transform: none;
-			opacity: 0;
-			z-index: 2;
-		}
-	}
+        &.left,
+        &.right {
+            left: 0\9;
+            z-index: 2;
+            transform: none;
+            opacity: 0;
+        }
+    }
 
-	.carousel-control {
-		&,
-		&:visited  { z-index: 3; }
-	}
+    .carousel-control {
+        &,
+        &:visited {
+            z-index: 3;
+        }
+    }
 }
