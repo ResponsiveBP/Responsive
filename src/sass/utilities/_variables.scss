@@ -1,11 +1,25 @@
 // General Styles
 $base-font-size: 100% !default;
-$base-font-size-px: 16px !default; // used for calculations 
 $base-line-height: 1.4 !default;
 $base-text-color: #222 !default;
 
 // Selected text
 $selection-background: #b3d4fc !default;
+
+//==
+// Grid System
+//##
+$grid-container-width: 1140px !default;
+$grid-column-gutter: 2% !default;
+
+// Breakpoints. These have been carefully considered so it
+// is recommended to leave them as they are.
+$grid-breakpoint-xs-max: 47.99em !default;
+$grid-breakpoint-s-min: 48em !default;
+$grid-breakpoint-s-max: 61.99em !default;
+$grid-breakpoint-m-min: 62em !default;
+$grid-breakpoint-m-max: 74.99em !default;
+$grid-breakpoint-l-min: 75em !default;
 
 //==
 // Basic Elements
@@ -18,17 +32,12 @@ $horizontal-rule-color: #c0c0c0 !default;
 $table-bordered-border: 1px solid #c0c0c0 !default;
 $table-striped-background-color: #e7e7e7 !default;
 
-// Grid System
-$grid-container-width: 1140px !default;
-$grid-column-margin: 2% !default;
-
 //==
 // CSS Components
 //##
 
 // Forms
 $form-placeholder: #c0c0c0 !default;
-
 $form-input-background: #fff !default;
 $form-input-border: 1px solid #c0c0c0 !default;
 $form-input-border-radius: 0 !default;
@@ -73,13 +82,17 @@ $lightbox-footer-color: #fff !default;
 
 $lightbox-content-background-color: #fff !default;
 
-$lightbox-media-background-color: #111 !default;
+$lightbox-media-background-color: #222 !default;
 
-$carousel-control-color: #fff !default;
-$carousel-control-text-decoration: none !default;
+$lightbox-control-color: #fff !default;
+$lightbox-control-background-color: transparent !default;
+$lightbox-control-border: none !default;
+$lightbox-control-text-decoration: none !default;
 
-$carousel-control-color-hover: #fff !default;
-$carousel-control-text-decoration-hover: underline !default;
+$lightbox-control-color-hover: #fff !default;
+$lightbox-control-background-color-hover: transparent !default;
+$lightbox-control-border-hover: none !default;
+$lightbox-control-text-decoration-hover: underline !default;
 
 // Carousel
 $carousel-caption-background-color: #222 !default;

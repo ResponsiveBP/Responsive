@@ -30,7 +30,7 @@
         background-color: #434343;
     }
 
-[class*="col-"] > span {
+.pad-gutter > [class*="col-"] span {
     background-color: #de3838;
     display: block;
 }

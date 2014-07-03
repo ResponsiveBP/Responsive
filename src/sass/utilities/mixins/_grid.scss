@@ -1,0 +1,107 @@
+//==
+// Grid System - Base
+//##
+
+@mixin grid-base($bp) {
+    // Large doesn't need an "only" since it operates on min width.
+    @if $bp != l {
+        @include bp-max($bp) {
+
+            [class*=col-] {
+                &.reset-#{$bp}-only {
+                    clear: both;
+                    margin-left: 0 !important;
+                }
+
+                &[class*=push-#{$bp}-right-only] {
+                    float: right;
+                }
+            }
+        }
+    }
+
+
+    [class*=col-#{$bp}] + [class*=col-#{$bp}] {
+        margin-left: $grid-column-gutter;
+    }
+
+    .no-gutter > [class*=col-#{$bp}] {
+        margin-left: 0;
+    }
+
+    [class*=col-] {
+        &.reset-#{$bp} {
+            clear: both;
+            margin-left: 0 !important;
+        }
+
+        &[class*=push-#{$bp}-right] {
+            float: right;
+        }
+    }
+}
+
+//==
+// Grid System - Columns
+//##
+@mixin grid-columns($bp) {
+    // Calculate column width and width with gutter.
+    $column-width: (100% / 12);
+    $column-width-with-gutter: (100% - ($grid-column-gutter * 11)) / 12;
+
+    // Loop through and set width.
+    @for $i from 1 to 13 {
+        $temp-width: $column-width-with-gutter * $i + ($grid-column-gutter * $i);
+
+        .col-#{$bp}-#{$i} {
+            width: $temp-width - $grid-column-gutter;
+        }
+        // We don't want add offsets etc to full width columns.
+        @if $i != 12 {
+            .offset-#{$bp}-#{$i} {
+                margin-left: $temp-width;
+            }
+
+            [class*=col-] + .offset-#{$bp}-#{$i} {
+                margin-left: $temp-width + $grid-column-gutter;
+            }
+
+            .push-#{$bp}-#{$i} {
+                left: $temp-width;
+            }
+
+            .pull-#{$bp}-#{$i} {
+                right: $temp-width;
+            }
+        }
+        @else {
+            // Ensure that the gutter is reset on full width columns.
+            .col-#{$bp}-#{$i},
+            [class*=col-] + [class*=col-#{$bp}-#{$i}] {
+                margin-left: 0;
+            }
+        }
+    }
+    // Loop through and build the "no-gutter" columns.
+    .no-gutter > {
+        @for $i from 1 to 12 {
+            $temp-width: $column-width * $i;
+
+            .col-#{$bp}-#{$i} {
+                width: $temp-width;
+            }
+
+            .offset-#{$bp}-#{$i} {
+                margin-left: $temp-width;
+            }
+
+            .push-#{$bp}-#{$i} {
+                left: $temp-width;
+            }
+
+            .pull-#{$bp}-#{$i} {
+                right: $temp-width;
+            }
+        }
+    }
+}

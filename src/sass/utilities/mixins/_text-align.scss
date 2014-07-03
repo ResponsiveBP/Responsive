@@ -1,0 +1,36 @@
+﻿//==
+// Creates text align classes for each breakpoint.
+//##
+@mixin text-align($bp, $direction) {
+    
+    // XS doesn't have a min value.
+    @if $bp == xs {
+
+        .text-#{$bp}-#{$direction} {
+            text-align: $direction!important;
+        }
+
+        @include bp-max($bp) {
+            .text-#{$bp}-#{$direction}-only {
+                text-align: $direction!important;
+            }
+        }
+    }
+    @else {
+
+        @include bp-min($bp) {
+
+            .text-#{$bp}-#{$direction} {
+                text-align: $direction!important;
+            }
+            // Large doesn't need an "only" since it operates on min width.
+            @if $bp != l {
+                @include bp-max($bp) {
+                    .text-#{$bp}-#{$direction}-only {
+                        text-align: $direction!important;
+                    }
+                }
+            }
+        }
+    }
+}

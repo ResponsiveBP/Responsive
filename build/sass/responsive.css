@@ -448,10 +448,11 @@ abbr {
 /* Columns */
 [class*=col-] {
   display: block;
+  width: 100%;
   float: left;
-  min-height: 1px;
-  position: relative;
-  width: 100%; }
+  min-height: 1px; }
+  [class*=col-][class*=offset], [class*=col-][class*=push], [class*=col-][class*=pull] {
+    position: relative; }
 
 .no-gutter.pad-gutter > [class*=col-] {
   padding: 0 1%; }
@@ -459,6 +460,12 @@ abbr {
 /*
  * Extra small 
  */
+@media (max-width: 47.99em) {
+  [class*=col-].reset-xs-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-xs-right-only] {
+    float: right; } }
 [class*=col-xs] + [class*=col-xs] {
   margin-left: 2%; }
 
@@ -471,12 +478,6 @@ abbr {
 [class*=col-][class*=push-xs-right] {
   float: right; }
 
-@media (max-width: 47.99em) {
-  [class*=col-].reset-xs-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-xs-right-only] {
-    float: right; } }
 .col-xs-1 {
   width: 6.5%; }
 
@@ -741,6 +742,12 @@ abbr {
 /*
  * Small 
  */
+@media (min-width: 48em) and (max-width: 61.99em) {
+  [class*=col-].reset-s-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-s-right-only] {
+    float: right; } }
 @media (min-width: 48em) {
   [class*=col-s] + [class*=col-s] {
     margin-left: 2%; }
@@ -752,14 +759,8 @@ abbr {
     clear: both;
     margin-left: 0 !important; }
   [class*=col-][class*=push-s-right] {
-    float: right; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
-  [class*=col-].reset-s-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-s-right-only] {
-    float: right; } }
-@media (min-width: 48em) {
+    float: right; }
+
   .col-s-1 {
     width: 6.5%; }
 
@@ -1023,6 +1024,12 @@ abbr {
 /*
  * Medium 
  */
+@media (min-width: 62em) and (max-width: 74.99em) {
+  [class*=col-].reset-m-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-m-right-only] {
+    float: right; } }
 @media (min-width: 62em) {
   [class*=col-m] + [class*=col-m] {
     margin-left: 2%; }
@@ -1034,14 +1041,8 @@ abbr {
     clear: both;
     margin-left: 0 !important; }
   [class*=col-][class*=push-m-right] {
-    float: right; } }
-@media (min-width: 62em) and (max-width: 74.99em) {
-  [class*=col-].reset-m-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-m-right-only] {
-    float: right; } }
-@media (min-width: 62em) {
+    float: right; }
+
   .col-m-1 {
     width: 6.5%; }
 
@@ -1578,154 +1579,6 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-l-11 {
     right: 91.6667%; } }
-/*
- * Unordered and ordered lists
- * Scale the padding/margin with the base font.
- */
-ul,
-ol {
-  margin: 1em 0;
-  padding-left: 2.5em; }
-
-ul ul,
-ol ol {
-  margin: 0; }
-
-/*
- * No bullets on first level.
- */
-ul.no-bullets,
-ol.no-bullets {
-  padding-left: 0; }
-
-ul.no-bullets > li,
-ol.no-bullets > li {
-  list-style: none; }
-
-/*
- * Coloured lists.
- */
-ul.colored,
-ol.colored {
-  padding-left: 40px; }
-
-ul.colored > li,
-ol.colored > li {
-  list-style-type: none;
-  position: relative; }
-
-/*
- * 1. Escaped unicode coloured circle.
- * 2. Edit this property to change all colored class lists.
- * 3. Normalize funky webkit margin
- */
-ul.colored > li:before,
-ol.colored > li:before {
-  color: #00a9ec;
-  /* 2 */
-  content: '\25cf';
-  /* 1 */
-  font-size: 1em;
-  font-weight: bold;
-  left: -1em;
-  -webkit-margin-start: -.25em;
-  /* 3 */
-  position: absolute;
-  text-align: right;
-  text-decoration: none;
-  top: 0; }
-
-/*
- * Counter increment to replace standard numbers.
- */
-ol.colored {
-  counter-reset: foo; }
-  ol.colored > li {
-    counter-increment: foo;
-    /*
-     * Use the :before pseudo element to supply numbers.
-     * 1. The counter value.
-     * 2. Normalize funky webkit margin
-     */ }
-    ol.colored > li:before {
-      content: counter(foo) ".";
-      /* 1 */
-      font-weight: normal;
-      left: -3.125em;
-      -webkit-margin-start: 0;
-      /* 2 */
-      width: 2.5em; }
-
-/* Definition lists */
-/*
- * Prevent dt and dd collapse.
- */
-dt,
-dd {
-  min-height: 1.4em; }
-
-@media (min-width: 48em) {
-  /*
-   * Horizontally styled definition list
-   */
-  .dl-horizontal > dt {
-    clear: left;
-    float: left;
-    overflow: hidden;
-    text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 150px; }
-  .dl-horizontal > dd {
-    margin-left: 166px; } }
-/*
- *  Make it responsive
- */
-table {
-  margin: 1em 0;
-  max-width: 100%;
-  width: 100%; }
-  table th,
-  table td {
-    padding: .5em;
-    text-align: left;
-    vertical-align: top; }
-
-/*
- *  Bordered tables
- */
-.table-bordered {
-  border: 1px solid silver;
-  border-left-width: 0;
-  border-collapse: separate; }
-  .table-bordered th,
-  .table-bordered td {
-    border-top: 1px solid silver;
-    border-left: 1px solid silver; }
-  .table-bordered thead:first-child tr:first-child th,
-  .table-bordered tbody:first-child tr:first-child td {
-    border-top-width: 0; }
-
-/*
- *  Striped tables
- */
-.table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th,
-.table-row-alt > td,
-.table-row-alt > th {
-  background-color: #e7e7e7; }
-
-/*
- * Overflow helpers
- */
-.table-scrollable {
-  margin: 1em 0;
-  overflow-y: hidden;
-  overflow: auto;
-  width: 100%; }
-  .table-scrollable table {
-    margin: 0; }
-
 .alert {
   background-color: #fcf8e3;
   border: 1px solid #f2e187;
@@ -1748,356 +1601,6 @@ table {
 .alert-heading {
   color: inherit; }
 
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
-audio,
-canvas,
-img,
-video {
-  vertical-align: middle; }
-
-/*
- * Make the image responsive.
- */
-img {
-  max-width: 100%;
-  height: auto; }
-
-/*
- * Remove the border around images in anchors.
- */
-a img {
-  border: none; }
-
-/*
- * Properly scale your video on any device based on YouTube/Dailymotion ratio.
- */
-.media {
-  height: 0;
-  height: auto;
-  margin-bottom: 1em;
-  max-width: 100%;
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  position: relative;
-  /*
-   * Widescreen mode.
-   */
-  /*
-   * Vimeo places the controls on the player itself.
-   */
-  /*
-   * Instagram
-   */
-  /*
-   * Vine
-   */
-  /*
-   * Getty
-   */
-  /*
-   * The actual player.
-   */
-  /*
-   * Position the image absolutely and then move it's four positions
-   * 1000000% out of the container. This with an auto margin is the core of the trick.
-   * Why such a large number? Firefox seems to have issue when using larger images even
-   * at 100%.
-   */ }
-  .media.widescreen {
-    padding-bottom: 45%; }
-  .media.vimeo {
-    padding-top: 0; }
-  .media.instagram {
-    height: auto;
-    max-width: none;
-    padding-bottom: 120%; }
-  .media.vine {
-    height: auto;
-    max-width: none;
-    padding-bottom: 100%; }
-  .media.getty {
-    height: auto;
-    padding-bottom: 79.96632996632997%; }
-  .media.video {
-    padding-top: 0; }
-  .media iframe,
-  .media object,
-  .media embed,
-  .media video {
-    background-color: transparent;
-    border: 0;
-    height: 100%;
-    left: 0;
-    margin: 0;
-    outline: none;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    width: 100%; }
-  .media img {
-    bottom: -1000000%;
-    left: -1000000%;
-    margin: auto;
-    position: absolute;
-    right: -1000000%;
-    top: -1000000%;
-    width: 100%; }
-
-/*
- *  Scrollable media
- */
-.media-scroll {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; }
-
-/* Normalize  */
-.form {
-  margin: 1em 0; }
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0; }
-
-legend {
-  display: block;
-  font-size: 1.17em;
-  margin-bottom: 1em;
-  width: 100%; }
-
-label,
-label .input-group {
-  display: block;
-  margin-bottom: 1em; }
-label[for] {
-  cursor: pointer; }
-label > input,
-label > input[type=checkbox],
-label > input[type=radio],
-label > select {
-  display: inline-block;
-  margin: 0 1em 0 0;
-  vertical-align: text-top; }
-
-select,
-textarea,
-input,
-.no-edit {
-  background: white;
-  border: 1px solid silver;
-  border-radius: 0;
-  color: #222222;
-  display: block;
-  font-family: inherit;
-  margin-bottom: 1em;
-  padding: .25em;
-  width: 100%;
-    /*
-	 * Focus
-	 */
-    /*
-	 * Disabled
-	 * 1. Override the value set in normalize.css
-	 * 2. Fix IOS 6/7 opacity issue
-	 */ }
-  select:focus,
-  textarea:focus,
-  input:focus,
-  .no-edit:focus {
-    border-color: #00a9ec;
-    outline: 0; }
-  select[disabled],
-  textarea[disabled],
-  input[disabled],
-  .no-edit[disabled] {
-    background: #ebebeb;
-    border-color: silver;
-    color: silver;
-    cursor: not-allowed !important;
-    /* 1 */
-    opacity: 1;
-    outline: 0 !important; }
-
-input {
-    /*
-	 * Declared separately to reduce selector duplication
-	 * for padding
-	 */
-    /*
-	 * Add range styles for IE8 and IE9
-	 */
-    /*
-	 * Inline
-	 */ }
-  input[type=color] {
-    max-width: 105px; }
-  input[type=radio], input[type=checkbox] {
-    display: block;
-    line-height: inherit;
-    margin: .1875em .1875em .1875em 0;
-    min-height: 1em;
-    min-width: 1em;
-    padding: 0;
-    width: auto; }
-  input[type=radio] {
-    border-color: transparent \9;
-    border-radius: 1em; }
-  input[type=range] {
-    background-color: #fff \9;
-    border: 1px solid #c0c0c0 \9;
-    border: 1px solid transparent;
-    padding: .25em 0;
-    padding: .25em \9; }
-  input[type=range]:focus, input[type=checkbox]:focus, input[type=radio]:focus, input[type=checkbox]:checked {
-    border-color: transparent;
-    outline: 1px solid silver;
-    outline-color: #00a9ec;
-    outline-offset: -1px; }
-  input[type=checkbox]:focus, input[type=checkbox]:checked {
-    border-color: #c0c0c0; }
-  input.inline-block,
-  input select.inline-block {
-    width: auto; }
-
-/*
- * 1. Remove borders and padding on range controls in IE10+
- */
-x::-ms-reveal,
-input[type=range] {
-  /* 1 */
-  border: 1px solid transparent;
-  padding: .25em 0; }
-
-/*
- * Fix field styling on iPhone and iPad.
- * 1. Strip OS styling on IOS
- */
-select,
-textarea,
-input[type=text],
-input[type=search],
-input[type=datetime],
-input[type=datetime-local],
-input[type=date],
-input[type=week],
-input[type=month],
-input[type=time],
-input[type=number],
-input[type=password],
-input[type=tel],
-input[type=email],
-input[type=url],
-input[type=color] {
-  -webkit-appearance: none;
-  /* 1 */ }
-
-select option {
-  height: 100%; }
-
-/*
- * Textareas : Multiple resizable options.
- * 1: Horizontal
- * 2: Vertical
- * 3: None
- */
-textarea {
-  height: auto;
-  min-height: 5.25em;
-  resize: both; }
-  textarea.horizontal {
-    resize: horizontal;
-    /* 1 */ }
-  textarea.vertical {
-    resize: vertical;
-    /* 2 */ }
-  textarea.no-resize {
-    resize: none;
-    /* 3 */ }
-
-/*
- * Read only
- */
-.no-edit,
-[readonly] {
-  border-color: #ebebeb;
-  cursor: not-allowed; }
-
-/*
- * Placeholder : These have to be kept separate
- * 1. Safari and Chrome
- * 2. Firefox 4-18
- * 3. Firefox 19+
- * 4. IE10+
- */
-::-webkit-input-placeholder {
-  color: silver;
-  /* 1 */ }
-
-:-moz-placeholder {
-  color: silver;
-  /* 2 */ }
-
-::-moz-placeholder {
-  color: silver;
-  /* 3 */ }
-
-:-ms-input-placeholder {
-  color: silver;
-  /* 4 */ }
-
-/*
- * Full Width
- */
-.full-width {
-  max-width: 100% !important;
-  width: 100% !important; }
-
-/*
- * Actions - Contains buttons
- */
-.form-actions {
-  margin: 1em 0;
-  padding: 1em 0; }
-
-@-moz-document url-prefix() {
-    /*
-	 * Remove excess padding in Firefox
-	 */
-  input[type=color] {
-    min-height: 1.8em;
-    padding: 0; } }
-@media (-webkit-min-device-pixel-ratio: 0) {
-  input {
-        /*
-		 * Fix changing height issues on iOS7.
-		 */
-        /*
-		 * Remove excess padding in Webkit
-		 */ }
-    input[type=datetime-local], input[type=date], input[type=week], input[type=month], input[type=time], input[type=number] {
-      min-height: 2em; }
-    input[type=color] {
-      min-height: 1.8em;
-      padding: 0; }
-      input[type=color]::-webkit-color-swatch-wrapper {
-        padding: 0; }
-      input[type=color]::-webkit-color-swatch {
-        border: none; }
-
-    /*
-	 * Fix field styling on iPhone and iPad.
-	 * 1. Add a select indicator
-	 */
-  select {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);
-    /* 1 */
-    background-repeat: no-repeat;
-    background-position: right center;
-    padding-right: 1.67em; } }
 /*
  * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
@@ -2249,42 +1752,519 @@ pre {
   max-height: 20em;
   overflow-y: scroll; }
 
-.accordion {
-  border: solid 1px silver;
-  margin-bottom: .125em; }
+/* Normalize  */
+.form {
+  margin: 1em 0; }
 
-.accordion-head {
-  border-bottom: solid 1px silver;
-  display: block; }
-  .accordion-head a {
-    display: block;
-    outline: none;
-    padding: .5em; }
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
 
-.accordion-body {
-  padding: 0 .5em; }
-  .accordion-body.collapse {
-    margin-top: -1px; }
-
-.trans,
-.collapse {
-  -webkit-transition: height .5s ease, width .5s ease;
-          transition: height .5s ease, width .5s ease; }
-
-.expand,
-.collapse {
+legend {
   display: block;
-  height: auto;
-  margin-top: 0;
-  overflow: hidden;
-  position: relative;
-  width: auto; }
+  width: 100%;
+  font-size: 1.17em;
+  margin-bottom: 1em; }
 
-.collapse {
-  height: 0; }
-  .collapse.width {
+label,
+label .input-group {
+  display: block;
+  margin-bottom: 1em; }
+label[for] {
+  cursor: pointer; }
+label > input,
+label > input[type=checkbox],
+label > input[type=radio],
+label > select {
+  display: inline-block;
+  margin: 0 1em 0 0;
+  vertical-align: text-top; }
+
+select,
+textarea,
+input,
+.no-edit {
+  background: white;
+  border: 1px solid silver;
+  border-radius: 0;
+  color: #222222;
+  display: block;
+  font-family: inherit;
+  margin-bottom: 1em;
+  padding: .25em;
+  width: 100%;
+    /*
+	 * Focus
+	 */
+    /*
+	 * Disabled
+	 * 1. Override the value set in normalize.css
+	 * 2. Fix IOS 6/7 opacity issue
+	 */
+  /*
+   * CLean up that hideous file input.
+   */ }
+  select:focus,
+  textarea:focus,
+  input:focus,
+  .no-edit:focus {
+    border-color: #00a9ec;
+    outline: 0; }
+  select[disabled],
+  textarea[disabled],
+  input[disabled],
+  .no-edit[disabled] {
+    background: #ebebeb;
+    border-color: silver;
+    color: silver;
+    cursor: not-allowed !important;
+    /* 1 */
+    opacity: 1;
+    outline: 0 !important; }
+  select[type=file]::-ms-value,
+  textarea[type=file]::-ms-value,
+  input[type=file]::-ms-value,
+  .no-edit[type=file]::-ms-value {
+    background: white;
+    border: none; }
+  select[type=file]::-ms-browse,
+  textarea[type=file]::-ms-browse,
+  input[type=file]::-ms-browse,
+  .no-edit[type=file]::-ms-browse {
+    background: #dadada;
+    border: solid 1px silver;
+    color: #222222; }
+    select[type=file]::-ms-browse:active,
+    textarea[type=file]::-ms-browse:active,
+    input[type=file]::-ms-browse:active,
+    .no-edit[type=file]::-ms-browse:active {
+      background-color: #e7e7e7; }
+
+input {
+    /*
+	 * Declared separately to reduce selector duplication
+	 * for padding
+	 */
+    /*
+	 * Add range styles for IE8 and IE9
+	 */
+    /*
+	 * Inline
+	 */ }
+  input[type=color] {
+    max-width: 105px; }
+  input[type=radio], input[type=checkbox] {
+    display: block;
+    line-height: inherit;
+    margin: .1875em .1875em .1875em 0;
+    min-height: 1em;
+    min-width: 1em;
+    padding: 0;
+    width: auto; }
+  input[type=radio] {
+    border-color: transparent\9;
+    border-radius: 1em; }
+  input[type=range] {
+    background-color: white \9;
+    border: 1px solid silver \9;
+    border: 1px solid transparent;
+    padding: .25em 0;
+    padding: .25em\9; }
+  input[type=range]:focus, input[type=checkbox]:focus, input[type=radio]:focus, input[type=checkbox]:checked {
+    border-color: transparent;
+    outline: 1px solid silver;
+    outline-color: #00a9ec;
+    outline-offset: -1px; }
+  input[type=checkbox]:focus, input[type=checkbox]:checked {
+    border-color: #c0c0c0; }
+  input.inline-block,
+  input select.inline-block {
+    width: auto; }
+
+/*
+ * 1. Remove borders and padding on range controls in IE10+
+ */
+x::-ms-reveal,
+input[type=range] {
+  /* 1 */
+  border: 1px solid transparent;
+  padding: .25em 0; }
+
+/*
+ * Fix field styling on iPhone and iPad.
+ * 1. Strip OS styling on IOS
+ */
+select,
+textarea,
+input[type=text],
+input[type=search],
+input[type=datetime],
+input[type=datetime-local],
+input[type=date],
+input[type=week],
+input[type=month],
+input[type=time],
+input[type=number],
+input[type=password],
+input[type=tel],
+input[type=email],
+input[type=url],
+input[type=color] {
+  -webkit-appearance: none;
+  /* 1 */ }
+
+select option {
+  height: 100%; }
+
+/*
+ * Textareas : Multiple resizable options.
+ * 1: Horizontal
+ * 2: Vertical
+ * 3: None
+ */
+textarea {
+  height: auto;
+  min-height: 5.25em;
+  resize: both; }
+  textarea.horizontal {
+    resize: horizontal;
+    /* 1 */ }
+  textarea.vertical {
+    resize: vertical;
+    /* 2 */ }
+  textarea.no-resize {
+    resize: none;
+    /* 3 */ }
+
+/*
+ * Read only
+ */
+.no-edit,
+[readonly] {
+  border-color: #ebebeb;
+  cursor: not-allowed; }
+
+/*
+ * Placeholder : These have to be kept separate
+ * 1. Safari and Chrome
+ * 2. Firefox 4-18
+ * 3. Firefox 19+
+ * 4. IE10+
+ */
+::-webkit-input-placeholder {
+  color: silver;
+  /* 1 */ }
+
+:-moz-placeholder {
+  color: silver;
+  /* 2 */ }
+
+::-moz-placeholder {
+  color: silver;
+  /* 3 */ }
+
+:-ms-input-placeholder {
+  color: silver;
+  /* 4 */ }
+
+/*
+ * Full Width
+ */
+.full-width {
+  max-width: 100% !important;
+  width: 100% !important; }
+
+/*
+ * Actions - Contains buttons
+ */
+.form-actions {
+  margin: 1em 0;
+  padding: 1em 0; }
+
+@-moz-document url-prefix() {
+    /*
+	 * Remove excess padding in Firefox
+	 */
+  input[type=color] {
+    min-height: 1.8em;
+    padding: 0; } }
+@media (-webkit-min-device-pixel-ratio: 0) {
+  input {
+        /*
+		 * Fix changing height issues on iOS7.
+		 */
+        /*
+		 * Remove excess padding in Webkit
+		 */ }
+    input[type=datetime-local], input[type=date], input[type=week], input[type=month], input[type=time], input[type=number] {
+      min-height: 2em; }
+    input[type=color] {
+      min-height: 1.8em;
+      padding: 0; }
+      input[type=color]::-webkit-color-swatch-wrapper {
+        padding: 0; }
+      input[type=color]::-webkit-color-swatch {
+        border: none; }
+
+    /*
+	 * Fix field styling on iPhone and iPad.
+	 * 1. Add a select indicator
+	 */
+  select {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);
+    /* 1 */
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 1.67em; } }
+/*
+ * Unordered and ordered lists
+ * Scale the padding/margin with the base font.
+ */
+ul,
+ol {
+  margin: 1em 0;
+  padding-left: 2.5em; }
+
+ul ul,
+ol ol {
+  margin: 0; }
+
+/*
+ * No bullets on first level.
+ */
+ul.no-bullets,
+ol.no-bullets {
+  padding-left: 0; }
+  ul.no-bullets > li,
+  ol.no-bullets > li {
+    list-style: none; }
+
+/*
+ * Coloured lists.
+ */
+ul.colored,
+ol.colored {
+  padding-left: 40px; }
+  ul.colored > li,
+  ol.colored > li {
+    list-style-type: none;
+    position: relative;
+    /*
+     * 1. Normalize funky webkit margin
+     * 2. Escaped unicode coloured circle.
+     * 3. Edit this property to change all colored class lists.
+     */ }
+    ul.colored > li:before,
+    ol.colored > li:before {
+      position: absolute;
+      top: 0;
+      left: -1em;
+      -webkit-margin-start: -.25em;
+      /* 1 */
+      content: "\25cf";
+      /* 2 */
+      color: #00a9ec;
+      /* 3 */
+      font-size: 1em;
+      font-weight: bold;
+      text-align: right;
+      text-decoration: none; }
+
+/*
+ * Counter increment to replace standard numbers.
+ */
+ol.colored {
+  counter-reset: foo; }
+  ol.colored > li {
+    counter-increment: foo;
+        /*
+		 * Use the :before pseudo element to supply numbers.
+		 * 1. The counter value.
+		 * 2. Normalize funky webkit margin
+		 */ }
+    ol.colored > li:before {
+      content: counter(foo) ".";
+      /* 1 */
+      font-weight: normal;
+      left: -3.125em;
+      width: 2.5em;
+      -webkit-margin-start: 0;
+      /* 2 */ }
+
+/* Definition lists 
+ * Prevent dt and dd collapse.
+ */
+dt, dd {
+  min-height: 1.4em; }
+
+@media (min-width: 48em) {
+    /*
+	 * Horizontally styled definition list
+	 */
+  .dl-horizontal > dt {
+    clear: left;
+    float: left;
+    width: 9.375em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis; }
+  .dl-horizontal > dd {
+    margin-left: 10.375em; } }
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle; }
+
+/*
+ * Make the image responsive.
+ */
+img {
+  max-width: 100%;
+  height: auto; }
+
+/*
+ * Remove the border around images in anchors.
+ */
+a img {
+  border: none; }
+
+/*
+ * Properly scale your video on any device based on YouTube/Dailymotion ratio.
+ */
+.media {
+  height: 0;
+  height: auto;
+  margin-bottom: 1em;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  position: relative;
+  /*
+   * Widescreen mode.
+   */
+  /*
+   * Vimeo places the controls on the player itself.
+   */
+  /*
+   * Instagram
+   */
+  /*
+   * Vine
+   */
+  /*
+   * Getty
+   */
+  /*
+   * The actual player.
+   */
+  /*
+   * Position the image absolutely and then move it's four positions
+   * 1000000% out of the container. This with an auto margin is the core of the trick.
+   * Why such a large number? Firefox seems to have issue when using larger images even
+   * at 100%.
+   */ }
+  .media.widescreen {
+    padding-bottom: 45%; }
+  .media.vimeo {
+    padding-top: 0; }
+  .media.instagram {
     height: auto;
-    width: 0; }
+    max-width: none;
+    padding-bottom: 120%; }
+  .media.vine {
+    height: auto;
+    max-width: none;
+    padding-bottom: 100%; }
+  .media.getty {
+    height: auto;
+    padding-bottom: 79.96632996632997%; }
+  .media.video {
+    padding-top: 0; }
+  .media iframe,
+  .media object,
+  .media embed,
+  .media video {
+    background-color: transparent;
+    border: 0;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%; }
+  .media img {
+    bottom: -1000000%;
+    left: -1000000%;
+    margin: auto;
+    position: absolute;
+    right: -1000000%;
+    top: -1000000%;
+    width: 100%; }
+
+/*
+ *  Scrollable media
+ */
+.media-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+
+/*
+ *  Make it responsive
+ */
+table {
+  margin: 1em 0;
+  max-width: 100%;
+  width: 100%; }
+  table th,
+  table td {
+    padding: .5em;
+    text-align: left;
+    vertical-align: top; }
+
+/*
+ *  Bordered tables
+ */
+.table-bordered {
+  border: 1px solid silver;
+  border-left-width: 0;
+  border-collapse: separate; }
+  .table-bordered th,
+  .table-bordered td {
+    border-top: 1px solid silver;
+    border-left: 1px solid silver; }
+  .table-bordered thead:first-child tr:first-child th,
+  .table-bordered tbody:first-child tr:first-child td {
+    border-top-width: 0; }
+
+/*
+ *  Striped tables
+ */
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th,
+.table-row-alt > td,
+.table-row-alt > th {
+  background-color: #e7e7e7; }
+
+/*
+ * Overflow helpers
+ */
+.table-scrollable {
+  margin: 1em 0;
+  overflow-y: hidden;
+  overflow: auto;
+  width: 100%; }
+  .table-scrollable table {
+    margin: 0; }
 
 .autosize,
 [data-autosize] {
@@ -2460,39 +2440,42 @@ pre {
 .carousel-fade .carousel-control, .carousel-fade .carousel-control:visited {
   z-index: 3; }
 
-.tabs {
-  position: relative; }
-  .tabs > * {
-    display: none; }
-  .tabs > ul {
-    border-bottom: 1px solid silver;
-    list-style: none;
-    margin-top: 0;
-    padding: 0; }
-    .tabs > ul > li {
-      float: left;
-      margin-bottom: -1px; }
-      .tabs > ul > li > a {
-        border: 1px solid transparent;
-        cursor: pointer;
-        display: block;
-        line-height: 2em;
-        margin-right: .2em;
-        outline: none;
-        padding: 0 1em;
-        text-decoration: none; }
-        .tabs > ul > li > a:hover {
-          background-color: #ebebeb;
-          border-color: silver; }
-      .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
-        background-color: white;
-        border-bottom-color: transparent;
-        border: 1px solid silver;
-        color: #454545;
-        cursor: default; }
-  .tabs > ul,
-  .tabs > .tab-pane-active {
-    display: block; }
+.accordion {
+  border: solid 1px silver;
+  margin-bottom: .125em; }
+
+.accordion-head {
+  border-bottom: solid 1px silver;
+  display: block; }
+  .accordion-head a {
+    display: block;
+    outline: none;
+    padding: .5em; }
+
+.accordion-body {
+  padding: 0 .5em; }
+  .accordion-body.collapse {
+    margin-top: -1px; }
+
+.trans,
+.collapse {
+  -webkit-transition: height .5s ease, width .5s ease;
+          transition: height .5s ease, width .5s ease; }
+
+.expand,
+.collapse {
+  display: block;
+  height: auto;
+  margin-top: 0;
+  overflow: hidden;
+  position: relative;
+  width: auto; }
+
+.collapse {
+  height: 0; }
+  .collapse.width {
+    height: auto;
+    width: 0; }
 
 .lightbox-on,
 .lightbox-lock > body {
@@ -2502,99 +2485,107 @@ pre {
   overflow: hidden; }
 
 /*
+ * IE10+ class the scrollbar on the side as a separate level.
+ */
+x::-ms-reveal,
+.lightbox-on {
+  margin-right: 0 !important; }
+
+/*
  * 1: Average browser max z-index.
  * 2: IE8 transparent background.
  * 3. Use the iOS devices hardware accelerator to provide native scrolling.
  * 4. Prevent font rendering issues on Webkit.
  */
 .lightbox-overlay {
-  -webkit-backface-visibility: hidden;
-  /* 4 */
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGDYDAAAuAC0TCbBxgAAAABJRU5ErkJggg==);
-  background-repeat: repeat;
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
-  /* 3 */
   position: fixed;
-  right: 0;
-  text-align: center;
   top: 0;
-  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 2147483647;
   /* 1 */
-  /*
-   * 1: Embedded animated gif.
-   */ }
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGDYDAAAuAC0TCbBxgAAAABJRU5ErkJggg==);
+  background-repeat: repeat;
+  -webkit-overflow-scrolling: touch;
+  /* 3 */
+  -webkit-backface-visibility: hidden;
+  /* 4 */
+  text-align: center;
+    /*
+	 * 1: Embedded animated gif.
+	 */ }
   .lightbox-overlay:before {
-    content: '';
+    content: "";
     display: inline-block;
     height: 100%;
+    width: 1px;
     margin-left: -.25em;
     margin-right: -1px;
-    vertical-align: middle;
-    width: 1px; }
+    vertical-align: middle; }
   .lightbox-overlay.lightbox-loader:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    width: 28px;
+    height: 28px;
+    margin: auto;
+    content: "";
     background-image: url(data:image/gif;base64,R0lGODlhHAAcAPMAAEpKSldXV2VlZXl5eYmJiZiYmKamprW1tcjIyNnZ2enp6fj4+AAAAAAAAAAAAAAAACH5BAAFAAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAHAAcAAAE5hDISau9OGttUKFGcmxWgJxUogZkdZyDNKhIWxHnB4SJrgkHwkRwqgFUCcEkFHOdDCzACzGYJYxEhSJhKRQPMZyH9yFotSPLYOoBGgRABPCsEGLiMItZmyR5D1EUAQkKBjYAAoEVAk0XBQeQkT4XCQuWl1xSkZsal54LEo+bB5MWlZ+ZF4kYAYobBAYFrjIDShsBBQa6toJVVbMTA7q6BLjFAQPFjL68FLDDSgMFBVUEBErIzF26shIE04nWdgC+jUPUE7jT3taBjMAV0ujk1s023wW2AeKHEuqT/PqRmyeDgDmB/SIAACH5BAAFAAAALAAAAAAcABwAg0pKSlhYWGdnZ3Z2doaGhpWVlaenp7i4uMjIyNbW1uPj4/X19QAAAAAAAAAAAAAAAATsEMhJq704a21QoUZibFaAnFSiBmR1nIM0qEdbEecHhImuCQfCxIQCIFSCSSERcx0OBhbghRDMEjWASaFIWArPZwznWfYAhARXka0MwocC0CAAVg1rhRAjMISbFARrVSRgB1IUAWojNgKIFQFJGAUGlZY+FwgLm5wIEpagjBicpAsSlKGYFpqlnnyPFFY2aAYFsFqbbRkBqHRfnAqSFwO9AwEEBAEBA8kHpKoSBJdJxAUDAshJBKSuFKjJ0QW2xwRNAgmbChYC1kPiOsjgnwqAGeztAMwEwrME4pLk6rXgJS4QslkTiNXDJhAhwggAIfkEAAUAAAAsAAAAABwAHACDSkpKWFhYaGhoenp6iYmJl5eXp6entbW1yMjI2tra6urq+Pj4AAAAAAAAAAAAAAAABOgQyEmrvThrXVChnbFZAYIclIkEY2WYgjSYaEsR5ge8CDEKBp+kdJKoWJJCIuY6HAzIA2xWBJQSCYSl4HTGcL1ODzDAYkWWQfdAEDwFwAPQnBBeAoYu82ZG7DMET0gUV2gtAoMVAX8VBQaPkDoYCAqVllo7kJoalp0KSZqPkheUnph3iRQCAzZkBaMTAQoLNRoBr6+MAAQLvUsZArgFAwEExIvEB729sBIEwjECBG2rA1+zvacTuARI090BA+ISAgm9n4rDsd8y4oMGCqwb0sbk4roj30jh461W7BPEyfM3oI0qa/4SUogAACH5BAAFAAAALAAAAAAcABwAg0pKSllZWWhoaHZ2doeHh5SUlKWlpbi4uMfHx9bW1uPj4/f39wAAAAAAAAAAAAAAAATsEMhJq704a11OoQVibFZwnBSiBmRlnII0qEdbEecHhAhBCgafxIQCqBAsSSjmMhgKyddBMEPUAKZEAmEhOJ0x3IHA8820iZFl8A0GngHg4Y1OCC/v76CLRjA1XgZJFAEIaTYAAoMVcRkFbU53FwgKlZZcAJBfGpadChKBbZIWlJ6YeIsUVIgDBaNDCgtXGgFkBQV/EwQLvAm5FQK3twMBA8QDCQsCB7y8OhWtwjECBATLvCMEsbyzurcESQPVtbyfWAi9JQR7Q9VCzX8GCuwa1OsS6AtqiADi4KDl+GFxNyFAs1QkxOVidkqgwAgAIfkEAAUAAAAsAAAAABwAHACDSkpKWFhYZ2dnenp6h4eHmJiYpqamtra2x8fH29vb6enp9/f3AAAAAAAAAAAAAAAABOcQyEmrvThrXQ6hBVJsVnCc1IEgAVkZpyANq+FWw/kBIbJrAsNgYkIBVKxJSFYpGAyFFgB2EAhqEtMKYSE8nzKCrvehbW2WwddACEADwUOgt/qVnOD0tkryRksrIzcCUiVMFwQFiot2FgcJkJEHEouVghiRmQkSiZaNFY+akxgBhRUCQzcDBJ8AAQkKoxoBrKyHEwQKugm3p7UEAwEDhFcKQbq6lxSrtTKowwYLCza5yLK4rMEzA8ED0puuCLslBIfC3BIK0ocFCalA3EwH0sqq3FIE3zdE3O8B0gtMuUB1a961fQglRAAAIfkEAAUAAAAsAAAAABwAHACDSkpKWFhYZ2dnd3d3hISElZWVp6enuLi41tbWyMjI5OTk9/f3AAAAAAAAAAAAAAAABO4QyEmrvThrXQyhxVFsVmCc1KEGZNUZgjSoRlsN5weEh64JhcHEhAKoDixJKOY6FZInmIAmCRwSiYOFEC3EuB7eZ4DFjiyDl8f0BBoChXLCV1IzKWTs4Z7hnitWCX8kAUklfBUEBYuMdBYHCJGSWjuMlhqSmQgSipYFjhWQmpQXhRgCQjYDBKAAAQgKNRsBq6yIAAQKugm3EwKstgILvAIJCgIGurqDE7WsLAYLCyfSNQSwuqTNrANJCtIDA9KbrsYK5BQBBHfC0hLfC3cFCL0V0QuUB9LMLfA6BONs+JK2gAI8QzYS4EuxUKDDChEAACH5BAAFAAAALAAAAAAcABwAg0pKSlhYWGdnZ3x8fIqKipeXl6amprS0tMnJydra2unp6ff39wAAAAAAAAAAAAAAAATpEMhJq704a00MocRRbFZgnNShBmRVnIIkqEZbDecHhMdACgWfxIQCqA4sSSjmKhQIyZdBMDvUACYE4mAhOJ0xnGHA+wwOWsTIAvwOAs8A3ABPI4SXgBdsGaQPTBoDTnloay1yGAGBfQSOj3gXaHZbSo+XGpRpEmSXBJEWk3ZciklsjBsCA6BDCQlXGgGrq6YTBK4JCKgUqrNUCroCCAkCBrgJOhW9tAAGCwsnCgojA8ekFLN4Cc+r0ghDB67fFbKBAs8KEtIKgQW6JM4LpAfShzYA2wtCA973MugU1tVqgUBeCgXX/CkEEAEAIfkEAAUAAAAsAAAAABwAHACDSkpKWFhYZ2dneXl5hoaGlZWVp6enuLi4yMjI1tbW5eXl9/f3AAAAAAAAAAAAAAAABOsQyEmrvThrTcqghFFsVmCI1GkEZFWcgiScY0sNJyGFxrcFnokJBVCxdodYpVMgHF8GwYxoOhwMlkFhW4jherzPwGqtVQRcD9AJXBXIB98lwOxmySuSVlcq2wABRyVKFwMEh4hyFwYIjY5YAIiSfBiOlggShpOKFoyXkIWEZ6IaAQcLC4JCCAmgGQIKqAtmEwQJtwikFAWyC0kKuQIHCTO3t5QUCL06BqgnCgojA6y3rhKxCwlHCagDA9CYgMMJ4TcLoAKoChIJ0IQFuSTNvhIG0LQ23As+38B/EgHUUYCmQFWLU67sHfjHkEIEACH5BAAFAAAALAAAAAAcABwAg0pKSlhYWGZmZnp6eoiIiJiYmKamprW1tcbGxtra2ujo6Pj4+AAAAAAAAAAAAAAAAATrEMhJq704a03KoIRBbFZQnJShBmTVFYIkqEVbDecHhIauBYSYxIQCqAwsSUgIIhAGyZdgZqgBTIeDwTJwOmM4D+8zyGZHFoH3CSQEgAWg+eArrZmTchZJ6qIrAQYHfyRvGAF4NwOLjHUWBgiRklsAjY0akpkIEpaMGpCalBcDiROINgEHCwpJFAGRVhoCCgu1hJySB6UTBbW1ugkIUwfCBZm3Egi+CiMFCgpVCQk1A5miE7QLCEkJz4vSm1fECAdc0BOzzxLSCUwEwiTOCuVG0sgk3Qo6A+A2ps8KKLBrZePAuQkGElzzx1BCBAAh+QQABQAAACwAAAAAHAAcAINKSkpXV1dmZmZ3d3eGhoaVlZWlpaW5ubnX19fIyMjj4+P5+fkAAAAAAAAAAAAAAAAE5xDISau9OGs9yqBEQWxWUJxUYRgBWYWFIAlr4VbC+QHEumsBgkxiQgFUrElvSBkQCIMW7ySgGWwA08pgcT6FgI5n4ANYVyOL4CsMRoOF4NbwK3nBFXJNqlnXJwFoN1l8FQFMFggLi4wIGgYHkZJcAIyWCxqSmgcSipeOGZCblBcDiBSHNwEHCwqFRAcJWH2eC2lNCbkHpymWuwi7ArE5ubm3FAmMCiMFCgpXCAg2A8UJpBOeCVIJzgMD0QlEBrpdzxMCzqDRCEwFuyTN5gAG0bOD3Ao738CDROkU616ROCBPAr1r/RJGAAAh+QQABQAAACwAAAAAHAAcAINKSkpXV1dmZmZ5eXmIiIiZmZmmpqa1tbXIyMjZ2dnp6en4+PgAAAAAAAAAAAAAAAAE4BDISau9OGs9yKBDQWxWQJxUoQZkdRIsIKhjSwnnB4SFrgUDwcSEAqgKsZ1BWBk4fa/ATCQJFAyGgkXwHLBwBK7qI8BiaxXuU2DyEk1mg6/UTU4GZiRJfQmcbQB2FVIZCQuHiAkaBQeNjloAiJILGo6WBxKGkwiLlweQF0EYhDYHCgmCgQcIoBkCCQqxaHcItQdMFwWxsUsIt2UIM7W1sxOmux8FCQkqxDurta2ZsQgxCMtOtlUG2k3ME6/LEsNJBLckygkGEtwIxS3XCToD3YABy4oT5IDs6ikI6/gJnBABACH5BAAFAAAALAAAAAAcABwAg0pKSldXV2ZmZnd3d4WFhZWVlaioqLi4uMjIyNbW1uTk5PX19QAAAAAAAAAAAAAAAATqEMhJq704az2IoEMxbFZAnFShBmTVESwgqERbCecIhMW3DQvDxIQCqAqxXc+yaCZ8r8CsUAMECgZDwYJoNms4D+8zyxqqlYJ3cQgMBgE3jGAWZQQK7/ZWT2ICB01+ElcGOi0DPiWDFF1rCwgaWGZZe49eGpSUEo5rkRmTlHsXiX+KGwEGCgmMgAejdwgKs2gTAwe4Bqdps7O6CAcCAgbBBbi4hxQHvQkjBQkJKggINbfHsBIJswgxCNBv0weExAdCLtETAtCf09wTBMEkzwnmBdO1Nt7NEgPhNkPrGk1jtMEAugn2sP1bCCACACH5BAAFAAAALAAAAAAcABwAg0pKSldXV2ZmZnh4eImJiZaWlqenp7a2tsjIyNra2urq6vj4+AAAAAAAAAAAAAAAAATrEMhJq704ay2GoAMxbNdgUkRKWuYQSEI6rlTnSSHxbYNiTIGWJEV44QpGimKxSOxagZgKECAUrhYEc6EgAGyd1Edwvc4qhe3iEHQFi4NyYXcRJLbeCvlaJB24SRRmNAA3FwGBFQgKjI0IGgUGkpMFEo2XChqTmz8Ai5iPGZGclRiGFlGEBgkIiVQGB3kcCAm1shMDB7oGrhMEtbUGAgjCArAxurpnFAfACSMFCAhX0l4DsLqlFLQJbBIH0ibSnQEFuyzTE8PS39JJBMIkBNKl0Qi3NOAIMwPjhBIBpIVq1+ofAAPpJkTTZtBgBAAh+QQABQAAACwAAAAAHAAcAINKSkpWVlZnZ2d2dnaHh4eUlJSlpaW4uLjHx8fW1tbj4+P39/cAAAAAAAAAAAAAAAAE6RDISau9OGuN1qECMWyWsJwUoZKWchJSoI4sZZwfMKgCOSiGiQkFUBECkx2y4logeoDmcRYjFAqwyuG0UMBuC0OI0BNcr7RKoekRKJ6BwSB+LkAvggQ3CzofSVsKSxVWaT53FQGDFggKjo8IGgUGlJUFEo+ZChqVnUEAjZqRGQSeBnwWcxgBiBsGCQiLMZSoGAIICbmGEgOdsim5uWIHYmYHMp27Eq+5CCMFCAhYBwcwAp21oLnHEgfRAgLUnwGTlCXSQtGj1NwSpa0XBNGXAAXU2YDRNOHENRMB6iiw++UK3QR79PwppBABACH5BAAFAAAALAAAAAAcABwAg0pKSlZWVmdnZ3p6eoiIiJeXl6WlpbW1tcfHx9zc3Onp6ff39wAAAAAAAAAAAAAAAATnEMhJq704a43WocIgbFawLAo1rKSVnIQUrENbGecHhCI5JIaJ4JQC0AJCArKSUCgQI8BrMZixADOC1nJwOmO4hYE3Emi1NUvBqzgInoJAKHuOXgTNr8V8Xmq6CX4UaDZGdhUBghUHCY2OOhgEBZOUMVKOmBqUmwUSjJgJkBeSnJZ3ihNyhQYICKgBBgamGQIHrQhpILEGBagTBLcIBbVjAgUGAQS7BrkUrLc1wAhaBwcxAsuzErcHS7ZQtQdBWMe8e8JCrTrV3RMDwyTSnQAF1c0231Hh44UB6hTsfGlC9+vAvEIIKUQAACH5BAAFAAAALAAAAAAcABwAg0pKSldXV2dnZ3d3d4WFhZWVlaampri4uMfHx9fX1+Tk5Pf39wAAAAAAAAAAAAAAAATvEMhJq704a33WoR2yWcGyKJS5BGOVmINEmElbFeYHIKYxDonCRGBCAVSCIYHlUigQzNdiMDtJAlQCwXJwKhJbQ6+z8Am02pil4FUYBAmEQIBQCLLaJIbu3VbOaUwaBl+CFHk2AAOGFAGMIAmRkjoYBAWXmH6SmzUZmJ9CAAecCZQXlqB+FwKPV3otBQgHjwEFBqoZAgcIvGoUAgbBBa0yvLzDBwWstgEEwQYFvhQGxggxBAcHWsExArbBuBK7CAZMBtlzwlffob/aEwHZOs+CA8oj2Mky3IkT5wd6gEHrByBetmnBiHnSN8FZOIKJIgAAIfkEAAUAAAAsAAAAABwAHACDSkpKV1dXaGhoe3t7iIiImJiYpqamtbW1ycnJ2dnZ6enp9/f3AAAAAAAAAAAAAAAABOgQyEmrvThrfZShx4JsVqCc1KIGZIWcg0SoSVsV5yGFS0EKCZ9EcFJIVAvBRDBguRKJgzMBG9AkgYE2VjlAoTGch/fJbpUWwjdhAB4Eghd8O0Bf4l9Cie7UGBIIfRRadj+CFAGHIAiMjToZAwSSk1yNliMZk5p6AAeXCI8YkZtcd4pYpxgFoIoBBQWlGQKejLFDrwUEqQAEtAgFAQbAAQTAA7gFhROrjG+8BwcEAwYGMQLInIsIBk4G0HDUQsSv2UvREwHQj9TcE8e7E73nvNS2Ld7OAALhNujqFOzgXSgwT4aBcv0SSogAACH5BAAFAAAALAAAAAAcABwAg0pKSlhYWGdnZ3l5eYaGhpaWlqenp7m5udbW1sjIyOTk5Pf39wAAAAAAAAAAAAAAAATuEMhJq704a32UocdybFagKAilLEtAVsk5SASbvlRxfkC4FCRBAigRnG6rhWBiWMxgCMTBBYgpBgNbEcFSWAzR6EynKDR/gBprkbgQwgiDQCoQIgQ+FvFiF1sKawpLG2AJVBQBLFM4AocVAk8XBgmUlTwYAwSam0+Vnm0Zm6IEEpOflxeZo5EWjRgBjhsFB4t/BawYAga0B7gAAgXBBLEUA7wHBQEGyQEEyQPBwYMVs7xLAwYGBNgGM8DRvrsHBlRmcrrLEs3CrQek6tk85oeZxBbc7wTZviTmg+h7cCjLliObPQ1m3kmAphCHwwoRAAAh+QQABQAAACwAAAAAHAAcAINKSkpXV1dmZmZ6enqJiYmYmJimpqa1tbXHx8fa2trp6en39/cAAAAAAAAAAAAAAAAE6xDISau9OGt9kqGHcmxWkJyUogZkhZyDNKhIWxXnB4RKQQoIn0RwSkhUCsHEoIi5EIgDC/BKDGaKGoC4WCgsBig0hksUmD0AQdFdjCwEcRB4EAg69/ZCeLmLnRQEbQlKGwVQUxQBbFI2AokVAoBgclA6GFeZmRKVYhqamhJhlZcXoJsYjxgBkBsEBwatEgQEk6kGB7m2W7S0shMDubkEAQXEAQQFAQO9BIU3wnUAAwYGVwUFMQLNu7gHyhJnBnbYBBLLvRYCBubn1TrY4EPEJNTsMtjPNgDihQLl+9xVoxDvlwYC94BlC8iQQgQAOw==);
     /* 1 */
     background-position: center center;
     background-repeat: no-repeat;
-    border-radius: 100%;
-    bottom: 0;
-    content: ' ';
-    height: 28px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 28px;
-    z-index: 3; }
+    border-radius: 100%; }
 
 /*
  * 1: Forces height calculations to work in JavaScript.
  */
 .lightbox-header,
 .lightbox-footer {
+  position: fixed;
+  top: 0;
+  right: 0;
   left: 0;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
   margin: -1px 0;
   /* 1 */
-  overflow: hidden;
   padding: 1px 1em;
-  /* 1 */
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  z-index: 1; }
+  /* 1 */ }
 
 .lightbox-header {
   background: transparent;
   color: white;
-  padding-right: 4.555em; }
+  padding-right: 4.555em;
+  padding-left: 4.555em; }
 
 .lightbox-footer {
   background: transparent;
   color: white;
-  bottom: 0;
-  top: auto; }
+  top: auto;
+  bottom: 0; }
 
 .lightbox {
   display: inline-block;
-  margin: 0 auto;
   max-height: 100%;
   max-width: 100%;
   overflow: auto;
+  margin: 0 auto;
   vertical-align: middle; }
   .lightbox.lightbox-ajax {
-    max-width: 1140px;
-    width: 100%; }
+    width: 100%;
+    max-width: 1140px; }
   .lightbox.lightbox-iframe {
+    width: 100%;
     max-width: 900px;
-    overflow: hidden;
-    width: 100%; }
+    overflow: hidden; }
   .lightbox.lightbox-image {
     overflow: hidden; }
   .lightbox > img {
@@ -2605,48 +2596,55 @@ pre {
     .lightbox > img:nth-of-type(1n) {
       max-width: 100% \9; }
   .lightbox > .media {
-    background-color: #111111;
-    margin: 0 auto; }
+    margin: 0 auto;
+    background-color: #222222; }
 
 .lightbox-content {
-  background-color: white;
   max-height: 100%;
   overflow: auto;
   padding: 1em;
+  background-color: white;
   text-align: left; }
 
 .lightbox-close {
-  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
   display: inline-block;
+  padding: .83em;
+  background-color: transparent;
+  border: none;
   font-size: 1.5em;
   font-weight: bold;
-  padding: .83em;
-  position: fixed;
-  right: 0;
-  text-decoration: white;
-  top: 0;
-  z-index: 2; }
+  color: white;
+  text-decoration: none; }
   .lightbox-close:hover {
     color: white;
-    text-decoration: underline; }
+    text-decoration: underline;
+    background-color: transparent; }
 
 .lightbox-direction, .lightbox-direction:visited {
-  color: white;
+  position: fixed;
+  top: 49%;
+  left: 0;
+  z-index: 2;
   display: block;
+  width: 2em;
+  padding: .5em;
+  background-color: transparent;
+  border: none;
+  color: white;
   font-size: 2em;
   font-weight: bold;
-  left: 0;
-  padding: .5em;
-  position: fixed;
   text-align: center;
-  text-decoration: none;
-  top: 49%;
-  width: 2em;
-  z-index: 2; }
+  text-decoration: none; }
 .lightbox-direction.right {
   left: auto;
   right: 0; }
 .lightbox-direction:hover {
+  background-color: transparent;
+  border: none;
   color: white;
   text-decoration: underline; }
 
@@ -2695,6 +2693,260 @@ pre {
       content: attr(data-tfoot); }
     .table-list.table-bordered {
       border-top-style: none; } }
+.tabs {
+  position: relative; }
+  .tabs > * {
+    display: none; }
+  .tabs > ul {
+    border-bottom: 1px solid silver;
+    list-style: none;
+    margin-top: 0;
+    padding: 0; }
+    .tabs > ul > li {
+      float: left;
+      margin-bottom: -1px; }
+      .tabs > ul > li > a {
+        border: 1px solid transparent;
+        cursor: pointer;
+        display: block;
+        line-height: 2em;
+        margin-right: .2em;
+        outline: none;
+        padding: 0 1em;
+        text-decoration: none; }
+        .tabs > ul > li > a:hover {
+          background-color: #ebebeb;
+          border-color: silver; }
+      .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
+        background-color: white;
+        border-bottom-color: transparent;
+        border: 1px solid silver;
+        color: #454545;
+        cursor: default; }
+  .tabs > ul,
+  .tabs > .tab-pane-active {
+    display: block; }
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *	`contenteditable` attribute is included anywhere else in the document.
+ *	Otherwise it causes space to appear at the top and bottom of elements
+ *	that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *	`:before` to contain the top-margins of child elements.
+ */
+.clearfix:before, .row:before, .alert:before, .btn-group:before, .tabs > ul:before, .clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
+  content: "";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+.clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
+  clear: both; }
+
+/*
+ * Float helpers
+ */
+.push-left {
+  float: left !important; }
+
+.push-xs-left {
+  float: left !important; }
+
+@media (max-width: 47.99em) {
+  .push-xs-left-only {
+    float: left !important; } }
+@media (min-width: 48em) {
+  .push-s-left {
+    float: left !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .push-s-left-only {
+    float: left !important; } }
+@media (min-width: 62em) {
+  .push-m-left {
+    float: left !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .push-m-left-only {
+    float: left !important; } }
+@media (min-width: 75em) {
+  .push-l-left {
+    float: left !important; } }
+.push-right {
+  float: right !important; }
+
+.push-xs-right {
+  float: right !important; }
+
+@media (max-width: 47.99em) {
+  .push-xs-right-only {
+    float: right !important; } }
+@media (min-width: 48em) {
+  .push-s-right {
+    float: right !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .push-s-right-only {
+    float: right !important; } }
+@media (min-width: 62em) {
+  .push-m-right {
+    float: right !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .push-m-right-only {
+    float: right !important; } }
+@media (min-width: 75em) {
+  .push-l-right {
+    float: right !important; } }
+/*
+ * Layout helpers
+ */
+.block {
+  display: block !important; }
+
+.block-xs {
+  display: block !important; }
+
+@media (max-width: 47.99em) {
+  .block-xs-only {
+    display: block !important; } }
+@media (min-width: 48em) {
+  .block-s {
+    display: block !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .block-s-only {
+    display: block !important; } }
+@media (min-width: 62em) {
+  .block-m {
+    display: block !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .block-m-only {
+    display: block !important; } }
+@media (min-width: 75em) {
+  .block-l {
+    display: block !important; } }
+.inline-block {
+  display: inline-block !important; }
+
+.inline-block-xs {
+  display: inline-block !important; }
+
+@media (max-width: 47.99em) {
+  .inline-block-xs-only {
+    display: inline-block !important; } }
+@media (min-width: 48em) {
+  .inline-block-s {
+    display: inline-block !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .inline-block-s-only {
+    display: inline-block !important; } }
+@media (min-width: 62em) {
+  .inline-block-m {
+    display: inline-block !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .inline-block-m-only {
+    display: inline-block !important; } }
+@media (min-width: 75em) {
+  .inline-block-l {
+    display: inline-block !important; } }
+.inline {
+  display: inline !important; }
+
+.inline-xs {
+  display: inline !important; }
+
+@media (max-width: 47.99em) {
+  .inline-xs-only {
+    display: inline !important; } }
+@media (min-width: 48em) {
+  .inline-s {
+    display: inline !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .inline-s-only {
+    display: inline !important; } }
+@media (min-width: 62em) {
+  .inline-m {
+    display: inline !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .inline-m-only {
+    display: inline !important; } }
+@media (min-width: 75em) {
+  .inline-l {
+    display: inline !important; } }
+/*
+ * Text align helpers
+ */
+.text-left {
+  text-align: left !important; }
+
+.text-xs-left {
+  text-align: left !important; }
+
+@media (max-width: 47.99em) {
+  .text-xs-left-only {
+    text-align: left !important; } }
+@media (min-width: 48em) {
+  .text-s-left {
+    text-align: left !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .text-s-left-only {
+    text-align: left !important; } }
+@media (min-width: 62em) {
+  .text-m-left {
+    text-align: left !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .text-m-left-only {
+    text-align: left !important; } }
+@media (min-width: 75em) {
+  .text-l-left {
+    text-align: left !important; } }
+.text-center {
+  text-align: center !important; }
+
+.text-xs-center {
+  text-align: center !important; }
+
+@media (max-width: 47.99em) {
+  .text-xs-center-only {
+    text-align: center !important; } }
+@media (min-width: 48em) {
+  .text-s-center {
+    text-align: center !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .text-s-center-only {
+    text-align: center !important; } }
+@media (min-width: 62em) {
+  .text-m-center {
+    text-align: center !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .text-m-center-only {
+    text-align: center !important; } }
+@media (min-width: 75em) {
+  .text-l-center {
+    text-align: center !important; } }
+.text-right {
+  text-align: right !important; }
+
+.text-xs-right {
+  text-align: right !important; }
+
+@media (max-width: 47.99em) {
+  .text-xs-right-only {
+    text-align: right !important; } }
+@media (min-width: 48em) {
+  .text-s-right {
+    text-align: right !important; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .text-s-right-only {
+    text-align: right !important; } }
+@media (min-width: 62em) {
+  .text-m-right {
+    text-align: right !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .text-m-right-only {
+    text-align: right !important; } }
+@media (min-width: 75em) {
+  .text-l-right {
+    text-align: right !important; } }
 /*
  * Image replacement
  */
@@ -2703,7 +2955,7 @@ pre {
   border: 0;
   overflow: hidden; }
   .ir:before {
-    content: '';
+    content: "";
     display: block;
     height: 150%;
     width: 0; }
@@ -2727,10 +2979,10 @@ pre {
   padding: 0;
   position: absolute;
   width: 1px;
-  /*
-   * Extends the .visuallyhidden class to allow the element to be focusable
-   * when navigated to via the keyboard: h5bp.com/p
-   */ }
+    /*
+	 * Extends the .visuallyhidden class to allow the element to be focusable
+	 * when navigated to via the keyboard: h5bp.com/p
+	 */ }
   .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
     clip: auto;
     height: auto;
@@ -2744,58 +2996,6 @@ pre {
  */
 .invisible {
   visibility: hidden; }
-
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *	`contenteditable` attribute is included anywhere else in the document.
- *	Otherwise it causes space to appear at the top and bottom of elements
- *	that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *	`:before` to contain the top-margins of child elements.
- */
-.clearfix:before, .row:before, .alert:before, .btn-group:before, .tabs > ul:before, .clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
-  content: ' ';
-  /* 1 */
-  display: table;
-  /* 2 */ }
-.clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
-  clear: both; }
-
-/*
- * Float helpers
- */
-.push-left {
-  float: left !important; }
-
-.push-right {
-  float: right !important; }
-
-/*
- * Layout helpers
- */
-.block {
-  display: block !important; }
-
-.inline-block {
-  display: inline-block !important; }
-
-.inline {
-  display: inline !important; }
-
-/*
- * Text align helpers
- */
-.text-left {
-  text-align: left; }
-
-.text-center {
-  text-align: center; }
-
-.text-right {
-  text-align: right; }
 
 /*
  * Fade opacity with animation
@@ -2851,9 +3051,6 @@ pre {
 
   caption.visible-xs {
     display: table-caption !important; } }
-/*
- * 769 > viewport < 991px
- */
 @media (min-width: 48em) and (max-width: 61.99em) {
   .hidden-s {
     display: none !important; }
@@ -2862,7 +3059,7 @@ pre {
     display: block !important; }
 
   table.visible-s {
-    display: table !important; }
+    display: table; }
 
   thead.visible-s {
     display: table-header-group !important; }
@@ -2882,9 +3079,6 @@ pre {
 
   caption.visible-s {
     display: table-caption !important; } }
-/*
- * 992px > viewport < 1200px
- */
 @media (min-width: 62em) and (max-width: 74.99em) {
   .hidden-m {
     display: none !important; }
@@ -2893,7 +3087,7 @@ pre {
     display: block !important; }
 
   table.visible-m {
-    display: table !important; }
+    display: table; }
 
   thead.visible-m {
     display: table-header-group !important; }
@@ -2913,9 +3107,6 @@ pre {
 
   caption.visible-m {
     display: table-caption !important; } }
-/*
- * viewport > 1200px
- */
 @media (min-width: 75em) {
   .hidden-l {
     display: none !important; }
@@ -2924,7 +3115,7 @@ pre {
     display: block !important; }
 
   table.visible-l {
-    display: table !important; }
+    display: table; }
 
   thead.visible-l {
     display: table-header-group !important; }

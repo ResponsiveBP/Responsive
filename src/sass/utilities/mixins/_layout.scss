@@ -1,0 +1,32 @@
+﻿@mixin layout($bp, $layout) {
+    // XS doesn't have a min value.
+    @if $bp == xs {
+
+        .#{$layout}-#{$bp} {
+            display: $layout !important;
+        }
+
+        @include bp-max($bp) {
+            .#{$layout}-#{$bp}-only {
+                display: $layout !important;
+            }
+        }
+    }
+    @else {
+
+        @include bp-min($bp) {
+
+            .#{$layout}-#{$bp} {
+                display: $layout !important;
+            }
+            // Large doesn't need an "only" since it operates on min width.
+            @if $bp != l {
+                @include bp-max($bp) {
+                    .#{$layout}-#{$bp}-only {
+                        display: $layout !important;
+                    }
+                }
+            }
+        }
+    }
+}

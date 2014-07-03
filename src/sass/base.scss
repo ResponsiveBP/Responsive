@@ -1,7 +1,11 @@
 // Utilities
 @import "utilities/variables";
-@import "utilities/functions";
-@import "utilities/mixins";
+@import "utilities/mixins/breakpoints";
+@import "utilities/mixins/grid";
+@import "utilities/mixins/push";
+@import "utilities/mixins/layout";
+@import "utilities/mixins/text-align";
+@import "utilities/mixins/visibility";
 
 // Base Styles
 @import "partials/copyright";
@@ -12,25 +16,25 @@
 @import "partials/grid";
 
 // CSS Components
-@import	"partials/lists";
-@import	"partials/tables";
 @import	"partials/alerts";
-@import	"partials/media";
-@import	"partials/forms";
 @import	"partials/buttons";
 @import	"partials/code";
+@import	"partials/forms";
+@import	"partials/lists";
+@import	"partials/media";
+@import	"partials/tables";
 
 // JS Plugins
-@import	"partials/dropdown";
 @import	"partials/autosize";
 @import	"partials/carousel";
-@import	"partials/tabs";
+@import	"partials/dropdown";
 @import	"partials/lightbox";
 @import	"partials/tablelist";
+@import	"partials/tabs";
 
 // Helpers
-@import "partials/helpers-base";
-@import "partials/helpers";
+@import "partials/helpers-layout";
+@import "partials/helpers-visibility";
 
 // Print Styles
 @import "partials/print";
