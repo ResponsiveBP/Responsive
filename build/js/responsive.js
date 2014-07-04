@@ -37,7 +37,7 @@
         }
 
         return text;
-    }
+    };
 
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
@@ -2353,6 +2353,12 @@
         eshow = "show" + ns,
         eshown = "shown" + ns;
 
+    var keys = {
+        SPACE: 32,
+        LEFT: 37,
+        RIGHT: 39
+    };
+
     // Private methods.
     var tab = function (activePosition, postion, callback) {
 
@@ -2499,11 +2505,34 @@
 
     }).on(ekeyup, "[data-tabs] > ul > li > a", function (event) {
 
-        // Ignore anything but spacebar.
-        if (event.which === 32) {
-            this.click();
-        }
+        var which = event.which;
 
+        // Ignore anything but spacebar.
+        if (which === keys.SPACE) {
+            this.click();
+        } else if (which === keys.LEFT || which === keys.RIGHT) {
+
+            var $this = $(this),
+                $li = $this.parent(),
+                $all = $li.siblings().addBack(),
+                length = $all.length,
+                $tabs = $this.parents("[data-tabs]:first"),
+                index = $li.index();
+
+            // Ensure that the index stays within bounds.
+            index = which === keys.LEFT ? index - 1 : index + 1;
+
+            if (index === length) {
+                index = 0;
+            }
+
+            if (index < 0) {
+                index = length - 1;
+            }
+
+            $all.eq(index).children().focus();
+            $tabs.tabs(index);
+        }
     });
 
     w.RESPONSIVE_TABS = true;

@@ -37,7 +37,7 @@
         }
 
         return text;
-    }
+    };
 
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
