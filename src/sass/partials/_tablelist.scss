@@ -1,65 +1,79 @@
 @include bp(xs) {
-
-	/*
-	 * Basic layout.
+    /*
+	 * Force the columns to display as rows on small viewports.
+     * Headers are applied with data attributes.
 	 */
-	[data-table-list] { opacity: 0; }
+    [data-table-list] {
+        opacity: 0;
+    }
 
-	.table-list {
-		display: block;
+    .table-list {
+        display: block;
 
-		thead,
-		tfoot,
-		th { display: none; }
+        thead,
+        tfoot,
+        th {
+            position: absolute;
+            clip: rect(0 0 0 0);
+            overflow: hidden;
+            visibility: hidden;
+        }
 
-		tbody,
-		tr,
-		td,
-		th[scope=row] { display: block; }
+        tbody,
+        tr,
+        td,
+        th[scope=row] {
+            position: static;
+            display: block;
+            overflow: visible;
+            visibility: visible;
+        }
 
-		tr {
-			&:before,
-			&:after {
-				content: ' ';
-				display: table;
-			}
+        tr {
+            &:before,
+            &:after {
+                content: "";
+                display: table;
+            }
 
-			&:after { clear: both; }
-		}
+            &:after {
+                clear: both;
+            }
+        }
 
-		td,
-		th[scope=row] {
-			float: left;
-			width: 100%;
-		}
+        td,
+        th[scope=row] {
+            float: left;
+            width: 100%;
+        }
 
-		td {
-			&:before,
-			&:after {
-				content: attr(data-thead);
-				display: block;
-				font-weight: bold;
-				padding: .5em 0;
-			}
-		}
+        td {
+            &:before,
+            &:after {
+                content: attr(data-thead);
+                display: block;
+                padding: .5em 0;
+                font-weight: bold;
+            }
+        }
 
-		th[scope=row] {
-			&:before,
-			&:after {
-				content: attr(data-thead);
-				display: block;
-				font-weight: bold;
-				padding: .5em 0;
-			}
-		}
+        th[scope=row] {
+            &:before,
+            &:after {
+                content: attr(data-thead);
+                display: block;
+                padding: .5em 0;
+                font-weight: bold;
+            }
+        }
 
-		td:after,
-		th[scope=row]:after { content: attr(data-tfoot); }
+        td:after,
+        th[scope=row]:after {
+            content: attr(data-tfoot);
+        }
 
-        /*
-         * Bordered
-         */
-		&.table-bordered { border-top-style: none; }
-	}
-
+        &.table-bordered {
+            border-top-style: none;
+        }
+    }
 }

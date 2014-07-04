@@ -11,6 +11,7 @@ $selection-background: #b3d4fc !default;
 //##
 $grid-container-width: 1140px !default;
 $grid-column-gutter: 2% !default;
+$grid-column-count: 12!default;
 
 // Breakpoints. These have been carefully considered so it
 // is recommended to leave them as they are.
@@ -30,7 +31,7 @@ $horizontal-rule-color: #c0c0c0 !default;
 
 // Tables
 $table-bordered-border: 1px solid #c0c0c0 !default;
-$table-striped-background-color: #e7e7e7 !default;
+$table-striped-background-color: #ebebeb !default;
 
 //==
 // CSS Components
@@ -93,6 +94,9 @@ $lightbox-control-color-hover: #fff !default;
 $lightbox-control-background-color-hover: transparent !default;
 $lightbox-control-border-hover: none !default;
 $lightbox-control-text-decoration-hover: underline !default;
+
+$lightbox-control-background-color-active: transparent !default;
+
 
 // Carousel
 $carousel-caption-background-color: #222 !default;

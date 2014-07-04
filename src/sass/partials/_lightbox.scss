@@ -161,6 +161,10 @@ x::-ms-reveal,
         text-decoration: $lightbox-control-text-decoration-hover;
         background-color: $lightbox-control-background-color-hover;
     }
+
+    &:active {
+        background-color: $lightbox-control-background-color-active;
+    }
 }
 
 .lightbox-direction {
@@ -192,5 +196,9 @@ x::-ms-reveal,
         border: $lightbox-control-border-hover;
         color: $lightbox-control-color;
         text-decoration: $lightbox-control-text-decoration-hover;
+    }
+
+    &:active {
+        background-color: $lightbox-control-background-color-active;
     }
 }

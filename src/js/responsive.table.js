@@ -38,8 +38,7 @@
             return;
         }
 
-        var supportTransition = $.support.transition,
-            self = this,
+        var self = this,
             addEvent = $.Event(eadd),
             complete = function () {
                 self.$element.trigger($.Event(eadded));
@@ -70,12 +69,10 @@
             });
         });
 
-        this.$element.addClass("fade-in").redraw();
+        this.$element.redraw().addClass("fade-in");
 
         // Do our callback
-        supportTransition ? this.$element.one(supportTransition.end, complete)
-        .ensureTransitionEnd(this.$element.css("transition-duration").slice(0, -1) * 1000)
-        : complete();
+        this.$element.onTransitionEnd(complete);
     };
 
     // Plug-in definition 

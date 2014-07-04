@@ -15,6 +15,7 @@
     // General variables.
     var eready = "ready" + ns,
         eclick = "click" + ns,
+        ekeyup = "keyup" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns;
 
@@ -37,8 +38,8 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active");
-        $nextTab.addClass("tab-active");
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false });
+        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true });
 
         // Do some class shuffling to allow the transition.
         $currentPane.addClass("fade-out fade-in");
@@ -58,6 +59,31 @@
 
         this.$element = $(element);
         this.tabbing = null;
+
+        // Add accessibility features.
+        var $tablist = this.$element.children("ul:first").attr("role", "tablist"),
+            $triggers = $tablist.children().attr("role", "presentation"),
+            $panes = this.$element.children(":not(ul)"),
+            id = $.pseudoUnique();
+
+        $triggers.each(function (index) {
+            var $this = $(this),
+                $tab = $this.children("a");
+            $tab.attr({
+                "role": "tab",
+                "id": "tab-" + id + "-" + index,
+                "aria-controls": "pane-" + id + "-" + index,
+                "aria-selected": $this.hasClass("tab-active") ? true : false
+            });
+        });
+
+        $panes.each(function (index) {
+            $(this).attr({
+                "role": "tabpanel",
+                "id": "pane-" + id + "-" + index,
+                "aria-labelledby": "tab-" + id + "-" + index
+            });
+        });
     };
 
     Tabs.prototype.show = function (position) {
@@ -136,6 +162,14 @@
             index = $li.index();
 
         $tabs.tabs(index);
+
+    }).on(ekeyup, "[data-tabs] > ul > li > a", function (event) {
+
+        // Ignore anything but spacebar.
+        if (event.which === 32) {
+            this.click();
+        }
+
     });
 
     w.RESPONSIVE_TABS = true;

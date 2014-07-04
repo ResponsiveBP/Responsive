@@ -24,9 +24,9 @@
         $img = null,
         $iframe = null,
         $content = null,
-        $close = $("<a/>").attr({ "href": "#", "title": "Close (Esc)", "role": "button" }).addClass("lightbox-close fade-out").html("x"),
-        $previous = $("<a/>").attr({ "href": "#", "title": "Previous (Left Arrow)", "role": "button" }).addClass("lightbox-direction left hidden"),
-        $next = $("<a/>").attr({ "href": "#", "title": "Next (Right Arrow)", "role": "button" }).addClass("lightbox-direction right hidden"),
+        $close = $("<button/>").attr({ "title": "Close (Esc)", "type": "button" }).addClass("lightbox-close fade-out").html("x"),
+        $previous = $("<button/>").attr({ "title": "Previous (Left Arrow)", "type": "button" }).addClass("lightbox-direction left hidden"),
+        $next = $("<button/>").attr({ "title": "Next (Right Arrow)", "type": "button" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         scrollbarWidth = 0,
         lastScroll = 0,
@@ -116,8 +116,11 @@
         // 1: Build the header
         if (title || !modal) {
 
-            $header.html(title ? "<div class=\"container\"><h2>" + title + "</h2></div>" : "")
-                   .appendTo($overlay);
+            if (title) {
+                var id = "modal-label-" + $.pseudoUnique();
+                $header.html("<div class=\"container\"><h2 id=\"" + id + "\">" + title + "</h2></div>")
+                       .appendTo($overlay.attr({ "aria-labelledby": id }));
+            }
 
             if (!modal) {
                 $close.appendTo($overlay);
@@ -260,6 +263,9 @@
                 $header.empty().detach();
                 $footer.empty().detach();
                 $close.detach();
+
+                // Remove label.
+                $overlay.removeAttr("aria-labelledby");
 
                 // Clean up the lightbox.
                 $next.detach();

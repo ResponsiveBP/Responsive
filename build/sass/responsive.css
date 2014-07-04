@@ -2136,7 +2136,9 @@ a img {
   border: none; }
 
 /*
- * Properly scale your video on any device based on YouTube/Dailymotion ratio.
+ * Properly scale your video on any device based on common ratios.
+ * The code here is based on research and work by Theirry Koblentz, Anders Andersen, 
+ * Niklaus Gerber, and Jeff Hobbs.
  */
 .media {
   height: 0;
@@ -2146,31 +2148,7 @@ a img {
   overflow: hidden;
   padding-bottom: 56.25%;
   padding-top: 30px;
-  position: relative;
-  /*
-   * Widescreen mode.
-   */
-  /*
-   * Vimeo places the controls on the player itself.
-   */
-  /*
-   * Instagram
-   */
-  /*
-   * Vine
-   */
-  /*
-   * Getty
-   */
-  /*
-   * The actual player.
-   */
-  /*
-   * Position the image absolutely and then move it's four positions
-   * 1000000% out of the container. This with an auto margin is the core of the trick.
-   * Why such a large number? Firefox seems to have issue when using larger images even
-   * at 100%.
-   */ }
+  position: relative; }
   .media.widescreen {
     padding-bottom: 45%; }
   .media.vimeo {
@@ -2185,7 +2163,7 @@ a img {
     padding-bottom: 100%; }
   .media.getty {
     height: auto;
-    padding-bottom: 79.96632996632997%; }
+    padding-bottom: 79.9663%; }
   .media.video {
     padding-top: 0; }
   .media iframe,
@@ -2203,6 +2181,12 @@ a img {
     top: 0;
     width: 100%; }
   .media img {
+        /*
+	     * Position the image absolutely and then move it's four positions
+	     * 1000000% out of the container. This with an auto margin is the core of the trick.
+	     * Why such a large number? Firefox seems to have issue when using larger images even
+	     * at 100%.
+	     */
     bottom: -1000000%;
     left: -1000000%;
     margin: auto;
@@ -2210,13 +2194,9 @@ a img {
     right: -1000000%;
     top: -1000000%;
     width: 100%; }
-
-/*
- *  Scrollable media
- */
-.media-scroll {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; }
+  .media.media-scroll {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
 
 /*
  *  Make it responsive
@@ -2253,7 +2233,7 @@ table {
 .table-striped tbody > tr:nth-child(odd) > th,
 .table-row-alt > td,
 .table-row-alt > th {
-  background-color: #e7e7e7; }
+  background-color: #ebebeb; }
 
 /*
  * Overflow helpers
@@ -2623,6 +2603,8 @@ x::-ms-reveal,
     color: white;
     text-decoration: underline;
     background-color: transparent; }
+  .lightbox-close:active {
+    background-color: transparent; }
 
 .lightbox-direction, .lightbox-direction:visited {
   position: fixed;
@@ -2647,30 +2629,36 @@ x::-ms-reveal,
   border: none;
   color: white;
   text-decoration: underline; }
+.lightbox-direction:active {
+  background-color: transparent; }
 
 @media (max-width: 47.99em) {
-  /*
-   * Basic layout.
-   */
+    /*
+	 * Force the columns to display as rows on small viewports.
+     * Headers are applied with data attributes.
+	 */
   [data-table-list] {
     opacity: 0; }
 
   .table-list {
-    display: block;
-    /*
-     * Bordered
-     */ }
+    display: block; }
     .table-list thead,
     .table-list tfoot,
     .table-list th {
-      display: none; }
+      position: absolute;
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+      visibility: hidden; }
     .table-list tbody,
     .table-list tr,
     .table-list td,
     .table-list th[scope=row] {
-      display: block; }
+      position: static;
+      display: block;
+      overflow: visible;
+      visibility: visible; }
     .table-list tr:before, .table-list tr:after {
-      content: ' ';
+      content: "";
       display: table; }
     .table-list tr:after {
       clear: both; }
@@ -2681,13 +2669,13 @@ x::-ms-reveal,
     .table-list td:before, .table-list td:after {
       content: attr(data-thead);
       display: block;
-      font-weight: bold;
-      padding: .5em 0; }
+      padding: .5em 0;
+      font-weight: bold; }
     .table-list th[scope=row]:before, .table-list th[scope=row]:after {
       content: attr(data-thead);
       display: block;
-      font-weight: bold;
-      padding: .5em 0; }
+      padding: .5em 0;
+      font-weight: bold; }
     .table-list td:after,
     .table-list th[scope=row]:after {
       content: attr(data-tfoot); }
@@ -2695,36 +2683,35 @@ x::-ms-reveal,
       border-top-style: none; } }
 .tabs {
   position: relative; }
-  .tabs > * {
-    display: none; }
   .tabs > ul {
-    border-bottom: 1px solid silver;
     list-style: none;
+    border-bottom: 1px solid silver;
     margin-top: 0;
     padding: 0; }
     .tabs > ul > li {
       float: left;
       margin-bottom: -1px; }
       .tabs > ul > li > a {
-        border: 1px solid transparent;
-        cursor: pointer;
         display: block;
         line-height: 2em;
         margin-right: .2em;
-        outline: none;
         padding: 0 1em;
-        text-decoration: none; }
+        border: 1px solid transparent;
+        text-decoration: none;
+        cursor: pointer; }
         .tabs > ul > li > a:hover {
           background-color: #ebebeb;
           border-color: silver; }
       .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
         background-color: white;
-        border-bottom-color: transparent;
         border: 1px solid silver;
+        border-bottom-color: transparent;
         color: #454545;
         cursor: default; }
+  .tabs > * {
+    display: none; }
   .tabs > ul,
-  .tabs > .tab-pane-active {
+  .tabs .tab-pane-active {
     display: block; }
 
 /*

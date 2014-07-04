@@ -46,18 +46,18 @@
 //##
 @mixin grid-columns($bp) {
     // Calculate column width and width with gutter.
-    $column-width: (100% / 12);
-    $column-width-with-gutter: (100% - ($grid-column-gutter * 11)) / 12;
+    $column-width: (100% / $grid-column-count);
+    $column-width-with-gutter: (100% - ($grid-column-gutter * ($grid-column-count - 1 ))) / $grid-column-count;
 
     // Loop through and set width.
-    @for $i from 1 to 13 {
+    @for $i from 1 to ($grid-column-count + 1) {
         $temp-width: $column-width-with-gutter * $i + ($grid-column-gutter * $i);
 
         .col-#{$bp}-#{$i} {
             width: $temp-width - $grid-column-gutter;
         }
         // We don't want add offsets etc to full width columns.
-        @if $i != 12 {
+        @if $i != $grid-column-count {
             .offset-#{$bp}-#{$i} {
                 margin-left: $temp-width;
             }

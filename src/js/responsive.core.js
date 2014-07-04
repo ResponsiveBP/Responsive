@@ -18,6 +18,27 @@
 
     "use strict";
 
+    $.pseudoUnique = function (length) {
+        /// <summary>Returns a pseudo unique alpha-numeric string of the given length.</summary>
+        /// <param name="length" type="Number">The length of the string to return. Defaults to 8.</param>
+        /// <returns type="String">The pseudo unique alpha-numeric string.</returns>
+
+        var len = length || 8,
+            text = "",
+            possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+            max = possible.length;
+
+        if (len > max) {
+            len = max;
+        }
+
+        for (var i = 0; i < len; i += 1) {
+            text += possible.charAt(Math.floor(Math.random() * max));
+        }
+
+        return text;
+    }
+
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>
