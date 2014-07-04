@@ -2378,13 +2378,13 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true });
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
+        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 });
 
         // Do some class shuffling to allow the transition.
         $currentPane.addClass("fade-out fade-in");
-        $nextPane.addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").removeClass("tab-pane-active fade-in");
+        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
+        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
 
         // Force redraw.
         $nextPane.redraw().addClass("fade-in");
@@ -2413,15 +2413,15 @@
                 "role": "tab",
                 "id": "tab-" + id + "-" + index,
                 "aria-controls": "pane-" + id + "-" + index,
-                "aria-selected": $this.hasClass("tab-active") ? true : false
+                "aria-selected": $this.hasClass("tab-active") ? true : false,
+                "tabIndex": $this.hasClass("tab-active") ? 0 : -1
             });
-        });
 
-        $panes.each(function (index) {
-            $(this).attr({
+            $panes.eq(index).attr({
                 "role": "tabpanel",
                 "id": "pane-" + id + "-" + index,
-                "aria-labelledby": "tab-" + id + "-" + index
+                "aria-labelledby": "tab-" + id + "-" + index,
+                "tabIndex": $this.hasClass("tab-active") ? 0 : -1
             });
         });
     };
