@@ -1199,6 +1199,7 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        eready = "ready" + ns,
         eclick = "click" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
@@ -1249,6 +1250,11 @@
 
         if (this.options.parent) {
             this.$parent = this.$element.parents(this.options.parent + ":first");
+        }
+
+        // Add accessibility features.
+        if (this.$parent) {
+            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" });
         }
 
         // Check to see if the plug-in is set to toggle and trigger 
@@ -1354,11 +1360,23 @@
         return this;
     };
 
+    $(document).on(eready, function () {
+        var $this = $(this),
+            data = $this.data("r.dropdownOptions"),
+            options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
+            target = options.target || (options.target = $this.attr("href")),
+            $target = $(target);
+
+        // Run the dropdown method.
+        $target.dropdown(options);
+    });
+
     // Dropdown data api initialization.
     $("body").on(eclick, ":attrStart(data-dropdown)", function (event) {
 
         event.preventDefault();
 
+        // Load this again on click to cater for dynamically added components.
         var $this = $(this),
             data = $this.data("r.dropdownOptions"),
             options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
@@ -2354,7 +2372,6 @@
         eshown = "shown" + ns;
 
     var keys = {
-        SPACE: 32,
         LEFT: 37,
         RIGHT: 39
     };
@@ -2507,10 +2524,8 @@
 
         var which = event.which;
 
-        // Ignore anything but spacebar.
-        if (which === keys.SPACE) {
-            this.click();
-        } else if (which === keys.LEFT || which === keys.RIGHT) {
+        // Ignore anything but left and right.
+       if (which === keys.LEFT || which === keys.RIGHT) {
 
             var $this = $(this),
                 $li = $this.parent(),

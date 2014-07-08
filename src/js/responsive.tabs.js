@@ -20,7 +20,6 @@
         eshown = "shown" + ns;
 
     var keys = {
-        SPACE: 32,
         LEFT: 37,
         RIGHT: 39
     };
@@ -173,10 +172,8 @@
 
         var which = event.which;
 
-        // Ignore anything but spacebar.
-        if (which === keys.SPACE) {
-            this.click();
-        } else if (which === keys.LEFT || which === keys.RIGHT) {
+        // Ignore anything but left and right.
+       if (which === keys.LEFT || which === keys.RIGHT) {
 
             var $this = $(this),
                 $li = $this.parent(),
