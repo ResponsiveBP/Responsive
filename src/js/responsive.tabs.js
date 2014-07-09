@@ -44,7 +44,7 @@
         this.tabbing = true;
 
         $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 });
+        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 }).focus();
 
         // Do some class shuffling to allow the transition.
         $currentPane.addClass("fade-out fade-in");
@@ -74,6 +74,7 @@
         $triggers.each(function (index) {
             var $this = $(this),
                 $tab = $this.children("a");
+
             $tab.attr({
                 "role": "tab",
                 "id": "tab-" + id + "-" + index,
@@ -121,8 +122,37 @@
         });
     };
 
+    Tabs.prototype.keyup = function (event) {
+
+        var which = event.which;
+
+        // Ignore anything but left and right.
+        if (which === keys.LEFT || which === keys.RIGHT) {
+
+            var $this = $(event.target),
+                $li = $this.parent(),
+                $all = $li.siblings().addBack(),
+                length = $all.length,
+                index = $li.index();
+
+            // Ensure that the index stays within bounds.
+            index = which === keys.LEFT ? index - 1 : index + 1;
+
+            if (index === length) {
+                index = 0;
+            }
+
+            if (index < 0) {
+                index = length - 1;
+            }
+
+            this.show(index);
+        }
+
+    };
+
     // Plug-in definition 
-    $.fn.tabs = function (options) {
+    $.fn.tabs = function (options, event) {
 
         return this.each(function () {
 
@@ -137,6 +167,10 @@
             // Show the given number.
             if (typeof options === "number") {
                 data.show(options);
+            }
+
+            if (options === "keyup") {
+                data.keyup(event);
             }
 
         });
@@ -157,45 +191,21 @@
         $("[data-tabs]").tabs();
     });
 
-    $(document).on(eclick, "[data-tabs] > ul > li > a", function (event) {
+    $(document).on(eclick, "ul[role=tablist] [role=tab]", function (event) {
 
         event.preventDefault();
 
         var $this = $(this),
             $li = $this.parent(),
-            $tabs = $this.parents("[data-tabs]:first"),
+            $tabs = $this.closest("[data-tabs], .tabs"),
             index = $li.index();
 
         $tabs.tabs(index);
 
-    }).on(ekeyup, "[data-tabs] > ul > li > a", function (event) {
+    }).on(ekeyup, "ul[role=tablist] [role=tab]", function (event) {
 
-        var which = event.which;
+        $(this).closest("[data-tabs], .tabs").tabs("keyup", event);
 
-        // Ignore anything but left and right.
-       if (which === keys.LEFT || which === keys.RIGHT) {
-
-            var $this = $(this),
-                $li = $this.parent(),
-                $all = $li.siblings().addBack(),
-                length = $all.length,
-                $tabs = $this.parents("[data-tabs]:first"),
-                index = $li.index();
-
-            // Ensure that the index stays within bounds.
-            index = which === keys.LEFT ? index - 1 : index + 1;
-
-            if (index === length) {
-                index = 0;
-            }
-
-            if (index < 0) {
-                index = length - 1;
-            }
-
-            $all.eq(index).children().focus();
-            $tabs.tabs(index);
-        }
     });
 
     w.RESPONSIVE_TABS = true;

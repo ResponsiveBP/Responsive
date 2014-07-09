@@ -2410,7 +2410,6 @@ table {
   display: block; }
   .accordion-head a {
     display: block;
-    outline: none;
     padding: .5em; }
 
 .accordion-body {
