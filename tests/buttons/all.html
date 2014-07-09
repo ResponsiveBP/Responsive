@@ -29,7 +29,6 @@
             <p>
                 Button states are:
                 <code>:hover</code>, <code>:focus</code>, <code>:active</code>, and <code>:disabled</code>.
-                Hyperlinks disabled state are styled by adding the class <code>.disabled</code>.
             </p>
             <div class="col-s-6">
                 <div>
@@ -48,11 +47,6 @@
                     <h3>Input : Submit </h3>
                     <p>Standard <code>input[type="submit"]</code> element.</p>
                     <input type="submit" value="button" />
-                </div>
-                <div>
-                    <h3>Link</h3>
-                    <p>Standard <code>a[role="button]</code> element.</p>
-                    <a href="#" role="button">button</a>
                 </div>
             </div>
         </section>
@@ -74,11 +68,6 @@
                     <h3>Input : Submit</h3>
                     <p>Standard <code>input[type="submit"]</code> element.</p>
                     <input type="submit" value="button" disabled />
-                </div>
-                <div>
-                    <h3>Link</h3>
-                    <p>Standard <code>a[role="button]</code> element.</p>
-                    <a href="#" role="button" class="disabled">button</a>
                 </div>
             </div>
             <div class="col-s-6">
@@ -102,24 +91,42 @@
                     <input type="text" class="inline-block" />
                     <input type="submit" value="submit" class="btn-inline" />
                 </div>
-                <div>
-                    <h3>Link</h3>
-                    <p>Standard <code>a[role="button]</code> element.</p>
-                    <input type="text" class="inline-block" />
-                    <a href="#" role="button" class="btn-inline">submit</a>
-                </div>
             </div>
         </section>
         <hr />
         <section class="row">
-            <h3>Grouped Buttons</h3>
+            <h2>Grouped Buttons</h2>
+            <p>Wrap the buttons in a div with class <code>.btn-group</code></p>
             <div class="col-s-6">
-                <p>Wrap the buttons in a div with class <code>.btn-group</code></p>
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <div class="btn-group">
+                        <button>first</button>
+                        <button>second</button>
+                        <button>third</button>
+                        <button>fourth</button>
+                    </div>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <div class="btn-group">
+                        <input type="button" value="first" />
+                        <input type="button" value="second" />
+                        <input type="button" value="third" />
+                        <input type="button" value="fourth" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-s-6">
+                <h3>Input : Submit</h3>
+                <p>Standard <code>input[type="submit"]</code> element.</p>
                 <div class="btn-group">
-                    <a href="#" role="button">first</a>
-                    <a href="#" role="button">second</a>
-                    <a href="#" role="button">third</a>
-                    <a href="#" role="button">fourth</a>
+                    <input type="submit" value="first" />
+                    <input type="submit" value="second" />
+                    <input type="submit" value="third" />
+                    <input type="submit" value="fourth" />
                 </div>
             </div>
         </section>
@@ -134,11 +141,5 @@
     <!--<![endif]-->
 
     <script src="../../build/js/responsive.js"></script>
-
-
-
-
-
-
 </body>
 </html>

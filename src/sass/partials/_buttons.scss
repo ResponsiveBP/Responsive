@@ -6,9 +6,7 @@
 button,
 input[type=submit],
 input[type=button],
-input[type=reset],
-[role=button],
-.button {
+input[type=reset] {
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
     color: inherit;
@@ -48,23 +46,13 @@ input[type=reset],
     }
 }
 
-[role=button] {
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration: none;
-    }
-}
-
 /*
  * 1. Fix IOS 6/7 opacity issue
  */
 button[disabled],
 input[type=submit][disabled],
 input[type=button][disabled],
-input[type=reset][disabled],
-[role=button].disabled,
-.button.disabled {
+input[type=reset][disabled] {
     background-color: lighten($button-background, 5);
     color: $button-color-disabled;
     cursor: not-allowed;

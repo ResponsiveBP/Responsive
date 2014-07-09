@@ -1605,9 +1605,7 @@ abbr {
 button,
 input[type=submit],
 input[type=button],
-input[type=reset],
-[role=button],
-.button {
+input[type=reset] {
   -webkit-appearance: none;
   /* 1 */
   border-radius: 0;
@@ -1632,39 +1630,28 @@ input[type=reset],
   button:hover,
   input[type=submit]:hover,
   input[type=button]:hover,
-  input[type=reset]:hover,
-  [role=button]:hover,
-  .button:hover {
+  input[type=reset]:hover {
     background-color: #cdcdcd; }
   button:focus,
   input[type=submit]:focus,
   input[type=button]:focus,
-  input[type=reset]:focus,
-  [role=button]:focus,
-  .button:focus {
+  input[type=reset]:focus {
     outline: 1px solid #00a9ec;
     outline-offset: -1px; }
   button:active,
   input[type=submit]:active,
   input[type=button]:active,
-  input[type=reset]:active,
-  [role=button]:active,
-  .button:active {
+  input[type=reset]:active {
     background-color: #e7e7e7;
     outline: none; }
   button.btn-inline,
   input[type=submit].btn-inline,
   input[type=button].btn-inline,
-  input[type=reset].btn-inline,
-  [role=button].btn-inline,
-  .button.btn-inline {
+  input[type=reset].btn-inline {
     margin-left: -.27em;
     /* 1 */
     padding: .25em 1em;
     /* 2 */ }
-
-[role=button]:hover, [role=button]:focus, [role=button]:active {
-  text-decoration: none; }
 
 /*
  * 1. Fix IOS 6/7 opacity issue
@@ -1672,9 +1659,7 @@ input[type=reset],
 button[disabled],
 input[type=submit][disabled],
 input[type=button][disabled],
-input[type=reset][disabled],
-[role=button].disabled,
-.button.disabled {
+input[type=reset][disabled] {
   background-color: #e7e7e7;
   color: #5d5d5d;
   cursor: not-allowed;
