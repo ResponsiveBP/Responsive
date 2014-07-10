@@ -2248,6 +2248,15 @@ table {
   -webkit-transition: height .3s linear;
           transition: height .3s linear; }
 
+.autosize-clone {
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+  visibility: hidden;
+  overflow: hidden;
+  -webkit-transition: none;
+          transition: none; }
+
 .carousel {
   margin-bottom: 1em;
   overflow: hidden;

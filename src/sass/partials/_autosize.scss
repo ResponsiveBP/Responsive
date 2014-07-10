@@ -3,3 +3,13 @@
     overflow: hidden;
     transition: height .3s linear;
 }
+
+.autosize-clone {
+    position: absolute;
+    top: -99999px;
+    // TODO: Ensure this is changed for rtl
+    left: -99999px;
+    visibility: hidden;
+    overflow: hidden;
+    transition: none;
+}

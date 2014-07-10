@@ -53,10 +53,11 @@
 
                     // Create a clone and offset it removing all specified attributes classes and data.
                     self.$clone = self.$element.clone()
-                                      .css({ "position": "absolute", "top": "-99999px", "left": "-99999px", "visibility": "hidden", "overflow": "hidden" })
                                       .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
                                       .removeAttr("id name data-autosize " + attributes)
                                       .removeClass(classes)
+                                      .removeClass(classes)
+                                      .addClass("autosize-clone")
                                       .insertAfter($element);
 
                     // jQuery goes spare if you try to remove null data.
