@@ -144,8 +144,8 @@ x::-ms-reveal,
 
 .lightbox-close {
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 1px;
+    right: 1px;
     z-index: 2;
     display: inline-block;
     padding: .83em;
@@ -157,13 +157,19 @@ x::-ms-reveal,
     text-decoration: $lightbox-control-text-decoration;
 
     &:hover {
+        border: none;
         color: $lightbox-control-color;
         text-decoration: $lightbox-control-text-decoration-hover;
         background-color: $lightbox-control-background-color-hover;
     }
 
     &:active {
+        border: none;
         background-color: $lightbox-control-background-color-active;
+    }
+
+    &:focus {
+        border: none;
     }
 }
 
@@ -189,6 +195,10 @@ x::-ms-reveal,
     &.right {
         left: auto;
         right: 0;
+    }
+
+    &:focus {
+        border: $lightbox-control-border;
     }
 
     &:hover {

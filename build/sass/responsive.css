@@ -2607,8 +2607,8 @@ x::-ms-reveal,
 
 .lightbox-close {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 1px;
+  right: 1px;
   z-index: 2;
   display: inline-block;
   padding: .83em;
@@ -2619,11 +2619,15 @@ x::-ms-reveal,
   color: white;
   text-decoration: none; }
   .lightbox-close:hover {
+    border: none;
     color: white;
     text-decoration: underline;
     background-color: transparent; }
   .lightbox-close:active {
+    border: none;
     background-color: transparent; }
+  .lightbox-close:focus {
+    border: none; }
 
 .lightbox-direction, .lightbox-direction:visited {
   position: fixed;
@@ -2643,6 +2647,8 @@ x::-ms-reveal,
 .lightbox-direction.right {
   left: auto;
   right: 0; }
+.lightbox-direction:focus {
+  border: none; }
 .lightbox-direction:hover {
   background-color: transparent;
   border: none;
