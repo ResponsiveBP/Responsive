@@ -14,8 +14,8 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        emouseenter = "mouseenter" + ns,
-        emouseleave = "mouseleave" + ns,
+        emouseenter = "mouseenter",
+        emouseleave = "mouseleave",
         eclick = "click" + ns,
         ekeydown = "keydown" + ns,
         eready = "ready" + ns,
@@ -177,7 +177,7 @@
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events.
-            // TODO: I don't think this should be here.
+            // Not namespaced as we want to keep behaviour when not using data api.
             if (!$.support.touchEvents && $.support.pointerEvents) {
                 this.$element.on(emouseenter, $.proxy(this.pause, this))
                     .on(emouseleave, $.proxy(this.cycle, this));

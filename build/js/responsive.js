@@ -439,17 +439,18 @@
     // General variables and methods.
     var resisizeTimer,
         eready = "ready" + ns,
-        eresize = "resize" + ns + " orientationchange" + ns,
-        ekeyup = "keyup" + ns,
-        epaste = "paste" + ns,
-        ecut = "cut" + ns,
+        eresize = "resize orientationchange",
+        ekeyup = "keyup",
+        epaste = "paste",
+        ecut = "cut",
         esize = "size" + ns,
         esized = "sized" + ns;
 
     // Private methods.
     var bindEvents = function () {
 
-        this.$element.on(ekeyup + " " + epaste + " " + ecut, function (event) {
+        // Not namespaced we want to keep the events when not using data-api.
+        this.$element.on([ekeyup, epaste, ecut].join(" "), function (event) {
 
             var $this = $(this),
                 delay = 0;
@@ -465,7 +466,6 @@
 
             }, delay);
         });
-
     },
         createClone = function () {
 
@@ -478,7 +478,7 @@
                     // Create a clone and offset it removing all specified attributes classes and data.
                     self.$clone = self.$element.clone()
                                       .css({ "position": "absolute", "top": "-99999px", "left": "-99999px", "visibility": "hidden", "overflow": "hidden" })
-                                      .attr({ "tabindex": -1, "rows": 2 })
+                                      .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
                                       .removeAttr("id name data-autosize " + attributes)
                                       .removeClass(classes)
                                       .insertAfter($element);
@@ -511,6 +511,8 @@
 
     AutoSize.prototype.size = function () {
 
+        console.log("sizing");
+
         var self = this,
             $element = this.$element,
             element = this.$element[0],
@@ -534,6 +536,8 @@
         // Set the height so animation will work.
         startHeight = $clone.height();
         $element.height(startHeight);
+
+        console.log(startHeight);
 
         // Shrink
         while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
@@ -598,20 +602,6 @@
         return this;
     };
 
-    // Data API
-    $(document).on(eready, function () {
-
-        $("textarea[data-autosize]").each(function () {
-
-            var $this = $(this),
-                data = $this.data("r.autosizeOptions"),
-                options = data || $.buildDataOptions($this, {}, "autosize", "r");
-
-            // Run the autosize method.
-            $this.autoSize(options);
-        });
-    });
-
     $(w).on(eresize, function () {
 
         if (resisizeTimer) {
@@ -620,16 +610,29 @@
 
         var resize = function () {
 
-            $("textarea[data-autosize]").each(function () {
+            $("textarea.autosize").each(function () {
 
                 var autosize = $(this).data("r.autosize");
 
                 if (autosize) { autosize.size(); }
-
             });
         };
 
         resisizeTimer = w.setTimeout(resize, 5);
+    });
+
+    // Data API
+    $(document).on(eready, function () {
+
+        $("textarea[data-autosize]").each(function () {
+
+            var $this = $(this).addClass("autosize"),
+                data = $this.data("r.autosizeOptions"),
+                options = data || $.buildDataOptions($this, {}, "autosize", "r");
+
+            // Run the autosize method.
+            $this.autoSize(options);
+        });
     });
 
     w.RESPONSIVE_AUTOSIZE = true;
@@ -651,8 +654,8 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        emouseenter = "mouseenter" + ns,
-        emouseleave = "mouseleave" + ns,
+        emouseenter = "mouseenter",
+        emouseleave = "mouseleave",
         eclick = "click" + ns,
         ekeydown = "keydown" + ns,
         eready = "ready" + ns,
@@ -814,7 +817,7 @@
 
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events.
-            // TODO: I don't think this should be here.
+            // Not namespaced as we want to keep behaviour when not using data api.
             if (!$.support.touchEvents && $.support.pointerEvents) {
                 this.$element.on(emouseenter, $.proxy(this.pause, this))
                     .on(emouseleave, $.proxy(this.cycle, this));
@@ -1628,7 +1631,7 @@
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         // Events
         eclick = "click" + ns,
-        ekeyup = "keyup" + ns,
+        ekeydown = "keydown" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -2110,11 +2113,12 @@
         }
     },
 
+    // TODO: This is all in the wrong place.
     manageKeyboard = function (event) {
         if (this.options.keyboard) {
 
             if (event === "hide") {
-                $body.off(ekeyup);
+                $body.off(ekeydown);
                 return;
             }
 
@@ -2122,7 +2126,7 @@
                 return;
             }
 
-            $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
+            $body.off(ekeydown).on(ekeydown, $.proxy(function (e) {
 
                 // Bind the escape key.
                 if (e.which === keys.ESCAPE) {

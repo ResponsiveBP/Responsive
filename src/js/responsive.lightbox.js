@@ -46,7 +46,7 @@
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         // Events
         eclick = "click" + ns,
-        ekeyup = "keyup" + ns,
+        ekeydown = "keydown" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -528,11 +528,12 @@
         }
     },
 
+    // TODO: This is all in the wrong place.
     manageKeyboard = function (event) {
         if (this.options.keyboard) {
 
             if (event === "hide") {
-                $body.off(ekeyup);
+                $body.off(ekeydown);
                 return;
             }
 
@@ -540,7 +541,7 @@
                 return;
             }
 
-            $body.off(ekeyup).on(ekeyup, $.proxy(function (e) {
+            $body.off(ekeydown).on(ekeydown, $.proxy(function (e) {
 
                 // Bind the escape key.
                 if (e.which === keys.ESCAPE) {
