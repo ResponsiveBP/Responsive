@@ -7,6 +7,12 @@ hr, input[type=search] {
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: $selection-focus-offset;
+}
+
 /*
  * IE10 in Windows (Phone) 8
  * Support for responsive views via media queries do not work in IE10 on mobile for

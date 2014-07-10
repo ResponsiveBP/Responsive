@@ -371,6 +371,11 @@ hr, input[type=search] {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
+*:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -1px; }
+
 /*
  * IE10 in Windows (Phone) 8
  * Support for responsive views via media queries do not work in IE10 on mobile for
@@ -1631,12 +1636,15 @@ input[type=reset] {
   input[type=submit]:hover,
   input[type=button]:hover,
   input[type=reset]:hover {
-    background-color: #cdcdcd; }
+    background-color: #cdcdcd;
+    border: solid 1px silver; }
   button:focus,
   input[type=submit]:focus,
   input[type=button]:focus,
   input[type=reset]:focus {
-    outline: 1px solid #00a9ec;
+    border: solid 1px silver;
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -1px; }
   button:active,
   input[type=submit]:active,
@@ -1790,7 +1798,7 @@ input,
   textarea:focus,
   input:focus,
   .no-edit:focus {
-    border-color: #00a9ec;
+    border-color: #a4c6fd;
     outline: 0; }
   select[disabled],
   textarea[disabled],
@@ -1844,18 +1852,18 @@ input {
     padding: 0;
     width: auto; }
   input[type=radio] {
-    border-color: transparent\9;
+    border-color: transparent \9;
     border-radius: 1em; }
   input[type=range] {
-    background-color: white \9;
-    border: 1px solid silver \9;
+    background-color: #fff \9;
+    border: 1px solid #c0c0c0 \9;
     border: 1px solid transparent;
     padding: .25em 0;
-    padding: .25em\9; }
+    padding: .25em \9; }
   input[type=range]:focus, input[type=checkbox]:focus, input[type=radio]:focus, input[type=checkbox]:checked {
     border-color: transparent;
     outline: 1px solid silver;
-    outline-color: #00a9ec;
+    outline-color: #a4c6fd;
     outline-offset: -1px; }
   input[type=checkbox]:focus, input[type=checkbox]:checked {
     border-color: #c0c0c0; }
@@ -2105,10 +2113,17 @@ video {
 
 /*
  * Make the image responsive.
+ * 1: Fix svg aspect scaling in IE
  */
 img {
   max-width: 100%;
   height: auto; }
+  img[src*=".svg"] {
+    width: 100% \9;
+    /* 1 */ }
+  imgx::-ms-reveal, img[src*=".svg"] {
+    width: 100%;
+    /* 1 */ }
 
 /*
  * Remove the border around images in anchors.
@@ -2261,6 +2276,19 @@ table {
     -webkit-transition: .7s ease-in-out -webkit-transform, .7s ease-in-out left;
             transition: .7s ease-in-out transform, .7s ease-in-out left;
     -webkit-transform: translate3d(0, 0, 0); }
+    .carousel > figure:focus:before {
+      content: "";
+      position: absolute;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #a4c6fd;
+      pointer-events: none; }
     .carousel > figure > img {
       display: block;
       width: 100%; }
@@ -2304,7 +2332,7 @@ table {
   .carousel .carousel-active,
   .carousel .next.left,
   .carousel .prev.right {
-    left: 0\9;
+    left: 0 \9;
     -webkit-transform: translateX(0);
         -ms-transform: translateX(0);
             transform: translateX(0); }
@@ -2341,9 +2369,9 @@ table {
     left: 0;
     /* 1 */ }
 
-.carousel-control, .carousel-control:visited {
+.carousel-control {
   position: absolute;
-  left: 0;
+  left: 1px;
   top: 40%;
   z-index: 3;
   display: block;
@@ -2352,15 +2380,17 @@ table {
   padding: .5em;
   font-size: 2em;
   font-weight: bold;
-  text-align: center;
-  color: white;
-  text-decoration: none; }
-.carousel-control.right {
-  left: auto;
-  right: 0; }
-.carousel-control:hover {
-  color: white;
-  text-decoration: underline; }
+  text-align: center; }
+  .carousel-control.right {
+    left: auto;
+    right: 1px; }
+  .carousel-control, .carousel-control:active, .carousel-control:visited, .carousel-control:hover, .carousel-control:focus {
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-decoration: none; }
+  .carousel-control:hover {
+    text-decoration: underline; }
 
 /*
  * Fade version
@@ -2380,7 +2410,7 @@ table {
 .carousel-fade > figure.next,
 .carousel-fade > figure.prev {
   z-index: 1;
-  left: 0\9;
+  left: 0 \9;
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
@@ -2392,7 +2422,7 @@ table {
 .carousel-fade .carousel-active {
   opacity: 1; }
   .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {
-    left: 0\9;
+    left: 0 \9;
     z-index: 2;
     -webkit-transform: none;
         -ms-transform: none;
@@ -2914,6 +2944,22 @@ x::-ms-reveal,
 @media (min-width: 75em) {
   .text-l-right {
     text-align: right !important; } }
+.grid-state-indicator {
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+  height: 1px;
+  width: 1px; }
+
+@media (min-width: 48em) {
+  .grid-state-indicator {
+    width: 2px; } }
+@media (min-width: 62em) {
+  .grid-state-indicator {
+    width: 3px; } }
+@media (min-width: 75em) {
+  .grid-state-indicator {
+    width: 4px; } }
 /*
  * Image replacement
  */

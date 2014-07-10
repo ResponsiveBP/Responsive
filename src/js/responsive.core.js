@@ -39,6 +39,26 @@
         return text;
     };
 
+    $.support.currentGrid = (function () {
+        /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
+        /// <returns type="String">Either xs, s, m, or l.</returns>
+
+        var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
+
+        return function () {
+
+            // These numbers match values in the css
+            var grids = {
+                1: "xs",
+                2: "s",
+                3: "m",
+                4: "l"
+            };
+
+            return grids[parseInt($div.width(), 10)];
+        };
+    }());
+
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
         /// <returns type="Boolean">True if the current browser supports css transitions.</returns>

@@ -18,6 +18,23 @@
         transition: .7s ease-in-out transform, .7s ease-in-out left;
         -webkit-transform: translate3d(0, 0, 0);
 
+        &:focus {
+
+            &:before {
+                content: "";
+                position: absolute;
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 1px solid $carousel-figure-border-color-focus;
+                pointer-events: none;
+            }
+        }
 
         > img {
             display: block;
@@ -86,7 +103,7 @@
     .carousel-active,
     .next.left,
     .prev.right {
-        left: 0\9;
+        left: 0 \9;
         transform: translateX(0);
     }
 
@@ -111,13 +128,13 @@
 
     .next,
     .carousel-active.right {
-        left: 100%\9;
+        left: 100% \9;
         transform: translateX(100%);
     }
 
     .prev,
     .carousel-active.left {
-        left: -100%\9;
+        left: -100% \9;
         transform: translateX(-100%);
     }
     /*
@@ -133,30 +150,35 @@
 }
 
 .carousel-control {
+    position: absolute;
+    left: 1px;
+    top: 40%;
+    z-index: 3;
+    display: block;
+    width: 2em;
+    margin-top: -1em;
+    padding: .5em;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+
+    &.right {
+        left: auto;
+        right: 1px;
+    }
+
     &,
-    &:visited {
-        position: absolute;
-        left: 0;
-        top: 40%;
-        z-index: 3;
-        display: block;
-        width: 2em;
-        margin-top: -1em;
-        padding: .5em;
-        font-size: 2em;
-        font-weight: bold;
-        text-align: center;
+    &:active,
+    &:visited,
+    &:hover,
+    &:focus {
+        background-color: transparent;
+        border: none;
         color: $carousel-control-color;
         text-decoration: none;
     }
 
-    &.right {
-        left: auto;
-        right: 0;
-    }
-
     &:hover {
-        color: $carousel-control-color;
         text-decoration: underline;
     }
 }
@@ -181,7 +203,7 @@
     > figure.next,
     > figure.prev {
         z-index: 1;
-        left: 0\9;
+        left: 0 \9;
         transform: none;
         opacity: 1;
     }
@@ -199,7 +221,7 @@
 
         &.left,
         &.right {
-            left: 0\9;
+            left: 0 \9;
             z-index: 2;
             transform: none;
             opacity: 0;

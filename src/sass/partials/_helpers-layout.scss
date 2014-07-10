@@ -79,7 +79,7 @@
  * Text align helpers
  */
 .text-left {
-    text-align: left!important;
+    text-align: left !important;
 }
 // XS, S, M, L viewports.
 @include text-align(xs, left);
@@ -88,7 +88,7 @@
 @include text-align(l, left);
 
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }
 // XS, S, M, L viewports.
 @include text-align(xs, center);
@@ -97,10 +97,23 @@
 @include text-align(l, center);
 
 .text-right {
-    text-align: right!important;
+    text-align: right !important;
 }
 // XS, S, M, L viewports.
 @include text-align(xs, right);
 @include text-align(s, right);
 @include text-align(m, right);
 @include text-align(l, right);
+
+// Grid state detection.
+.grid-state-indicator {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    height: 1px;
+    width: 1px;
+}
+// Breakpoint driven changes
+@include grid-state(s, 2px);
+@include grid-state(m, 3px);
+@include grid-state(l, 4px);

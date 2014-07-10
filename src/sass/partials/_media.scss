@@ -11,10 +11,20 @@ video {
 
 /*
  * Make the image responsive.
+ * 1: Fix svg aspect scaling in IE
  */
 img {
     max-width: 100%;
     height: auto;
+
+    &[src*=".svg"] {
+        width: 100% \9; /* 1 */
+    }
+
+    &x::-ms-reveal,
+    &[src*=".svg"] {
+        width: 100%; /* 1 */
+    }
 }
 
 /*

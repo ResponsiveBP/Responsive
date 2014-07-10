@@ -15,7 +15,7 @@
     var supportTransition = w.getComputedStyle && $.support.transition,
         eready = "ready" + ns,
         eclick = "click" + ns,
-        ekeyup = "keyup" + ns,
+        ekeydown = "keydown" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -194,7 +194,7 @@
         this[this.$element.hasClass("collapse") ? "show" : "hide"]();
     };
 
-    Dropdown.prototype.keyup = function (event) {
+    Dropdown.prototype.keydown = function (event) {
 
         var which = event.which;
 
@@ -276,21 +276,7 @@
             // Run the dropdown method.
             $target.dropdown(options);
         });
-    }).on(eclick, ":attrStart(data-dropdown)[role=tab]", function (event) {
-
-        event.preventDefault();
-
-        // Load this again on click to cater for dynamically added components.
-        var $this = $(this),
-            data = $this.data("r.dropdownOptions"),
-            options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
-            target = options.target || (options.target = $this.attr("href")),
-            $target = $(target);
-
-        // Run the dropdown method.
-        $target.dropdown("toggle");
-
-    }).on(ekeyup, ":attrStart(data-dropdown)[role=tab]", function (event) {
+    }).on(eclick + " " + ekeydown, ":attrStart(data-dropdown)[role=tab]", function (event) {
 
         var $this = $(this),
             data = $this.data("r.dropdownOptions"),
@@ -298,8 +284,15 @@
             target = options.target || (options.target = $this.attr("href")),
             $target = $(target);
 
-        $target.dropdown("keyup", event);
-
+        switch (event.type) {
+            case "click":
+                event.preventDefault();
+                $target.dropdown("toggle");
+                break;
+            case "keydown":
+                $target.dropdown("keydown", event);
+                break;
+        }
     });
 
     w.RESPONSIVE_DROPDOWN = true;

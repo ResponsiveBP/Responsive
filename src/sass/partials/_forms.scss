@@ -111,18 +111,18 @@ input {
     }
 
     &[type=radio] {
-        border-color: transparent\9;
+        border-color: transparent \9;
         border-radius: 1em;
     }
     /*
 	 * Add range styles for IE8 and IE9
 	 */
     &[type=range] {
-        background-color: #fff\9;
-        border: 1px solid #c0c0c0\9;
+        background-color: #fff \9;
+        border: 1px solid #c0c0c0 \9;
         border: 1px solid transparent;
         padding: .25em 0;
-        padding: .25em\9;
+        padding: .25em \9;
     }
 
     &[type=range]:focus,

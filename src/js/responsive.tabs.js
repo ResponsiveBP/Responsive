@@ -15,7 +15,7 @@
     // General variables.
     var eready = "ready" + ns,
         eclick = "click" + ns,
-        ekeyup = "keyup" + ns,
+        ekeydown = "keydown" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns;
 
@@ -122,7 +122,7 @@
         });
     };
 
-    Tabs.prototype.keyup = function (event) {
+    Tabs.prototype.keydown = function (event) {
 
         var which = event.which;
 
@@ -169,8 +169,8 @@
                 data.show(options);
             }
 
-            if (options === "keyup") {
-                data.keyup(event);
+            if (options === "keydown") {
+                data.keydown(event);
             }
 
         });
@@ -202,9 +202,9 @@
 
         $tabs.tabs(index);
 
-    }).on(ekeyup, "ul[role=tablist] [role=tab]", function (event) {
+    }).on(ekeydown, "ul[role=tablist] [role=tab]", function (event) {
 
-        $(this).closest("[data-tabs], .tabs").tabs("keyup", event);
+        $(this).closest("[data-tabs], .tabs").tabs("keydown", event);
 
     });
 

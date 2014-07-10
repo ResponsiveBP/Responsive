@@ -22,19 +22,20 @@ input[type=reset] {
 
     &:hover {
         background-color: darken($button-background, 5);
-        outline-color: $button-border-color-hover;
+        border: $button-border;
     }
 
     &:focus {
-        outline: 1px solid $button-outline-color-focus;
-        outline-offset: -1px;
+        border: $button-border;
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: $selection-focus-offset;
     }
 
     &:active {
         background-color: lighten($button-background, 5);
         outline: none;
     }
-
     /*
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.

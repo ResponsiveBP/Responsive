@@ -6,6 +6,9 @@ $base-text-color: #222 !default;
 // Selected text
 $selection-background: #b3d4fc !default;
 
+// Focused objects
+$selection-focus-offset: -1px !default;
+
 //==
 // Grid System
 //##
@@ -45,7 +48,7 @@ $form-input-border-radius: 0 !default;
 $form-input-color: #222 !default;
 
 $form-input-background-focus: null !default;
-$form-input-border-color-focus: #00a9ec !default;
+$form-input-border-color-focus: #a4c6fd !default;
 $form-input-color-focus: null !default;
 
 $form-input-background-disabled: #ebebeb !default;
@@ -61,7 +64,6 @@ $button-background: #dadada !default;
 $button-border: solid 1px #c0c0c0 !default;
 $button-background-hover: #cdcdcd !default;
 $button-border-color-hover: null !default;
-$button-outline-color-focus: #00a9ec !default;
 $button-color-disabled: #5d5d5d !default;
 
 // Lists
@@ -99,6 +101,7 @@ $lightbox-control-background-color-active: transparent !default;
 
 
 // Carousel
+$carousel-figure-border-color-focus: #a4c6fd !default;
 $carousel-caption-background-color: #222 !default;
 $carousel-caption-color: #fff !default;
 

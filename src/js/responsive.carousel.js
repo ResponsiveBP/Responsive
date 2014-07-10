@@ -17,9 +17,16 @@
         emouseenter = "mouseenter" + ns,
         emouseleave = "mouseleave" + ns,
         eclick = "click" + ns,
+        ekeydown = "keydown" + ns,
         eready = "ready" + ns,
         eslide = "slide" + ns,
         eslid = "slid" + ns;
+
+    var keys = {
+        SPACE: 32,
+        LEFT: 37,
+        RIGHT: 39
+    };
 
     // Private methods.
     var getActiveIndex = function () {
@@ -152,7 +159,7 @@
 
         this.$element = $(element);
         this.defaults = {
-            interval: 5000,
+            interval: 0, // Better for a11y
             mode: "slide",
             pause: "hover",
             wrap: true,
@@ -169,7 +176,8 @@
         this.translationDuration = null;
 
         if (this.options.pause === "hover") {
-            // Bind the mouse enter/leave events
+            // Bind the mouse enter/leave events.
+            // TODO: I don't think this should be here.
             if (!$.support.touchEvents && $.support.pointerEvents) {
                 this.$element.on(emouseenter, $.proxy(this.pause, this))
                     .on(emouseleave, $.proxy(this.cycle, this));
@@ -190,9 +198,35 @@
             });
         }
 
-        // Find and bind indicators.
-        $("[data-carousel-slide-to]").each(function () {
+        // Add a11y features.
+        this.$element.attr("role", "listbox");
+        this.$element.children("figure").each(function () {
             var $this = $(this),
+                active = $this.hasClass("carousel-active");
+
+            $this.attr({
+                "role": "option",
+                "aria-selected": active,
+                "tabindex": active ? 0 : -1
+            });
+
+        });
+
+        $("[data-carousel-slide]").each(function () {
+
+            var $this = $(this).attr({ "tabindex": 0 });
+            $this.is("a") ? $this.attr({ "role": "button" }) : $this.attr({ "type": "button" });
+            if (!$this.find(".visuallyhidden").length) {
+                $("<span/>").addClass("visuallyhidden")
+                    .html($this.attr("data-carousel-slide"))
+                    .appendTo($this);
+            }
+        });
+
+        // Find and bind indicators.
+        // TODO: Should I add further a11y to this?
+        $("[data-carousel-slide-to]").each(function () {
+            var $this = $(this).attr({ "role": "button" }),
                 $target = $($this.attr("data-carousel-target") || $this.attr("href"));
 
             if ($target[0] === element) {
@@ -364,8 +398,10 @@
                 });
             }
 
-            $activeItem.removeClass(["carousel-active", direction].join(" "));
-            $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+            $activeItem.removeClass(["carousel-active", direction].join(" "))
+                       .attr({ "aria-selected": false, "tabIndex": -1 });
+            $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active")
+                     .attr({ "aria-selected": true, "tabIndex": 0 });
 
             self.sliding = false;
             slidEvent = $.Event(eslid, { relatedTarget: $nextItem[0], direction: direction });
@@ -397,8 +433,46 @@
         return this;
     };
 
+    Carousel.prototype.keydown = function (event) {
+
+        var which = event.which,
+        self = this;
+
+        if (which === keys.LEFT || which === keys.RIGHT) {
+
+            var direction;
+
+            switch (which) {
+                case keys.LEFT:
+                    direction = "prev";
+                    this.prev();
+                    break;
+                case keys.RIGHT:
+                    direction = "next";
+                    this.next();
+                    break;
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Seek out the correct direction indicator and focus.
+            $("[data-carousel-slide]").each(function () {
+
+                var $this = $(this),
+                    data = $this.data("r.carouselOptions"),
+                    options = data || $.buildDataOptions($this, {}, "carousel", "r"),
+                    $target = $(options.target || (options.target = $this.attr("href")));
+
+                if (options.slide === direction && $target[0] === self.$element[0]) {
+                    $this.focus();
+                }
+            });
+        }
+    };
+
     // Plug-in definition 
-    $.fn.carousel = function (options) {
+    $.fn.carousel = function (options, event) {
 
         return this.each(function () {
 
@@ -417,7 +491,7 @@
 
             } else if (typeof options === "string" || (options = opts.slide)) {
 
-                data[options]();
+                data[options](event);
 
             } else if (data.options.interval) {
                 data.cycle();
@@ -436,7 +510,18 @@
     };
 
     // Data API
-    $(document).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
+    $(document).on(eready, function () {
+
+        $(".carousel").each(function () {
+
+            var $this = $(this),
+                data = $this.data("r.carouselOptions"),
+                options = data || $.buildDataOptions($this, {}, "carousel", "r");
+
+            $this.carousel(options);
+        });
+
+    }).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
 
         event.preventDefault();
 
@@ -450,17 +535,8 @@
         if (carousel) {
             typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
         }
-
-    }).on(eready, function () {
-
-        $(".carousel").each(function () {
-
-            var $this = $(this),
-                data = $this.data("r.carouselOptions"),
-                options = data || $.buildDataOptions($this, {}, "carousel", "r");
-
-            $this.carousel(options);
-        });
+    }).on(ekeydown, ".carousel", function (event) {
+        $(this).carousel("keydown", event);
     });
 
     w.RESPONSIVE_CAROUSEL = true;
