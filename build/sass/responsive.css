@@ -1799,7 +1799,7 @@ input,
   textarea:focus,
   input:focus,
   .no-edit:focus {
-    border-color: #a4c6fd;
+    border-color: #00a9ec;
     outline: 0; }
   select[disabled],
   textarea[disabled],
@@ -1864,7 +1864,7 @@ input {
   input[type=range]:focus, input[type=checkbox]:focus, input[type=radio]:focus, input[type=checkbox]:checked {
     border-color: transparent;
     outline: 1px solid silver;
-    outline-color: #a4c6fd;
+    outline-color: #00a9ec;
     outline-offset: -1px; }
   input[type=checkbox]:focus, input[type=checkbox]:checked {
     border-color: #c0c0c0; }

@@ -1610,15 +1610,9 @@
         $img = null,
         $iframe = null,
         $content = null,
-        $close = $("<button/>").attr({ "title": "Close (Esc)", "type": "button" })
-                               .addClass("lightbox-close fade-out")
-                               .html("x <span class=\"visuallyhidden\">Close (Esc)</span>"),
-        $previous = $("<button/>").attr({ "title": "Previous (Left Arrow)", "type": "button" })
-                                  .addClass("lightbox-direction left hidden")
-                                  .html("x <span class=\"visuallyhidden\">Previous (Left Arrow)</span>"),
-        $next = $("<button/>").attr({ "title": "Next (Right Arrow)", "type": "button" })
-                              .addClass("lightbox-direction right hidden")
-                              .html("x <span class=\"visuallyhidden\">Next (Right Arrow)</span>"),
+        $close = $("<button/>").attr({ "type": "button" }).addClass("lightbox-close fade-out"),
+        $previous = $("<button/>").attr({ "type": "button" }).addClass("lightbox-direction left hidden"),
+        $next = $("<button/>").attr({ "type": "button" }).addClass("lightbox-direction right hidden"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         scrollbarWidth = 0,
         lastScroll = 0,
@@ -1638,13 +1632,13 @@
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         // Events
         eclick = "click" + ns,
-        ekeydown = "keydown" + ns,
+        ekeydown = "keydown",
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        eresize = "resize" + ns + " orientationchange" + ns,
-        efocusin = "focusin" + ns;
+        eresize = ["resize", " orientationchange"].join(" "),
+        efocusin = "focusin";
 
     // Private methods.
     var isExternalUrl = function (url) {
@@ -1695,8 +1689,8 @@
             target = this.options.target,
             local = !this.options.external && !isExternalUrl(target),
             group = this.options.group,
-            nextText = this.options.next,
-            previousText = this.options.previous,
+            nextText = this.options.next + "<span class=\"visuallyhidden\">" + this.options.nextHint + "</span>",
+            previousText = this.options.previous + "<span class=\"visuallyhidden\">" + this.options.previousHint + "</span>",
             iframeScroll = this.options.iframeScroll,
             iframe = this.options.iframe || !local ? isExternalUrl(target) && !rimage.test(target) : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media");
@@ -1715,7 +1709,7 @@
             }
 
             if (!modal) {
-                $close.appendTo($overlay);
+                $close.html("x <span class=\"visuallyhidden\">" + this.options.closeHint + "</span>").appendTo($overlay);
             }
         }
 
@@ -1798,8 +1792,8 @@
 
         if (group) {
             // Need to show next/previous.
-            $next.text(nextText).prependTo($lightbox).removeClass("hidden");
-            $previous.text(previousText).prependTo($lightbox).removeClass("hidden");
+            $next.html(nextText).prependTo($lightbox).removeClass("hidden");
+            $previous.html(previousText).prependTo($lightbox).removeClass("hidden");
         }
 
         // Bind the click events.
@@ -2120,7 +2114,6 @@
         }
     },
 
-    // TODO: This is all in the wrong place.
     manageKeyboard = function (event) {
         if (this.options.keyboard) {
 
@@ -2182,7 +2175,7 @@
 
         $(document).off(efocusin).on(efocusin, function (event) {
             if (!$.contains($overlay[0], event.target)) {
-                var newTarget = $lightbox.find("input, select, a, button, iframe").first();
+                var newTarget = $lightbox.find("input, select, a, iframe, img, button").first();
                 newTarget.length ? newTarget.focus() : $close.focus();
                 return false;
             }
@@ -2202,12 +2195,15 @@
             iframe: false,
             iframeScroll: false,
             keyboard: true,
+            touch: true,
             next: ">",
+            nextHint: "Next (Right Arrow)",
             previous: "<",
+            previousHint: "Previous (Left Arrow)",
+            closeHint: "Close (Esc)",
             mobileTarget: null,
-            fitViewport: true,
             mobileViewportWidth: 480,
-            enabletouch: true
+            fitViewport: true
         };
         this.options = $.extend({}, this.defaults, options);
         this.title = null;
@@ -2230,6 +2226,8 @@
             return;
         }
 
+        console.log("show");
+
         // If the trigger has a mobile target and the viewport is smaller than the mobile limit
         // then redirect to that page instead.
         if (this.options.mobileTarget && this.options.mobileViewportWidth >= parseInt($window.width(), 10)) {
@@ -2242,6 +2240,7 @@
             shownEvent = $.Event(eshown),
             complete = function () {
 
+                $lightbox.focus();
                 manageFocus();
 
                 // Bind the keyboard actions.
@@ -2250,7 +2249,7 @@
                 }
 
                 if (self.options.group) {
-                    if (self.options.enabletouch) {
+                    if (self.options.touch) {
                         manageTouch.call(self);
                     } else {
                         manageTouch.call(self, "off");
