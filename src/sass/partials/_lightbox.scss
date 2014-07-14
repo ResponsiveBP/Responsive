@@ -120,11 +120,11 @@ x::-ms-reveal,
 
     > img {
         max-height: 100%;
-        max-width: none\9;
-        width: auto\9;
+        max-width: none \9;
+        width: auto \9;
         /* IE9 and IE10 still read the \9 hack*/
         &:nth-of-type(1n) {
-            max-width: 100%\9;
+            max-width: 100% \9;
         }
     }
 
@@ -149,66 +149,51 @@ x::-ms-reveal,
     z-index: 2;
     display: inline-block;
     padding: .83em;
-    background-color: $lightbox-control-background-color;
-    border: none;
     font-size: 1.5em;
     font-weight: bold;
     color: $lightbox-control-color;
-    text-decoration: $lightbox-control-text-decoration;
+
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: transparent;
+        border: none;
+    }
 
     &:hover {
-        border: none;
-        color: $lightbox-control-color;
-        text-decoration: $lightbox-control-text-decoration-hover;
-        background-color: $lightbox-control-background-color-hover;
-    }
-
-    &:active {
-        border: none;
-        background-color: $lightbox-control-background-color-active;
-    }
-
-    &:focus {
-        border: none;
+        text-decoration: underline;
     }
 }
 
 .lightbox-direction {
-    &,
-    &:visited {
-        position: fixed;
-        top: 49%;
-        left: 0;
-        z-index: 2;
-        display: block;
-        width: 2em;
-        padding: .5em;
-        background-color: $lightbox-control-background-color;
-        border: $lightbox-control-border;
-        color: $lightbox-control-color;
-        font-size: 2em;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: $lightbox-control-text-decoration;
-    }
+    position: fixed;
+    top: 49%;
+    left: 0;
+    z-index: 2;
+    display: block;
+    width: 2em;
+    padding: .5em;
+    color: $lightbox-control-color;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+
 
     &.right {
         left: auto;
         right: 0;
     }
 
+    &,
+    &:hover,
+    &:active,
     &:focus {
-        border: $lightbox-control-border;
+        background-color: transparent;
+        border: none;
     }
 
     &:hover {
-        background-color: $lightbox-control-background-color-hover;
-        border: $lightbox-control-border-hover;
-        color: $lightbox-control-color;
-        text-decoration: $lightbox-control-text-decoration-hover;
-    }
-
-    &:active {
-        background-color: $lightbox-control-background-color-active;
+        text-decoration: underline;
     }
 }

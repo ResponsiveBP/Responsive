@@ -62,8 +62,6 @@ $form-input-color-readonly: null !default;
 // Buttons
 $button-background: #dadada !default;
 $button-border: solid 1px #c0c0c0 !default;
-$button-background-hover: #cdcdcd !default;
-$button-border-color-hover: null !default;
 $button-color-disabled: #5d5d5d !default;
 
 // Lists
@@ -88,17 +86,6 @@ $lightbox-content-background-color: #fff !default;
 $lightbox-media-background-color: #222 !default;
 
 $lightbox-control-color: #fff !default;
-$lightbox-control-background-color: transparent !default;
-$lightbox-control-border: none !default;
-$lightbox-control-text-decoration: none !default;
-
-$lightbox-control-color-hover: #fff !default;
-$lightbox-control-background-color-hover: transparent !default;
-$lightbox-control-border-hover: none !default;
-$lightbox-control-text-decoration-hover: underline !default;
-
-$lightbox-control-background-color-active: transparent !default;
-
 
 // Carousel
 $carousel-figure-border-color-focus: #a4c6fd !default;

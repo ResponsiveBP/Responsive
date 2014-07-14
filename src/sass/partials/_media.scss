@@ -20,11 +20,11 @@ img {
     &[src*=".svg"] {
         width: 100% \9; /* 1 */
     }
+}
 
-    &x::-ms-reveal,
-    &[src*=".svg"] {
-        width: 100%; /* 1 */
-    }
+x::-ms-reveal,
+img[src*=".svg"] {
+    width: 100%; /* 1 */
 }
 
 /*

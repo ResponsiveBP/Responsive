@@ -5,8 +5,8 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/*! Responsive v2.5.7 | MIT License | responsivebp.com */
-/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+/* Responsive v2.5.7 | MIT License | responsivebp.com */
+/* normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -383,6 +383,7 @@ hr, input[type=search] {
  */
 @-ms-viewport {
   width: device-width; }
+
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
@@ -743,12 +744,6 @@ abbr {
 /*
  * Small 
  */
-@media (min-width: 48em) and (max-width: 61.99em) {
-  [class*=col-].reset-s-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-s-right-only] {
-    float: right; } }
 @media (min-width: 48em) {
   [class*=col-s] + [class*=col-s] {
     margin-left: 2%; }
@@ -1022,15 +1017,15 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-s-11 {
     right: 91.6667%; } }
+@media (min-width: 48em) and (max-width: 61.99em) {
+  [class*=col-].reset-s-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-s-right-only] {
+    float: right; } }
 /*
  * Medium 
  */
-@media (min-width: 62em) and (max-width: 74.99em) {
-  [class*=col-].reset-m-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-m-right-only] {
-    float: right; } }
 @media (min-width: 62em) {
   [class*=col-m] + [class*=col-m] {
     margin-left: 2%; }
@@ -1304,6 +1299,12 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-m-11 {
     right: 91.6667%; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
+  [class*=col-].reset-m-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-m-right-only] {
+    float: right; } }
 /*
  * Large 
  */
@@ -1958,13 +1959,6 @@ textarea {
   /* 4 */ }
 
 /*
- * Full Width
- */
-.full-width {
-  max-width: 100% !important;
-  width: 100% !important; }
-
-/*
  * Actions - Contains buttons
  */
 .form-actions {
@@ -1978,6 +1972,7 @@ textarea {
   input[type=color] {
     min-height: 1.8em;
     padding: 0; } }
+
 @media (-webkit-min-device-pixel-ratio: 0) {
   input {
         /*
@@ -2121,9 +2116,11 @@ img {
   img[src*=".svg"] {
     width: 100% \9;
     /* 1 */ }
-  imgx::-ms-reveal, img[src*=".svg"] {
-    width: 100%;
-    /* 1 */ }
+
+x::-ms-reveal,
+img[src*=".svg"] {
+  width: 100%;
+  /* 1 */ }
 
 /*
  * Remove the border around images in anchors.
@@ -2589,8 +2586,8 @@ x::-ms-reveal,
     overflow: hidden; }
   .lightbox > img {
     max-height: 100%;
-    max-width: none\9;
-    width: auto\9;
+    max-width: none \9;
+    width: auto \9;
     /* IE9 and IE10 still read the \9 hack*/ }
     .lightbox > img:nth-of-type(1n) {
       max-width: 100% \9; }
@@ -2612,24 +2609,16 @@ x::-ms-reveal,
   z-index: 2;
   display: inline-block;
   padding: .83em;
-  background-color: transparent;
-  border: none;
   font-size: 1.5em;
   font-weight: bold;
-  color: white;
-  text-decoration: none; }
-  .lightbox-close:hover {
-    border: none;
-    color: white;
-    text-decoration: underline;
-    background-color: transparent; }
-  .lightbox-close:active {
-    border: none;
-    background-color: transparent; }
-  .lightbox-close:focus {
+  color: white; }
+  .lightbox-close, .lightbox-close:hover, .lightbox-close:active, .lightbox-close:focus {
+    background-color: transparent;
     border: none; }
+  .lightbox-close:hover {
+    text-decoration: underline; }
 
-.lightbox-direction, .lightbox-direction:visited {
+.lightbox-direction {
   position: fixed;
   top: 49%;
   left: 0;
@@ -2637,25 +2626,18 @@ x::-ms-reveal,
   display: block;
   width: 2em;
   padding: .5em;
-  background-color: transparent;
-  border: none;
   color: white;
   font-size: 2em;
   font-weight: bold;
-  text-align: center;
-  text-decoration: none; }
-.lightbox-direction.right {
-  left: auto;
-  right: 0; }
-.lightbox-direction:focus {
-  border: none; }
-.lightbox-direction:hover {
-  background-color: transparent;
-  border: none;
-  color: white;
-  text-decoration: underline; }
-.lightbox-direction:active {
-  background-color: transparent; }
+  text-align: center; }
+  .lightbox-direction.right {
+    left: auto;
+    right: 0; }
+  .lightbox-direction, .lightbox-direction:hover, .lightbox-direction:active, .lightbox-direction:focus {
+    background-color: transparent;
+    border: none; }
+  .lightbox-direction:hover {
+    text-decoration: underline; }
 
 @media (max-width: 47.99em) {
     /*
@@ -3207,6 +3189,7 @@ x::-ms-reveal,
 
   @page {
     margin: 0.5cm; }
+
   p,
   h2,
   h3 {
