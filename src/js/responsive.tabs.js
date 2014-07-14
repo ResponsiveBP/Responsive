@@ -14,8 +14,8 @@
 
     // General variables.
     var eready = "ready" + ns,
-        eclick = "click" + ns,
-        ekeydown = "keydown" + ns,
+        eclick = "click",
+        ekeydown = "keydown",
         eshow = "show" + ns,
         eshown = "shown" + ns;
 
@@ -29,7 +29,7 @@
 
         var showEvent = $.Event(eshow),
             $element = this.$element,
-            $childTabs = $element.children("ul").find("li"),
+            $childTabs = $element.children("ul").children("li"),
             $childPanes = $element.children(":not(ul)"),
             $nextTab = $childTabs.eq(postion),
             $currentPane = $childPanes.eq(activePosition),
@@ -90,11 +90,55 @@
                 "tabIndex": $this.hasClass("tab-active") ? 0 : -1
             });
         });
+
+        // Bind events.
+        $(this.$element).on(eclick, "ul[role=tablist] > li > [role=tab]", $.proxy(function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            var $this = $(event.target),
+                $li = $this.parent(),
+                index = $li.index();
+
+            this.show(index);
+
+        }, this)).on(ekeydown, "ul[role=tablist] > li > [role=tab]", $.proxy(function (event) {
+
+            var which = event.which;
+
+            // Ignore anything but left and right.
+            if (which === keys.LEFT || which === keys.RIGHT) {
+
+                event.stopPropagation();
+
+                var $this = $(event.target),
+                    $li = $this.parent(),
+                    $all = $li.siblings().addBack(),
+                    length = $all.length,
+                    index = $li.index();
+
+                // Ensure that the index stays within bounds.
+                index = which === keys.LEFT ? index - 1 : index + 1;
+
+                if (index === length) {
+                    index = 0;
+                }
+
+                if (index < 0) {
+                    index = length - 1;
+                }
+
+                this.show(index);
+            }
+
+        }, this));
+
     };
 
     Tabs.prototype.show = function (position) {
 
-        var $activeItem = this.$element.find(".tab-active"),
+        var $activeItem = this.$element.children("ul").children(".tab-active"),
             $children = $activeItem.parent().children(),
             activePosition = $children.index($activeItem),
             self = this;
@@ -112,7 +156,6 @@
         return tab.call(this, activePosition, position, function ($item) {
 
             var complete = function () {
-
                 self.tabbing = false;
                 self.$element.trigger($.Event(eshown));
             };
@@ -122,37 +165,8 @@
         });
     };
 
-    Tabs.prototype.keydown = function (event) {
-
-        var which = event.which;
-
-        // Ignore anything but left and right.
-        if (which === keys.LEFT || which === keys.RIGHT) {
-
-            var $this = $(event.target),
-                $li = $this.parent(),
-                $all = $li.siblings().addBack(),
-                length = $all.length,
-                index = $li.index();
-
-            // Ensure that the index stays within bounds.
-            index = which === keys.LEFT ? index - 1 : index + 1;
-
-            if (index === length) {
-                index = 0;
-            }
-
-            if (index < 0) {
-                index = length - 1;
-            }
-
-            this.show(index);
-        }
-
-    };
-
     // Plug-in definition 
-    $.fn.tabs = function (options, event) {
+    $.fn.tabs = function (options) {
 
         return this.each(function () {
 
@@ -168,11 +182,6 @@
             if (typeof options === "number") {
                 data.show(options);
             }
-
-            if (options === "keydown") {
-                data.keydown(event);
-            }
-
         });
     };
 
@@ -189,23 +198,6 @@
     // Data API
     $(document).on(eready, function () {
         $("[data-tabs]").tabs();
-    });
-
-    $(document).on(eclick, "ul[role=tablist] [role=tab]", function (event) {
-
-        event.preventDefault();
-
-        var $this = $(this),
-            $li = $this.parent(),
-            $tabs = $this.closest("[data-tabs], .tabs"),
-            index = $li.index();
-
-        $tabs.tabs(index);
-
-    }).on(ekeydown, "ul[role=tablist] [role=tab]", function (event) {
-
-        $(this).closest("[data-tabs], .tabs").tabs("keydown", event);
-
     });
 
     w.RESPONSIVE_TABS = true;
