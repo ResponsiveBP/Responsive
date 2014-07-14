@@ -1,8 +1,8 @@
 .alert {
     @extend .clearfix;
-    background-color: lighten($alert-color-scheme, 20);
-    border: 1px solid $alert-color-scheme;
-    color: darken($alert-color-scheme, 50);
+    background-color: $alert-color-scheme;
+    border: 1px solid darken($alert-color-scheme, 20);
+    color: darken($alert-color-scheme, 70);
     margin: 1em 0;
     padding: 0 2.17em 0 1em;
 
@@ -13,9 +13,16 @@
         font-weight: bold;
         line-height: 1em;
         position: relative;
-        right: -1.17em;
-        text-decoration: none;
-        top: .33em;
+        right: -1.73em;
+        top: .13em;
+
+        &,
+        &:active,
+        &:focus,
+        &:hover {
+            background-color: transparent;
+            border: none;
+        }
 
         &:hover {
             text-decoration: underline;

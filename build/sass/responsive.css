@@ -1594,9 +1594,11 @@ abbr {
     font-weight: bold;
     line-height: 1em;
     position: relative;
-    right: -1.17em;
-    text-decoration: none;
-    top: .33em; }
+    right: -1.73em;
+    top: .13em; }
+    .alert .close, .alert .close:active, .alert .close:focus, .alert .close:hover {
+      background-color: transparent;
+      border: none; }
     .alert .close:hover {
       text-decoration: underline; }
 

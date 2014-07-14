@@ -13,16 +13,43 @@
     }
 
     // General variables.
-    var eclick = "click" + ns,
+    var eready = "ready" + ns,
+        eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
 
     // Dismiss class definition
-    var Dismiss = function (element, target) {
+    var Dismiss = function (element, options) {
 
-        this.$element = $(element);
-        this.$target = this.$element.parents(target);
+        this.defaults = {
+            closeHint: "Click to close"
+        };
+
+        this.options = $.extend({}, this.defaults, options);
+
+        this.$element = $(element).attr({ "type": "button" });
+        this.$target = this.$element.closest(options.target);
         this.dismissing = null;
+
+        // A11y goodness.
+        if (this.$element.is("button")) {
+            $(element).attr({ "type": "button" });
+        }
+
+        if (this.$target.hasClass("alert")) {
+            this.$target.attr({ "aria-live": "assertive" });
+        }
+
+        if (!this.$element.find(".visuallyhidden").length) {
+            $("<span/>").addClass("visuallyhidden")
+                        .html(this.options.closeHint)
+                        .appendTo(this.$element);
+        }
+
+        this.$element.on(eclick, $.proxy(function (event) {
+            event.preventDefault();
+            this.close();
+        }, this));
     };
 
     Dismiss.prototype.close = function () {
@@ -31,9 +58,8 @@
             $target = this.$target,
             self = this,
             complete = function () {
-
                 self.dismissing = false;
-                $target.addClass("hidden").trigger($.Event(edismissed));
+                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 }).trigger($.Event(edismissed));
             };
 
         $target.trigger(dismissEvent);
@@ -53,7 +79,7 @@
     };
 
     // Plug-in definition 
-    $.fn.dismiss = function (target) {
+    $.fn.dismiss = function (options) {
 
         return this.each(function () {
 
@@ -62,11 +88,13 @@
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("dismiss", (data = new Dismiss(this, target + ":first")));
+                $this.data("dismiss", (data = new Dismiss(this, options)));
             }
 
             // Close the element.
-            data.close();
+            if (typeof options === "string") {
+                data[options]();
+            }
         });
     };
 
@@ -81,19 +109,18 @@
     };
 
     // Data API
-    $("body").on(eclick, ":attrStart(data-dismiss)", function (event) {
+    $(document).on(eready, function () {
 
-        event.preventDefault();
+        $("button[data-dismiss-target]").each(function () {
 
-        var $this = $(this),
-            data = $this.data("r.dismissOptions"),
-            options = data || $.buildDataOptions($this, {}, "dismiss", "r"),
-            target = options.target || (options.target = $this.attr("href"));
+            var $this = $(this),
+                data = $this.data("r.dismissOptions"),
+                options = data || $.buildDataOptions($this, {}, "dismiss", "r");
 
-        // Run the dismiss method.
-        if (target) {
-            $(this).dismiss(options.target);
-        }
+            // Run the dismiss method.
+            $this.dismiss(options);
+        });
+
     });
 
     w.RESPONSIVE_DISMISS = true;
