@@ -2674,15 +2674,17 @@ x::-ms-reveal,
       float: left;
       width: 100%; }
     .table-list td:before, .table-list td:after {
-      content: attr(data-thead);
       display: block;
       padding: .5em 0;
       font-weight: bold; }
+    .table-list td:before {
+      content: attr(data-thead); }
     .table-list th[scope=row]:before, .table-list th[scope=row]:after {
-      content: attr(data-thead);
       display: block;
       padding: .5em 0;
       font-weight: bold; }
+    .table-list th[scope=row]:before {
+      content: attr(data-thead); }
     .table-list td:after,
     .table-list th[scope=row]:after {
       content: attr(data-tfoot); }

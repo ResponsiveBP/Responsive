@@ -1610,9 +1610,15 @@
         $img = null,
         $iframe = null,
         $content = null,
-        $close = $("<button/>").attr({ "title": "Close (Esc)", "type": "button" }).addClass("lightbox-close fade-out").html("x"),
-        $previous = $("<button/>").attr({ "title": "Previous (Left Arrow)", "type": "button" }).addClass("lightbox-direction left hidden"),
-        $next = $("<button/>").attr({ "title": "Next (Right Arrow)", "type": "button" }).addClass("lightbox-direction right hidden"),
+        $close = $("<button/>").attr({ "title": "Close (Esc)", "type": "button" })
+                               .addClass("lightbox-close fade-out")
+                               .html("x <span class=\"visuallyhidden\">Close (Esc)</span>"),
+        $previous = $("<button/>").attr({ "title": "Previous (Left Arrow)", "type": "button" })
+                                  .addClass("lightbox-direction left hidden")
+                                  .html("x <span class=\"visuallyhidden\">Previous (Left Arrow)</span>"),
+        $next = $("<button/>").attr({ "title": "Next (Right Arrow)", "type": "button" })
+                              .addClass("lightbox-direction right hidden")
+                              .html("x <span class=\"visuallyhidden\">Next (Right Arrow)</span>"),
         $placeholder = $("<div/>").addClass("lightbox-placeholder"),
         scrollbarWidth = 0,
         lastScroll = 0,

@@ -50,20 +50,26 @@
         td {
             &:before,
             &:after {
-                content: attr(data-thead);
                 display: block;
                 padding: .5em 0;
                 font-weight: bold;
+            }
+
+            &:before {
+                content: attr(data-thead);
             }
         }
 
         th[scope=row] {
             &:before,
             &:after {
-                content: attr(data-thead);
                 display: block;
                 padding: .5em 0;
                 font-weight: bold;
+            }
+
+            &:before {
+                content: attr(data-thead);
             }
         }
 
