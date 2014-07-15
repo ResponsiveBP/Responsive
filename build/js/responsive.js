@@ -1420,7 +1420,6 @@
         // Bind events.
         this.$element.on(eclick, $.proxy(this.click, this));
         this.$element.on(ekeydown, $.proxy(this.keydown, this));
-
     };
 
     Dropdown.prototype.show = function () {
@@ -1430,17 +1429,14 @@
         }
 
         var dimension = this.options.dimension,
-            $actives = this.$parent && this.$parent.find("[role=tab]"),
-            hasData;
+            $actives = this.$parent && this.$parent.find("[role=tab]") || [];
 
         $actives = $.grep($actives, function (a) {
-
             var $this = $(a),
-                $target = $this.data("r.dropdown");
+                $target = $this.data("r.dropdown") && $this.data("r.dropdown").$target;
+
             return $target.hasClass("dropdown-group") && !$target.hasClass("collapse");
         });
-
-        console.log($actives);
 
         // Set the height/width to zero then to the height/width
         // so animation can take place.
@@ -1461,12 +1457,9 @@
         transition.call(this, "removeClass", $.Event(eshow), eshown);
 
         if ($actives && $actives.length) {
-            hasData = $actives.data("r.dropdown");
-            $actives.dropdown("hide");
-
-            if (!hasData) {
-                $actives.data("r.dropdown", null);
-            }
+            $.each($actives, function () {
+                $(this).dropdown("hide");
+            });
         }
     };
 
