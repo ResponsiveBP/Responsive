@@ -17,7 +17,7 @@
         emouseenter = "mouseenter",
         emouseleave = "mouseleave",
         eclick = "click" + ns,
-        ekeydown = "keydown" + ns,
+        ekeydown = "keydown",
         eready = "ready" + ns,
         eslide = "slide" + ns,
         eslid = "slid" + ns;
@@ -175,15 +175,6 @@
         this.$indicators = [];
         this.translationDuration = null;
 
-        if (this.options.pause === "hover") {
-            // Bind the mouse enter/leave events.
-            // Not namespaced as we want to keep behaviour when not using data api.
-            if (!$.support.touchEvents && $.support.pointerEvents) {
-                this.$element.on(emouseenter, $.proxy(this.pause, this))
-                    .on(emouseleave, $.proxy(this.cycle, this));
-            }
-        }
-
         // Add the css class to support fade.
         this.options.mode === "fade" && this.$element.addClass("carousel-fade");
 
@@ -212,8 +203,7 @@
 
         });
 
-        $("[data-carousel-slide]").each(function () {
-
+        $(".carousel-control").each(function () {
             var $this = $(this).attr({ "tabindex": 0 });
             $this.is("a") ? $this.attr({ "role": "button" }) : $this.attr({ "type": "button" });
             if (!$this.find(".visuallyhidden").length) {
@@ -225,17 +215,30 @@
 
         // Find and bind indicators.
         // TODO: Should I add further a11y to this?
-        $("[data-carousel-slide-to]").each(function () {
-            var $this = $(this).attr({ "role": "button" }),
+        $("ol > li, ol > li > a").each(function () {
+            var $this = $(this),
                 $target = $($this.attr("data-carousel-target") || $this.attr("href"));
 
             if ($target[0] === element) {
-                var $parent = $this.parents("ol:first");
+                $this.attr({ "role": "button" });
+                var $parent = $this.closest("ol");
                 if ($.inArray($parent[0], self.$indicators) === -1) {
                     self.$indicators.push($parent[0]);
                 }
             }
         });
+
+        // Bind events
+        // Not namespaced as we want to keep behaviour when not using data api.
+        if (this.options.pause === "hover") {
+            // Bind the mouse enter/leave events.
+            if (!$.support.touchEvents && $.support.pointerEvents) {
+                this.$element.on(emouseenter, $.proxy(this.pause, this))
+                    .on(emouseleave, $.proxy(this.cycle, this));
+            }
+        }
+
+        this.$element.on(ekeydown, $.proxy(this.keydown, this));
     };
 
     Carousel.prototype.cycle = function (event) {
@@ -435,44 +438,33 @@
 
     Carousel.prototype.keydown = function (event) {
 
-        var which = event.which,
-        self = this;
+        var which = event && event.which;
 
         if (which === keys.LEFT || which === keys.RIGHT) {
-
-            var direction;
-
-            switch (which) {
-                case keys.LEFT:
-                    direction = "prev";
-                    this.prev();
-                    break;
-                case keys.RIGHT:
-                    direction = "next";
-                    this.next();
-                    break;
-            }
 
             event.preventDefault();
             event.stopPropagation();
 
+            var direction = "";
+
+            switch (which) {
+                case keys.LEFT:
+                    direction = ".left";
+                    this.prev();
+                    break;
+                case keys.RIGHT:
+                    direction = ".right";
+                    this.next();
+                    break;
+            }
+
             // Seek out the correct direction indicator and focus.
-            $("[data-carousel-slide]").each(function () {
-
-                var $this = $(this),
-                    data = $this.data("r.carouselOptions"),
-                    options = data || $.buildDataOptions($this, {}, "carousel", "r"),
-                    $target = $(options.target || (options.target = $this.attr("href")));
-
-                if (options.slide === direction && $target[0] === self.$element[0]) {
-                    $this.focus();
-                }
-            });
+            this.$element.find(".carousel-control" + direction)[0].focus();
         }
     };
 
     // Plug-in definition 
-    $.fn.carousel = function (options, event) {
+    $.fn.carousel = function (options) {
 
         return this.each(function () {
 
@@ -491,10 +483,10 @@
 
             } else if (typeof options === "string" || (options = opts.slide)) {
 
-                data[options](event);
+                data[options]();
 
             } else if (data.options.interval) {
-                data.cycle();
+                data.pause().cycle();
             }
         });
     };
@@ -535,8 +527,6 @@
         if (carousel) {
             typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
         }
-    }).on(ekeydown, ".carousel", function (event) {
-        $(this).carousel("keydown", event);
     });
 
     w.RESPONSIVE_CAROUSEL = true;

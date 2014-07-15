@@ -92,48 +92,8 @@
         });
 
         // Bind events.
-        $(this.$element).on(eclick, "ul[role=tablist] > li > [role=tab]", $.proxy(function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            var $this = $(event.target),
-                $li = $this.parent(),
-                index = $li.index();
-
-            this.show(index);
-
-        }, this)).on(ekeydown, "ul[role=tablist] > li > [role=tab]", $.proxy(function (event) {
-
-            var which = event.which;
-
-            // Ignore anything but left and right.
-            if (which === keys.LEFT || which === keys.RIGHT) {
-
-                event.stopPropagation();
-
-                var $this = $(event.target),
-                    $li = $this.parent(),
-                    $all = $li.siblings().addBack(),
-                    length = $all.length,
-                    index = $li.index();
-
-                // Ensure that the index stays within bounds.
-                index = which === keys.LEFT ? index - 1 : index + 1;
-
-                if (index === length) {
-                    index = 0;
-                }
-
-                if (index < 0) {
-                    index = length - 1;
-                }
-
-                this.show(index);
-            }
-
-        }, this));
-
+        $(this.$element).on(eclick, "ul[role=tablist] > li > [role=tab]", $.proxy(this.click, this))
+                        .on(ekeydown, "ul[role=tablist] > li > [role=tab]", $.proxy(this.keydown, this));
     };
 
     Tabs.prototype.show = function (position) {
@@ -163,6 +123,47 @@
             // Do our callback
             $item.onTransitionEnd(complete);
         });
+    };
+
+    Tabs.prototype.click = function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var $this = $(event.target),
+            $li = $this.parent(),
+            index = $li.index();
+
+        this.show(index);
+    };
+
+    Tabs.prototype.keydown = function (event) {
+
+        var which = event.which;
+        // Ignore anything but left and right.
+        if (which === keys.LEFT || which === keys.RIGHT) {
+
+            event.stopPropagation();
+
+            var $this = $(event.target),
+                $li = $this.parent(),
+                $all = $li.siblings().addBack(),
+                length = $all.length,
+                index = $li.index();
+
+            // Ensure that the index stays within bounds.
+            index = which === keys.LEFT ? index - 1 : index + 1;
+
+            if (index === length) {
+                index = 0;
+            }
+
+            if (index < 0) {
+                index = length - 1;
+            }
+
+            this.show(index);
+        }
     };
 
     // Plug-in definition 

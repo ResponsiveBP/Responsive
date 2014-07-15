@@ -23,27 +23,7 @@
         esized = "sized" + ns;
 
     // Private methods.
-    var bindEvents = function () {
-
-        // Not namespaced we want to keep the events when not using data-api.
-        this.$element.on([ekeyup, epaste, ecut].join(" "), function (event) {
-
-            var $this = $(this),
-                delay = 0;
-
-            if (event.type === "paste" || event.type === "cut") {
-                delay = 5;
-            }
-
-            w.setTimeout(function () {
-
-                // Run the size method.
-                $this.autoSize("size");
-
-            }, delay);
-        });
-    },
-        createClone = function () {
+    var createClone = function () {
 
             var self = this,
                 attributes = this.options.removeAttributes,
@@ -82,13 +62,13 @@
         this.sizing = null;
 
         // Initial setup.
-        bindEvents.call(this);
         createClone.call(this);
+
+        // Bind events
+        this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
     };
 
     AutoSize.prototype.size = function () {
-
-        console.log("sizing");
 
         var self = this,
             $element = this.$element,
@@ -113,8 +93,6 @@
         // Set the height so animation will work.
         startHeight = $clone.height();
         $element.height(startHeight);
-
-        console.log(startHeight);
 
         // Shrink
         while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
@@ -148,6 +126,23 @@
         }
     };
 
+    AutoSize.prototype.change = function (event) {
+
+        var self = this,
+            delay = 0;
+
+        if (event.type === "paste" || event.type === "cut") {
+            delay = 5;
+        }
+
+        w.setTimeout(function () {
+
+            // Run the size method.
+            self.size();
+
+        }, delay);
+    };
+
     // Plug-in definition 
     $.fn.autoSize = function (options) {
 
@@ -162,9 +157,8 @@
                 $this.data("r.autosize", (data = new AutoSize(this, opts)));
             }
 
-            // Run the appropriate function is a string is passed.
-            if (typeof options === "string") {
-                data[options]();
+            if (options === "size") {
+                data.size();
             }
         });
     };

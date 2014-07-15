@@ -46,10 +46,8 @@
                         .appendTo(this.$element);
         }
 
-        this.$element.on(eclick, $.proxy(function (event) {
-            event.preventDefault();
-            this.close();
-        }, this));
+        // Bind events
+        this.$element.on(eclick, $.proxy(this.click, this));
     };
 
     Dismiss.prototype.close = function () {
@@ -78,6 +76,11 @@
         this.$target.onTransitionEnd(complete);
     };
 
+    Dismiss.prototype.click = function (event) {
+        event.preventDefault();
+        this.close();
+    };
+
     // Plug-in definition 
     $.fn.dismiss = function (options) {
 
@@ -92,8 +95,8 @@
             }
 
             // Close the element.
-            if (typeof options === "string") {
-                data[options]();
+            if (options === "close") {
+                data.close();
             }
         });
     };

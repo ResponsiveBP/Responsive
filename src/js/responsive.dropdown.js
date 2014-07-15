@@ -14,8 +14,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         eready = "ready" + ns,
-        eclick = "click" + ns,
-        ekeydown = "keydown" + ns,
+        eclick = "click",
+        ekeydown = "keydown",
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -38,23 +38,23 @@
                 var eventToTrigger = $.Event(completeEvent);
 
                 // Ensure the height/width is set to auto.
-                self.$element.removeClass("trans")[self.options.dimension]("");
+                self.$target.removeClass("trans")[self.options.dimension]("");
 
                 self.transitioning = false;
 
                 // Set the correct aria attributes.
-                self.$element.attr({
+                self.$target.attr({
                     "aria-hidden": !doShow,
                     "tabindex": doShow ? 0 : -1,
                 });
 
-                $("#" + self.$element.attr("aria-labelledby")).attr({
+                $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
                     "aria-expanded": doShow,
                     "tabindex": self.options.parent ? doShow ? 0 : -1 : 0
                 });
 
-                self.$element.trigger(eventToTrigger);
+                self.$target.trigger(eventToTrigger);
             };
 
         if (this.transitioning || startEvent.isDefaultPrevented()) {
@@ -64,16 +64,17 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$element.trigger(startEvent)[method]("collapse");
-        this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+        this.$target.trigger(startEvent)[method]("collapse");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
-        this.$element.onTransitionEnd(complete);
+        this.$target.onTransitionEnd(complete);
     };
 
     // The Dropdown class definition
     var Dropdown = function (element, options) {
 
         this.$element = $(element);
+        this.$target = $(options.target);
         this.defaults = {
             dimension: "height"
         };
@@ -83,7 +84,7 @@
         this.endSize = null;
 
         if (this.options.parent) {
-            this.$parent = this.$element.closest(this.options.parent);
+            this.$parent = this.$target.closest(this.options.parent);
         }
 
         // Add accessibility features.
@@ -96,8 +97,8 @@
 
         var $tab = $("[href=" + this.options.target + "], [data-dropdown-target=" + this.options.target + "]"),
             tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
-            paneId = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
-            active = !this.$element.hasClass("collapse");
+            paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
+            active = !this.$target.hasClass("collapse");
 
         $tab.attr({
             "id": tabId,
@@ -108,63 +109,76 @@
             "tabindex": this.options.parent ? active ? 0 : -1 : 0
         });
 
-        this.$element.attr({
+        this.$target.attr({
             "id": paneId,
             "role": "tabpanel",
             "aria-labelledby": tabId,
             "aria-hidden": !active,
             "tabindex": active ? 0 : -1
         });
+
+        // Bind events.
+        this.$element.on(eclick, $.proxy(this.click, this));
+        this.$element.on(ekeydown, $.proxy(this.keydown, this));
+
     };
 
     Dropdown.prototype.show = function () {
 
-        if (this.transitioning || this.$element.hasClass("expand")) {
+        if (this.transitioning || this.$target.hasClass("expand")) {
             return;
         }
 
         var dimension = this.options.dimension,
-            actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
+            $actives = this.$parent && this.$parent.find("[role=tab]"),
             hasData;
+
+        $actives = $.grep($actives, function (a) {
+
+            var $this = $(a),
+                $target = $this.data("r.dropdown");
+            return $target.hasClass("dropdown-group") && !$target.hasClass("collapse");
+        });
+
+        console.log($actives);
 
         // Set the height/width to zero then to the height/width
         // so animation can take place.
-        this.$element[dimension](0);
+        this.$target[dimension](0);
 
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$element[dimension]("auto");
-            this.endSize = w.getComputedStyle(this.$element[0])[dimension];
+            this.$target[dimension]("auto");
+            this.endSize = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset to zero and force repaint.
-            this.$element[dimension](0).redraw();
+            this.$target[dimension](0).redraw();
         }
 
-        this.$element[dimension](this.endSize || "");
+        this.$target[dimension](this.endSize || "");
 
         transition.call(this, "removeClass", $.Event(eshow), eshown);
 
-        if (actives && actives.length) {
-            hasData = actives.data("r.dropdown");
-            actives.dropdown("hide");
+        if ($actives && $actives.length) {
+            hasData = $actives.data("r.dropdown");
+            $actives.dropdown("hide");
 
             if (!hasData) {
-                actives.data("r.dropdown", null);
+                $actives.data("r.dropdown", null);
             }
         }
-
     };
 
     Dropdown.prototype.hide = function () {
 
-        if (this.transitioning || this.$element.hasClass("collapse")) {
+        if (this.transitioning || this.$target.hasClass("collapse")) {
             return;
         }
 
         if (this.$parent) {
 
-            var actives = this.$parent.find(".dropdown-group:not(.collapse)").not(this.$element);
+            var actives = this.$parent.find(".dropdown-group:not(.collapse)").not(this.$target);
 
             if (!actives.length) {
                 return;
@@ -178,20 +192,26 @@
         if (supportTransition) {
 
             // Set the height to auto, calculate the height/width and reset.
-            size = w.getComputedStyle(this.$element[0])[dimension];
+            size = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset the size and force repaint.
-            this.$element[dimension](size).redraw(); // Force reflow ;
+            this.$target[dimension](size).redraw(); // Force reflow ;
         }
 
-        this.$element.removeClass("expand");
-        this.$element[dimension](0);
+        this.$target.removeClass("expand");
+        this.$target[dimension](0);
         transition.call(this, "addClass", $.Event(ehide), ehidden);
     };
 
     Dropdown.prototype.toggle = function () {
         // Run the correct command based on the presence of the class "collapse".
-        this[this.$element.hasClass("collapse") ? "show" : "hide"]();
+        this[this.$target.hasClass("collapse") ? "show" : "hide"]();
+    };
+
+    Dropdown.prototype.click = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.toggle();
     };
 
     Dropdown.prototype.keydown = function (event) {
@@ -200,7 +220,9 @@
 
         if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {
 
-            // Ignore anything but left and right.
+            event.preventDefault();
+            event.stopPropagation();
+
             var $this = $(event.target),
                 $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
                 $items = $parent.find("[role=tab]"),
@@ -227,16 +249,11 @@
             }
 
             $items.eq(index).focus();
-
-            event.preventDefault();
-            event.stopPropagation();
-
         }
     };
 
-
     // Plug-in definition 
-    $.fn.dropdown = function (options, event) {
+    $.fn.dropdown = function (options) {
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdown"),
@@ -249,7 +266,7 @@
 
             // Run the appropriate function if a string is passed.
             if (typeof options === "string") {
-                data[options](event);
+                data[options]();
             }
         });
     };
@@ -269,30 +286,12 @@
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
-                target = options.target || (options.target = $this.attr("href")),
-                $target = $(target);
+                options = data || $.buildDataOptions($this, {}, "dropdown", "r");
 
+            options.target || (options.target = $this.attr("href"));
             // Run the dropdown method.
-            $target.dropdown(options);
+            $this.dropdown(options);
         });
-    }).on(eclick + " " + ekeydown, ":attrStart(data-dropdown)[role=tab]", function (event) {
-
-        var $this = $(this),
-            data = $this.data("r.dropdownOptions"),
-            options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
-            target = options.target || (options.target = $this.attr("href")),
-            $target = $(target);
-
-        switch (event.type) {
-            case "click":
-                event.preventDefault();
-                $target.dropdown("toggle");
-                break;
-            case "keydown":
-                $target.dropdown("keydown", event);
-                break;
-        }
     });
 
     w.RESPONSIVE_DROPDOWN = true;

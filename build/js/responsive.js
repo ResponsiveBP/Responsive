@@ -447,27 +447,7 @@
         esized = "sized" + ns;
 
     // Private methods.
-    var bindEvents = function () {
-
-        // Not namespaced we want to keep the events when not using data-api.
-        this.$element.on([ekeyup, epaste, ecut].join(" "), function (event) {
-
-            var $this = $(this),
-                delay = 0;
-
-            if (event.type === "paste" || event.type === "cut") {
-                delay = 5;
-            }
-
-            w.setTimeout(function () {
-
-                // Run the size method.
-                $this.autoSize("size");
-
-            }, delay);
-        });
-    },
-        createClone = function () {
+    var createClone = function () {
 
             var self = this,
                 attributes = this.options.removeAttributes,
@@ -506,13 +486,13 @@
         this.sizing = null;
 
         // Initial setup.
-        bindEvents.call(this);
         createClone.call(this);
+
+        // Bind events
+        this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
     };
 
     AutoSize.prototype.size = function () {
-
-        console.log("sizing");
 
         var self = this,
             $element = this.$element,
@@ -537,8 +517,6 @@
         // Set the height so animation will work.
         startHeight = $clone.height();
         $element.height(startHeight);
-
-        console.log(startHeight);
 
         // Shrink
         while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
@@ -572,6 +550,23 @@
         }
     };
 
+    AutoSize.prototype.change = function (event) {
+
+        var self = this,
+            delay = 0;
+
+        if (event.type === "paste" || event.type === "cut") {
+            delay = 5;
+        }
+
+        w.setTimeout(function () {
+
+            // Run the size method.
+            self.size();
+
+        }, delay);
+    };
+
     // Plug-in definition 
     $.fn.autoSize = function (options) {
 
@@ -586,9 +581,8 @@
                 $this.data("r.autosize", (data = new AutoSize(this, opts)));
             }
 
-            // Run the appropriate function is a string is passed.
-            if (typeof options === "string") {
-                data[options]();
+            if (options === "size") {
+                data.size();
             }
         });
     };
@@ -658,7 +652,7 @@
         emouseenter = "mouseenter",
         emouseleave = "mouseleave",
         eclick = "click" + ns,
-        ekeydown = "keydown" + ns,
+        ekeydown = "keydown",
         eready = "ready" + ns,
         eslide = "slide" + ns,
         eslid = "slid" + ns;
@@ -816,15 +810,6 @@
         this.$indicators = [];
         this.translationDuration = null;
 
-        if (this.options.pause === "hover") {
-            // Bind the mouse enter/leave events.
-            // Not namespaced as we want to keep behaviour when not using data api.
-            if (!$.support.touchEvents && $.support.pointerEvents) {
-                this.$element.on(emouseenter, $.proxy(this.pause, this))
-                    .on(emouseleave, $.proxy(this.cycle, this));
-            }
-        }
-
         // Add the css class to support fade.
         this.options.mode === "fade" && this.$element.addClass("carousel-fade");
 
@@ -853,8 +838,7 @@
 
         });
 
-        $("[data-carousel-slide]").each(function () {
-
+        $(".carousel-control").each(function () {
             var $this = $(this).attr({ "tabindex": 0 });
             $this.is("a") ? $this.attr({ "role": "button" }) : $this.attr({ "type": "button" });
             if (!$this.find(".visuallyhidden").length) {
@@ -866,17 +850,30 @@
 
         // Find and bind indicators.
         // TODO: Should I add further a11y to this?
-        $("[data-carousel-slide-to]").each(function () {
-            var $this = $(this).attr({ "role": "button" }),
+        $("ol > li, ol > li > a").each(function () {
+            var $this = $(this),
                 $target = $($this.attr("data-carousel-target") || $this.attr("href"));
 
             if ($target[0] === element) {
-                var $parent = $this.parents("ol:first");
+                $this.attr({ "role": "button" });
+                var $parent = $this.closest("ol");
                 if ($.inArray($parent[0], self.$indicators) === -1) {
                     self.$indicators.push($parent[0]);
                 }
             }
         });
+
+        // Bind events
+        // Not namespaced as we want to keep behaviour when not using data api.
+        if (this.options.pause === "hover") {
+            // Bind the mouse enter/leave events.
+            if (!$.support.touchEvents && $.support.pointerEvents) {
+                this.$element.on(emouseenter, $.proxy(this.pause, this))
+                    .on(emouseleave, $.proxy(this.cycle, this));
+            }
+        }
+
+        this.$element.on(ekeydown, $.proxy(this.keydown, this));
     };
 
     Carousel.prototype.cycle = function (event) {
@@ -1076,44 +1073,33 @@
 
     Carousel.prototype.keydown = function (event) {
 
-        var which = event.which,
-        self = this;
+        var which = event && event.which;
 
         if (which === keys.LEFT || which === keys.RIGHT) {
-
-            var direction;
-
-            switch (which) {
-                case keys.LEFT:
-                    direction = "prev";
-                    this.prev();
-                    break;
-                case keys.RIGHT:
-                    direction = "next";
-                    this.next();
-                    break;
-            }
 
             event.preventDefault();
             event.stopPropagation();
 
+            var direction = "";
+
+            switch (which) {
+                case keys.LEFT:
+                    direction = ".left";
+                    this.prev();
+                    break;
+                case keys.RIGHT:
+                    direction = ".right";
+                    this.next();
+                    break;
+            }
+
             // Seek out the correct direction indicator and focus.
-            $("[data-carousel-slide]").each(function () {
-
-                var $this = $(this),
-                    data = $this.data("r.carouselOptions"),
-                    options = data || $.buildDataOptions($this, {}, "carousel", "r"),
-                    $target = $(options.target || (options.target = $this.attr("href")));
-
-                if (options.slide === direction && $target[0] === self.$element[0]) {
-                    $this.focus();
-                }
-            });
+            this.$element.find(".carousel-control" + direction)[0].focus();
         }
     };
 
     // Plug-in definition 
-    $.fn.carousel = function (options, event) {
+    $.fn.carousel = function (options) {
 
         return this.each(function () {
 
@@ -1132,10 +1118,10 @@
 
             } else if (typeof options === "string" || (options = opts.slide)) {
 
-                data[options](event);
+                data[options]();
 
             } else if (data.options.interval) {
-                data.cycle();
+                data.pause().cycle();
             }
         });
     };
@@ -1176,8 +1162,6 @@
         if (carousel) {
             typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
         }
-    }).on(ekeydown, ".carousel", function (event) {
-        $(this).carousel("keydown", event);
     });
 
     w.RESPONSIVE_CAROUSEL = true;
@@ -1231,10 +1215,8 @@
                         .appendTo(this.$element);
         }
 
-        this.$element.on(eclick, $.proxy(function (event) {
-            event.preventDefault();
-            this.close();
-        }, this));
+        // Bind events
+        this.$element.on(eclick, $.proxy(this.click, this));
     };
 
     Dismiss.prototype.close = function () {
@@ -1263,6 +1245,11 @@
         this.$target.onTransitionEnd(complete);
     };
 
+    Dismiss.prototype.click = function (event) {
+        event.preventDefault();
+        this.close();
+    };
+
     // Plug-in definition 
     $.fn.dismiss = function (options) {
 
@@ -1277,8 +1264,8 @@
             }
 
             // Close the element.
-            if (typeof options === "string") {
-                data[options]();
+            if (options === "close") {
+                data.close();
             }
         });
     };
@@ -1327,8 +1314,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         eready = "ready" + ns,
-        eclick = "click" + ns,
-        ekeydown = "keydown" + ns,
+        eclick = "click",
+        ekeydown = "keydown",
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -1351,23 +1338,23 @@
                 var eventToTrigger = $.Event(completeEvent);
 
                 // Ensure the height/width is set to auto.
-                self.$element.removeClass("trans")[self.options.dimension]("");
+                self.$target.removeClass("trans")[self.options.dimension]("");
 
                 self.transitioning = false;
 
                 // Set the correct aria attributes.
-                self.$element.attr({
+                self.$target.attr({
                     "aria-hidden": !doShow,
                     "tabindex": doShow ? 0 : -1,
                 });
 
-                $("#" + self.$element.attr("aria-labelledby")).attr({
+                $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
                     "aria-expanded": doShow,
                     "tabindex": self.options.parent ? doShow ? 0 : -1 : 0
                 });
 
-                self.$element.trigger(eventToTrigger);
+                self.$target.trigger(eventToTrigger);
             };
 
         if (this.transitioning || startEvent.isDefaultPrevented()) {
@@ -1377,16 +1364,17 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$element.trigger(startEvent)[method]("collapse");
-        this.$element[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+        this.$target.trigger(startEvent)[method]("collapse");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
-        this.$element.onTransitionEnd(complete);
+        this.$target.onTransitionEnd(complete);
     };
 
     // The Dropdown class definition
     var Dropdown = function (element, options) {
 
         this.$element = $(element);
+        this.$target = $(options.target);
         this.defaults = {
             dimension: "height"
         };
@@ -1396,7 +1384,7 @@
         this.endSize = null;
 
         if (this.options.parent) {
-            this.$parent = this.$element.closest(this.options.parent);
+            this.$parent = this.$target.closest(this.options.parent);
         }
 
         // Add accessibility features.
@@ -1409,8 +1397,8 @@
 
         var $tab = $("[href=" + this.options.target + "], [data-dropdown-target=" + this.options.target + "]"),
             tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
-            paneId = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
-            active = !this.$element.hasClass("collapse");
+            paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
+            active = !this.$target.hasClass("collapse");
 
         $tab.attr({
             "id": tabId,
@@ -1421,63 +1409,76 @@
             "tabindex": this.options.parent ? active ? 0 : -1 : 0
         });
 
-        this.$element.attr({
+        this.$target.attr({
             "id": paneId,
             "role": "tabpanel",
             "aria-labelledby": tabId,
             "aria-hidden": !active,
             "tabindex": active ? 0 : -1
         });
+
+        // Bind events.
+        this.$element.on(eclick, $.proxy(this.click, this));
+        this.$element.on(ekeydown, $.proxy(this.keydown, this));
+
     };
 
     Dropdown.prototype.show = function () {
 
-        if (this.transitioning || this.$element.hasClass("expand")) {
+        if (this.transitioning || this.$target.hasClass("expand")) {
             return;
         }
 
         var dimension = this.options.dimension,
-            actives = this.$parent && this.$parent.find(".dropdown-group:not(.collapse)"),
+            $actives = this.$parent && this.$parent.find("[role=tab]"),
             hasData;
+
+        $actives = $.grep($actives, function (a) {
+
+            var $this = $(a),
+                $target = $this.data("r.dropdown");
+            return $target.hasClass("dropdown-group") && !$target.hasClass("collapse");
+        });
+
+        console.log($actives);
 
         // Set the height/width to zero then to the height/width
         // so animation can take place.
-        this.$element[dimension](0);
+        this.$target[dimension](0);
 
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$element[dimension]("auto");
-            this.endSize = w.getComputedStyle(this.$element[0])[dimension];
+            this.$target[dimension]("auto");
+            this.endSize = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset to zero and force repaint.
-            this.$element[dimension](0).redraw();
+            this.$target[dimension](0).redraw();
         }
 
-        this.$element[dimension](this.endSize || "");
+        this.$target[dimension](this.endSize || "");
 
         transition.call(this, "removeClass", $.Event(eshow), eshown);
 
-        if (actives && actives.length) {
-            hasData = actives.data("r.dropdown");
-            actives.dropdown("hide");
+        if ($actives && $actives.length) {
+            hasData = $actives.data("r.dropdown");
+            $actives.dropdown("hide");
 
             if (!hasData) {
-                actives.data("r.dropdown", null);
+                $actives.data("r.dropdown", null);
             }
         }
-
     };
 
     Dropdown.prototype.hide = function () {
 
-        if (this.transitioning || this.$element.hasClass("collapse")) {
+        if (this.transitioning || this.$target.hasClass("collapse")) {
             return;
         }
 
         if (this.$parent) {
 
-            var actives = this.$parent.find(".dropdown-group:not(.collapse)").not(this.$element);
+            var actives = this.$parent.find(".dropdown-group:not(.collapse)").not(this.$target);
 
             if (!actives.length) {
                 return;
@@ -1491,20 +1492,26 @@
         if (supportTransition) {
 
             // Set the height to auto, calculate the height/width and reset.
-            size = w.getComputedStyle(this.$element[0])[dimension];
+            size = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset the size and force repaint.
-            this.$element[dimension](size).redraw(); // Force reflow ;
+            this.$target[dimension](size).redraw(); // Force reflow ;
         }
 
-        this.$element.removeClass("expand");
-        this.$element[dimension](0);
+        this.$target.removeClass("expand");
+        this.$target[dimension](0);
         transition.call(this, "addClass", $.Event(ehide), ehidden);
     };
 
     Dropdown.prototype.toggle = function () {
         // Run the correct command based on the presence of the class "collapse".
-        this[this.$element.hasClass("collapse") ? "show" : "hide"]();
+        this[this.$target.hasClass("collapse") ? "show" : "hide"]();
+    };
+
+    Dropdown.prototype.click = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.toggle();
     };
 
     Dropdown.prototype.keydown = function (event) {
@@ -1513,7 +1520,9 @@
 
         if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {
 
-            // Ignore anything but left and right.
+            event.preventDefault();
+            event.stopPropagation();
+
             var $this = $(event.target),
                 $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
                 $items = $parent.find("[role=tab]"),
@@ -1540,16 +1549,11 @@
             }
 
             $items.eq(index).focus();
-
-            event.preventDefault();
-            event.stopPropagation();
-
         }
     };
 
-
     // Plug-in definition 
-    $.fn.dropdown = function (options, event) {
+    $.fn.dropdown = function (options) {
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdown"),
@@ -1562,7 +1566,7 @@
 
             // Run the appropriate function if a string is passed.
             if (typeof options === "string") {
-                data[options](event);
+                data[options]();
             }
         });
     };
@@ -1582,30 +1586,12 @@
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
-                target = options.target || (options.target = $this.attr("href")),
-                $target = $(target);
+                options = data || $.buildDataOptions($this, {}, "dropdown", "r");
 
+            options.target || (options.target = $this.attr("href"));
             // Run the dropdown method.
-            $target.dropdown(options);
+            $this.dropdown(options);
         });
-    }).on(eclick + " " + ekeydown, ":attrStart(data-dropdown)[role=tab]", function (event) {
-
-        var $this = $(this),
-            data = $this.data("r.dropdownOptions"),
-            options = data || $.buildDataOptions($this, {}, "dropdown", "r"),
-            target = options.target || (options.target = $this.attr("href")),
-            $target = $(target);
-
-        switch (event.type) {
-            case "click":
-                event.preventDefault();
-                $target.dropdown("toggle");
-                break;
-            case "keydown":
-                $target.dropdown("keydown", event);
-                break;
-        }
     });
 
     w.RESPONSIVE_DROPDOWN = true;
@@ -2670,48 +2656,8 @@
         });
 
         // Bind events.
-        $(this.$element).on(eclick, "ul[role=tablist] > li > [role=tab]", $.proxy(function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            var $this = $(event.target),
-                $li = $this.parent(),
-                index = $li.index();
-
-            this.show(index);
-
-        }, this)).on(ekeydown, "ul[role=tablist] > li > [role=tab]", $.proxy(function (event) {
-
-            var which = event.which;
-
-            // Ignore anything but left and right.
-            if (which === keys.LEFT || which === keys.RIGHT) {
-
-                event.stopPropagation();
-
-                var $this = $(event.target),
-                    $li = $this.parent(),
-                    $all = $li.siblings().addBack(),
-                    length = $all.length,
-                    index = $li.index();
-
-                // Ensure that the index stays within bounds.
-                index = which === keys.LEFT ? index - 1 : index + 1;
-
-                if (index === length) {
-                    index = 0;
-                }
-
-                if (index < 0) {
-                    index = length - 1;
-                }
-
-                this.show(index);
-            }
-
-        }, this));
-
+        $(this.$element).on(eclick, "ul[role=tablist] > li > [role=tab]", $.proxy(this.click, this))
+                        .on(ekeydown, "ul[role=tablist] > li > [role=tab]", $.proxy(this.keydown, this));
     };
 
     Tabs.prototype.show = function (position) {
@@ -2741,6 +2687,47 @@
             // Do our callback
             $item.onTransitionEnd(complete);
         });
+    };
+
+    Tabs.prototype.click = function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var $this = $(event.target),
+            $li = $this.parent(),
+            index = $li.index();
+
+        this.show(index);
+    };
+
+    Tabs.prototype.keydown = function (event) {
+
+        var which = event.which;
+        // Ignore anything but left and right.
+        if (which === keys.LEFT || which === keys.RIGHT) {
+
+            event.stopPropagation();
+
+            var $this = $(event.target),
+                $li = $this.parent(),
+                $all = $li.siblings().addBack(),
+                length = $all.length,
+                index = $li.index();
+
+            // Ensure that the index stays within bounds.
+            index = which === keys.LEFT ? index - 1 : index + 1;
+
+            if (index === length) {
+                index = 0;
+            }
+
+            if (index < 0) {
+                index = length - 1;
+            }
+
+            this.show(index);
+        }
     };
 
     // Plug-in definition 
