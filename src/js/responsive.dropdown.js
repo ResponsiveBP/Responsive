@@ -128,20 +128,26 @@
             return;
         }
 
-        var dimension = this.options.dimension,
-            $actives = this.$parent && this.$parent.find("[role=tab]") || [];
+        var self = this,
+            dimension = this.options.dimension,
+            $actives = [];
 
-        $actives = $.grep($actives, function (a) {
-            var $this = $(a),
-                $target = $this.data("r.dropdown") && $this.data("r.dropdown").$target;
+        if (this.$parent) {
+            // Get all the related open panes.
+            $actives = this.$parent.find("[role=tab]");
 
-            return $target.hasClass("dropdown-group") && !$target.hasClass("collapse");
-        });
+            $actives = $.grep($actives, function (a) {
+                var data = $(a).data("r.dropdown"),
+                    $target = data && data.$target;
+
+                return $target && $target.hasClass("dropdown-group") && !$target.hasClass("collapse") && data.$parent[0] === self.$parent[0];
+            });
+        }
 
         // Set the height/width to zero then to the height/width
         // so animation can take place.
         this.$target[dimension](0);
-
+            
         if (supportTransition) {
 
             // Calculate the height/width.
