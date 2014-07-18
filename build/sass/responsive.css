@@ -5,8 +5,8 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/* Responsive v2.5.7 | MIT License | responsivebp.com */
-/* normalize.css v3.0.1 | MIT License | git.io/normalize */
+/*! Responsive v2.5.7 | MIT License | responsivebp.com */
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -363,27 +363,12 @@ th {
   padding: 0; }
 
 /*
- * Fix the box model
- * Overwrite Normalize rather than edit it.
- */
-*, *:before, *:after,
-hr, input[type=search] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; }
-
-*:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -1px; }
-
-/*
  * IE10 in Windows (Phone) 8
  * Support for responsive views via media queries do not work in IE10 on mobile for
  * versions prior to WP8 Update 3 (GDR3).
  */
 @-ms-viewport {
   width: device-width; }
-
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
@@ -392,7 +377,23 @@ html {
   /* 1 */
   color: #222222;
   font-size: 100%;
-  line-height: 1.4; }
+  line-height: 1.4;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+/*
+ * Fix the box model
+ * Overwrite Normalize rather than edit it.
+ */
+*, *:before, *:after,
+hr, input[type=search] {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
+
+*:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -1px; }
 
 /*
  * Headers
@@ -744,6 +745,12 @@ abbr {
 /*
  * Small 
  */
+@media (min-width: 48em) and (max-width: 61.99em) {
+  [class*=col-].reset-s-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-s-right-only] {
+    float: right; } }
 @media (min-width: 48em) {
   [class*=col-s] + [class*=col-s] {
     margin-left: 2%; }
@@ -1017,15 +1024,15 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-s-11 {
     right: 91.6667%; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
-  [class*=col-].reset-s-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-s-right-only] {
-    float: right; } }
 /*
  * Medium 
  */
+@media (min-width: 62em) and (max-width: 74.99em) {
+  [class*=col-].reset-m-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-m-right-only] {
+    float: right; } }
 @media (min-width: 62em) {
   [class*=col-m] + [class*=col-m] {
     margin-left: 2%; }
@@ -1299,12 +1306,6 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-m-11 {
     right: 91.6667%; } }
-@media (min-width: 62em) and (max-width: 74.99em) {
-  [class*=col-].reset-m-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-m-right-only] {
-    float: right; } }
 /*
  * Large 
  */
@@ -1974,7 +1975,6 @@ textarea {
   input[type=color] {
     min-height: 1.8em;
     padding: 0; } }
-
 @media (-webkit-min-device-pixel-ratio: 0) {
   input {
         /*
@@ -2295,7 +2295,7 @@ table {
       left: 0;
       width: 100%;
       height: 100%;
-      border: 1px solid #a4c6fd;
+      border: 2px solid #a4c6fd;
       pointer-events: none; }
     .carousel > figure > img {
       display: block;
@@ -2521,7 +2521,7 @@ x::-ms-reveal,
     display: inline-block;
     height: 100%;
     width: 1px;
-    margin-left: -.25em;
+    margin-left: -.27em;
     margin-right: -1px;
     vertical-align: middle; }
   .lightbox-overlay.lightbox-loader:after {
@@ -3193,7 +3193,6 @@ x::-ms-reveal,
 
   @page {
     margin: 0.5cm; }
-
   p,
   h2,
   h3 {

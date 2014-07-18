@@ -1,19 +1,4 @@
 /*
- * Fix the box model
- * Overwrite Normalize rather than edit it.
- */
-*, *:before, *:after,
-hr, input[type=search] {
-    box-sizing: border-box;
-}
-
-*:focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: $selection-focus-offset;
-}
-
-/*
  * IE10 in Windows (Phone) 8
  * Support for responsive views via media queries do not work in IE10 on mobile for
  * versions prior to WP8 Update 3 (GDR3).
@@ -30,6 +15,22 @@ html {
     color: $base-text-color;
     font-size: $base-font-size;
     line-height: $base-line-height;
+    box-sizing: border-box;
+}
+
+/*
+ * Fix the box model
+ * Overwrite Normalize rather than edit it.
+ */
+*, *:before, *:after,
+hr, input[type=search] {
+    box-sizing: inherit;
+}
+
+*:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: $selection-focus-offset;
 }
 
 /*
