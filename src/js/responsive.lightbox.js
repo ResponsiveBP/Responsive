@@ -335,7 +335,7 @@
                             iframeHeight = $iframe.height(),
                             ratio = iframeWidth / iframeHeight,
                             childWidth = childHeight * ratio;
-
+                        // Set both to ensure there is no overflow.
                         $.each([$lightbox, $iframe], function () {
 
                             this.css({
@@ -639,8 +639,6 @@
         if (this.isShown) {
             return;
         }
-
-        console.log("show");
 
         // If the trigger has a mobile target and the viewport is smaller than the mobile limit
         // then redirect to that page instead.

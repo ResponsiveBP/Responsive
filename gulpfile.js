@@ -54,6 +54,7 @@ var cssSrc = [
     path.css.src + "dropdown.css",
     path.css.src + "autosize.css",
     path.css.src + "carousel.css",
+    path.css.src + "modal.css",
     path.css.src + "tabs.css",
     path.css.src + "lightbox.css",
     path.css.src + "helpers-base.css",
@@ -69,6 +70,7 @@ var jsSrc = [
     path.js.src + "responsive.carousel.js",
     path.js.src + "responsive.dismiss.js",
     path.js.src + "responsive.dropdown.js",
+    path.js.src + "responsive.modal.js",
     path.js.src + "responsive.lightbox.js",
     path.js.src + "responsive.table.js",
     path.js.src + "responsive.tabs.js"
