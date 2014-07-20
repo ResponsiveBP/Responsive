@@ -1673,15 +1673,49 @@
         this.create();
         this.overlay();
     };
-
+    Modal.protoype.hide = function () { };
     Modal.prototype.overlay = function (hide) {
 
         // TODO: Add hide method.
-        var self = this,
+        var fade = hide ? "removeClass" : "addClass",
+            self = this,
             shownEvent = $.Event(eshown),
             complete = function () {
+                if (hide) {
+                    $overlay.addClass("hidden");
+                    $html.removeClass("modal-on")
+                         .css("margin-right", "");
 
-                // TODO: Complete function;
+                    if ($html.hasClass("modal-lock")) {
+                        $html.removeClass("modal-lock");
+                        //if (lastScroll !== $window.scrollTop()) {
+                        //    $window.scrollTop(lastScroll);
+                        //    lastScroll = 0;
+                        //}
+                    }
+
+                    return;
+                }
+
+                $overlay.off(eclick).on(eclick, function (e) {
+
+                    if (self.options.modal) {
+                        return;
+                    }
+
+                    var closeTarget = $close[0],
+                        eventTarget = e.target;
+
+                    if (eventTarget === closeTarget) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        self.hide();
+                    }
+
+                    if (eventTarget === $overlay[0]) {
+                        self.hide();
+                    }
+                });
             };
 
         // Show the overlay.
@@ -1698,10 +1732,12 @@
             $body.append($overlay);
         }
 
-        // Remove the scrollbar.
-        $html.addClass("modal-on")
-             .css("margin-right", getScrollbarWidth());
-        $overlay.removeClass("hidden").addClass("fade-in").redraw();
+        if (!hide) {
+            // Remove the scrollbar.
+            $html.addClass("modal-on")
+                .css("margin-right", getScrollbarWidth());
+        }
+        $overlay.removeClass("hidden")[fade]("fade-in").redraw();
         $overlay.onTransitionEnd(complete);
     };
     Modal.prototype.create = function () {
@@ -1732,7 +1768,7 @@
 
             $.each([$header, $footer, $close, $modal], function () {
 
-                this.toggleClass("fade-in")
+                this.addClass("fade-in")
                     .redraw();
             });
 
@@ -1821,17 +1857,16 @@
                     "vspace": 0,
                     "webkitallowfullscreen": "",
                     "mozallowfullscreen": "",
-                    "allowfullscreen": "",
-                    "src": src
-                }).appendTo($iframeWrap);
+                    "allowfullscreen": ""
+                }).one("load error", function () {
+                    // Fade in. Can be slow but ensures concurrency.
+                    fadeIn();
+                }).appendTo($iframeWrap).attr("src", src);
 
                 // Test and add additional media classes.
                 var mediaClasses = getMediaProvider(target) || "";
-
                 $iframeWrap.addClass(mediaClasses).appendTo($modal);
 
-                // Fade in. Not on load as can take forever.
-                fadeIn();
             } else {
                 if (rimage.test(target)) {
 
