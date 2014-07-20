@@ -35,7 +35,6 @@ x::-ms-reveal,
         height: 100%;
         width: 1px;
         margin-right: -1px;
-        margin-left: -.25em;
         vertical-align: middle;
     }
 }
@@ -78,13 +77,6 @@ x::-ms-reveal,
 .modal-image {
     > img {
         max-height: 100%;
-        /* IE8 reads width as zero when loaded dynamically.*/
-        max-width: none \9;
-        width: auto \9;
-        /* IE9 and IE10 still read the \9 hack*/
-        &:nth-of-type(1n) {
-            max-width: 100% \9;
-        }
     }
 }
 
@@ -124,7 +116,30 @@ x::-ms-reveal,
     font-size: 1.5em;
     font-weight: bold;
     color: $lightbox-control-color;
+}
 
+.modal-direction {
+    position: fixed;
+    top: 49%;
+    left: 0;
+    z-index: 2;
+    display: block;
+    width: 2em;
+    padding: .5em;
+    color: $lightbox-control-color;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+
+
+    &.right {
+        left: auto;
+        right: 0;
+    }
+}
+
+.modal-close,
+.modal-direction {
     &,
     &:hover,
     &:active,

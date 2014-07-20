@@ -81,7 +81,6 @@
 
         this.create();
         this.overlay();
-        this.resize();
     };
 
     Modal.prototype.overlay = function (hide) {
@@ -137,6 +136,19 @@
             return !rexternalHost.test(locationParts[2]);
         };
 
+        var fadeIn = function () {
+            self.resize();
+
+            $.each([$header, $footer, $close, $modal], function () {
+
+                this.toggleClass("fade-in")
+                    .redraw();
+            });
+
+            self.overlay();
+            $overlay.removeClass("modal-loader");
+        };
+
         var self = this,
             title = this.options.title,
             description = this.options.description,
@@ -183,7 +195,7 @@
             $target.detach().appendTo($content).removeClass("hidden");
             $content.appendTo($modal);
             // Fade in.
-            this.overlay();
+            fadeIn();
         } else {
             if (iframe) {
 
@@ -228,7 +240,7 @@
                 $iframeWrap.addClass(mediaClasses).appendTo($modal);
 
                 // Fade in. Not on load as can take forever.
-                this.overlay();
+                fadeIn();
             } else {
                 if (rimage.test(target)) {
 
@@ -236,16 +248,15 @@
 
                     $("<img/>").one("load error", function () {
                         // Fade in.
-                        self.overlay();
-                    }).attr("src", target)
-                        .appendTo($modal);
+                        fadeIn();
+                    }).appendTo($modal).attr("src", target);
                 } else {
                     $modal.addClass("modal-ajax");
                     // Standard ajax load.
                     $content.load(target, function () {
                         $content.appendTo($modal);
                         // Fade in.
-                        self.overlay();
+                        fadeIn();
                     });
                 }
             }
@@ -256,15 +267,6 @@
             $next.html(nextText).prependTo($modal).removeClass("hidden");
             $previous.html(previousText).prependTo($modal).removeClass("hidden");
         }
-
-        $.each([$header, $footer, $close, $modal], function () {
-
-            this.toggleClass("fade-in")
-                .redraw();
-        });
-
-        $overlay.removeClass("modal-loader");
-
     };
     Modal.prototype.click = function (event) {
         event.preventDefault();
@@ -281,12 +283,8 @@
         $(".modal-overlay").css({ "padding-top": topHeight, "padding-bottom": footerHeight });
 
         if ($modal.hasClass("modal-image")) {
-            // Reset the max-width to ensure that IE8 will trigger layout.
-            $modal.children("img").css(
-                {
-                    "max-height": windowHeight - (topHeight + footerHeight),
-                    "max-width": "100%"
-                });
+
+            $modal.children("img").css("max-height", windowHeight - (topHeight + footerHeight));
         } else if ($modal.hasClass("modal-iframe")) {
 
             // Calculate the ratio.
