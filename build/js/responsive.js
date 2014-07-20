@@ -1657,13 +1657,37 @@
     };
 
     Modal.prototype.show = function () {
-        // TODO: do we actually need this?
+
         if (this.isShown) {
             return;
         }
 
-        var showEvent = $.Event(eshow);
+        var self = this,
+            showEvent = $.Event(eshow),
+            shownEvent = $.Event(eshown),
+            complete = function () {
 
+                $modal.focus();
+                // manageFocus();
+
+                // Bind the keyboard actions.
+                if (self.options.keyboard) {
+                    // manageKeyboard.call(self, "show");
+                }
+
+                if (self.options.group) {
+                    if (self.options.touch) {
+                        //  manageTouch.call(self);
+                    } else {
+                        //   manageTouch.call(self, "off");
+                    }
+                }
+
+                console.log("shown");
+                self.$element.trigger(shownEvent);
+            };
+
+        console.log("show");
         this.$element.trigger(showEvent);
 
         if (showEvent.isDefaultPrevented()) {
@@ -1672,8 +1696,35 @@
 
         this.create();
         this.overlay();
+
+        // Call the callback.
+        $modal.onTransitionEnd(complete);
     };
-    Modal.protoype.hide = function () { };
+    Modal.prototype.hide = function () {
+
+        if (!this.isShown) {
+            return;
+        }
+
+        var self = this,
+            hideEvent = $.Event(ehide),
+            hiddenEvent = $.Event(ehidden),
+            complete = function () {
+                self.$element.trigger(hiddenEvent);
+            };
+
+        this.$element.trigger(hideEvent);
+
+        if (hideEvent.isDefaultPrevented()) {
+            return;
+        }
+
+        this.isShown = false;
+
+        this.destroy();
+
+        $modal.onTransitionEnd(complete);
+    };
     Modal.prototype.overlay = function (hide) {
 
         // TODO: Add hide method.
@@ -1735,8 +1786,9 @@
         if (!hide) {
             // Remove the scrollbar.
             $html.addClass("modal-on")
-                .css("margin-right", getScrollbarWidth());
+                 .css("margin-right", getScrollbarWidth());
         }
+
         $overlay.removeClass("hidden")[fade]("fade-in").redraw();
         $overlay.onTransitionEnd(complete);
     };
@@ -1893,6 +1945,51 @@
             $next.html(nextText).prependTo($modal).removeClass("hidden");
             $previous.html(previousText).prependTo($modal).removeClass("hidden");
         }
+    };
+    Modal.prototype.destroy = function () {
+        var self = this,
+            cleanUp = function () {
+
+                if (!self.options.external) {
+                    // Put that kid back where it came from or so help me.
+                    $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+                    $placeholder.detach().insertAfter($overlay);
+                }
+
+                // Clean up the header/footer.
+                $header.empty().detach();
+                $footer.empty().detach();
+                $close.detach();
+
+                // Remove label.
+                $overlay.removeAttr("aria-labelledby");
+
+                // Clean up the modal.
+                $next.detach();
+                $previous.detach();
+
+                // Fix __flash__removeCallback' is undefined error.
+                $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
+
+                    $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
+                        "max-height": "",
+                        "max-width": ""
+                    }).empty();
+
+                    // manageFocus("hide");
+
+                    // Unbind the keyboard actions.
+                    if (self.options.keyboard) {
+
+                        // manageKeyboard.call(self, "hide");
+                    }
+                }, 100));
+
+                // $modal.removeData("currentmodal");
+            };
+
+        self.overlay(true);
+        $modal.onTransitionEnd(cleanUp);
     };
     Modal.prototype.click = function (event) {
         event.preventDefault();
@@ -2677,7 +2774,6 @@
             hideEvent = $.Event(ehide),
             hiddenEvent = $.Event(ehidden),
             complete = function () {
-
                 self.$element.trigger(hiddenEvent);
             };
 

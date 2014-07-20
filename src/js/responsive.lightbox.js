@@ -697,7 +697,6 @@
             hideEvent = $.Event(ehide),
             hiddenEvent = $.Event(ehidden),
             complete = function () {
-
                 self.$element.trigger(hiddenEvent);
             };
 
