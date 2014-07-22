@@ -5,8 +5,8 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/* Responsive v2.5.7 | MIT License | responsivebp.com */
-/* normalize.css v3.0.1 | MIT License | git.io/normalize */
+/*! Responsive v2.5.7 | MIT License | responsivebp.com */
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -369,7 +369,6 @@ th {
  */
 @-ms-viewport {
   width: device-width; }
-
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
@@ -746,6 +745,12 @@ abbr {
 /*
  * Small 
  */
+@media (min-width: 48em) and (max-width: 61.99em) {
+  [class*=col-].reset-s-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-s-right-only] {
+    float: right; } }
 @media (min-width: 48em) {
   [class*=col-s] + [class*=col-s] {
     margin-left: 2%; }
@@ -1019,15 +1024,15 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-s-11 {
     right: 91.6667%; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
-  [class*=col-].reset-s-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-s-right-only] {
-    float: right; } }
 /*
  * Medium 
  */
+@media (min-width: 62em) and (max-width: 74.99em) {
+  [class*=col-].reset-m-only {
+    clear: both;
+    margin-left: 0 !important; }
+  [class*=col-][class*=push-m-right-only] {
+    float: right; } }
 @media (min-width: 62em) {
   [class*=col-m] + [class*=col-m] {
     margin-left: 2%; }
@@ -1301,12 +1306,6 @@ abbr {
     left: 91.6667%; }
   .no-gutter > .pull-m-11 {
     right: 91.6667%; } }
-@media (min-width: 62em) and (max-width: 74.99em) {
-  [class*=col-].reset-m-only {
-    clear: both;
-    margin-left: 0 !important; }
-  [class*=col-][class*=push-m-right-only] {
-    float: right; } }
 /*
  * Large 
  */
@@ -1976,7 +1975,6 @@ textarea {
   input[type=color] {
     min-height: 1.8em;
     padding: 0; } }
-
 @media (-webkit-min-device-pixel-ratio: 0) {
   input {
         /*
@@ -2258,12 +2256,17 @@ table {
   -webkit-transition: none;
           transition: none; }
 
+/*
+ * 1: Prefent font shift on chrome.
+ */
 .carousel {
   margin-bottom: 1em;
   overflow: hidden;
   position: relative;
   -webkit-backface-visibility: hidden;
+  /* 1 */
   -webkit-perspective: 1000;
+  /* 1 */
     /*
 	 * Default slide version
 	 */
@@ -2272,9 +2275,6 @@ table {
 	 */
     /*
 	 * Next Last version
-	 */
-    /*
-	 * 1.  IE10 is picking up on the left positioning :(
 	 */ }
   .carousel.no-transition > figure {
     -webkit-transition-duration: 0s !important;
@@ -2283,12 +2283,12 @@ table {
     margin: 0;
     display: none;
     position: relative;
-    -webkit-transition: .7s ease-in-out -webkit-transform, .7s ease-in-out left;
-            transition: .7s ease-in-out transform, .7s ease-in-out left;
-    -webkit-transform: translate3d(0, 0, 0); }
+    -webkit-transition: .7s ease-in-out left;
+            transition: .7s ease-in-out left;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
     .carousel > figure:focus:before {
       content: "";
-      position: absolute;
       position: absolute;
       z-index: 1;
       top: 0;
@@ -2342,10 +2342,7 @@ table {
   .carousel .carousel-active,
   .carousel .next.left,
   .carousel .prev.right {
-    left: 0 \9;
-    -webkit-transform: translateX(0);
-        -ms-transform: translateX(0);
-            transform: translateX(0); }
+    left: 0; }
   .carousel .carousel-active {
     position: relative !important;
     z-index: 1; }
@@ -2361,23 +2358,10 @@ table {
     height: 100%; }
   .carousel .next,
   .carousel .carousel-active.right {
-    left: 100% \9;
-    -webkit-transform: translateX(100%);
-        -ms-transform: translateX(100%);
-            transform: translateX(100%); }
+    left: 100%; }
   .carousel .prev,
   .carousel .carousel-active.left {
-    left: -100% \9;
-    -webkit-transform: translateX(-100%);
-        -ms-transform: translateX(-100%);
-            transform: translateX(-100%); }
-  .carousel x::-ms-reveal,
-  .carousel .next,
-  .carousel .prev,
-  .carousel .carousel-active.left,
-  .carousel .carousel-active.right {
-    left: 0;
-    /* 1 */ }
+    left: -100%; }
 
 .carousel-control {
   position: absolute;
@@ -2420,10 +2404,7 @@ table {
 .carousel-fade > figure.next,
 .carousel-fade > figure.prev {
   z-index: 1;
-  left: 0 \9;
-  -webkit-transform: none;
-      -ms-transform: none;
-          transform: none;
+  left: 0;
   opacity: 1; }
 .carousel-fade > .carousel-active.swipe {
   z-index: 2; }
@@ -2432,11 +2413,8 @@ table {
 .carousel-fade .carousel-active {
   opacity: 1; }
   .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {
-    left: 0 \9;
+    left: 0;
     z-index: 2;
-    -webkit-transform: none;
-        -ms-transform: none;
-            transform: none;
     opacity: 0; }
 .carousel-fade .carousel-control, .carousel-fade .carousel-control:visited {
   z-index: 3; }
@@ -2706,6 +2684,7 @@ x::-ms-reveal,
 .modal {
   display: inline-block;
   max-height: 95%;
+  width: 95%;
   max-width: 1140px;
   vertical-align: middle;
   margin: 0 auto;
@@ -2713,7 +2692,6 @@ x::-ms-reveal,
 
 .modal-iframe,
 .modal-image {
-  width: 95%;
   overflow: hidden; }
 
 .modal-image > img {
@@ -3331,7 +3309,6 @@ x::-ms-reveal,
 
   @page {
     margin: 0.5cm; }
-
   p,
   h2,
   h3 {

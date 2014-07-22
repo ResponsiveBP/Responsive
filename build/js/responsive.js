@@ -877,14 +877,14 @@
         }
 
         if ($nextItem.hasClass("carousel-active")) {
-            return false;
+            return this.sliding = false;
         }
 
         // Trigger the slide event with positional data.
         slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
 
-        if (this.sliding || slideEvent.isDefaultPrevented()) {
+        if (slideEvent.isDefaultPrevented()) {
             return false;
         }
 
@@ -911,7 +911,7 @@
             if (self.$items) {
                 // Clear the transition properties if set.
                 self.$items.each(function () {
-                    $(this).css({ "transition": "", "opacity": "" });
+                    $(this).css({"transition-duration": ""});
                 });
             }
 
@@ -935,7 +935,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe").css({ "transform": "", "opacity": "" });
+                $(this).removeClass("swipe").css({ "left": "", "opacity": "" });
             });
         }
 
@@ -1041,8 +1041,8 @@
         if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
             this.$element.addClass("no-transition");
             if (this.options.mode === "slide") {
-                $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
-                $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
+                $activeItem.css({ "left": percent + "%" });
+                $nextItem.addClass("swipe").css({ "left": (percent + diff) + "%" });
             } else {
                 $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
                 $nextItem.addClass("swipe");
@@ -1606,7 +1606,7 @@
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
         eready = "ready" + ns,
-        eresize = "resize.modal",
+        eresize = ["resize", " orientationchange"].join(".modal "),
         eclick = "click",
         eshow = "show" + ns,
         eshown = "shown" + ns,
@@ -1650,6 +1650,12 @@
         this.title = null;
         this.description = null;
         this.isShown = null;
+        this.$group = null;
+
+        // Make a list of grouped modal targets.
+        if (this.options.group) {
+            this.$group = $("[data-modal-group=" + this.options.group + "]");
+        }
 
         // Bind events.
         this.$element.on(eclick, $.proxy(this.click, this));
@@ -1683,24 +1689,23 @@
                     }
                 }
 
-                console.log("shown");
                 self.$element.trigger(shownEvent);
             };
 
-        console.log("show");
         this.$element.trigger(showEvent);
 
         if (showEvent.isDefaultPrevented()) {
             return;
         }
 
-        this.create();
+        this.isShown = true;
         this.overlay();
+        this.create();
 
         // Call the callback.
         $modal.onTransitionEnd(complete);
     };
-    Modal.prototype.hide = function () {
+    Modal.prototype.hide = function (preserveOverlay) {
 
         if (!this.isShown) {
             return;
@@ -1722,6 +1727,10 @@
         this.isShown = false;
 
         this.destroy();
+
+        if (!preserveOverlay) {
+            this.overlay(true);
+        }
 
         $modal.onTransitionEnd(complete);
     };
@@ -1748,18 +1757,19 @@
                     return;
                 }
 
-                $overlay.off(eclick).on(eclick, function (e) {
+                // Bind click events to handle hide.
+                $overlay.off(eclick).on(eclick, function (event) {
 
                     if (self.options.modal) {
                         return;
                     }
 
                     var closeTarget = $close[0],
-                        eventTarget = e.target;
+                        eventTarget = event.target;
 
                     if (eventTarget === closeTarget) {
-                        e.preventDefault();
-                        e.stopPropagation();
+                        event.preventDefault();
+                        event.stopPropagation();
                         self.hide();
                     }
 
@@ -1789,10 +1799,12 @@
                  .css("margin-right", getScrollbarWidth());
         }
 
-        $overlay.removeClass("hidden")[fade]("fade-in").redraw();
+        $overlay.removeClass("hidden").redraw()[fade]("fade-in").redraw();
         $overlay.onTransitionEnd(complete);
     };
     Modal.prototype.create = function () {
+
+        $overlay.addClass("modal-loader");
 
         // Calculate whether this is an external request and set the value.
         this.options.external = !rhash.test(this.options.target);
@@ -1824,7 +1836,7 @@
                     .redraw();
             });
 
-            self.overlay();
+            // self.overlay();
             $overlay.removeClass("modal-loader");
         };
 
@@ -1945,6 +1957,20 @@
             $next.html(nextText).prependTo($modal).removeClass("hidden");
             $previous.html(previousText).prependTo($modal).removeClass("hidden");
         }
+
+        // Bind the next/previous events.
+        $modal.off(eclick).on(eclick, $.proxy(function (event) {
+            var next = $next[0],
+                previous = $previous[0],
+                eventTarget = event.target;
+
+            if (eventTarget === next || eventTarget === previous) {
+                event.preventDefault();
+                event.stopPropagation();
+                this[eventTarget === next ? "next" : "previous"]();
+            }
+
+        }, this));
     };
     Modal.prototype.destroy = function () {
         var self = this,
@@ -1964,7 +1990,7 @@
                 // Remove label.
                 $overlay.removeAttr("aria-labelledby");
 
-                // Clean up the modal.
+                // Clean up the next/previous.
                 $next.detach();
                 $previous.detach();
 
@@ -1988,7 +2014,11 @@
                 // $modal.removeData("currentmodal");
             };
 
-        self.overlay(true);
+        $.each([$header, $footer, $close, $modal], function () {
+            this.removeClass("fade-in")
+                .redraw();
+        });
+
         $modal.onTransitionEnd(cleanUp);
     };
     Modal.prototype.click = function (event) {
@@ -2025,6 +2055,58 @@
                 });
             });
         }
+    };
+    Modal.prototype.direction = function (course) {
+        if (!this.isShown) {
+            return;
+        }
+
+        if (this.options.group) {
+            var self = this,
+                index = this.$group.index(this.$element),
+                length = this.$group.length,
+                position = course === "next" ? index + 1 : index - 1,
+                complete = function () {
+                    if (self.$sibling) {
+                        if (supportTransition) {
+                            self.$sibling.trigger(eclick);
+                        } else {
+                            w.setTimeout(function () {
+                                self.$sibling.trigger(eclick);
+                            }, 300);
+                        }
+                    }
+                };
+
+            if (course === "next") {
+
+                if (position >= length || position < 0) {
+
+                    position = 0;
+                }
+            } else {
+
+                if (position >= length) {
+
+                    position = 0;
+                }
+
+                if (position < 0) {
+                    position = length - 1;
+                }
+            }
+
+            this.$sibling = $(this.$group[position]);
+            this.hide(true);
+
+            $modal.onTransitionEnd(complete);
+        }
+    };
+    Modal.prototype.next = function() {
+        this.direction("next");
+    };
+    Modal.prototype.previous = function() {
+        this.direction("previous");
     };
 
     // Plug-in definition 

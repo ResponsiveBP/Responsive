@@ -62,6 +62,7 @@ x::-ms-reveal,
 .modal {
     display: inline-block;
     max-height: 95%;
+    width: 95%;
     max-width: $grid-container-width;
     vertical-align: middle;
     margin: 0 auto;
@@ -70,7 +71,6 @@ x::-ms-reveal,
 
 .modal-iframe,
 .modal-image {
-    width: 95%;
     overflow: hidden;
 }
 

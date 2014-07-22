@@ -1,9 +1,12 @@
+/*
+ * 1: Prefent font shift on chrome.
+ */
 .carousel {
     margin-bottom: 1em;
     overflow: hidden;
     position: relative;
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden; /* 1 */
+    -webkit-perspective: 1000; /* 1 */
 
     &.no-transition > figure {
         transition-duration: 0s !important;
@@ -15,14 +18,13 @@
         margin: 0;
         display: none;
         position: relative;
-        transition: .7s ease-in-out transform, .7s ease-in-out left;
-        -webkit-transform: translate3d(0, 0, 0);
+        transition: .7s ease-in-out left;
+        transform: translate3d(0, 0, 0);
 
         &:focus {
 
             &:before {
                 content: "";
-                position: absolute;
                 position: absolute;
                 z-index: 1;
                 top: 0;
@@ -103,8 +105,7 @@
     .carousel-active,
     .next.left,
     .prev.right {
-        left: 0 \9;
-        transform: translateX(0);
+        left: 0;
     }
 
     .carousel-active {
@@ -128,24 +129,12 @@
 
     .next,
     .carousel-active.right {
-        left: 100% \9;
-        transform: translateX(100%);
+        left: 100%;
     }
 
     .prev,
     .carousel-active.left {
-        left: -100% \9;
-        transform: translateX(-100%);
-    }
-    /*
-	 * 1.  IE10 is picking up on the left positioning :(
-	 */
-    x::-ms-reveal,
-    .next,
-    .prev,
-    .carousel-active.left,
-    .carousel-active.right {
-        left: 0; /* 1 */
+        left: -100%;
     }
 }
 
@@ -203,8 +192,7 @@
     > figure.next,
     > figure.prev {
         z-index: 1;
-        left: 0 \9;
-        transform: none;
+        left: 0;
         opacity: 1;
     }
 
@@ -221,9 +209,8 @@
 
         &.left,
         &.right {
-            left: 0 \9;
+            left: 0;
             z-index: 2;
-            transform: none;
             opacity: 0;
         }
     }
