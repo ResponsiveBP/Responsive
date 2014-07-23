@@ -242,7 +242,7 @@
         }
 
         if ($nextItem.hasClass("carousel-active")) {
-            return this.sliding = false;
+            return (this.sliding = false);
         }
 
         // Trigger the slide event with positional data.

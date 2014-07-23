@@ -62,6 +62,7 @@
         this.$group = null;
 
         // Make a list of grouped modal targets.
+        // TODO: This needs to be different.
         if (this.options.group) {
             this.$group = $("[data-modal-group=" + this.options.group + "]");
         }
@@ -114,7 +115,7 @@
         // Call the callback.
         $modal.onTransitionEnd(complete);
     };
-    Modal.prototype.hide = function (preserveOverlay) {
+    Modal.prototype.hide = function (preserveOverlay, callback) {
 
         if (!this.isShown) {
             return;
@@ -135,7 +136,7 @@
 
         this.isShown = false;
 
-        this.destroy();
+        this.destroy(callback);
 
         if (!preserveOverlay) {
             this.overlay(true);
@@ -381,7 +382,7 @@
 
         }, this));
     };
-    Modal.prototype.destroy = function () {
+    Modal.prototype.destroy = function (callback) {
         var self = this,
             cleanUp = function () {
 
@@ -403,6 +404,11 @@
                 $next.detach();
                 $previous.detach();
 
+                $.each([$header, $footer, $close, $modal], function () {
+                    this.removeClass("fade-in")
+                        .redraw();
+                });
+
                 // Fix __flash__removeCallback' is undefined error.
                 $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
 
@@ -418,15 +424,13 @@
 
                         // manageKeyboard.call(self, "hide");
                     }
+
+                    // Handle callback passed from direction.
+                    callback && callback.call(self);
                 }, 100));
 
                 // $modal.removeData("currentmodal");
             };
-
-        $.each([$header, $footer, $close, $modal], function () {
-            this.removeClass("fade-in")
-                .redraw();
-        });
 
         $modal.onTransitionEnd(cleanUp);
     };
@@ -476,12 +480,13 @@
                 length = this.$group.length,
                 position = course === "next" ? index + 1 : index - 1,
                 complete = function () {
-                    if (self.$sibling) {
+                    // TODO: This is whack!
+                    if (self.$sibling && self.$sibling.data("r.modal")) {
                         if (supportTransition) {
-                            self.$sibling.trigger(eclick);
+                            self.$sibling.data("r.modal").show();
                         } else {
                             w.setTimeout(function () {
-                                self.$sibling.trigger(eclick);
+                                self.$sibling.data("r.modal").show();
                             }, 300);
                         }
                     }
@@ -506,15 +511,15 @@
             }
 
             this.$sibling = $(this.$group[position]);
-            this.hide(true);
+            this.hide(true, complete);
 
-            $modal.onTransitionEnd(complete);
+            //$modal.onTransitionEnd(complete);
         }
     };
-    Modal.prototype.next = function() {
+    Modal.prototype.next = function () {
         this.direction("next");
     };
-    Modal.prototype.previous = function() {
+    Modal.prototype.previous = function () {
         this.direction("previous");
     };
 
