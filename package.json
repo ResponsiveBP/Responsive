@@ -1,7 +1,7 @@
 {
   "name": "responsive",
   "description": "A super lightweight HTML, CSS, and JavaScript framework for building responsive websites.",
-  "version": "2.5.4",
+  "version": "2.5.7",
   "keywords": [
     "responsive",
     "css",
@@ -25,15 +25,15 @@
     }
   ],
   "devDependencies": {
-    "gulp": "~3.6.0",
-    "gulp-util": "~2.2.14",
-    "gulp-rename": "~1.2.0",
-    "gulp-concat": "~2.2.0",
+    "event-stream": "~3.1.2",
+    "gulp": "^3.8.6",
+    "gulp-clean": "^0.2.4",
+    "gulp-concat": "^2.2.0",
+    "gulp-jshint": "^1.5.6",
     "gulp-minify-css": "~0.3.1",
-    "gulp-zip": "~0.3.4",
-    "gulp-uglify": "~0.2.1",
-    "gulp-jshint": "~1.5.3",
-    "gulp-clean": "~0.2.4",
-    "event-stream": "~3.1.2"
+    "gulp-rename": "~1.2.0",
+    "gulp-uglify": "^0.2.1",
+    "gulp-util": "^2.2.20",
+    "gulp-zip": "^0.3.4"
   }
 }
