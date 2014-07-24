@@ -3,6 +3,7 @@ var gulp = require("gulp");
 
 // Install tools and plugins.
 var es = require("event-stream"),
+    del = require("del"),
     path = require("path"),
     plugins = require("gulp-load-plugins")();
 
@@ -125,14 +126,10 @@ gulp.task("scripts", function (cb) {
 });
 
 gulp.task("clean", ["css", "sass", "scripts"], function (cb) {
-
-    gulp.src("./dist/responsive.zip", { read: false })
-        .pipe(clean())
-        .on("end", cb);
+    del("./dist/responsive.zip", cb);
 });
 
 gulp.task("zip", ["clean"], function (cb) {
-
     gulp.src(basePath.build + "**/*")
         .pipe(plugins.zip("responsive.zip"))
         .pipe(gulp.dest(basePath.dist))
