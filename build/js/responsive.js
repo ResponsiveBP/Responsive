@@ -1607,6 +1607,8 @@
         eready = "ready" + ns,
         eresize = ["resize", " orientationchange"].join(".modal "),
         eclick = "click",
+        ekeydown = "keydown",
+        efocusin = "focusin",
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -1674,11 +1676,23 @@
             complete = function () {
 
                 $modal.focus();
-                // manageFocus();
+
+                $body.children().not($overlay).attr("tabindex", -1);
+
+                // Ensure that focus is maintained within the modal.
+                $(document).on(efocusin, function (event) {
+                    if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
+                        var $newTarget = $modal.find("input, select, a, iframe, img, div, button").first();
+                        $newTarget.length ? $newTarget.focus() : ((!self.options.modal && $close.focus()) || $overlay.focus());
+                        return false;
+                    }
+
+                    return true;
+                });
 
                 // Bind the keyboard actions.
                 if (self.options.keyboard) {
-                    // manageKeyboard.call(self, "show");
+                    $(document).on(ekeydown, $.proxy(self.keydown, self));
                 }
 
                 if (self.options.group) {
@@ -1705,6 +1719,7 @@
         // Call the callback.
         $modal.onTransitionEnd(complete);
     };
+
     Modal.prototype.hide = function (preserveOverlay, callback) {
 
         if (!this.isShown) {
@@ -1734,6 +1749,7 @@
 
         $modal.onTransitionEnd(complete);
     };
+
     Modal.prototype.overlay = function (hide) {
 
         // TODO: Add hide method.
@@ -1806,6 +1822,7 @@
         $overlay.removeClass("hidden").redraw()[fade]("fade-in").redraw();
         $overlay.onTransitionEnd(complete);
     };
+
     Modal.prototype.create = function () {
 
         $overlay.addClass("modal-loader");
@@ -1958,10 +1975,10 @@
 
         if ($group) {
             // Test to see if the grouped target have data.
-            var $filtered = $group.filter(function() {
+            var $filtered = $group.filter(function () {
                 return $(this).data("r.modal");
             });
-            
+
             if ($filtered.length) {
                 // Need to show next/previous.
                 $next.html(nextText).prependTo($modal).removeClass("hidden");
@@ -1983,6 +2000,7 @@
 
         }, this));
     };
+
     Modal.prototype.destroy = function (callback) {
         var self = this,
             cleanUp = function () {
@@ -2018,12 +2036,12 @@
                         "max-width": ""
                     }).empty();
 
-                    // manageFocus("hide");
+                    // Return focus events back to normal.
+                    $(document).off(efocusin);
 
                     // Unbind the keyboard actions.
                     if (self.options.keyboard) {
-
-                        // manageKeyboard.call(self, "hide");
+                        $(document).off(ekeydown);
                     }
 
                     // Handle callback passed from direction.
@@ -2035,10 +2053,33 @@
 
         $modal.onTransitionEnd(cleanUp);
     };
+
     Modal.prototype.click = function (event) {
         event.preventDefault();
         this.show();
     };
+
+    Modal.prototype.keydown = function (event) {
+
+        // Bind the escape key.
+        if (event.which === keys.ESCAPE) {
+            this.hide();
+        }
+
+        // Bind the next/previous keys.
+        if (this.options.group) {
+            // Bind the left arrow key.
+            if (event.which === keys.LEFT) {
+                this.previous();
+            }
+
+            // Bind the right arrow key.
+            if (event.which === keys.RIGHT) {
+                this.next();
+            }
+        }
+    };
+
     Modal.prototype.resize = function () {
 
         var windowHeight = parseInt($window.height(), 10),
@@ -2070,6 +2111,7 @@
             });
         }
     };
+
     Modal.prototype.direction = function (course) {
         if (!this.isShown) {
             return;
@@ -2116,9 +2158,11 @@
             //$modal.onTransitionEnd(complete);
         }
     };
+
     Modal.prototype.next = function () {
         this.direction("next");
     };
+
     Modal.prototype.previous = function () {
         this.direction("previous");
     };
