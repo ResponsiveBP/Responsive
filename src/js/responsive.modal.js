@@ -27,6 +27,7 @@
             LEFT: 37,
             RIGHT: 39
         },
+        lastScroll = 0,
         protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:",
         // Regular expression.
         rexternalHost = new RegExp("//" + w.location.host + "($|/)"),
@@ -62,9 +63,8 @@
         this.$group = null;
 
         // Make a list of grouped modal targets.
-        // TODO: This needs to be different.
         if (this.options.group) {
-            this.$group = $("[data-modal-group=" + this.options.group + "]");
+            this.$group = $(this.options.group);
         }
 
         // Bind events.
@@ -149,19 +149,19 @@
         // TODO: Add hide method.
         var fade = hide ? "removeClass" : "addClass",
             self = this,
-            shownEvent = $.Event(eshown),
             complete = function () {
                 if (hide) {
+                    // Put scroll position etc back as before.
                     $overlay.addClass("hidden");
                     $html.removeClass("modal-on")
                          .css("margin-right", "");
 
                     if ($html.hasClass("modal-lock")) {
                         $html.removeClass("modal-lock");
-                        //if (lastScroll !== $window.scrollTop()) {
-                        //    $window.scrollTop(lastScroll);
-                        //    lastScroll = 0;
-                        //}
+                        if (lastScroll !== $window.scrollTop()) {
+                            $window.scrollTop(lastScroll);
+                            lastScroll = 0;
+                        }
                     }
 
                     return;
@@ -204,7 +204,11 @@
         }
 
         if (!hide) {
-            // Remove the scrollbar.
+            // Take note of the current scroll position then remove the scrollbar.
+            if (lastScroll === 0) {
+                lastScroll = $window.scrollTop();
+            }
+
             $html.addClass("modal-on")
                  .css("margin-right", getScrollbarWidth());
         }
@@ -257,7 +261,7 @@
             target = this.options.target,
             external = isExternalUrl(target),
             local = !this.options.external && !external,
-            group = this.options.group,
+            $group = this.$group,
             nextText = this.options.next + "<span class=\"visuallyhidden\">" + this.options.nextHint + "</span>",
             previousText = this.options.previous + "<span class=\"visuallyhidden\">" + this.options.previousHint + "</span>",
             iframeScroll = this.options.iframeScroll,
@@ -362,10 +366,17 @@
             }
         }
 
-        if (group) {
-            // Need to show next/previous.
-            $next.html(nextText).prependTo($modal).removeClass("hidden");
-            $previous.html(previousText).prependTo($modal).removeClass("hidden");
+        if ($group) {
+            // Test to see if the grouped target have data.
+            var $filtered = $group.filter(function() {
+                return $(this).data("r.modal");
+            });
+            
+            if ($filtered.length) {
+                // Need to show next/previous.
+                $next.html(nextText).prependTo($modal).removeClass("hidden");
+                $previous.html(previousText).prependTo($modal).removeClass("hidden");
+            }
         }
 
         // Bind the next/previous events.
@@ -480,7 +491,6 @@
                 length = this.$group.length,
                 position = course === "next" ? index + 1 : index - 1,
                 complete = function () {
-                    // TODO: This is whack!
                     if (self.$sibling && self.$sibling.data("r.modal")) {
                         if (supportTransition) {
                             self.$sibling.data("r.modal").show();
