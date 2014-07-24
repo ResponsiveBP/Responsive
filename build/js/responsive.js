@@ -159,26 +159,26 @@
             mouseMove = "mousemove",
             mouseEnd = ["mouseup", "mouseleave"];
 
-        var getEvents = function (ns) {
+        var getEvents = function () {
             var estart,
                 emove,
                 eend;
 
             // Keep the events separate since support could be crazy.
             if (supportTouch) {
-                estart = touchStart + ns;
-                emove = touchMove + ns;
-                eend = (touchEnd.join(ns + " ")) + ns;
+                estart = touchStart;
+                emove = touchMove;
+                eend = (touchEnd.join(" "));
             }
             else if (supportPointer) {
-                estart = (pointerStart.join(ns + " ")) + ns;
-                emove = (pointerMove.join(ns + " ")) + ns;
-                eend = (pointerEnd.join(ns + " ")) + ns;
+                estart = (pointerStart.join(" "));
+                emove = (pointerMove.join(" "));
+                eend = (pointerEnd.join(" "));
 
             } else {
-                estart = mouseStart + ns;
-                emove = mouseMove + ns;
-                eend = (mouseEnd.join(ns + " ")) + ns;
+                estart = mouseStart;
+                emove = mouseMove;
+                eend = (mouseEnd.join(" "));
             }
 
             return {
@@ -188,33 +188,28 @@
             };
         };
 
-        $.fn.swipe = function (options) {
+        var addSwipe = function ($elem, handler) {
             /// <summary>Adds swiping functionality to the given element.</summary>
-            /// <param name="options" type="Object" optional="true" parameterArray="true">
-            ///      A collection of optional settings to apply.
-            ///      &#10;    1: namespace - The namespace for isolating the touch events.
+            /// <param name="$elem" type="Object">
+            ///      The jQuery object representing the given node(s).
             /// </param>
             /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-            var defaults = {
-                namespace: null,
-                touchAction: "none"
-            },
-                settings = $.extend({}, defaults, options);
+            var eswipestart = "swipestart",
+                eswipemove = "swipemove",
+                eswipeend = "swipeend",
+                etouch = getEvents();
 
-            var ns = settings.namespace ? "." + settings.namespace : "",
-                eswipestart = "swipestart" + ns,
-                eswipemove = "swipemove" + ns,
-                eswipeend = "swipeend" + ns,
-                etouch = getEvents(ns);
+            // Set the touchaction variable for move.
+            var touchAction = handler.data && handler.data.touchAction || "none";
 
-            return this.each(function () {
+            if (supportPointer) {
+                // Enable extended touch events on supported browsers before any touch events.
+                $elem.css({ "-ms-touch-action": "" + touchAction + "", "touch-action": "" + touchAction + "" });
+            }
+
+            return $elem.each(function () {
                 var $this = $(this);
-
-                if (supportPointer) {
-                    // Enable extended touch events on IE.
-                    $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
-                }
 
                 var start = {},
                     delta = {},
@@ -248,11 +243,11 @@
                         // Mimic touch action on iProducts.
                         // Should also prevent bounce.
                         if (!isPointer) {
-                            switch (settings.touchAction) {
+                            switch (touchAction) {
                                 case "pan-x":
                                 case "pan-y":
 
-                                    isScrolling = settings.touchAction === "pan-x" ?
+                                    isScrolling = touchAction === "pan-x" ?
                                                   Math.abs(dy) < Math.abs(dx) :
                                                   Math.abs(dx) < Math.abs(dy);
 
@@ -271,7 +266,6 @@
                         }
 
                         moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
-
                         $this.trigger(moveEvent);
 
                         if (moveEvent.isDefaultPrevented()) {
@@ -350,15 +344,10 @@
             });
         };
 
-        $.fn.removeSwipe = function (namespace) {
+        var removeSwipe = function ($elem) {
             /// <summary>Removes swiping functionality from the given element.</summary>
-            /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
-            /// <returns type="jQuery">The jQuery object for chaining.</returns>
-
-            var ns = namespace ? "." + namespace : "",
-                etouch = getEvents(ns);
-
-            return this.each(function () {
+            var etouch = getEvents();
+            return $elem.each(function () {
 
                 // Disable extended touch events on ie.
                 // Unbind events.
@@ -367,6 +356,15 @@
             });
         };
 
+        // Create special events so we can use on/off.
+        $.event.special.swipe = {
+            add: function (handler) {
+                addSwipe($(this), handler);
+            },
+            remove: function () {
+                removeSwipe($(this));
+            }
+        };
     }());
 
     $.extend($.expr[":"], {
@@ -751,7 +749,8 @@
         }
 
         if (this.options.touch) {
-            this.$element.swipe({ namespace: "carousel", touchAction: "pan-y" })
+            // You always have to pass the third parameter if setting data.
+            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, true)
                          .on("swipemove.carousel", $.proxy(this.swipemove, this))
                          .on("swipeend.carousel", $.proxy(this.swipeend, this));
         }
@@ -911,7 +910,7 @@
             if (self.$items) {
                 // Clear the transition properties if set.
                 self.$items.each(function () {
-                    $(this).css({"transition-duration": ""});
+                    $(this).css({ "transition-duration": "" });
                 });
             }
 
@@ -2740,18 +2739,18 @@
     manageTouch = function (off) {
 
         if (off) {
-            $lightbox.removeSwipe("r.lightbox");
+           // $lightbox.removeSwipe("r.lightbox");
             return;
         }
 
-        $lightbox.swipe({ namespace: "r.lightbox" }).on("swipeend.r.lightbox", $.proxy(function (event) {
+        //$lightbox.swipe({ namespace: "r.lightbox" }).on("swipeend.r.lightbox", $.proxy(function (event) {
 
-            var eventDirection = event.direction,
-                method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";
+        //    var eventDirection = event.direction,
+        //        method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";
 
-            this[method]();
+        //    this[method]();
 
-        }, this));
+        //}, this));
     },
 
     manageFocus = function (off) {

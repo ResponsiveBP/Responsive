@@ -566,18 +566,18 @@
     manageTouch = function (off) {
 
         if (off) {
-            $lightbox.removeSwipe("r.lightbox");
+           // $lightbox.removeSwipe("r.lightbox");
             return;
         }
 
-        $lightbox.swipe({ namespace: "r.lightbox" }).on("swipeend.r.lightbox", $.proxy(function (event) {
+        //$lightbox.swipe({ namespace: "r.lightbox" }).on("swipeend.r.lightbox", $.proxy(function (event) {
 
-            var eventDirection = event.direction,
-                method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";
+        //    var eventDirection = event.direction,
+        //        method = (eventDirection === "up" || eventDirection === "right") ? "next" : "previous";
 
-            this[method]();
+        //    this[method]();
 
-        }, this));
+        //}, this));
     },
 
     manageFocus = function (off) {

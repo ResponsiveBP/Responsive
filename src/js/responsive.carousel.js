@@ -116,7 +116,8 @@
         }
 
         if (this.options.touch) {
-            this.$element.swipe({ namespace: "carousel", touchAction: "pan-y" })
+            // You always have to pass the third parameter if setting data.
+            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, true)
                          .on("swipemove.carousel", $.proxy(this.swipemove, this))
                          .on("swipeend.carousel", $.proxy(this.swipeend, this));
         }
@@ -276,7 +277,7 @@
             if (self.$items) {
                 // Clear the transition properties if set.
                 self.$items.each(function () {
-                    $(this).css({"transition-duration": ""});
+                    $(this).css({ "transition-duration": "" });
                 });
             }
 
