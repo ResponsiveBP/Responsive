@@ -62,11 +62,15 @@ x::-ms-reveal,
 .modal {
     display: inline-block;
     max-height: 95%;
-    width: 95%;
-    max-width: $grid-container-width;
+    max-width: 95%;
     vertical-align: middle;
     margin: 0 auto;
     overflow: auto;
+}
+
+.modal-ajax.container,
+.modal-iframe {
+    @extend .container;
 }
 
 .modal-iframe,

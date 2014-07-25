@@ -41,21 +41,25 @@
 
     $.support.currentGrid = (function () {
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
-        /// <returns type="String">Either xs, s, m, or l.</returns>
+        /// <returns type="Object">
+        ///      An object containing two properties.
+        ///      &#10;    1: grid - The current applied grid; either xs, s, m, or l.
+        ///      &#10;    2: index - The index of the current grid in the range.
+        ///      &#10;    3: range - The available grid range.
+        ///</returns>
 
         var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
 
         return function () {
-
             // These numbers match values in the css
-            var grids = {
-                1: "xs",
-                2: "s",
-                3: "m",
-                4: "l"
-            };
+            var grids = ["xs", "s", "m", "l"],
+                key = parseInt($div.width(), 10);
 
-            return grids[parseInt($div.width(), 10)];
+            return {
+                grid: grids[parseInt($div.width(), 10)],
+                index: key,
+                range: grids
+            };
         };
     }());
 

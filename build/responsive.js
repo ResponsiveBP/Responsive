@@ -15,7 +15,7 @@
 /*global jQuery*/
 /*jshint forin:false, expr:true*/
 (function ($, w, d) {
-
+    
     "use strict";
 
     $.support.transition = (function () {

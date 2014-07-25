@@ -111,9 +111,9 @@
     top: -99999px;
     left: -99999px;
     height: 1px;
-    width: 1px;
+    width: 0;
 }
 // Breakpoint driven changes
-@include grid-state(s, 2px);
-@include grid-state(m, 3px);
-@include grid-state(l, 4px);
+@include grid-state(s, 1px);
+@include grid-state(m, 2px);
+@include grid-state(l, 3px);
