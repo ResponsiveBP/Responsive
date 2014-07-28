@@ -2126,6 +2126,10 @@
 
     Modal.prototype.keydown = function (event) {
 
+        if (this.options.modal) {
+            return;
+        }
+
         // Bind the escape key.
         if (event.which === keys.ESCAPE) {
             this.hide();
@@ -2151,19 +2155,19 @@
             headerHeight = $header.length && parseInt($header.height(), 10) || 0,
             closeHeight = $close.length && parseInt($close.outerHeight(), 10) || 0,
             topHeight = closeHeight > headerHeight ? closeHeight : headerHeight,
-            footerHeight = $footer.length && parseInt($footer.height(), 10) || 0;
+            footerHeight = $footer.length && parseInt($footer.height(), 10) || 0,
+            maxHeight = (windowHeight - (topHeight + footerHeight)) * .95;
 
         $(".modal-overlay").css({ "padding-top": topHeight, "padding-bottom": footerHeight });
 
         if ($modal.hasClass("modal-image")) {
 
-            $modal.children("img").css("max-height", windowHeight - (topHeight + footerHeight));
+            $modal.children("img").css("max-height", maxHeight);
         } else if ($modal.hasClass("modal-iframe")) {
 
             // Calculate the ratio.
             var $iframe = $modal.find(".media > iframe"),
                 iframeWidth = parseInt($iframe.width(), 10),
-                maxHeight = windowHeight - (topHeight + footerHeight),
                 iframeHeight = parseInt($iframe.height(), 10),
                 ratio = iframeWidth / iframeHeight,
                 maxWidth = maxHeight * ratio;
@@ -2177,12 +2181,11 @@
             });
 
         } else {
-            var $content = $modal.children(".modal-content"),
-                max = windowHeight - (topHeight + footerHeight);
+            var $content = $modal.children(".modal-content");
 
             $.each([$modal, $content], function () {
                 this.css({
-                    "max-height": max
+                    "max-height": maxHeight
                 });
             });
 

@@ -78,6 +78,10 @@ x::-ms-reveal,
     overflow: hidden;
 }
 
+.modal-iframe iframe {
+    background-color: #fff;
+}
+
 .modal-image {
     > img {
         max-height: 100%;

@@ -353,8 +353,18 @@ html {
 *, *:before, *:after, hr, input[type=search] {
   box-sizing: inherit; }
 
-*:focus {
+:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -1px; }
+
+/**
+ * Suppress the focus outline on links that cannot be accessed via keyboard.
+ * This prevents an unwanted focus outline from appearing around elements that
+ * might still respond to pointer events.
+ */
+[tabindex="-1"]:focus {
+  outline: none !important; }
 
 /*
  * Headers
@@ -2206,6 +2216,9 @@ x::-ms-reveal, .modal-on {
 
 .modal-iframe, .modal-image {
   overflow: hidden; }
+
+.modal-iframe iframe {
+  background-color: #fff; }
 
 .modal-image > img {
   max-height: 100%; }
