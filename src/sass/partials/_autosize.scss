@@ -7,9 +7,13 @@
 .autosize-clone {
     position: absolute;
     top: -99999px;
-    // TODO: Ensure this is changed for rtl
     left: -99999px;
     visibility: hidden;
     overflow: hidden;
     transition: none;
+
+    [dir="rtl"] & {
+        left: auto;
+        right: -99999px;
+    }
 }

@@ -302,7 +302,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe").css({ "left": "", "opacity": "" });
+                $(this).removeClass("swipe swipe-next").css({ "left": "", "opacity": "" });
             });
         }
 
@@ -329,12 +329,22 @@
             // Seek out the correct direction indicator, shift, and focus.
             switch (which) {
                 case keys.LEFT:
-                    this.prev();
-                    this.$previousTrigger.focus();
+                    if (rtl) {
+                        this.next();
+                        this.$nextTrigger.focus();
+                    } else {
+                        this.prev();
+                        this.$previousTrigger.focus();
+                    }
                     break;
                 case keys.RIGHT:
-                    this.next();
-                    this.$nextTrigger.focus();
+                    if (rtl) {
+                        this.prev();
+                        this.$previousTrigger.focus();
+                    } else {
+                        this.next();
+                        this.$nextTrigger.focus();
+                    }
                     break;
             }
         }
@@ -371,8 +381,8 @@
 
         // Left is next.
         var isNext = event.delta.x < 0,
-            type = isNext ? "next" : "prev",
-            fallback = isNext ? "first" : "last",
+            type = isNext ? (rtl ? "prev" : "next") : (rtl ? "next" : "prev"),
+            fallback = isNext ? (rtl ? "last" : "first") : (rtl ? "first" : "last"),
             activePosition = getActiveIndex.call(this),
             $activeItem = this.$items.eq(activePosition),
             $nextItem = $activeItem[type]("figure");
@@ -409,10 +419,10 @@
             this.$element.addClass("no-transition");
             if (this.options.mode === "slide") {
                 $activeItem.css({ "left": percent + "%" });
-                $nextItem.addClass("swipe").css({ "left": (percent + diff) + "%" });
+                $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
             } else {
                 $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
-                $nextItem.addClass("swipe");
+                $nextItem.addClass("swipe swipe-next");
             }
         }
     };
@@ -457,7 +467,7 @@
         }
 
         this.cycle();
-        this[method]();
+        this.slide(method, $(this.$items.filter(".swipe-next")));
     };
 
     Carousel.prototype.lazyimages = function () {

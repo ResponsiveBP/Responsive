@@ -3036,6 +3036,9 @@ table {
   visibility: hidden;
   overflow: hidden;
   transition: none; }
+  [dir="rtl"] .autosize-clone {
+    left: auto;
+    right: -99999px; }
 
 /*
  * 1: Prevent font shift on chrome.
@@ -3733,6 +3736,9 @@ x::-ms-reveal, .modal-on {
   left: -99999px;
   height: 1px;
   width: 0; }
+  [dir="rtl"] .grid-state-indicator {
+    left: auto;
+    right: -99999px; }
 
 @media (min-width: 48em) {
   .grid-state-indicator {

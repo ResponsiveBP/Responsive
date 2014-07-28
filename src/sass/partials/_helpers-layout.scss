@@ -112,6 +112,11 @@
     left: -99999px;
     height: 1px;
     width: 0;
+
+    [dir="rtl"] & {
+        left: auto;
+        right: -99999px;
+    }
 }
 // Breakpoint driven changes
 @include grid-state(s, 1px);
