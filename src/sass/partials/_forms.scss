@@ -302,5 +302,11 @@ textarea {
         background-repeat: no-repeat;
         background-position: right center;
         padding-right: 1.67em;
+
+        [dir="rtl"] & {
+            background-position: .67em center;
+            padding-right: 0;
+            padding-left: 1.67em;
+        }
     }
 }

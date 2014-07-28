@@ -651,6 +651,7 @@
 
     // General variables.
     var supportTransition = $.support.transition,
+        rtl = $("html[dir=rtl]").length,
         emouseenter = "mouseenter",
         emouseleave = "mouseleave",
         ekeydown = "keydown",
@@ -688,9 +689,9 @@
             lazyImages: true,
             lazyOnDemand: true,
             nextTrigger: null,
-            nextHint: "Next (Right Arrow)",
+            nextHint: "Next (" + (rtl ? "Left" : "Right") + " Arrow)",
             previousTrigger: null,
-            previousHint: "Previous (Left Arrow)",
+            previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             indicators: null
         };
         this.options = $.extend({}, this.defaults, options);
@@ -1309,6 +1310,7 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        rtl = $("html[dir=rtl]").length,
         eready = "ready" + ns,
         eclick = "click",
         ekeydown = "keydown",
@@ -1443,7 +1445,7 @@
         // Set the height/width to zero then to the height/width
         // so animation can take place.
         this.$target[dimension](0);
-            
+
         if (supportTransition) {
 
             // Calculate the height/width.
@@ -1529,9 +1531,9 @@
             }
 
             if (which === keys.LEFT) {
-                index -= 1;
+                rtl ? index += 1 : index -= 1;
             } else if (which === keys.RIGHT) {
-                index += 1;
+                rtl ? index -= 1 : index += 1;
             }
 
             // Ensure that the index stays within bounds.
@@ -1592,9 +1594,20 @@
     w.RESPONSIVE_DROPDOWN = true;
 
 }(jQuery, window, ".r.dropdown"));
+/*
+ * Responsive Lightbox
+ */
+
+/*global jQuery*/
+/*jshint expr:true*/
+
 (function ($, w, ns) {
 
     "use strict";
+
+    if (w.RESPONSIVE_MODAL) {
+        return;
+    }
 
     var $window = $(w),
         $html = $("html"),
@@ -1604,8 +1617,8 @@
         $header = $("<div/>").addClass("modal-header fade-out"),
         $footer = $("<div/>").addClass("modal-footer fade-out"),
         $close = $("<button/>").attr({ "type": "button" }).addClass("modal-close fade-out"),
-        $prev = $("<button/>").attr({ "type": "button" }).addClass("modal-direction left fade-out"),
-        $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction right fade-out"),
+        $prev = $("<button/>").attr({ "type": "button" }).addClass("modal-direction prev fade-out"),
+        $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
         eready = "ready" + ns,
@@ -1617,6 +1630,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
+        rtl = ($html.attr("dir") && $html.attr("dir").toLowerCase() === "rtl"),
         supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
         keys = {
@@ -1645,9 +1659,9 @@
             keyboard: true,
             touch: true,
             next: ">",
-            nextHint: "Next (Right Arrow)",
+            nextHint: "Next (" + (rtl ? "Left" : "Right") + " Arrow)",
             prev: "<",
-            prevHint: "prev (Left Arrow)",
+            previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             closeHint: "Close (Esc)",
             mobileTarget: null,
             mobileViewportWidth: "xs",
@@ -2139,12 +2153,12 @@
         if (this.options.group) {
             // Bind the left arrow key.
             if (event.which === keys.LEFT) {
-                this.prev();
+                rtl ? this.next() : this.prev();
             }
 
             // Bind the right arrow key.
             if (event.which === keys.RIGHT) {
-                this.next();
+                rtl ? this.prev() : this.next();
             }
         }
     };
@@ -2156,7 +2170,7 @@
             closeHeight = $close.length && parseInt($close.outerHeight(), 10) || 0,
             topHeight = closeHeight > headerHeight ? closeHeight : headerHeight,
             footerHeight = $footer.length && parseInt($footer.height(), 10) || 0,
-            maxHeight = (windowHeight - (topHeight + footerHeight)) * .95;
+            maxHeight = (windowHeight - (topHeight + footerHeight)) * 0.95;
 
         $(".modal-overlay").css({ "padding-top": topHeight, "padding-bottom": footerHeight });
 
@@ -2257,6 +2271,11 @@
     };
 
     Modal.prototype.swipeend = function (event) {
+        if (rtl) {
+            this[(event.direction === "right") ? "prev" : "next"]();
+            return;
+        }
+
         this[(event.direction === "right") ? "next" : "prev"]();
     };
 
@@ -2306,6 +2325,8 @@
             $this.modal(options);
         });
     });
+
+    w.RESPONSIVE_MODAL = true;
 
 }(jQuery, window, ".r.modal"));
 /*

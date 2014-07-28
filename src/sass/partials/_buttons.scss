@@ -44,6 +44,10 @@ input[type=reset] {
     &.btn-inline {
         margin-left: -.27em; /* 1 */
         padding: .25em 1em; /* 2 */
+        [dir="rtl"] & {
+            margin-left: auto;
+            margin-right: -.27em;
+        }
     }
 }
 
@@ -84,5 +88,9 @@ input {
 
     > * {
         float: left;
+
+        [dir="rtl"] & {
+            float: right;
+        }
     }
 }

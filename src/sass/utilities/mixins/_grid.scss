@@ -8,35 +8,50 @@
         @include bp-max($bp) {
 
             [class*=col-] {
+                // Reset classes for each level.
                 &.reset-#{$bp}-only {
                     clear: both;
                     margin-left: 0 !important;
-                }
 
-                &[class*=push-#{$bp}-right-only] {
-                    float: right;
+                    [dir="rtl"] & {
+                        // TODO: Check the auto property.
+                        margin-left: auto !important;
+                        margin-right: 0 !important;
+                    }
                 }
             }
         }
     }
-
-
+    // Set the margin for each following column.
     [class*=col-#{$bp}] + [class*=col-#{$bp}] {
         margin-left: $grid-column-gutter;
+
+        [dir="rtl"] & {
+            margin-left: 0;
+            margin-right: $grid-column-gutter;
+        }
     }
 
     .no-gutter > [class*=col-#{$bp}] {
         margin-left: 0;
+
+        [dir="rtl"] & {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 
     [class*=col-] {
+        // Global reset classes.
         &.reset-#{$bp} {
             clear: both;
             margin-left: 0 !important;
-        }
 
-        &[class*=push-#{$bp}-right] {
-            float: right;
+            [dir="rtl"] & {
+                // TODO: Check the auto property.
+                margin-left: auto !important;
+                margin-right: 0 !important;
+            }
         }
     }
 }
@@ -60,18 +75,40 @@
         @if $i != $grid-column-count {
             .offset-#{$bp}-#{$i} {
                 margin-left: $temp-width;
+
+                [dir="rtl"] & {
+                    // TODO: Check the auto property.
+                    margin-left: auto;
+                    margin-right: $temp-width;
+                }
             }
 
             [class*=col-] + .offset-#{$bp}-#{$i} {
                 margin-left: $temp-width + $grid-column-gutter;
+
+                [dir="rtl"] & {
+                    // TODO: Check the auto property.
+                    margin-left: auto;
+                    margin-right: $temp-width + $grid-column-gutter;
+                }
             }
 
             .push-#{$bp}-#{$i} {
                 left: $temp-width;
+
+                [dir="rtl"] & {
+                    left: auto;
+                    right: $temp-width;
+                }
             }
 
             .pull-#{$bp}-#{$i} {
                 right: $temp-width;
+
+                [dir="rtl"] & {
+                    right: auto;
+                    left: $temp-width;
+                }
             }
         }
         @else {
@@ -79,28 +116,47 @@
             .col-#{$bp}-#{$i},
             [class*=col-] + [class*=col-#{$bp}-#{$i}] {
                 margin-left: 0;
+
+                [dir="rtl"] & {
+                    margin-right: 0;
+                }
             }
         }
     }
     // Loop through and build the "no-gutter" columns.
-    .no-gutter > {
-        @for $i from 1 to 12 {
+    .no-gutter {
+        @for $i from 1 to ($grid-column-count + 1) {
             $temp-width: $column-width * $i;
 
-            .col-#{$bp}-#{$i} {
+            > .col-#{$bp}-#{$i} {
                 width: $temp-width;
             }
 
-            .offset-#{$bp}-#{$i} {
+            > .offset-#{$bp}-#{$i} {
                 margin-left: $temp-width;
+
+                [dir="rtl"] & {
+                    margin-left: auto;
+                    margin-right: $temp-width;
+                }
             }
 
-            .push-#{$bp}-#{$i} {
+            > .push-#{$bp}-#{$i} {
                 left: $temp-width;
+
+                [dir="rtl"] & {
+                    left: auto;
+                    right: $temp-width;
+                }
             }
 
-            .pull-#{$bp}-#{$i} {
+            > .pull-#{$bp}-#{$i} {
                 right: $temp-width;
+
+                [dir="rtl"] & {
+                    right: auto;
+                    left: $temp-width;
+                }
             }
         }
     }

@@ -1,6 +1,17 @@
-﻿(function ($, w, ns) {
+﻿/*
+ * Responsive Lightbox
+ */
+
+/*global jQuery*/
+/*jshint expr:true*/
+
+(function ($, w, ns) {
 
     "use strict";
+
+    if (w.RESPONSIVE_MODAL) {
+        return;
+    }
 
     var $window = $(w),
         $html = $("html"),
@@ -10,8 +21,8 @@
         $header = $("<div/>").addClass("modal-header fade-out"),
         $footer = $("<div/>").addClass("modal-footer fade-out"),
         $close = $("<button/>").attr({ "type": "button" }).addClass("modal-close fade-out"),
-        $prev = $("<button/>").attr({ "type": "button" }).addClass("modal-direction left fade-out"),
-        $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction right fade-out"),
+        $prev = $("<button/>").attr({ "type": "button" }).addClass("modal-direction prev fade-out"),
+        $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
         eready = "ready" + ns,
@@ -23,6 +34,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
+        rtl = ($html.attr("dir") && $html.attr("dir").toLowerCase() === "rtl"),
         supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
         keys = {
@@ -51,9 +63,9 @@
             keyboard: true,
             touch: true,
             next: ">",
-            nextHint: "Next (Right Arrow)",
+            nextHint: "Next (" + (rtl ? "Left" : "Right") + " Arrow)",
             prev: "<",
-            prevHint: "prev (Left Arrow)",
+            previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             closeHint: "Close (Esc)",
             mobileTarget: null,
             mobileViewportWidth: "xs",
@@ -545,12 +557,12 @@
         if (this.options.group) {
             // Bind the left arrow key.
             if (event.which === keys.LEFT) {
-                this.prev();
+                rtl ? this.next() : this.prev();
             }
 
             // Bind the right arrow key.
             if (event.which === keys.RIGHT) {
-                this.next();
+                rtl ? this.prev() : this.next();
             }
         }
     };
@@ -562,7 +574,7 @@
             closeHeight = $close.length && parseInt($close.outerHeight(), 10) || 0,
             topHeight = closeHeight > headerHeight ? closeHeight : headerHeight,
             footerHeight = $footer.length && parseInt($footer.height(), 10) || 0,
-            maxHeight = (windowHeight - (topHeight + footerHeight)) * .95;
+            maxHeight = (windowHeight - (topHeight + footerHeight)) * 0.95;
 
         $(".modal-overlay").css({ "padding-top": topHeight, "padding-bottom": footerHeight });
 
@@ -663,6 +675,11 @@
     };
 
     Modal.prototype.swipeend = function (event) {
+        if (rtl) {
+            this[(event.direction === "right") ? "prev" : "next"]();
+            return;
+        }
+
         this[(event.direction === "right") ? "next" : "prev"]();
     };
 
@@ -712,5 +729,7 @@
             $this.modal(options);
         });
     });
+
+    w.RESPONSIVE_MODAL = true;
 
 }(jQuery, window, ".r.modal"));

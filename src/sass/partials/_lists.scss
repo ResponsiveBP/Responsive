@@ -6,6 +6,11 @@ ul,
 ol {
     margin: 1em 0;
     padding-left: 2.5em;
+
+    [dir="rtl"] & {
+        padding-left: 0;
+        padding-right: 2.5em;
+    }
 }
 
 ul ul,
@@ -19,6 +24,10 @@ ol ol {
 ul.no-bullets,
 ol.no-bullets {
     padding-left: 0;
+
+    [dir="rtl"] & {
+        padding-right: 0;
+    }
 
     & > li {
         list-style: none;
@@ -51,6 +60,12 @@ ol.colored {
             font-weight: bold;
             text-align: right;
             text-decoration: none;
+
+            [dir="rtl"] & {
+                left: auto;
+                right: -1em;
+                text-align: left;
+            }
         }
     }
 }
@@ -74,6 +89,10 @@ ol.colored {
             left: -3.125em;
             width: 2.5em;
             -webkit-margin-start: 0; /* 2 */
+            [dir="rtl"] & {
+                left: auto;
+                right: -3.125em;
+            }
         }
     }
 }
@@ -98,10 +117,21 @@ dt, dd {
             overflow: hidden;
             text-align: right;
             text-overflow: ellipsis;
+
+            [dir="rtl"] & {
+                clear: right;
+                float: right;
+                text-align: left;
+            }
         }
 
         & > dd {
             margin-left: 10.375em;
+
+            [dir="rtl"] & {
+                margin-left: auto;
+                margin-right: 10.375em;
+            }
         }
     }
 }

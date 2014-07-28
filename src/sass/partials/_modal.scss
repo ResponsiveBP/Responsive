@@ -36,6 +36,11 @@ x::-ms-reveal,
         width: 1px;
         margin-right: -1px;
         vertical-align: middle;
+
+        [dir="rtl"] & {
+            margin-right: 0;
+            margin-left: -1px;
+        }
     }
 }
 
@@ -94,6 +99,10 @@ x::-ms-reveal,
     padding: 1em;
     background-color: $lightbox-content-background-color;
     text-align: left;
+
+    [dir="rtl"] & {
+        text-align: right;
+    }
 }
 
 .modal-header,
@@ -124,6 +133,11 @@ x::-ms-reveal,
     font-size: 1.5em;
     font-weight: bold;
     color: $lightbox-control-color;
+
+    [dir="rtl"] & {
+       right: auto;
+       left: 1px;
+    }
 }
 
 .modal-direction {
@@ -139,10 +153,18 @@ x::-ms-reveal,
     font-weight: bold;
     text-align: center;
 
+    [dir="rtl"] & {
+        right: 0;
+    }
 
-    &.right {
+    &.next {
         left: auto;
         right: 0;
+
+        [dir="rtl"] & {
+            right: auto;
+            left: 0;
+        }
     }
 }
 
