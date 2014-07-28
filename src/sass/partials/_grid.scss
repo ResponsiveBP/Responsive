@@ -23,6 +23,10 @@
     float: left;
     min-height: 1px;
 
+    [dir="rtl"] & {
+        float: right;
+    }
+
     &[class*=offset],
     &[class*=push],
     &[class*=pull] {

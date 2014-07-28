@@ -24,24 +24,24 @@
 /*
  * Float helpers
  */
-.push-left {
+.push {
     float: left !important;
 }
 // XS, S, M, L viewports.
-@include push(xs, left);
-@include push(s, left);
-@include push(m, left);
-@include push(l, left);
+@include push(xs);
+@include push(s);
+@include push(m);
+@include push(l);
 
 
-.push-right {
+.pull {
     float: right !important;
 }
 // XS, S, M, L viewports.
-@include push(xs, right);
-@include push(s, right);
-@include push(m, right);
-@include push(l, right);
+@include pull(xs);
+@include pull(s);
+@include pull(m);
+@include pull(l);
 
 
 /*

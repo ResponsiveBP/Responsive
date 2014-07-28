@@ -13,6 +13,7 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
+        rtl = $("html[dir=rtl]").length,
         eready = "ready" + ns,
         eclick = "click",
         ekeydown = "keydown",
@@ -147,7 +148,7 @@
         // Set the height/width to zero then to the height/width
         // so animation can take place.
         this.$target[dimension](0);
-            
+
         if (supportTransition) {
 
             // Calculate the height/width.
@@ -233,9 +234,9 @@
             }
 
             if (which === keys.LEFT) {
-                index -= 1;
+                rtl ? index += 1 : index -= 1;
             } else if (which === keys.RIGHT) {
-                index += 1;
+                rtl ? index -= 1 : index += 1;
             }
 
             // Ensure that the index stays within bounds.

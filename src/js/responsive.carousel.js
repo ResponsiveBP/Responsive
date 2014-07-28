@@ -14,6 +14,7 @@
 
     // General variables.
     var supportTransition = $.support.transition,
+        rtl = $("html[dir=rtl]").length,
         emouseenter = "mouseenter",
         emouseleave = "mouseleave",
         ekeydown = "keydown",
@@ -51,9 +52,9 @@
             lazyImages: true,
             lazyOnDemand: true,
             nextTrigger: null,
-            nextHint: "Next (Right Arrow)",
+            nextHint: "Next (" + (rtl ? "Left" : "Right") + " Arrow)",
             previousTrigger: null,
-            previousHint: "Previous (Left Arrow)",
+            previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             indicators: null
         };
         this.options = $.extend({}, this.defaults, options);
