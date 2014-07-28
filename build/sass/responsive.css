@@ -3350,7 +3350,7 @@ table {
           transition: none; }
 
 /*
- * 1: Prefent font shift on chrome.
+ * 1: Prevent font shift on chrome.
  */
 .carousel {
   margin-bottom: 1em;
@@ -4236,17 +4236,18 @@ x::-ms-reveal,
   caption.visible-l {
     display: table-caption !important; } }
 @media print {
-  body:not(.prince-pdf),
-  body:not(.prince-pdf) * {
+  * {
     background: transparent !important;
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
     color: #000 !important;
     /* Black prints faster: h5bp.com/s */
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
     text-shadow: none !important; }
 
+  a,
   a:visited {
     text-decoration: underline; }
+
   a[href]:after {
     content: " (" attr(href) ")"; }
 
@@ -4254,12 +4255,12 @@ x::-ms-reveal,
     content: " (" attr(title) ")"; }
 
   /*
-   * Don't show links for images, or javascript/internal links
+   * Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
    */
-  .ir a:after,
-  a[href^='javascript:']:after,
-  a[href^='#']:after {
-    content: ''; }
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: ""; }
 
   pre,
   blockquote {
@@ -4277,8 +4278,6 @@ x::-ms-reveal,
   img {
     max-width: 100% !important; }
 
-  @page {
-    margin: 0.5cm; }
   p,
   h2,
   h3 {
@@ -4287,13 +4286,4 @@ x::-ms-reveal,
 
   h2,
   h3 {
-    page-break-after: avoid; }
-
-  .no-print,
-  .no-print * {
-    display: none !important; }
-
-  [class*=col-] {
-    min-height: 0;
-    float: none;
-    width: auto; } }
+    page-break-after: avoid; } }
