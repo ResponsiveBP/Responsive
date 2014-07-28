@@ -13,7 +13,7 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
-        rtl = $("html[dir=rtl]").length,
+        rtl = $.support.rtl,
         eready = "ready" + ns,
         eclick = "click",
         ekeydown = "keydown",

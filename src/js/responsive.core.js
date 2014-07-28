@@ -39,6 +39,15 @@
         return text;
     };
 
+    $.support.rtl = (function () {
+        /// <summary>Returns a value indicating whether the current page is setup for right-to-left languages.</summary>
+        /// <returns type="Boolean">
+        ///      True if right-to-left language support is set up; otherwise false.
+        ///</returns>
+
+        return $("html[dir=rtl]").length ? true : false;
+    }());
+
     $.support.currentGrid = (function () {
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
         /// <returns type="Object">

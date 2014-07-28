@@ -14,7 +14,7 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        rtl = $("html[dir=rtl]").length,
+        rtl = $.support.rtl,
         emouseenter = "mouseenter",
         emouseleave = "mouseleave",
         ekeydown = "keydown",

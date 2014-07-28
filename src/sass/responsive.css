@@ -3147,9 +3147,15 @@ table {
   font-size: 2em;
   font-weight: bold;
   text-align: center; }
+  [dir="rtl"] .carousel-control {
+    left: auto;
+    right: 1px; }
   .carousel-control.right {
     left: auto;
     right: 1px; }
+    [dir="rtl"] .carousel-control.right {
+      right: auto;
+      left: 1px; }
   .carousel-control, .carousel-control:active, .carousel-control:visited, .carousel-control:hover, .carousel-control:focus {
     background-color: transparent;
     border: none;

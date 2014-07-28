@@ -34,7 +34,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        rtl = ($html.attr("dir") && $html.attr("dir").toLowerCase() === "rtl"),
+        rtl = $.support.rtl,
         supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
         keys = {

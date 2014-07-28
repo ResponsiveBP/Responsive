@@ -39,6 +39,15 @@
         return text;
     };
 
+    $.support.rtl = (function () {
+        /// <summary>Returns a value indicating whether the current page is setup for right-to-left languages.</summary>
+        /// <returns type="Boolean">
+        ///      True if right-to-left language support is set up; otherwise false.
+        ///</returns>
+
+        return $("html[dir=rtl]").length ? true : false;
+    }());
+
     $.support.currentGrid = (function () {
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
         /// <returns type="Object">
@@ -651,7 +660,7 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        rtl = $("html[dir=rtl]").length,
+        rtl = $.support.rtl,
         emouseenter = "mouseenter",
         emouseleave = "mouseleave",
         ekeydown = "keydown",
@@ -1310,7 +1319,7 @@
 
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
-        rtl = $("html[dir=rtl]").length,
+        rtl = $.support.rtl,
         eready = "ready" + ns,
         eclick = "click",
         ekeydown = "keydown",
@@ -1630,7 +1639,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
-        rtl = ($html.attr("dir") && $html.attr("dir").toLowerCase() === "rtl"),
+        rtl = $.support.rtl,
         supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
         keys = {

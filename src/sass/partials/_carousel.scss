@@ -7,7 +7,6 @@
     position: relative;
     -webkit-backface-visibility: hidden; /* 1 */
     -webkit-perspective: 1000; /* 1 */
-
     &.no-transition > figure {
         transition-duration: 0s !important;
     }
@@ -151,9 +150,19 @@
     font-weight: bold;
     text-align: center;
 
+    [dir="rtl"] & {
+        left: auto;
+        right: 1px;
+    }
+
     &.right {
         left: auto;
         right: 1px;
+
+        [dir="rtl"] & {
+            right: auto;
+            left: 1px;
+        }
     }
 
     &,
