@@ -20,6 +20,10 @@
         transition: .7s ease-in-out left;
         transform: translate3d(0, 0, 0);
 
+        [dir="rtl"] & {
+            transition: .7s ease-in-out right;
+        }
+
         &:focus {
 
             &:before {
@@ -105,6 +109,11 @@
     .next.left,
     .prev.right {
         left: 0;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: 0;
+        }
     }
 
     .carousel-active {
@@ -129,11 +138,29 @@
     .next,
     .carousel-active.right {
         left: 100%;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: 100%;
+
+            &.swiping {
+                right: -100%;
+            }
+        }
     }
 
     .prev,
     .carousel-active.left {
         left: -100%;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: -100%;
+
+            &.swiping {
+                right: 100%;
+            }
+        }
     }
 }
 
@@ -194,7 +221,11 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity .7s ease-in-out;
+
+        &,
+        [dir="rtl"] & {
+            transition: all .7s ease-in-out;
+        }
     }
 
     > figure.swipe,
@@ -203,6 +234,10 @@
         z-index: 1;
         left: 0;
         opacity: 1;
+
+        [dir="rtl"] & {
+            right: 0;
+        }
     }
 
     > .carousel-active.swipe {
@@ -221,6 +256,10 @@
             left: 0;
             z-index: 2;
             opacity: 0;
+
+            [dir="rtl"] & {
+                right: 0;
+            }
         }
     }
 

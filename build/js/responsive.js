@@ -924,7 +924,7 @@
             if (self.$items) {
                 // Clear the transition properties if set.
                 self.$items.each(function () {
-                    $(this).css({ "transition-duration": "" });
+                    $(this).removeClass("swiping").css({ "transition-duration": "" });
                 });
             }
 
@@ -948,7 +948,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe swipe-next").css({ "left": "", "opacity": "" });
+                $(this).removeClass("swipe swipe-next").css({ "left": "", "right": "", "opacity": "" });
             });
         }
 
@@ -1060,12 +1060,21 @@
             percent = parseFloat((event.delta.x / width) * 100),
             diff = isNext ? 100 : -100;
 
+        if (rtl) {
+            percent *= -1;
+        }
+
         // Shift the items but put a limit on sensitivity.
         if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
             this.$element.addClass("no-transition");
             if (this.options.mode === "slide") {
-                $activeItem.css({ "left": percent + "%" });
-                $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
+                if (rtl) {
+                    $activeItem.addClass("swiping").css({ "right": percent + "%" });
+                    $nextItem.addClass("swipe swipe-next").css({ "right": (percent - diff) + "%" });
+                } else {
+                    $activeItem.addClass("swiping").css({ "left": percent + "%" });
+                    $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
+                }
             } else {
                 $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
                 $nextItem.addClass("swipe swipe-next");
