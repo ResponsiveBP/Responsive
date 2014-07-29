@@ -263,32 +263,31 @@ textarea {
 
 @media (-webkit-min-device-pixel-ratio:0) {
 
-    input {
-        /*
-		 * Fix changing height issues on iOS7.
-		 */
-        &[type=datetime-local],
-        &[type=date],
-        &[type=week],
-        &[type=month],
-        &[type=time],
-        &[type=number] {
-            min-height: 2em;
-        }
-        /*
-		 * Remove excess padding in Webkit
-		 */
-        &[type=color] {
-            min-height: 1.8em;
+    /*
+	 * Fix changing height issues on iOS7.
+	 */
+    input[type=datetime-local],
+    input[type=date],
+    input[type=week],
+    input[type=month],
+    input[type=time],
+    input[type=number] {
+        min-height: 2em;
+    }
+
+    /*
+     * Remove excess padding in Webkit
+	 */
+    input[type=color] {
+        min-height: 1.8em;
+        padding: 0;
+
+        &::-webkit-color-swatch-wrapper {
             padding: 0;
+        }
 
-            &::-webkit-color-swatch-wrapper {
-                padding: 0;
-            }
-
-            &::-webkit-color-swatch {
-                border: none;
-            }
+        &::-webkit-color-swatch {
+            border: none;
         }
     }
 

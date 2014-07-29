@@ -83,8 +83,14 @@ x::-ms-reveal,
     overflow: hidden;
 }
 
+.modal-iframe .media,
 .modal-iframe iframe {
+    max-height: 100%;
+}
+
+.modal-iframe .media {
     background-color: #fff;
+    margin-bottom: 0;
 }
 
 .modal-image {

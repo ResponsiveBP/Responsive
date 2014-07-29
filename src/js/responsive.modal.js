@@ -59,7 +59,7 @@
             external: false,
             group: null,
             iframe: false,
-            iframeScroll: false,
+            iframeScroll: true,
             keyboard: true,
             touch: true,
             next: ">",
@@ -408,7 +408,7 @@
 
                         for (var p in providers) {
                             if (providers.hasOwnProperty(p) && providers[p].test(url)) {
-                                return p;
+                                return [p, "scaled"].join(" ");
                             }
                         }
 
@@ -589,17 +589,16 @@
                 iframeHeight = parseInt($iframe.height(), 10),
                 ratio = iframeWidth / iframeHeight,
                 maxWidth = maxHeight * ratio;
-            
-            // TODO: Remove this once testing is complete.
-            $header.html("maxHeight:" + maxHeight + ", maxWidth:" + maxWidth + "<br/> iframeHeight:" + iframeHeight + ", iframeWidth:" + iframeWidth);
 
             // Set both to ensure there is no overflow.
-            $.each([$modal, $iframe], function () {
-                this.css({
-                    "max-height": maxHeight,
-                    "max-width": maxWidth
+            if ($iframe.parent().hasClass("scaled")) {
+                $.each([$modal, $iframe], function () {
+                    this.css({
+                        "max-height": maxHeight,
+                        "max-width": maxWidth
+                    });
                 });
-            });
+            }
 
         } else {
             var $content = $modal.children(".modal-content");

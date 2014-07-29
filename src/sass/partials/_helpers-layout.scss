@@ -25,7 +25,7 @@
  * Float helpers
  */
 .push {
-    float: left !important;
+    float: right !important;
 }
 // XS, S, M, L viewports.
 @include push(xs);
@@ -35,7 +35,7 @@
 
 
 .pull {
-    float: right !important;
+    float: left !important;
 }
 // XS, S, M, L viewports.
 @include pull(xs);
