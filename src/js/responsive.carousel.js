@@ -29,15 +29,6 @@
         RIGHT: 39
     };
 
-    // Private methods.
-    var getActiveIndex = function () {
-
-        var $activeItem = this.$element.find(".carousel-active");
-        this.$items = $activeItem.parent().children("figure");
-
-        return this.$items.index($activeItem);
-    };
-
     // Carousel class definition
     var Carousel = function (element, options) {
 
@@ -130,6 +121,13 @@
         $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
+    Carousel.prototype.activeindex = function() {
+        var $activeItem = this.$element.find(".carousel-active");
+        this.$items = $activeItem.parent().children("figure");
+
+        return this.$items.index($activeItem);
+    };
+
     Carousel.prototype.cycle = function (event) {
 
         if (!event) {
@@ -153,7 +151,7 @@
 
     Carousel.prototype.to = function (position) {
 
-        var activePosition = getActiveIndex.call(this),
+        var activePosition = this.activeindex(),
             self = this;
 
         if (position > (this.$items.length - 1) || position < 0) {
@@ -270,7 +268,7 @@
         // Highlight the correct indicator.
         this.$element.one(eslid, function () {
             self.$indicators.removeClass("active")
-                .eq(getActiveIndex.call(self)).addClass("active");
+                .eq(self.activeindex()).addClass("active");
         });
 
         var complete = function () {
@@ -381,7 +379,7 @@
         var isNext = event.delta.x < 0,
             type = isNext ? (rtl ? "prev" : "next") : (rtl ? "next" : "prev"),
             fallback = isNext ? (rtl ? "last" : "first") : (rtl ? "first" : "last"),
-            activePosition = getActiveIndex.call(this),
+            activePosition = this.activeindex(),
             $activeItem = this.$items.eq(activePosition),
             $nextItem = $activeItem[type]("figure");
 
@@ -455,7 +453,7 @@
         if (supportTransition) {
 
             // Trim the animation duration based on the current position.
-            var activePosition = getActiveIndex.call(this),
+            var activePosition = this.activeindex(),
                 $activeItem = this.$items.eq(activePosition);
 
             if (!this.translationDuration) {

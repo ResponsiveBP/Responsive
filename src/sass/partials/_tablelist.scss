@@ -45,6 +45,10 @@
         th[scope=row] {
             float: left;
             width: 100%;
+
+            [dir="rtl"] & {
+                float: right;
+            }
         }
 
         td {

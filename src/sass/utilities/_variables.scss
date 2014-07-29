@@ -12,7 +12,8 @@ $selection-focus-offset: -1px !default;
 //==
 // Grid System
 //##
-$grid-container-width: 1140px !default;
+$grid-container-max-width: 1140px !default;
+$grid-container-width: 95% !default;
 $grid-column-gutter: 2% !default;
 $grid-column-count: 12!default;
 

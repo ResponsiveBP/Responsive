@@ -589,6 +589,9 @@
                 iframeHeight = parseInt($iframe.height(), 10),
                 ratio = iframeWidth / iframeHeight,
                 maxWidth = maxHeight * ratio;
+            
+            // TODO: Remove this once testing is complete.
+            $header.html("maxHeight:" + maxHeight + ", maxWidth:" + maxWidth + "<br/> iframeHeight:" + iframeHeight + ", iframeWidth:" + iframeWidth);
 
             // Set both to ensure there is no overflow.
             $.each([$modal, $iframe], function () {

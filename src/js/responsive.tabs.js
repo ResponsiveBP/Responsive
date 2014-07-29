@@ -13,7 +13,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns,
+    var rtl = $.support.rtl,
+        eready = "ready" + ns,
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -22,41 +23,6 @@
     var keys = {
         LEFT: 37,
         RIGHT: 39
-    };
-
-    // Private methods.
-    var tab = function (activePosition, postion, callback) {
-
-        var showEvent = $.Event(eshow),
-            $element = this.$element,
-            $childTabs = $element.children("ul").children("li"),
-            $childPanes = $element.children(":not(ul)"),
-            $nextTab = $childTabs.eq(postion),
-            $currentPane = $childPanes.eq(activePosition),
-            $nextPane = $childPanes.eq(postion);
-
-        $element.trigger(showEvent);
-
-        if (this.tabbing || showEvent.isDefaultPrevented()) {
-            return;
-        }
-
-        this.tabbing = true;
-
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 }).focus();
-
-        // Do some class shuffling to allow the transition.
-        $currentPane.addClass("fade-out fade-in");
-        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
-
-        // Force redraw.
-        $nextPane.redraw().addClass("fade-in");
-
-        // Do the callback
-        callback.call(this, $nextPane);
-
     };
 
     // Tabs class definition
@@ -113,7 +79,7 @@
         }
 
         // Call the function with the callback
-        return tab.call(this, activePosition, position, function ($item) {
+        return this.tab(activePosition, position, function ($item) {
 
             var complete = function () {
                 self.tabbing = false;
@@ -123,6 +89,39 @@
             // Do our callback
             $item.onTransitionEnd(complete);
         });
+    };
+
+    Tabs.prototype.tab = function (activePosition, postion, callback) {
+
+        var showEvent = $.Event(eshow),
+           $element = this.$element,
+           $childTabs = $element.children("ul").children("li"),
+           $childPanes = $element.children(":not(ul)"),
+           $nextTab = $childTabs.eq(postion),
+           $currentPane = $childPanes.eq(activePosition),
+           $nextPane = $childPanes.eq(postion);
+
+        $element.trigger(showEvent);
+
+        if (this.tabbing || showEvent.isDefaultPrevented()) {
+            return;
+        }
+
+        this.tabbing = true;
+
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
+        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 }).focus();
+
+        // Do some class shuffling to allow the transition.
+        $currentPane.addClass("fade-out fade-in");
+        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
+        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
+
+        // Force redraw.
+        $nextPane.redraw().addClass("fade-in");
+
+        // Do the callback
+        callback.call(this, $nextPane);
     };
 
     Tabs.prototype.click = function (event) {
@@ -151,9 +150,10 @@
                 length = $all.length,
                 index = $li.index();
 
-            // Ensure that the index stays within bounds.
-            index = which === keys.LEFT ? index - 1 : index + 1;
+            // Select the correct index.
+            index = which === keys.LEFT ? (rtl ? index + 1 : index - 1) : (rtl ? index - 1 : index + 1);
 
+            // Ensure that the index stays within bounds.
             if (index === length) {
                 index = 0;
             }

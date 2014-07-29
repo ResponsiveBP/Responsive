@@ -22,33 +22,6 @@
         esize = "size" + ns,
         esized = "sized" + ns;
 
-    // Private methods.
-    var createClone = function () {
-
-            var self = this,
-                attributes = this.options.removeAttributes,
-                classes = this.options.removeClasses,
-                $element = this.$element,
-                clone = function () {
-
-                    // Create a clone and offset it removing all specified attributes classes and data.
-                    self.$clone = self.$element.clone()
-                                      .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
-                                      .removeAttr("id name data-autosize " + attributes)
-                                      .removeClass(classes)
-                                      .removeClass(classes)
-                                      .addClass("autosize-clone")
-                                      .insertAfter($element);
-
-                    // jQuery goes spare if you try to remove null data.
-                    if (classes) {
-                        self.$clone.removeData(classes);
-                    }
-                };
-
-            $.when(clone()).then(this.size());
-        };
-
     // AutoSize class definition
     var AutoSize = function (element, options) {
 
@@ -62,10 +35,36 @@
         this.sizing = null;
 
         // Initial setup.
-        createClone.call(this);
+        this.clone();
 
         // Bind events
         this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
+    };
+
+    AutoSize.prototype.clone = function () {
+
+        var self = this,
+            attributes = this.options.removeAttributes,
+            classes = this.options.removeClasses,
+            $element = this.$element,
+            clone = function () {
+
+                // Create a clone and offset it removing all specified attributes classes and data.
+                self.$clone = self.$element.clone()
+                                  .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
+                                  .removeAttr("id name data-autosize " + attributes)
+                                  .removeClass(classes)
+                                  .removeClass(classes)
+                                  .addClass("autosize-clone")
+                                  .insertAfter($element);
+
+                // jQuery goes spare if you try to remove null data.
+                if (classes) {
+                    self.$clone.removeData(classes);
+                }
+            };
+
+        $.when(clone()).then(this.size());
     };
 
     AutoSize.prototype.size = function () {

@@ -12,6 +12,10 @@
             float: left;
             margin-bottom: -1px;
 
+            [dir="rtl"] & {
+                float: right;
+            }
+
             > a {
                 display: block;
                 line-height: 2em;
@@ -22,6 +26,11 @@
                 color: $tabs-nav-item-color;
                 text-decoration: none;
                 cursor: pointer;
+
+                [dir="rtl"] & {
+                    margin-right: 0;
+                    margin-left: .2em;
+                }
 
                 &:hover {
                     background-color: $tabs-nav-item-background-color-hover;

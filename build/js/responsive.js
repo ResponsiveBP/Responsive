@@ -457,33 +457,6 @@
         esize = "size" + ns,
         esized = "sized" + ns;
 
-    // Private methods.
-    var createClone = function () {
-
-            var self = this,
-                attributes = this.options.removeAttributes,
-                classes = this.options.removeClasses,
-                $element = this.$element,
-                clone = function () {
-
-                    // Create a clone and offset it removing all specified attributes classes and data.
-                    self.$clone = self.$element.clone()
-                                      .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
-                                      .removeAttr("id name data-autosize " + attributes)
-                                      .removeClass(classes)
-                                      .removeClass(classes)
-                                      .addClass("autosize-clone")
-                                      .insertAfter($element);
-
-                    // jQuery goes spare if you try to remove null data.
-                    if (classes) {
-                        self.$clone.removeData(classes);
-                    }
-                };
-
-            $.when(clone()).then(this.size());
-        };
-
     // AutoSize class definition
     var AutoSize = function (element, options) {
 
@@ -497,10 +470,36 @@
         this.sizing = null;
 
         // Initial setup.
-        createClone.call(this);
+        this.clone();
 
         // Bind events
         this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
+    };
+
+    AutoSize.prototype.clone = function () {
+
+        var self = this,
+            attributes = this.options.removeAttributes,
+            classes = this.options.removeClasses,
+            $element = this.$element,
+            clone = function () {
+
+                // Create a clone and offset it removing all specified attributes classes and data.
+                self.$clone = self.$element.clone()
+                                  .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
+                                  .removeAttr("id name data-autosize " + attributes)
+                                  .removeClass(classes)
+                                  .removeClass(classes)
+                                  .addClass("autosize-clone")
+                                  .insertAfter($element);
+
+                // jQuery goes spare if you try to remove null data.
+                if (classes) {
+                    self.$clone.removeData(classes);
+                }
+            };
+
+        $.when(clone()).then(this.size());
     };
 
     AutoSize.prototype.size = function () {
@@ -675,15 +674,6 @@
         RIGHT: 39
     };
 
-    // Private methods.
-    var getActiveIndex = function () {
-
-        var $activeItem = this.$element.find(".carousel-active");
-        this.$items = $activeItem.parent().children("figure");
-
-        return this.$items.index($activeItem);
-    };
-
     // Carousel class definition
     var Carousel = function (element, options) {
 
@@ -776,6 +766,13 @@
         $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
+    Carousel.prototype.activeindex = function() {
+        var $activeItem = this.$element.find(".carousel-active");
+        this.$items = $activeItem.parent().children("figure");
+
+        return this.$items.index($activeItem);
+    };
+
     Carousel.prototype.cycle = function (event) {
 
         if (!event) {
@@ -799,7 +796,7 @@
 
     Carousel.prototype.to = function (position) {
 
-        var activePosition = getActiveIndex.call(this),
+        var activePosition = this.activeindex(),
             self = this;
 
         if (position > (this.$items.length - 1) || position < 0) {
@@ -916,7 +913,7 @@
         // Highlight the correct indicator.
         this.$element.one(eslid, function () {
             self.$indicators.removeClass("active")
-                .eq(getActiveIndex.call(self)).addClass("active");
+                .eq(self.activeindex()).addClass("active");
         });
 
         var complete = function () {
@@ -1027,7 +1024,7 @@
         var isNext = event.delta.x < 0,
             type = isNext ? (rtl ? "prev" : "next") : (rtl ? "next" : "prev"),
             fallback = isNext ? (rtl ? "last" : "first") : (rtl ? "first" : "last"),
-            activePosition = getActiveIndex.call(this),
+            activePosition = this.activeindex(),
             $activeItem = this.$items.eq(activePosition),
             $nextItem = $activeItem[type]("figure");
 
@@ -1101,7 +1098,7 @@
         if (supportTransition) {
 
             // Trim the animation duration based on the current position.
-            var activePosition = getActiveIndex.call(this),
+            var activePosition = this.activeindex(),
                 $activeItem = this.$items.eq(activePosition);
 
             if (!this.translationDuration) {
@@ -2213,6 +2210,9 @@
                 iframeHeight = parseInt($iframe.height(), 10),
                 ratio = iframeWidth / iframeHeight,
                 maxWidth = maxHeight * ratio;
+            
+            // TODO: Remove this once testing is complete.
+            $header.html("maxHeight:" + maxHeight + ", maxWidth:" + maxWidth + "<br/> iframeHeight:" + iframeHeight + ", iframeWidth:" + iframeWidth);
 
             // Set both to ensure there is no overflow.
             $.each([$modal, $iframe], function () {
@@ -2497,7 +2497,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns,
+    var rtl = $.support.rtl,
+        eready = "ready" + ns,
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -2506,41 +2507,6 @@
     var keys = {
         LEFT: 37,
         RIGHT: 39
-    };
-
-    // Private methods.
-    var tab = function (activePosition, postion, callback) {
-
-        var showEvent = $.Event(eshow),
-            $element = this.$element,
-            $childTabs = $element.children("ul").children("li"),
-            $childPanes = $element.children(":not(ul)"),
-            $nextTab = $childTabs.eq(postion),
-            $currentPane = $childPanes.eq(activePosition),
-            $nextPane = $childPanes.eq(postion);
-
-        $element.trigger(showEvent);
-
-        if (this.tabbing || showEvent.isDefaultPrevented()) {
-            return;
-        }
-
-        this.tabbing = true;
-
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 }).focus();
-
-        // Do some class shuffling to allow the transition.
-        $currentPane.addClass("fade-out fade-in");
-        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
-
-        // Force redraw.
-        $nextPane.redraw().addClass("fade-in");
-
-        // Do the callback
-        callback.call(this, $nextPane);
-
     };
 
     // Tabs class definition
@@ -2597,7 +2563,7 @@
         }
 
         // Call the function with the callback
-        return tab.call(this, activePosition, position, function ($item) {
+        return this.tab(activePosition, position, function ($item) {
 
             var complete = function () {
                 self.tabbing = false;
@@ -2607,6 +2573,39 @@
             // Do our callback
             $item.onTransitionEnd(complete);
         });
+    };
+
+    Tabs.prototype.tab = function (activePosition, postion, callback) {
+
+        var showEvent = $.Event(eshow),
+           $element = this.$element,
+           $childTabs = $element.children("ul").children("li"),
+           $childPanes = $element.children(":not(ul)"),
+           $nextTab = $childTabs.eq(postion),
+           $currentPane = $childPanes.eq(activePosition),
+           $nextPane = $childPanes.eq(postion);
+
+        $element.trigger(showEvent);
+
+        if (this.tabbing || showEvent.isDefaultPrevented()) {
+            return;
+        }
+
+        this.tabbing = true;
+
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
+        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 }).focus();
+
+        // Do some class shuffling to allow the transition.
+        $currentPane.addClass("fade-out fade-in");
+        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
+        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
+
+        // Force redraw.
+        $nextPane.redraw().addClass("fade-in");
+
+        // Do the callback
+        callback.call(this, $nextPane);
     };
 
     Tabs.prototype.click = function (event) {
@@ -2635,9 +2634,10 @@
                 length = $all.length,
                 index = $li.index();
 
-            // Ensure that the index stays within bounds.
-            index = which === keys.LEFT ? index - 1 : index + 1;
+            // Select the correct index.
+            index = which === keys.LEFT ? (rtl ? index + 1 : index - 1) : (rtl ? index - 1 : index + 1);
 
+            // Ensure that the index stays within bounds.
             if (index === length) {
                 index = 0;
             }

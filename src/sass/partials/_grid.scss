@@ -1,17 +1,15 @@
+ /* Manages width in a single place */
 .container {
     margin: 0 auto;
-    max-width: $grid-container-width; /* Manages width in a single place */
-    width: 95%;
+    max-width: $grid-container-max-width; 
+    width: $grid-container-width;
 
     &.fixed,
     .fixed & {
-        width: $grid-container-width; /* Manages width in a single place */
+        width: $grid-container-max-width;
     }
 }
 
-/*
- * Clearfix: contain floats
- */
 .row {
     @extend .clearfix;
 }

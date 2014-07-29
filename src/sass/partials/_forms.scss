@@ -12,7 +12,6 @@ fieldset {
 legend {
     display: block;
     width: 100%;
-    font-size: 1.17em;
     margin-bottom: 1em;
 }
 
@@ -72,82 +71,82 @@ input,
         opacity: 1;
         outline: 0 !important;
     }
-    /*
-     * CLean up that hideous file input.
-     */
-    &[type=file]::-ms-value {
-        background: $form-input-background;
-        border: none;
-    }
+}
 
-    &[type=file]::-ms-browse {
-        background: $button-background;
-        border: $button-border;
-        color: $form-input-color;
+/*
+ * Clean up that hideous file input.
+ */
+input[type=file]::-ms-value {
+    background: $form-input-background;
+    border: none;
+}
 
-        &:active {
-            background-color: lighten($button-background, 5);
-        }
+input[type=file]::-ms-browse {
+    background: $button-background;
+    border: $button-border;
+    color: $form-input-color;
+
+    &:active {
+        background-color: lighten($button-background, 5);
     }
 }
 
-input {
-    &[type=color] {
-        max-width: 105px;
-    }
-    /*
+input[type=color] {
+    max-width: 105px;
+}
+/*
 	 * Declared separately to reduce selector duplication
 	 * for padding
 	 */
-    &[type=radio],
-    &[type=checkbox] {
-        display: block;
-        line-height: inherit;
-        margin: .1875em .1875em .1875em 0;
-        min-height: 1em;
-        min-width: 1em;
-        padding: 0;
-        width: auto;
-    }
+input[type=radio],
+input[type=checkbox] {
+    display: block;
+    line-height: inherit;
+    margin: .1875em .1875em .1875em 0;
+    min-height: 1em;
+    min-width: 1em;
+    padding: 0;
+    width: auto;
+}
 
-    &[type=radio] {
-        border-color: transparent \9;
-        border-radius: 1em;
-    }
-    /*
+input[type=radio] {
+    border-color: transparent \9;
+    border-radius: 1em;
+}
+/*
 	 * Add range styles for IE8 and IE9
 	 */
-    &[type=range] {
-        background-color: #fff \9;
-        border: 1px solid #c0c0c0 \9;
-        border: 1px solid transparent;
-        padding: .25em 0;
-        padding: .25em \9;
-    }
+input[type=range] {
+    background-color: #fff \9;
+    border: 1px solid #c0c0c0 \9;
+    border: 1px solid transparent;
+    padding: .25em 0;
+    padding: .25em \9;
+}
 
-    &[type=range]:focus,
-    &[type=checkbox]:focus,
-    &[type=radio]:focus,
-    &[type=checkbox]:checked {
-        border-color: transparent;
-        outline: $form-input-border;
-        outline-color: $form-input-border-color-focus;
-        outline-offset: -1px;
-    }
+input[type=range]:focus,
+input[type=checkbox]:focus,
+input[type=radio]:focus,
+input[type=checkbox]:checked {
+    border-color: transparent;
+    outline: $form-input-border;
+    outline-color: $form-input-border-color-focus;
+    outline-offset: -1px;
+}
 
-    &[type=checkbox] {
-        &:focus,
-        &:checked {
-            border-color: #c0c0c0;
-        }
+input[type=checkbox] {
+    &:focus,
+    &:checked {
+        border-color: #c0c0c0;
     }
-    /*
-	 * Inline
-	 */
-    &.inline-block,
-    select.inline-block {
-        width: auto;
-    }
+}
+
+/*
+ * Inline
+ */
+input.inline-block,
+select.inline-block {
+    width: auto;
 }
 
 /*

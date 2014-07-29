@@ -22,12 +22,12 @@ html {
  * Fix the box model
  * Overwrite Normalize rather than edit it.
  */
-*, *:before, *:after,
+*, :before, :after,
 hr, input[type=search] {
     box-sizing: inherit;
 }
 
-// Add a placeholder for focus events so we can manage 
+// Add a placeholder for focus events so we can manage
 // both global and button styles.
 %focus {
     outline: 1px dotted;

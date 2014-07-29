@@ -385,7 +385,7 @@ html {
  * Fix the box model
  * Overwrite Normalize rather than edit it.
  */
-*, *:before, *:after,
+*, :before, :after,
 hr, input[type=search] {
   -webkit-box-sizing: inherit;
           box-sizing: inherit; }
@@ -447,21 +447,17 @@ hr {
 abbr {
   cursor: help; }
 
+/* Manages width in a single place */
 .container, .modal-ajax.container,
 .modal-iframe {
   margin: 0 auto;
   max-width: 1140px;
-  /* Manages width in a single place */
   width: 95%; }
   .container.fixed,
   .fixed.modal-iframe, .fixed .container,
   .fixed .modal-iframe {
-    width: 1140px;
-    /* Manages width in a single place */ }
+    width: 1140px; }
 
-/*
- * Clearfix: contain floats
- */
 /* Columns */
 [class*=col-] {
   display: block;
@@ -2824,7 +2820,6 @@ fieldset {
 legend {
   display: block;
   width: 100%;
-  font-size: 1.17em;
   margin-bottom: 1em; }
 
 label,
@@ -2861,10 +2856,7 @@ input,
 	 * Disabled
 	 * 1. Override the value set in normalize.css
 	 * 2. Fix IOS 6/7 opacity issue
-	 */
-  /*
-   * CLean up that hideous file input.
-   */ }
+	 */ }
   select:focus,
   textarea:focus,
   input:focus,
@@ -2882,65 +2874,70 @@ input,
     /* 1 */
     opacity: 1;
     outline: 0 !important; }
-  select[type=file]::-ms-value,
-  textarea[type=file]::-ms-value,
-  input[type=file]::-ms-value,
-  .no-edit[type=file]::-ms-value {
-    background: white;
-    border: none; }
-  select[type=file]::-ms-browse,
-  textarea[type=file]::-ms-browse,
-  input[type=file]::-ms-browse,
-  .no-edit[type=file]::-ms-browse {
-    background: #dadada;
-    border: solid 1px silver;
-    color: #222222; }
-    select[type=file]::-ms-browse:active,
-    textarea[type=file]::-ms-browse:active,
-    input[type=file]::-ms-browse:active,
-    .no-edit[type=file]::-ms-browse:active {
-      background-color: #e7e7e7; }
 
-input {
-    /*
+/*
+ * Clean up that hideous file input.
+ */
+input[type=file]::-ms-value {
+  background: white;
+  border: none; }
+
+input[type=file]::-ms-browse {
+  background: #dadada;
+  border: solid 1px silver;
+  color: #222222; }
+  input[type=file]::-ms-browse:active {
+    background-color: #e7e7e7; }
+
+input[type=color] {
+  max-width: 105px; }
+
+/*
 	 * Declared separately to reduce selector duplication
 	 * for padding
 	 */
-    /*
+input[type=radio],
+input[type=checkbox] {
+  display: block;
+  line-height: inherit;
+  margin: .1875em .1875em .1875em 0;
+  min-height: 1em;
+  min-width: 1em;
+  padding: 0;
+  width: auto; }
+
+input[type=radio] {
+  border-color: transparent \9;
+  border-radius: 1em; }
+
+/*
 	 * Add range styles for IE8 and IE9
 	 */
-    /*
-	 * Inline
-	 */ }
-  input[type=color] {
-    max-width: 105px; }
-  input[type=radio], input[type=checkbox] {
-    display: block;
-    line-height: inherit;
-    margin: .1875em .1875em .1875em 0;
-    min-height: 1em;
-    min-width: 1em;
-    padding: 0;
-    width: auto; }
-  input[type=radio] {
-    border-color: transparent \9;
-    border-radius: 1em; }
-  input[type=range] {
-    background-color: #fff \9;
-    border: 1px solid #c0c0c0 \9;
-    border: 1px solid transparent;
-    padding: .25em 0;
-    padding: .25em \9; }
-  input[type=range]:focus, input[type=checkbox]:focus, input[type=radio]:focus, input[type=checkbox]:checked {
-    border-color: transparent;
-    outline: 1px solid silver;
-    outline-color: #00a9ec;
-    outline-offset: -1px; }
-  input[type=checkbox]:focus, input[type=checkbox]:checked {
-    border-color: #c0c0c0; }
-  input.inline-block,
-  input select.inline-block {
-    width: auto; }
+input[type=range] {
+  background-color: #fff \9;
+  border: 1px solid #c0c0c0 \9;
+  border: 1px solid transparent;
+  padding: .25em 0;
+  padding: .25em \9; }
+
+input[type=range]:focus,
+input[type=checkbox]:focus,
+input[type=radio]:focus,
+input[type=checkbox]:checked {
+  border-color: transparent;
+  outline: 1px solid silver;
+  outline-color: #00a9ec;
+  outline-offset: -1px; }
+
+input[type=checkbox]:focus, input[type=checkbox]:checked {
+  border-color: #c0c0c0; }
+
+/*
+ * Inline
+ */
+input.inline-block,
+select.inline-block {
+  width: auto; }
 
 /*
  * 1. Remove borders and padding on range controls in IE10+
@@ -3298,6 +3295,9 @@ table {
     padding: .5em;
     text-align: left;
     vertical-align: top; }
+    [dir="rtl"] table th, [dir="rtl"]
+    table td {
+      text-align: right; }
 
 /*
  *  Bordered tables
@@ -3763,6 +3763,9 @@ x::-ms-reveal,
     .table-list th[scope=row] {
       float: left;
       width: 100%; }
+      [dir="rtl"] .table-list td, [dir="rtl"]
+      .table-list th[scope=row] {
+        float: right; }
     .table-list td:before, .table-list td:after {
       display: block;
       padding: .5em 0;
@@ -3790,6 +3793,8 @@ x::-ms-reveal,
     .tabs > ul > li {
       float: left;
       margin-bottom: -1px; }
+      [dir="rtl"] .tabs > ul > li {
+        float: right; }
       .tabs > ul > li > a {
         display: block;
         line-height: 2em;
@@ -3798,6 +3803,9 @@ x::-ms-reveal,
         border: 1px solid transparent;
         text-decoration: none;
         cursor: pointer; }
+        [dir="rtl"] .tabs > ul > li > a {
+          margin-right: 0;
+          margin-left: .2em; }
         .tabs > ul > li > a:hover {
           background-color: #ebebeb;
           border-color: silver; }
