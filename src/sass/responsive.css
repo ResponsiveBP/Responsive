@@ -353,7 +353,7 @@ html {
 *, *:before, *:after, hr, input[type=search] {
   box-sizing: inherit; }
 
-:focus {
+:focus, button:focus, input[type=submit]:focus, input[type=button]:focus, input[type=reset]:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -1px; }
@@ -2471,10 +2471,7 @@ button, input[type=submit], input[type=button], input[type=reset] {
     background-color: #cdcdcd;
     border: solid 1px #c0c0c0; }
   button:focus, input[type=submit]:focus, input[type=button]:focus, input[type=reset]:focus {
-    border: solid 1px #c0c0c0;
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -1px; }
+    border: solid 1px #c0c0c0; }
   button:active, input[type=submit]:active, input[type=button]:active, input[type=reset]:active {
     background-color: #e7e7e7;
     outline: none; }
@@ -3188,20 +3185,17 @@ table {
 .carousel-fade > figure {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 0 !important;
   bottom: 0;
-  left: 0;
+  left: 0 !important;
   width: 100%;
   height: 100%;
   opacity: 0; }
   .carousel-fade > figure, [dir="rtl"] .carousel-fade > figure {
-    transition: all 0.7s ease-in-out; }
+    transition: opacity 0.7s ease-in-out; }
 .carousel-fade > figure.swipe, .carousel-fade > figure.next, .carousel-fade > figure.prev {
   z-index: 1;
-  left: 0;
   opacity: 1; }
-  [dir="rtl"] .carousel-fade > figure.swipe, [dir="rtl"] .carousel-fade > figure.next, [dir="rtl"] .carousel-fade > figure.prev {
-    right: 0; }
 .carousel-fade > .carousel-active.swipe {
   z-index: 2; }
 .carousel-fade > .carousel-active {
@@ -3209,11 +3203,8 @@ table {
 .carousel-fade .carousel-active {
   opacity: 1; }
   .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {
-    left: 0;
     z-index: 2;
     opacity: 0; }
-    [dir="rtl"] .carousel-fade .carousel-active.left, [dir="rtl"] .carousel-fade .carousel-active.right {
-      right: 0; }
 .carousel-fade .carousel-control, .carousel-fade .carousel-control:visited {
   z-index: 3; }
 

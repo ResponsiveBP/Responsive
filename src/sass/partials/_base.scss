@@ -27,10 +27,17 @@ hr, input[type=search] {
     box-sizing: inherit;
 }
 
-:focus {
+// Add a placeholder for focus events so we can manage 
+// both global and button styles.
+%focus {
     outline: 1px dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: $selection-focus-offset;
+}
+
+
+:focus {
+    @extend %focus;
 }
 
 /**

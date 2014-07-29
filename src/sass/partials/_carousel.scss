@@ -215,16 +215,16 @@
     > figure {
         position: absolute;
         top: 0;
-        right: 0;
+        right: 0 !important;
         bottom: 0;
-        left: 0;
+        left: 0 !important;
         width: 100%;
         height: 100%;
         opacity: 0;
 
         &,
         [dir="rtl"] & {
-            transition: all .7s ease-in-out;
+            transition: opacity .7s ease-in-out;
         }
     }
 
@@ -232,12 +232,7 @@
     > figure.next,
     > figure.prev {
         z-index: 1;
-        left: 0;
         opacity: 1;
-
-        [dir="rtl"] & {
-            right: 0;
-        }
     }
 
     > .carousel-active.swipe {
@@ -253,13 +248,8 @@
 
         &.left,
         &.right {
-            left: 0;
             z-index: 2;
             opacity: 0;
-
-            [dir="rtl"] & {
-                right: 0;
-            }
         }
     }
 

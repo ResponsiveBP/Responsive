@@ -26,10 +26,8 @@ input[type=reset] {
     }
 
     &:focus {
+        @extend %focus;
         border: $button-border;
-        outline: thin dotted;
-        outline: 5px auto -webkit-focus-ring-color;
-        outline-offset: $selection-focus-offset;
     }
 
     &:active {
