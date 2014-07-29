@@ -277,9 +277,7 @@
 
             if (self.$items) {
                 // Clear the transition properties if set.
-                self.$items.each(function () {
-                    $(this).removeClass("swiping").css({ "transition-duration": "" });
-                });
+                self.$items.removeClass("swiping").css({ "transition-duration": "" });
             }
 
             $activeItem.removeClass(["carousel-active", direction].join(" "))
@@ -390,6 +388,8 @@
         if (this.$items.length === 1) {
             return;
         }
+
+        this.$items.removeClass("swipe-next");
 
         if (!$nextItem.length) {
 
