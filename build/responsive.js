@@ -380,6 +380,7 @@
 
         return options;
     };
+
 }(jQuery, window, document));
 /*
  * Responsive AutoSize
@@ -689,8 +690,8 @@
                     if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
                         this.$element.addClass("no-transition");
                         if (this.options.mode === "slide") {
-                            $activeItem.css({ "transform": "translate(" + percent + "%, 0)" });
-                            $nextItem.addClass("swipe").css({ "transform": "translate(" + (percent + diff) + "%, 0)" });
+                            $activeItem.css({ "left": percent + "%" });
+                            $nextItem.addClass("swipe").css({ "left": (percent + diff) + "%" });
                         } else {
                             $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
                             $nextItem.addClass("swipe");
@@ -914,7 +915,7 @@
         }
 
         if ($nextItem.hasClass("carousel-active")) {
-            return false;
+            return (this.sliding = false);
         }
 
         // Trigger the slide event with positional data.
@@ -956,7 +957,7 @@
             if (self.$items) {
                 // Clear the transition properties if set.
                 self.$items.each(function () {
-                    $(this).css({ "transition": "", "opacity": "" });
+                    $(this).css({ "transition-duration": "" });
                 });
             }
 
@@ -978,7 +979,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe").css({ "transform": "", "opacity": "" });
+                $(this).removeClass("swipe").css({ "left": "", "opacity": "" });
             });
         }
 
