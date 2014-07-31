@@ -592,11 +592,9 @@
 
             // Set both to ensure there is no overflow.
             if ($iframe.parent().hasClass("scaled")) {
-                $.each([$modal, $iframe], function () {
-                    this.css({
-                        "max-height": maxHeight,
-                        "max-width": maxWidth
-                    });
+                $modal.css({
+                    "max-height": maxHeight,
+                    "max-width": maxWidth
                 });
             }
 

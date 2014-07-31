@@ -54,8 +54,8 @@
         this.sliding = null;
         this.$items = null;
         this.translationDuration = null;
-        this.$nextTrigger = this.options.nextTrigger ? $(this.nextTrigger) : this.$element.find(".carousel-control.right");
-        this.$previousTrigger = this.options.previousTrigger ? $(this.previousTrigger) : this.$element.find(".carousel-control.left");
+        this.$nextTrigger = this.options.nextTrigger ? $(this.nextTrigger) : this.$element.find(".carousel-control.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.previousTrigger) : this.$element.find(".carousel-control.back");
         this.$indicators = this.options.indicators ? $(this.indicators) : this.$element.find("ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
@@ -101,7 +101,7 @@
         // Not namespaced as we want to keep behaviour when not using data api.
         if (this.options.pause === "hover") {
             // Bind the mouse enter/leave events.
-            if (!$.support.touchEvents && $.support.pointerEvents) {
+            if (!$.support.touchEvents && !$.support.pointerEvents) {
                 this.$element.on(emouseenter, $.proxy(this.pause, this))
                     .on(emouseleave, $.proxy(this.cycle, this));
             }

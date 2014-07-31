@@ -3161,10 +3161,10 @@ table {
   [dir="rtl"] .carousel-control {
     left: auto;
     right: 1px; }
-  .carousel-control.right {
+  .carousel-control.forward {
     left: auto;
     right: 1px; }
-    [dir="rtl"] .carousel-control.right {
+    [dir="rtl"] .carousel-control.forward {
       right: auto;
       left: 1px; }
   .carousel-control, .carousel-control:active, .carousel-control:visited, .carousel-control:hover, .carousel-control:focus {
@@ -3309,7 +3309,8 @@ x::-ms-reveal, .modal-on {
   overflow: hidden; }
 
 .modal-iframe .media, .modal-iframe iframe {
-  max-height: 100%; }
+  max-height: 100%;
+  max-width: 100%; }
 
 .modal-iframe .media {
   background-color: #fff;

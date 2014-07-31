@@ -46,7 +46,7 @@
                 "id": "tab-" + id + "-" + index,
                 "aria-controls": "pane-" + id + "-" + index,
                 "aria-selected": $this.hasClass("tab-active") ? true : false,
-                "tabIndex": $this.hasClass("tab-active") ? 0 : -1
+                "tabIndex": 0
             });
 
             $panes.eq(index).attr({
@@ -109,8 +109,8 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false, "tabIndex": -1 });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true, "tabIndex": 0 }).focus();
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false});
+        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true }).focus();
 
         // Do some class shuffling to allow the transition.
         $currentPane.addClass("fade-out fade-in");
