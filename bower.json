@@ -1,6 +1,6 @@
 {
   "name": "responsive",
-  "version": "2.5.7",
+  "version": "3.0.0",
   "homepage": "http://responsivebp.com",
   "authors": [
     "James South"
@@ -25,8 +25,8 @@
   ],
   "dependencies": {
     "html5shiv": "3.7.2",
-    "jquery": "2.1.0",
-    "jquery-legacy": "jquery#1.11",
+    "jquery": "2.1.1",
+    "jquery-legacy": "jquery#1.11.1",
     "respond": "1.4.2"
   }
 }

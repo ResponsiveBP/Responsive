@@ -14,53 +14,15 @@ var basePath = {
     dist: "./dist/"
 },
 	path = {
-	    css: {
-	        src: basePath.src + "css/",
-	        build: basePath.build + "css/",
-	        dist: basePath.dist + "css/"
-	    },
 	    sass: {
 	        src: basePath.src + "sass/",
-	        build: basePath.build + "sass/",
-	        dist: basePath.dist + "sass/"
+	        build: basePath.build
 	    },
 	    js: {
 	        src: basePath.src + "js/",
-	        build: basePath.build + "js/",
-	        dist: basePath.dist + "js/"
-	    },
-	    img: {
-	        src: basePath.src + "img/",
-	        build: basePath.build + "img/",
-	        dist: basePath.dist + "img/"
+	        build: basePath.build
 	    }
 	};
-
-var cssSrc = [
-    path.css.src + "copyright.css",
-    path.css.src + "normalize.css",
-    path.css.src + "base.css",
-    path.css.src + "grid-base.css",
-    path.css.src + "grid-small.css",
-    path.css.src + "grid-medium.css",
-    path.css.src + "grid-large.css",
-    path.css.src + "lists.css",
-    path.css.src + "tables.css",
-    path.css.src + "tablelist.css",
-    path.css.src + "alerts.css",
-    path.css.src + "media.css",
-    path.css.src + "forms.css",
-    path.css.src + "buttons.css",
-    path.css.src + "code.css",
-    path.css.src + "dropdown.css",
-    path.css.src + "autosize.css",
-    path.css.src + "carousel.css",
-    path.css.src + "modal.css",
-    path.css.src + "tabs.css",
-    path.css.src + "helpers-base.css",
-    path.css.src + "helpers.css",
-    path.css.src + "print.css"
-];
 
 var sassSrc = path.sass.src + "responsive.scss";
 
@@ -74,17 +36,6 @@ var jsSrc = [
     path.js.src + "responsive.table.js",
     path.js.src + "responsive.tabs.js"
 ];
-
-// Concatenate & Minify CSS
-gulp.task("css", function (cb) {
-    gulp.src(cssSrc)
-        .pipe(plugins.concat("responsive.css"))
-        .pipe(gulp.dest(path.css.build))
-        .pipe(plugins.rename({ suffix: ".min" }))
-        .pipe(plugins.minifyCss())
-        .pipe(gulp.dest(path.css.build))
-        .on("end", cb);
-});
 
 // Concatenate & Minify SCSS
 gulp.task("sass", function (cb) {
@@ -123,7 +74,7 @@ gulp.task("scripts", function (cb) {
         ).on("end", cb);
 });
 
-gulp.task("clean", ["css", "sass", "scripts"], function (cb) {
+gulp.task("clean", ["sass", "scripts"], function (cb) {
     del("./dist/responsive.zip", cb);
 });
 
@@ -141,11 +92,9 @@ gulp.task("watch", function () {
     // Watch for changes to our SASS
     gulp.watch(path.sass.src + "**/*.scss", ["sass"]);
 
-    // Watch for changes to our CSS
-    gulp.watch(path.css.src + "**/*.css", ["css"]);
 });
 
 gulp.task("release", ["zip"]);
 
 // Default Task
-gulp.task("default", ["css", "sass", "scripts"]);
+gulp.task("default", ["sass", "scripts"]);
