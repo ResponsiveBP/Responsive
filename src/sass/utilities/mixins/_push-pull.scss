@@ -1,7 +1,7 @@
 ﻿//==
 // Creates float classes for each breakpoint.
 //##
-@mixin push($bp) {
+@mixin push-pull($bp) {
     // XS doesn't have a min value.
     @if $bp == xs {
 
@@ -13,12 +13,28 @@
             }
         }
 
+        .pull-#{$bp} {
+            float: left !important;
+
+            [dir="rtl"] & {
+                float: right !important;
+            }
+        }
+
         @include bp-max($bp) {
             .push-#{$bp}-only {
                 float: right !important;
 
                 [dir="rtl"] & {
                     float: left !important;
+                }
+            }
+
+            .pull-#{$bp}-only {
+                float: left !important;
+
+                [dir="rtl"] & {
+                    float: right !important;
                 }
             }
         }
@@ -34,47 +50,6 @@
                     float: left !important;
                 }
             }
-            // Large doesn't need an "only" since it operates on min width.
-            @if $bp != l {
-                @include bp-max($bp) {
-                    .push-#{$bp}-only {
-                        float: right !important;
-
-                        [dir="rtl"] & {
-                            float: left !important;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@mixin pull($bp) {
-    // XS doesn't have a min value.
-    @if $bp == xs {
-
-        .pull-#{$bp} {
-            float: left !important;
-
-            [dir="rtl"] & {
-                float: right !important;
-            }
-        }
-
-        @include bp-max($bp) {
-            .pull-#{$bp}-only {
-                float: left !important;
-
-                [dir="rtl"] & {
-                    float: right !important;
-                }
-            }
-        }
-    }
-    @else {
-
-        @include bp-min($bp) {
 
             .pull-#{$bp} {
                 float: left !important;
@@ -86,6 +61,14 @@
             // Large doesn't need an "only" since it operates on min width.
             @if $bp != l {
                 @include bp-max($bp) {
+                    .push-#{$bp}-only {
+                        float: right !important;
+
+                        [dir="rtl"] & {
+                            float: left !important;
+                        }
+                    }
+
                     .pull-#{$bp}-only {
                         float: left !important;
 

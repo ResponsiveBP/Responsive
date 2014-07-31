@@ -27,22 +27,15 @@
 .push {
     float: right !important;
 }
-// XS, S, M, L viewports.
-@include push(xs);
-@include push(s);
-@include push(m);
-@include push(l);
-
 
 .pull {
     float: left !important;
 }
 // XS, S, M, L viewports.
-@include pull(xs);
-@include pull(s);
-@include pull(m);
-@include pull(l);
-
+@include push-pull(xs);
+@include push-pull(s);
+@include push-pull(m);
+@include push-pull(l);
 
 /*
  * Layout helpers
@@ -50,30 +43,20 @@
 .block {
     display: block !important;
 }
-// XS, S, M, L viewports.
-@include layout(xs, block);
-@include layout(s, block);
-@include layout(m, block);
-@include layout(l, block);
-
 
 .inline-block {
     display: inline-block !important;
 }
-// XS, S, M, L viewports.
-@include layout(xs, inline-block);
-@include layout(s, inline-block);
-@include layout(m, inline-block);
-@include layout(l, inline-block);
 
 .inline {
     display: inline !important;
 }
+
 // XS, S, M, L viewports.
-@include layout(xs, inline);
-@include layout(s, inline);
-@include layout(m, inline);
-@include layout(l, inline);
+@include layout(xs);
+@include layout(s);
+@include layout(m);
+@include layout(l);
 
 /*
  * Text align helpers
@@ -81,29 +64,20 @@
 .text-left {
     text-align: left !important;
 }
-// XS, S, M, L viewports.
-@include text-align(xs, left);
-@include text-align(s, left);
-@include text-align(m, left);
-@include text-align(l, left);
-
-.text-center {
-    text-align: center !important;
-}
-// XS, S, M, L viewports.
-@include text-align(xs, center);
-@include text-align(s, center);
-@include text-align(m, center);
-@include text-align(l, center);
 
 .text-right {
     text-align: right !important;
 }
+
+.text-center {
+    text-align: center !important;
+}
+
 // XS, S, M, L viewports.
-@include text-align(xs, right);
-@include text-align(s, right);
-@include text-align(m, right);
-@include text-align(l, right);
+@include text-align(xs);
+@include text-align(s);
+@include text-align(m);
+@include text-align(l);
 
 // Grid state detection.
 .grid-state-indicator {
