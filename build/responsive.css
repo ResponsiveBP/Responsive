@@ -369,6 +369,8 @@ th {
  */
 @-ms-viewport {
   width: device-width; }
+@viewport {
+  width: auto; }
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
@@ -390,12 +392,15 @@ hr, input[type=search] {
   -webkit-box-sizing: inherit;
           box-sizing: inherit; }
 
-:focus, button:focus,
+button:focus,
 input[type=submit]:focus,
 input[type=button]:focus,
 input[type=reset]:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -1px; }
+
+:focus {
   outline-offset: -1px; }
 
 /**

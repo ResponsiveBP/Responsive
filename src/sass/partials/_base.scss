@@ -37,7 +37,7 @@ hr, input[type=search] {
 
 
 :focus {
-    @extend %focus;
+    outline-offset: $selection-focus-offset;
 }
 
 /**
