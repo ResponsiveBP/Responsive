@@ -172,26 +172,26 @@
             mouseMove = "mousemove",
             mouseEnd = ["mouseup", "mouseleave"];
 
-        var getEvents = function () {
+        var getEvents = function (ns) {
             var estart,
                 emove,
                 eend;
 
             // Keep the events separate since support could be crazy.
             if (supportTouch) {
-                estart = touchStart;
-                emove = touchMove;
-                eend = (touchEnd.join(" "));
+                estart = touchStart + ns;
+                emove = touchMove + ns;
+                eend = (touchEnd.join(ns + " ")) + ns;
             }
             else if (supportPointer) {
-                estart = (pointerStart.join(" "));
-                emove = (pointerMove.join(" "));
-                eend = (pointerEnd.join(" "));
+                estart = (pointerStart.join(ns + " ")) + ns;
+                emove = (pointerMove.join(ns + " ")) + ns;
+                eend = (pointerEnd.join(ns + " ")) + ns;
 
             } else {
-                estart = mouseStart;
-                emove = mouseMove;
-                eend = (mouseEnd.join(" "));
+                estart = mouseStart + ns;
+                emove = mouseMove + ns;
+                eend = (mouseEnd.join(ns + " ")) + ns;
             }
 
             return {
@@ -208,10 +208,11 @@
             /// </param>
             /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-            var eswipestart = "swipestart",
+            var ns = handler.namespace ? "." + handler.namespace : "",
+                eswipestart = "swipestart",
                 eswipemove = "swipemove",
                 eswipeend = "swipeend",
-                etouch = getEvents();
+                etouch = getEvents(ns);
 
             // Set the touchaction variable for move.
             var touchAction = handler.data && handler.data.touchAction || "none";
@@ -357,9 +358,12 @@
             });
         };
 
-        var removeSwipe = function ($elem) {
+        var removeSwipe = function ($elem, handler) {
             /// <summary>Removes swiping functionality from the given element.</summary>
-            var etouch = getEvents();
+
+            var ns = handler.namespace ? "." + handler.namespace : "",
+                etouch = getEvents(ns);
+
             return $elem.each(function () {
 
                 // Disable extended touch events on ie.
@@ -374,8 +378,8 @@
             add: function (handler) {
                 addSwipe($(this), handler);
             },
-            remove: function () {
-                removeSwipe($(this));
+            remove: function (handler) {
+                removeSwipe($(this), handler);
             }
         };
     }());
@@ -766,7 +770,7 @@
         $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
-    Carousel.prototype.activeindex = function() {
+    Carousel.prototype.activeindex = function () {
         var $activeItem = this.$element.find(".carousel-active");
         this.$items = $activeItem.parent().children("figure");
 
@@ -1076,6 +1080,8 @@
                 $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
                 $nextItem.addClass("swipe swipe-next");
             }
+        } else {
+            this.cycle();
         }
     };
 

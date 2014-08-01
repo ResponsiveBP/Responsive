@@ -121,7 +121,7 @@
         $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
-    Carousel.prototype.activeindex = function() {
+    Carousel.prototype.activeindex = function () {
         var $activeItem = this.$element.find(".carousel-active");
         this.$items = $activeItem.parent().children("figure");
 
@@ -431,6 +431,8 @@
                 $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
                 $nextItem.addClass("swipe swipe-next");
             }
+        } else {
+            this.cycle();
         }
     };
 
