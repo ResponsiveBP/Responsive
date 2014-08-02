@@ -215,5 +215,5 @@ pip-log.txt
 .mr.developer.cfg
 
 # specific files
-_site/
 node_modules/
+_site/
