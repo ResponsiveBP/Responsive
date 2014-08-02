@@ -17,7 +17,7 @@ input[type=reset] {
     margin-bottom: 0;
     background: $button-background;
     border: $button-border;
-    touch-action: none; /* 2 */
+    touch-action: manipulation; /* 2 */
     text-decoration: none;
 
     &:hover {

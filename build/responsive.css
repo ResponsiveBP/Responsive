@@ -2681,8 +2681,8 @@ input[type=reset] {
   margin-bottom: 0;
   background: #dadada;
   border: solid 1px silver;
-  -ms-touch-action: none;
-      touch-action: none;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
   /* 2 */
   text-decoration: none;
     /*
