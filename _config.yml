@@ -12,18 +12,19 @@ relative_permalinks: false
 name: Responsive
 
 # Server
-exclude:          ["CNAME","node_modules"]
+exclude:          ["CNAME","node_modules","Gemfile","Gemfile.lock"]
 
 # Meta Details
-description: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites.
-keywords: "HTML, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate"
+description: A super lightweight HTML, SASS, CSS, and JavaScript framework for building responsive websites.
+keywords: "HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate"
 author: "James South, and Responsive contributers"
 
 
 
 # Custom variables
-version: 2.5.7
-buildsize : 20.6
+version: 3.0.0
+buildsize : 24.8
 repo: https://github.com/responsivebp/responsive
-release: https://github.com/ResponsiveBP/Responsive/releases/download/2.5.7/responsive.zip
+sourcefiles: https://github.com/ResponsiveBP/Responsive/archive/3.0.0.zip
+release: https://github.com/ResponsiveBP/Responsive/releases/download/3.0.0/responsive.zip
 

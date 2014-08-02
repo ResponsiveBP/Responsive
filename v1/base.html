@@ -7,29 +7,22 @@
     <meta content="width=device-width" name="viewport">
     <title>Responsive :: Base</title>
 
-    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
-    <link href="assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
-    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="/v1/assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="/v1/assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="/v1/assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
-      <link href="assets/css/docs.css" rel="stylesheet" />
-      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
-      <script src="assets/js/vendor/html5shiv.js"></script>
+      <link href="/v1/assets/css/responsive-legacy.css" rel="stylesheet" />
+      <link href="/v1/assets/css/docs.css" rel="stylesheet" />
+      <link href="/v1/assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="/v1/assets/js/vendor/html5shiv.js"></script>
     <![endif]-->
-
-    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
         <div class="container">
             <div class="clearfix">
-                <a href="/" rel="home" class=" push-left">Responsive</a>
+                <a href="/v1/" rel="home" class=" push-left">Responsive</a>
                 <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
             </div>
             <div class="menu collapse">
@@ -72,20 +65,20 @@
             <h1>Normalize</h1>
             <p>Responsive provides lots of building blocks that are specifically designed to speed up your development by boilerplating common components from normalized styles.</p>
             <p>
-                The base CSS for this comes from <a href="http://necolas.github.com/normalize.css/" target="_blank" rel="external">Normalize.css</a>; an open-source project by 
-                <a href="http://twitter.com/necolas" target="_blank" rel="external">Nicolas Gallagher</a> and <a href="http://twitter.com/jon_neal" target="_blank" rel="external">Jonathan Neal</a>. 
-                <a href="http://nicolasgallagher.com/about-normalize-css/" target="_blank" rel="external">In their own words</a>:             
+                The base CSS for this comes from <a href="http://necolas.github.com/normalize.css/" target="_blank" rel="external">Normalize.css</a>; an open-source project by
+                <a href="http://twitter.com/necolas" target="_blank" rel="external">Nicolas Gallagher</a> and <a href="http://twitter.com/jon_neal" target="_blank" rel="external">Jonathan Neal</a>.
+                <a href="http://nicolasgallagher.com/about-normalize-css/" target="_blank" rel="external">In their own words</a>:
             </p>
             <blockquote>
-                Normalize.css is a small CSS file that provides better cross-browser consistency in the default styling of HTML elements. 
-            It’s a modern, HTML5-ready, alternative to the traditional CSS reset.
+                Normalize.css is a small CSS file that provides better cross-browser consistency in the default styling of HTML elements.
+                It’s a modern, HTML5-ready, alternative to the traditional CSS reset.
             </blockquote>
         </header>
         <hr />
         <section>
             <h1>Typography</h1>
             <p>
-                Responsive does not add any additional styles to basic typographical elements such as <code>&lt;p/&gt;</code>. Header tags and other elements conform to 
+                Responsive does not add any additional styles to basic typographical elements such as <code>&lt;p/&gt;</code>. Header tags and other elements conform to
                 cross-browser normalized standards.
             </p>
             <table class="table-bordered">
@@ -283,22 +276,32 @@ margin: 2.33em 0;</code></pre>
                 <dt><code>.ir</code></dt>
                 <dd>Hides an elements text so that a background image can be used instead. Useful for logos.</dd>
                 <dt><code>.block</code></dt>
-                <dd>Changes an elements display style to
-                    <var>block</var>.</dd>
+                <dd>
+                    Changes an elements display style to
+                    <var>block</var>.
+                </dd>
                 <dt><code>.inline-block</code></dt>
-                <dd>Changes an elements display style to
-                    <var>inline-block</var>.</dd>
+                <dd>
+                    Changes an elements display style to
+                    <var>inline-block</var>.
+                </dd>
                 <dt><code>.inline</code></dt>
-                <dd>Changes an elements display style to
-                    <var>inline</var>.</dd>
+                <dd>
+                    Changes an elements display style to
+                    <var>inline</var>.
+                </dd>
                 <dt><code>.fade-out</code></dt>
-                <dd>Changes an elements opacity to
+                <dd>
+                    Changes an elements opacity to
                     <var>0</var>
-                    fading it out with a CSS animation.</dd>
+                    fading it out with a CSS animation.
+                </dd>
                 <dt><code>.fade-in</code></dt>
-                <dd>Changes an elements opacity to
+                <dd>
+                    Changes an elements opacity to
                     <var>1</var>
-                    fading it in with a CSS animation.</dd>
+                    fading it in with a CSS animation.
+                </dd>
             </dl>
         </section>
     </article>
@@ -310,8 +313,8 @@ margin: 2.33em 0;</code></pre>
                     <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
                 </p>
                 <p>
-                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
-                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>,
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>.
                 </p>
                 <p>
                     Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
@@ -322,15 +325,15 @@ margin: 2.33em 0;</code></pre>
             </div>
         </div>
     </footer>
-    <!--[if IE 8]>     
-        <script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <!--[if IE 8]>
+        <script src="/v1/assets/js/vendor/jquery-1.10.2.min.js"></script>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
-    <script src="assets/js/vendor/prism.js"></script>
+    <script src="/v1/assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <script src="/v1/assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
-    <script src="assets/js/responsive.js"></script>
+    <script src="/v1/assets/js/responsive.js"></script>
 
     <!-- Google Analytics: -->
     <script>
@@ -342,6 +345,6 @@ margin: 2.33em 0;</code></pre>
         }(document, 'script'));
     </script>
 
-    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+    <script src="/v1/assets/js/jquery.googleanalytics.min.js"></script>
 </body>
 </html>

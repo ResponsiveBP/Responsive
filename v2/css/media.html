@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Media ::  Responsive</title>
+    <meta name="description" content=" Responsive media elements that scale with your browser. " />
+    <meta name="keywords" content="HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+    
+    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
+
+    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/v2/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+
+<main class="container" role="main">
+    <header role="banner">
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/v2">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v2/css">css</a> &#187; </li>
+
+    
+    
+    
+    <li>media</li>
+</ol>
+
+ 
+        <h1>
+            Media
+            <span>Responsive media elements that scale with your browser.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-m-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#images">Images</a></li>
+    
+       
+       <li><a href="#iframes">Iframes</a></li>
+    
+       
+       <li><a href="#video">Video</a></li>
+    
+</ul>
+
+        </nav>
+        <article class="col-m-9">
+            <section>
+    <h1>Media</h1>
+    <p>Responsive media elements that scale with your browser.</p>
+    The code here is based on research and work by <a  href="http://alistapart.com/article/creating-intrinsic-ratios-for-video">Theirry Koblentz</a>, <a  href="http://amobil.se/2011/11/responsive-embeds/">Anders Andersen</a>, <a  href="http://niklausgerber.com/blog/responsive-google-or-bing-maps/">Niklaus Gerber</a>, and <a  href="http://embedresponsively.com/">Jeff Hobbs</a>.
+    <hr />
+    <section id="images">
+        <section>
+            <h2>Images</h2>
+            <p>Images are responsive by default ensuring they do not overflow the bounds of their container.</p>
+            <div class="row">
+                <div class="col-s-4">
+                    <img src="../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="col-s-4">
+                    <img src="../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="col-s-4">
+                    <img src="../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Constrained Images</h2>
+            <p>Vertically and horizontally constrained and centered. Wrap the image in a container with the class <code>.media</code>.</p>
+            <div class="row">
+                <div class="col-s-4">
+                    <div class="media">
+                        <img src="../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="col-s-4">
+                    <div class="media">
+                        <img src="../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="col-s-4">
+                    <div class="media">
+                        <img src="../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+    </section>
+    <hr />
+    <section id="iframes">
+        <h1>Iframes</h1>
+        <p>We've provided responsive wrappers for iframe embeds from many popular sites.</p>
+        <div class="row">
+            <div class="col-s-6">
+                <h2>Youtube</h2>
+                <p>Add class <code>.media</code> to the media container.</p>
+                <div class="media">
+                    <iframe src="http://www.youtube.com/embed/eRW84aVCMWo" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-s-6">
+                <h2>Dailymotion</h2>
+                <p>Add class <code>.media</code> to the media container.</p>
+                <div class="media">
+                    <iframe src="http://www.dailymotion.com/embed/video/x10o8jk" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-s-6">
+                <h2>Google Maps</h2>
+                <p>Add classes <code>.media</code> to the media container.</p>
+                <div class="media">
+                    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;output=embed"></iframe>
+                    <br />
+                    <small><a href="http://maps.google.co.uk/maps?q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=m&amp;z=11&amp;iwloc=A&amp;source=embed" style="color: #0000FF; text-align: left">View Larger Map</a></small>
+                </div>
+            </div>
+            <div class="col-s-6">
+                <h2>Vimeo</h2>
+                <p>Add classes <code>.media</code> and <code>.vimeo</code> to the media container.</p>
+                <div class="media vimeo">
+                    <iframe src="http://player.vimeo.com/video/24954567" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-s-6">
+                <h2>Vine</h2>
+                <p>Add classes <code>.media</code> and <code>.vine</code> to the media container.</p>
+                <div class="media vine">
+                    <iframe src="https://vine.co/v/bYwPIluIipH/embed/simple" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                </div>
+            </div>
+            <div class="col-s-6">
+                <h2>Instagram</h2>
+                <p>Add classes <code>.media</code> and <code>.instagram</code> to the media container.</p>
+                <div class="media instagram">
+                    <iframe src="http://instagram.com/p/dJJvzMI4X8/embed/" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Getty</h2>
+            <p>Add classes <code>.media</code> and <code>.getty</code> to the media container.</p>
+            <div class="col-s-6">
+                <div class="media getty">
+                    <iframe src="http://embed.gettyimages.com/embed/137668307?et=0kKQE3OQU06k6Y-tD9FdZA&sig=MuEspy0rbDdvg7lpUAk77Pwaha2oc1_tUWsZTdH6IHE=" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
+
+     <div class="alert" aria-live="assertive">
+            <p>
+                Twitter, Facebook, SoundCloud, Storify, and Scribd (select 'Autosize') already provide responsive embed code.
+            </p>
+        </div>
+
+        <h2>Markup</h2>
+        <pre class="language-markup"><code>&lt;div class="media"&gt;
+    &lt;iframe src="http://www.youtube.com/embed/eRW84aVCMWo" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="video">
+        <h1>Video</h1>
+        <p>Wrap the video element in a container marked with classes <code>.media</code> and <code>.video</code>.</p>
+        <p>Embed code taken from <a href="http://camendesign.com/code/video_for_everybody" rel="external nofollow" >"Video For Everybody"</a>.</p>
+        <div class="media video">
+            <!-- "Video For Everybody" http://camendesign.com/code/video_for_everybody -->
+            <video controls="controls" poster="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360">
+                <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
+                <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" />
+                <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" />
+                <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
+                    <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                    <param name="allowFullScreen" value="true" />
+                    <param name="wmode" value="transparent" />
+                    <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fsandbox.thewikies.com%2Fvfe-generator%2Fimages%2Fbig-buck-bunny_poster.jpg',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />
+                    <img alt="Big Buck Bunny" src="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360" title="No video playback capabilities, please download the video below" />
+                </object>
+            </video>
+        </div>
+        <p>
+            <strong>Download video:</strong> <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">MP4 format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv">Ogg format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm">WebM format</a>
+        </p>
+        <h2>Markup</h2>
+        <pre class="language-markup"><code>&lt;div class="media video"&gt;
+    &lt;!-- "Video For Everybody" http://camendesign.com/code/video_for_everybody --&gt;
+    &lt;video controls="controls" poster="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360"&gt;
+        &lt;source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" /&gt;
+        &lt;source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" /&gt;
+        &lt;source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" /&gt;
+        &lt;object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360"&gt;
+            &lt;param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" /&gt;
+            &lt;param name="allowFullScreen" value="true" /&gt;
+            &lt;param name="wmode" value="transparent" /&gt;
+            &lt;param name="flashVars" value="config={'playlist':['http%3A%2F%2Fsandbox.thewikies.com%2Fvfe-generator%2Fimages%2Fbig-buck-bunny_poster.jpg',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" /&gt;
+            &lt;img alt="Big Buck Bunny" src="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360" title="No video playback capabilities, please download the video below" /&gt;
+        &lt;/object&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+</section>
+
+        </article>
+    </div>
+</main>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <button class="to-top push-right">Back to Top ^</button>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+    <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
+<!--<![endif]-->
+<script src="/v2/assets/js/vendor/prism.js"></script>
+<script src="/v2/assets/js/responsive.min.js"></script>
+<script src="/v2/assets/js/docs.min.js"></script>
+
+<!-- Google Analytics: -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42035025-1', 'responsivebp.com');
+    ga('send', 'pageview');
+</script>
+
+<script src="/v2/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

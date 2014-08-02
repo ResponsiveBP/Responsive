@@ -7,29 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Responsive :: Dismiss</title>
 
-    <link href="assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
-    <link href="assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
-    <link href="assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="/v1/assets/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="/v1/assets/css/docs.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="/v1/assets/css/vendor/prism.css" rel="stylesheet" media="all and (min-width: 1em)" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-      <link href="assets/css/responsive-legacy.css" rel="stylesheet" />
-      <link href="assets/css/docs.css" rel="stylesheet" />
-      <link href="assets/css/docs-legacy.css" rel="stylesheet" />
-      <script src="assets/js/vendor/html5shiv.js"></script>
+      <link href="/v1/assets/css/responsive-legacy.css" rel="stylesheet" />
+      <link href="/v1/assets/css/docs.css" rel="stylesheet" />
+      <link href="/v1/assets/css/docs-legacy.css" rel="stylesheet" />
+      <script src="/v1/assets/js/vendor/html5shiv.js"></script>
     <![endif]-->
-
-    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57x57.png" />
 </head>
 <body>
     <nav role="navigation">
         <div class="container">
             <div class="clearfix">
-                <a href="/" rel="home" class=" push-left">Responsive</a>
+                <a href="/v1/" rel="home" class=" push-left">Responsive</a>
                 <a href="#" data-dropdown-target=".menu" role="button" class="push-right ir">Menu</a>
             </div>
             <div class="menu collapse">
@@ -71,7 +64,7 @@
             <h1 class="masthead">Dismiss</h1>
             <p>A jQuery plugin that adds dismissal functionality to hide to any parent element it targets. Uses CSS transitions to perform the animation.</p>
             <p>
-                Comes with a markup API that allows running the plugin without writing a single line of JavaScript. 
+                Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
                 This is Responsive's first class API and should be your first consideration when using a plugin.
             </p>
         </header>
@@ -85,15 +78,15 @@
                         <strong>Adding the plugin inside any element will hide the closest parent to the plugin matching the given selector on click.</strong>
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo leo, tincidunt at nulla sed, aliquam fermentum mauris. 
-                        Quisque laoreet, enim et volutpat faucibus, nisi ante gravida dolor, nec ornare libero sapien quis est. Curabitur nec aliquet 
-                        lacus, sed suscipit neque. Etiam ut sapien tempus, malesuada enim ut, semper diam. Aliquam erat volutpat. Donec eget posuere ligula. 
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo leo, tincidunt at nulla sed, aliquam fermentum mauris.
+                        Quisque laoreet, enim et volutpat faucibus, nisi ante gravida dolor, nec ornare libero sapien quis est. Curabitur nec aliquet
+                        lacus, sed suscipit neque. Etiam ut sapien tempus, malesuada enim ut, semper diam. Aliquam erat volutpat. Donec eget posuere ligula.
                         Proin fermentum et turpis ut rutrum. Nunc vitae nunc fermentum, aliquam mauris ac, tincidunt dui.
                     </p>
                     <p>
-                        Cras at laoreet enim. Etiam tincidunt mi ut mi tristique facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Cras sed nunc ut nisl laoreet adipiscing. Quisque a fermentum libero. Nam at facilisis neque, quis tempus purus. Quisque ultrices 
-                        est at augue ultricies, vitae rutrum nisl imperdiet. Nullam non erat non mauris eleifend laoreet. Ut nibh nisl, consequat id eleifend 
+                        Cras at laoreet enim. Etiam tincidunt mi ut mi tristique facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Cras sed nunc ut nisl laoreet adipiscing. Quisque a fermentum libero. Nam at facilisis neque, quis tempus purus. Quisque ultrices
+                        est at augue ultricies, vitae rutrum nisl imperdiet. Nullam non erat non mauris eleifend laoreet. Ut nibh nisl, consequat id eleifend
                         nec, tristique quis mauris. Maecenas cursus mi nec lorem elementum pulvinar. Vestibulum eu sem quam.
                     </p>
                 </div>
@@ -111,9 +104,11 @@
             <p>The dismiss plugin exposes the following method signatures.</p>
             <dl>
                 <dt><strong>.dismiss(target)</strong>  </dt>
-                <dd>Initialises the plugin with a
+                <dd>
+                    Initialises the plugin with a
                     <var>target</var>
-                    parameter. A jQuery selector indicating which target to hide.</dd>
+                    parameter. A jQuery selector indicating which target to hide.
+                </dd>
             </dl>
         </section>
         <hr />
@@ -159,8 +154,8 @@ $("YOUR_PARENT_SELECTOR").on("closed.dismiss.responsive", function(event) {
                     <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external" target="_blank" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
                 </p>
                 <p>
-                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>, 
-                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>. 
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external" target="_blank">HTML5 Boilerplate</a>,
+                    <a href="http://twitter.github.com/bootstrap/" rel="external" target="_blank">Twitter Bootstrap</a>, and <a href="http://foundation.zurb.com/" target="_blank" rel="nofollow">Zurb Foundation</a>.
                 </p>
                 <p>
                     Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="external" target="_blank">Apache License, Version 2.0</a>.
@@ -171,15 +166,15 @@ $("YOUR_PARENT_SELECTOR").on("closed.dismiss.responsive", function(event) {
             </div>
         </div>
     </footer>
-    <!--[if IE 8]>     
-        <script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
+    <!--[if IE 8]>
+        <script src="/v1/assets/js/vendor/jquery-1.10.2.min.js"></script>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
-    <script src="assets/js/vendor/prism.js"></script>
+    <script src="/v1/assets/js/vendor/jquery-2.0.3.min.js"></script>
+    <script src="/v1/assets/js/vendor/prism.js"></script>
     <!--<![endif]-->
 
-    <script src="assets/js/responsive.js"></script>
+    <script src="/v1/assets/js/responsive.js"></script>
 
     <!-- Google Analytics: -->
     <script>
@@ -191,6 +186,6 @@ $("YOUR_PARENT_SELECTOR").on("closed.dismiss.responsive", function(event) {
         }(document, 'script'));
     </script>
 
-    <script src="assets/js/jquery.googleanalytics.min.js"></script>
+    <script src="/v1/assets/js/jquery.googleanalytics.min.js"></script>
 </body>
 </html>

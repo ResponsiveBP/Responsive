@@ -2,49 +2,88 @@
 layout: default
 title: A real-world website developer framework
 heading: Responsive
-subheading: A super lightweight HTML, CSS, and JavaScript framework for building responsive websites
+subheading: A super lightweight HTML, SASS, CSS, and JavaScript framework for building responsive websites
 ---
 <section>
-    <a href="{{site.release}}" role="button" class="download" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Framework Download">Download Responsive</a>
-    <ul class="download-links">
-        <li>
-            <a href="{{site.repo}}" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="GitHub project" rel="external">GitHub project</a>
-        </li>
-        <li>
-            Version {{site.version}}
-        </li>
-    </ul>
-    <ul class="social-icons">
-        <li>
-            <iframe src="http://ghbtns.com/github-btn.html?user=responsivebp&repo=responsive&type=watch&count=true"
-                    allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20" title="Star on GitHub"></iframe>
-        </li>
-        <li>
-            <iframe src="http://ghbtns.com/github-btn.html?user=responsivebp&repo=responsive&type=fork&count=true"
-                    allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20" title="Fork on GitHub"></iframe> </li>
-        <li>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-text="Get Responsive - A smarter, lighter, responsive framework" data-via="responsivebp" data-hashtags="responsive,css,javascript,html,rwd">Tweet</a>
-        </li>
-        <li>
-            <a href="https://twitter.com/responsivebp" class="twitter-follow-button" data-show-count="false">Follow @responsivebp</a>
-            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-m-6">
+            <a href="{{site.release}}" role="button" class="download" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Framework Download">Download Responsive</a>
+            <ul class="download-links">
+                <li>
+                    <a href="{{site.repo}}" data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="GitHub project" rel="external nofollow">GitHub project</a>
+                </li>
+                <li>
+                    Version {{site.version}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-m-6">
+            <ul class="social-icons">
+                <li>
+                    <iframe src="http://ghbtns.com/github-btn.html?user=responsivebp&repo=responsive&type=watch&count=true"
+                            allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20" title="Star on GitHub"></iframe>
+                </li>
+                <li>
+                    <iframe src="http://ghbtns.com/github-btn.html?user=responsivebp&repo=responsive&type=fork&count=true"
+                            allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20" title="Fork on GitHub"></iframe>
+                </li>
+                <li>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-text="Get Responsive - A smarter, lighter, responsive framework" data-via="responsivebp" data-hashtags="responsive,css,javascript,html,rwd">Tweet</a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/responsivebp" class="twitter-follow-button" data-show-count="false">Follow @responsivebp</a>
+                    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                </li>
+            </ul>
+        </div>
+    </div>
 </section>
+<hr />
 <section>
     <h1>
-        Bootstrap and Foundation are too heavy.
+        Responsive is the developers framework.
     </h1>
+    <div class="row">
+        <div class="col-m-4">
+            <h2>Accessible</h2>
+            <p>
+                Each component and plugin within the framework has been carefully crafted to be fully accessible to keyboard and screenreaders.
+            </p>
+            <p>
+                <strong>Responsive is for everybody!</strong>
+            </p>
+        </div>
+        <div class="col-m-4">
+            <h2>Global</h2>
+            <p>
+                Responsive had built in right-to-left language support for all its components. Even touch events have been altered to provide
+                the best possible experience for right-to-left users.
+            </p>
+        </div>
+        <div class="col-m-4">
+            <h2>Extensible</h2>
+            <p>
+                Built with <a href="http://sass-lang.com/" rel="external nofollow">SASS</a> and <a href="http://jquery.com/" rel="external nofollow">Jquery</a>, the best tools in their class, Responsive has been build to cover every need for a modern website.
+                That said it can be easily extended and enhanced to suite your specific needs.
+            </p>
+        </div>
+    </div>
+</section>
+<hr />
+<section>
+    <h1>Why Responsive?</h1>
     <p>
-        They're great for prototyping but every time you start a real, front-facing, project with them you have to overwrite lots of
-        designer styles that do nothing to add to the functionality of the website. That's annoying!
+        Frameworks like Bootstrap and Foundation are too design opinionated and heavy. They're great for prototyping but every time
+        you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
+        functionality of the website. That costs developers time and money.
     </p>
     <p>
-        Responsive has been built with that in mind. It has been specifically designed and coded to be as lightweight as possible to prevent the need to undo styles set by the
-        framework itself and allow developers to write efficient code and speed up development time.
+        Responsive has been built with that in mind. It has been specifically designed and coded to be as lightweight as possible to prevent
+        the need to undo styles set by the framework itself and allow developers to write efficient code and speed up development time.
     </p>
     <p>
-        Responsive is tiny. The combined CSS and JavaScript is <strong>only {{site.buildsize}}kb minified and gzipped</strong> but there is a lot of functionality built into the framework.
-        It's designed to be dropped-in, as-is to your website such as you would with <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="nofollow">Normalize.css</a>.
+        Responsive is tiny. The combined output CSS and JavaScript is <strong>only {{site.buildsize}}kb minified and gzipped</strong> but
+        there is a lot of functionality built into the framework with touch, right-to-left language, and accessibility support.
+        It's designed to be dropped-in, as-is to your website such as you would with <a href="http://necolas.github.io/normalize.css/" rel="external nofollow">Normalize.css</a>.
     </p>
 </section>
