@@ -55,7 +55,7 @@ table {
 .table-scrollable {
     margin: 1em 0;
     overflow-y: hidden;
-    overflow: auto;
+    overflow-x: auto;
     width: 100%;
 
     table {

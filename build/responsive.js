@@ -2238,7 +2238,7 @@
             // Prevent IEMobile10+ scrolling when content overflows the modal.
             // This causes the content to jump behind the model but it's all I can
             // find for now.
-            if (navigator.userAgent.match(/IEMobile\//)) {
+            if (w.MSPointerEvent) {
                 if ($content.length && $content.children("*:first")[0].scrollHeight > parseInt($content.height(), 10)) {
                     $html.addClass("modal-lock");
                 }

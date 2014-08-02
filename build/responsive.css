@@ -367,9 +367,8 @@ th {
  * Support for responsive views via media queries do not work in IE10 on mobile for
  * versions prior to WP8 Update 3 (GDR3).
  */
-/*@-ms-viewport {
-    width: device-width;
-}*/
+@-ms-viewport {
+  width: device-width; }
 /*
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
@@ -3331,7 +3330,7 @@ table {
 .table-scrollable {
   margin: 1em 0;
   overflow-y: hidden;
-  overflow: auto;
+  overflow-x: auto;
   width: 100%; }
   .table-scrollable table {
     margin: 0; }
