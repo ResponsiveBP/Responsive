@@ -17,9 +17,13 @@ sublinks: ["#examples|Examples",
         and all fields can be made to display inline by adding the class <code>.inline-block</code>.
     </p>
     <p>Smaller elements such as radio and checkbox inputs can be aligned by wrapping them in an element with the class <code>.input-group</code>.</p>
+    <div class="alert">
+        <h4>Right-to-Left Language Support</h4>
+        Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the layout of form inputs to allow for right-to-left languages.
+    </div>
     <hr />
     <section id="examples">
-        <h1>Standard</h1>
+        <h1>Standard Form</h1>
         <p>Responsive form elements span 100% by default; their width is designed to be constrained by the existing grid system. This makes them extremely flexible.</p>
         <form action="#">
             <fieldset>
@@ -28,35 +32,35 @@ sublinks: ["#examples|Examples",
                     <div class="col-s-6">
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input9">Standard</label>
+                                <label for="input1">Standard</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="text" id="input9" class="focus" value="standard input...">
+                                <input type="text" id="input1" class="focus" value="standard input...">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-disabled9">Disabled</label>
+                                <label for="input-disabled1">Disabled</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="text" id="input-disabled9" disabled="" value="disabled input...">
+                                <input type="text" id="input-disabled1" disabled value="disabled input...">
                                 <p>Support text to help describe the input.</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-no-edit9">Non editable</label>
+                                <label for="input-no-edit1">Non editable</label>
                             </div>
                             <div class="col-s-8">
-                                <span id="input-no-edit9" class="no-edit">No edit</span>
+                                <span id="input-no-edit1" class="no-edit">No edit</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="select-default9">Select</label>
+                                <label for="select-default1">Select</label>
                             </div>
                             <div class="col-s-8">
-                                <select id="select-default9">
+                                <select id="select-default1">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -67,142 +71,142 @@ sublinks: ["#examples|Examples",
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-file9">File upload</label>
+                                <label for="input-file1">File upload</label>
                             </div>
                             <div class="col-s-8">
-                                <input id="input-file9" type="file">
+                                <input id="input-file1" type="file">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-number9">Number</label>
+                                <label for="input-number1">Number</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="number" id="input-number9">
+                                <input type="number" id="input-number1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-password9">Password</label>
+                                <label for="input-password1">Password</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="password" id="input-password9">
+                                <input type="password" id="input-password1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-time9">Time</label>
+                                <label for="input-time1">Time</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="time" id="input-time9">
+                                <input type="time" id="input-time1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-week9">Week</label>
+                                <label for="input-week1">Week</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="week" id="input-week9">
+                                <input type="week" id="input-week1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-month9">Month</label>
+                                <label for="input-month1">Month</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="month" id="input-month9">
+                                <input type="month" id="input-month1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-date9">Date</label>
+                                <label for="input-date1">Date</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="date" id="input-date9">
+                                <input type="date" id="input-date1">
                             </div>
                         </div>
                     </div>
                     <div class="col-s-6">
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-datetime9">Datetime</label>
+                                <label for="input-datetime1">Datetime</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="datetime" id="input-datetime9">
+                                <input type="datetime" id="input-datetime1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-datetime-local9">Datetime Local</label>
+                                <label for="input-datetime-local1">Datetime Local</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="datetime-local" id="input-datetime-local9">
+                                <input type="datetime-local" id="input-datetime-local1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-search9">Search</label>
+                                <label for="input-search1">Search</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="search" id="input-search9">
+                                <input type="search" id="input-search1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-color9">Color</label>
+                                <label for="input-color1">Color</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="color" id="input-color9">
+                                <input type="color" id="input-color1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-range9">Range</label>
+                                <label for="input-range1">Range</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="range" id="input-range9" min="0" max="100" value="50">
+                                <input type="range" id="input-range1" min="0" max="100" value="50">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="input-email9">Email</label>
+                                <label for="input-email1">Email</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="email" id="input-email9">
+                                <input type="email" id="input-email1">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="check-disabled9">Disabled Checkbox</label>
+                                <label for="check-disabled1">Disabled Checkbox</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="checkbox" id="check-disabled9" value="option9" disabled="" class="inline-block">
+                                <input type="checkbox" id="check-disabled1" value="option1" disabled class="inline-block">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="check9">Checkbox</label>
+                                <label for="check1">Checkbox</label>
                             </div>
                             <div class="col-s-8">
-                                <input type="checkbox" id="check9" value="option1" class="inline-block">
-                                <input type="checkbox" id="check10" value="option9" class="inline-block">
+                                <input type="checkbox" id="check1" value="option1" class="inline-block">
+                                <input type="checkbox" id="check2" value="option1" class="inline-block">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="radio9">Radio</label>
-                            </div>
+                                <label for="radio1">Radio</label>
+                            </div> 
                             <div class="col-s-8">
-                                <input type="radio" id="radio9" name="radio" value="option1" class="inline-block">
-                                <input type="radio" id="radio10" name="radio" value="option9" class="inline-block">
+                                <input type="radio" id="radio1" name="radio" value="option1" class="inline-block">
+                                <input type="radio" id="radio2" name="radio" value="option1" class="inline-block">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-s-4">
-                                <label for="textarea9">Textarea</label>
+                                <label for="textarea1">Textarea</label>
                             </div>
                             <div class="col-s-8">
-                                <textarea id="textarea9"></textarea>
+                                <textarea id="textarea1"></textarea>
                             </div>
                         </div>
                     </div>
@@ -225,35 +229,35 @@ sublinks: ["#examples|Examples",
             &lt;div class="col-s-6"&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input9"&gt;Standard&lt;/label&gt;
+                        &lt;label for="input1"&gt;Standard&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="text" id="input9" class="focus" value="standard input..."&gt;
+                        &lt;input type="text" id="input1" class="focus" value="standard input..."&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-disabled9"&gt;Disabled&lt;/label&gt;
+                        &lt;label for="input-disabled1"&gt;Disabled&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="text" id="input-disabled9" disabled="" value="disabled input..."&gt;
+                        &lt;input type="text" id="input-disabled1" disabled="" value="disabled input..."&gt;
                         &lt;p&gt;Support text to help describe the input.&lt;/p&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-no-edit9"&gt;Non editable&lt;/label&gt;
+                        &lt;label for="input-no-edit1"&gt;Non editable&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;span id="input-no-edit9" class="no-edit"&gt;No edit&lt;/span&gt;
+                        &lt;span id="input-no-edit1" class="no-edit"&gt;No edit&lt;/span&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="select-default9"&gt;Select&lt;/label&gt;
+                        &lt;label for="select-default1"&gt;Select&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;select id="select-default9"&gt;
+                        &lt;select id="select-default1"&gt;
                             &lt;option&gt;1&lt;/option&gt;
                             &lt;option&gt;2&lt;/option&gt;
                             &lt;option&gt;3&lt;/option&gt;
@@ -264,142 +268,142 @@ sublinks: ["#examples|Examples",
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-file9"&gt;File upload&lt;/label&gt;
+                        &lt;label for="input-file1"&gt;File upload&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input id="input-file9" type="file"&gt;
+                        &lt;input id="input-file1" type="file"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-number9"&gt;Number&lt;/label&gt;
+                        &lt;label for="input-number1"&gt;Number&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="number" id="input-number9"&gt;
+                        &lt;input type="number" id="input-number1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-password9"&gt;Password&lt;/label&gt;
+                        &lt;label for="input-password1"&gt;Password&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="password" id="input-password9"&gt;
+                        &lt;input type="password" id="input-password1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-time9"&gt;Time&lt;/label&gt;
+                        &lt;label for="input-time1"&gt;Time&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="time" id="input-time9"&gt;
+                        &lt;input type="time" id="input-time1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-week9"&gt;Week&lt;/label&gt;
+                        &lt;label for="input-week1"&gt;Week&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="week" id="input-week9"&gt;
+                        &lt;input type="week" id="input-week1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-month9"&gt;Month&lt;/label&gt;
+                        &lt;label for="input-month1"&gt;Month&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="month" id="input-month9"&gt;
+                        &lt;input type="month" id="input-month1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-date9"&gt;Date&lt;/label&gt;
+                        &lt;label for="input-date1"&gt;Date&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="date" id="input-date9"&gt;
+                        &lt;input type="date" id="input-date1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
             &lt;div class="col-s-6"&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-datetime9"&gt;Datetime&lt;/label&gt;
+                        &lt;label for="input-datetime1"&gt;Datetime&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="datetime" id="input-datetime9"&gt;
+                        &lt;input type="datetime" id="input-datetime1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-datetime-local9"&gt;Datetime Local&lt;/label&gt;
+                        &lt;label for="input-datetime-local1"&gt;Datetime Local&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="datetime-local" id="input-datetime-local9"&gt;
+                        &lt;input type="datetime-local" id="input-datetime-local1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-search9"&gt;Search&lt;/label&gt;
+                        &lt;label for="input-search1"&gt;Search&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="search" id="input-search9"&gt;
+                        &lt;input type="search" id="input-search1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-color9"&gt;Color&lt;/label&gt;
+                        &lt;label for="input-color1"&gt;Color&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="color" id="input-color9"&gt;
+                        &lt;input type="color" id="input-color1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-range9"&gt;Range&lt;/label&gt;
+                        &lt;label for="input-range1"&gt;Range&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="range" id="input-range9" min="0" max="100" value="50"&gt;
+                        &lt;input type="range" id="input-range1" min="0" max="100" value="50"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-email9"&gt;Email&lt;/label&gt;
+                        &lt;label for="input-email1"&gt;Email&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="email" id="input-email9"&gt;
+                        &lt;input type="email" id="input-email1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="check-disabled9"&gt;Disabled Checkbox&lt;/label&gt;
+                        &lt;label for="check-disabled1"&gt;Disabled Checkbox&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="checkbox" id="check-disabled9" value="option9" disabled="" class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check-disabled1" value="option1" disabled="" class="inline-block"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="check9"&gt;Checkbox&lt;/label&gt;
+                        &lt;label for="check1"&gt;Checkbox&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="checkbox" id="check9" value="option1" class="inline-block"&gt;
-                        &lt;input type="checkbox" id="check10" value="option9" class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check1" value="option1" class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check2" value="option1" class="inline-block"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="radio9"&gt;Radio&lt;/label&gt;
+                        &lt;label for="radio1"&gt;Radio&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="radio" id="radio9" name="radio" value="option1" class="inline-block"&gt;
-                        &lt;input type="radio" id="radio10" name="radio" value="option9" class="inline-block"&gt;
+                        &lt;input type="radio" id="radio1" name="radio" value="option1" class="inline-block"&gt;
+                        &lt;input type="radio" id="radio2" name="radio" value="option1" class="inline-block"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="textarea9"&gt;Textarea&lt;/label&gt;
+                        &lt;label for="textarea1"&gt;Textarea&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;textarea id="textarea9"&gt;&lt;/textarea&gt;
+                        &lt;textarea id="textarea1"&gt;&lt;/textarea&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;

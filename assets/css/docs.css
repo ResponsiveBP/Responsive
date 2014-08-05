@@ -119,6 +119,9 @@ header[role="banner"] span {
 
 .download {
     font-size: 1.5em;
+    padding: 1em;
+    border: 2px solid #222;
+    display: inline-block;
 }
 
 .download-links {

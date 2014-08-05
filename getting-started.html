@@ -66,11 +66,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
         &lt;meta name="description" content="Your Page Description." /&gt;
         &lt;title&gt;Your Page Title&lt;/title&gt;
-        &lt;!-- 
-             IE10 Mobile ignores the meta viewport tag. 
-             This fix needs to be in the head.
-        --&gt;
-        &lt;script src="responsive.ie10mobilefix.min.js"&gt;&lt;/script&gt;
+ 
         &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
         &lt;!-- 
              HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
@@ -110,25 +106,10 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
 
             <ul>
                 <li>Chrome (Mac, Windows, iOS, and Android)</li>
-                <li>Internet Explorer</li>
+                <li>Internet Explorer (Windows, WP7/8)</li>
                 <li>Firefox (Mac, Windows)</li>
                 <li>Opera (Mac, Windows)</li>
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
-            </ul>
-            <h2>Internet Explorer 10 Mobile</h2>
-            <p>
-                Internet Explorer 10 on Windows 8 phones prior to <a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2013/10/14/introducing-windows-phone-preview-for-developers.aspx"
-                                                                     rel="external nofollow">Update 3 (a.k.a. GDR3)</a> do not render content to the correct width due to a css fix used to allow "snap mode" on the desktop.
-                Responsive comes bundled with a JavaScript fix that should be referenced in the head of your document.
-                For more information see:
-            </p>
-            <ul>
-                <li>
-                    Matt Stow: <a href="http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html" rel="external nofollow">Responsive Design in IE10 on Windows Phone 8</a>
-                </li>
-                <li>
-                    Tim Kadlec: <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/" rel="external nofollow">Windows Phone 8 and Device-Width</a>
-                </li>
             </ul>
 
             <h2>Internet Explorer 8</h2>
