@@ -1876,7 +1876,7 @@
                     var closeTarget = $close[0],
                         eventTarget = event.target;
 
-                    if (eventTarget === $modal[0] || $.contains($modal[0], event.target)) {
+                    if (eventTarget === $modal[0] || $.contains($modal[0], eventTarget)) {
                         return;
                     }
 
@@ -1886,7 +1886,7 @@
                         self.hide();
                     }
 
-                    if (eventTarget === $overlay[0] || ($.contains($overlay[0], event.target))) {
+                    if (eventTarget === $overlay[0] || ($.contains($overlay[0], eventTarget))) {
                         self.hide();
                     }
                 });

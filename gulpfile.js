@@ -58,12 +58,6 @@ gulp.task("scripts", function (cb) {
         .pipe(plugins.jshint())
         .pipe(plugins.jshint.reporter("default")),
 
-    gulp.src(path.js.src + "responsive.ie10mobilefix.js")
-        .pipe(gulp.dest(path.js.build))
-        .pipe(plugins.rename({ suffix: ".min" }))
-        .pipe(plugins.uglify({ preserveComments: "some" }))
-        .pipe(gulp.dest(path.js.build)),
-
     gulp.src(jsSrc)
         .pipe(plugins.concat("responsive.js"))
         .pipe(gulp.dest(path.js.build))
