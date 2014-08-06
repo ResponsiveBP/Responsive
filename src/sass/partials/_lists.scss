@@ -54,7 +54,7 @@ ol.colored {
             top: 0;
             left: -1em;
             -webkit-margin-start: -.25em; /* 1 */
-            content: "\25cf"; /* 2 */
+            content: "\25cf"; /*2 */
             color: $list-colored-bullet; /* 3 */
             font-size: 1em;
             font-weight: bold;
@@ -88,7 +88,7 @@ ol.colored {
             font-weight: normal;
             left: -3.125em;
             width: 2.5em;
-            -webkit-margin-start: 0; /* 2 */
+            -webkit-margin-start: 0; /*2 */
             [dir="rtl"] & {
                 left: auto;
                 right: -3.125em;
@@ -97,7 +97,7 @@ ol.colored {
     }
 }
 
-/* Definition lists 
+/**Definition lists 
  * Prevent dt and dd collapse.
  */
 dt, dd {

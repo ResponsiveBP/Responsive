@@ -1,4 +1,4 @@
- /* Manages width in a single place */
+ /**Manages width in a single place */
 .container {
     margin: 0 auto;
     max-width: $grid-container-max-width; 
@@ -14,7 +14,7 @@
     @extend .clearfix;
 }
 
-/* Columns */
+/**Columns */
 [class*=col-] {
     display: block;
     width: 100%;

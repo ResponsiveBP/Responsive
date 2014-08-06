@@ -1,4 +1,4 @@
-/*  ==|== Responsive =============================================================
+/** ==|== Responsive =============================================================
 	Author: James South
 	twitter : http://twitter.com/James_M_South
 	github : https://github.com/ResponsiveBP/Responsive
@@ -16,9 +16,9 @@ html {
   font-family: sans-serif;
   /* 1 */
   -ms-text-size-adjust: 100%;
-  /* 2 */
+  /*2 */
   -webkit-text-size-adjust: 100%;
-  /* 2 */ }
+  /*2 */ }
 
 /**
  * Remove default margin.
@@ -26,7 +26,7 @@ html {
 body {
   margin: 0; }
 
-/* HTML5 display definitions
+/**HTML5 display definitions
    ========================================================================== */
 /**
  * Correct `block` display not defined for any HTML5 element in IE 8/9.
@@ -58,7 +58,7 @@ video {
   display: inline-block;
   /* 1 */
   vertical-align: baseline;
-  /* 2 */ }
+  /*2 */ }
 
 /**
  * Prevent modern browsers from displaying `audio` without controls.
@@ -76,7 +76,7 @@ audio:not([controls]) {
 template {
   display: none; }
 
-/* Links
+/**Links
    ========================================================================== */
 /**
  * Remove the gray background color from active links in IE 10.
@@ -91,7 +91,7 @@ a:active,
 a:hover {
   outline: 0; }
 
-/* Text-level semantics
+/**Text-level semantics
    ========================================================================== */
 /**
  * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
@@ -149,7 +149,7 @@ sup {
 sub {
   bottom: -0.25em; }
 
-/* Embedded content
+/**Embedded content
    ========================================================================== */
 /**
  * Remove border when inside `a` element in IE 8/9/10.
@@ -163,7 +163,7 @@ img {
 svg:not(:root) {
   overflow: hidden; }
 
-/* Grouping content
+/**Grouping content
    ========================================================================== */
 /**
  * Address margin not present in IE 8/9 and Safari.
@@ -195,7 +195,7 @@ samp {
   font-family: monospace, monospace;
   font-size: 1em; }
 
-/* Forms
+/**Forms
    ========================================================================== */
 /**
  * Known limitation: by default, Chrome and Safari on OS X allow very limited
@@ -215,7 +215,7 @@ textarea {
   color: inherit;
   /* 1 */
   font: inherit;
-  /* 2 */
+  /*2 */
   margin: 0;
   /* 3 */ }
 
@@ -247,7 +247,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
-  /* 2 */
+  /*2 */
   cursor: pointer;
   /* 3 */ }
 
@@ -286,7 +286,7 @@ input[type="radio"] {
           box-sizing: border-box;
   /* 1 */
   padding: 0;
-  /* 2 */ }
+  /*2 */ }
 
 /**
  * Fix the cursor style for Chrome's increment/decrement buttons. For certain
@@ -306,7 +306,7 @@ input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
   -webkit-box-sizing: content-box;
-  /* 2 */
+  /*2 */
   box-sizing: content-box; }
 
 /**
@@ -334,7 +334,7 @@ legend {
   border: 0;
   /* 1 */
   padding: 0;
-  /* 2 */ }
+  /*2 */ }
 
 /**
  * Remove default vertical scrollbar in IE 8/9/10/11.
@@ -349,7 +349,7 @@ textarea {
 optgroup {
   font-weight: bold; }
 
-/* Tables
+/**Tables
    ========================================================================== */
 /**
  * Remove most spacing between table cells.
@@ -362,7 +362,7 @@ td,
 th {
   padding: 0; }
 
-/*
+/**
  * 1. Use the iOS devices hardware accelerator to provide native scrolling.
  */
 html {
@@ -374,7 +374,7 @@ html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
-/*
+/**
  * Fix the box model
  * Overwrite Normalize rather than edit it.
  */
@@ -383,17 +383,14 @@ hr, input[type=search] {
   -webkit-box-sizing: inherit;
           box-sizing: inherit; }
 
-button:focus,
-input[type=submit]:focus,
-input[type=button]:focus,
-input[type=reset]:focus, .carousel > figure:focus:before {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -1px; }
+a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
+  outline: 2px solid #4d90fe;
+  outline-offset: -2px; }
 
-:focus {
-  outline-offset: -1px; }
-
+/**
+ * Set a focus on elements that can recieve it.
+ * http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex
+ */
 /**
  * Suppress the focus outline on links that cannot be accessed via keyboard.
  * This prevents an unwanted focus outline from appearing around elements that
@@ -402,7 +399,7 @@ input[type=reset]:focus, .carousel > figure:focus:before {
 [tabindex="-1"]:focus {
   outline: none !important; }
 
-/*
+/**
  * Headers
  * 1: Improve rendering of screen fonts.
  * 2: Prevent page breaking.
@@ -411,9 +408,9 @@ h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
   /* 1 */
   page-break-after: avoid;
-  /* 2 */ }
+  /*2 */ }
 
-/*
+/**
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
  * Customize the background colour to match your design.
@@ -426,7 +423,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #b3d4fc;
   text-shadow: none; }
 
-/*
+/**
  * A better looking default horizontal rule
  */
 hr {
@@ -437,13 +434,13 @@ hr {
   margin: 1em 0;
   padding: 0; }
 
-/*
+/**
  * Add query indicator to abbr
  */
 abbr {
   cursor: help; }
 
-/* Manages width in a single place */
+/**Manages width in a single place */
 .container, .modal-ajax.container,
 .modal-iframe {
   margin: 0 auto;
@@ -454,7 +451,7 @@ abbr {
   .fixed .modal-iframe {
     width: 1140px; }
 
-/* Columns */
+/**Columns */
 [class*=col-] {
   display: block;
   width: 100%;
@@ -2653,15 +2650,15 @@ abbr {
 .alert-heading {
   color: inherit; }
 
-/*
+/**
  * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
  * 2: Remove 300ms touch delay.
  */
 button,
-input[type=submit],
-input[type=button],
-input[type=reset] {
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
   -webkit-appearance: none;
   /* 1 */
   border-radius: 0;
@@ -2676,66 +2673,61 @@ input[type=reset] {
   border: solid 1px silver;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
-  /* 2 */
+  /*2 */
   text-decoration: none;
-    /*
+    /**
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.
 	 * 2. Pad buttons.
 	 */ }
   button:hover,
-  input[type=submit]:hover,
-  input[type=button]:hover,
-  input[type=reset]:hover {
+  input[type="submit"]:hover,
+  input[type="button"]:hover,
+  input[type="reset"]:hover {
     background-color: #cdcdcd;
     border: solid 1px silver; }
-  button:focus,
-  input[type=submit]:focus,
-  input[type=button]:focus,
-  input[type=reset]:focus {
-    border: solid 1px silver; }
   button:active,
-  input[type=submit]:active,
-  input[type=button]:active,
-  input[type=reset]:active {
+  input[type="submit"]:active,
+  input[type="button"]:active,
+  input[type="reset"]:active {
     background-color: #e7e7e7;
     outline: none; }
   button.btn-inline,
-  input[type=submit].btn-inline,
-  input[type=button].btn-inline,
-  input[type=reset].btn-inline {
+  input[type="submit"].btn-inline,
+  input[type="button"].btn-inline,
+  input[type="reset"].btn-inline {
     margin-left: -.27em;
     /* 1 */
     padding: .25em 1em;
-    /* 2 */ }
+    /*2 */ }
     [dir="rtl"] button.btn-inline, [dir="rtl"]
-    input[type=submit].btn-inline, [dir="rtl"]
-    input[type=button].btn-inline, [dir="rtl"]
-    input[type=reset].btn-inline {
+    input[type="submit"].btn-inline, [dir="rtl"]
+    input[type="button"].btn-inline, [dir="rtl"]
+    input[type="reset"].btn-inline {
       margin-left: auto;
       margin-right: -.27em; }
 
-/*
+/**
  * 1. Fix IOS 6/7 opacity issue
  */
 button[disabled],
-input[type=submit][disabled],
-input[type=button][disabled],
-input[type=reset][disabled] {
+input[type="submit"][disabled],
+input[type="button"][disabled],
+input[type="reset"][disabled] {
   background-color: #e7e7e7;
   color: #5d5d5d;
   cursor: not-allowed;
   opacity: 1;
   /* 1 */ }
 
-/*
+/**
  * Reset width for inputs
  */
-input[type=submit], input[type=reset], input[type=button] {
+input[type="submit"], input[type="reset"], input[type="button"] {
   max-width: none;
   width: auto; }
 
-/*
+/**
  * Grouped buttons.
  */
 .btn-group {
@@ -2743,9 +2735,15 @@ input[type=submit], input[type=reset], input[type=button] {
   position: relative;
   vertical-align: middle;
   white-space: nowrap; }
-  .btn-group > * {
+  .btn-group > button,
+  .btn-group > input[type="submit"],
+  .btn-group > input[type="button"],
+  .btn-group > input[type="reset"] {
     float: left; }
-    [dir="rtl"] .btn-group > * {
+    [dir="rtl"] .btn-group > button, [dir="rtl"]
+    .btn-group > input[type="submit"], [dir="rtl"]
+    .btn-group > input[type="button"], [dir="rtl"]
+    .btn-group > input[type="reset"] {
       float: right; }
 
 /*
@@ -2757,8 +2755,11 @@ samp,
 kbd {
   padding: .5em;
   background-color: #f7f7f9;
-  border: 1px solid #c0c0c0;
+  border: 1px solid silver;
   color: #ad0d36; }
+
+code > kbd {
+  background-color: #e8e8ee; }
 
 /*
  * Prevent overlap on concurrent lines.
@@ -2766,7 +2767,7 @@ kbd {
 code,
 samp,
 kbd {
-  padding: .067em .25em; }
+  padding: .0667em .25em; }
 
 /*
  * Prevent wrapping.
@@ -2797,7 +2798,9 @@ pre {
   max-height: 20em;
   overflow-y: scroll; }
 
-/* Normalize  */
+/**
+ * Normalize  
+ */
 .form {
   margin: 1em 0; }
 
@@ -2818,8 +2821,8 @@ label .input-group {
 label[for] {
   cursor: pointer; }
 label > input,
-label > input[type=checkbox],
-label > input[type=radio],
+label > input[type="checkbox"],
+label > input[type="radio"],
 label > select {
   display: inline-block;
   margin: 0 1em 0 0;
@@ -2839,19 +2842,10 @@ input,
   padding: .25em;
   width: 100%;
     /*
-	 * Focus
-	 */
-    /*
 	 * Disabled
 	 * 1. Override the value set in normalize.css
 	 * 2. Fix IOS 6/7 opacity issue
 	 */ }
-  select:focus,
-  textarea:focus,
-  input:focus,
-  .no-edit:focus {
-    border-color: #00a9ec;
-    outline: 0; }
   select[disabled],
   textarea[disabled],
   input[disabled],
@@ -2861,32 +2855,31 @@ input,
     color: silver;
     cursor: not-allowed !important;
     /* 1 */
-    opacity: 1;
-    outline: 0 !important; }
+    opacity: 1; }
 
 /*
  * Clean up that hideous file input.
  */
-input[type=file]::-ms-value {
+input[type="file"]::-ms-value {
   background: white;
   border: none; }
 
-input[type=file]::-ms-browse {
+input[type="file"]::-ms-browse {
   background: #dadada;
   border: solid 1px silver;
   color: #222222; }
-  input[type=file]::-ms-browse:active {
+  input[type="file"]::-ms-browse:active {
     background-color: #e7e7e7; }
 
-input[type=color] {
+input[type="color"] {
   max-width: 105px; }
 
 /*
 	 * Declared separately to reduce selector duplication
 	 * for padding
 	 */
-input[type=radio],
-input[type=checkbox] {
+input[type="radio"],
+input[type="checkbox"] {
   display: block;
   line-height: inherit;
   margin: .1875em .1875em .1875em 0;
@@ -2895,31 +2888,19 @@ input[type=checkbox] {
   padding: 0;
   width: auto; }
 
-input[type=radio] {
+input[type="radio"] {
   border-color: transparent \9;
   border-radius: 1em; }
 
 /*
 	 * Add range styles for IE8 and IE9
 	 */
-input[type=range] {
+input[type="range"] {
   background-color: #fff \9;
   border: 1px solid #c0c0c0 \9;
   border: 1px solid transparent;
   padding: .25em 0;
   padding: .25em \9; }
-
-input[type=range]:focus,
-input[type=checkbox]:focus,
-input[type=radio]:focus,
-input[type=checkbox]:checked {
-  border-color: transparent;
-  outline: 1px solid silver;
-  outline-color: #00a9ec;
-  outline-offset: -1px; }
-
-input[type=checkbox]:focus, input[type=checkbox]:checked {
-  border-color: #c0c0c0; }
 
 /*
  * Inline
@@ -2932,7 +2913,7 @@ select.inline-block {
  * 1. Remove borders and padding on range controls in IE10+
  */
 x::-ms-reveal,
-input[type=range] {
+input[type="range"] {
   /* 1 */
   border: 1px solid transparent;
   padding: .25em 0; }
@@ -2943,20 +2924,20 @@ input[type=range] {
  */
 select,
 textarea,
-input[type=text],
-input[type=search],
-input[type=datetime],
-input[type=datetime-local],
-input[type=date],
-input[type=week],
-input[type=month],
-input[type=time],
-input[type=number],
-input[type=password],
-input[type=tel],
-input[type=email],
-input[type=url],
-input[type=color] {
+input[type="text"],
+input[type="search"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="week"],
+input[type="month"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="color"] {
   -webkit-appearance: none;
   /* 1 */ }
 
@@ -2978,7 +2959,7 @@ textarea {
     /* 1 */ }
   textarea.vertical {
     resize: vertical;
-    /* 2 */ }
+    /*2 */ }
   textarea.no-resize {
     resize: none;
     /* 3 */ }
@@ -3004,7 +2985,7 @@ textarea {
 
 :-moz-placeholder {
   color: silver;
-  /* 2 */ }
+  /*2 */ }
 
 ::-moz-placeholder {
   color: silver;
@@ -3025,30 +3006,30 @@ textarea {
     /*
 	 * Remove excess padding in Firefox
 	 */
-  input[type=color] {
+  input[type="color"] {
     min-height: 1.8em;
     padding: 0; } }
 @media (-webkit-min-device-pixel-ratio: 0) {
     /*
 	 * Fix changing height issues on iOS7.
 	 */
-  input[type=datetime-local],
-  input[type=date],
-  input[type=week],
-  input[type=month],
-  input[type=time],
-  input[type=number] {
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="week"],
+  input[type="month"],
+  input[type="time"],
+  input[type="number"] {
     min-height: 2em; }
 
     /*
      * Remove excess padding in Webkit
 	 */
-  input[type=color] {
+  input[type="color"] {
     min-height: 1.8em;
     padding: 0; }
-    input[type=color]::-webkit-color-swatch-wrapper {
+    input[type="color"]::-webkit-color-swatch-wrapper {
       padding: 0; }
-    input[type=color]::-webkit-color-swatch {
+    input[type="color"]::-webkit-color-swatch {
       border: none; }
 
     /*
@@ -3118,7 +3099,7 @@ ol.colored {
       -webkit-margin-start: -.25em;
       /* 1 */
       content: "\25cf";
-      /* 2 */
+      /*2 */
       color: #00a9ec;
       /* 3 */
       font-size: 1em;
@@ -3150,12 +3131,12 @@ ol.colored {
       left: -3.125em;
       width: 2.5em;
       -webkit-margin-start: 0;
-      /* 2 */ }
+      /*2 */ }
       [dir="rtl"] ol.colored > li:before {
         left: auto;
         right: -3.125em; }
 
-/* Definition lists 
+/**Definition lists 
  * Prevent dt and dd collapse.
  */
 dt, dd {
@@ -3833,7 +3814,7 @@ x::-ms-reveal,
   content: "";
   /* 1 */
   display: table;
-  /* 2 */ }
+  /*2 */ }
 .clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
   clear: both; }
 
@@ -3842,9 +3823,13 @@ x::-ms-reveal,
  */
 .push {
   float: right !important; }
+  [dir="rtl"] .push {
+    float: left !important; }
 
 .pull {
   float: left !important; }
+  [dir="rtl"] .pull {
+    float: right !important; }
 
 .push-xs {
   float: right !important; }
@@ -4277,7 +4262,7 @@ x::-ms-reveal,
   * {
     background: transparent !important;
     color: #000 !important;
-    /* Black prints faster: h5bp.com/s */
+    /**Black prints faster: h5bp.com/s */
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
     text-shadow: none !important; }
@@ -4307,7 +4292,7 @@ x::-ms-reveal,
 
   thead {
     display: table-header-group;
-    /* h5bp.com/t */ }
+    /**h5bp.com/t */ }
 
   tr,
   img {

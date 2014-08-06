@@ -13,7 +13,7 @@
     &:before,
     &:after {
         content: ""; /* 1 */
-        display: table; /* 2 */
+        display: table; /*2 */
     }
 
     &:after {
@@ -26,10 +26,18 @@
  */
 .push {
     float: right !important;
+
+    [dir="rtl"] & {
+        float: left !important;
+    }
 }
 
 .pull {
     float: left !important;
+
+    [dir="rtl"] & {
+        float: right !important;
+    }
 }
 // XS, S, M, L viewports.
 @include push-pull(xs);

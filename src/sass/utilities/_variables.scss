@@ -7,7 +7,8 @@ $base-text-color: #222 !default;
 $selection-background: #b3d4fc !default;
 
 // Focused objects
-$selection-focus-offset: -1px !default;
+$selection-focus: 2px solid #4d90fe;
+$selection-focus-offset: -2px !default;
 
 //==
 // Grid System
@@ -48,10 +49,6 @@ $form-input-border: 1px solid #c0c0c0 !default;
 $form-input-border-radius: 0 !default;
 $form-input-color: #222 !default;
 
-$form-input-background-focus: null !default;
-$form-input-border-color-focus: #00a9ec !default;
-$form-input-color-focus: null !default;
-
 $form-input-background-disabled: #ebebeb !default;
 $form-input-border-color-disabled: #c0c0c0 !default;
 $form-input-color-disabled: #c0c0c0 !default;
@@ -70,6 +67,11 @@ $list-colored-bullet: #00a9ec !default;
 
 // Alerts
 $alert-color-scheme: #fcf8e3 !default;
+
+// Code
+$code-background-color: #f7f7f9 !default;
+$code-border-color: #c0c0c0 !default;
+$code-color: #ad0d36 !default;
 
 //==
 // JS Plugins

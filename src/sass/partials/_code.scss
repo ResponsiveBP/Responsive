@@ -6,9 +6,13 @@ code,
 samp,
 kbd {
     padding: .5em;
-    background-color: #f7f7f9;
-    border: 1px solid #c0c0c0;
-    color: #ad0d36;
+    background-color: $code-background-color;
+    border: 1px solid $code-border-color;
+    color: $code-color;
+}
+
+code > kbd {
+    background-color: darken($code-background-color, 5);
 }
 
 /*
@@ -17,7 +21,7 @@ kbd {
 code,
 samp,
 kbd {
-    padding: .067em .25em;
+    padding: .0667em .25em;
 }
 
 /*

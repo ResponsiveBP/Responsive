@@ -1,4 +1,6 @@
-/* Normalize  */
+/**
+ * Normalize  
+ */
 .form {
     margin: 1em 0;
 }
@@ -27,8 +29,8 @@ label {
     }
 
     > input,
-    > input[type=checkbox],
-    > input[type=radio],
+    > input[type="checkbox"],
+    > input[type="radio"],
     > select {
         display: inline-block;
         margin: 0 1em 0 0;
@@ -50,15 +52,6 @@ input,
     padding: .25em;
     width: 100%;
     /*
-	 * Focus
-	 */
-    &:focus {
-        background: $form-input-background-focus;
-        border-color: $form-input-border-color-focus;
-        color: $form-input-color-focus;
-        outline: 0;
-    }
-    /*
 	 * Disabled
 	 * 1. Override the value set in normalize.css
 	 * 2. Fix IOS 6/7 opacity issue
@@ -69,19 +62,18 @@ input,
         color: $form-input-color-disabled;
         cursor: not-allowed !important; /* 1 */
         opacity: 1;
-        outline: 0 !important;
     }
 }
 
 /*
  * Clean up that hideous file input.
  */
-input[type=file]::-ms-value {
+input[type="file"]::-ms-value {
     background: $form-input-background;
     border: none;
 }
 
-input[type=file]::-ms-browse {
+input[type="file"]::-ms-browse {
     background: $button-background;
     border: $button-border;
     color: $form-input-color;
@@ -91,15 +83,15 @@ input[type=file]::-ms-browse {
     }
 }
 
-input[type=color] {
+input[type="color"] {
     max-width: 105px;
 }
 /*
 	 * Declared separately to reduce selector duplication
 	 * for padding
 	 */
-input[type=radio],
-input[type=checkbox] {
+input[type="radio"],
+input[type="checkbox"] {
     display: block;
     line-height: inherit;
     margin: .1875em .1875em .1875em 0;
@@ -109,36 +101,19 @@ input[type=checkbox] {
     width: auto;
 }
 
-input[type=radio] {
+input[type="radio"] {
     border-color: transparent \9;
     border-radius: 1em;
 }
 /*
 	 * Add range styles for IE8 and IE9
 	 */
-input[type=range] {
+input[type="range"] {
     background-color: #fff \9;
     border: 1px solid #c0c0c0 \9;
     border: 1px solid transparent;
     padding: .25em 0;
     padding: .25em \9;
-}
-
-input[type=range]:focus,
-input[type=checkbox]:focus,
-input[type=radio]:focus,
-input[type=checkbox]:checked {
-    border-color: transparent;
-    outline: $form-input-border;
-    outline-color: $form-input-border-color-focus;
-    outline-offset: -1px;
-}
-
-input[type=checkbox] {
-    &:focus,
-    &:checked {
-        border-color: #c0c0c0;
-    }
 }
 
 /*
@@ -153,7 +128,7 @@ select.inline-block {
  * 1. Remove borders and padding on range controls in IE10+
  */
 x::-ms-reveal,
-input[type=range] { /* 1 */
+input[type="range"] { /* 1 */
     border: 1px solid transparent;
     padding: .25em 0;
 }
@@ -164,20 +139,20 @@ input[type=range] { /* 1 */
  */
 select,
 textarea,
-input[type=text],
-input[type=search],
-input[type=datetime],
-input[type=datetime-local],
-input[type=date],
-input[type=week],
-input[type=month],
-input[type=time],
-input[type=number],
-input[type=password],
-input[type=tel],
-input[type=email],
-input[type=url],
-input[type=color] {
+input[type="text"],
+input[type="search"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="week"],
+input[type="month"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="color"] {
     -webkit-appearance: none; /* 1 */
 }
 
@@ -201,7 +176,7 @@ textarea {
     }
 
     &.vertical {
-        resize: vertical; /* 2 */
+        resize: vertical; /*2 */
     }
 
     &.no-resize {
@@ -232,7 +207,7 @@ textarea {
 }
 
 :-moz-placeholder {
-    color: $form-placeholder; /* 2 */
+    color: $form-placeholder; /*2 */
 }
 
 ::-moz-placeholder {
@@ -255,7 +230,7 @@ textarea {
     /*
 	 * Remove excess padding in Firefox
 	 */
-    input[type=color] {
+    input[type="color"] {
         min-height: 1.8em;
         padding: 0;
     }
@@ -266,19 +241,19 @@ textarea {
     /*
 	 * Fix changing height issues on iOS7.
 	 */
-    input[type=datetime-local],
-    input[type=date],
-    input[type=week],
-    input[type=month],
-    input[type=time],
-    input[type=number] {
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"],
+    input[type="number"] {
         min-height: 2em;
     }
 
     /*
      * Remove excess padding in Webkit
 	 */
-    input[type=color] {
+    input[type="color"] {
         min-height: 1.8em;
         padding: 0;
 

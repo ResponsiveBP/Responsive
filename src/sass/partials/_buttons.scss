@@ -1,12 +1,12 @@
-/*
+/**
  * Normalize button borders, color, and padding.
  * 1: Remove rounded corners on iPhone.
  * 2: Remove 300ms touch delay.
  */
 button,
-input[type=submit],
-input[type=button],
-input[type=reset] {
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
     -webkit-appearance: none; /* 1 */
     border-radius: 0; /* 1 */
     color: inherit;
@@ -17,7 +17,7 @@ input[type=reset] {
     margin-bottom: 0;
     background: $button-background;
     border: $button-border;
-    touch-action: manipulation; /* 2 */
+    touch-action: manipulation; /*2 */
     text-decoration: none;
 
     &:hover {
@@ -25,23 +25,18 @@ input[type=reset] {
         border: $button-border;
     }
 
-    &:focus {
-        @extend %focus;
-        border: $button-border;
-    }
-
     &:active {
         background-color: lighten($button-background, 5);
         outline: none;
     }
-    /*
+    /**
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.
 	 * 2. Pad buttons.
 	 */
     &.btn-inline {
         margin-left: -.27em; /* 1 */
-        padding: .25em 1em; /* 2 */
+        padding: .25em 1em; /*2 */
         [dir="rtl"] & {
             margin-left: auto;
             margin-right: -.27em;
@@ -49,32 +44,32 @@ input[type=reset] {
     }
 }
 
-/*
+/**
  * 1. Fix IOS 6/7 opacity issue
  */
 button[disabled],
-input[type=submit][disabled],
-input[type=button][disabled],
-input[type=reset][disabled] {
+input[type="submit"][disabled],
+input[type="button"][disabled],
+input[type="reset"][disabled] {
     background-color: lighten($button-background, 5);
     color: $button-color-disabled;
     cursor: not-allowed;
     opacity: 1; /* 1 */
 }
 
-/*
+/**
  * Reset width for inputs
  */
 input {
-    &[type=submit],
-    &[type=reset],
-    &[type=button] {
+    &[type="submit"],
+    &[type="reset"],
+    &[type="button"] {
         max-width: none;
         width: auto;
     }
 }
 
-/*
+/**
  * Grouped buttons.
  */
 .btn-group {
@@ -84,7 +79,10 @@ input {
     vertical-align: middle;
     white-space: nowrap;
 
-    > * {
+    > button,
+    > input[type="submit"],
+    > input[type="button"],
+    > input[type="reset"] {
         float: left;
 
         [dir="rtl"] & {
