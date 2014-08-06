@@ -9,7 +9,17 @@ sublinks: ["#standard|Standard Layout","#disabled|Disabled","#inline|Inline","#g
 ---
 <section>
     <h1>Button Elements</h1>
-    <p>Button styling in Responsive has, like everything else, been designed with the bare minimum of CSS. Styles have been normalized across all button states with no extra css classes added.</p>
+    <p>
+        Button styling in Responsive has, like everything else, been designed with the bare minimum of CSS.
+        Styles have been normalized across all button states with no extra css classes added.
+    </p>
+    <div class="alert">
+        <h4>Heads Up:</h4>
+        <p>
+            We have deliberately not styled elements with <code>[role="alert"]</code> to match their native counterparts.
+            This is for accessibility reasons as we believe that is will promote misuse to do so.
+        </p>
+    </div>
     <hr />
     <section id="standard">
         <h1>Default Button Styles</h1>
@@ -69,7 +79,7 @@ sublinks: ["#standard|Standard Layout","#disabled|Disabled","#inline|Inline","#g
                     <h3>Input : Button</h3>
                     <p>Standard <code>input[type="button"]</code> element.</p>
                     <input type="button" value="button" disabled />
-                </div> 
+                </div>
             </div>
             <div class="col-s-6">
                 <div>
@@ -145,7 +155,7 @@ sublinks: ["#standard|Standard Layout","#disabled|Disabled","#inline|Inline","#g
                         <input type="button" value="third" />
                         <input type="button" value="fourth" />
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="col-s-6">
                 <div>
