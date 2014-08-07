@@ -19,14 +19,14 @@ x::-ms-reveal,
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 2147483647; /* 1 */
+    z-index: 2147483647; 
     width: 100%;
     height: 100%;
     overflow: hidden;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGDYDAAAuAC0TCbBxgAAAABJRU5ErkJggg==);
     background-repeat: repeat;
-    -webkit-overflow-scrolling: touch; /* 3 */
-    -webkit-backface-visibility: hidden; /* 4 */
+    -webkit-overflow-scrolling: touch;
+    -webkit-backface-visibility: hidden; 
     text-align: center;
 
     &:before {

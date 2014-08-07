@@ -1234,7 +1234,7 @@
         }
 
         if (this.$target.hasClass("alert")) {
-            this.$target.attr({ "aria-live": "assertive" });
+            this.$target.attr({ "role": "alert" });
         }
 
         if (!this.$element.find(".visuallyhidden").length) {
