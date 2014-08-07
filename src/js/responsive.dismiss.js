@@ -57,10 +57,11 @@
             self = this,
             complete = function () {
                 self.dismissing = false;
-                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 }).trigger($.Event(edismissed));
+                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 });
+                self.$element.trigger($.Event(edismissed));
             };
 
-        $target.trigger(dismissEvent);
+        this.$element.trigger(dismissEvent);
 
         if (this.dismissing || dismissEvent.isDefaultPrevented()) {
             return;
