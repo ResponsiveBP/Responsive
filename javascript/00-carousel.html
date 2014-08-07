@@ -15,24 +15,38 @@ sublinks: ["#examples|Examples",
     <h1>Carousel</h1>
     <p>A jQuery plugin that creates a carousel for cycling through elements. Uses CSS transitions to perform the animation.</p>
     <p>
-        The carousel comes in two modes: Slide and Fade, both animated via CSS3 transitions. On browsers that do not support transitions they simply change without special effects.
+        The carousel comes in two modes: Slide and Fade, both animated via CSS3 transitions. On browsers that do not support transitions they
+        simply change without special effects.
     </p>
-    <p>On devices that support touch, grouped items will iterate though their collection via swiping <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd></p>
     <p>
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
+    <div class="alert" role="alert">
+        <h4>Accessibility</h4>
+        <p>The carousel, by default, will not transition automatically. This makes it less confusing for screenreaders to follow.</p>
+        <p>
+            On devices that support touch, grouped items will iterate though their collection via swiping either left or right.
+            Keybord support can also be utilised to navigate when the carousel is in focus by using the <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> keys.
+        </p>
+
+        <h4>Right-to-Left Language Support</h4>
+        <p>
+            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the order of carousel items and all other
+            input behaviour will be reversed.
+        </p>
+    </div>
     <hr />
     <section id="examples">
         <h1>Examples</h1>
         <div class="row">
             <div class="col-s-6">
                 <h2>Slide Mode</h2>
-                <div id="carousel-1" class="carousel" data-carousel-interval="5000">
+                <div id="carousel-1" class="carousel">
                     <ol>
-                        <li data-carousel-target="#carousel-1" data-carousel-slide-to="0" class="active"></li>
-                        <li data-carousel-target="#carousel-1" data-carousel-slide-to="1"></li>
-                        <li data-carousel-target="#carousel-1" data-carousel-slide-to="2"></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
                     </ol>
 
                     <figure class="carousel-active">
@@ -57,19 +71,13 @@ sublinks: ["#examples|Examples",
                         </figcaption>
                     </figure>
 
-                    <a class="left carousel-control" href="#carousel-1" data-carousel-slide="prev">&lt;</a>
-                    <a class="right carousel-control" href="#carousel-1" data-carousel-slide="next">&gt;</a>
+                    <button class="back carousel-control">&lt;</button>
+                    <button class="forward carousel-control">&gt;</button>
                 </div>
             </div>
             <div class="col-s-6">
                 <h2>Fade Mode</h2>
-                <div id="carousel-2" class="carousel" data-carousel-mode="fade" data-carousel-interval="5000">
-                    <ol>
-                        <li data-carousel-target="#carousel-2" data-carousel-slide-to="0" class="active"></li>
-                        <li data-carousel-target="#carousel-2" data-carousel-slide-to="1"></li>
-                        <li data-carousel-target="#carousel-2" data-carousel-slide-to="2"></li>
-                    </ol>
-
+                <div id="carousel-2" class="carousel" data-carousel-mode="fade">
                     <figure class="carousel-active">
                         <img src="../assets/img/hydrangeas.jpg" alt="hydrangeas">
                         <figcaption>
@@ -92,27 +100,27 @@ sublinks: ["#examples|Examples",
                         </figcaption>
                     </figure>
 
-                    <a class="left carousel-control" href="#carousel-2" data-carousel-slide="prev">&lt;</a>
-                    <a class="right carousel-control" href="#carousel-2" data-carousel-slide="next">&gt;</a>
+                    <button class="back carousel-control">&lt;</button>
+                    <button class="forward carousel-control">&gt;</button>
                 </div>
-
             </div>
         </div>
     </section>
     <hr />
- <div class="alert" aria-live="assertive">
+    <div class="alert" role="alert">
+        <h4>Heads Up!</h4>
         <p>
             Replace image <code>src</code> attributes with <code>data-src</code> to allow lazy loading of images.
         </p>
     </div>
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>&lt;div id="carousel-2" class="carousel" data-carousel-mode="fade" data-carousel-interval="5000"&gt;
+        <pre class="language-markup"><code>&lt;div id="carousel-2" class="carousel" data-carousel-mode="fade"&gt;
     &lt;!-- Carousel Indicators--&gt;
     &lt;ol&gt;
-        &lt;li data-carousel-target="#carousel-2" data-carousel-slide-to="0" class="active"&gt;&lt;/li&gt;
-        &lt;li data-carousel-target="#carousel-2" data-carousel-slide-to="1"&gt;&lt;/li&gt;
-        &lt;li data-carousel-target="#carousel-2" data-carousel-slide-to="2"&gt;&lt;/li&gt;
+        &lt;li class="active"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
     &lt;/ol&gt;
     &lt;!-- Carousel Items--&gt;
     &lt;figure class="carousel-active"&gt;
@@ -137,8 +145,8 @@ sublinks: ["#examples|Examples",
         &lt;/figcaption&gt;
     &lt;/figure&gt;
     &lt;!-- Carousel Controls--&gt;
-    &lt;a class="left carousel-control" href="#carousel-2" data-carousel-slide="prev"&gt;&lt;&lt;/a&gt;
-    &lt;a class="right carousel-control" href="#carousel-2" data-carousel-slide="next"&gt;&gt;&lt;/a&gt;
+    &lt;button class="back carousel-control"&gt;&lt;&lt;/button&gt;
+    &lt;button class="forward carousel-control"&gt;&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
     </section>
     <hr />
@@ -149,62 +157,103 @@ sublinks: ["#examples|Examples",
             <dt><strong>.carousel(options)</strong>  </dt>
             <dd>
                 Initialises the plugin with an optional options <code>object</code>
-                <div class="table-scrollable">
-                    <table class="table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Default Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">mode</th>
-                                <td>string</td>
-                                <td>A string containing either the values <var>fade</var> or <var>slide</var>.</td>
-                                <td><var>slide</var></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">interval</th>
-                                <td>number</td>
-                                <td>The time in milliseconds between carousel transitions.</td>
-                                <td><var>5000</var></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">pause</th>
-                                <td>string</td>
-                                <td>The event to bind the pause behaviour to</td>
-                                <td><var>hover</var></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">wrap</th>
-                                <td>boolean</td>
-                                <td>Whether the carousel items should wrap</td>
-                                <td><var>true</var></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">enabletouch</th>
-                                <td>boolean</td>
-                                <td>Whether the carousel responds to touch events</td>
-                                <td><var>true</var></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">lazyLoadImages</th>
-                                <td>boolean</td>
-                                <td>Whether to lazily load any images on page load.</td>
-                                <td><var>true</var></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">lazyOnDemand</th>
-                                <td>boolean</td>
-                                <td>Whether to lazily load any images on demand when sliding. Overwrites <var>lazyLoadImages</var></td>
-                                <td><var>true</var></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                <table data-table-list class="table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Default Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">mode</th>
+                            <td>string</td>
+                            <td>A string containing either the values <var>fade</var> or <var>slide</var>.</td>
+                            <td><var>slide</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">interval</th>
+                            <td>number</td>
+                            <td>The time in milliseconds between carousel transitions.</td>
+                            <td><var>0</var> (Better for accessibility)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">pause</th>
+                            <td>string</td>
+                            <td>The event to bind the pause behaviour to</td>
+                            <td><var>hover</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">wrap</th>
+                            <td>boolean</td>
+                            <td>Whether the carousel items should wrap</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">keyboard</th>
+                            <td>boolean</td>
+                            <td>Whether the carousel responds to keyboard events</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">touch</th>
+                            <td>boolean</td>
+                            <td>Whether the carousel responds to touch events</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">lazyLoadImages</th>
+                            <td>boolean</td>
+                            <td>Whether to lazily load any images on page load.</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">lazyOnDemand</th>
+                            <td>boolean</td>
+                            <td>Whether to lazily load any images on demand when sliding. Overwrites <var>lazyLoadImages</var></td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">nextTrigger</th>
+                            <td>string</td>
+                            <td>A jQuery selector to define any external element to trigger the <code>next()</code> method.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">nextHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the next trigger for accesibility purposes. The default language direction indicator is reversed by
+                                setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
+                            </td>
+                            <td><var>Next {Left|Right} Arrow</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">previousTrigger</th>
+                            <td>string</td>
+                            <td>A jQuery selector to define any external element to trigger the <code>prev()</code> method.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">previousHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the previous trigger for accesibility purposes. The default language direction indicator is reversed by
+                                setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
+                            </td>
+                            <td><var>Previous {Left|Right} Arrow</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">indicators</th>
+                            <td>string</td>
+                            <td>A jQuery selector to define any external indicators <code>&lt;ol/&gt;</code> that highlight the carousels current position</td>
+                            <td><var>null</var></td>
+                        </tr>
+                    </tbody>
+                </table>
             </dd>
             <dt><strong>.carousel("cycle")</strong></dt>
             <dd>Cycles through the carousel instance items in a logical order.</dd>
@@ -256,11 +305,6 @@ $(document).off("ready.r.carousel")
            .on("ready.r.carousel", function () {
              // Your custom behaviour...
            }); 
-// Override the default carousel control click behaviour
-$("YOUR_SELECTOR").off("click.r.carousel")
-                  .on("click.r.carousel", "[data-carousel-slide], [data-carousel-slide-to]", function (event) {
-                      // Your custom behaviour...
-                  }); 
 // Bind to the slide event.
 $("YOUR_SELECTOR").on("slide.r.carousel", function(event) {
     // Your custom behaviour...

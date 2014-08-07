@@ -1,6 +1,6 @@
-﻿/*
- * Base elements.
- */
+﻿/*==|Base|====================================================
+ *
+ *============================================================*/
 body {
     font-family: Arial, sans-serif;
     padding-top: 2em;
@@ -11,9 +11,9 @@ blockquote {
     border-left: 5px solid #c0c0c0;
 }
 
-/*
- * Navigation.
- */
+/*==|Navigation|==============================================
+ *
+ *============================================================*/
 
 nav[role="navigation"] {
     color: #fff;
@@ -120,9 +120,15 @@ header[role="banner"] span {
 .download {
     font-size: 1.5em;
     padding: 1em;
-    border: 2px solid #222;
+    background-color: #222;
+    color: #fff;
     display: inline-block;
+    text-decoration: none;
 }
+
+    .download:hover {
+        text-decoration: underline;
+    }
 
 .download-links {
     list-style: none;
@@ -138,9 +144,9 @@ header[role="banner"] span {
             padding: 0 .5em;
         }
 
-/*
- * Grid
- */
+/*==|Grid|====================================================
+ *
+ *============================================================*/
 
 .grid-demo .row {
     text-align: center;
@@ -171,7 +177,7 @@ header[role="banner"] span {
     background-color: #434343;
 }
 
-/*==|Alerts====================================================
+/*==|Alerts|==================================================
  *
  *============================================================*/
 .alert > h4 {

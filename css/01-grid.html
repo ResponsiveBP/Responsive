@@ -47,6 +47,12 @@ sublinks: ["#mediaqueries|Media Queries",
             Use <code>.col-xs-{number}</code> range on the columns.
         </li>
     </ol>
+
+    <h4>Heads Up:</h4>
+    <p>
+        The grid system is designed to be used as a wrapping scaffold only.
+        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
+    </p>
 </div>
 <hr />
 <section id="mediaqueries">
@@ -87,13 +93,6 @@ sublinks: ["#mediaqueries|Media Queries",
         Design guidelines (rendered as png's) for the default grid at maximum widths of 1140px and 970px are available for download <a href="{{ site.baseurl }}/assets/responsive-grid-rulers.zip">here</a>.
     </p>
 </section>
-<div class="alert" role="alert">
-    <h4>Heads Up:</h4>
-    <p>
-        The grid system is designed to be used as a wrapping scaffold only.
-        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
-    </p>
-</div>
 <hr />
 <section id="examples">
     <h1>Examples</h1>
@@ -493,7 +492,7 @@ sublinks: ["#mediaqueries|Media Queries",
         <h3>Offsetting Columns</h3>
         <p>Columns can be offset by each column width.</p>
         <p>
-            Use classes <code>.offset-[size]-[number]</code> to push by column width.
+            Use classes <code>.offset-{size}-{number}</code> to push by column width.
         </p>
         <p class="hidden-xs clearfix">
             <button type="button" data-modal-target="#offsetting-test" class="push">Click to test</button>
@@ -517,7 +516,7 @@ sublinks: ["#mediaqueries|Media Queries",
     </section>
     <section id="ordering">
         <h3>Ordering Columns</h3>
-        <p>The order of columns can be flipped by combining classes <code>.push-[size]-[number]</code> and <code>.pull-[size]-[number]</code>.</p>
+        <p>The order of columns can be flipped by combining classes <code>.push-{size}-{number}</code> and <code>.pull-{size}-{number}</code>.</p>
         <p class="hidden-xs clearfix">
             <button type="button" data-modal-target="#ordering-test" class="push">Click to test</button>
         </p>
@@ -535,7 +534,7 @@ sublinks: ["#mediaqueries|Media Queries",
     <section id="resetting">
         <h3>Resets</h3>
         <p>
-            Each tier comes with a <code>.reset-[size]</code> and <code>.reset-[size]-only</code> class which allows you to reset the flow of the layout as the viewport scales.
+            Each tier comes with a <code>.reset-{size}</code> and <code>.reset-{size}-only</code> class which allows you to reset the flow of the layout as the viewport scales.
             This allows you to perform more complicated layouts with relative ease.
         </p>
         <p class="hidden-xs clearfix">

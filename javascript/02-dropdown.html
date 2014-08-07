@@ -14,11 +14,26 @@ sublinks: ["#standard|Example : Standard",
 ---
 <section id="normalize">
     <h1>Dropdown</h1>
-    <p>A jQuery plugin that toggles the visibility of content. Uses CSS transitions to perform the animation. Useful for building accordion like widgets or hamburger menus.</p>
+    <p>
+        A jQuery plugin that toggles the visibility of content. Uses CSS transitions to perform the animation.
+        Useful for building accordion like widgets or hamburger menus.
+    </p>
     <p>
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
+    <div class="alert" role="alert">
+        <h4>Accessibility</h4>
+        <p>
+            Keybord support comes as standard with triggers responding to both <kbd>space</kbd> and <kbd>enter</kbd>.
+            It can be utilised to navigate all grouped accordion elements by using the <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> keys.
+        </p>
+
+        <h4>Right-to-Left Language Support</h4>
+        <p>
+            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse all directional input behaviour.
+        </p>
+    </div>
     <hr />
     <section id="examples">
         <h1>Examples</h1>
@@ -58,7 +73,7 @@ sublinks: ["#standard|Example : Standard",
                 This example toggles the horizontal visibility of an element. Adding the attribute <code>data-dropdown-dimension="width"</code> to your
                 trigger and the class <code>.width</code> to your target enables this behaviour.
             </p>
-         <div class="alert" aria-live="assertive">
+            <div class="alert" role="alert">
                 <p>Note: To prevent word wrap fix the height and width of the item within your target container.</p>
             </div>
             <div class="row">
@@ -251,32 +266,31 @@ sublinks: ["#standard|Example : Standard",
             <dt><strong>.dropdown(options)</strong></dt>
             <dd>
                 Initialises the plugin with an optional options <code>object</code>
-                <div class="table-scrollable">
-                    <table class="table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Default Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">target</th>
-                                <td>string</td>
-                                <td>A jQuery selector indicating what target to toggle the visibility of.</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">parent</th>
-                                <td>string</td>
-                                <td>A jQuery selector indicating what parent of the dropdown trigger should force grouped mode.</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                <table data-table-list class="table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Default Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">target</th>
+                            <td>string</td>
+                            <td>A jQuery selector indicating what target to toggle the visibility of.</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">parent</th>
+                            <td>string</td>
+                            <td>A jQuery selector indicating what parent of the dropdown trigger should force grouped mode.</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </dd>
             <dt><strong>.dropdown("show")</strong></dt>
             <dd>Shows a collapsed dropdown target.</dd>
@@ -314,20 +328,22 @@ $(document.body).off("click.r.dropdown")
                     // Your custom behaviour...
                 }); 
 // Bind to the show event.
-$("YOUR_TARGET_SELECTOR").on("show.r.dropdown", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("show.r.dropdown", function(event) {
     // Your custom behaviour...
 });
                                                
 // Bind to the shown event.
-$("YOUR_TARGET_SELECTOR").on("shown.r.dropdown", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("shown.r.dropdown", function(event) {
     // Your custom behaviour...
 });
+
 // Bind to the hide event.
-$("YOUR_TARGET_SELECTOR").on("hide.r.dropdown", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("hide.r.dropdown", function(event) {
     // Your custom behaviour...
 });
+
 // Bind to the hidden event.
-$("YOUR_TARGET_SELECTOR").on("hidden.r.dropdown", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("hidden.r.dropdown", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>

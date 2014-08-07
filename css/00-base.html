@@ -102,7 +102,7 @@ margin: 2.33em 0;</code></pre>
 
     <p><code>&lt;hr/&gt;</code> elements have been tweaked slightly though to allow developers to more easily style them. For example:</p>
     <hr />
-    <div class="alert" aria-live="assertive">
+    <div class="alert" role="alert">
         <p>Responsive also adds some light styling to code driven elements. See <a href="code.html" rel="bookmark">Code</a> for examples of that styling.</p>
     </div>
 </section>
@@ -244,7 +244,7 @@ margin: 2.33em 0;</code></pre>
         <dt><code>.invisible</code></dt>
         <dd>Hides an element visually and from screen readers, but maintain layout.</dd>
         <dt><code>.ir</code></dt>
-        <dd>Hides an elements text so that a background image can be used instead. Useful for logos.</dd>
+        <dd>Hides an elements text so that a background image can be used instead; requires the height of the element to be set via CSS to work. Useful for logos.</dd>
     </dl>
 </section>
 <hr />
@@ -272,8 +272,8 @@ margin: 2.33em 0;</code></pre>
     <div class="alert">
         <h4>Heads Up:</h4>
         <p>
-            Both <code>.push</code> and <code>.pull</code> have <code>.push/.pull-{grid size}</code> and <code>.push/.pull-{grid size}-only</code>
-            variants for each grid level.
+            Both <code>.push</code> and <code>.pull</code> have <code>.push/.pull-{grid range}</code> and <code>.push/.pull-{grid range}-only</code>
+            variants for each grid range.
         </p>
     </div>
 
@@ -299,8 +299,8 @@ margin: 2.33em 0;</code></pre>
     <div class="alert">
         <h4>Heads Up:</h4>
         <p>
-            <code>.block</code>, <code>.inline-block</code>, and <code>.inline</code> have <code>{display type}-{grid size}</code> and
-            <code>{display type}-{grid size}-only</code> variants for each grid level.
+            <code>.block</code>, <code>.inline-block</code>, and <code>.inline</code> have <code>{display type}-{grid range}</code> and
+            <code>{display type}-{grid range}-only</code> variants for each grid range.
         </p>
     </div>
 </section>
