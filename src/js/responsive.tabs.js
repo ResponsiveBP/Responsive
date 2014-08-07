@@ -21,6 +21,7 @@
         eshown = "shown" + ns;
 
     var keys = {
+        SPACE: 32,
         LEFT: 37,
         RIGHT: 39
     };
@@ -140,8 +141,9 @@
 
         var which = event.which;
         // Ignore anything but left and right.
-        if (which === keys.LEFT || which === keys.RIGHT) {
+        if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {
 
+            event.preventDefault();
             event.stopPropagation();
 
             var $this = $(event.target),
@@ -149,6 +151,11 @@
                 $all = $li.siblings().addBack(),
                 length = $all.length,
                 index = $li.index();
+
+            if (which === keys.SPACE) {
+                this.show(index);
+                return;
+            }
 
             // Select the correct index.
             index = which === keys.LEFT ? (rtl ? index + 1 : index - 1) : (rtl ? index - 1 : index + 1);
