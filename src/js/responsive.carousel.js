@@ -59,8 +59,7 @@
         this.$indicators = this.options.indicators ? $(this.indicators) : this.$element.find("ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
-        var self = this,
-            defaultTriggers = !this.options.nextTrigger && !this.options.previousTrigger;
+        var self = this;
 
         // Add the css class to support fade.
         this.options.mode === "fade" && this.$element.addClass("carousel-fade");
@@ -85,7 +84,7 @@
         // Find and add a11y to controls.
         var $controls = this.$nextTrigger.add(this.$previousTrigger);
         $controls.each(function () {
-            var $this = $(this).attr({ "tabindex": defaultTriggers ? -1 : 0, "aria-controls": self.id });
+            var $this = $(this).attr({ "tabindex": 0, "aria-controls": self.id });
             !$this.is("button") ? $this.attr({ "role": "button" }) : $this.attr({ "type": "button" });
             if (!$this.find(".visuallyhidden").length) {
                 $("<span/>").addClass("visuallyhidden")
