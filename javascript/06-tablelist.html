@@ -125,18 +125,18 @@ sublinks: ["#examples|Examples",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.table")
+$(document).off("ready.r.tablelist")
            .on("ready.r.table", function (event) {    
                // Your custom behaviour...
            });
             
 // Bind to the add event.
-$("YOUR_SELECTOR").on("add.r.table", function(event) {
+$("YOUR_SELECTOR").on("add.r.tablelist", function(event) {
     // Your custom behaviour...
 });
 
 // Bind to the added event.
-$("YOUR_SELECTOR").on("added.r.table", function(event) {
+$("YOUR_SELECTOR").on("added.r.tablelist", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>
