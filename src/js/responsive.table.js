@@ -20,7 +20,7 @@
     // Table class definition.
     var Table = function (element) {
 
-        this.$element = $(element);
+        this.$element = $(element).addClass("table-list");
         this.$thead = this.$element.find("thead");
         this.$tfoot = this.$element.find("tfoot");
         this.$tbody = this.$element.find("tbody");

@@ -385,7 +385,7 @@ hr, input[type=search] {
 
 a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
   outline: 2px solid #4d90fe;
-  outline-offset: -2px; }
+  outline-offset: -1px; }
 
 /**
  * Set a focus on elements that can recieve it.
