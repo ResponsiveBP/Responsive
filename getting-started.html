@@ -13,19 +13,31 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         </ul>
     </nav>
     <section class="col-m-9">
-        <div class="alert ">
-            <p>Looking for the v1 documentation? You can find it <a href="v1/">here</a>.</p>
+        <div class="alert" role="alert">
+            <h4>Heads Up!</h4>
+            <p>Looking for the v2 documentation? You can find it <a href="/v2/">here</a>.</p>
         </div>
         <section id="download">
             <h1>Download Responsive</h1>
-            <p>
-                The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
-                No documentation or original source code files are included.
-            </p>
-            <a href="{{site.release}}" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Framework Download">Download Responsive</a>
+            <div class="row">
+                <div class="col-m-6">
+                    <p>
+                        The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
+                        No documentation or original source code files are included.
+                    </p>
+                    <a href="{{site.release}}" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Framework Download">Download Responsive</a>
+                </div>
+                <div class="col-m-6">
+                    <p>
+                        If you are feeling more adventurous and want to tweak Responsive before use you can download the full SASS and JavaScript source
+                        directly from Github. This will require the use of <a href="http://gulpjs.com/" rel="external nofollow">gulp.js</a> to build.
+                    </p>
+                    <a href="{{site.sourcefiles}}" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Source Download">Download Source</a>
+                </div>
+            </div>
             <ul class="download-links">
                 <li>
-                    <a href="{{site.repo}}" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="GitHub project" rel="external">GitHub project</a>
+                    <a href="{{site.repo}}" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="GitHub project" rel="external nofollow">GitHub project</a>
                 </li>
                 <li>
                     Version {{site.version}}
@@ -39,6 +51,13 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                 Inside the zip file you will also find a HTML file containing the default template for including
                 responsive in your webpage.<br /> Set up your layout as follows.
             </p>
+            <div class="alert" role="alert">
+                <h4>Heads Up!</h4>
+                <p>
+                    To enable right-to-left language support for such languages such as Hebrew or Arabic add the attribute
+                    <code>dir="rtl"</code> to the <code>html</code> tag.
+                </p>
+            </div>
             <pre class="language-markup"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
     &lt;head&gt;
@@ -47,11 +66,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
         &lt;meta name="description" content="Your Page Description." /&gt;
         &lt;title&gt;Your Page Title&lt;/title&gt;
-        &lt;!-- 
-             IE10 Mobile ignores the meta viewport tag. 
-             This fix needs to be in the head.
-        --&gt;
-        &lt;script src="responsive.ie10mobilefix.min.js"&gt;&lt;/script&gt;
+ 
         &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
         &lt;!-- 
              HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
@@ -70,10 +85,10 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         &lt;!-- Scripts at the bottom for improved performance. --&gt;
         &lt;!-- jQuery, required for all responsive plugins. --&gt;
         &lt;!--[if IE 8]&gt;     
-            &lt;script src="vendor/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
         &lt;![endif]--&gt;
         &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
-            &lt;script src="vendor/jquery-2.1.0.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/jquery-2.1.1.min.js"&gt;&lt;/script&gt;
         &lt;!--&lt;![endif]--&gt;
         &lt;script src="responsive.min.js"&gt;&lt;/script&gt;
     &lt;/body&gt;
@@ -91,32 +106,17 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
 
             <ul>
                 <li>Chrome (Mac, Windows, iOS, and Android)</li>
-                <li>Internet Explorer</li>
+                <li>Internet Explorer (Windows, WP7/8)</li>
                 <li>Firefox (Mac, Windows)</li>
                 <li>Opera (Mac, Windows)</li>
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
-            </ul>
-            <h2>Internet Explorer 10 Mobile</h2>
-            <p>
-                Internet Explorer 10 on Windows 8 phones prior to <a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2013/10/14/introducing-windows-phone-preview-for-developers.aspx"
-                                                                     rel="external nofollow" target="_blank">Update 3 (a.k.a. GDR3)</a> do not render content to the correct width due to a css fix used to allow "snap mode" on the desktop.
-                Responsive comes bundled with a JavaScript fix that should be referenced in the head of your document.
-                For more information see:
-            </p>
-            <ul>
-                <li>
-                    Matt Stow: <a href="http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html" rel="external nofollow" target="_blank">Responsive Design in IE10 on Windows Phone 8</a>
-                </li>
-                <li>
-                    Tim Kadlec: <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/" rel="external nofollow" target="_blank">Windows Phone 8 and Device-Width</a>
-                </li>
             </ul>
 
             <h2>Internet Explorer 8</h2>
             <p>
                 Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.
-                In addition, Internet Explorer 8 requires the use of <a href="https://code.google.com/p/html5shiv/" rel="external nofollow" target="_blank">html5shiv</a> to correctly display those elements
-                and <a href="https://github.com/scottjehl/Respond" rel="external nofollow" target="_blank">Respond.js</a>  to enable media query support.
+                In addition, Internet Explorer 8 requires the use of <a href="https://code.google.com/p/html5shiv/" rel="external nofollow">html5shiv</a> to correctly display those elements
+                and <a href="https://github.com/scottjehl/Respond" rel="external nofollow">Respond.js</a>  to enable media query support.
             </p>
         </section>
     </section>

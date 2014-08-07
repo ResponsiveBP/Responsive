@@ -27,15 +27,15 @@ sublinks: ["#examples|Examples",
         <section class="row">
             <div class="col-s-6">
                 <h2>Standard</h2>
-                <textarea id="textarea1" name="textarea1" data-autosize="" class="full-width"></textarea>
+                <textarea id="textarea1" name="textarea1" data-autosize class="full-width"></textarea>
             </div>
             <div class="col-s-6">
                 <h2>Extra Data-Attributes</h2>
-                <textarea id="textarea2" name="textarea2" data-autosize="" data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate" class="full-width validate" data-val-message="Generic error message"></textarea>
+                <textarea id="textarea2" name="textarea2" data-autosize data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate" class="full-width validate" data-val-message="Generic error message"></textarea>
                 <p>Extra data-attributes configured to allow removal of problematic classes or attributes that could affect the cloned element used for calculating size.</p>
             </div>
         </section>
-        <div class="alert ">
+        <div class="alert" role="alert">
             <p>If running the plugin without using the markup API, add the class <code>.autosize</code> to the plugin to get the desired style behaviour.</p>
         </div>
     </section>
@@ -43,9 +43,9 @@ sublinks: ["#examples|Examples",
     <section id="markup">
         <h1>Markup</h1>
         <pre class="language-markup"><code>&lt;!-- Standard markup --&gt;
-&lt;textarea id="textarea1" name="textarea1" data-autosize="" &gt;&lt;/textarea &gt;
+&lt;textarea id="textarea1" name="textarea1" data-autosize &gt;&lt;/textarea &gt;
 &lt;!-- Additional remove attributes/classes markup (space separated values) --&gt;
-&lt;textarea id="textarea2" name="textarea2" data-autosize="" data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate error" &gt;&lt;/textarea &gt;</code></pre>
+&lt;textarea id="textarea2" name="textarea2" data-autosize data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate error" &gt;&lt;/textarea &gt;</code></pre>
     </section>
     <hr />
     <section id="methods">
@@ -95,16 +95,7 @@ $(document).off("ready.r.autosize")
            .on("ready.r.autosize", function () {
                // Your custom behaviour...
            }); 
-// Override the default textarea control cut/paste/keyup behaviour
-$(document.body).off("keyup.r.autosize paste.r.autosize cut.r.autosize")
-                .on("keyup.r.autosize paste.r.autosize cut.r.autosize", "textarea[data-autosize]", function (event) {
-                    // Your custom behaviour...
-                }); 
-// Override the default window resize behaviour
-$(window).off("resize.r.autosize")
-         .on("resize.r.autosize", function () {
-             // Your custom behaviour...
-         }); 
+
 // Bind to the size event.
 $("YOUR_SELECTOR").on("size.r.autosize", function(event) {
     // Your custom behaviour...

@@ -1,0 +1,441 @@
+---
+permalink: javascript/modal.html
+layout: subpage
+group: javascript
+title: Modal
+heading: Modal
+subheading: A responsive plugin for presenting modal content.
+sublinks: ["#examples|Examples",
+            "#markup|Markup",
+            "#methods|Methods",
+            "#events|Events",
+            "#dataapi|Data API"]
+---
+<section id="normalize">
+    <h1>Modal</h1>
+    <p>A jQuery plugin that adds modal functionality to any element it targets. Uses CSS transitions to perform the animation.</p>
+    <p>
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
+        This is Responsive's first class API and should be your first consideration when using a plugin.
+    </p>
+    <div class="alert" role="alert">
+        <h4>Accessibility</h4>
+        <p>The modal popup can be closed by either clicking on the indicator, the overlay or by hitting the <kbd>Esc</kbd> key.</p>
+        <p>
+            On devices that support touch, grouped images will iterate though their collection via swiping either left or right.
+            Keybord support can also be utilised to navigate all grouped targets by using the <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> keys.
+        </p>
+
+        <h4>Right-to-Left Language Support</h4>
+        <p>
+            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse all directional input behaviour.
+        </p>
+    </div>
+    <hr />
+    <section id="examples">
+        <h1>Examples</h1>
+        <h3>Relatively loaded target</h3>
+
+        <a href="../css/alerts.html #examples" data-modal-title="Relative Url">Launch relative overlay</a>
+        <pre class="language-markup"><code>&lt;a href="../css/alerts.html #examples" data-modal-title="Relative Url"&gt;
+    Launch relative overlay
+&lt;/a&gt;</code></pre>
+
+        <h3>External target with iframe header and footer</h3>
+        <a href="//www.microsoft.com" data-modal-title="Microsoft" data-modal-description="<p>sample text or the footer.</p>" data-modal-iframe-scroll="false">Launch external overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//www.microsoft.com" data-modal-title="Microsoft" 
+   data-modal-description=" data-modal-iframe-scroll="false"&lt;p&gt;sample text or the footer.&lt;/p&gt;"&gt;
+    Launch external overlay
+&lt;/a&gt;</code></pre>
+
+        <h3>External target with iframe header and footer and scrollbars</h3>
+        <a href="//www.microsoft.com" data-modal-title="Microsoft" data-modal-description="<p>sample text or the footer.</p>" data-modal-iframe-scroll="true">Launch external overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//www.microsoft.com" data-modal-title="Microsoft" 
+   data-modal-description="&lt;p&gt;sample text or the footer.&lt;/p&gt;" &gt;
+    Launch external overlay
+&lt;/a&gt;</code></pre>
+
+        <h3>Youtube</h3>
+        <a href="//www.youtube.com/embed/eRW84aVCMWo" data-modal-title="Youtube">Launch Youtube overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//www.youtube.com/embed/eRW84aVCMWo" data-modal-title="Youtube"&gt;
+Launch Youtube overlay
+&lt;/a&gt;</code></pre>
+
+        <h3>Vimeo</h3>
+        <a href="//player.vimeo.com/video/101980132" data-modal-title="Vimeo">Launch Vimeo overlay</a>
+        <pre class="language-markup"><code>&lt;a href="//player.vimeo.com/video/101980132" data-modal-title="Vimeo"&gt;
+    Launch Vimeo overlay
+&lt;/a&gt;</code></pre>
+
+        <h3>Google Maps</h3>
+        <a href="//maps.google.co.uk/maps?safe=off&amp;q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=h&amp;z=11&amp;ll=55.864237,-4.251806&amp;output=embed" data-modal-title="Google Maps">Launch Google Map overlay</a>
+
+        <pre class="language-markup"><code>&lt;a href="//maps.google.co.uk/maps?safe=off&amp;q=glasgow&amp;ie=UTF8&amp;hq=&amp;hnear=Glasgow,+Glasgow+City,+United+Kingdom&amp;gl=uk&amp;t=h&amp;z=11&amp;ll=55.864237,-4.251806&amp;output=embed" 
+   data-modal-title="Google Maps"&gt;
+    Launch Google Map overlay
+&lt;/a&gt;</code></pre>
+
+        <h3>Internal target</h3>
+        <a href="#" data-modal-target="#overlay1">Launch internal overlay</a>
+        <div class="alert" role="alert">
+            <p>Internal overlays can contain both hidden and unhidden content.</p>
+        </div>
+        <div id="overlay1" class="hidden">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+        </div>
+
+        <pre class="language-markup"><code>&lt;a href="#" data-modal-target="#overlay1"&gt;Launch internal overlay&lt;/a&gt;
+&lt;div id="overlay1" class="hidden"&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet...
+    &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Linked Internal Targets Showing Steps</h3>
+        <a href="#" data-modal-target="#overlay2">Launch internal overlay</a>
+        <div id="overlay2" class="hidden">
+            <h2>Step One</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            <p><a href="#" data-modal-target="#overlay3">Go to Step Two</a></p>
+        </div>
+        <div id="overlay3" class="hidden">
+            <h2>Step Two</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            <p><a href="#" data-modal-target="#overlay2">Back to Step One</a></p>
+        </div>
+        <pre class="language-markup"><code>&lt;a href="#" data-modal-target="#overlay2"&gt;Launch internal overlay&lt;/a&gt;
+&lt;div id="overlay2" class="hidden"&gt;
+    &lt;h2&gt;Step One&lt;/h2&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet...
+    &lt;/p&gt;
+&lt;p&gt;&lt;a href="#" data-modal-target="#overlay3"&gt;Go to Step Two&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+    &lt;div id="overlay3" class="hidden"&gt;
+    &lt;h2&gt;Step Two&lt;/h2&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet...
+    &lt;/p&gt;
+        &lt;p&gt;&lt;a href="#" data-modal-target="#overlay2"&gt;Back to Step One&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Internal Target with Modal behavior</h3>
+        <a href="#" class="modal" data-modal-target="#modal" data-modal-modal="button">Launch modal overlay</a>
+        <div id="modal" class="hidden">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            <p>
+                <button role="button">Click to close.</button>
+            </p>
+        </div>
+
+        <pre class="language-markup"><code>&lt;a href="#" class="modal" data-modal-target="#modal" data-modal-modal="button"&gt;Launch modal overlay&lt;/a&gt;
+&lt;div id="modal" class="hidden"&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet...
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;button role="button"&gt;Click to close.&lt;/button&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+        <h3>Form</h3>
+        <a href="#" data-modal-target="#form-overlay" data-modal-fit-viewport="false">
+            Launch internal overlay containing a form that should not stretch to the full viewport width.
+        </a>
+        <pre class="language-markup"><code>&lt;a href="#" data-modal-target="#form-overlay" data-modal-fit-viewport="false"&gt;
+    Launch internal overlay containing a form
+&lt;/a&gt;</code></pre>
+        <div id="form-overlay" class="hidden">
+            <form method="POST" action="#">
+                <fieldset>
+                    <legend>Default Form</legend>
+                    <label for="field-one">Field One</label>
+                    <input type="text" id="field-one" />
+                    <label for="field-two">Field Two</label>
+                    <select id="field-two">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit">Save changes</button>
+                    <button type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <h3>Wrapped Image</h3>
+        <div class="row">
+            <a href="../assets/img/768x900.jpg" data-modal-title="Kittens!">
+                <img src="../assets/img/768x900_thumb.jpg" />
+            </a>
+        </div>
+<pre class="language-markup"><code>&lt;a href="../assets/img/768x900.jpg" data-modal-title="Kittens!"&gt;
+    &lt;img src="../assets/img/768x900_thumb.jpg" /&gt;
+&lt;/a&gt;</code></pre>
+        <h3>Mobile Redirect</h3>
+        <p>Redirects on viewports of grid range <var>s</var> and below. (settable)</p>
+        <div class="row">
+            <a href="../assets/img/768x900.jpg" data-modal-mobile-target="../assets/img/768x900.jpg" data-modal-mobile-viewport-width="s">
+                <img src="../assets/img/768x900_thumb.jpg" />
+            </a>
+        </div>
+        <pre class="language-markup"><code>&lt;a href="../assets/img/768x900.jpg" 
+   data-modal-mobile-target="../assets/img/768x900.jpg" 
+   data-modal-mobile-viewport-width="s"&gt;
+    &lt;img src="../assets/img/768x900_thumb.jpg" /&gt;
+&lt;/a&gt;</code></pre>
+        <h3>Grouped</h3>
+        <div class="row">
+            <div class="col-s-3">
+                <a class="grouped" href="../assets/img/hydrangeas.jpg" data-modal-title="Hydrangeas with a long title appended" data-modal-group=".grouped">Grouped Item 1</a>
+            </div>
+            <div class="col-s-3">
+                <a class="grouped" href="../assets/img/chrysanthemum.jpg" data-modal-title="Chrysanthemum" data-modal-group=".grouped">Grouped Item 2</a>
+            </div>
+            <div class="col-s-3">
+                <a class="grouped" href="../assets/img/desert.jpg" data-modal-title="Desert" data-modal-group=".grouped">Grouped Item 3</a>
+            </div>
+            <div class="col-s-3">
+                <a class="grouped" href="../assets/img/768x900.jpg" data-modal-title="Large image with a longer title to see what happens when the title wraps." data-modal-group=".grouped">Grouped Item 4</a>
+            </div>
+        </div>
+<pre class="language-markup"><code>&lt;a href="../assets/img/hydrangeas.jpg" 
+   data-modal-title="Hydrangeas with a long title appended" 
+   data-modal-group=".grouped"&gt;
+    Grouped Item 1
+&lt;/a&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="markup">
+        <h1>Markup</h1>
+        <pre class="language-markup"><code>/* Add to your element. */
+&lt;a href="YOUR_TARGET" or data-modal-target="YOUR_TARGET" 
+   data-modal-title="YOUR_TITLE"&gt;
+modal trigger
+&lt;/a&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="methods">
+        <h1>Methods</h1>
+        <p>The modal exposes the following method signatures.</p>
+        <dl>
+            <dt><strong>.modal(options)</strong>  </dt>
+            <dd>
+                Initialises the plugin with an optional options <code>object</code>
+
+                <table data-table-list class="table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Default Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">modal</th>
+                            <td>string</td>
+                            <td>A jQuery selector that assigns a trigger to replace all other close triggers.</td>
+                            <td><var>false</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">external</th>
+                            <td>boolean</td>
+                            <td>Whether the target is on a different page. Used for forcing the modal to recognize external urls when automatic detaction fails.</td>
+                            <td><var>false</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">group</th>
+                            <td>string</td>
+                            <td>A jQuery selector containing a group identifier for creating galleries.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">iframe</th>
+                            <td>boolean</td>
+                            <td>Whether to use an iframe. Used for forcing iframe behaviour when automatic detection fails.</td>
+                            <td><var>false</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">iframeScroll</th>
+                            <td>boolean</td>
+                            <td>Whether the iframe should have scrollbars.</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">fitViewport</th>
+                            <td>boolean</td>
+                            <td>Whether loaded content width should be forced to fit the viewport.</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">keyboard</th>
+                            <td>boolean</td>
+                            <td>Whether to enable keyboard control.</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">touch</th>
+                            <td>boolean</td>
+                            <td>Whether the lightbox responds to touch events</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">title</th>
+                            <td>string</td>
+                            <td>The text to insert as the title of the modal.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">description</th>
+                            <td>string</td>
+                            <td>The text to insert as the description of the modal in the footer.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">next</th>
+                            <td>string</td>
+                            <td>The text to insert into the next indicator.</td>
+                            <td><var>&gt;</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">nextHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the next trigger for accesibility purposes. The default language direction indicator is reversed by
+                                setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
+                            </td>
+                            <td><var>Next {Left|Right} Arrow</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">previous</th>
+                            <td>string</td>
+                            <td>The text to insert into the previous indicator.</td>
+                            <td><var>&gt;</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">previousHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the previous trigger for accesibility purposes. The default language direction indicator is reversed by
+                                setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
+                            </td>
+                            <td><var>Previous {Left|Right} Arrow</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">closeHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the close trigger for accesibility purposes.
+                            </td>
+                            <td><var>Close (Esc)</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">mobileTarget</th>
+                            <td>string</td>
+                            <td>An alternative url for mobile views.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">mobileViewportWidth</th>
+                            <td>number</td>
+                            <td>
+                                The maximum viewport width to present the alternative url for. This can either be given by passing either
+                                one of the grid ranges <var>xs</var> ,<var>s</var>,<var>m</var>, or<var>l</var> or by in a pixel value.
+                            </td>
+                            <td><var>xs</var></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+            <dt><strong>.modal("show")</strong></dt>
+            <dd>Show the modal.</dd>
+            <dt><strong>.modal("hide")</strong></dt>
+            <dd>Show the modal.</dd>
+            <dt><strong>.modal("prev")</strong></dt>
+            <dd>Cycles the modal instance to the previous item in a group.</dd>
+            <dt><strong>.modal("next")</strong></dt>
+            <dd>Cycles the modal instance to the next item in a group.</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="events">
+        <h1>Events</h1>
+        <p>The modal exposes the following events allowing the developer to tap into its behaviour.</p>
+        <dl>
+            <dt><strong>show.r.modal</strong></dt>
+            <dd>This event is fired immediately when the plugins <code>show</code> instance method is invoked.</dd>
+            <dt><strong>shown.r.modal</strong></dt>
+            <dd>This event is fired when the plugins <code>shown</code> instance method is invoked once the target has completed the animation and is shown.</dd>
+            <dt><strong>hide.r.modal</strong></dt>
+            <dd>This event is fired immediately when the plugins <code>hide</code> instance method is invoked.</dd>
+            <dt><strong>hidden.r.modal</strong></dt>
+            <dd>This event is fired when the plugins <code>hidden</code> instance method is invoked once the target has completed the animation and is hidden.</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The modal's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Override the default behaviour
+$(document.body).off("ready.r.modal")
+                .on("ready.r.modal", function (event) {    
+                    // Your custom behaviour...
+                });
+                    
+// Bind to the show event.
+$("YOUR_TRIGGER_SELECTOR").on("show.r.modal", function(event) {
+    // Your custom behaviour...
+});
+                                               
+// Bind to the shown event.
+$("YOUR_TRIGGER_SELECTOR").on("shown.r.modal", function(event) {
+    // Your custom behaviour...
+});
+// Bind to the hide event.
+$("YOUR_TRIGGER_SELECTOR").on("hide.r.modal", function(event) {
+    // Your custom behaviour...
+});
+// Bind to the hidden event.
+$("YOUR_TRIGGER_SELECTOR").on("hidden.r.modal", function(event) {
+    // Your custom behaviour...
+});</code></pre>
+    </section>
+</section>

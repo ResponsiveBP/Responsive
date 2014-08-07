@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Tabs ::  Responsive</title>
+    <meta name="description" content=" Responsive tabbed content. " />
+    <meta name="keywords" content="HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+    
+    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
+
+    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/v2/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+
+<main class="container" role="main">
+    <header role="banner">
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/v2">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v2/javascript">javascript</a> &#187; </li>
+
+    
+    
+    
+    <li>tabs</li>
+</ol>
+
+ 
+        <h1>
+            Tabs
+            <span>Responsive tabbed content.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-m-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#examples">Examples</a></li>
+    
+       
+       <li><a href="#markup">Markup</a></li>
+    
+       
+       <li><a href="#methods">Methods</a></li>
+    
+       
+       <li><a href="#events">Events</a></li>
+    
+       
+       <li><a href="#dataapi">Data API</a></li>
+    
+</ul>
+
+        </nav>
+        <article class="col-m-9">
+            <section id="normalize">
+    <h1>Tabs</h1>
+    <p>A jQuery plugin that provides dynamic tab functionality to transition through panes of local content. Uses CSS transitions to perform the animation.</p>
+    <p>
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
+        This is Responsive's first class API and should be your first consideration when using a plugin.
+    </p>
+    <hr />
+    <section id="examples">
+        <h1>Examples</h1>
+        <div class="row">
+            <div class="col-s-6">
+                <div class="tabs" data-tabs="">
+                    <ul>
+                        <li class="tab-active"><a href="#">tab1</a></li>
+                        <li><a href="#">tab2</a></li>
+                        <li><a href="#">tab3</a></li>
+                    </ul>
+                    <section class="tab-pane-active">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </section>
+                    <section>
+                        <h3>I am nested</h3>
+                        <div class="tabs" data-tabs="">
+                            <ul>
+                                <li class="tab-active"><a href="#">tab1</a></li>
+                                <li><a href="#">tab2</a></li>
+                                <li><a href="#">tab3</a></li>
+                            </ul>
+                            <section class="tab-pane-active">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </section>
+                            <section>
+                                Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                            <section>
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                        </div>
+                    </section>
+                    <section>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr />
+    <section id="markup">
+        <h1>Markup</h1>
+        <pre class="language-markup"><code>&lt;div class="tabs" data-tabs=""&gt;
+    &lt;ul&gt;
+        &lt;li class="tab-active"&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;tab2&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;section class="tab-pane-active"&gt;
+        ....
+    &lt;/section&gt;
+    &lt;section&gt;...&lt;/section&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="methods">
+        <h1>Methods</h1>
+        <p>The tabs plugin exposes the following method signatures.</p>
+        <dl>
+            <dt><strong>.tabs(index)</strong>  </dt>
+            <dd>
+                Initialises the plugin with an optional
+                <var>index</var>
+                parameter. A zero based indicator for which tab to show.
+            </dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="events">
+        <h1>Events</h1>
+        <p>The tabs plugin exposes the following events allowing the developer to tap into its behaviour.</p>
+        <dl>
+            <dt><strong>show.r.tabs</strong></dt>
+            <dd>This event is fired immediately when the plugins <code>show</code> instance method is invoked.</dd>
+            <dt><strong>shown.r.tabs</strong></dt>
+            <dd>This event is fired when the plugins <code>shown</code> instance method is invoked once the tab has completed the animation and the new pane is visible.</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The tabs plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Override the default behaviour
+$(document).off("ready.r.tabs")
+           .on("ready.r.tabs", function (event) {
+               // Your custom behaviour...
+           }); 
+// Override the default tabs control click behaviour
+$(document).off("click.r.tabs")
+           .on("click.r.tabs", "[data-tabs] > ul > li > a", function (event) {
+               // Your custom behaviour...
+           }); 
+// Bind to the show event.
+$("YOUR_SELECTOR").on("show.r.tabs", function(event) {
+    // Your custom behaviour...
+});
+                                               
+// Bind to the shown event.
+$("YOUR_SELECTOR").on("shown.r.tabs", function(event) {
+    // Your custom behaviour...
+});</code></pre>
+    </section>
+</section>
+
+        </article>
+    </div>
+</main>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <button class="to-top push-right">Back to Top ^</button>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+    <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
+<!--<![endif]-->
+<script src="/v2/assets/js/vendor/prism.js"></script>
+<script src="/v2/assets/js/responsive.min.js"></script>
+<script src="/v2/assets/js/docs.min.js"></script>
+
+<!-- Google Analytics: -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42035025-1', 'responsivebp.com');
+    ga('send', 'pageview');
+</script>
+
+<script src="/v2/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

@@ -21,8 +21,8 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="examples">
         <h1>Examples</h1>
-        <div class="alert ">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+        <div class="alert alert-dismissable" role="alert">
+            <button data-dismiss-target=".alert" class="close">x</button>
             <p>
                 <strong>Adding the plugin inside any element will hide the closest parent to the plugin matching the given selector on click.</strong>
             </p>
@@ -44,18 +44,28 @@ sublinks: ["#examples|Examples",
     <section id="markup">
         <h1>Markup</h1>
         <pre class="language-markup"><code>/* Add inside any element. */
-&lt;a href="#" data-dismiss-target="YOUR_PARENT_SELECTOR"&gt;x&lt;/a&gt;</code></pre>
+&lt;button role="button" data-dismiss-target="YOUR_PARENT_SELECTOR"&gt;x&lt;/button&gt;</code></pre>
     </section>
     <hr />
     <section id="methods">
         <h1>Methods</h1>
         <p>The dismiss plugin exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.dismiss(target)</strong>  </dt>
+            <dt><strong>.dismiss(options)</strong>  </dt>
             <dd>
-                Initialises the plugin with a
-                <var>target</var>
-                parameter. A jQuery selector indicating which target to hide.
+                Initialises the plugin with an optional options <code>object</code>
+                <dl class="dl-horizontal">
+                    <dt><strong>options</strong></dt>
+                    <dd>
+                        Contains parameters to pass to the plugin.
+                        <dl>
+                            <dt><strong>target</strong></dt>
+                            <dd>A jQuery selector indicating which target to hide.</dd>
+                            <dt><strong>closeHint</strong></dt>
+                            <dd>A hidden value that is added to the close trigger for accesibility purposes.</dd>
+                        </dl>
+                    </dd>
+                </dl>
             </dd>
         </dl>
     </section>
@@ -78,18 +88,18 @@ sublinks: ["#examples|Examples",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("click.r.dismiss")
-                .on("click.r.dismiss", ":attrStart(data-dismiss)", function (event) {    
+$(document.body).off("ready.r.dismiss")
+                .on("ready.r.dismiss", function (event) {    
                     // Your custom behaviour...
                 });
                 
 // Bind to the close event.
-$("YOUR_PARENT_SELECTOR").on("dismiss.r.dismiss", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("dismiss.r.dismiss", function(event) {
     // Your custom behaviour...
 });
                                                
 // Bind to the closed event.
-$("YOUR_PARENT_SELECTOR").on("dismissed.r.dismiss", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("dismissed.r.dismiss", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>

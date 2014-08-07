@@ -23,9 +23,14 @@ sublinks: ["#mediaqueries|Media Queries",
     scales up.
 </p>
 <p>
-    By standard all grids are wrapped in a div with the class <code>.container</code> which constrains the grid to 95% of the viewport width up to a maximum of 1140px.
+    To prevent content hitting the side of the viewport by standard all grids would be wrapped in a div with the
+    class <code>.container</code>. This constrains the grid to 95% of the viewport width up to a maximum of 1140px.
 </p>
-<div class="alert">
+<div class="alert" role="alert">
+    <h4>Right-to-Left Language Support</h4>
+    Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the order of columns and all other
+    column overload behaviour to allow for right-to-left languages.
+
     <h4>Fixed Layout</h4>
     <p>
         To disable the default fluid grid behaviour and force the grid into a non-responsive layout do the following:
@@ -42,6 +47,12 @@ sublinks: ["#mediaqueries|Media Queries",
             Use <code>.col-xs-{number}</code> range on the columns.
         </li>
     </ol>
+
+    <h4>Heads Up!</h4>
+    <p>
+        The grid system is designed to be used as a wrapping scaffold only.
+        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
+    </p>
 </div>
 <hr />
 <section id="mediaqueries">
@@ -82,12 +93,6 @@ sublinks: ["#mediaqueries|Media Queries",
         Design guidelines (rendered as png's) for the default grid at maximum widths of 1140px and 970px are available for download <a href="{{ site.baseurl }}/assets/responsive-grid-rulers.zip">here</a>.
     </p>
 </section>
-<div class="alert ">
-    <p>
-        The grid system is designed to be used as a wrapping scaffold only.
-        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
-    </p>
-</div>
 <hr />
 <section id="examples">
     <h1>Examples</h1>
@@ -98,7 +103,7 @@ sublinks: ["#mediaqueries|Media Queries",
             below 48em <small>(768px at 16px/1em)</small> the columns will collapse to a horizontal layout.
         </p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#basic-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#basic-test" class="push">Click to test</button>
         </p>
         <div id="basic-test" class="grid-demo">
             <div class="row">
@@ -215,7 +220,7 @@ sublinks: ["#mediaqueries|Media Queries",
             Adding the class <code>.no-gutter</code> to a row triggers the gutterless column layout.
         </p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#nogutter-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#nogutter-test" class="push">Click to test</button>
         </p>
         <div id="nogutter-test" class="grid-demo">
             <div class="row no-gutter">
@@ -292,7 +297,7 @@ sublinks: ["#mediaqueries|Media Queries",
             Adding the classes <code>.no-gutter .pad-gutter</code> to a row triggers the padded column layout similar to that of Bootstrap.
         </p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#padded-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#padded-test" class="push">Click to test</button>
         </p>
         <div id="padded-test" class="grid-demo">
             <div class="row no-gutter pad-gutter ">
@@ -367,7 +372,7 @@ sublinks: ["#mediaqueries|Media Queries",
         <h3>Fixed</h3>
         <p>In this example the columns will persist their width from the base view all the way up. This is performed using the <code>.col-xs-{number}</code> tier system.</p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#fixed-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#fixed-test" class="push">Click to test</button>
         </p>
         <div id="fixed-test" class="grid-demo">
             <div class="row">
@@ -392,7 +397,7 @@ sublinks: ["#mediaqueries|Media Queries",
         <h3>Nesting</h3>
         <p>Nesting is supported. Add a new <code>.row</code> class to a div to designate a new level.</p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#nested-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#nested-test" class="push">Click to test</button>
         </p>
         <div id="nested-test" class="grid-demo">
             <div class="row">
@@ -453,7 +458,7 @@ sublinks: ["#mediaqueries|Media Queries",
         <h3>Resizing</h3>
         <p>In this example the grid from each tier is being overwritten as the viewport scales up.</p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#resizing-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#resizing-test" class="push">Click to test</button>
         </p>
         <div id="resizing-test" class="grid-demo">
             <div class="row">
@@ -487,10 +492,10 @@ sublinks: ["#mediaqueries|Media Queries",
         <h3>Offsetting Columns</h3>
         <p>Columns can be offset by each column width.</p>
         <p>
-            Use classes <code>.offset-[size]-[number]</code> to push by column width.
+            Use classes <code>.offset-{size}-{number}</code> to push by column width.
         </p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#offsetting-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#offsetting-test" class="push">Click to test</button>
         </p>
         <div id="offsetting-test" class="grid-demo">
             <div class="row">
@@ -511,9 +516,9 @@ sublinks: ["#mediaqueries|Media Queries",
     </section>
     <section id="ordering">
         <h3>Ordering Columns</h3>
-        <p>The order of columns can be flipped by combining classes <code>.push-[size]-[number]</code> and <code>.pull-[size]-[number]</code>.</p>
+        <p>The order of columns can be flipped by combining classes <code>.push-{size}-{number}</code> and <code>.pull-{size}-{number}</code>.</p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#ordering-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#ordering-test" class="push">Click to test</button>
         </p>
         <div id="ordering-test" class="grid-demo">
             <div class="row">
@@ -529,11 +534,11 @@ sublinks: ["#mediaqueries|Media Queries",
     <section id="resetting">
         <h3>Resets</h3>
         <p>
-            Each tier comes with a <code>.reset-[size]</code> and <code>.reset-[size]-only</code> class which allows you to reset the flow of the layout as the viewport scales.
+            Each tier comes with a <code>.reset-{size}</code> and <code>.reset-{size}-only</code> class which allows you to reset the flow of the layout as the viewport scales.
             This allows you to perform more complicated layouts with relative ease.
         </p>
         <p class="hidden-xs clearfix">
-            <button data-lightbox-target="#resetting-test" class="demo-trigger push-right">Click to test</button>
+            <button type="button" data-modal-target="#resetting-test" class="push">Click to test</button>
         </p>
         <div id="resetting-test" class="grid-demo">
             <div class="row">

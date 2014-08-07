@@ -18,6 +18,18 @@ sublinks: ["#examples|Examples",
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
+    <div class="alert" role="alert">
+        <h4>Accessibility</h4>
+        <p>
+            Keybord support comes as standard with triggers responding to both <kbd>space</kbd> and <kbd>enter</kbd>.
+            It can be utilised also to navigate between panes by using the <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> keys.
+        </p>
+
+        <h4>Right-to-Left Language Support</h4>
+        <p>
+            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse all directional input behaviour.
+        </p>
+    </div>
     <hr />
     <section id="examples">
         <h1>Examples</h1>
@@ -96,7 +108,10 @@ sublinks: ["#examples|Examples",
             <dt><strong>show.r.tabs</strong></dt>
             <dd>This event is fired immediately when the plugins <code>show</code> instance method is invoked.</dd>
             <dt><strong>shown.r.tabs</strong></dt>
-            <dd>This event is fired when the plugins <code>shown</code> instance method is invoked once the tab has completed the animation and the new pane is visible.</dd>
+            <dd>
+                This event is fired when the plugins <code>shown</code> instance method is invoked once the tab has completed the
+                animation and the new pane is visible.
+            </dd>
         </dl>
     </section>
     <hr />
@@ -111,11 +126,7 @@ $(document).off("ready.r.tabs")
            .on("ready.r.tabs", function (event) {
                // Your custom behaviour...
            }); 
-// Override the default tabs control click behaviour
-$(document).off("click.r.tabs")
-           .on("click.r.tabs", "[data-tabs] > ul > li > a", function (event) {
-               // Your custom behaviour...
-           }); 
+
 // Bind to the show event.
 $("YOUR_SELECTOR").on("show.r.tabs", function(event) {
     // Your custom behaviour...

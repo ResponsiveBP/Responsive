@@ -5,9 +5,9 @@
 {% assign lastword={{splitwords.last}} %}
 <ol class="breadcrumb">
     {% if num_parts == "0" or num_parts == "-1" %}
-    <li><a href="/">home</a> &#187; </li> 
+    <li><a href="{{ site.baseurl }}">home</a> &#187; </li> 
     {% else %}
-    <li><a href="/">home</a> &#187; </li>
+    <li><a href="{{ site.baseurl }}">home</a> &#187; </li>
 
     {% for unused in page.content limit:num_parts %}
     {% capture first_word %}{{ url_parts | truncatewords:1 | remove:"..."}}{% endcapture %}

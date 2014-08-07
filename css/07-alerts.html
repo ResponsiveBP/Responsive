@@ -4,13 +4,14 @@ layout: subpage
 group: css
 title: Alerts
 heading: Alerts
-subheading: Alert info boxes for various scenarios. 
+subheading: Alert info boxes for various scenarios.
 sublinks: ["#examples|Examples"]
 ---
 <section>
     <h1 class="masthead">Alerts</h1>
     <p>
-        Alert boxes are used to bring information to a users perspective, Responsive bundles a pattern that provides a flexible layout across all viewport sizes that can easily be extended.
+        Alert boxes are used to bring information to a users perspective, Responsive bundles a pattern that provides a flexible layout across all viewport sizes
+        that can easily be extended.
     </p>
     <p>
         The dismiss functionality is added via the <a href="{{ site.baseurl }}/javascript/dismiss.html">JavaScript Data API</a>.
@@ -18,19 +19,25 @@ sublinks: ["#examples|Examples"]
     <hr />
     <section id="examples">
         <h2>Alert Box</h2>
-        <div class="alert">
-            <a data-dismiss-target=".alert" href="#" class="close">x</a>
-            <h4 class="alert-heading">Alert block</h4>
+        <div class="alert alert-dismissable" role="alert">
+            <button data-dismiss-target=".alert" class="close">x</button>
+            <h4>Alert block</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
         </div>
 
         <h2>The Markup</h2>
-        <pre class="language-markup"><code>&lt;div class="alert"&gt;
-    &lt;a data-dismiss-target=".alert" href="#" class="close"&gt;x&lt;/a&gt;
-        &lt;h4 class="alert-heading"&gt;Alert block&lt;/h4&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
-        &lt;p&gt;Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.&lt;/p&gt;
+        <pre class="language-markup"><code>&lt;div class="alert alert-dismissable" role="alert"&gt;
+    &lt;button data-dismiss-target=".alert" class="close"&gt;x&lt;/button&gt;
+    &lt;h4&gt;Alert block&lt;/h4&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+        tempor incididunt ut labore et dolore magna aliqua.
+    &lt;/p&gt;
+    &lt;p&gt;
+        Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis
+        ut ac tortor.
+    &lt;/p&gt;
 &lt;/div&gt;</code></pre>
     </section>
 </section>

@@ -1,0 +1,711 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Grid ::  Responsive</title>
+    <meta name="description" content=" Flexible grid layouts across all devices. " />
+    <meta name="keywords" content="HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+    
+    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
+
+    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/v2/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+
+<main class="container" role="main">
+    <header role="banner">
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/v2">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v2/css">css</a> &#187; </li>
+
+    
+    
+    
+    <li>grid</li>
+</ol>
+
+ 
+        <h1>
+            The Grid
+            <span>Flexible grid layouts across all devices.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-m-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#mediaqueries">Media Queries</a></li>
+    
+       
+       <li><a href="#basic">Example : Basic</a></li>
+    
+       
+       <li><a href="#nogutter">Example : No Gutter</a></li>
+    
+       
+       <li><a href="#padded">Example : Padded</a></li>
+    
+       
+       <li><a href="#fixed">Example : Fixed</a></li>
+    
+       
+       <li><a href="#nested">Example : Nested</a></li>
+    
+       
+       <li><a href="#resizing">Example : Resizing</a></li>
+    
+       
+       <li><a href="#offsetting">Example : Offsetting</a></li>
+    
+       
+       <li><a href="#ordering">Example : Ordering</a></li>
+    
+       
+       <li><a href="#resetting">Example : Resetting</a></li>
+    
+</ul>
+
+        </nav>
+        <article class="col-m-9">
+            <h1>The Grid System</h1>
+<p>
+    Responsive comes, not with one but with <strong>4 tiers of 12 column fluid grids in three variants</strong> that allow for granular control over layout across all
+    devices. The system has been written from an <strong>entirely mobile first</strong> perspective with each level overwriting the previous one as the viewport width
+    scales up.
+</p>
+<p>
+    By standard all grids are wrapped in a div with the class <code>.container</code> which constrains the grid to 95% of the viewport width up to a maximum of 1140px.
+</p>
+<div class="alert">
+    <h4>Fixed Layout</h4>
+    <p>
+        To disable the default fluid grid behaviour and force the grid into a non-responsive layout do the following:
+
+    </p>
+    <ol>
+        <li>
+            Remove the <code>&lt;meta name="viewport" /&gt;</code> meta tag from the head of your document.
+        </li>
+        <li>
+            Add the class <code>.fixed</code> to the container.
+        </li>
+        <li>
+            Use <code>.col-xs-{number}</code> range on the columns.
+        </li>
+    </ol>
+</div>
+<hr />
+<section id="mediaqueries">
+    <h1>Media Queries</h1>
+    <p>The media queries specifying breakpoints are as follows:</p>
+    <table class="table-list table-striped table-bordered" data-table-list="">
+        <thead>
+            <tr>
+                <th scope="col">Level</th>
+                <th>Selector</th>
+                <th>Width</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Extra small (initial)</td>
+                <td><code>.col-xs-{number}</code></td>
+                <td>Up to 48em <small>(768px at 16px/1em)</small></td>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td><code>.col-s-{number}</code></td>
+                <td>48em to 62em <small>(768px to 992px at 16px/1em)</small> </td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td><code>.col-m-{number}</code></td>
+                <td>62em to 75em <small>(992px to 1200px at 16px/1em)</small> </td>
+            </tr>
+            <tr>
+                <td>Large</td>
+                <td><code>.col-l-{number}</code></td>
+                <td>75em and over <small>(1200px at 16px/1em)</small> </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        Design guidelines (rendered as png's) for the default grid at maximum widths of 1140px and 970px are available for download <a href="/v2/assets/responsive-grid-rulers.zip">here</a>.
+    </p>
+</section>
+<div class="alert">
+    <p>
+        The grid system is designed to be used as a wrapping scaffold only.
+        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
+    </p>
+</div>
+<hr />
+<section id="examples">
+    <h1>Examples</h1>
+    <section id="basic">
+        <h3>Basic</h3>
+        <p>
+            Here is a very basic example of the grid system. In this example the columns are styled using the <code>.col-s-{number}</code> tier meaning that on viewport widths
+            below 48em <small>(768px at 16px/1em)</small> the columns will collapse to a horizontal layout.
+        </p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#basic-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="basic-test" class="grid-demo">
+            <div class="row">
+                <div class="col-s-12">
+                    12
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-11">
+                    11
+                </div>
+                <div class="col-s-1">
+                    1
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-10">
+                    10
+                </div>
+                <div class="col-s-2">
+                    2
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-9">
+                    9
+                </div>
+                <div class="col-s-3">
+                    3
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-8">
+                    8
+                </div>
+                <div class="col-s-4">
+                    4
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-7">
+                    7
+                </div>
+                <div class="col-s-5">
+                    5
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-6">
+                    6
+                </div>
+                <div class="col-s-6">
+                    6
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-5">
+                    5
+                </div>
+                <div class="col-s-7">
+                    7
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-4">
+                    4
+                </div>
+                <div class="col-s-8">
+                    8
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-3">
+                    3
+                </div>
+                <div class="col-s-9">
+                    9
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-2">
+                    2
+                </div>
+                <div class="col-s-10">
+                    10
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-1">
+                    1
+                </div>
+                <div class="col-s-11">
+                    11
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-s-12"&gt;
+        12
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-s-11"&gt;
+        11
+    &lt;/div&gt;
+    &lt;div class="col-s-1"&gt;
+        1
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="nogutter">
+        <h3>No Gutter</h3>
+        <p>
+            Adding the class <code>.no-gutter</code> to a row triggers the gutterless column layout.
+        </p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#nogutter-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="nogutter-test" class="grid-demo">
+            <div class="row no-gutter">
+                <div class="col-s-12">
+                    12
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-11">
+                    11
+                </div>
+                <div class="col-s-1">
+                    1
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-10">
+                    10
+                </div>
+                <div class="col-s-2">
+                    2
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-9">
+                    9
+                </div>
+                <div class="col-s-3">
+                    3
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-8">
+                    8
+                </div>
+                <div class="col-s-4">
+                    4
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-7">
+                    7
+                </div>
+                <div class="col-s-5">
+                    5
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-6">
+                    6
+                </div>
+                <div class="col-s-6">
+                    6
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row no-gutter"&gt;
+    &lt;div class="col-s-12"&gt;
+        12
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-s-11"&gt;
+        11
+    &lt;/div&gt;
+    &lt;div class="col-s-1"&gt;
+        1
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="padded">
+        <h3>Padded</h3>
+        <p>
+            Adding the classes <code>.no-gutter .pad-gutter</code> to a row triggers the padded column layout similar to that of Bootstrap.
+        </p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#padded-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="padded-test" class="grid-demo">
+            <div class="row no-gutter pad-gutter ">
+                <div class="col-s-12">
+                    <div>12</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-11">
+                    <div>11</div>
+                </div>
+                <div class="col-s-1">
+                    <div>1</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-10">
+                    <div>10</div>
+                </div>
+                <div class="col-s-2">
+                    <div>2</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-9">
+                    <div>9</div>
+                </div>
+                <div class="col-s-3">
+                    <div>3</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-8">
+                    <div>8</div>
+                </div>
+                <div class="col-s-4">
+                    <div>4</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-7">
+                    <div>7</div>
+                </div>
+                <div class="col-s-5">
+                    <div>5</div>
+                </div>
+            </div>
+            <div class="row no-gutter pad-gutter">
+                <div class="col-s-6">
+                    <div>6</div>
+                </div>
+                <div class="col-s-6">
+                    <div>6</div>
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row no-gutter pad-gutter"&gt;
+    &lt;div class="col-s-12"&gt;
+        &lt;div&gt;12&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-s-11"&gt;
+        &lt;div&gt;11&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-s-1"&gt;
+        &lt;div&gt;1&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="fixed">
+        <h3>Fixed</h3>
+        <p>In this example the columns will persist their width from the base view all the way up. This is performed using the <code>.col-xs-{number}</code> tier system.</p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#fixed-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="fixed-test" class="grid-demo">
+            <div class="row">
+                <div class="col-xs-6">
+                    6
+                </div>
+                <div class="col-xs-6">
+                    6
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-6"&gt;
+        6
+    &lt;/div&gt;
+    &lt;div class="col-xs-6"&gt;
+        6
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="nested">
+        <h3>Nesting</h3>
+        <p>Nesting is supported. Add a new <code>.row</code> class to a div to designate a new level.</p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#nested-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="nested-test" class="grid-demo">
+            <div class="row">
+                <div class="col-s-6">
+                    6
+                    <div class="row">
+                        <div class="col-s-6">
+                            6
+                        </div>
+                        <div class="col-s-6">
+                            6
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s-6">
+                    6
+                    <div class="row">
+                        <div class="col-s-6">
+                            6
+
+
+                        </div>
+                        <div class="col-s-6">
+                            6
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-s-6"&gt;
+        6
+        &lt;div class="row"&gt;
+            &lt;div class="col-s-6"&gt;
+                6
+            &lt;/div&gt;
+            &lt;div class="col-s-6"&gt;
+                6
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-s-6"&gt;
+        6
+        &lt;div class="row"&gt;
+            &lt;div class="col-s-6"&gt;
+                6
+            &lt;/div&gt;
+            &lt;div class="col-s-6"&gt;
+                6
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="resizing">
+        <h3>Resizing</h3>
+        <p>In this example the grid from each tier is being overwritten as the viewport scales up.</p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#resizing-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="resizing-test" class="grid-demo">
+            <div class="row">
+                <div class="col-xs-6 col-s-4">
+                    <div class="visible-xs">6</div>
+                    <div class="hidden-xs ">4</div>
+                </div>
+                <div class="col-xs-6 col-s-4 push-xs-right">
+                    <div class="visible-xs">6</div>
+                    <div class="hidden-xs ">4</div>
+                </div>
+                <div class="col-xs-12 col-s-4">
+                    <div class="visible-xs">12</div>
+                    <div class="hidden-xs">4</div>
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-6 col-s-4"&gt;
+        6
+    &lt;/div&gt;
+    &lt;div class="col-xs-6 col-s-4 push-xs-right"&gt;
+        6
+    &lt;/div&gt;
+    &lt;div class="col-xs-12 col-s-4"&gt;
+        6
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="offsetting">
+        <h3>Offsetting Columns</h3>
+        <p>Columns can be offset by each column width.</p>
+        <p>
+            Use classes <code>.offset-[size]-[number]</code> to push by column width.
+        </p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#offsetting-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="offsetting-test" class="grid-demo">
+            <div class="row">
+                <div class="col-xs-4">4</div>
+                <div class="col-xs-4 offset-xs-4">4</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 offset-xs-4">4</div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-4"&gt;4&lt;/div&gt;
+    &lt;div class="col-xs-4 offset-xs-4"&gt;4&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-xs-4 offset-xs-4"&gt;4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="ordering">
+        <h3>Ordering Columns</h3>
+        <p>The order of columns can be flipped by combining classes <code>.push-[size]-[number]</code> and <code>.pull-[size]-[number]</code>.</p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#ordering-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="ordering-test" class="grid-demo">
+            <div class="row">
+                <div class="col-xs-4 push-xs-8">4</div>
+                <div class="col-xs-8 pull-xs-4">8</div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-4 push-xs-8"&gt;4&lt;/div&gt;
+    &lt;div class="col-xs-8 pull-xs-4"&gt;8&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <section id="resetting">
+        <h3>Resets</h3>
+        <p>
+            Each tier comes with a <code>.reset-[size]</code> and <code>.reset-[size]-only</code> class which allows you to reset the flow of the layout as the viewport scales.
+            This allows you to perform more complicated layouts with relative ease.
+        </p>
+        <p class="hidden-xs clearfix">
+            <button data-lightbox-target="#resetting-test" class="demo-trigger push-right">Click to test</button>
+        </p>
+        <div id="resetting-test" class="grid-demo">
+            <div class="row">
+                <div class="col-s-3 col-m-6">
+                    <div class="visible-xs">12</div>
+                    <div class="visible-s">3</div>
+                    <div class="hidden-xs hidden-s">6</div>
+                </div>
+                <div class="col-s-3 col-m-6">
+                    <div class="visible-xs">12</div>
+                    <div class="visible-s">3</div>
+                    <div class="hidden-xs hidden-s">6</div>
+                </div>
+                <div class="col-s-3 col-m-6 reset-m">
+                    <div class="visible-xs">12</div>
+                    <div class="visible-s">3</div>
+                    <div class="hidden-xs hidden-s">6</div>
+                </div>
+                <div class="col-s-3 col-m-6">
+                    <div class="visible-xs">12</div>
+                    <div class="visible-s">3</div>
+                    <div class="hidden-xs hidden-s">6</div>
+                </div>
+            </div>
+        </div>
+        <pre class="language-markup"><code>&lt;div class="row"&gt;
+    &lt;div class="col-s-3 col-m-6"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-s-3 col-m-6"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-s-3 col-m-6 reset-m"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-s-3 col-m-6"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+</section>
+
+        </article>
+    </div>
+</main>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <button class="to-top push-right">Back to Top ^</button>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+    <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
+<!--<![endif]-->
+<script src="/v2/assets/js/vendor/prism.js"></script>
+<script src="/v2/assets/js/responsive.min.js"></script>
+<script src="/v2/assets/js/docs.min.js"></script>
+
+<!-- Google Analytics: -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42035025-1', 'responsivebp.com');
+    ga('send', 'pageview');
+</script>
+
+<script src="/v2/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

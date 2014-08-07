@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Forms ::  Responsive</title>
+    <meta name="description" content=" Cross browser, normalized, responsive forms. " />
+    <meta name="keywords" content="HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+    
+    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
+
+    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/v2/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+
+<main class="container" role="main">
+    <header role="banner">
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/v2">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v2/css">css</a> &#187; </li>
+
+    
+    
+    
+    <li>forms</li>
+</ol>
+
+ 
+        <h1>
+            Forms
+            <span>Cross browser, normalized, responsive forms.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+        <nav class="col-m-3" role="complementary">
+            <h3>Contents</h3>
+            <ul class="no-bullets">
+    
+       
+       <li><a href="#examples">Examples</a></li>
+    
+       
+       <li><a href="#markup">The Markup</a></li>
+    
+       
+       <li><a href="#ios">IOS</a></li>
+    
+</ul>
+
+        </nav>
+        <article class="col-m-9">
+            <section>
+    <h1>Form Elements</h1>
+    <p>Cross browser, normalized, responsive forms with minimal styling to allow easy overrides and lean CSS.</p>
+    <p>
+        All inputs are responsive with progressively enhanced fallbacks for unsupported types. A hook class <code>.no-edit</code> can be used to mimic non-editable inputs,
+        and all fields can be made to display inline by adding the class <code>.inline-block</code>.
+    </p>
+    <p>Smaller elements such as radio and checkbox inputs can be aligned by wrapping them in an element with the class <code>.input-group</code>.</p>
+    <hr />
+    <section id="examples">
+        <h1>Standard</h1>
+        <p>Responsive form elements span 100% by default; their width is designed to be constrained by the existing grid system. This makes them extremely flexible.</p>
+        <form action="#">
+            <fieldset>
+                <legend>Standard Form spanning two columns</legend>
+                <div class="row">
+                    <div class="col-s-6">
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input9">Standard</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="text" id="input9" class="focus" value="standard input...">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-disabled9">Disabled</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="text" id="input-disabled9" disabled="" value="disabled input...">
+                                <p>Support text to help describe the input.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-no-edit9">Non editable</label>
+                            </div>
+                            <div class="col-s-8">
+                                <span id="input-no-edit9" class="no-edit">No edit</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="select-default9">Select</label>
+                            </div>
+                            <div class="col-s-8">
+                                <select id="select-default9">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-file9">File upload</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input id="input-file9" type="file">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-number9">Number</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="number" id="input-number9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-password9">Password</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="password" id="input-password9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-time9">Time</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="time" id="input-time9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-week9">Week</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="week" id="input-week9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-month9">Month</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="month" id="input-month9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-date9">Date</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="date" id="input-date9">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-s-6">
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-datetime9">Datetime</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="datetime" id="input-datetime9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-datetime-local9">Datetime Local</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="datetime-local" id="input-datetime-local9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-search9">Search</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="search" id="input-search9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-color9">Color</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="color" id="input-color9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-range9">Range</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="range" id="input-range9" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-email9">Email</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="email" id="input-email9">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="check-disabled9">Disabled Checkbox</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="checkbox" id="check-disabled9" value="option9" disabled="" class="inline-block">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="check9">Checkbox</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="checkbox" id="check9" value="option1" class="inline-block">
+                                <input type="checkbox" id="check10" value="option9" class="inline-block">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="radio9">Radio</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="radio" id="radio9" name="radio" value="option1" class="inline-block">
+                                <input type="radio" id="radio10" name="radio" value="option9" class="inline-block">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="textarea9">Textarea</label>
+                            </div>
+                            <div class="col-s-8">
+                                <textarea id="textarea9"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit">Save changes</button>
+                <button type="button">Cancel</button>
+            </div>
+        </form>
+    </section>
+    <hr />
+    <section id="markup">
+        <h1>The Markup</h1>
+        <p>The entire markup for the first form. Note the grid wrappers required for arranging inputs.</p>
+        <pre class="language-markup"><code>&lt;form action="#"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Standard Form spanning two columns&lt;/legend&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-s-6"&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input9"&gt;Standard&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="text" id="input9" class="focus" value="standard input..."&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-disabled9"&gt;Disabled&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="text" id="input-disabled9" disabled="" value="disabled input..."&gt;
+                        &lt;p&gt;Support text to help describe the input.&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-no-edit9"&gt;Non editable&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;span id="input-no-edit9" class="no-edit"&gt;No edit&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="select-default9"&gt;Select&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;select id="select-default9"&gt;
+                            &lt;option&gt;1&lt;/option&gt;
+                            &lt;option&gt;2&lt;/option&gt;
+                            &lt;option&gt;3&lt;/option&gt;
+                            &lt;option&gt;4&lt;/option&gt;
+                            &lt;option&gt;5&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-file9"&gt;File upload&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input id="input-file9" type="file"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-number9"&gt;Number&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="number" id="input-number9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-password9"&gt;Password&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="password" id="input-password9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-time9"&gt;Time&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="time" id="input-time9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-week9"&gt;Week&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="week" id="input-week9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-month9"&gt;Month&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="month" id="input-month9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-date9"&gt;Date&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="date" id="input-date9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-s-6"&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-datetime9"&gt;Datetime&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="datetime" id="input-datetime9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-datetime-local9"&gt;Datetime Local&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="datetime-local" id="input-datetime-local9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-search9"&gt;Search&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="search" id="input-search9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-color9"&gt;Color&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="color" id="input-color9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-range9"&gt;Range&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="range" id="input-range9" min="0" max="100" value="50"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-email9"&gt;Email&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="email" id="input-email9"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="check-disabled9"&gt;Disabled Checkbox&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="checkbox" id="check-disabled9" value="option9" disabled="" class="inline-block"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="check9"&gt;Checkbox&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="checkbox" id="check9" value="option1" class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check10" value="option9" class="inline-block"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="radio9"&gt;Radio&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="radio" id="radio9" name="radio" value="option1" class="inline-block"&gt;
+                        &lt;input type="radio" id="radio10" name="radio" value="option9" class="inline-block"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="textarea9"&gt;Textarea&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;textarea id="textarea9"&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    &lt;div class="form-actions"&gt;
+        &lt;button type="submit"&gt;Save changes&lt;/button&gt;
+        &lt;button type="button"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+    </section>
+    <section id="ios">
+        <h1>IOS</h1>
+        <p>On IOS devices the OS chroma is stripped from select and certain input fields allowing them to be styled with the same flexibility of desktop browsers. As such the dropdown indicator needs to be replaced. This is done using a data encoded svg image embedded in the CSS.</p>
+        <p>The data for this image is as follows:</p>
+        <pre class="language-css"><code>background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);</code></pre>
+    </section>
+</section>
+
+        </article>
+    </div>
+</main>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <button class="to-top push-right">Back to Top ^</button>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+    <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
+<!--<![endif]-->
+<script src="/v2/assets/js/vendor/prism.js"></script>
+<script src="/v2/assets/js/responsive.min.js"></script>
+<script src="/v2/assets/js/docs.min.js"></script>
+
+<!-- Google Analytics: -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42035025-1', 'responsivebp.com');
+    ga('send', 'pageview');
+</script>
+
+<script src="/v2/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

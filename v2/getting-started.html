@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Getting Started ::  Responsive</title>
+    <meta name="description" content=" An introduction to Responsive, how to use it, with basic templates and examples. " />
+    <meta name="keywords" content="HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+    
+    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
+
+    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="shortcut icon" href="/v2/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/v2/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+<main class="container" role="main">
+    <header role="banner">
+        ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="/v2">home</a> &#187; </li> 
+    
+    <li>getting-started</li>
+</ol>
+
+
+        <h1>Getting Started
+            <span>An introduction to Responsive, how to use it, with basic templates and examples.</span>
+        </h1>
+    </header>
+    <hr />
+    <div class="row">
+    <nav class="col-m-3" role="complementary">
+        <ul class="no-bullets">
+            <li><a href="#download">Download Responsive</a></li>
+            <li><a href="#html">The HTML</a></li>
+            <li><a href="#support">Browser Support</a></li>
+        </ul>
+    </nav>
+    <section class="col-m-9">
+     <div class="alert" role="alert">
+            <p>Looking for the v1 documentation? You can find it <a href="v1/">here</a>.</p>
+        </div>
+        <section id="download">
+            <h1>Download Responsive</h1>
+            <p>
+                The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
+                No documentation or original source code files are included.
+            </p>
+            <a href="https://github.com/ResponsiveBP/Responsive/releases/download/2.5.7/responsive.zip" role="button" class="download" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="Framework Download">Download Responsive</a>
+            <ul class="download-links">
+                <li>
+                    <a href="https://github.com/responsivebp/responsive" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="GitHub project" rel="external nofollow">GitHub project</a>
+                </li>
+                <li>
+                    Version 2.5.7
+                </li>
+            </ul>
+        </section>
+        <hr />
+        <section id="html">
+            <h1>Setting up your HTML</h1>
+            <p>
+                Inside the zip file you will also find a HTML file containing the default template for including
+                responsive in your webpage.<br /> Set up your layout as follows.
+            </p>
+            <pre class="language-markup"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" /&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+        &lt;meta name="description" content="Your Page Description." /&gt;
+        &lt;title&gt;Your Page Title&lt;/title&gt;
+        &lt;!-- 
+             IE10 Mobile ignores the meta viewport tag. 
+             This fix needs to be in the head.
+        --&gt;
+        &lt;script src="responsive.ie10mobilefix.min.js"&gt;&lt;/script&gt;
+        &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
+        &lt;!-- 
+             HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
+             and media queries 
+             WARNING: Respond.js doesn't work if you view the 
+             page via file:// 
+        --&gt;
+        &lt;!--[if lt IE 9 &!(IEMobile)]&gt;
+            &lt;script src="vendor/html5shiv.min.js"&gt;&lt;/script&gt;
+            &lt;script src="vendor/respond.min.js"&gt;&lt;/script&gt;
+        &lt;![endif]--&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Your Body Content
+    
+        &lt;!-- Scripts at the bottom for improved performance. --&gt;
+        &lt;!-- jQuery, required for all responsive plugins. --&gt;
+        &lt;!--[if IE 8]&gt;     
+            &lt;script src="vendor/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+        &lt;![endif]--&gt;
+        &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
+            &lt;script src="vendor/jquery-2.1.0.min.js"&gt;&lt;/script&gt;
+        &lt;!--&lt;![endif]--&gt;
+        &lt;script src="responsive.min.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+        <hr />
+        <section id="support">
+            <h1>Browser Support</h1>
+            <p>
+                Responsive is built to work best in the latest desktop and mobile browsers. Everything though has been built with progressive
+                enhancement in mind, meaning older browsers might display differently styled, though fully functional, renderings of certain components.
+            </p>
+            <h3>Supported browsers</h3>
+            <p>Specifically, latest versions of the following browsers are supported:</p>
+
+            <ul>
+                <li>Chrome (Mac, Windows, iOS, and Android)</li>
+                <li>Internet Explorer</li>
+                <li>Firefox (Mac, Windows)</li>
+                <li>Opera (Mac, Windows)</li>
+                <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
+            </ul>
+            <h2>Internet Explorer 10 Mobile</h2>
+            <p>
+                Internet Explorer 10 on Windows 8 phones prior to <a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2013/10/14/introducing-windows-phone-preview-for-developers.aspx"
+                                                                     rel="external nofollow" >Update 3 (a.k.a. GDR3)</a> do not render content to the correct width due to a css fix used to allow "snap mode" on the desktop.
+                Responsive comes bundled with a JavaScript fix that should be referenced in the head of your document.
+                For more information see:
+            </p>
+            <ul>
+                <li>
+                    Matt Stow: <a href="http://mattstow.com/responsive-design-in-ie10-on-windows-phone-8.html" rel="external nofollow" >Responsive Design in IE10 on Windows Phone 8</a>
+                </li>
+                <li>
+                    Tim Kadlec: <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/" rel="external nofollow" >Windows Phone 8 and Device-Width</a>
+                </li>
+            </ul>
+
+            <h2>Internet Explorer 8</h2>
+            <p>
+                Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.
+                In addition, Internet Explorer 8 requires the use of <a href="https://code.google.com/p/html5shiv/" rel="external nofollow" >html5shiv</a> to correctly display those elements
+                and <a href="https://github.com/scottjehl/Respond" rel="external nofollow" >Respond.js</a>  to enable media query support.
+            </p>
+        </section>
+    </section>
+</div>
+</main>
+﻿<footer role="contentinfo" class="container">
+    <hr>
+    <div class="row">
+        <div class="col-s-8">
+            <p>
+                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+            </p>
+            <p>
+                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>. 
+            </p>
+            <p>
+                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
+            </p>
+        </div>
+        <div class="col-s-4">
+            <div class="clearfix">
+                <button class="to-top push-right">Back to Top ^</button>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if IE 8]>     
+    <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
+<!--<![endif]-->
+<script src="/v2/assets/js/vendor/prism.js"></script>
+<script src="/v2/assets/js/responsive.min.js"></script>
+<script src="/v2/assets/js/docs.min.js"></script>
+
+<!-- Google Analytics: -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42035025-1', 'responsivebp.com');
+    ga('send', 'pageview');
+</script>
+
+<script src="/v2/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

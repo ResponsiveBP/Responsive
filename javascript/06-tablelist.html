@@ -21,7 +21,7 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="examples">
         <h1>Examples</h1>
-        <table data-table-list="" class="table-list table-striped table-bordered">
+        <table data-table-list class="table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Title</th>
@@ -64,7 +64,7 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>&lt;table data-table-list="" class="table-list table-striped table-bordered"&gt;
+        <pre class="language-markup"><code>&lt;table data-table-list class="table-striped table-bordered"&gt;
     &lt;thead&gt;
         &lt;tr&gt;
             &lt;th scope="col"&gt;Title&lt;/th&gt;
@@ -100,7 +100,7 @@ sublinks: ["#examples|Examples",
         <h1>Methods</h1>
         <p>The tablelist plugin exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.add()</strong></dt>
+            <dt><strong>.tablelist()</strong></dt>
             <dd>
                 Initialises the plugin adding the necessary data attributes to the table.
             </dd>
@@ -125,9 +125,19 @@ sublinks: ["#examples|Examples",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.table")
-           .on("ready.r.table", "[data-tablelist]", function (event) {    
+$(document).off("ready.r.tablelist")
+           .on("ready.r.table", function (event) {    
                // Your custom behaviour...
-           });</code></pre>
+           });
+            
+// Bind to the add event.
+$("YOUR_SELECTOR").on("add.r.tablelist", function(event) {
+    // Your custom behaviour...
+});
+
+// Bind to the added event.
+$("YOUR_SELECTOR").on("added.r.tablelist", function(event) {
+    // Your custom behaviour...
+});</code></pre>
     </section>
 </section>

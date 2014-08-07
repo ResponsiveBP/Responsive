@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Alerts ::  Responsive</title>
+    <meta name="description" content=" Alert info boxes for various scenarios. " />
+    <meta name="keywords" content="HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
+    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
+    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="/v2/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+            ﻿
+
+
+
+
+            <ol class="breadcrumb">
+
+                <li><a href="/v2">home</a> &#187; </li>
+
+
+
+                <li><a href="/v2/css">css</a> &#187; </li>
+
+
+
+                <li>alerts</li>
+            </ol>
+
+            <h1>
+                Alerts
+                <span>Alert info boxes for various scenarios.</span>
+            </h1>
+        </header>
+        <hr />
+        <div class="row">
+            <nav class="col-m-3" role="complementary">
+                <h3>Contents</h3>
+                <ul class="no-bullets">
+
+
+                    <li><a href="#examples">Examples</a></li>
+
+                </ul>
+            </nav>
+            <article class="col-m-9">
+                <section>
+                    <h1 class="masthead">Alerts</h1>
+                    <p>
+                        Alert boxes are used to bring information to a users perspective, Responsive bundles a pattern that provides a flexible layout across all viewport sizes that can easily be extended.
+                    </p>
+                    <p>
+                        The dismiss functionality is added via the <a href="/v2/javascript/dismiss.html">JavaScript Data API</a>.
+                    </p>
+                    <hr />
+                    <section id="examples">
+                        <h2>Alert Box</h2>
+                     <div class="alert" role="alert">
+                            <a data-dismiss-target=".alert" href="#" class="close">x</a>
+                            <h4 class="alert-heading">Alert block</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.</p>
+                        </div>
+                        <h2>The Markup</h2>
+                        <pre class="language-markup"><code>&lt;div class="alert"&gt;
+    &lt;a data-dismiss-target=".alert" href="#" class="close"&gt;x&lt;/a&gt;
+        &lt;h4 class="alert-heading"&gt;Alert block&lt;/h4&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+        &lt;p&gt;Phasellus vitae nibh justo. Integer a ligula vel enim ultricies mollis ut ac tortor.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                    </section>
+                </section>
+            </article>
+        </div>
+    </main>
+    ﻿<footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right">Back to Top ^</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
+    <!--<![endif]-->
+    <script src="/v2/assets/js/vendor/prism.js"></script>
+    <script src="/v2/assets/js/responsive.min.js"></script>
+    <script src="/v2/assets/js/docs.min.js"></script>
+    <!-- Google Analytics: -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('send', 'pageview');
+    </script>
+    <script src="/v2/assets/js/ga-event-tracking.js"></script>
+</body>
+</html>
