@@ -1,0 +1,285 @@
+/**
+ * Normalize  
+ */
+.form {
+    margin: 1em 0;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+label {
+    &,
+    .input-group {
+        display: block;
+        margin-bottom: 1em;
+    }
+
+    &[for] {
+        cursor: pointer;
+    }
+
+    > input,
+    > input[type="checkbox"],
+    > input[type="radio"],
+    > select {
+        display: inline-block;
+        margin: 0 1em 0 0;
+        vertical-align: text-top;
+    }
+}
+
+select,
+textarea,
+input,
+.no-edit {
+    background: $form-input-background;
+    border: $form-input-border;
+    border-radius: $form-input-border-radius;
+    color: $form-input-color;
+    display: block;
+    font-family: inherit;
+    margin-bottom: 1em;
+    padding: .25em;
+    width: 100%;
+    /*
+	 * Disabled
+	 * 1. Override the value set in normalize.css
+	 * 2. Fix IOS 6/7 opacity issue
+	 */
+    &[disabled] {
+        background: $form-input-background-disabled;
+        border-color: $form-input-border-color-disabled;
+        color: $form-input-color-disabled;
+        cursor: not-allowed !important; /* 1 */
+        opacity: 1;
+    }
+}
+
+/*
+ * Clean up that hideous file input.
+ */
+input[type="file"]::-ms-value {
+    background: $form-input-background;
+    border: none;
+}
+
+input[type="file"]::-ms-browse {
+    background: $button-background;
+    border: $button-border;
+    color: $form-input-color;
+
+    &:active {
+        background-color: lighten($button-background, 5);
+    }
+}
+
+input[type="color"] {
+    max-width: 105px;
+}
+/*
+	 * Declared separately to reduce selector duplication
+	 * for padding
+	 */
+input[type="radio"],
+input[type="checkbox"] {
+    display: block;
+    line-height: inherit;
+    margin: .1875em .1875em .1875em 0;
+    min-height: 1em;
+    min-width: 1em;
+    padding: 0;
+    width: auto;
+}
+
+input[type="radio"] {
+    border-color: transparent \9;
+    border-radius: 1em;
+}
+/*
+	 * Add range styles for IE8 and IE9
+	 */
+input[type="range"] {
+    background-color: #fff \9;
+    border: 1px solid #c0c0c0 \9;
+    border: 1px solid transparent;
+    padding: .25em 0;
+    padding: .25em \9;
+}
+
+/*
+ * Inline
+ */
+input.inline-block,
+select.inline-block {
+    width: auto;
+}
+
+/*
+ * 1. Remove borders and padding on range controls in IE10+
+ */
+x::-ms-reveal,
+input[type="range"] { /* 1 */
+    border: 1px solid transparent;
+    padding: .25em 0;
+}
+
+/*
+ * Fix field styling on iPhone and iPad.
+ * 1. Strip OS styling on IOS
+ */
+select,
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="week"],
+input[type="month"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="color"] {
+    -webkit-appearance: none; /* 1 */
+}
+
+select option {
+    height: 100%;
+}
+
+/*
+ * Textareas : Multiple resizable options.
+ * 1: Horizontal
+ * 2: Vertical
+ * 3: None
+ */
+textarea {
+    height: auto;
+    min-height: 5.25em;
+    resize: both;
+
+    &.horizontal {
+        resize: horizontal; /* 1 */
+    }
+
+    &.vertical {
+        resize: vertical; /*2 */
+    }
+
+    &.no-resize {
+        resize: none; /* 3 */
+    }
+}
+
+/*
+ * Read only
+ */
+.no-edit,
+[readonly] {
+    background-color: $form-input-background-readonly;
+    border-color: $form-input-border-color-readonly;
+    color: $form-input-color-readonly;
+    cursor: not-allowed;
+}
+
+/*
+ * Placeholder : These have to be kept separate
+ * 1. Safari and Chrome
+ * 2. Firefox 4-18
+ * 3. Firefox 19+
+ * 4. IE10+
+ */
+::-webkit-input-placeholder {
+    color: $form-placeholder; /* 1 */
+}
+
+:-moz-placeholder {
+    color: $form-placeholder; /*2 */
+}
+
+::-moz-placeholder {
+    color: $form-placeholder; /* 3 */
+}
+
+:-ms-input-placeholder {
+    color: $form-placeholder; /* 4 */
+}
+
+/*
+ * Actions - Contains buttons
+ */
+.form-actions {
+    margin: 1em 0;
+    padding: 1em 0;
+}
+
+@-moz-document url-prefix() {
+    /*
+	 * Remove excess padding in Firefox
+	 */
+    input[type="color"] {
+        min-height: 1.8em;
+        padding: 0;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio:0) {
+
+    /*
+	 * Fix changing height issues on iOS7.
+	 */
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"],
+    input[type="number"] {
+        min-height: 2em;
+    }
+
+    /*
+     * Remove excess padding in Webkit
+	 */
+    input[type="color"] {
+        min-height: 1.8em;
+        padding: 0;
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        &::-webkit-color-swatch {
+            border: none;
+        }
+    }
+
+    /*
+	 * Fix field styling on iPhone and iPad.
+	 * 1. Add a select indicator
+	 */
+    select {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==); /* 1 */
+        background-repeat: no-repeat;
+        background-position: right center;
+        padding-right: 1.67em;
+
+        [dir="rtl"] & {
+            background-position: .67em center;
+            padding-right: 0;
+            padding-left: 1.67em;
+        }
+    }
+}

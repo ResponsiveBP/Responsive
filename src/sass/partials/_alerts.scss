@@ -1,0 +1,52 @@
+.alert {
+    @extend .clearfix;
+    position: relative;
+    margin: 1em 0;
+    padding: 0 1em;
+    background-color: $alert-color-scheme;
+    border: 1px solid darken($alert-color-scheme, 20);
+    color: darken($alert-color-scheme, 70);
+
+    .close {
+        position: relative;
+        right: -1.73em;
+        top: .13em;
+        float: right;
+        color: inherit;
+        font-size: 1.17em;
+        font-weight: bold;
+        line-height: 1em;
+
+
+        [dir="rtl"] & {
+            float: left;
+            right: auto;
+            left: -1.73em;
+        }
+
+        &,
+        &:active,
+        &:focus,
+        &:hover {
+            background-color: transparent;
+            border: none;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.alert-dismissable {
+    padding-right: 2.17em;
+
+    [dir="rtl"] & {
+        padding-right: 1em;
+        padding-left: 2.17em;
+    }
+}
+
+.alert-heading {
+    color: inherit;
+}

@@ -14,194 +14,117 @@
 
     // General variables.
     var supportTransition = $.support.transition,
-        emouseenter = "mouseenter" + ns,
-        emouseleave = "mouseleave" + ns,
-        eclick = "click" + ns,
+        rtl = $.support.rtl,
+        emouseenter = "mouseenter",
+        emouseleave = "mouseleave",
+        ekeydown = "keydown",
+        eclick = "click",
         eready = "ready" + ns,
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
-    // Private methods.
-    var getActiveIndex = function () {
-
-        var $activeItem = this.$element.find(".carousel-active");
-        this.$items = $activeItem.parent().children("figure");
-
-        return this.$items.index($activeItem);
-    },
-
-        manageLazyImages = function () {
-            if (!this.data("lazyLoaded")) {
-
-                this.find("img[data-src]").each(function () {
-                    if (this.src.length === 0) {
-                        this.src = this.getAttribute("data-src");
-                    }
-                });
-
-                this.data("lazyLoaded", true);
-            }
-        },
-
-        manageTouch = function () {
-
-            this.$element.swipe({ namespace: "r.carousel", touchAction: "pan-y" })
-                .on("swipemove.r.carousel", $.proxy(function (event) {
-
-                    if (this.sliding) {
-                        return;
-                    }
-
-                    this.pause();
-
-                    // Left is next.
-                    var isNext = event.delta.x < 0,
-                        type = isNext ? "next" : "prev",
-                        fallback = isNext ? "first" : "last",
-                        activePosition = getActiveIndex.call(this),
-                        $activeItem = $(this.$items[activePosition]),
-                        $nextItem = $activeItem[type]("figure");
-
-                    if (this.$items.length === 1) {
-                        return;
-                    }
-
-                    if (!$nextItem.length) {
-
-                        if (!this.options.wrap) {
-                            return;
-                        }
-
-                        $nextItem = this.$element.children("figure")[fallback]();
-                    }
-
-                    if ($nextItem.hasClass("carousel-active")) {
-                        return;
-                    }
-
-                    if (this.options.lazyLoadImages && this.options.lazyOnDemand) {
-                        // Load the next image.
-                        manageLazyImages.call($nextItem);
-                    }
-
-                    // Get the distance swiped as a percentage.
-                    var width = $activeItem.width(),
-                        percent = parseFloat((event.delta.x / width) * 100),
-                        diff = isNext ? 100 : -100;
-
-                    // Shift the items but put a limit on sensitivity.
-                    if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
-                        this.$element.addClass("no-transition");
-                        if (this.options.mode === "slide") {
-                            $activeItem.css({ "left": percent + "%" });
-                            $nextItem.addClass("swipe").css({ "left": (percent + diff) + "%" });
-                        } else {
-                            $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
-                            $nextItem.addClass("swipe");
-                        }
-                    }
-
-                }, this))
-                .on("swipeend.r.carousel", $.proxy(function (event) {
-
-                    if (this.sliding || !this.$element.hasClass("no-transition")) {
-                        return;
-                    }
-
-                    var direction = event.direction,
-                        method = "next";
-
-                    if (direction === "right") {
-                        method = "prev";
-                    }
-
-                    // Re-enable the transitions.
-                    this.$element.removeClass("no-transition");
-
-                    if (supportTransition) {
-
-                        // Trim the animation duration based on the current position.
-                        var activePosition = getActiveIndex.call(this),
-                            $activeItem = $(this.$items[activePosition]);
-
-                        if (!this.translationDuration) {
-                            this.translationDuration = parseFloat($activeItem.css("transition-duration"));
-                        }
-
-                        // Get the distance and turn it into into a percentage
-                        // to calculate the duration. Whichever is lowest is used.
-                        var width = $activeItem.width(),
-                            percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
-                            swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
-                            newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
-
-                        // Set the new temporary duration.
-                        this.$items.each(function () {
-                            $(this).css({ "transition-duration": newDuration + "s" });
-                        });
-                    }
-
-                    this.cycle();
-                    this[method]();
-
-                }, this));
-        };
+    var keys = {
+        SPACE: 32,
+        LEFT: 37,
+        RIGHT: 39
+    };
 
     // Carousel class definition
     var Carousel = function (element, options) {
 
         this.$element = $(element);
         this.defaults = {
-            interval: 5000,
+            interval: 0, // Better for a11y
             mode: "slide",
             pause: "hover",
             wrap: true,
-            enabletouch: true,
-            lazyLoadImages: true,
-            lazyOnDemand: true
+            keyboard: true,
+            touch: true,
+            lazyImages: true,
+            lazyOnDemand: true,
+            nextTrigger: null,
+            nextHint: "Next (" + (rtl ? "Left" : "Right") + " Arrow)",
+            previousTrigger: null,
+            previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
+            indicators: null
         };
         this.options = $.extend({}, this.defaults, options);
         this.paused = null;
         this.interval = null;
         this.sliding = null;
         this.$items = null;
-        this.$indicators = [];
         this.translationDuration = null;
+        this.$nextTrigger = this.options.nextTrigger ? $(this.nextTrigger) : this.$element.find(".carousel-control.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.previousTrigger) : this.$element.find(".carousel-control.back");
+        this.$indicators = this.options.indicators ? $(this.indicators) : this.$element.find("ol > li");
+        this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
+        var self = this;
+
+        // Add the css class to support fade.
+        this.options.mode === "fade" && this.$element.addClass("carousel-fade");
+
+        if (this.options.lazyImages && !this.options.lazyOnDemand) {
+            $(w).on("load", $.proxy(this.lazyimages), this);
+        }
+
+        // Add a11y features.
+        this.$element.attr({ "role": "listbox", "id": this.id });
+        this.$element.children("figure").each(function () {
+            var $this = $(this),
+                active = $this.hasClass("carousel-active");
+
+            $this.attr({
+                "role": "option",
+                "aria-selected": active,
+                "tabindex": active ? 0 : -1
+            });
+        });
+
+        // Find and add a11y to controls.
+        var $controls = this.$nextTrigger.add(this.$previousTrigger);
+        $controls.each(function () {
+            var $this = $(this).attr({ "tabindex": 0, "aria-controls": self.id });
+            !$this.is("button") ? $this.attr({ "role": "button" }) : $this.attr({ "type": "button" });
+            if (!$this.find(".visuallyhidden").length) {
+                $("<span/>").addClass("visuallyhidden")
+                            .html($this.is(self.$nextTrigger.selector) ? self.options.nextHint : self.options.previousHint)
+                            .appendTo($this);
+            }
+        });
+
+        // Find and a11y indicators.
+        this.$indicators.attr({ "role": "button", "aria-controls": self.id });
+
+        // Bind events
+        // Not namespaced as we want to keep behaviour when not using data api.
         if (this.options.pause === "hover") {
-            // Bind the mouse enter/leave events
-            if (!$.support.touchEvents && $.support.pointerEvents) {
+            // Bind the mouse enter/leave events.
+            if (!$.support.touchEvents && !$.support.pointerEvents) {
                 this.$element.on(emouseenter, $.proxy(this.pause, this))
                     .on(emouseleave, $.proxy(this.cycle, this));
             }
         }
 
-        // Add the css class to support fade.
-        this.options.mode === "fade" && this.$element.addClass("carousel-fade");
-
-        if (this.options.enabletouch) {
-            manageTouch.call(this);
+        if (this.options.touch) {
+            // You always have to pass the third parameter if setting data.
+            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, true)
+                         .on("swipemove.carousel", $.proxy(this.swipemove, this))
+                         .on("swipeend.carousel", $.proxy(this.swipeend, this));
         }
 
-        var self = this;
-        if (this.options.lazyLoadImages && !this.options.lazyOnDemand) {
-            $(w).on("load", function () {
-                manageLazyImages.call(self.$element);
-            });
+        if (this.options.keyboard) {
+            this.$element.on(ekeydown, $.proxy(this.keydown, this));
         }
 
-        // Find and bind indicators.
-        $("[data-carousel-slide-to]").each(function () {
-            var $this = $(this),
-                $target = $($this.attr("data-carousel-target") || $this.attr("href"));
+        $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
+    };
 
-            if ($target[0] === element) {
-                var $parent = $this.parents("ol:first");
-                if ($.inArray($parent[0], self.$indicators) === -1) {
-                    self.$indicators.push($parent[0]);
-                }
-            }
-        });
+    Carousel.prototype.activeindex = function () {
+        var $activeItem = this.$element.find(".carousel-active");
+        this.$items = $activeItem.parent().children("figure");
+
+        return this.$items.index($activeItem);
     };
 
     Carousel.prototype.cycle = function (event) {
@@ -227,7 +150,7 @@
 
     Carousel.prototype.to = function (position) {
 
-        var activePosition = getActiveIndex.call(this),
+        var activePosition = this.activeindex(),
             self = this;
 
         if (position > (this.$items.length - 1) || position < 0) {
@@ -325,13 +248,13 @@
         slideEvent = $.Event(eslide, { relatedTarget: $nextItem[0], direction: direction });
         this.$element.trigger(slideEvent);
 
-        if (this.sliding || slideEvent.isDefaultPrevented()) {
+        if (slideEvent.isDefaultPrevented()) {
             return false;
         }
 
-        if (this.options.lazyLoadImages && this.options.lazyOnDemand) {
+        if (this.options.lazyImages && this.options.lazyOnDemand) {
             // Load the next image.
-            manageLazyImages.call($nextItem);
+            this.lazyimages.call($nextItem);
         }
 
         // Good to go? Then let's slide.
@@ -342,30 +265,22 @@
         }
 
         // Highlight the correct indicator.
-        if (this.$indicators.length) {
-            $.each(this.$indicators, function () {
-                var $this = $(this);
-                $this.find(".active").removeClass("active");
-                self.$element.one(eslid, function () {
-                    var $nextIndicator = $($this.children()[getActiveIndex.call(self)]);
-                    if ($nextIndicator) {
-                        $nextIndicator.addClass("active");
-                    }
-                });
-            });
-        }
+        this.$element.one(eslid, function () {
+            self.$indicators.removeClass("active")
+                .eq(self.activeindex()).addClass("active");
+        });
 
         var complete = function () {
 
             if (self.$items) {
                 // Clear the transition properties if set.
-                self.$items.each(function () {
-                    $(this).css({ "transition-duration": "" });
-                });
+                self.$items.removeClass("swiping").css({ "transition-duration": "" });
             }
 
-            $activeItem.removeClass(["carousel-active", direction].join(" "));
-            $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active");
+            $activeItem.removeClass(["carousel-active", direction].join(" "))
+                       .attr({ "aria-selected": false, "tabIndex": -1 });
+            $nextItem.removeClass([type, direction].join(" ")).addClass("carousel-active")
+                     .attr({ "aria-selected": true, "tabIndex": 0 });
 
             self.sliding = false;
             slidEvent = $.Event(eslid, { relatedTarget: $nextItem[0], direction: direction });
@@ -382,7 +297,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe").css({ "left": "", "opacity": "" });
+                $(this).removeClass("swipe swipe-next").css({ "left": "", "right": "", "opacity": "" });
             });
         }
 
@@ -395,6 +310,185 @@
         }
 
         return this;
+    };
+
+    Carousel.prototype.keydown = function (event) {
+
+        var which = event && event.which;
+
+        if (which === keys.LEFT || which === keys.RIGHT) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Seek out the correct direction indicator, shift, and focus.
+            switch (which) {
+                case keys.LEFT:
+                    if (rtl) {
+                        this.next();
+                        this.$nextTrigger.focus();
+                    } else {
+                        this.prev();
+                        this.$previousTrigger.focus();
+                    }
+                    break;
+                case keys.RIGHT:
+                    if (rtl) {
+                        this.prev();
+                        this.$previousTrigger.focus();
+                    } else {
+                        this.next();
+                        this.$nextTrigger.focus();
+                    }
+                    break;
+            }
+        }
+    };
+
+    Carousel.prototype.click = function (event) {
+
+        if (!event) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        var $this = $(event.target),
+            indicator = $this.is(this.$indicators.selector);
+
+        if (indicator) {
+            this.to($this.index());
+        } else if ($this.is(this.$nextTrigger.selector)) {
+            this.next();
+        }
+        else if ($this.is(this.$previousTrigger.selector)) {
+            this.prev();
+        }
+    };
+
+    Carousel.prototype.swipemove = function (event) {
+
+        if (this.sliding) {
+            return;
+        }
+
+        this.pause();
+
+        // Left is next.
+        var isNext = event.delta.x < 0,
+            type = isNext ? (rtl ? "prev" : "next") : (rtl ? "next" : "prev"),
+            fallback = isNext ? (rtl ? "last" : "first") : (rtl ? "first" : "last"),
+            activePosition = this.activeindex(),
+            $activeItem = this.$items.eq(activePosition),
+            $nextItem = $activeItem[type]("figure");
+
+        if (this.$items.length === 1) {
+            return;
+        }
+
+        this.$items.removeClass("swipe-next");
+
+        if (!$nextItem.length) {
+
+            if (!this.options.wrap) {
+                return;
+            }
+
+            $nextItem = this.$element.children("figure")[fallback]();
+        }
+
+        if ($nextItem.hasClass("carousel-active")) {
+            return;
+        }
+
+        if (this.options.lazyImages && this.options.lazyOnDemand) {
+            // Load the next image.
+            this.lazyimages.call($nextItem);
+        }
+
+        // Get the distance swiped as a percentage.
+        var width = $activeItem.width(),
+            percent = parseFloat((event.delta.x / width) * 100),
+            diff = isNext ? 100 : -100;
+
+        if (rtl) {
+            percent *= -1;
+        }
+
+        // Shift the items but put a limit on sensitivity.
+        if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
+            this.$element.addClass("no-transition");
+            if (this.options.mode === "slide") {
+                if (rtl) {
+                    $activeItem.addClass("swiping").css({ "right": percent + "%" });
+                    $nextItem.addClass("swipe swipe-next").css({ "right": (percent - diff) + "%" });
+                } else {
+                    $activeItem.addClass("swiping").css({ "left": percent + "%" });
+                    $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
+                }
+            } else {
+                $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
+                $nextItem.addClass("swipe swipe-next");
+            }
+        } else {
+            this.cycle();
+        }
+    };
+
+    Carousel.prototype.swipeend = function (event) {
+
+        if (this.sliding || !this.$element.hasClass("no-transition")) {
+            return;
+        }
+
+        var direction = event.direction,
+            method = "next";
+
+        if (direction === "right") {
+            method = "prev";
+        }
+
+        // Re-enable the transitions.
+        this.$element.removeClass("no-transition");
+
+        if (supportTransition) {
+
+            // Trim the animation duration based on the current position.
+            var activePosition = this.activeindex(),
+                $activeItem = this.$items.eq(activePosition);
+
+            if (!this.translationDuration) {
+                this.translationDuration = parseFloat($activeItem.css("transition-duration"));
+            }
+
+            // Get the distance and turn it into into a percentage
+            // to calculate the duration. Whichever is lowest is used.
+            var width = $activeItem.width(),
+                percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
+                swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
+                newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
+
+            // Set the new temporary duration.
+            this.$items.each(function () {
+                $(this).css({ "transition-duration": newDuration + "s" });
+            });
+        }
+
+        this.cycle();
+        this.slide(method, $(this.$items.filter(".swipe-next")));
+    };
+
+    Carousel.prototype.lazyimages = function () {
+        if (!this.data("lazyLoaded")) {
+
+            this.find("img[data-src]").each(function () {
+                if (this.src.length === 0) {
+                    this.src = this.getAttribute("data-src");
+                }
+            });
+
+            this.data("lazyLoaded", true);
+        }
     };
 
     // Plug-in definition 
@@ -415,12 +509,12 @@
                 // Cycle to the given number.
                 data.to(options);
 
-            } else if (typeof options === "string" || (options = opts.slide)) {
+            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts.slide)) {
 
                 data[options]();
 
             } else if (data.options.interval) {
-                data.cycle();
+                data.pause().cycle();
             }
         });
     };
@@ -436,22 +530,7 @@
     };
 
     // Data API
-    $(document).on(eclick, ":attrStart(data-carousel-slide)", function (event) {
-
-        event.preventDefault();
-
-        var $this = $(this),
-            data = $this.data("r.carouselOptions"),
-            options = data || $.buildDataOptions($this, {}, "carousel", "r"),
-            $target = $(options.target || (options.target = $this.attr("href"))),
-            slideIndex = options.slideTo,
-            carousel = $target.data("r.carousel");
-
-        if (carousel) {
-            typeof slideIndex === "number" ? carousel.to(slideIndex) : carousel[options.slide]();
-        }
-
-    }).on(eready, function () {
+    $(document).on(eready, function () {
 
         $(".carousel").each(function () {
 

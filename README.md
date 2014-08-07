@@ -1,14 +1,18 @@
 #Responsive
-##A super lightweight HTML, CSS, and JavaScript framework for building responsive websites
+##A super lightweight HTML, SASS, CSS, and JavaScript framework for building responsive websites
 
-###Bootstrap and Foundation are too heavy.
+###Responsive is the developers framework.
 
+Frameworks like Bootstrap and Foundation are too design opinionated and heavy. They're great for prototyping but every time
+you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
+functionality of the website. That costs developers time and money.
 
-They're great for prototyping but every time you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the functionality of the website. That's annoying!
-
-**Responsive** has been built with that in mind. It has been specifically designed and coded to be as lightweight as possible to prevent the need to undo styles set by the framework itself and allow developers to write efficient code and speed up development time.
-
-**Responsive** is tiny. The combined CSS and JavaScript is **only 20.6kb minified and gzipped** but there is a lot of functionality built into the framework. It's designed to be dropped-in, as-is to your website such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
+**Responsive** has been built with that in mind. It is the result of thousands of hours of real, client driven web development and
+testing; specifically developed to be as lightweight as possible to prevent the need to undo styles set by the framework itself
+and allow developers to write efficient code and lower costs.
+  
+**Responsive** is tiny. The combined output CSS and JavaScript is **only 24.8kb minified and gzipped** but there is a lot of functionality 
+built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
 
 Browser support covers IE8+ as well as all other modern browsers.
 
@@ -16,9 +20,9 @@ Browser support covers IE8+ as well as all other modern browsers.
 
 Responsives' documentation, included in the [gh-pages](https://github.com/ResponsiveBP/Responsive/tree/gh-pages) repo. It is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at [http://responsivebp.com](http://responsivebp.com). The docs may also be run locally.
 
-1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v1.5).
+1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v2.2).
  - **If you are running Windows** please read this [unofficial guide](https://github.com/juthilo/run-jekyll-on-windows/) to get Jekyll up and running without problems.
-2. From the root `/Responsive` directory, run `jekyll serve --baseurl '' --watch` in the command line.
+2. From the root `/Responsive` directory, run `jekyll serve --watch` in the command line.
  - Open [http://localhost:4000](http://localhost:4000) in your browser to view the compiled docs.
 
 
@@ -28,9 +32,9 @@ Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com
 
 Contribution is most welcome, that's the whole idea! Together as a community we can build a boilerplate for building responsive sites that will ensure that high standards can be delivered across all devices.   
 
-Please adhere to existing JavaScript and CSS styles though when submitting code and ensure that you test thoroughly on multiple devices, we don't want another Semicolongate ;)
+Please adhere to existing JavaScript and SASS styles though when submitting code and ensure that you test thoroughly on multiple devices, we don't want another Semicolongate ;)
 
-##Building the CSS and Javascript
+##Building the SASS and Javascript
 
 The build process for Responsive is powered by [gulpjs](http://gulpjs.com/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
 

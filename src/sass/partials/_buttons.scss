@@ -1,0 +1,92 @@
+/**
+ * Normalize button borders, color, and padding.
+ * 1: Remove rounded corners on iPhone.
+ * 2: Remove 300ms touch delay.
+ */
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    -webkit-appearance: none; /* 1 */
+    border-radius: 0; /* 1 */
+    color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    padding: .5em 1em;
+    line-height: normal;
+    margin-bottom: 0;
+    background: $button-background;
+    border: $button-border;
+    touch-action: manipulation; /*2 */
+    text-decoration: none;
+
+    &:hover {
+        background-color: darken($button-background, 5);
+        border: $button-border;
+    }
+
+    &:active {
+        background-color: lighten($button-background, 5);
+        outline: none;
+    }
+    /**
+	 * Inline buttons designed for rendering next to inputs.
+	 * 1. Fix inline-block margin.
+	 * 2. Pad buttons.
+	 */
+    &.btn-inline {
+        margin-left: -.27em; /* 1 */
+        padding: .25em 1em; /*2 */
+        [dir="rtl"] & {
+            margin-left: auto;
+            margin-right: -.27em;
+        }
+    }
+}
+
+/**
+ * 1. Fix IOS 6/7 opacity issue
+ */
+button[disabled],
+input[type="submit"][disabled],
+input[type="button"][disabled],
+input[type="reset"][disabled] {
+    background-color: lighten($button-background, 5);
+    color: $button-color-disabled;
+    cursor: not-allowed;
+    opacity: 1; /* 1 */
+}
+
+/**
+ * Reset width for inputs
+ */
+input {
+    &[type="submit"],
+    &[type="reset"],
+    &[type="button"] {
+        max-width: none;
+        width: auto;
+    }
+}
+
+/**
+ * Grouped buttons.
+ */
+.btn-group {
+    @extend .clearfix;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    > button,
+    > input[type="submit"],
+    > input[type="button"],
+    > input[type="reset"] {
+        float: left;
+
+        [dir="rtl"] & {
+            float: right;
+        }
+    }
+}

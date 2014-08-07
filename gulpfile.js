@@ -1,61 +1,51 @@
 // Include gulp
 var gulp = require("gulp");
 
-// Install Tools
-var es = require('event-stream'),
-    path = require("path");
+// Install tools and plugins.
+var es = require("event-stream"),
+    del = require("del"),
+    path = require("path"),
+    plugins = require("gulp-load-plugins")();
 
-// Include Our Plugins
-var jshint = require("gulp-jshint"),
-    concat = require("gulp-concat"),
-    minifyCSS = require("gulp-minify-css"),
-    uglify = require("gulp-uglify"),
-    rename = require("gulp-rename"),
-    clean = require("gulp-clean"),
-    zip = require("gulp-zip");
+// Set paths
+var basePath = {
+    src: "./src/",
+    build: "./build/",
+    dist: "./dist/"
+},
+	path = {
+	    sass: {
+	        src: basePath.src + "sass/",
+	        build: basePath.build
+	    },
+	    js: {
+	        src: basePath.src + "js/",
+	        build: basePath.build
+	    }
+	};
 
-var cssSrc = [
-    "./src/css/copyright.css",
-    "./src/css/normalize.css",
-    "./src/css/base.css",
-    "./src/css/grid-base.css",
-    "./src/css/grid-small.css",
-    "./src/css/grid-medium.css",
-    "./src/css/grid-large.css",
-    "./src/css/lists.css",
-    "./src/css/tables.css",
-    "./src/css/tablelist.css",
-    "./src/css/alerts.css",
-    "./src/css/media.css",
-    "./src/css/forms.css",
-    "./src/css/buttons.css",
-    "./src/css/code.css",
-    "./src/css/dropdown.css",
-    "./src/css/autosize.css",
-    "./src/css/carousel.css",
-    "./src/css/tabs.css",
-    "./src/css/lightbox.css",
-    "./src/css/helpers-base.css",
-    "./src/css/helpers.css",
-    "./src/css/print.css"];
+var sassSrc = path.sass.src + "responsive.scss";
 
-var jsSrc = ["./src/js/responsive.core.js",
-             "./src/js/responsive.autosize.js",
-             "./src/js/responsive.carousel.js",
-             "./src/js/responsive.dismiss.js",
-             "./src/js/responsive.dropdown.js",
-             "./src/js/responsive.lightbox.js",
-             "./src/js/responsive.table.js",
-             "./src/js/responsive.tabs.js"];
+var jsSrc = [
+    path.js.src + "responsive.core.js",
+    path.js.src + "responsive.autosize.js",
+    path.js.src + "responsive.carousel.js",
+    path.js.src + "responsive.dismiss.js",
+    path.js.src + "responsive.dropdown.js",
+    path.js.src + "responsive.modal.js",
+    path.js.src + "responsive.tablelist.js",
+    path.js.src + "responsive.tabs.js"
+];
 
-// Concatenate & Minify CSS
-gulp.task("css", function (cb) {
-    gulp.src(cssSrc)
-        .pipe(concat("responsive.css"))
-        .pipe(gulp.dest("./build"))
-        .pipe(rename("responsive.min.css"))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest("./build"))
+// Concatenate & Minify SCSS
+gulp.task("sass", function (cb) {
+    gulp.src(sassSrc)
+        .pipe(plugins.rubySass({ unixNewlines: true, precision: 4, noCache: true }))
+        .pipe(plugins.autoprefixer("last 2 version", "> 1%", "ie 8", { cascade: true }))
+        .pipe(gulp.dest(path.sass.build))
+        .pipe(plugins.rename({ suffix: ".min" }))
+        .pipe(plugins.minifyCss())
+        .pipe(gulp.dest(path.sass.build))
         .on("end", cb);
 });
 
@@ -64,51 +54,41 @@ gulp.task("scripts", function (cb) {
 
     es.concat(
     // Lint
-    gulp.src("./src/js/*.js")
-        .pipe(jshint())
-        .pipe(jshint.reporter("default")),
-
-    gulp.src("./src/js/responsive.ie10mobilefix.js")
-        .pipe(concat("responsive.ie10mobilefix.js"))
-        .pipe(gulp.dest("./build"))
-        .pipe(rename("responsive.ie10mobilefix.min.js"))
-        .pipe(uglify({ preserveComments: "some" }))
-        .pipe(gulp.dest("./build")),
+    gulp.src(path.js.src + "*.js")
+        .pipe(plugins.jshint())
+        .pipe(plugins.jshint.reporter("default")),
 
     gulp.src(jsSrc)
-        .pipe(concat("responsive.js"))
-        .pipe(gulp.dest("./build"))
-        .pipe(rename("responsive.min.js"))
-        .pipe(uglify({ preserveComments: "some" }))
-        .pipe(gulp.dest("./build"))
+        .pipe(plugins.concat("responsive.js"))
+        .pipe(gulp.dest(path.js.build))
+        .pipe(plugins.rename({ suffix: ".min" }))
+        .pipe(plugins.uglify({ preserveComments: "some" }))
+        .pipe(gulp.dest(path.js.build))
 
         ).on("end", cb);
 });
 
-gulp.task("clean", ["css", "scripts"], function (cb) {
-
-    gulp.src("./dist/responsive.zip", { read: false })
-        .pipe(clean())
-        .on("end", cb);
+gulp.task("clean", ["sass", "scripts"], function (cb) {
+    del("./dist/responsive.zip", cb);
 });
 
 gulp.task("zip", ["clean"], function (cb) {
-
-    gulp.src("./build/**/*")
-        .pipe(zip("responsive.zip"))
-        .pipe(gulp.dest("./dist"))
+    gulp.src(basePath.build + "**/*")
+        .pipe(plugins.zip("responsive.zip"))
+        .pipe(gulp.dest(basePath.dist))
         .on("end", cb);
 });
 
 gulp.task("watch", function () {
-    // Watch For Changes To Our JS
-    gulp.watch("./src/js/*.js", ["scripts"]);
+    // Watch for changes to our JS
+    gulp.watch(path.js.src + "**/*.js", ["scripts"]);
 
-    // Watch For Changes To Our CSS
-    gulp.watch("./src/css/*.css", ["css"]);
+    // Watch for changes to our SASS
+    gulp.watch(path.sass.src + "**/*.scss", ["sass"]);
+
 });
 
 gulp.task("release", ["zip"]);
 
 // Default Task
-gulp.task("default", ["css", "scripts"]);
+gulp.task("default", ["sass", "scripts"]);

@@ -1,0 +1,82 @@
+﻿body {
+    padding-bottom: 50px;
+}
+
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+
+.grid-test .row {
+    text-align: center;
+    background: #ebebeb;
+}
+
+    .grid-test .row + .row,
+    .grid-test .row .row {
+        padding-top: .5em;
+    }
+
+    .grid-test .row .row {
+        background-color: #3876a7;
+    }
+
+.grid-test [class*="col-"] {
+    line-height: 2em;
+    background-color: #3876a7;
+    color: #fff;
+}
+
+    .grid-test [class*="col-"] [class*="col-"] {
+        background-color: #434343;
+    }
+
+.pad-gutter > [class*="col-"] span {
+    background-color: #de3838;
+    display: block;
+}
+
+/* ==========================================================================
+   Dropdown
+   ========================================================================== */
+
+.dropdown-filler {
+    height: 246px;
+    width: 300px;
+}
+
+.narrow-code {
+    max-width: 300px;
+}
+
+
+/*
+ * Helper examples.
+ */
+
+.responsive-helper-pane,
+.responsive-helper-alert {
+    text-align: center;
+    position: relative;
+    padding: 1em 0;
+    border: 1px solid #c0c0c0;
+}
+
+.responsive-helper-alert {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+}
+
+.is-shown {
+    background-color: #C5E6C5;
+    border: 1px solid #A2D6A2;
+    color: #347834;
+}
+
+.is-hidden {
+    background-color: #F4CAC8;
+    border: 1px solid #EBA19E;
+    color: #DA4F49;
+}

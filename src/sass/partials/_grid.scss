@@ -1,0 +1,74 @@
+ /**Manages width in a single place */
+.container {
+    margin: 0 auto;
+    max-width: $grid-container-max-width; 
+    width: $grid-container-width;
+
+    &.fixed,
+    .fixed & {
+        width: $grid-container-max-width;
+    }
+}
+
+.row {
+    @extend .clearfix;
+}
+
+/**Columns */
+[class*=col-] {
+    display: block;
+    width: 100%;
+    float: left;
+    min-height: 1px;
+
+    [dir="rtl"] & {
+        float: right;
+    }
+
+    &[class*=offset],
+    &[class*=push],
+    &[class*=pull] {
+        position: relative;
+    }
+}
+
+.no-gutter.pad-gutter > [class*=col-] {
+    padding: 0 $grid-column-gutter/2;
+}
+
+/*
+ * Extra small 
+ */
+@include grid-base(xs);
+
+@include grid-columns(xs);
+
+/*
+ * Small 
+ */
+@include bp-min(s) {
+
+    @include grid-base(s);
+
+    @include grid-columns(s);
+}
+
+/*
+ * Medium 
+ */
+@include bp-min(m) {
+
+    @include grid-base(m);
+
+    @include grid-columns(m);
+}
+
+/*
+ * Large 
+ */
+@include bp-min(l) {
+
+    @include grid-base(l);
+
+    @include grid-columns(l);
+}

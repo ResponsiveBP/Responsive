@@ -1,0 +1,89 @@
+@include bp(xs) {
+    /*
+	 * Force the columns to display as rows on small viewports.
+     * Headers are applied with data attributes.
+	 */
+    [data-table-list] {
+        opacity: 0;
+    }
+
+    .table-list {
+        display: block;
+
+        thead,
+        tfoot,
+        th {
+            position: absolute;
+            clip: rect(0 0 0 0);
+            overflow: hidden;
+            visibility: hidden;
+        }
+
+        tbody,
+        tr,
+        td,
+        th[scope=row] {
+            position: static;
+            display: block;
+            overflow: visible;
+            visibility: visible;
+        }
+
+        tr {
+            &:before,
+            &:after {
+                content: "";
+                display: table;
+            }
+
+            &:after {
+                clear: both;
+            }
+        }
+
+        td,
+        th[scope=row] {
+            float: left;
+            width: 100%;
+
+            [dir="rtl"] & {
+                float: right;
+            }
+        }
+
+        td {
+            &:before,
+            &:after {
+                display: block;
+                padding: .5em 0;
+                font-weight: bold;
+            }
+
+            &:before {
+                content: attr(data-thead);
+            }
+        }
+
+        th[scope=row] {
+            &:before,
+            &:after {
+                display: block;
+                padding: .5em 0;
+                font-weight: bold;
+            }
+
+            &:before {
+                content: attr(data-thead);
+            }
+        }
+
+        td:after,
+        th[scope=row]:after {
+            content: attr(data-tfoot);
+        }
+
+        &.table-bordered {
+            border-top-style: none;
+        }
+    }
+}

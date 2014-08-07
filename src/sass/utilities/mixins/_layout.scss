@@ -1,0 +1,64 @@
+﻿@mixin layout($bp) {
+    // XS doesn't have a min value.
+    @if $bp == xs {
+
+        .block-#{$bp} {
+            display: block;
+        }
+
+        .inline-block-#{$bp} {
+            display: inline-block;
+        }
+
+        .inline-#{$bp} {
+            display: inline;
+        }
+
+        @include bp-max($bp) {
+            .block-#{$bp}-only {
+                display: block !important;
+            }
+
+            .inline-block-#{$bp}-only {
+                display: inline-block !important;
+            }
+
+            .inline-#{$bp}-only {
+                display: inline !important;
+            }
+        }
+    }
+    @else {
+
+        @include bp-min($bp) {
+
+            .block-#{$bp} {
+                display: block !important;
+            }
+
+            .inline-block-#{$bp} {
+                display: inline-block !important;
+            }
+
+            .inline-#{$bp} {
+                display: inline !important;
+            }
+            // Large doesn't need an "only" since it operates on min width.
+            @if $bp != l {
+                @include bp-max($bp) {
+                    .block-#{$bp}-only {
+                        display: block !important;
+                    }
+
+                    .inline-block-#{$bp}-only {
+                        display: inline-block !important;
+                    }
+
+                    .inline-#{$bp}-only {
+                        display: inline !important;
+                    }
+                }
+            }
+        }
+    }
+}

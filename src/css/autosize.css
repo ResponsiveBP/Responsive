@@ -1,8 +1,0 @@
-.autosize,
-[data-autosize] {
-    overflow: hidden;
-    -webkit-transition: height 0.3s linear;
-    -moz-transition: height 0.3s linear;
-    -o-transition: height 0.3s linear;
-    transition: height 0.3s linear;
-}

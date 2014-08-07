@@ -1,0 +1,64 @@
+/*
+ *  Make it responsive
+ */
+table {
+    margin: 1em 0;
+    max-width: 100%;
+    width: 100%;
+
+    th,
+    td {
+        padding: .5em;
+        text-align: left;
+        vertical-align: top;
+
+        [dir="rtl"] & {
+            text-align: right;
+        }
+    }
+}
+
+/*
+ *  Bordered tables
+ */
+.table-bordered {
+    border: $table-bordered-border;
+    border-left-width: 0;
+    border-collapse: separate;
+
+    th,
+    td {
+        border-top: $table-bordered-border;
+        border-left: $table-bordered-border;
+    }
+
+    thead:first-child tr:first-child th,
+    tbody:first-child tr:first-child td {
+        border-top-width: 0;
+    }
+}
+
+/*
+ *  Striped tables
+ */
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th,
+.table-row-alt > td,
+.table-row-alt > th {
+    background-color: $table-striped-background-color;
+}
+
+/*
+ * Overflow helpers
+ */
+
+.table-scrollable {
+    margin: 1em 0;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 100%;
+
+    table {
+        margin: 0;
+    }
+}

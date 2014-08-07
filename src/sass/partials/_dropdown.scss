@@ -1,0 +1,42 @@
+.accordion {
+	border: solid 1px $accordion-border-color;
+	margin-bottom: .125em;
+}
+
+.accordion-head {
+	border-bottom: solid 1px $accordion-border-color;
+	display: block;
+
+	a {
+		display: block;
+		padding: .5em;
+	}
+}
+
+.accordion-body {
+	padding: 0 .5em;
+
+	&.collapse { margin-top: -1px; }
+}
+
+.trans,
+.collapse { transition: height .5s ease, width .5s ease; }
+
+.expand,
+.collapse {
+	display: block;
+	height: auto;
+	margin-top: 0;
+	overflow: hidden;
+	position: relative;
+	width: auto;
+}
+
+.collapse {
+	height: 0;
+
+	&.width {
+		height: auto;
+		width: 0;
+	}
+}

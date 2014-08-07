@@ -1,0 +1,90 @@
+/**
+ * 1. Use the iOS devices hardware accelerator to provide native scrolling.
+ */
+html {
+    -webkit-overflow-scrolling: touch; /* 1 */
+    color: $base-text-color;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    box-sizing: border-box;
+}
+
+/**
+ * Fix the box model
+ * Overwrite Normalize rather than edit it.
+ */
+*, :before, :after,
+hr, input[type=search] {
+    box-sizing: inherit;
+}
+
+// Add a placeholder for focus events so we can manage
+// both global and button styles.
+%focus {
+    outline: $selection-focus;
+    outline-offset: $selection-focus-offset;
+}
+
+/**
+ * Set a focus on elements that can recieve it.
+ * http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex
+ */
+a, area, button, input, object, select, textarea, [tabindex] {
+    &:focus {
+        @extend %focus;
+    }
+}
+
+/**
+ * Suppress the focus outline on links that cannot be accessed via keyboard.
+ * This prevents an unwanted focus outline from appearing around elements that
+ * might still respond to pointer events.
+ */
+
+[tabindex="-1"]:focus {
+    outline: none !important;
+}
+
+/**
+ * Headers
+ * 1: Improve rendering of screen fonts.
+ * 2: Prevent page breaking.
+ */
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility; /* 1 */
+    page-break-after: avoid; /*2 */
+}
+
+/**
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background colour to match your design.
+ */
+::-moz-selection {
+    background: $selection-background;
+    text-shadow: none;
+}
+
+::selection {
+    background: $selection-background;
+    text-shadow: none;
+}
+
+/**
+ * A better looking default horizontal rule
+ */
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid $horizontal-rule-color;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/**
+ * Add query indicator to abbr
+ */
+abbr {
+    cursor: help;
+}

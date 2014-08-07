@@ -1,0 +1,19 @@
+.autosize,
+[data-autosize] {
+    overflow: hidden;
+    transition: height .3s linear;
+}
+
+.autosize-clone {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    visibility: hidden;
+    overflow: hidden;
+    transition: none;
+
+    [dir="rtl"] & {
+        left: auto;
+        right: -99999px;
+    }
+}

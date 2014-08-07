@@ -15,58 +15,12 @@
     // General variables and methods.
     var resisizeTimer,
         eready = "ready" + ns,
-        eresize = "resize" + ns + " orientationchange" + ns,
-        ekeyup = "keyup" + ns,
-        epaste = "paste" + ns,
-        ecut = "cut" + ns,
+        eresize = "resize orientationchange",
+        ekeyup = "keyup",
+        epaste = "paste",
+        ecut = "cut",
         esize = "size" + ns,
         esized = "sized" + ns;
-
-    // Private methods.
-    var bindEvents = function () {
-
-        this.$element.on(ekeyup + " " + epaste + " " + ecut, function (event) {
-
-            var $this = $(this),
-                delay = 0;
-
-            if (event.type === "paste" || event.type === "cut") {
-                delay = 5;
-            }
-
-            w.setTimeout(function () {
-
-                // Run the size method.
-                $this.autoSize("size");
-
-            }, delay);
-        });
-
-    },
-        createClone = function () {
-
-            var self = this,
-                attributes = this.options.removeAttributes,
-                classes = this.options.removeClasses,
-                $element = this.$element,
-                clone = function () {
-
-                    // Create a clone and offset it removing all specified attributes classes and data.
-                    self.$clone = self.$element.clone()
-                                      .css({ "position": "absolute", "top": "-99999px", "left": "-99999px", "visibility": "hidden", "overflow": "hidden" })
-                                      .attr({ "tabindex": -1, "rows": 2 })
-                                      .removeAttr("id name data-autosize " + attributes)
-                                      .removeClass(classes)
-                                      .insertAfter($element);
-
-                    // jQuery goes spare if you try to remove null data.
-                    if (classes) {
-                        self.$clone.removeData(classes);
-                    }
-                };
-
-            $.when(clone()).then(this.size());
-        };
 
     // AutoSize class definition
     var AutoSize = function (element, options) {
@@ -81,8 +35,36 @@
         this.sizing = null;
 
         // Initial setup.
-        bindEvents.call(this);
-        createClone.call(this);
+        this.clone();
+
+        // Bind events
+        this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
+    };
+
+    AutoSize.prototype.clone = function () {
+
+        var self = this,
+            attributes = this.options.removeAttributes,
+            classes = this.options.removeClasses,
+            $element = this.$element,
+            clone = function () {
+
+                // Create a clone and offset it removing all specified attributes classes and data.
+                self.$clone = self.$element.clone()
+                                  .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
+                                  .removeAttr("id name data-autosize " + attributes)
+                                  .removeClass(classes)
+                                  .removeClass(classes)
+                                  .addClass("autosize-clone")
+                                  .insertAfter($element);
+
+                // jQuery goes spare if you try to remove null data.
+                if (classes) {
+                    self.$clone.removeData(classes);
+                }
+            };
+
+        $.when(clone()).then(this.size());
     };
 
     AutoSize.prototype.size = function () {
@@ -143,6 +125,23 @@
         }
     };
 
+    AutoSize.prototype.change = function (event) {
+
+        var self = this,
+            delay = 0;
+
+        if (event.type === "paste" || event.type === "cut") {
+            delay = 5;
+        }
+
+        w.setTimeout(function () {
+
+            // Run the size method.
+            self.size();
+
+        }, delay);
+    };
+
     // Plug-in definition 
     $.fn.autoSize = function (options) {
 
@@ -157,9 +156,8 @@
                 $this.data("r.autosize", (data = new AutoSize(this, opts)));
             }
 
-            // Run the appropriate function is a string is passed.
-            if (typeof options === "string") {
-                data[options]();
+            if (options === "size") {
+                data.size();
             }
         });
     };
@@ -174,20 +172,6 @@
         return this;
     };
 
-    // Data API
-    $(document).on(eready, function () {
-
-        $("textarea[data-autosize]").each(function () {
-
-            var $this = $(this),
-                data = $this.data("r.autosizeOptions"),
-                options = data || $.buildDataOptions($this, {}, "autosize", "r");
-
-            // Run the autosize method.
-            $this.autoSize(options);
-        });
-    });
-
     $(w).on(eresize, function () {
 
         if (resisizeTimer) {
@@ -196,16 +180,29 @@
 
         var resize = function () {
 
-            $("textarea[data-autosize]").each(function () {
+            $("textarea.autosize").each(function () {
 
                 var autosize = $(this).data("r.autosize");
 
                 if (autosize) { autosize.size(); }
-
             });
         };
 
         resisizeTimer = w.setTimeout(resize, 5);
+    });
+
+    // Data API
+    $(document).on(eready, function () {
+
+        $("textarea[data-autosize]").each(function () {
+
+            var $this = $(this).addClass("autosize"),
+                data = $this.data("r.autosizeOptions"),
+                options = data || $.buildDataOptions($this, {}, "autosize", "r");
+
+            // Run the autosize method.
+            $this.autoSize(options);
+        });
     });
 
     w.RESPONSIVE_AUTOSIZE = true;

@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v2.5.7 | MIT License | responsivebp.com */
+/*! Responsive v3.0.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -17,6 +17,60 @@
 (function ($, w, d) {
 
     "use strict";
+
+    $.pseudoUnique = function (length) {
+        /// <summary>Returns a pseudo unique alpha-numeric string of the given length.</summary>
+        /// <param name="length" type="Number">The length of the string to return. Defaults to 8.</param>
+        /// <returns type="String">The pseudo unique alpha-numeric string.</returns>
+
+        var len = length || 8,
+            text = "",
+            possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+            max = possible.length;
+
+        if (len > max) {
+            len = max;
+        }
+
+        for (var i = 0; i < len; i += 1) {
+            text += possible.charAt(Math.floor(Math.random() * max));
+        }
+
+        return text;
+    };
+
+    $.support.rtl = (function () {
+        /// <summary>Returns a value indicating whether the current page is setup for right-to-left languages.</summary>
+        /// <returns type="Boolean">
+        ///      True if right-to-left language support is set up; otherwise false.
+        ///</returns>
+
+        return $("html[dir=rtl]").length ? true : false;
+    }());
+
+    $.support.currentGrid = (function () {
+        /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
+        /// <returns type="Object">
+        ///      An object containing two properties.
+        ///      &#10;    1: grid - The current applied grid; either xs, s, m, or l.
+        ///      &#10;    2: index - The index of the current grid in the range.
+        ///      &#10;    3: range - The available grid range.
+        ///</returns>
+
+        var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
+
+        return function () {
+            // These numbers match values in the css
+            var grids = ["xs", "s", "m", "l"],
+                key = parseInt($div.width(), 10);
+
+            return {
+                grid: grids[parseInt($div.width(), 10)],
+                index: key,
+                range: grids
+            };
+        };
+    }());
 
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
@@ -147,33 +201,29 @@
             };
         };
 
-        $.fn.swipe = function (options) {
+        var addSwipe = function ($elem, handler) {
             /// <summary>Adds swiping functionality to the given element.</summary>
-            /// <param name="options" type="Object" optional="true" parameterArray="true">
-            ///      A collection of optional settings to apply.
-            ///      &#10;    1: namespace - The namespace for isolating the touch events.
+            /// <param name="$elem" type="Object">
+            ///      The jQuery object representing the given node(s).
             /// </param>
             /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-            var defaults = {
-                namespace: null,
-                touchAction: "none"
-            },
-                settings = $.extend({}, defaults, options);
-
-            var ns = settings.namespace ? "." + settings.namespace : "",
-                eswipestart = "swipestart" + ns,
-                eswipemove = "swipemove" + ns,
-                eswipeend = "swipeend" + ns,
+            var ns = handler.namespace ? "." + handler.namespace : "",
+                eswipestart = "swipestart",
+                eswipemove = "swipemove",
+                eswipeend = "swipeend",
                 etouch = getEvents(ns);
 
-            return this.each(function () {
-                var $this = $(this);
+            // Set the touchaction variable for move.
+            var touchAction = handler.data && handler.data.touchAction || "none";
 
-                if (supportPointer) {
-                    // Enable extended touch events on IE.
-                    $this.css({ "-ms-touch-action": "" + settings.touchAction + "", "touch-action": "" + settings.touchAction + "" });
-                }
+            if (supportPointer) {
+                // Enable extended touch events on supported browsers before any touch events.
+                $elem.css({ "-ms-touch-action": "" + touchAction + "", "touch-action": "" + touchAction + "" });
+            }
+
+            return $elem.each(function () {
+                var $this = $(this);
 
                 var start = {},
                     delta = {},
@@ -207,11 +257,11 @@
                         // Mimic touch action on iProducts.
                         // Should also prevent bounce.
                         if (!isPointer) {
-                            switch (settings.touchAction) {
+                            switch (touchAction) {
                                 case "pan-x":
                                 case "pan-y":
 
-                                    isScrolling = settings.touchAction === "pan-x" ?
+                                    isScrolling = touchAction === "pan-x" ?
                                                   Math.abs(dy) < Math.abs(dx) :
                                                   Math.abs(dx) < Math.abs(dy);
 
@@ -230,7 +280,6 @@
                         }
 
                         moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
-
                         $this.trigger(moveEvent);
 
                         if (moveEvent.isDefaultPrevented()) {
@@ -309,15 +358,13 @@
             });
         };
 
-        $.fn.removeSwipe = function (namespace) {
+        var removeSwipe = function ($elem, handler) {
             /// <summary>Removes swiping functionality from the given element.</summary>
-            /// <param name="namespace" type="String">The namespace for isolating the touch events.</param>
-            /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-            var ns = namespace ? "." + namespace : "",
+            var ns = handler.namespace ? "." + handler.namespace : "",
                 etouch = getEvents(ns);
 
-            return this.each(function () {
+            return $elem.each(function () {
 
                 // Disable extended touch events on ie.
                 // Unbind events.
@@ -326,6 +373,15 @@
             });
         };
 
+        // Create special events so we can use on/off.
+        $.event.special.swipe = {
+            add: function (handler) {
+                addSwipe($(this), handler);
+            },
+            remove: function (handler) {
+                removeSwipe($(this), handler);
+            }
+        };
     }());
 
     $.extend($.expr[":"], {
