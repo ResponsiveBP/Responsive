@@ -192,7 +192,7 @@
                     "tabindex": doShow ? 0 : -1,
                 });
 
-                self.$target.trigger(eventToTrigger);
+                self.$element.trigger(eventToTrigger);
             };
 
         if (this.transitioning || startEvent.isDefaultPrevented()) {
@@ -202,7 +202,8 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$target.trigger(startEvent)[method]("collapse");
+        this.$element.trigger(startEvent);
+        this.$target[method]("collapse");
         this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
         this.$target.onTransitionEnd(complete);
