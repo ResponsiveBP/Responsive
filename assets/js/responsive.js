@@ -1254,10 +1254,11 @@
             self = this,
             complete = function () {
                 self.dismissing = false;
-                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 }).trigger($.Event(edismissed));
+                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 });
+                self.$element.trigger($.Event(edismissed));
             };
 
-        $target.trigger(dismissEvent);
+        this.$element.trigger(dismissEvent);
 
         if (this.dismissing || dismissEvent.isDefaultPrevented()) {
             return;
@@ -1520,7 +1521,7 @@
                     "tabindex": doShow ? 0 : -1,
                 });
 
-                self.$target.trigger(eventToTrigger);
+                self.$element.trigger(eventToTrigger);
             };
 
         if (this.transitioning || startEvent.isDefaultPrevented()) {
@@ -1530,7 +1531,8 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$target.trigger(startEvent)[method]("collapse");
+        this.$element.trigger(startEvent);
+        this.$target[method]("collapse");
         this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
         this.$target.onTransitionEnd(complete);
@@ -1626,6 +1628,7 @@
     w.RESPONSIVE_DROPDOWN = true;
 
 }(jQuery, window, ".r.dropdown"));
+
 /*
  * Responsive Lightbox
  */
@@ -2509,6 +2512,7 @@
         eshown = "shown" + ns;
 
     var keys = {
+        SPACE: 32,
         LEFT: 37,
         RIGHT: 39
     };
@@ -2628,8 +2632,9 @@
 
         var which = event.which;
         // Ignore anything but left and right.
-        if (which === keys.LEFT || which === keys.RIGHT) {
+        if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {
 
+            event.preventDefault();
             event.stopPropagation();
 
             var $this = $(event.target),
@@ -2637,6 +2642,11 @@
                 $all = $li.siblings().addBack(),
                 length = $all.length,
                 index = $li.index();
+
+            if (which === keys.SPACE) {
+                this.show(index);
+                return;
+            }
 
             // Select the correct index.
             index = which === keys.LEFT ? (rtl ? index + 1 : index - 1) : (rtl ? index - 1 : index + 1);

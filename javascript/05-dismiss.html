@@ -51,11 +51,21 @@ sublinks: ["#examples|Examples",
         <h1>Methods</h1>
         <p>The dismiss plugin exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.dismiss(target)</strong>  </dt>
+            <dt><strong>.dismiss(options)</strong>  </dt>
             <dd>
-                Initialises the plugin with a
-                <var>target</var>
-                parameter. A jQuery selector indicating which target to hide.
+                Initialises the plugin with an optional options <code>object</code>
+                <dl class="dl-horizontal">
+                    <dt><strong>options</strong></dt>
+                    <dd>
+                        Contains parameters to pass to the plugin.
+                        <dl>
+                            <dt><strong>target</strong></dt>
+                            <dd>A jQuery selector indicating which target to hide.</dd>
+                            <dt><strong>closeHint</strong></dt>
+                            <dd>A hidden value that is added to the close trigger for accesibility purposes.</dd>
+                        </dl>
+                    </dd>
+                </dl>
             </dd>
         </dl>
     </section>
@@ -84,12 +94,12 @@ $(document.body).off("click.r.dismiss")
                 });
                 
 // Bind to the close event.
-$("YOUR_PARENT_SELECTOR").on("dismiss.r.dismiss", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("dismiss.r.dismiss", function(event) {
     // Your custom behaviour...
 });
                                                
 // Bind to the closed event.
-$("YOUR_PARENT_SELECTOR").on("dismissed.r.dismiss", function(event) {
+$("YOUR_TRIGGER_SELECTOR").on("dismissed.r.dismiss", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>

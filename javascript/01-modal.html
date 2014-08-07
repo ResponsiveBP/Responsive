@@ -415,8 +415,8 @@ modal trigger
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("click.r.modal")
-                .on("click.r.modal", ":attrStart(data-modal)", function (event) {    
+$(document.body).off("ready.r.modal")
+                .on("ready.r.modal", function (event) {    
                     // Your custom behaviour...
                 });
                     

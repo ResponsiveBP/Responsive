@@ -95,17 +95,6 @@ $(document).off("ready.r.autosize")
            .on("ready.r.autosize", function () {
                // Your custom behaviour...
            }); 
-// Override the default textarea control cut/paste/keyup behaviour
-$(document.body).off("keyup.r.autosize paste.r.autosize cut.r.autosize")
-                .on("keyup.r.autosize paste.r.autosize cut.r.autosize", "textarea[data-autosize]", function (event) {
-                    // Your custom behaviour...
-                }); 
-
-// Override the default window resize behaviour
-$(window).off("resize.r.autosize")
-         .on("resize.r.autosize", function () {
-             // Your custom behaviour...
-         }); 
 
 // Bind to the size event.
 $("YOUR_SELECTOR").on("size.r.autosize", function(event) {
