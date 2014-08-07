@@ -2442,17 +2442,17 @@
     };
 
     // Plug-in definition 
-    $.fn.table = function (options) {
+    $.fn.tablelist = function (options) {
 
         return this.each(function () {
 
             var $this = $(this),
-                data = $this.data("r.table"),
+                data = $this.data("r.tablelist"),
                 opts = typeof options === "object" ? options : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
-                $this.data("r.table", (data = new Table(this, opts)));
+                $this.data("r.tablelist", (data = new Table(this, opts)));
             }
 
             // Run the appropriate function is a string is passed.
@@ -2463,12 +2463,12 @@
     };
 
     // Set the public constructor.
-    $.fn.table.Constructor = Table;
+    $.fn.tablelist.Constructor = Table;
 
     // No conflict.
     var old = $.fn.table;
-    $.fn.table.noConflict = function () {
-        $.fn.table = old;
+    $.fn.tablelist.noConflict = function () {
+        $.fn.tablelist = old;
         return this;
     };
 
@@ -2478,17 +2478,17 @@
         $("table[data-table-list]").each(function () {
 
             var $this = $(this),
-                data = $this.data("r.tableOptions"),
-                options = data || $.buildDataOptions($this, {}, "table", "r");
+                data = $this.data("r.tablelistOptions"),
+                options = data || $.buildDataOptions($this, {}, "tablelist", "r");
 
-            // Run the table method.
-            $this.table(options);
+            // Run the tablelist method.
+            $this.tablelist(options);
         });
     });
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.table"));
+}(jQuery, window, ".r.tablelist"));
 /*
  * Responsive tabs
  */

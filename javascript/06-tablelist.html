@@ -126,7 +126,7 @@ sublinks: ["#examples|Examples",
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
 $(document).off("ready.r.table")
-           .on("ready.r.table", "[data-tablelist]", function (event) {    
+           .on("ready.r.table", function (event) {    
                // Your custom behaviour...
            });
             
