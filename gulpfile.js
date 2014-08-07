@@ -33,7 +33,7 @@ var jsSrc = [
     path.js.src + "responsive.dismiss.js",
     path.js.src + "responsive.dropdown.js",
     path.js.src + "responsive.modal.js",
-    path.js.src + "responsive.table.js",
+    path.js.src + "responsive.tablelist.js",
     path.js.src + "responsive.tabs.js"
 ];
 
