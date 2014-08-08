@@ -80,20 +80,11 @@ sublinks: ["#examples|Examples",
                             <input type="range" id="input-range1" min="0" max="100" value="50">
                             <label for="input-email1">Email</label>
                             <input type="email" id="input-email1">
-                            <label for="check-disabled1">Disabled Checkbox</label>
-                            <div class="input-group">
-                                <input type="checkbox" id="check-disabled1" value="option1" disabled class="inline-block">
-                            </div>
-                            <label for="check1">Checkbox</label>
-                            <div class="input-group">
-                                <input type="checkbox" id="check1" value="option1" class="inline-block">
-                                <input type="checkbox" id="check2" value="option2" class="inline-block">
-                            </div>
-                            <label for="radio1">Radio</label>
-                            <div class="input-group">
-                                <input type="radio" id="radio1" name="radio" value="option1" class="inline-block">
-                                <input type="radio" id="radio2" name="radio" value="option2" class="inline-block">
-                            </div>
+                            <label for="check-disabled1"><input type="checkbox" id="check-disabled1" value="option1" disabled class="inline-block"> Disabled Checkbox</label>
+                            <label for="check1"><input type="checkbox" id="check1" value="option1" class="inline-block"> Checkbox 1</label>
+                            <label for="check2"><input type="checkbox" id="check2" value="option2" class="inline-block"> Checkbox 2</label>
+                            <label for="radio1"><input type="radio" id="radio1" name="radio" value="option1"> Radio 1</label>
+                            <label for="radio2"><input type="radio" id="radio2" name="radio" value="option1"> Radio 2</label>
                             <label for="textarea1">Textarea</label>
                             <textarea id="textarea1"></textarea>
                         </div>
@@ -262,25 +253,39 @@ sublinks: ["#examples|Examples",
                                     <label for="check-disabled3">Disabled Checkbox</label>
                                 </div>
                                 <div class="col-s-8">
-                                    <input type="checkbox" id="check-disabled3" value="option2" disabled class="inline-block">
+                                    <input type="checkbox" id="check-disabled3" value="option1" disabled class="inline-block">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-s-4">
-                                    <label for="check3">Checkbox</label>
+                                    <label for="check3">Checkbox 3</label>
                                 </div>
                                 <div class="col-s-8">
-                                    <input type="checkbox" id="check3" value="option2" class="inline-block">
-                                    <input type="checkbox" id="check4" value="option2" class="inline-block">
+                                    <input type="checkbox" id="check3" value="option1">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-s-4">
-                                    <label for="radio3">Radio</label>
+                                    <label for="check4">Checkbox 4</label>
                                 </div>
                                 <div class="col-s-8">
-                                    <input type="radio" id="radio3" name="radio" value="option2" class="inline-block">
-                                    <input type="radio" id="radio4" name="radio" value="option2" class="inline-block">
+                                    <input type="checkbox" id="check4" value="option2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="radio3">Radio 3</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="radio" id="radio3" name="radio" value="option2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="radio4">Radio 4</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="radio" id="radio4" name="radio" value="option1">
                                 </div>
                             </div>
                             <div class="row">
@@ -465,20 +470,34 @@ sublinks: ["#examples|Examples",
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="check3"&gt;Checkbox&lt;/label&gt;
+                        &lt;label for="check3"&gt;Checkbox 3&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="checkbox" id="check3" value="option2" class="inline-block"&gt;
-                        &lt;input type="checkbox" id="check4" value="option2" class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check3" value="option1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="radio3"&gt;Radio&lt;/label&gt;
+                        &lt;label for="check4"&gt;Checkbox 4&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="radio" id="radio3" name="radio" value="option2" class="inline-block"&gt;
-                        &lt;input type="radio" id="radio4" name="radio" value="option2" class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check4" value="option2"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="radio3"&gt;Radio 3&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="radio" id="radio3" name="radio" value="option1"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="radio4"&gt;Radio 4&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="radio" id="radio4" name="radio" value="option1"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
