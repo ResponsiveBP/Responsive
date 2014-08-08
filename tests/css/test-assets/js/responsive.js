@@ -6,7 +6,7 @@
  * developers to write streamlined code.
  *
  * Portions of this CSS are based on the incredibly hard work that has been 
- * done creating the HTML5 Boilerplate, Twitter Bootstrap, Zurb Foundation, and Normalize.css 
+ * done creating the HTML5 Boilerplate, Bootstrap, Zurb Foundation, and Normalize.css 
  * and all credit for that work is due to them.
  * 
  */
