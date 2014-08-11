@@ -704,9 +704,9 @@
         this.sliding = null;
         this.$items = null;
         this.translationDuration = null;
-        this.$nextTrigger = this.options.nextTrigger ? $(this.nextTrigger) : this.$element.find(".carousel-control.forward");
-        this.$previousTrigger = this.options.previousTrigger ? $(this.previousTrigger) : this.$element.find(".carousel-control.back");
-        this.$indicators = this.options.indicators ? $(this.indicators) : this.$element.find("ol > li");
+        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.find(".carousel-control.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.find(".carousel-control.back");
+        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
         var self = this;
