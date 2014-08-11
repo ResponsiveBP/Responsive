@@ -29,6 +29,17 @@ input[type="reset"] {
         background-color: lighten($button-background, 5);
         outline: none;
     }
+    
+    /**
+     * 1. Fix IOS 6/7 opacity issue
+     */
+    fieldset[disabled] &,
+    &[disabled] {
+        background-color: lighten($button-background, 5);
+        color: $button-color-disabled;
+        cursor: not-allowed;
+        opacity: 1; /* 1 */
+    }
     /**
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.
@@ -42,19 +53,6 @@ input[type="reset"] {
             margin-right: -.27em;
         }
     }
-}
-
-/**
- * 1. Fix IOS 6/7 opacity issue
- */
-button[disabled],
-input[type="submit"][disabled],
-input[type="button"][disabled],
-input[type="reset"][disabled] {
-    background-color: lighten($button-background, 5);
-    color: $button-color-disabled;
-    cursor: not-allowed;
-    opacity: 1; /* 1 */
 }
 
 /**

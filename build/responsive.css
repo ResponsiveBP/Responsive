@@ -175,7 +175,8 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   height: 0; }
 
 /**
@@ -281,7 +282,8 @@ input {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   /* 1 */
   padding: 0;
   /*2 */ }
@@ -303,6 +305,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
+  -webkit-box-sizing: content-box;
   /*2 */
   box-sizing: content-box; }
 
@@ -368,7 +371,8 @@ html {
   color: #222222;
   font-size: 100%;
   line-height: 1.4;
-  box-sizing: border-box; }
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
 
 /**
  * Fix the box model
@@ -376,7 +380,8 @@ html {
  */
 *, :before, :after,
 hr, input[type=search] {
-  box-sizing: inherit; }
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
 
 a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
   outline: 2px solid #4d90fe;
@@ -2670,6 +2675,9 @@ input[type="reset"] {
       touch-action: manipulation;
   /*2 */
   text-decoration: none;
+  /**
+   * 1. Fix IOS 6/7 opacity issue
+   */
     /**
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.
@@ -2687,6 +2695,18 @@ input[type="reset"] {
   input[type="reset"]:active {
     background-color: #e7e7e7;
     outline: none; }
+  fieldset[disabled] button, button[disabled], fieldset[disabled]
+  input[type="submit"],
+  input[type="submit"][disabled], fieldset[disabled]
+  input[type="button"],
+  input[type="button"][disabled], fieldset[disabled]
+  input[type="reset"],
+  input[type="reset"][disabled] {
+    background-color: #e7e7e7;
+    color: #5d5d5d;
+    cursor: not-allowed;
+    opacity: 1;
+    /* 1 */ }
   button.btn-inline,
   input[type="submit"].btn-inline,
   input[type="button"].btn-inline,
@@ -2701,19 +2721,6 @@ input[type="reset"] {
     input[type="reset"].btn-inline {
       margin-left: auto;
       margin-right: -.27em; }
-
-/**
- * 1. Fix IOS 6/7 opacity issue
- */
-button[disabled],
-input[type="submit"][disabled],
-input[type="button"][disabled],
-input[type="reset"][disabled] {
-  background-color: #e7e7e7;
-  color: #5d5d5d;
-  cursor: not-allowed;
-  opacity: 1;
-  /* 1 */ }
 
 /**
  * Reset width for inputs
@@ -2841,9 +2848,12 @@ input,
 	 * 1. Override the value set in normalize.css
 	 * 2. Fix IOS 6/7 opacity issue
 	 */ }
-  select[disabled],
-  textarea[disabled],
-  input[disabled],
+  fieldset[disabled] select, select[disabled], fieldset[disabled]
+  textarea,
+  textarea[disabled], fieldset[disabled]
+  input,
+  input[disabled], fieldset[disabled]
+  .no-edit,
   .no-edit[disabled] {
     background: #ebebeb;
     border-color: silver;
@@ -4255,7 +4265,8 @@ x::-ms-reveal,
     background: transparent !important;
     color: #000 !important;
     /**Black prints faster: h5bp.com/s */
-    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
     text-shadow: none !important; }
 
   a,

@@ -56,6 +56,7 @@ input,
 	 * 1. Override the value set in normalize.css
 	 * 2. Fix IOS 6/7 opacity issue
 	 */
+    fieldset[disabled] &,
     &[disabled] {
         background: $form-input-background-disabled;
         border-color: $form-input-border-color-disabled;
