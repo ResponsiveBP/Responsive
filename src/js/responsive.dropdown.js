@@ -53,7 +53,7 @@
             $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
         }
 
-        var $tab = $("[href=" + this.options.target + "], [data-dropdown-target=" + this.options.target + "]"),
+        var $tab = $("[href='" + this.options.target + "'], [data-dropdown-target='" + this.options.target + "']"),
             tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
@@ -93,7 +93,7 @@
         if (this.$parent) {
             // Get all the related open panes.
             $actives = this.$parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]");
-            
+
             $actives = $.grep($actives, function (a) {
                 var data = $(a).data("r.dropdown"),
                     $target = data && data.$target;
