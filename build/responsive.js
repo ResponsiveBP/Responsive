@@ -1665,6 +1665,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
+        eerror = "error" + ns,
         rtl = $.support.rtl,
         supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
@@ -1698,6 +1699,7 @@
             prev: "<",
             previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             closeHint: "Close (Esc)",
+            errorHint: "<p>An error has occured.</p>",
             mobileTarget: null,
             mobileViewportWidth: "xs",
             fitViewport: true
@@ -1949,6 +1951,7 @@
         };
 
         var fadeIn = function () {
+
             self.resize();
 
             $.each([$header, $footer, $close, $next, $prev, $modal], function () {
@@ -2079,8 +2082,15 @@
                     $modal.addClass(this.options.fitViewport ? "container" : "");
 
                     // Standard ajax load.
-                    $content.load(target, function () {
+                    $content.load(target, null, function (responseText, textStatus) {
+
+                        if (textStatus === "error") {
+                            self.$element.trigger($.Event(eerror, { relatedTarget: $content[0] }));
+                            $content.html(self.options.errorHint);
+                        }
+
                         $content.appendTo($modal);
+
                         // Fade in.
                         fadeIn();
                     });
