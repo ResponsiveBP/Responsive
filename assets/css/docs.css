@@ -9,7 +9,7 @@ body {
 blockquote {
     padding: 1em 1em 1em 1.5em;
     border-left: 5px solid #c0c0c0;
-} 
+}
 
 [dir="rtl"] blockquote {
     padding: 1em 1.5em 1em 1em;
@@ -145,12 +145,12 @@ header[role="banner"] h1 {
     margin-bottom: 0;
 }
 
-header[role="banner"] span {
-    display: block;
-    font-size: 55%;
-    color: #888;
-    margin: .34em 0;
-}
+    header[role="banner"] h1 span {
+        display: block;
+        font-size: 55%;
+        color: #888;
+        margin: .34em 0;
+    }
 
 .download {
     font-size: 1.5em;
@@ -268,3 +268,47 @@ header[role="banner"] span {
     .social-icons li {
         display: inline-block;
     }
+
+/*==|Carbon Ads|==============================================
+ *
+ *============================================================*/
+
+#carbonads {
+    padding: 1em;
+    border: 1px solid #c0c0c0;
+    border-radius: 4px;
+}
+
+    #carbonads a {
+        display: block;
+        text-decoration: none;
+        font-size: 85%;
+    }
+
+.carbon-wrap {
+    display: block;
+}
+
+    .carbon-wrap:before,
+    .carbon-wrap:after {
+        content: "";
+        display: table;
+    }
+
+    .carbon-wrap:after {
+        clear: both;
+    }
+
+.carbon-img {
+    float: left;
+    width: 130px;
+}
+
+    .carbon-img + a {
+        margin-left: 146px;
+        min-height: 100px;
+    }
+
+.carbon-wrap + a {
+    text-align: right;
+}

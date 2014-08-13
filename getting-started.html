@@ -112,6 +112,16 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
             </ul>
 
+            <h2>Safari 7</h2>
+            <p>
+                Safari 7 up to and including v7.0.5  on Mac and iOS do not calculate percentages properly and will render 12 individual columns defined using the
+                <code>col-{range}-1</code> classes slightly narrower than they should be. See <a href="https://github.com/ResponsiveBP/Responsive/issues/40" rel="external">#40</a>.
+            </p>
+            <p>
+                Unfortunately there is not much that can be done about this at the moment without resorting to hacks to tweak the percentages using JavaScript or by using the
+                <code>push-{range}</code> or <code>push-{range}-only</code> classes to offest the last column. Hopefully Apple will fix this in upcoming releases.
+            </p>
+
             <h2>Internet Explorer 8</h2>
             <p>
                 Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.
