@@ -21,7 +21,9 @@ hr, input[type=search] {
 // Add a placeholder for focus events so we can manage
 // both global and button styles.
 %focus {
-    outline: $selection-focus;
+    outline-color: $selection-focus-color;
+    outline-style: $selection-focus-style;
+    outline-width: $selection-focus-width;
     outline-offset: $selection-focus-offset;
 }
 

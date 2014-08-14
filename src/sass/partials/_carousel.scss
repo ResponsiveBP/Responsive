@@ -31,10 +31,10 @@
                 content: "";
                 position: absolute;
                 z-index: 1;
-                top: 1px;
-                right: 1px;
-                bottom: 1px;
-                left: 1px;
+                top: $selection-focus-width;
+                right: $selection-focus-width;
+                bottom: $selection-focus-width;
+                left: $selection-focus-width;
                 pointer-events: none;
             }
         }

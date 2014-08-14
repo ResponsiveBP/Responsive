@@ -384,7 +384,9 @@ hr, input[type=search] {
           box-sizing: inherit; }
 
 a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
-  outline: 2px solid #4d90fe;
+  outline-color: #4d90fe;
+  outline-style: solid;
+  outline-width: 2px;
   outline-offset: -1px; }
 
 /**
@@ -3372,10 +3374,10 @@ table {
       content: "";
       position: absolute;
       z-index: 1;
-      top: 1px;
-      right: 1px;
-      bottom: 1px;
-      left: 1px;
+      top: 2px;
+      right: 2px;
+      bottom: 2px;
+      left: 2px;
       pointer-events: none; }
     .carousel > figure > img {
       display: block;
