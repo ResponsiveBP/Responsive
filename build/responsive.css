@@ -2825,10 +2825,15 @@ label[for] {
 label > input,
 label > input[type="checkbox"],
 label > input[type="radio"],
-label > select {
+label > input[type="radio"] > select {
   display: inline-block;
   margin: 0 1em 0 0;
   vertical-align: text-top; }
+  [dir="rtl"] label > input, [dir="rtl"]
+  label > input[type="checkbox"], [dir="rtl"]
+  label > input[type="radio"], [dir="rtl"]
+  label > input[type="radio"] > select {
+    margin: 0 0 0 1em; }
 
 select,
 textarea,
@@ -2880,26 +2885,23 @@ input[type="color"] {
   max-width: 105px; }
 
 /*
-	 * Declared separately to reduce selector duplication
-	 * for padding
-	 */
+ * Declared separately to reduce selector duplication
+ * for padding
+ */
 input[type="radio"],
 input[type="checkbox"] {
-  display: block;
-  line-height: inherit;
-  margin: .1875em .1875em .1875em 0;
-  min-height: 1em;
-  min-width: 1em;
+  min-height: 1.334em;
+  min-width: 1.334em;
+  margin-bottom: 1.1em;
   padding: 0;
   width: auto; }
 
 input[type="radio"] {
-  border-color: transparent \9;
-  border-radius: 1em; }
+  border: none \9; }
 
 /*
-	 * Add range styles for IE8 and IE9
-	 */
+ * Add range styles for IE8 and IE9
+ */
 input[type="range"] {
   background-color: #fff \9;
   border: 1px solid #c0c0c0 \9;
