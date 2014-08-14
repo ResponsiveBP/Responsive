@@ -5,7 +5,7 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/*! Responsive v3.0.0 | MIT License | responsivebp.com */
+/*! Responsive v3.0.1 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -384,7 +384,9 @@ hr, input[type=search] {
           box-sizing: inherit; }
 
 a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
-  outline: 2px solid #4d90fe;
+  outline-color: #4d90fe;
+  outline-style: solid;
+  outline-width: 2px;
   outline-offset: -1px; }
 
 /**
@@ -2675,6 +2677,9 @@ input[type="reset"] {
       touch-action: manipulation;
   /*2 */
   text-decoration: none;
+  /**
+   * 1. Fix IOS 6/7 opacity issue
+   */
     /**
 	 * Inline buttons designed for rendering next to inputs.
 	 * 1. Fix inline-block margin.
@@ -2692,6 +2697,18 @@ input[type="reset"] {
   input[type="reset"]:active {
     background-color: #e7e7e7;
     outline: none; }
+  fieldset[disabled] button, button[disabled], fieldset[disabled]
+  input[type="submit"],
+  input[type="submit"][disabled], fieldset[disabled]
+  input[type="button"],
+  input[type="button"][disabled], fieldset[disabled]
+  input[type="reset"],
+  input[type="reset"][disabled] {
+    background-color: #e7e7e7;
+    color: #5d5d5d;
+    cursor: not-allowed;
+    opacity: 1;
+    /* 1 */ }
   button.btn-inline,
   input[type="submit"].btn-inline,
   input[type="button"].btn-inline,
@@ -2706,19 +2723,6 @@ input[type="reset"] {
     input[type="reset"].btn-inline {
       margin-left: auto;
       margin-right: -.27em; }
-
-/**
- * 1. Fix IOS 6/7 opacity issue
- */
-button[disabled],
-input[type="submit"][disabled],
-input[type="button"][disabled],
-input[type="reset"][disabled] {
-  background-color: #e7e7e7;
-  color: #5d5d5d;
-  cursor: not-allowed;
-  opacity: 1;
-  /* 1 */ }
 
 /**
  * Reset width for inputs
@@ -2823,10 +2827,15 @@ label[for] {
 label > input,
 label > input[type="checkbox"],
 label > input[type="radio"],
-label > select {
+label > input[type="radio"] > select {
   display: inline-block;
   margin: 0 1em 0 0;
   vertical-align: text-top; }
+  [dir="rtl"] label > input, [dir="rtl"]
+  label > input[type="checkbox"], [dir="rtl"]
+  label > input[type="radio"], [dir="rtl"]
+  label > input[type="radio"] > select {
+    margin: 0 0 0 1em; }
 
 select,
 textarea,
@@ -2846,9 +2855,12 @@ input,
 	 * 1. Override the value set in normalize.css
 	 * 2. Fix IOS 6/7 opacity issue
 	 */ }
-  select[disabled],
-  textarea[disabled],
-  input[disabled],
+  fieldset[disabled] select, select[disabled], fieldset[disabled]
+  textarea,
+  textarea[disabled], fieldset[disabled]
+  input,
+  input[disabled], fieldset[disabled]
+  .no-edit,
   .no-edit[disabled] {
     background: #ebebeb;
     border-color: silver;
@@ -2875,26 +2887,23 @@ input[type="color"] {
   max-width: 105px; }
 
 /*
-	 * Declared separately to reduce selector duplication
-	 * for padding
-	 */
+ * Declared separately to reduce selector duplication
+ * for padding
+ */
 input[type="radio"],
 input[type="checkbox"] {
-  display: block;
-  line-height: inherit;
-  margin: .1875em .1875em .1875em 0;
-  min-height: 1em;
-  min-width: 1em;
+  min-height: 1.334em;
+  min-width: 1.334em;
+  margin-bottom: 1.1em;
   padding: 0;
   width: auto; }
 
 input[type="radio"] {
-  border-color: transparent \9;
-  border-radius: 1em; }
+  border: none \9; }
 
 /*
-	 * Add range styles for IE8 and IE9
-	 */
+ * Add range styles for IE8 and IE9
+ */
 input[type="range"] {
   background-color: #fff \9;
   border: 1px solid #c0c0c0 \9;
@@ -3365,10 +3374,10 @@ table {
       content: "";
       position: absolute;
       z-index: 1;
-      top: 1px;
-      right: 1px;
-      bottom: 1px;
-      left: 1px;
+      top: 2px;
+      right: 2px;
+      bottom: 2px;
+      left: 2px;
       pointer-events: none; }
     .carousel > figure > img {
       display: block;

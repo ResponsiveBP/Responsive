@@ -89,9 +89,9 @@ sublinks: ["#examples|Examples",
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
 $(document.body).off("ready.r.dismiss")
-                .on("ready.r.dismiss", function (event) {    
-                    // Your custom behaviour...
-                });
+.on("ready.r.dismiss", function (event) {    
+    // Your custom behaviour...
+});
                 
 // Bind to the close event.
 $("YOUR_TRIGGER_SELECTOR").on("dismiss.r.dismiss", function(event) {

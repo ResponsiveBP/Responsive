@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.0.0 | MIT License | responsivebp.com */
+/*! Responsive v3.0.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -704,9 +704,9 @@
         this.sliding = null;
         this.$items = null;
         this.translationDuration = null;
-        this.$nextTrigger = this.options.nextTrigger ? $(this.nextTrigger) : this.$element.find(".carousel-control.forward");
-        this.$previousTrigger = this.options.previousTrigger ? $(this.previousTrigger) : this.$element.find(".carousel-control.back");
-        this.$indicators = this.options.indicators ? $(this.indicators) : this.$element.find("ol > li");
+        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.find(".carousel-control.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.find(".carousel-control.back");
+        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
         var self = this;
@@ -1382,7 +1382,7 @@
             $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
         }
 
-        var $tab = $("[href=" + this.options.target + "], [data-dropdown-target=" + this.options.target + "]"),
+        var $tab = $("[href='" + this.options.target + "'], [data-dropdown-target='" + this.options.target + "']"),
             tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
@@ -1422,7 +1422,7 @@
         if (this.$parent) {
             // Get all the related open panes.
             $actives = this.$parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]");
-            
+
             $actives = $.grep($actives, function (a) {
                 var data = $(a).data("r.dropdown"),
                     $target = data && data.$target;
@@ -1665,6 +1665,7 @@
         eshown = "shown" + ns,
         ehide = "hide" + ns,
         ehidden = "hidden" + ns,
+        eerror = "error" + ns,
         rtl = $.support.rtl,
         supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
@@ -1698,6 +1699,7 @@
             prev: "<",
             previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             closeHint: "Close (Esc)",
+            errorHint: "<p>An error has occured.</p>",
             mobileTarget: null,
             mobileViewportWidth: "xs",
             fitViewport: true
@@ -1949,6 +1951,7 @@
         };
 
         var fadeIn = function () {
+
             self.resize();
 
             $.each([$header, $footer, $close, $next, $prev, $modal], function () {
@@ -2079,8 +2082,15 @@
                     $modal.addClass(this.options.fitViewport ? "container" : "");
 
                     // Standard ajax load.
-                    $content.load(target, function () {
+                    $content.load(target, null, function (responseText, textStatus) {
+
+                        if (textStatus === "error") {
+                            self.$element.trigger($.Event(eerror, { relatedTarget: $content[0] }));
+                            $content.html(self.options.errorHint);
+                        }
+
                         $content.appendTo($modal);
+
                         // Fade in.
                         fadeIn();
                     });
