@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.0.1 | MIT License | responsivebp.com */
+/*! Responsive v3.1.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -65,7 +65,7 @@
                 key = parseInt($div.width(), 10);
 
             return {
-                grid: grids[parseInt($div.width(), 10)],
+                grid: grids[key],
                 index: key,
                 range: grids
             };
@@ -138,12 +138,8 @@
                 return;
             }
 
-            var $this = $(this).redraw(),
-                rtransition = /\d+(.\d+)/;
-
-            supportTransition ? $this.one(supportTransition.end, callback)
-                                     .ensureTransitionEnd((rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000)
-                              : callback();
+            var $this = $(this).redraw();
+            supportTransition ? $this.one(supportTransition.end, callback) : callback();
         });
     };
 
@@ -436,5 +432,56 @@
 
         return options;
     };
+
+    $.debounce = function (func, wait, immediate) {
+        /// <summary>
+        /// Returns a function, that, as long as it continues to be invoked, will not
+        /// be triggered. The function will be called after it stops being called for
+        /// N milliseconds. If `immediate` is passed, trigger the function on the
+        /// leading edge, instead of the trailing.
+        ///</summary>
+        /// <param name="func" type="Function">
+        ///      The function to debounce.
+        /// </param>
+        /// <param name="wait" type="Number">
+        ///      The number of milliseconds to delay.
+        /// </param>
+        /// <param name="wait" type="immediate">
+        ///      Specify execution on the leading edge of the timeout.
+        /// </param>
+        /// <returns type="jQuery">The function.</returns>
+        var timeout;
+        return function () {
+            var context = this, args = arguments;
+            w.clearTimeout(timeout);
+            timeout = w.setTimeout(function () {
+                timeout = null;
+                if (!immediate) { func.apply(context, args); }
+            }, wait);
+            if (immediate && !timeout) { func.apply(context, args); }
+        };
+    };
+
+    (function (old) {
+        /// <summary>Override the core html method in the jQuery object to fire a domchanged event whenever it is called.</summary>
+        /// <param name="old" type="Function">
+        ///      The jQuery function being overridden.
+        /// </param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+        var echanged = $.Event("domchanged"),
+            $d = $(d);
+
+        $.fn.html = function () {
+            // Execute the original HTML method using the
+            // augmented arguments collection.
+            var result = old.apply(this, arguments);
+
+            $d.trigger(echanged);
+
+            return result;
+
+        };
+    })($.fn.html);
 
 }(jQuery, window, document));

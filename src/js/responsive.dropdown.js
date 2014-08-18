@@ -15,6 +15,7 @@
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
         eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -283,17 +284,21 @@
         return this;
     };
 
-    // Dropdown data api initialization.
-    $(document).on(eready, function () {
+    // Data API
+    var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdownOptions"),
                 options = data || $.buildDataOptions($this, {}, "dropdown", "r");
-
             options.target || (options.target = $this.attr("href"));
-            // Run the dropdown method.
+
             $this.dropdown(options);
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_DROPDOWN = true;

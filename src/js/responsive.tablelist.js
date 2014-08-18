@@ -14,6 +14,7 @@
 
     // General variables and methods.
     var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -107,17 +108,19 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $("table[data-table-list]").each(function () {
-
             var $this = $(this),
                 data = $this.data("r.tablelistOptions"),
                 options = data || $.buildDataOptions($this, {}, "tablelist", "r");
 
-            // Run the tablelist method.
             $this.tablelist(options);
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_TABLE = true;

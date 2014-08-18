@@ -30,6 +30,7 @@ var jsSrc = [
     path.js.src + "responsive.core.js",
     path.js.src + "responsive.autosize.js",
     path.js.src + "responsive.carousel.js",
+    path.js.src + "responsive.conditional.js",
     path.js.src + "responsive.dismiss.js",
     path.js.src + "responsive.dropdown.js",
     path.js.src + "responsive.modal.js",

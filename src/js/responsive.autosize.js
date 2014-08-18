@@ -13,8 +13,8 @@
     }
 
     // General variables and methods.
-    var resisizeTimer,
-        eready = "ready" + ns,
+    var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eresize = "resize orientationchange",
         ekeyup = "keyup",
         epaste = "paste",
@@ -39,6 +39,8 @@
 
         // Bind events
         this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
+        var onResize = $.debounce($.proxy(this.size, this), 50);
+        $(w).off(eresize).on(eresize, onResize);
     };
 
     AutoSize.prototype.clone = function () {
@@ -172,37 +174,21 @@
         return this;
     };
 
-    $(w).on(eresize, function () {
-
-        if (resisizeTimer) {
-            w.clearTimeout(resisizeTimer);
-        }
-
-        var resize = function () {
-
-            $("textarea.autosize").each(function () {
-
-                var autosize = $(this).data("r.autosize");
-
-                if (autosize) { autosize.size(); }
-            });
-        };
-
-        resisizeTimer = w.setTimeout(resize, 5);
-    });
-
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $("textarea[data-autosize]").each(function () {
 
             var $this = $(this).addClass("autosize"),
                 data = $this.data("r.autosizeOptions"),
                 options = data || $.buildDataOptions($this, {}, "autosize", "r");
 
-            // Run the autosize method.
             $this.autoSize(options);
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_AUTOSIZE = true;

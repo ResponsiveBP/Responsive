@@ -14,6 +14,7 @@
 
     // General variables.
     var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -113,18 +114,19 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $("button[data-dismiss-target]").each(function () {
-
             var $this = $(this),
                 data = $this.data("r.dismissOptions"),
                 options = data || $.buildDataOptions($this, {}, "dismiss", "r");
 
-            // Run the dismiss method.
             $this.dismiss(options);
         });
+    },
+    debouncedInit = $.debounce(init, 500);
 
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_DISMISS = true;

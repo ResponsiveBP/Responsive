@@ -26,6 +26,7 @@
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
         eready = "ready" + ns,
+        echanged = "domchanged" + ns,
         eresize = ["resize", "orientationchange"].join(".modal "),
         eclick = "click",
         ekeydown = "keydown",
@@ -86,7 +87,8 @@
 
         // Bind events.
         this.$element.on(eclick, $.proxy(this.click, this));
-        $(w).off(eresize).on(eresize, $.proxy(this.resize, this));
+        var onResize = $.debounce($.proxy(this.resize, this), 15);
+        $(w).off(eresize).on(eresize, onResize);
     };
 
     Modal.prototype.show = function () {
@@ -469,61 +471,58 @@
     };
 
     Modal.prototype.destroy = function (callback) {
-        var self = this,
-            cleanUp = function () {
+        var self = this;
 
-                $.each([$header, $footer, $close, $modal, $next, $prev], function () {
-                    this.removeClass("fade-in")
-                        .redraw();
-                });
+        $.each([$header, $footer, $close, $modal, $next, $prev], function () {
+            this.removeClass("fade-in")
+                .redraw();
+        });
 
-                $modal.onTransitionEnd(function () {
+        $modal.onTransitionEnd(function () {
 
-                    // Clean up the next/prev.
-                    $next.detach();
-                    $prev.detach();
+            // Clean up the next/prev.
+            $next.detach();
+            $prev.detach();
 
-                    // Clean up the header/footer.
-                    $header.empty().detach();
-                    $footer.empty().detach();
-                    $close.detach();
+            // Clean up the header/footer.
+            $header.empty().detach();
+            $footer.empty().detach();
+            $close.detach();
 
-                    // Remove label.
-                    $overlay.removeAttr("aria-labelledby");
+            // Remove label.
+            $overlay.removeAttr("aria-labelledby");
 
-                    if (!self.options.external) {
-                        // Put that kid back where it came from or so help me.
-                        $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
-                        $placeholder.detach().insertAfter($overlay);
-                    }
+            if (!self.options.external) {
+                // Put that kid back where it came from or so help me.
+                $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+                $placeholder.detach().insertAfter($overlay);
+            }
 
-                    // Fix __flash__removeCallback' is undefined error.
-                    $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
+            // Fix __flash__removeCallback' is undefined error.
+            $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
 
-                        $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
-                            "max-height": "",
-                            "max-width": ""
-                        }).empty();
+                $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
+                    "max-height": "",
+                    "max-width": ""
+                }).empty();
 
-                        // Return focus events back to normal.
-                        $(document).off(efocusin);
+                // Return focus events back to normal.
+                $(document).off(efocusin);
 
-                        // Unbind the keyboard and touch actions.
-                        if (self.options.keyboard) {
-                            $(document).off(ekeydown);
-                        }
+                // Unbind the keyboard and touch actions.
+                if (self.options.keyboard) {
+                    $(document).off(ekeydown);
+                }
 
-                        if (self.options.touch) {
-                            $modal.off("swipe.modal swipeend.modal");
-                        }
+                if (self.options.touch) {
+                    $modal.off("swipe.modal swipeend.modal");
+                }
 
-                        // Handle callback passed from direction and linked calls.
-                        callback && callback.call(self);
-                    }, 100));
-                });
-            };
+                // Handle callback passed from direction and linked calls.
+                callback && callback.call(self);
+            }, 100));
 
-        $modal.onTransitionEnd(cleanUp);
+        });
     };
 
     Modal.prototype.click = function (event) {
@@ -727,10 +726,9 @@
         return this;
     };
 
-    $(document).on(eready, function () {
-
+    // Data API
+    var init = function () {
         $(":attrStart(data-modal)").each(function () {
-
             var $this = $(this),
                 data = $this.data("r.modalOptions"),
                 options = data || $.buildDataOptions($this, {}, "modal", "r");
@@ -738,6 +736,11 @@
             // Run the modal method.
             $this.modal(options);
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged, eshown].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_MODAL = true;

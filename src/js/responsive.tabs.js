@@ -15,6 +15,7 @@
     // General variables.
     var rtl = $.support.rtl,
         eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -110,7 +111,7 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false});
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false });
         $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true }).focus();
 
         // Do some class shuffling to allow the transition.
@@ -204,8 +205,13 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
+    var init = function () {
         $("[data-tabs]").tabs();
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_TABS = true;
