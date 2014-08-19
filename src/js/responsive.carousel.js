@@ -534,10 +534,10 @@
     var init = function () {
         $(".carousel").each(function () {
             var $this = $(this),
-                data = $this.data("r.carouselOptions"),
-                options = data || $.buildDataOptions($this, {}, "carousel", "r");
-
-            $this.carousel(options);
+                options = $this.data("r.carouselOptions");
+            if (!options) {
+                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);

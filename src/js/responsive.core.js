@@ -258,8 +258,8 @@
                                 case "pan-y":
 
                                     isScrolling = touchAction === "pan-x" ?
-                                                  Math.abs(dy) < Math.abs(dx) :
-                                                  Math.abs(dx) < Math.abs(dy);
+                                                  Math.abs(dy) <= Math.abs(dx) :
+                                                  Math.abs(dx) <= Math.abs(dy);
 
                                     if (!isScrolling) {
                                         event.preventDefault();
@@ -477,7 +477,9 @@
             // augmented arguments collection.
             var result = old.apply(this, arguments);
 
-            $d.trigger(echanged);
+            if (arguments.length) {
+                $d.trigger(echanged);
+            }
 
             return result;
 

@@ -730,11 +730,10 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                data = $this.data("r.modalOptions"),
-                options = data || $.buildDataOptions($this, {}, "modal", "r");
-
-            // Run the modal method.
-            $this.modal(options);
+                options = $this.data("r.modalOptions");
+            if (!options) {
+                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);

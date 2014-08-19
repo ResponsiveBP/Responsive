@@ -39,8 +39,7 @@
 
         // Bind events
         this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
-        var onResize = $.debounce($.proxy(this.size, this), 50);
-        $(w).off(eresize).on(eresize, onResize);
+        $(w).off(eresize).on(eresize, $.debounce($.proxy(this.size, this), 50));
     };
 
     AutoSize.prototype.clone = function () {
@@ -177,12 +176,11 @@
     // Data API
     var init = function () {
         $("textarea[data-autosize]").each(function () {
-
-            var $this = $(this).addClass("autosize"),
-                data = $this.data("r.autosizeOptions"),
-                options = data || $.buildDataOptions($this, {}, "autosize", "r");
-
-            $this.autoSize(options);
+            var $this = $(this),
+                options = $this.data("r.autosizeOptions");
+            if (!options) {
+                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);

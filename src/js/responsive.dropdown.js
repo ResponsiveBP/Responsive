@@ -288,11 +288,10 @@
     var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                data = $this.data("r.dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown", "r");
-            options.target || (options.target = $this.attr("href"));
-
-            $this.dropdown(options);
+                options = $this.data("r.dropdownOptions");
+            if (!options) {
+                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);

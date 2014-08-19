@@ -31,13 +31,14 @@
             fallback: null,
             errorHint: "<p>An error has occured.</p>"
         };
+        this.cache = {};
         this.options = $.extend({}, this.defaults, options);
         this.currentGrid = null;
+        this.currentTarget = null;
         this.sizing = null;
 
         // Bind events.
-        var onResize = $.debounce($.proxy(this.resize, this), 50);
-        $(w).off(eresize).on(eresize, onResize);
+        $(w).on(eresize, $.debounce($.proxy(this.resize, this), 50));
 
         // First Run
         this.resize();
@@ -53,16 +54,38 @@
             var self = this,
                 target = this.options[grid] || this.options.fallback;
 
-            if (target) {
-                this.$element.empty().load(target, null, function (responseText, textStatus) {
-                    if (textStatus === "error") {
-                        self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: grid }));
-                        self.$element.html(self.options.errorHint);
-                        return;
-                    }
+            if (target && target !== this.currentTarget) {
+                this.currentTarget = target;
 
-                    self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: grid }));
-                });
+                // First check the cache.
+                if (this.cache[this.currentGrid]) {
+                    this.$element.empty().html(this.cache[this.currentGrid]);
+                    this.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: this.currentGrid }));
+
+                } else {
+                    this.$element.empty().load(target, null, function (responseText, textStatus) {
+                        
+                        // Handle errors.
+                        if (textStatus === "error") {
+                            self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
+                            self.$element.html(self.options.errorHint);
+                            return;
+                        }
+
+                        var selector, off = target.indexOf(" ");
+                        if (off >= 0) {
+                            selector = $.trim(target.slice(off));
+                        }
+
+                        // Cache the result so no further requests are made. This uses the internal `parseHTML`
+                        // method so be aware that could one day change.
+                        self.cache[grid] = selector
+                            ? jQuery("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
+                            : responseText;
+
+                        self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
+                    });
+                }
             }
         }
     };
@@ -100,12 +123,11 @@
     // Data API
     var init = function () {
         $(":attrStart(data-conditional)").each(function () {
-
-            var $this = $(this).addClass("conditional"),
-                data = $this.data("r.conditionalOptions"),
-                options = data || $.buildDataOptions($this, {}, "conditional", "r");
-
-            $this.conditional(options);
+            var $this = $(this),
+                options = $this.data("r.conditionalOptions");
+            if (!options) {
+                $this.conditional($.buildDataOptions($this, {}, "conditional", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);

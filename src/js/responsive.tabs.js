@@ -206,7 +206,14 @@
 
     // Data API
     var init = function () {
-        $("[data-tabs]").tabs();
+        $("[data-tabs]").each(function () {
+            var $this = $(this),
+                loaded = $this.data("r.tabsLoaded");
+            if (!loaded) {
+                $this.data("r.tabsLoaded", true);
+                $this.tabs();
+            }
+        });
     },
     debouncedInit = $.debounce(init, 500);
 

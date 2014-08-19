@@ -258,8 +258,8 @@
                                 case "pan-y":
 
                                     isScrolling = touchAction === "pan-x" ?
-                                                  Math.abs(dy) < Math.abs(dx) :
-                                                  Math.abs(dx) < Math.abs(dy);
+                                                  Math.abs(dy) <= Math.abs(dx) :
+                                                  Math.abs(dx) <= Math.abs(dy);
 
                                     if (!isScrolling) {
                                         event.preventDefault();
@@ -477,7 +477,9 @@
             // augmented arguments collection.
             var result = old.apply(this, arguments);
 
-            $d.trigger(echanged);
+            if (arguments.length) {
+                $d.trigger(echanged);
+            }
 
             return result;
 
@@ -526,8 +528,7 @@
 
         // Bind events
         this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
-        var onResize = $.debounce($.proxy(this.size, this), 50);
-        $(w).off(eresize).on(eresize, onResize);
+        $(w).off(eresize).on(eresize, $.debounce($.proxy(this.size, this), 50));
     };
 
     AutoSize.prototype.clone = function () {
@@ -664,12 +665,11 @@
     // Data API
     var init = function () {
         $("textarea[data-autosize]").each(function () {
-
-            var $this = $(this).addClass("autosize"),
-                data = $this.data("r.autosizeOptions"),
-                options = data || $.buildDataOptions($this, {}, "autosize", "r");
-
-            $this.autoSize(options);
+            var $this = $(this),
+                options = $this.data("r.autosizeOptions");
+            if (!options) {
+                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -1217,10 +1217,10 @@
     var init = function () {
         $(".carousel").each(function () {
             var $this = $(this),
-                data = $this.data("r.carouselOptions"),
-                options = data || $.buildDataOptions($this, {}, "carousel", "r");
-
-            $this.carousel(options);
+                options = $this.data("r.carouselOptions");
+            if (!options) {
+                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -1265,13 +1265,14 @@
             fallback: null,
             errorHint: "<p>An error has occured.</p>"
         };
+        this.cache = {};
         this.options = $.extend({}, this.defaults, options);
         this.currentGrid = null;
+        this.currentTarget = null;
         this.sizing = null;
 
         // Bind events.
-        var onResize = $.debounce($.proxy(this.resize, this), 50);
-        $(w).off(eresize).on(eresize, onResize);
+        $(w).on(eresize, $.debounce($.proxy(this.resize, this), 50));
 
         // First Run
         this.resize();
@@ -1287,16 +1288,38 @@
             var self = this,
                 target = this.options[grid] || this.options.fallback;
 
-            if (target) {
-                this.$element.empty().load(target, null, function (responseText, textStatus) {
-                    if (textStatus === "error") {
-                        self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: grid }));
-                        self.$element.html(self.options.errorHint);
-                        return;
-                    }
+            if (target && target !== this.currentTarget) {
+                this.currentTarget = target;
 
-                    self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: grid }));
-                });
+                // First check the cache.
+                if (this.cache[this.currentGrid]) {
+                    this.$element.empty().html(this.cache[this.currentGrid]);
+                    this.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: this.currentGrid }));
+
+                } else {
+                    this.$element.empty().load(target, null, function (responseText, textStatus) {
+                        
+                        // Handle errors.
+                        if (textStatus === "error") {
+                            self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
+                            self.$element.html(self.options.errorHint);
+                            return;
+                        }
+
+                        var selector, off = target.indexOf(" ");
+                        if (off >= 0) {
+                            selector = $.trim(target.slice(off));
+                        }
+
+                        // Cache the result so no further requests are made. This uses the internal `parseHTML`
+                        // method so be aware that could one day change.
+                        self.cache[grid] = selector
+                            ? jQuery("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
+                            : responseText;
+
+                        self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
+                    });
+                }
             }
         }
     };
@@ -1334,12 +1357,11 @@
     // Data API
     var init = function () {
         $(":attrStart(data-conditional)").each(function () {
-
-            var $this = $(this).addClass("conditional"),
-                data = $this.data("r.conditionalOptions"),
-                options = data || $.buildDataOptions($this, {}, "conditional", "r");
-
-            $this.conditional(options);
+            var $this = $(this),
+                options = $this.data("r.conditionalOptions");
+            if (!options) {
+                $this.conditional($.buildDataOptions($this, {}, "conditional", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -1470,10 +1492,10 @@
     var init = function () {
         $("button[data-dismiss-target]").each(function () {
             var $this = $(this),
-                data = $this.data("r.dismissOptions"),
-                options = data || $.buildDataOptions($this, {}, "dismiss", "r");
-
-            $this.dismiss(options);
+                options = $this.data("r.dismissOptions");
+            if (!options) {
+                $this.dismiss($.buildDataOptions($this, {}, "dismiss", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -1775,11 +1797,10 @@
     var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                data = $this.data("r.dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown", "r");
-            options.target || (options.target = $this.attr("href"));
-
-            $this.dropdown(options);
+                options = $this.data("r.dropdownOptions");
+            if (!options) {
+                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -2524,11 +2545,10 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                data = $this.data("r.modalOptions"),
-                options = data || $.buildDataOptions($this, {}, "modal", "r");
-
-            // Run the modal method.
-            $this.modal(options);
+                options = $this.data("r.modalOptions");
+            if (!options) {
+                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -2653,10 +2673,10 @@
     var init = function () {
         $("table[data-table-list]").each(function () {
             var $this = $(this),
-                data = $this.data("r.tablelistOptions"),
-                options = data || $.buildDataOptions($this, {}, "tablelist", "r");
-
-            $this.tablelist(options);
+                options = $this.data("r.tablelistOptions");
+            if (!options) {
+                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
@@ -2876,7 +2896,14 @@
 
     // Data API
     var init = function () {
-        $("[data-tabs]").tabs();
+        $("[data-tabs]").each(function () {
+            var $this = $(this),
+                loaded = $this.data("r.tabsLoaded");
+            if (!loaded) {
+                $this.data("r.tabsLoaded", true);
+                $this.tabs();
+            }
+        });
     },
     debouncedInit = $.debounce(init, 500);
 

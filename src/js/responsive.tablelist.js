@@ -111,10 +111,10 @@
     var init = function () {
         $("table[data-table-list]").each(function () {
             var $this = $(this),
-                data = $this.data("r.tablelistOptions"),
-                options = data || $.buildDataOptions($this, {}, "tablelist", "r");
-
-            $this.tablelist(options);
+                options = $this.data("r.tablelistOptions");
+            if (!options) {
+                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+            }
         });
     },
     debouncedInit = $.debounce(init, 500);
