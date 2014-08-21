@@ -11,7 +11,7 @@ functionality of the website. That costs developers time and money.
 testing; specifically developed to be as lightweight as possible to prevent the need to undo styles set by the framework itself
 and allow developers to write efficient code and lower costs.
   
-**Responsive is tiny**. The combined output CSS and JavaScript is **only 24.8kb minified and gzipped** but there is a lot of functionality 
+**Responsive is tiny**. The combined output CSS and JavaScript is **only 25.4kb minified and gzipped** but there is a lot of functionality 
 built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
 
 Browser support covers IE8+ as well as all other modern browsers.

@@ -1,30 +1,44 @@
 {
-  "name": "responsive",
-  "version": "3.0.1",
-  "homepage": "http://responsivebp.com",
-  "authors": [
-    "James South"
-  ],
-  "license": "MIT",
-  "main": [
-    "./build/responsive.js",
-	  "./build/responsive.min.js",
-    "./build/responsive.css",
-	  "./build/responsive.min.css",
-    "./build/template.html"
-  ],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "src",
-    "dist",
-    "tests"
-  ],
-  "dependencies": {
-    "html5shiv": "3.7.2",
-    "jquery": "2.1.1",
-    "jquery-legacy": "jquery#1.11.1",
-    "respond": "1.4.2"
-  }
+    "name": "responsive",
+    "description": "A super lightweight HTML, SASS, CSS, and JavaScript framework for building responsive websites.",
+    "version": "3.1.0",
+    "homepage": "http://responsivebp.com",
+    "authors": [
+        "James South"
+    ],
+    "keywords": [
+        "css",
+        "js",
+        "javascript",
+        "sass",
+        "mobile-first",
+        "responsive",
+        "rwd",
+        "front-end",
+        "framework",
+        "boilerplate",
+        "web"
+    ],
+    "license": "MIT",
+    "main": [
+        "./build/responsive.js",
+        "./build/responsive.min.js",
+        "./build/responsive.css",
+        "./build/responsive.min.css",
+        "./build/template.html"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "src",
+        "dist",
+        "tests"
+    ],
+    "dependencies": {
+        "html5shiv": "3.7.2",
+        "jquery": "2.1.1",
+        "jquery-legacy": "jquery#1.11.1",
+        "respond": "1.4.2"
+    }
 }
