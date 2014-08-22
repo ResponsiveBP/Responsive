@@ -16,6 +16,15 @@ built into the framework with touch, right-to-left language, and accessibility s
 
 Browser support covers IE8+ as well as all other modern browsers.
 
+##Downloading Responsive
+
+Several options are available for downloading Responsive:
+
+- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/3.1.0/responsive.zip).
+- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/3.1.0.zip).
+- Clone the repo: `git clone https://github.com/ResponsiveBP/Responsive.git`.
+- Install with [Bower](http://bower.io): `bower install responsive`.
+
 ##Documentation
 
 Responsives' documentation, included in the [gh-pages](https://github.com/ResponsiveBP/Responsive/tree/gh-pages) repo. It is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at [http://responsivebp.com](http://responsivebp.com). The docs may also be run locally.
@@ -32,7 +41,7 @@ Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com
 
 Contribution is most welcome, that's the whole idea! Together as a community we can build a boilerplate for building responsive sites that will ensure that high standards can be delivered across all devices.   
 
-Please adhere to existing JavaScript and SASS styles though when submitting code and ensure that you test thoroughly on multiple devices, we don't want another Semicolongate ;)
+Please adhere to existing JavaScript and SASS styles though when submitting code and ensure that you test thoroughly on multiple devices.
 
 ##Building the SASS and Javascript
 
@@ -53,7 +62,7 @@ There are three types of build available:
 
 ##Bugs and feature requests
 
-Have a bug or a feature request? Please open a new [issue](https://github.com/JimBobSquarePants/Responsive/issues) or even better submit a pull request. Before opening any issue, please search for existing issues and read the Issue Guidelines, written by [Nicolas Gallagher](https://github.com/necolas/).
+Have a bug or a feature request? Please open a new [issue](https://github.com/responsivebp/responsive/issues) or even better submit a pull request. Before opening any issue, please search for existing issues and read the Issue Guidelines, written by [Nicolas Gallagher](https://github.com/necolas/).
 
 ##Authors
 
