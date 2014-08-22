@@ -291,6 +291,7 @@ sublinks: ["#examples|Examples",
                     <dt><strong>direction</strong></dt>
                     <dd>The direction in which the carousel is transitioning.</dd>
                 </dl>
+            </dd>
         </dl>
     </section>
     <hr />
@@ -301,8 +302,8 @@ sublinks: ["#examples|Examples",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default loading behaviour
-$(document).off("ready.r.carousel")
-           .on("ready.r.carousel", function () {
+$(document).off("ready.r.carousel domchanged.r.carousel")
+           .on("ready.r.carousel domchanged.r.carousel", function () {
     // Your custom behaviour...
 }); 
            

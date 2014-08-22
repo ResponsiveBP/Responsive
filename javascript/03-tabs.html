@@ -122,8 +122,8 @@ sublinks: ["#examples|Examples",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.tabs")
-           .on("ready.r.tabs", function (event) {
+$(document).off("ready.r.tabs domchanged.r.tabs")
+           .on("ready.r.tabs domchanged.r.tabs", function (event) {
     // Your custom behaviour...
 }); 
 

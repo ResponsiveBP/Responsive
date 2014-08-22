@@ -17,7 +17,7 @@ sublinks: ["#general|General Tools",
 </p>
 <section id="general">
     <h1>General Tools</h1>
-    <p>The following tools are used for the general runnning of the framework.</p>
+    <p>The following tools are used for the general running of the framework.</p>
     <dl>
         <dt><strong>$.pseudoUnique(length)</strong></dt>
         <dd>Returns a pseudo unique alpha-numeric string of the given length. Defaults to 8 which gives a very low collision rate.</dd>
@@ -31,6 +31,19 @@ sublinks: ["#general|General Tools",
                 <dd>The index of the current grid in the range. Zero based.</dd>
                 <dt>range</dt>
                 <dd>An array containing the available grid range.</dd>
+            </dl>
+        </dd>
+        <dt><strong>$.debounce()</strong></dt>
+        <dd>
+            Creates and returns a new debounced version of the passed function which will postpone its execution until after wait
+            milliseconds have elapsed since the last time it was invoked.
+            <dl class="dl-horizontal">
+                <dt>function</dt>
+                <dd> The function to debounce.</dd>
+                <dt>wait</dt>
+                <dd>The number of milliseconds to delay.</dd>
+                <dt>immediate</dt>
+                <dd> Specify execution on the leading edge of the timeout.</dd>
             </dl>
         </dd>
         <dt><code>:attrStart(value)</code> selector</dt>

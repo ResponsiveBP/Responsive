@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.0.1 | MIT License | responsivebp.com */
+/*! Responsive v3.1.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -65,7 +65,7 @@
                 key = parseInt($div.width(), 10);
 
             return {
-                grid: grids[parseInt($div.width(), 10)],
+                grid: grids[key],
                 index: key,
                 range: grids
             };
@@ -138,12 +138,8 @@
                 return;
             }
 
-            var $this = $(this).redraw(),
-                rtransition = /\d+(.\d+)/;
-
-            supportTransition ? $this.one(supportTransition.end, callback)
-                                     .ensureTransitionEnd((rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000)
-                              : callback();
+            var $this = $(this).redraw();
+            supportTransition ? $this.one(supportTransition.end, callback) : callback();
         });
     };
 
@@ -262,8 +258,8 @@
                                 case "pan-y":
 
                                     isScrolling = touchAction === "pan-x" ?
-                                                  Math.abs(dy) < Math.abs(dx) :
-                                                  Math.abs(dx) < Math.abs(dy);
+                                                  Math.abs(dy) <= Math.abs(dx) :
+                                                  Math.abs(dx) <= Math.abs(dy);
 
                                     if (!isScrolling) {
                                         event.preventDefault();
@@ -437,6 +433,59 @@
         return options;
     };
 
+    $.debounce = function (func, wait, immediate) {
+        /// <summary>
+        /// Returns a function, that, as long as it continues to be invoked, will not
+        /// be triggered. The function will be called after it stops being called for
+        /// N milliseconds. If `immediate` is passed, trigger the function on the
+        /// leading edge, instead of the trailing.
+        ///</summary>
+        /// <param name="func" type="Function">
+        ///      The function to debounce.
+        /// </param>
+        /// <param name="wait" type="Number">
+        ///      The number of milliseconds to delay.
+        /// </param>
+        /// <param name="wait" type="immediate">
+        ///      Specify execution on the leading edge of the timeout.
+        /// </param>
+        /// <returns type="jQuery">The function.</returns>
+        var timeout;
+        return function () {
+            var context = this, args = arguments;
+            w.clearTimeout(timeout);
+            timeout = w.setTimeout(function () {
+                timeout = null;
+                if (!immediate) { func.apply(context, args); }
+            }, wait);
+            if (immediate && !timeout) { func.apply(context, args); }
+        };
+    };
+
+    (function (old) {
+        /// <summary>Override the core html method in the jQuery object to fire a domchanged event whenever it is called.</summary>
+        /// <param name="old" type="Function">
+        ///      The jQuery function being overridden.
+        /// </param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+        var echanged = $.Event("domchanged"),
+            $d = $(d);
+
+        $.fn.html = function () {
+            // Execute the original HTML method using the
+            // augmented arguments collection.
+            var result = old.apply(this, arguments);
+
+            if (arguments.length) {
+                $d.trigger(echanged);
+            }
+
+            return result;
+
+        };
+    })($.fn.html);
+
 }(jQuery, window, document));
 /*
  * Responsive AutoSize
@@ -453,8 +502,8 @@
     }
 
     // General variables and methods.
-    var resisizeTimer,
-        eready = "ready" + ns,
+    var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eresize = "resize orientationchange",
         ekeyup = "keyup",
         epaste = "paste",
@@ -479,6 +528,7 @@
 
         // Bind events
         this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
+        $(w).off(eresize).on(eresize, $.debounce($.proxy(this.size, this), 50));
     };
 
     AutoSize.prototype.clone = function () {
@@ -612,37 +662,20 @@
         return this;
     };
 
-    $(w).on(eresize, function () {
-
-        if (resisizeTimer) {
-            w.clearTimeout(resisizeTimer);
-        }
-
-        var resize = function () {
-
-            $("textarea.autosize").each(function () {
-
-                var autosize = $(this).data("r.autosize");
-
-                if (autosize) { autosize.size(); }
-            });
-        };
-
-        resisizeTimer = w.setTimeout(resize, 5);
-    });
-
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $("textarea[data-autosize]").each(function () {
-
-            var $this = $(this).addClass("autosize"),
-                data = $this.data("r.autosizeOptions"),
-                options = data || $.buildDataOptions($this, {}, "autosize", "r");
-
-            // Run the autosize method.
-            $this.autoSize(options);
+            var $this = $(this),
+                options = $this.data("r.autosizeOptions");
+            if (!options) {
+                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+            }
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_AUTOSIZE = true;
@@ -670,6 +703,7 @@
         ekeydown = "keydown",
         eclick = "click",
         eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
@@ -1180,21 +1214,165 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $(".carousel").each(function () {
-
             var $this = $(this),
-                data = $this.data("r.carouselOptions"),
-                options = data || $.buildDataOptions($this, {}, "carousel", "r");
-
-            $this.carousel(options);
+                options = $this.data("r.carouselOptions");
+            if (!options) {
+                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+            }
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_CAROUSEL = true;
 
 }(jQuery, window, ".r.carousel"));
+/*
+ * Responsive Conditional
+ */
+
+/*global jQuery*/
+/*jshint expr:true*/
+(function ($, w, ns) {
+
+    "use strict";
+
+    if (w.RESPONSIVE_CONDITIONAL) {
+        return;
+    }
+
+    // General variables and methods.
+    var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eresize = ["resize", "orientationchange"].join(".conditional "),
+        eloaded = "loaded" + ns,
+        eerror = "error" + ns;
+
+    // AutoSize class definition
+    var Conditional = function (element, options) {
+
+        this.$element = $(element);
+        this.defaults = {
+            xs: null,
+            s: null,
+            m: null,
+            l: null,
+            fallback: null,
+            errorHint: "<p>An error has occured.</p>"
+        };
+        this.cache = {};
+        this.options = $.extend({}, this.defaults, options);
+        this.currentGrid = null;
+        this.currentTarget = null;
+        this.sizing = null;
+
+        // Bind events.
+        $(w).on(eresize, $.debounce($.proxy(this.resize, this), 50));
+
+        // First Run
+        this.resize();
+    };
+
+    Conditional.prototype.resize = function () {
+
+        var grid = $.support.currentGrid().grid;
+
+        if (this.currentGrid !== grid) {
+            this.currentGrid = grid;
+
+            var self = this,
+                target = this.options[grid] || this.options.fallback;
+
+            if (target && target !== this.currentTarget) {
+                this.currentTarget = target;
+
+                // First check the cache.
+                if (this.cache[this.currentGrid]) {
+                    this.$element.empty().html(this.cache[this.currentGrid]);
+                    this.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: this.currentGrid }));
+
+                } else {
+                    this.$element.empty().load(target, null, function (responseText, textStatus) {
+                        
+                        // Handle errors.
+                        if (textStatus === "error") {
+                            self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
+                            self.$element.html(self.options.errorHint);
+                            return;
+                        }
+
+                        var selector, off = target.indexOf(" ");
+                        if (off >= 0) {
+                            selector = $.trim(target.slice(off));
+                        }
+
+                        // Cache the result so no further requests are made. This uses the internal `parseHTML`
+                        // method so be aware that could one day change.
+                        self.cache[grid] = selector
+                            ? jQuery("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
+                            : responseText;
+
+                        self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
+                    });
+                }
+            }
+        }
+    };
+
+    // Plug-in definition 
+    $.fn.conditional = function (options) {
+
+        return this.each(function () {
+
+            var $this = $(this),
+                data = $this.data("r.conditional"),
+                opts = typeof options === "object" ? options : null;
+
+            if (!data) {
+                // Check the data and reassign if not present.
+                $this.data("r.conditional", (data = new Conditional(this, opts)));
+            }
+
+            if (options === "resize") {
+                data.resize();
+            }
+        });
+    };
+
+    // Set the public constructor.
+    $.fn.conditional.Constructor = Conditional;
+
+    // No conflict.
+    var old = $.fn.conditional;
+    $.fn.conditional.noConflict = function () {
+        $.fn.conditional = old;
+        return this;
+    };
+
+    // Data API
+    var init = function () {
+        $(":attrStart(data-conditional)").each(function () {
+            var $this = $(this),
+                options = $this.data("r.conditionalOptions");
+            if (!options) {
+                $this.conditional($.buildDataOptions($this, {}, "conditional", "r"));
+            }
+        });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
+    });
+
+    w.RESPONSIVE_CONDITIONAL = true;
+
+}(jQuery, window, ".r.conditional"));
 /*
  * Responsive Dismiss 
  */
@@ -1211,6 +1389,7 @@
 
     // General variables.
     var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -1310,18 +1489,19 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $("button[data-dismiss-target]").each(function () {
-
             var $this = $(this),
-                data = $this.data("r.dismissOptions"),
-                options = data || $.buildDataOptions($this, {}, "dismiss", "r");
-
-            // Run the dismiss method.
-            $this.dismiss(options);
+                options = $this.data("r.dismissOptions");
+            if (!options) {
+                $this.dismiss($.buildDataOptions($this, {}, "dismiss", "r"));
+            }
         });
+    },
+    debouncedInit = $.debounce(init, 500);
 
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_DISMISS = true;
@@ -1344,6 +1524,7 @@
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
         eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -1612,17 +1793,20 @@
         return this;
     };
 
-    // Dropdown data api initialization.
-    $(document).on(eready, function () {
+    // Data API
+    var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                data = $this.data("r.dropdownOptions"),
-                options = data || $.buildDataOptions($this, {}, "dropdown", "r");
-
-            options.target || (options.target = $this.attr("href"));
-            // Run the dropdown method.
-            $this.dropdown(options);
+                options = $this.data("r.dropdownOptions");
+            if (!options) {
+                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+            }
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_DROPDOWN = true;
@@ -1657,6 +1841,7 @@
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
         eready = "ready" + ns,
+        echanged = "domchanged" + ns,
         eresize = ["resize", "orientationchange"].join(".modal "),
         eclick = "click",
         ekeydown = "keydown",
@@ -1717,7 +1902,8 @@
 
         // Bind events.
         this.$element.on(eclick, $.proxy(this.click, this));
-        $(w).off(eresize).on(eresize, $.proxy(this.resize, this));
+        var onResize = $.debounce($.proxy(this.resize, this), 15);
+        $(w).off(eresize).on(eresize, onResize);
     };
 
     Modal.prototype.show = function () {
@@ -2100,61 +2286,58 @@
     };
 
     Modal.prototype.destroy = function (callback) {
-        var self = this,
-            cleanUp = function () {
+        var self = this;
 
-                $.each([$header, $footer, $close, $modal, $next, $prev], function () {
-                    this.removeClass("fade-in")
-                        .redraw();
-                });
+        $.each([$header, $footer, $close, $modal, $next, $prev], function () {
+            this.removeClass("fade-in")
+                .redraw();
+        });
 
-                $modal.onTransitionEnd(function () {
+        $modal.onTransitionEnd(function () {
 
-                    // Clean up the next/prev.
-                    $next.detach();
-                    $prev.detach();
+            // Clean up the next/prev.
+            $next.detach();
+            $prev.detach();
 
-                    // Clean up the header/footer.
-                    $header.empty().detach();
-                    $footer.empty().detach();
-                    $close.detach();
+            // Clean up the header/footer.
+            $header.empty().detach();
+            $footer.empty().detach();
+            $close.detach();
 
-                    // Remove label.
-                    $overlay.removeAttr("aria-labelledby");
+            // Remove label.
+            $overlay.removeAttr("aria-labelledby");
 
-                    if (!self.options.external) {
-                        // Put that kid back where it came from or so help me.
-                        $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
-                        $placeholder.detach().insertAfter($overlay);
-                    }
+            if (!self.options.external) {
+                // Put that kid back where it came from or so help me.
+                $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+                $placeholder.detach().insertAfter($overlay);
+            }
 
-                    // Fix __flash__removeCallback' is undefined error.
-                    $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
+            // Fix __flash__removeCallback' is undefined error.
+            $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
 
-                        $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
-                            "max-height": "",
-                            "max-width": ""
-                        }).empty();
+                $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
+                    "max-height": "",
+                    "max-width": ""
+                }).empty();
 
-                        // Return focus events back to normal.
-                        $(document).off(efocusin);
+                // Return focus events back to normal.
+                $(document).off(efocusin);
 
-                        // Unbind the keyboard and touch actions.
-                        if (self.options.keyboard) {
-                            $(document).off(ekeydown);
-                        }
+                // Unbind the keyboard and touch actions.
+                if (self.options.keyboard) {
+                    $(document).off(ekeydown);
+                }
 
-                        if (self.options.touch) {
-                            $modal.off("swipe.modal swipeend.modal");
-                        }
+                if (self.options.touch) {
+                    $modal.off("swipe.modal swipeend.modal");
+                }
 
-                        // Handle callback passed from direction and linked calls.
-                        callback && callback.call(self);
-                    }, 100));
-                });
-            };
+                // Handle callback passed from direction and linked calls.
+                callback && callback.call(self);
+            }, 100));
 
-        $modal.onTransitionEnd(cleanUp);
+        });
     };
 
     Modal.prototype.click = function (event) {
@@ -2358,17 +2541,20 @@
         return this;
     };
 
-    $(document).on(eready, function () {
-
+    // Data API
+    var init = function () {
         $(":attrStart(data-modal)").each(function () {
-
             var $this = $(this),
-                data = $this.data("r.modalOptions"),
-                options = data || $.buildDataOptions($this, {}, "modal", "r");
-
-            // Run the modal method.
-            $this.modal(options);
+                options = $this.data("r.modalOptions");
+            if (!options) {
+                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+            }
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged, eshown].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_MODAL = true;
@@ -2390,6 +2576,7 @@
 
     // General variables and methods.
     var eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -2483,17 +2670,19 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
-
+    var init = function () {
         $("table[data-table-list]").each(function () {
-
             var $this = $(this),
-                data = $this.data("r.tablelistOptions"),
-                options = data || $.buildDataOptions($this, {}, "tablelist", "r");
-
-            // Run the tablelist method.
-            $this.tablelist(options);
+                options = $this.data("r.tablelistOptions");
+            if (!options) {
+                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+            }
         });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_TABLE = true;
@@ -2516,6 +2705,7 @@
     // General variables.
     var rtl = $.support.rtl,
         eready = "ready" + ns,
+        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -2611,7 +2801,7 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false});
+        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false });
         $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true }).focus();
 
         // Do some class shuffling to allow the transition.
@@ -2705,8 +2895,20 @@
     };
 
     // Data API
-    $(document).on(eready, function () {
-        $("[data-tabs]").tabs();
+    var init = function () {
+        $("[data-tabs]").each(function () {
+            var $this = $(this),
+                loaded = $this.data("r.tabsLoaded");
+            if (!loaded) {
+                $this.data("r.tabsLoaded", true);
+                $this.tabs();
+            }
+        });
+    },
+    debouncedInit = $.debounce(init, 500);
+
+    $(document).on([eready, echanged].join(" "), function (event) {
+        event.type === "ready" ? init() : debouncedInit();
     });
 
     w.RESPONSIVE_TABS = true;

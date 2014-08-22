@@ -1,0 +1,134 @@
+---
+permalink: javascript/conditional.html
+layout: subpage
+group: javascript
+title: Conditional
+heading: Conditional
+subheading: A plugin that replaces content within a page based on the current grid level.
+sublinks: ["#examples|Examples",
+            "#markup|Markup",
+            "#methods|Methods",
+            "#events|Events",
+            "#dataapi|Data API"]
+---
+<section id="normalize">
+    <h1>Conditional</h1>
+    <p>
+        A jQuery plugin that replaces content within a page based on the grid level <code>xs, s, m, l</code> that the current viewport width falls within.
+    </p>
+    <p>
+        The plugin uses ajax to load in the defined content. The url paths to the content are defined in the same format as
+        jQuery's <a href="http://api.jquery.com/load/" rel="external">Load()</a> method which allows you to specify selectors. After each initial call the content
+        is cached so that no further requests are made. 
+    </p>
+    <p>
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
+        This is Responsive's first class API and should be your first consideration when using a plugin.
+    </p>
+    <h3>Resize the browser window to see dynamically loaded content change.</h3>
+    <hr />
+    <section id="examples">
+        <h1>Examples</h1>
+        <section class="row">
+            <div data-conditional-xs="../css/grid.html #basic" data-conditional-fallback="tabs.html #examples" data-conditional-l="carousel.html #carousel-1">
+            </div>
+        </section>
+        <div class="alert" role="alert">
+            <p>All Responsive plugins within loaded markup that use the Data-API will automatically register themselves.</p>
+        </div>
+    </section>
+    <hr />
+    <section id="markup">
+        <h1>Markup</h1>
+        <pre class="language-markup"><code>&lt;div data-conditional-xs="../css/grid.html #basic" 
+     data-conditional-fallback="tabs.html #examples" 
+     data-conditional-l="carousel.html #carousel-1"&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="methods">
+        <h1>Methods</h1>
+        <p>The conditional plugin exposes the following method signatures.</p>
+        <dl>
+            <dt><strong>.conditional(options)</strong>  </dt>
+            <dd>
+                Initialises the plugin with an optional options <code>object</code>
+                <dl class="dl-horizontal">
+                    <dt><strong>options</strong></dt>
+                    <dd>
+                        Contains parameters to pass to the plugin.
+                        <dl>
+                            <dt><strong>xs</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>xs</code> mode.</dd>
+                            <dt><strong>s</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>s</code> mode.</dd>
+                            <dt><strong>m</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>m</code> mode.</dd>
+                            <dt><strong>l</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>l</code> mode.</dd>
+                            <dt><strong>fallback</strong></dt>
+                            <dd>The path to the content to load when no specific content to load has been defined for each mode.</dd>
+                        </dl>
+                    </dd>
+                </dl>
+            </dd>
+            <dt><strong>.conditional("resize")</strong>  </dt>
+            <dd>Triggers the plugin to reload the content.</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="events">
+        <h1>Events</h1>
+        <p>The conditional plugin exposes the following events allowing the developer to tap into its behaviour.</p>
+        <dl>
+            <dt><strong>loaded.r.conditional</strong></dt>
+            <dd>
+                This event is fired when the plugins <code>resize</code> instance method is invoked and content is loaded.
+                The event data contains three custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The containing element that the plugin is bound to.</dd>
+                    <dt><strong>loadtarget</strong></dt>
+                    <dd>The url to the target html to load.</dd>
+                    <dt><strong>grid</strong></dt>
+                    <dd>The current grid range in which the event is firing. <var>xs</var>, <var>s</var>, <var>m</var>, or <var>l</var></dd>
+                </dl>
+            </dd>
+            <dd>
+                This event is fired when the plugin encounters an error when attempting to load ajax content.
+                The event data contains three custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The containing element that the plugin is bound to.</dd>
+                    <dt><strong>loadtarget</strong></dt>
+                    <dd>The url to the target html to load.</dd>
+                    <dt><strong>grid</strong></dt>
+                    <dd>The current grid range in which the event is firing. <var>xs</var>, <var>s</var>, <var>m</var>, or <var>l</var></dd>
+                </dl>
+            </dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The conditional's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Override the default behaviour
+$(document).off("ready.r.conditional domchanged.r.conditional")
+           .on("ready.r.conditional domchanged.r.conditional", function () {
+    // Your custom behaviour...
+}); 
+
+// Bind to the loaded event.
+$("YOUR_SELECTOR").on("loaded.r.conditional", function(event) {
+    // Your custom behaviour...
+});
+                                               
+// Bind to the error event.
+$("YOUR_SELECTOR").on("error.r.conditional", function(event) {
+    // Your custom behaviour...
+});</code></pre>
+    </section>
+</section>

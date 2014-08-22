@@ -125,8 +125,8 @@ sublinks: ["#examples|Examples",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.tablelist")
-           .on("ready.r.table", function (event) {    
+$(document).off("ready.r.tablelist domchanged.r.tablelist")
+           .on("ready.r.tablelist domchanged.r.tablelist", function (event) {    
     // Your custom behaviour...
 });
             

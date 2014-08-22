@@ -323,8 +323,8 @@ sublinks: ["#standard|Example : Standard",
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("ready.r.dropdown")
-                .on("ready.r.dropdown", function (event) {
+$(document.body).off("ready.r.dropdown domchanged.r.dropdown")
+                .on("ready.r.dropdown domchanged.r.dropdown", function (event) {
     // Your custom behaviour...
 }); 
 
