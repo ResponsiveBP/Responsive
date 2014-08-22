@@ -1,12 +1,12 @@
 ﻿// Media Query Breakpoints
 @mixin bp($point) {
     @if $point == xs {
-        @media (max-width: $grid-breakpoint-xs-max) {
+        @media print and (max-width: $grid-print-breakpoint-xs-max ), screen and (max-width: $grid-breakpoint-xs-max) {
             @content;
         }
     }
     @else if $point == s {
-        @media (min-width: $grid-breakpoint-s-min) and (max-width: $grid-breakpoint-s-max) {
+        @media print and (min-width: $grid-print-breakpoint-s-min ) and (max-width: $grid-breakpoint-s-max), screen and (min-width: $grid-breakpoint-s-min) and (max-width: $grid-breakpoint-s-max) {
             @content;
         }
     }
@@ -22,10 +22,10 @@
     }
 }
 
-// Minimum width. 
+// Minimum width.
 @mixin bp-min($point) {
     @if $point == s {
-        @media (min-width: $grid-breakpoint-s-min) {
+        @media print and (min-width: $grid-print-breakpoint-s-min ), screen and (min-width: $grid-breakpoint-s-min) {
             @content;
         }
     }
@@ -44,7 +44,7 @@
 // Max width.
 @mixin bp-max($point) {
     @if $point == xs {
-        @media (max-width: $grid-breakpoint-xs-max) {
+        @media print and (max-width: $grid-print-breakpoint-xs-max ), screen and (max-width: $grid-breakpoint-xs-max) {
             @content;
         }
     }

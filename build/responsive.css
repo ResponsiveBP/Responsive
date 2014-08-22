@@ -175,7 +175,8 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   height: 0; }
 
 /**
@@ -281,7 +282,8 @@ input {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   /* 1 */
   padding: 0;
   /*2 */ }
@@ -303,6 +305,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
+  -webkit-box-sizing: content-box;
   /*2 */
   box-sizing: content-box; }
 
@@ -365,10 +368,11 @@ th {
 html {
   -webkit-overflow-scrolling: touch;
   /* 1 */
-  color: #222222;
+  color: #222;
   font-size: 100%;
   line-height: 1.4;
-  box-sizing: border-box; }
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
 
 /**
  * Fix the box model
@@ -376,7 +380,8 @@ html {
  */
 *, :before, :after,
 hr, input[type=search] {
-  box-sizing: inherit; }
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
 
 a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
   outline-color: #4d90fe;
@@ -427,7 +432,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid silver;
+  border-top: 1px solid #c0c0c0;
   margin: 1em 0;
   padding: 0; }
 
@@ -465,7 +470,7 @@ abbr {
 /*
  * Extra small 
  */
-@media (max-width: 47.99em) {
+@media print and (max-width: 536px), screen and (max-width: 47.99em) {
   [class*=col-].reset-xs-only {
     clear: both;
     margin-left: 0 !important; }
@@ -1004,13 +1009,13 @@ abbr {
 /*
  * Small 
  */
-@media (min-width: 48em) and (max-width: 61.99em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   [class*=col-].reset-s-only {
     clear: both;
     margin-left: 0 !important; }
     [dir="rtl"] [class*=col-].reset-s-only {
       margin-right: 0 !important; } }
-@media (min-width: 48em) {
+@media print and (min-width: 537px), screen and (min-width: 48em) {
   [class*=col-s] + [class*=col-s] {
     margin-left: 2%; }
     [dir="rtl"] [class*=col-s] + [class*=col-s] {
@@ -2667,7 +2672,7 @@ input[type="reset"] {
   line-height: normal;
   margin-bottom: 0;
   background: #dadada;
-  border: solid 1px silver;
+  border: solid 1px #c0c0c0;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
   /*2 */
@@ -2685,7 +2690,7 @@ input[type="reset"] {
   input[type="button"]:hover,
   input[type="reset"]:hover {
     background-color: #cdcdcd;
-    border: solid 1px silver; }
+    border: solid 1px #c0c0c0; }
   button:active,
   input[type="submit"]:active,
   input[type="button"]:active,
@@ -2754,7 +2759,7 @@ samp,
 kbd {
   padding: .5em;
   background-color: #f7f7f9;
-  border: 1px solid silver;
+  border: 1px solid #c0c0c0;
   color: #ad0d36; }
 
 code > kbd {
@@ -2836,10 +2841,10 @@ select,
 textarea,
 input,
 .no-edit {
-  background: white;
-  border: 1px solid silver;
+  background: #fff;
+  border: 1px solid #c0c0c0;
   border-radius: 0;
-  color: #222222;
+  color: #222;
   display: block;
   font-family: inherit;
   margin-bottom: 1em;
@@ -2858,8 +2863,8 @@ input,
   .no-edit,
   .no-edit[disabled] {
     background: #ebebeb;
-    border-color: silver;
-    color: silver;
+    border-color: #c0c0c0;
+    color: #c0c0c0;
     cursor: not-allowed !important;
     /* 1 */
     opacity: 1; }
@@ -2868,13 +2873,13 @@ input,
  * Clean up that hideous file input.
  */
 input[type="file"]::-ms-value {
-  background: white;
+  background: #fff;
   border: none; }
 
 input[type="file"]::-ms-browse {
   background: #dadada;
-  border: solid 1px silver;
-  color: #222222; }
+  border: solid 1px #c0c0c0;
+  color: #222; }
   input[type="file"]::-ms-browse:active {
     background-color: #e7e7e7; }
 
@@ -2984,19 +2989,19 @@ textarea {
  * 4. IE10+
  */
 ::-webkit-input-placeholder {
-  color: silver;
+  color: #c0c0c0;
   /* 1 */ }
 
 :-moz-placeholder {
-  color: silver;
+  color: #c0c0c0;
   /*2 */ }
 
 ::-moz-placeholder {
-  color: silver;
+  color: #c0c0c0;
   /* 3 */ }
 
 :-ms-input-placeholder {
-  color: silver;
+  color: #c0c0c0;
   /* 4 */ }
 
 /*
@@ -3146,7 +3151,7 @@ ol.colored {
 dt, dd {
   min-height: 1.4em; }
 
-@media (min-width: 48em) {
+@media print and (min-width: 537px), screen and (min-width: 48em) {
     /*
 	 * Horizontally styled definition list
 	 */
@@ -3282,13 +3287,13 @@ table {
  *  Bordered tables
  */
 .table-bordered {
-  border: 1px solid silver;
+  border: 1px solid #c0c0c0;
   border-left-width: 0;
   border-collapse: separate; }
   .table-bordered th,
   .table-bordered td {
-    border-top: 1px solid silver;
-    border-left: 1px solid silver; }
+    border-top: 1px solid #c0c0c0;
+    border-left: 1px solid #c0c0c0; }
   .table-bordered thead:first-child tr:first-child th,
   .table-bordered tbody:first-child tr:first-child td {
     border-top-width: 0; }
@@ -3382,8 +3387,8 @@ table {
       bottom: 0;
       width: 100%;
       padding: 1px 1em;
-      background-color: #222222;
-      color: white; }
+      background-color: #222;
+      color: #fff; }
   .carousel > ol {
     left: 0;
     list-style: none;
@@ -3396,7 +3401,7 @@ table {
     z-index: 3; }
     .carousel > ol li {
       background-color: transparent;
-      border: 2px solid #222222;
+      border: 2px solid #222;
       cursor: pointer;
       display: inline-block;
       height: 1em;
@@ -3404,11 +3409,11 @@ table {
       text-indent: -9999px;
       width: 1em; }
       .carousel > ol li:hover {
-        background-color: silver; }
+        background-color: #c0c0c0; }
     .carousel > ol .active {
-      background-color: white; }
+      background-color: #fff; }
       .carousel > ol .active:hover {
-        background-color: white; }
+        background-color: #fff; }
   .carousel .carousel-active,
   .carousel .next,
   .carousel .prev,
@@ -3481,7 +3486,7 @@ table {
   .carousel-control, .carousel-control:active, .carousel-control:visited, .carousel-control:hover, .carousel-control:focus {
     background-color: transparent;
     border: none;
-    color: white;
+    color: #fff;
     text-decoration: none; }
   .carousel-control:hover {
     text-decoration: underline; }
@@ -3519,11 +3524,11 @@ table {
   z-index: 3; }
 
 .accordion {
-  border: solid 1px silver;
+  border: solid 1px #c0c0c0;
   margin-bottom: .125em; }
 
 .accordion-head {
-  border-bottom: solid 1px silver;
+  border-bottom: solid 1px #c0c0c0;
   display: block; }
   .accordion-head a {
     display: block;
@@ -3642,7 +3647,7 @@ x::-ms-reveal,
   max-height: 100%;
   overflow: auto;
   padding: 1em;
-  background-color: white;
+  background-color: #fff;
   text-align: left; }
   [dir="rtl"] .modal-content {
     text-align: right; }
@@ -3671,7 +3676,7 @@ x::-ms-reveal,
   padding: .83em;
   font-size: 1.5em;
   font-weight: bold;
-  color: white; }
+  color: #fff; }
   [dir="rtl"] .modal-close {
     right: auto;
     left: 1px; }
@@ -3684,7 +3689,7 @@ x::-ms-reveal,
   display: block;
   width: 2em;
   padding: .5em;
-  color: white;
+  color: #fff;
   font-size: 2em;
   font-weight: bold;
   text-align: center; }
@@ -3708,7 +3713,7 @@ x::-ms-reveal,
 .modal-direction:hover {
   text-decoration: underline; }
 
-@media (max-width: 47.99em) {
+@media print and (max-width: 536px), screen and (max-width: 47.99em) {
     /*
 	 * Force the columns to display as rows on small viewports.
      * Headers are applied with data attributes.
@@ -3766,7 +3771,7 @@ x::-ms-reveal,
   position: relative; }
   .tabs > ul {
     list-style: none;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid #c0c0c0;
     margin-top: 0;
     padding: 0; }
     .tabs > ul > li {
@@ -3787,10 +3792,10 @@ x::-ms-reveal,
           margin-left: .2em; }
         .tabs > ul > li > a:hover {
           background-color: #ebebeb;
-          border-color: silver; }
+          border-color: #c0c0c0; }
       .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
-        background-color: white;
-        border: 1px solid silver;
+        background-color: #fff;
+        border: 1px solid #c0c0c0;
         border-bottom-color: transparent;
         color: #454545;
         cursor: default; }
@@ -3842,7 +3847,7 @@ x::-ms-reveal,
   [dir="rtl"] .pull-xs {
     float: right !important; }
 
-@media (max-width: 47.99em) {
+@media print and (max-width: 536px), screen and (max-width: 47.99em) {
   .push-xs-only {
     float: right !important; }
     [dir="rtl"] .push-xs-only {
@@ -3852,7 +3857,7 @@ x::-ms-reveal,
     float: left !important; }
     [dir="rtl"] .pull-xs-only {
       float: right !important; } }
-@media (min-width: 48em) {
+@media print and (min-width: 537px), screen and (min-width: 48em) {
   .push-s {
     float: right !important; }
     [dir="rtl"] .push-s {
@@ -3862,7 +3867,7 @@ x::-ms-reveal,
     float: left !important; }
     [dir="rtl"] .pull-s {
       float: right !important; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .push-s-only {
     float: right !important; }
     [dir="rtl"] .push-s-only {
@@ -3923,7 +3928,7 @@ x::-ms-reveal,
 .inline-xs {
   display: inline; }
 
-@media (max-width: 47.99em) {
+@media print and (max-width: 536px), screen and (max-width: 47.99em) {
   .block-xs-only {
     display: block !important; }
 
@@ -3932,7 +3937,7 @@ x::-ms-reveal,
 
   .inline-xs-only {
     display: inline !important; } }
-@media (min-width: 48em) {
+@media print and (min-width: 537px), screen and (min-width: 48em) {
   .block-s {
     display: block !important; }
 
@@ -3941,7 +3946,7 @@ x::-ms-reveal,
 
   .inline-s {
     display: inline !important; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .block-s-only {
     display: block !important; }
 
@@ -3998,7 +4003,7 @@ x::-ms-reveal,
 .text-xs-center {
   text-align: center !important; }
 
-@media (max-width: 47.99em) {
+@media print and (max-width: 536px), screen and (max-width: 47.99em) {
   .text-xs-left-only {
     text-align: left !important; }
 
@@ -4007,7 +4012,7 @@ x::-ms-reveal,
 
   .text-xs-center-only {
     text-align: center !important; } }
-@media (min-width: 48em) {
+@media print and (min-width: 537px), screen and (min-width: 48em) {
   .text-s-left {
     text-align: left !important; }
 
@@ -4016,7 +4021,7 @@ x::-ms-reveal,
 
   .text-s-center {
     text-align: center !important; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .text-s-left {
     text-align: left !important; }
 
@@ -4062,7 +4067,7 @@ x::-ms-reveal,
     left: auto;
     right: -99999px; }
 
-@media (min-width: 48em) {
+@media print and (min-width: 537px), screen and (min-width: 48em) {
   .grid-state-indicator {
     width: 1px; } }
 @media (min-width: 62em) {
@@ -4147,7 +4152,7 @@ x::-ms-reveal,
 .visible-l {
   display: none !important; }
 
-@media (max-width: 47.99em) {
+@media print and (max-width: 536px), screen and (max-width: 47.99em) {
   .hidden-xs {
     display: none !important; }
 
@@ -4175,7 +4180,7 @@ x::-ms-reveal,
 
   caption.visible-xs {
     display: table-caption !important; } }
-@media (min-width: 48em) and (max-width: 61.99em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .hidden-s {
     display: none !important; }
 
@@ -4261,11 +4266,15 @@ x::-ms-reveal,
     display: table-caption !important; } }
 @media print {
   * {
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+    text-shadow: none !important; }
+
+  html,
+  body {
     background: transparent !important;
     color: #000 !important;
-    /**Black prints faster: h5bp.com/s */
-    box-shadow: none !important;
-    text-shadow: none !important; }
+    /**Black prints faster: h5bp.com/s */ }
 
   a,
   a:visited {
@@ -4309,4 +4318,13 @@ x::-ms-reveal,
 
   h2,
   h3 {
-    page-break-after: avoid; } }
+    page-break-after: avoid; }
+
+  .container, .modal-ajax.container,
+  .modal-iframe {
+    max-width: 100%;
+    width: 100%; }
+    .container.fixed,
+    .fixed.modal-iframe, .fixed .container,
+    .fixed .modal-iframe {
+      width: 100%; } }
