@@ -4067,15 +4067,15 @@ x::-ms-reveal,
     left: auto;
     right: -99999px; }
 
-@media print and (min-width: 537px), screen and (min-width: 48em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .grid-state-indicator {
-    width: 1px; } }
-@media (min-width: 62em) {
+    width: 1px !important; } }
+@media (min-width: 62em) and (max-width: 74.99em) {
   .grid-state-indicator {
-    width: 2px; } }
+    width: 2px !important; } }
 @media (min-width: 75em) {
   .grid-state-indicator {
-    width: 3px; } }
+    width: 3px !important; } }
 /*
  * Image replacement
  */
