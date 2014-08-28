@@ -298,7 +298,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
+                $(this).removeClass("swipe swipe-next").css({ "left": "", "right": "", "opacity": "" });
             });
         }
 
@@ -398,6 +398,7 @@
 
         this.$items.not($activeItem).not($nextItem).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
 
+
         if ($nextItem.hasClass("carousel-active")) {
             return;
         }
@@ -416,7 +417,6 @@
             percent *= -1;
         }
 
-        // Shift the items .
         this.$element.addClass("no-transition");
         if (this.options.mode === "slide") {
             if (rtl) {
@@ -458,7 +458,7 @@
                 this.translationDuration = parseFloat($activeItem.css("transition-duration"));
             }
 
-            // Get the distance and turn it into a percentage
+            // Get the distance and turn it into into a percentage
             // to calculate the duration. Whichever is lowest is used.
             var width = $activeItem.width(),
                 percentageTravelled = (Math.abs(event.delta.x) / width) * 100,
