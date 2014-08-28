@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.0 | MIT License | responsivebp.com */
+/*! Responsive v3.1.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -210,8 +210,9 @@
                 eswipeend = "swipeend",
                 etouch = getEvents(ns);
 
-            // Set the touchaction variable for move.
-            var touchAction = handler.data && handler.data.touchAction || "none";
+            // Set the touchAction variable for move.
+            var touchAction = handler.data && handler.data.touchAction || "none",
+                sensitivity = handler.data && handler.data.sensitivity || 5;
 
             if (supportPointer) {
                 // Enable extended touch events on supported browsers before any touch events.
@@ -223,7 +224,6 @@
 
                 var start = {},
                     delta = {},
-                    isScrolling,
                     onMove = function (event) {
 
                         // Normalize the variables.
@@ -250,30 +250,35 @@
                         var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
                             dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
 
-                        // Mimic touch action on iProducts.
-                        // Should also prevent bounce.
-                        if (!isPointer) {
-                            switch (touchAction) {
-                                case "pan-x":
-                                case "pan-y":
+                        var doSwipe,
+                            percentX = Math.abs(parseFloat((dx / $this.width()) * 100)) || 100,
+                            percentY = Math.abs(parseFloat((dy / $this.height()) * 100)) || 100;
 
-                                    isScrolling = touchAction === "pan-x" ?
-                                                  Math.abs(dy) <= Math.abs(dx) :
-                                                  Math.abs(dx) <= Math.abs(dy);
-
-                                    if (!isScrolling) {
-                                        event.preventDefault();
-                                    } else {
-                                        event.stopPropagation();
-                                        return;
-                                    }
-
-                                    break;
-                                default:
+                        // Work out whether to do a scroll based on the sensitivity limit.
+                        switch (touchAction) {
+                            case "pan-x":
+                                if (Math.abs(dy) > sensitivity) {
                                     event.preventDefault();
-                                    break;
-                            }
+                                }
+                                doSwipe = Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > sensitivity && percentY < 100;
+                                break;
+                            case "pan-y":
+                                if (Math.abs(dx) > sensitivity) {
+                                    event.preventDefault();
+                                }
+                                doSwipe = Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > sensitivity && percentX < 100;
+                                break;
+                            default:
+                                event.preventDefault();
+                                doSwipe = Math.abs(dy) > sensitivity || Math.abs(dx) > sensitivity && percentX < 100 && percentY < 100;
+                                break;
                         }
+                        
+                        if (!doSwipe) {
+                            return;
+                        }
+
+                        event.stopPropagation();
 
                         moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
                         $this.trigger(moveEvent);
@@ -323,8 +328,7 @@
                         event.preventDefault();
                     }
 
-                    // Used for testing first move event
-                    isScrolling = undefined;
+                    event.stopPropagation();
 
                     // Measure start values.
                     start = {

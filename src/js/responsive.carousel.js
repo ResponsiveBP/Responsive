@@ -298,7 +298,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe swipe-next").css({ "left": "", "right": "", "opacity": "" });
+                $(this).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
             });
         }
 
@@ -387,8 +387,6 @@
             return;
         }
 
-        this.$items.removeClass("swipe-next");
-
         if (!$nextItem.length) {
 
             if (!this.options.wrap) {
@@ -397,6 +395,8 @@
 
             $nextItem = this.$element.children("figure")[fallback]();
         }
+
+        this.$items.not($activeItem).not($nextItem).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
 
         if ($nextItem.hasClass("carousel-active")) {
             return;
@@ -416,23 +416,19 @@
             percent *= -1;
         }
 
-        // Shift the items but put a limit on sensitivity.
-        if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
-            this.$element.addClass("no-transition");
-            if (this.options.mode === "slide") {
-                if (rtl) {
-                    $activeItem.addClass("swiping").css({ "right": percent + "%" });
-                    $nextItem.addClass("swipe swipe-next").css({ "right": (percent - diff) + "%" });
-                } else {
-                    $activeItem.addClass("swiping").css({ "left": percent + "%" });
-                    $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
-                }
+        // Shift the items .
+        this.$element.addClass("no-transition");
+        if (this.options.mode === "slide") {
+            if (rtl) {
+                $activeItem.addClass("swiping").css({ "right": percent + "%" });
+                $nextItem.addClass("swipe swipe-next").css({ "right": (percent - diff) + "%" });
             } else {
-                $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
-                $nextItem.addClass("swipe swipe-next");
+                $activeItem.addClass("swiping").css({ "left": percent + "%" });
+                $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
             }
         } else {
-            this.cycle();
+            $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
+            $nextItem.addClass("swipe swipe-next");
         }
     };
 
@@ -462,10 +458,10 @@
                 this.translationDuration = parseFloat($activeItem.css("transition-duration"));
             }
 
-            // Get the distance and turn it into into a percentage
+            // Get the distance and turn it into a percentage
             // to calculate the duration. Whichever is lowest is used.
             var width = $activeItem.width(),
-                percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
+                percentageTravelled = (Math.abs(event.delta.x) / width) * 100,
                 swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
                 newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
 

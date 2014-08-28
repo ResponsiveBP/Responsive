@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.0 | MIT License | responsivebp.com */
+/*! Responsive v3.1.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -210,8 +210,9 @@
                 eswipeend = "swipeend",
                 etouch = getEvents(ns);
 
-            // Set the touchaction variable for move.
-            var touchAction = handler.data && handler.data.touchAction || "none";
+            // Set the touchAction variable for move.
+            var touchAction = handler.data && handler.data.touchAction || "none",
+                sensitivity = handler.data && handler.data.sensitivity || 5;
 
             if (supportPointer) {
                 // Enable extended touch events on supported browsers before any touch events.
@@ -223,7 +224,6 @@
 
                 var start = {},
                     delta = {},
-                    isScrolling,
                     onMove = function (event) {
 
                         // Normalize the variables.
@@ -250,30 +250,35 @@
                         var dx = (isMouse ? original.pageX : isPointer ? original.clientX : original.touches[0].pageX) - start.x,
                             dy = (isMouse ? original.pageY : isPointer ? original.clientY : original.touches[0].pageY) - start.y;
 
-                        // Mimic touch action on iProducts.
-                        // Should also prevent bounce.
-                        if (!isPointer) {
-                            switch (touchAction) {
-                                case "pan-x":
-                                case "pan-y":
+                        var doSwipe,
+                            percentX = Math.abs(parseFloat((dx / $this.width()) * 100)) || 100,
+                            percentY = Math.abs(parseFloat((dy / $this.height()) * 100)) || 100;
 
-                                    isScrolling = touchAction === "pan-x" ?
-                                                  Math.abs(dy) <= Math.abs(dx) :
-                                                  Math.abs(dx) <= Math.abs(dy);
-
-                                    if (!isScrolling) {
-                                        event.preventDefault();
-                                    } else {
-                                        event.stopPropagation();
-                                        return;
-                                    }
-
-                                    break;
-                                default:
+                        // Work out whether to do a scroll based on the sensitivity limit.
+                        switch (touchAction) {
+                            case "pan-x":
+                                if (Math.abs(dy) > sensitivity) {
                                     event.preventDefault();
-                                    break;
-                            }
+                                }
+                                doSwipe = Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > sensitivity && percentY < 100;
+                                break;
+                            case "pan-y":
+                                if (Math.abs(dx) > sensitivity) {
+                                    event.preventDefault();
+                                }
+                                doSwipe = Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > sensitivity && percentX < 100;
+                                break;
+                            default:
+                                event.preventDefault();
+                                doSwipe = Math.abs(dy) > sensitivity || Math.abs(dx) > sensitivity && percentX < 100 && percentY < 100;
+                                break;
                         }
+                        
+                        if (!doSwipe) {
+                            return;
+                        }
+
+                        event.stopPropagation();
 
                         moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
                         $this.trigger(moveEvent);
@@ -323,8 +328,7 @@
                         event.preventDefault();
                     }
 
-                    // Used for testing first move event
-                    isScrolling = undefined;
+                    event.stopPropagation();
 
                     // Measure start values.
                     start = {
@@ -981,7 +985,7 @@
         // Clear the added css.
         if (this.$items) {
             this.$items.each(function () {
-                $(this).removeClass("swipe swipe-next").css({ "left": "", "right": "", "opacity": "" });
+                $(this).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
             });
         }
 
@@ -1070,8 +1074,6 @@
             return;
         }
 
-        this.$items.removeClass("swipe-next");
-
         if (!$nextItem.length) {
 
             if (!this.options.wrap) {
@@ -1080,6 +1082,8 @@
 
             $nextItem = this.$element.children("figure")[fallback]();
         }
+
+        this.$items.not($activeItem).not($nextItem).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
 
         if ($nextItem.hasClass("carousel-active")) {
             return;
@@ -1099,23 +1103,19 @@
             percent *= -1;
         }
 
-        // Shift the items but put a limit on sensitivity.
-        if (Math.abs(percent) < 100 && Math.abs(percent) > 5) {
-            this.$element.addClass("no-transition");
-            if (this.options.mode === "slide") {
-                if (rtl) {
-                    $activeItem.addClass("swiping").css({ "right": percent + "%" });
-                    $nextItem.addClass("swipe swipe-next").css({ "right": (percent - diff) + "%" });
-                } else {
-                    $activeItem.addClass("swiping").css({ "left": percent + "%" });
-                    $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
-                }
+        // Shift the items .
+        this.$element.addClass("no-transition");
+        if (this.options.mode === "slide") {
+            if (rtl) {
+                $activeItem.addClass("swiping").css({ "right": percent + "%" });
+                $nextItem.addClass("swipe swipe-next").css({ "right": (percent - diff) + "%" });
             } else {
-                $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
-                $nextItem.addClass("swipe swipe-next");
+                $activeItem.addClass("swiping").css({ "left": percent + "%" });
+                $nextItem.addClass("swipe swipe-next").css({ "left": (percent + diff) + "%" });
             }
         } else {
-            this.cycle();
+            $activeItem.addClass("swipe").css({ "opacity": 1 - Math.abs((percent / 100)) });
+            $nextItem.addClass("swipe swipe-next");
         }
     };
 
@@ -1145,10 +1145,10 @@
                 this.translationDuration = parseFloat($activeItem.css("transition-duration"));
             }
 
-            // Get the distance and turn it into into a percentage
+            // Get the distance and turn it into a percentage
             // to calculate the duration. Whichever is lowest is used.
             var width = $activeItem.width(),
-                percentageTravelled = parseInt((Math.abs(event.delta.x) / width) * 100, 10),
+                percentageTravelled = (Math.abs(event.delta.x) / width) * 100,
                 swipeDuration = (((event.duration / 1000) * 100) / percentageTravelled),
                 newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
 
@@ -1917,7 +1917,7 @@
         if (this.options.mobileTarget) {
             var width = this.options.mobileViewportWidth;
             // Handle numeric width.
-            if (typeof width === "number" && width >= parseInt($window.width(), 10)) {
+            if (typeof width === "number" && width >= $window.width()) {
                 w.location.href = this.options.mobileTarget;
                 return;
             }
@@ -2393,11 +2393,11 @@
 
     Modal.prototype.resize = function () {
         // Resize the model
-        var windowHeight = parseInt($window.height(), 10),
-            headerHeight = $header.length && parseInt($header.height(), 10) || 0,
-            closeHeight = $close.length && parseInt($close.outerHeight(), 10) || 0,
+        var windowHeight = $window.height(),
+            headerHeight = $header.length && $header.height() || 0,
+            closeHeight = $close.length && $close.outerHeight() || 0,
             topHeight = closeHeight > headerHeight ? closeHeight : headerHeight,
-            footerHeight = $footer.length && parseInt($footer.height(), 10) || 0,
+            footerHeight = $footer.length && $footer.height() || 0,
             maxHeight = (windowHeight - (topHeight + footerHeight)) * 0.95;
 
         $(".modal-overlay").css({ "padding-top": topHeight, "padding-bottom": footerHeight });
@@ -2409,8 +2409,8 @@
 
             // Calculate the ratio.
             var $iframe = $modal.find(".media > iframe"),
-                iframeWidth = parseInt($iframe.width(), 10),
-                iframeHeight = parseInt($iframe.height(), 10),
+                iframeWidth = $iframe.width(),
+                iframeHeight = $iframe.height(),
                 ratio = iframeWidth / iframeHeight,
                 maxWidth = maxHeight * ratio;
 
@@ -2435,7 +2435,7 @@
             // This causes the content to jump behind the model but it's all I can
             // find for now.
             if (w.MSPointerEvent) {
-                if ($content.length && $content.children("*:first")[0].scrollHeight > parseInt($content.height(), 10)) {
+                if ($content.length && $content.children("*:first")[0].scrollHeight > $content.height()) {
                     $html.addClass("modal-lock");
                 }
             }

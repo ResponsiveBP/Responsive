@@ -102,7 +102,7 @@
         if (this.options.mobileTarget) {
             var width = this.options.mobileViewportWidth;
             // Handle numeric width.
-            if (typeof width === "number" && width >= parseInt($window.width(), 10)) {
+            if (typeof width === "number" && width >= $window.width()) {
                 w.location.href = this.options.mobileTarget;
                 return;
             }
@@ -578,11 +578,11 @@
 
     Modal.prototype.resize = function () {
         // Resize the model
-        var windowHeight = parseInt($window.height(), 10),
-            headerHeight = $header.length && parseInt($header.height(), 10) || 0,
-            closeHeight = $close.length && parseInt($close.outerHeight(), 10) || 0,
+        var windowHeight = $window.height(),
+            headerHeight = $header.length && $header.height() || 0,
+            closeHeight = $close.length && $close.outerHeight() || 0,
             topHeight = closeHeight > headerHeight ? closeHeight : headerHeight,
-            footerHeight = $footer.length && parseInt($footer.height(), 10) || 0,
+            footerHeight = $footer.length && $footer.height() || 0,
             maxHeight = (windowHeight - (topHeight + footerHeight)) * 0.95;
 
         $(".modal-overlay").css({ "padding-top": topHeight, "padding-bottom": footerHeight });
@@ -594,8 +594,8 @@
 
             // Calculate the ratio.
             var $iframe = $modal.find(".media > iframe"),
-                iframeWidth = parseInt($iframe.width(), 10),
-                iframeHeight = parseInt($iframe.height(), 10),
+                iframeWidth = $iframe.width(),
+                iframeHeight = $iframe.height(),
                 ratio = iframeWidth / iframeHeight,
                 maxWidth = maxHeight * ratio;
 
@@ -620,7 +620,7 @@
             // This causes the content to jump behind the model but it's all I can
             // find for now.
             if (w.MSPointerEvent) {
-                if ($content.length && $content.children("*:first")[0].scrollHeight > parseInt($content.height(), 10)) {
+                if ($content.length && $content.children("*:first")[0].scrollHeight > $content.height()) {
                     $html.addClass("modal-lock");
                 }
             }
