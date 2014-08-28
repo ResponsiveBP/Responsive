@@ -31,7 +31,7 @@ $grid-breakpoint-m-max: 74.99em !default;
 $grid-breakpoint-l-min: 75em !default;
 
 // Print Breakpoints. Printing on A4 only maintains 
-// xs grid layout so we shift the xs/s breakpoint to force it so print using the 
+// xs grid layout so we shift the xs/s breakpoint to force it to print using the 
 // s grid. These are deliberately set at pixel values to ensure 
 // that font-size doesn't affect output.
 $grid-print-breakpoint-xs-max: 536px !default;

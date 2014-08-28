@@ -1145,7 +1145,7 @@
                 this.translationDuration = parseFloat($activeItem.css("transition-duration"));
             }
 
-            // Get the distance and turn it into into a percentage
+            // Get the distance and turn it into a percentage
             // to calculate the duration. Whichever is lowest is used.
             var width = $activeItem.width(),
                 percentageTravelled = (Math.abs(event.delta.x) / width) * 100,
