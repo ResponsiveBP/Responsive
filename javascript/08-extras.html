@@ -74,7 +74,10 @@ sublinks: ["#general|General Tools",
         <dt><strong>$(target).redraw()</strong></dt>
         <dd>Forces the browser to repaint which will trigger a CSS transition.</dd>
         <dt><strong>$(target).ensureTransitionEnd(duration)</strong></dt>
-        <dd>Ensures that the transition end callback is triggered after the given duration in milliseconds.</dd>
+        <dd>
+            Ensures that the transition end callback is triggered after the given duration in milliseconds.
+            If no duration is set then it will attempt to work out the transition time using the elements style rules.
+        </dd>
         <dt><strong>$(target).onTransitionEnd(callback)</strong></dt>
         <dd>Performs the given callback function at the end of a CSS transition.</dd>
     </dl>
@@ -94,6 +97,13 @@ sublinks: ["#general|General Tools",
                 A <a href="http://learn.jquery.com/events/event-extensions/#special-event-hooks" rel="external nofollow">special event</a> that can be bound or
                 unbound to an target using jquery's<code>on()</code> and <code>off()</code>. This allows the element to register and respond to swipe actions.
             </p>
+            <p>The following data can be passed to handler in <code>event.data</code> when the event is triggered.</p>
+            <dl>
+                <dt><strong>touchAction</strong></dt>
+                <dd>The touch action to respond to which restricts the direction that you can scroll within. <var>pan-x</var>, <var>pan-y</var>, or the default <var>none</var></dd>
+                <dt><strong>sensitivity</strong></dt>
+                <dd>Defined as a percentage of the target elements height or width. Defaults to <var>5</var>.</dd>
+            </dl>
             <p>Once bound the element exposes the following events. These can be suffixed on initialization.</p>
             <dl>
                 <dt><strong>swipestart</strong></dt>

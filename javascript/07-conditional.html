@@ -19,7 +19,7 @@ sublinks: ["#examples|Examples",
     <p>
         The plugin uses ajax to load in the defined content. The url paths to the content are defined in the same format as
         jQuery's <a href="http://api.jquery.com/load/" rel="external">Load()</a> method which allows you to specify selectors. After each initial call the content
-        is cached so that no further requests are made. 
+        is cached so that no further requests are made. If no fallback is defined then any html contained withing the plugin element will be saved and cached instead.
     </p>
     <p>
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
@@ -30,7 +30,25 @@ sublinks: ["#examples|Examples",
     <section id="examples">
         <h1>Examples</h1>
         <section class="row">
+            <h3>Standard</h3>
             <div data-conditional-xs="../css/grid.html #basic" data-conditional-fallback="tabs.html #examples" data-conditional-l="carousel.html #carousel-1">
+            </div>
+        </section>
+        <section class="row">
+            <h3>Initial Content as Fallback</h3>
+            <p>
+                In this example the content that is within the bounds of the plugin element before the plugin initializes is saved and used as fallback content for
+                any undefined grid ranges. This ensures that search engine crawlers can find content to add to their results.
+            </p>
+            <div data-conditional-xs="../css/grid.html #basic" data-conditional-l="carousel.html #carousel-1">
+                <blockquote>
+                    <p>
+                        The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation
+                        of the printed page. We should embrace the fact that the web doesn't have the same constraints, and design for this flexibility.
+                        But first, we must 'accept the ebb and flow of things.'
+                    </p>
+                    <cite>- John Allsopp, <a href="http://www.alistapart.com/articles/dao/">"A Dao of Web Design"</a></cite>
+                </blockquote>
             </div>
         </section>
         <div class="alert" role="alert">
@@ -121,7 +139,6 @@ $(document).off("ready.r.conditional domchanged.r.conditional")
            .on("ready.r.conditional domchanged.r.conditional", function () {
     // Your custom behaviour...
 }); 
-
 // Bind to the loaded event.
 $("YOUR_SELECTOR").on("loaded.r.conditional", function(event) {
     // Your custom behaviour...

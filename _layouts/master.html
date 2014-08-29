@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if page.title %} {{ page.title }} :: {% endif %} {{ site.name }}</title>
+    <meta name="description" content="{% if page.subheading %} {{ page.subheading }} {% else %} {{ site.description }} {% endif %}" />
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="author" content="{{ site.author }}">
+
+    <link href="{{ site.baseurl }}/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="{{ site.baseurl }}/assets/css/docs.css" rel="stylesheet" />
+    <link href="{{ site.baseurl }}/assets/css/vendor/prism.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="{{ site.baseurl }}/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation">
+        <div class="container">
+            <div class="row">
+                <a href="{{ site.baseurl }}/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="{{ site.baseurl }}/getting-started.html">Getting Started</a><a href="{{ site.baseurl }}/css/">CSS</a><a href="{{ site.baseurl }}/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        {{ content }}
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right">Back to Top ^</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="{{ site.baseurl }}/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="{{ site.baseurl }}/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <!--<![endif]-->
+    <script src="{{ site.baseurl }}/assets/js/vendor/prism.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/responsive.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="{{ site.baseurl }}/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

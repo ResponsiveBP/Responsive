@@ -1,20 +1,19 @@
-{% include header.html %}
-<main class="container" role="main">
-    <header role="banner">
-        {% include breadcrumb.html %}
-        <div class="row">
-            <div class="col-m-6">
-                <h1>
-                    {{page.heading}}
-                    <span>{{page.subheading}}</span>
-                </h1>
-            </div>
-            <div class="col-m-6">
-                <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
-            </div>
+---
+layout: master
+---
+<header role="banner">
+    {% include breadcrumb.html %}
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                {{page.heading}}
+                <span>{{page.subheading}}</span>
+            </h1>
         </div>
-    </header>
-    <hr />
-    {{ content }}
-</main>
-{% include footer.html %}
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+{{ content }}

@@ -1,12 +1,11 @@
-{% include header.html %}
-<main class="container" role="main">
-    <header role="banner">
-        <h1>
-            {{page.heading}}
-            <span>{{page.subheading}}</span>
-        </h1>
-    </header>
-    <hr />
-    {{ content }}
-</main>
-{% include footer.html %}
+---
+layout: master
+---
+<header role="banner">
+    <h1>
+        {{page.heading}}
+        <span>{{page.subheading}}</span>
+    </h1>
+</header>
+<hr />
+{{ content }}
