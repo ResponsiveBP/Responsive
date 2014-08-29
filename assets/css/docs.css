@@ -162,7 +162,11 @@ header[role="banner"] h1 {
 }
 
     .download:hover {
-        text-decoration: underline;
+        background-color: #333;
+    }
+
+    .download:active {
+        background-color: #555;
     }
 
 .download-links {
@@ -268,6 +272,12 @@ header[role="banner"] h1 {
     .social-icons li {
         display: inline-block;
     }
+
+.shadow {
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
+    -ms-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
+}
 
 /*==|Carbon Ads|==============================================
  *
