@@ -71,7 +71,7 @@ nav[role="navigation"] [data-dropdown-target] {
     #navigation a {
         display: block;
         float: none;
-        padding: .5em 0;
+        padding: 1em 0;
     }
 
         #navigation a:hover {
@@ -153,7 +153,7 @@ header[role="banner"] h1 {
     }
 
 .download {
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding: 1em;
     background-color: #222;
     color: #fff;
@@ -161,13 +161,19 @@ header[role="banner"] h1 {
     text-decoration: none;
 }
 
-    .download:hover {
-        background-color: #333;
+@media (min-width: 62em) {
+    .download {
+        font-size: 1.5em;
     }
+}
 
-    .download:active {
-        background-color: #555;
-    }
+.download:hover {
+    background-color: #333;
+}
+
+.download:active {
+    background-color: #555;
+}
 
 .download-links {
     list-style: none;
@@ -277,6 +283,24 @@ header[role="banner"] h1 {
     -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
     -ms-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
     box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
+}
+
+.icon-left > i {
+    margin-right: .5em;
+}
+
+[dir="rtl"] .icon-left > i {
+    margin-left: .5em;
+    margin-right: 0;
+}
+
+.icon-right > i {
+    margin-left: .5em;
+}
+
+[dir="rtl"] .icon-right > i {
+    margin-right: .5em;
+    margin-left: 0;
 }
 
 /*==|Carbon Ads|==============================================
