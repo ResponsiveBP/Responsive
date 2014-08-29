@@ -175,8 +175,7 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   height: 0; }
 
 /**
@@ -282,8 +281,7 @@ input {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   padding: 0;
   /*2 */ }
@@ -305,7 +303,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -webkit-box-sizing: content-box;
   /*2 */
   box-sizing: content-box; }
 
@@ -371,8 +368,7 @@ html {
   color: #222;
   font-size: 100%;
   line-height: 1.4;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; }
+  box-sizing: border-box; }
 
 /**
  * Fix the box model
@@ -380,8 +376,7 @@ html {
  */
 *, :before, :after,
 hr, input[type=search] {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit; }
+  box-sizing: inherit; }
 
 a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
   outline-color: #4d90fe;
@@ -4266,8 +4261,7 @@ x::-ms-reveal,
     display: table-caption !important; } }
 @media print {
   * {
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
+    box-shadow: none !important;
     text-shadow: none !important; }
 
   html,
