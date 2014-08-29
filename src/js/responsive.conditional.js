@@ -46,7 +46,22 @@
 
     Conditional.prototype.resize = function () {
 
-        var grid = $.support.currentGrid().grid;
+        var current = $.support.currentGrid(),
+            grid = current.grid,
+            range = current.range;
+
+        // Check to see if we need to cache the current content.
+        if (!this.options.fallback) {
+            for (var level in range) {
+                if (range.hasOwnProperty(level)) {
+                    var name = range[level];
+                    if (!this.options[name]) {
+                        this.options[name] = "fallback";
+                        this.cache[name] = this.$element.html();
+                    }
+                }
+            }
+        }
 
         if (this.currentGrid !== grid) {
             this.currentGrid = grid;
@@ -64,7 +79,7 @@
 
                 } else {
                     this.$element.empty().load(target, null, function (responseText, textStatus) {
-                        
+
                         // Handle errors.
                         if (textStatus === "error") {
                             self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));

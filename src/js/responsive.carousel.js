@@ -302,7 +302,9 @@
             });
         }
 
-        $activeItem.onTransitionEnd(complete);
+        // We use ensure here as IOS7 can sometimes not fire 
+        // the event if a scroll is accidentally triggered.
+        $activeItem.onTransitionEnd(complete).ensureTransitionEnd();
 
         // Restart the cycle.
         if (isCycling) {

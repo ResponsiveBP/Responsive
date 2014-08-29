@@ -117,9 +117,14 @@
         /// Ensures that the transition end callback is triggered.
         /// http://blog.alexmaccaw.com/css-transitions
         ///</summary>
-        var called = false,
+        var rtransition = /\d+(.\d+)/,
+            called = false,
             $this = $(this),
             callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
+
+        if (!duration) {
+            duration = (rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000;
+        }
 
         $this.one($.support.transition.end, function () { called = true; });
         w.setTimeout(callback, duration);
@@ -257,13 +262,13 @@
                         // Work out whether to do a scroll based on the sensitivity limit.
                         switch (touchAction) {
                             case "pan-x":
-                                if (Math.abs(dy) > sensitivity) {
+                                if (Math.abs(dy) > Math.abs(dx)) {
                                     event.preventDefault();
                                 }
                                 doSwipe = Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > sensitivity && percentY < 100;
                                 break;
                             case "pan-y":
-                                if (Math.abs(dx) > sensitivity) {
+                                if (Math.abs(dx) > Math.abs(dy)) {
                                     event.preventDefault();
                                 }
                                 doSwipe = Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > sensitivity && percentX < 100;
@@ -273,12 +278,12 @@
                                 doSwipe = Math.abs(dy) > sensitivity || Math.abs(dx) > sensitivity && percentX < 100 && percentY < 100;
                                 break;
                         }
-                        
+
+                        event.stopPropagation();
+
                         if (!doSwipe) {
                             return;
                         }
-
-                        event.stopPropagation();
 
                         moveEvent = $.Event(eswipemove, { delta: { x: dx, y: dy } });
                         $this.trigger(moveEvent);
