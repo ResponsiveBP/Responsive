@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.1 | MIT License | responsivebp.com */
+/*! Responsive v3.1.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -117,6 +117,11 @@
         /// Ensures that the transition end callback is triggered.
         /// http://blog.alexmaccaw.com/css-transitions
         ///</summary>
+
+        if (!$.support.transition) {
+            return this;
+        }
+
         var rtransition = /\d+(.\d+)/,
             called = false,
             $this = $(this),
