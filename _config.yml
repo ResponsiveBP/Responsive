@@ -15,8 +15,8 @@ name: Responsive
 exclude:          ["CNAME","node_modules","Gemfile","Gemfile.lock"]
 
 # Meta Details
-description: A super lightweight HTML, SASS, CSS, and JavaScript framework for building responsive websites.
-keywords: "HTML, SASS, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate"
+description: A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites.
+keywords: "HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate"
 author: "James South, and Responsive contributers"
 
 
