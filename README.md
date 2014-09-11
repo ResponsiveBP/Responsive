@@ -1,5 +1,5 @@
 #Responsive
-##A super lightweight HTML, SASS, CSS, and JavaScript framework for building responsive websites
+##A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites
 
 ###Responsive is the developers framework.
 
@@ -41,9 +41,9 @@ Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com
 
 Contribution is most welcome, that's the whole idea! Together as a community we can build a boilerplate for building responsive sites that will ensure that high standards can be delivered across all devices.   
 
-Please adhere to existing JavaScript and SASS styles though when submitting code and ensure that you test thoroughly on multiple devices.
+Please adhere to existing JavaScript and Sass styles though when submitting code and ensure that you test thoroughly on multiple devices.
 
-##Building the SASS and Javascript
+##Building the Sass and JavaScript
 
 The build process for Responsive is powered by [gulpjs](http://gulpjs.com/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
 

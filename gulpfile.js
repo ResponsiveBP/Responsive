@@ -84,7 +84,7 @@ gulp.task("watch", function () {
     // Watch for changes to our JS
     gulp.watch(path.js.src + "**/*.js", ["scripts"]);
 
-    // Watch for changes to our SASS
+    // Watch for changes to our Sass
     gulp.watch(path.sass.src + "**/*.scss", ["sass"]);
 
 });
