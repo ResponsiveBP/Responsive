@@ -169,5 +169,29 @@
     <!--<![endif]-->
 
     <script src="../../../../build/responsive.js"></script>
+    <script>
+        var $target = $(":attrStart(data-modal)"),
+            $h1 = $("h1");
+
+        // Bind to the show event.
+        $target.on("show.r.modal", function (event) {
+            $h1.text("show");
+        });
+
+        // Bind to the shown event.
+        $target.on("shown.r.modal", function (event) {
+            $h1.text("shown");
+        });
+
+        // Bind to the hide event.
+        $target.on("hide.r.modal", function (event) {
+            $h1.text("hide");
+        });
+
+        // Bind to the hidden event.
+        $target.on("hidden.r.modal", function (event) {
+            $h1.text("hidden");
+        });
+    </script>
 </body>
 </html>

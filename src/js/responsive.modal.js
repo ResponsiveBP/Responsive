@@ -199,6 +199,7 @@
             hideEvent = $.Event(ehide),
             hiddenEvent = $.Event(ehidden),
             complete = function () {
+                self.destroy(callback);
                 $modal.removeData("currentModal");
                 self.$element.trigger(hiddenEvent);
             };
@@ -211,13 +212,28 @@
 
         this.isShown = false;
 
-        this.destroy(callback);
+        $.each([$header, $footer, $close, $modal, $next, $prev], function () {
+            this.removeClass("fade-in")
+                .redraw();
+        });
+
+        // Return focus events back to normal.
+        $(document).off(efocusin);
+
+        // Unbind the keyboard and touch actions.
+        if (this.options.keyboard) {
+            $(document).off(ekeydown);
+        }
+
+        if (this.options.touch) {
+            $modal.off("swipe.modal swipeend.modal");
+        }
 
         if (!preserveOverlay) {
             this.overlay(true);
         }
 
-        $modal.onTransitionEnd(complete);
+        $modal.onTransitionEnd(complete).ensureTransitionEnd();
     };
 
     Modal.prototype.overlay = function (hide) {
@@ -471,58 +487,38 @@
     };
 
     Modal.prototype.destroy = function (callback) {
+
+        // Clean up the next/prev.
+        $next.detach();
+        $prev.detach();
+
+        // Clean up the header/footer.
+        $header.empty().detach();
+        $footer.empty().detach();
+        $close.detach();
+
+        // Remove label.
+        $overlay.removeAttr("aria-labelledby");
+
+        if (!this.options.external) {
+            // Put that kid back where it came from or so help me.
+            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+            $placeholder.detach().insertAfter($overlay);
+        }
+
         var self = this;
+        // Fix __flash__removeCallback' is undefined error.
+        $modal.find("iframe").attr("src", "");
+        w.setTimeout(function () {
 
-        $.each([$header, $footer, $close, $modal, $next, $prev], function () {
-            this.removeClass("fade-in")
-                .redraw();
-        });
+            $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
+                "max-height": "",
+                "max-width": ""
+            }).empty();
 
-        $modal.onTransitionEnd(function () {
-
-            // Clean up the next/prev.
-            $next.detach();
-            $prev.detach();
-
-            // Clean up the header/footer.
-            $header.empty().detach();
-            $footer.empty().detach();
-            $close.detach();
-
-            // Remove label.
-            $overlay.removeAttr("aria-labelledby");
-
-            if (!self.options.external) {
-                // Put that kid back where it came from or so help me.
-                $(self.options.target).addClass(self.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
-                $placeholder.detach().insertAfter($overlay);
-            }
-
-            // Fix __flash__removeCallback' is undefined error.
-            $.when($modal.find("iframe").attr("src", "")).then(w.setTimeout(function () {
-
-                $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
-                    "max-height": "",
-                    "max-width": ""
-                }).empty();
-
-                // Return focus events back to normal.
-                $(document).off(efocusin);
-
-                // Unbind the keyboard and touch actions.
-                if (self.options.keyboard) {
-                    $(document).off(ekeydown);
-                }
-
-                if (self.options.touch) {
-                    $modal.off("swipe.modal swipeend.modal");
-                }
-
-                // Handle callback passed from direction and linked calls.
-                callback && callback.call(self);
-            }, 100));
-
-        });
+            // Handle callback passed from direction and linked calls.
+            callback && callback.call(self);
+        }, 100);
     };
 
     Modal.prototype.click = function (event) {

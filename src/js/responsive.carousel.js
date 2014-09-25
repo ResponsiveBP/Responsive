@@ -60,7 +60,21 @@
         this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
-        var self = this;
+        var self = this,
+            activeIndex = this.activeindex();
+
+        // Hide the previous button if no wrapping.
+        if (!this.options.wrap) {
+            if (activeIndex === 0) {
+                this.$previousTrigger.hide().attr("aria-hidden", true);
+            }
+        }
+
+        // Hide both if one item.
+        if (this.$items.length === 1) {
+            this.$previousTrigger.hide().attr("aria-hidden", true);
+            this.$nextTrigger.hide().attr("aria-hidden", true);
+        }
 
         // Add the css class to support fade.
         this.options.mode === "fade" && this.$element.addClass("carousel-fade");
@@ -265,8 +279,25 @@
             this.pause();
         }
 
-        // Highlight the correct indicator.
         this.$element.one(eslid, function () {
+
+            // Hide the correct trigger if necessary.
+            if (!self.options.wrap) {
+                var activePosition = self.activeindex();
+                if (self.$items && activePosition === self.$items.length - 1) {
+                    self.$nextTrigger.hide().attr("aria-hidden", true);
+                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                }
+                else if (self.$items && activePosition === 0) {
+                    self.$previousTrigger.hide().attr("aria-hidden", true);
+                    self.$nextTrigger.show().removeAttr("aria-hidden");
+                } else {
+                    self.$nextTrigger.show().removeAttr("aria-hidden");
+                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                }
+            }
+
+            // Highlight the correct indicator.
             self.$indicators.removeClass("active")
                 .eq(self.activeindex()).addClass("active");
         });
@@ -399,7 +430,6 @@
         }
 
         this.$items.not($activeItem).not($nextItem).removeClass("swipe swiping swipe-next").css({ "left": "", "right": "", "opacity": "" });
-
 
         if ($nextItem.hasClass("carousel-active")) {
             return;
