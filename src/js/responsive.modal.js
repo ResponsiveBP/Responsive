@@ -8,7 +8,7 @@
 (function ($, w, ns) {
 
     "use strict";
-
+    
     if (w.RESPONSIVE_MODAL) {
         return;
     }
@@ -60,6 +60,7 @@
             modal: null,
             external: false,
             group: null,
+            image: false,
             iframe: false,
             iframeScroll: true,
             keyboard: true,
@@ -362,6 +363,7 @@
             nextText = this.options.next + "<span class=\"visuallyhidden\">" + this.options.nextHint + "</span>",
             prevText = this.options.prev + "<span class=\"visuallyhidden\">" + this.options.prevHint + "</span>",
             iframeScroll = this.options.iframeScroll,
+            image = this.options.image || rimage.test(target),
             iframe = this.options.iframe || !local ? external && !rimage.test(target) : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
             $content = $("<div/>").addClass("modal-content");
@@ -456,7 +458,7 @@
                 $iframeWrap.addClass(mediaClasses).appendTo($modal);
 
             } else {
-                if (rimage.test(target)) {
+                if (image) {
 
                     $modal.addClass("modal-image");
 
