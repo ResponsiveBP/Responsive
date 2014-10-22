@@ -2189,9 +2189,6 @@
 
         $overlay.addClass("modal-loader");
 
-        // Calculate whether this is an external request and set the value.
-        this.options.external = !rhash.test(this.options.target);
-
         var isExternalUrl = function (url) {
 
             // Handle different host types.
