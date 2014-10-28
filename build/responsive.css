@@ -3211,12 +3211,9 @@ a img {
   max-width: 100%;
   overflow: hidden;
   padding-bottom: 56.25%;
-  padding-top: 30px;
   position: relative; }
   .media.widescreen {
     padding-bottom: 45%; }
-  .media.vimeo {
-    padding-top: 0; }
   .media.instagram {
     height: auto;
     max-width: none;
@@ -3228,8 +3225,6 @@ a img {
   .media.getty {
     height: auto;
     padding-bottom: 79.9663%; }
-  .media.video {
-    padding-top: 0; }
   .media iframe,
   .media object,
   .media embed,
@@ -3378,7 +3373,7 @@ table {
       display: block;
       width: 100%; }
     .carousel > figure > figcaption {
-      position: absolute;
+      /*position: absolute;*/
       bottom: 0;
       width: 100%;
       padding: 1px 1em;
@@ -3634,6 +3629,13 @@ x::-ms-reveal,
 .modal-iframe .media {
   background-color: #fff;
   margin-bottom: 0; }
+
+.modal-iframe.iframe-full {
+  height: 95%; }
+
+.iframe-full .media {
+  height: 100%;
+  padding: 0; }
 
 .modal-image > img {
   max-height: 100%; }

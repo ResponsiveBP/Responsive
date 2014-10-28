@@ -8,7 +8,7 @@
 (function ($, w, ns) {
 
     "use strict";
-    
+
     if (w.RESPONSIVE_MODAL) {
         return;
     }
@@ -415,10 +415,10 @@
         } else {
             if (iframe) {
 
-                $modal.addClass("modal-iframe");   
+                $modal.addClass("modal-iframe");
 
                 // Normalize the src.
-                var src = (isExternalUrl(target) && target.indexOf("http") !== 0 )? protocol + target : target,
+                var src = (isExternalUrl(target) && target.indexOf("http") !== 0) ? protocol + target : target,
                     getMediaProvider = function (url) {
                         var providers = {
                             youtube: /youtu(be\.com|be\.googleapis\.com|\.be)/i,
@@ -454,6 +454,11 @@
 
                 // Test and add additional media classes.
                 var mediaClasses = getMediaProvider(target) || "";
+
+                if (!mediaClasses) {
+                    $modal.addClass("iframe-full");
+                }
+
                 $iframeWrap.addClass(mediaClasses).appendTo($modal);
 
             } else {
@@ -501,12 +506,12 @@
         // Remove label.
         $overlay.removeAttr("aria-labelledby");
 
-        if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax")) {       
+        if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax")) {
 
             // Put that kid back where it came from or so help me.
             $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
             $placeholder.detach().insertAfter($overlay);
-        
+
         }
 
         var self = this;
@@ -514,7 +519,7 @@
         $modal.find("iframe").attr("src", "");
         w.setTimeout(function () {
 
-            $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
+            $modal.removeClass("modal-iframe iframe-full modal-ajax modal-image container").css({
                 "max-height": "",
                 "max-width": ""
             }).empty();
