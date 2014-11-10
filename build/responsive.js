@@ -2378,7 +2378,7 @@
         // Remove label.
         $overlay.removeAttr("aria-labelledby");
 
-        if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax")) {
+        if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax, .modal-image")) {
 
             // Put that kid back where it came from or so help me.
             $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
