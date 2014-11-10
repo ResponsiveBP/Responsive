@@ -46,15 +46,10 @@ a img {
     max-width: 100%;
     overflow: hidden;
     padding-bottom: 56.25%;
-    padding-top: 30px;
     position: relative;
 
     &.widescreen {
         padding-bottom: 45%;
-    }
-
-    &.vimeo {
-        padding-top: 0;
     }
 
     &.instagram {
@@ -72,10 +67,6 @@ a img {
     &.getty {
         height: auto;
         padding-bottom: 79.9663%;
-    }
-
-    &.video {
-        padding-top: 0;
     }
 
     iframe,

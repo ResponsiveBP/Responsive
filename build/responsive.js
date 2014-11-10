@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.3 | MIT License | responsivebp.com */
+/*! Responsive v3.1.4 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -1932,6 +1932,7 @@
             modal: null,
             external: false,
             group: null,
+            image: false,
             iframe: false,
             iframeScroll: true,
             keyboard: true,
@@ -2188,10 +2189,8 @@
 
         $overlay.addClass("modal-loader");
 
-        // Calculate whether this is an external request and set the value.
-        this.options.external = !rhash.test(this.options.target);
-
         var isExternalUrl = function (url) {
+
             // Handle different host types.
             // Split the url into it's various parts.
             var locationParts = rurl.exec(url) || rurl.exec(protocol + url);
@@ -2228,13 +2227,15 @@
             description = this.options.description,
             modal = this.options.modal,
             target = this.options.target,
+            notHash = !rhash.test(this.options.target),
             external = isExternalUrl(target),
-            local = !this.options.external && !external,
+            local = !notHash && !external,
             $group = this.$group,
             nextText = this.options.next + "<span class=\"visuallyhidden\">" + this.options.nextHint + "</span>",
             prevText = this.options.prev + "<span class=\"visuallyhidden\">" + this.options.prevHint + "</span>",
             iframeScroll = this.options.iframeScroll,
-            iframe = this.options.iframe || !local ? external && !rimage.test(target) : false,
+            image = this.options.image || rimage.test(target),
+            iframe = this.options.iframe || notHash && external ? !image : false,
             $iframeWrap = $("<div/>").addClass(iframeScroll ? "media media-scroll" : "media"),
             $content = $("<div/>").addClass("modal-content");
 
@@ -2289,7 +2290,7 @@
                 $modal.addClass("modal-iframe");
 
                 // Normalize the src.
-                var src = target.indexOf("http") !== 0 ? protocol + target : target,
+                var src = (isExternalUrl(target) && target.indexOf("http") !== 0) ? protocol + target : target,
                     getMediaProvider = function (url) {
                         var providers = {
                             youtube: /youtu(be\.com|be\.googleapis\.com|\.be)/i,
@@ -2325,10 +2326,15 @@
 
                 // Test and add additional media classes.
                 var mediaClasses = getMediaProvider(target) || "";
+
+                if (!mediaClasses) {
+                    $modal.addClass("iframe-full");
+                }
+
                 $iframeWrap.addClass(mediaClasses).appendTo($modal);
 
             } else {
-                if (rimage.test(target)) {
+                if (image) {
 
                     $modal.addClass("modal-image");
 
@@ -2372,10 +2378,12 @@
         // Remove label.
         $overlay.removeAttr("aria-labelledby");
 
-        if (!this.options.external) {
+        if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax, .modal-image")) {
+
             // Put that kid back where it came from or so help me.
             $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
             $placeholder.detach().insertAfter($overlay);
+
         }
 
         var self = this;
@@ -2383,7 +2391,7 @@
         $modal.find("iframe").attr("src", "");
         w.setTimeout(function () {
 
-            $modal.removeClass("modal-iframe modal-ajax modal-image container").css({
+            $modal.removeClass("modal-iframe iframe-full modal-ajax modal-image container").css({
                 "max-height": "",
                 "max-width": ""
             }).empty();
