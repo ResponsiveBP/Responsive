@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.4 | MIT License | responsivebp.com */
+/*! Responsive v4.0.0| MIT License | responsivebp.com */
 
 /*
  * Responsive Core

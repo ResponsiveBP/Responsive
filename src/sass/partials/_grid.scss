@@ -1,7 +1,7 @@
- /**Manages width in a single place */
+// Manages width in a single place
 .container {
     margin: 0 auto;
-    max-width: $grid-container-max-width; 
+    max-width: $grid-container-max-width;
     width: $grid-container-width;
 
     &.fixed,
@@ -14,15 +14,23 @@
     @extend .clearfix;
 }
 
-/**Columns */
+// Columns
 [class*=col-] {
     display: block;
     width: 100%;
     float: left;
     min-height: 1px;
+    // Reset margin to zero for first column.
+    &:first-of-type {
+        margin-left: 0;
+    }
 
     [dir="rtl"] & {
         float: right;
+
+        &:first-of-type {
+            margin-right: 0;
+        }
     }
 
     &[class*=offset],
@@ -36,39 +44,33 @@
     padding: 0 $grid-column-gutter/2;
 }
 
-/*
- * Extra small 
- */
-@include grid-base(xs);
+// Extra, extra small
+@include grid-base(xxs);
+@include grid-columns(xxs);
 
-@include grid-columns(xs);
+// Extra small
+@include bp-min(xs) {
 
-/*
- * Small 
- */
+    @include grid-base(xs);
+    @include grid-columns(xs);
+}
+// Small
 @include bp-min(s) {
 
     @include grid-base(s);
-
     @include grid-columns(s);
 }
 
-/*
- * Medium 
- */
+// Medium
 @include bp-min(m) {
 
     @include grid-base(m);
-
     @include grid-columns(m);
 }
 
-/*
- * Large 
- */
+// Large
 @include bp-min(l) {
 
     @include grid-base(l);
-
     @include grid-columns(l);
 }

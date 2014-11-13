@@ -23,6 +23,8 @@ $grid-column-count: 12!default;
 
 // Breakpoints. These have been carefully considered so it
 // is recommended to leave them as they are.
+$grid-breakpoint-xxs-max: 37.49em !default;
+$grid-breakpoint-xs-min: 37.5em !default;
 $grid-breakpoint-xs-max: 47.99em !default;
 $grid-breakpoint-s-min: 48em !default;
 $grid-breakpoint-s-max: 61.99em !default;
