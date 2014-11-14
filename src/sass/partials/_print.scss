@@ -1,4 +1,4 @@
-//
+// #
 // Basic print styles
 // --------------------------------------------------
 // Source: https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css
@@ -12,7 +12,7 @@
     html,
     body {
         background: transparent !important;
-        color: #000 !important; /**Black prints faster: h5bp.com/s */
+        color: #000 !important; // Black prints faster: h5bp.com/s
     }
 
     a,
@@ -28,11 +28,8 @@
         content: " (" attr(title) ")";
     }
 
-    /*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
-
+    // Don't show links that are fragment identifiers,
+    // or use the `javascript:` pseudo protocol
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
@@ -45,7 +42,7 @@
     }
 
     thead {
-        display: table-header-group; /**h5bp.com/t */
+        display: table-header-group; // h5bp.com/t
     }
 
     tr,
