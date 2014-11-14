@@ -3460,11 +3460,8 @@ pre {
   max-height: 20em;
   overflow-y: scroll; }
 
-/**
- * Normalize  
- */
 .form {
-  margin: 1em 0; }
+  margin: 1rem 0; }
 
 fieldset {
   border: 0;
@@ -3474,26 +3471,26 @@ fieldset {
 legend {
   display: block;
   width: 100%;
-  margin-bottom: 1em; }
+  margin-bottom: 1rem; }
 
 label,
 label .input-group {
   display: block;
-  margin-bottom: 1em; }
+  margin-bottom: 1rem; }
 label[for] {
   cursor: pointer; }
 label > input,
-label > input[type="checkbox"],
-label > input[type="radio"],
-label > input[type="radio"] > select {
+label > input[type='checkbox'],
+label > input[type='radio'],
+label > select {
   display: inline-block;
-  margin: 0 1em 0 0;
+  margin: 0 1rem 0 0;
   vertical-align: text-top; }
-  [dir="rtl"] label > input, [dir="rtl"]
-  label > input[type="checkbox"], [dir="rtl"]
-  label > input[type="radio"], [dir="rtl"]
-  label > input[type="radio"] > select {
-    margin: 0 0 0 1em; }
+  [dir=rtl] label > input, [dir=rtl]
+  label > input[type='checkbox'], [dir=rtl]
+  label > input[type='radio'], [dir=rtl]
+  label > select {
+    margin: 0 0 0 1rem; }
 
 select,
 textarea,
@@ -3505,14 +3502,10 @@ input,
   color: #222222;
   display: block;
   font-family: inherit;
-  margin-bottom: 1em;
-  padding: .25em;
-  width: 100%;
-    /*
-	 * Disabled
-	 * 1. Override the value set in normalize.css
-	 * 2. Fix IOS 6/7 opacity issue
-	 */ }
+  line-height: 1.2rem;
+  margin-bottom: 1rem;
+  padding: .25rem;
+  width: 100%; }
   fieldset[disabled] select, select[disabled], fieldset[disabled]
   textarea,
   textarea[disabled], fieldset[disabled]
@@ -3524,89 +3517,61 @@ input,
     border-color: silver;
     color: silver;
     cursor: not-allowed !important;
-    /* 1 */
     opacity: 1; }
 
-/*
- * Clean up that hideous file input.
- */
-input[type="file"]::-ms-value {
+input[type='file']::-ms-value {
   background: white;
   border: none; }
 
-input[type="file"]::-ms-browse {
+input[type='file']::-ms-browse {
   background: #dadada;
   border: solid 1px silver;
   color: #222222; }
-  input[type="file"]::-ms-browse:active {
+  input[type='file']::-ms-browse:active {
     background-color: #e7e7e7; }
 
-input[type="color"] {
-  max-width: 105px; }
+input[type='color'] {
+  max-width: 6.563rem; }
 
-/*
- * Declared separately to reduce selector duplication
- * for padding
- */
-input[type="radio"],
-input[type="checkbox"] {
-  min-height: 1.334em;
-  min-width: 1.334em;
-  margin-bottom: 1.1em;
+input[type='radio'],
+input[type='checkbox'] {
+  min-height: 1.334rem;
+  min-width: 1.334rem;
+  margin-bottom: 1.1rem;
   padding: 0;
   width: auto; }
 
-input[type="radio"] {
+input[type='radio'] {
   border: none \9; }
 
-/*
- * Add range styles for IE8 and IE9
- */
-input[type="range"] {
-  background-color: #fff \9;
+input[type='range'] {
+  border: 1px solid transparent;
   border: 1px solid #c0c0c0 \9;
-  border: 1px solid transparent;
-  padding: .25em 0;
-  padding: .25em \9; }
+  background-color: #fff \9;
+  padding: .25rem 0;
+  padding: .25rem\9; }
 
-/*
- * Inline
- */
-input.inline-block,
-select.inline-block {
-  width: auto; }
+_::-ms-reveal,
+input[type='range'] {
+  border: 1px solid transparent; }
 
-/*
- * 1. Remove borders and padding on range controls in IE10+
- */
-x::-ms-reveal,
-input[type="range"] {
-  /* 1 */
-  border: 1px solid transparent;
-  padding: .25em 0; }
-
-/*
- * Fix field styling on iPhone and iPad.
- * 1. Strip OS styling on IOS
- */
 select,
 textarea,
-input[type="text"],
-input[type="search"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="week"],
-input[type="month"],
-input[type="time"],
-input[type="number"],
-input[type="password"],
-input[type="tel"],
-input[type="email"],
-input[type="url"],
-input[type="color"] {
-  -webkit-appearance: none;
-  /* 1 */ }
+input[type='text'],
+input[type='search'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='date'],
+input[type='week'],
+input[type='month'],
+input[type='time'],
+input[type='number'],
+input[type='password'],
+input[type='tel'],
+input[type='email'],
+input[type='url'],
+input[type='color'] {
+  -webkit-appearance: none; }
 
 select option {
   height: 100%; }
@@ -3619,7 +3584,7 @@ select option {
  */
 textarea {
   height: auto;
-  min-height: 5.25em;
+  min-height: 5.25rem;
   resize: both; }
   textarea.horizontal {
     resize: horizontal;
@@ -3639,81 +3604,57 @@ textarea {
   border-color: #ebebeb;
   cursor: not-allowed; }
 
-/*
- * Placeholder : These have to be kept separate
- * 1. Safari and Chrome
- * 2. Firefox 4-18
- * 3. Firefox 19+
- * 4. IE10+
- */
 ::-webkit-input-placeholder {
-  color: silver;
-  /* 1 */ }
+  color: silver; }
 
 :-moz-placeholder {
-  color: silver;
-  /*2 */ }
+  color: silver; }
 
 ::-moz-placeholder {
-  color: silver;
-  /* 3 */ }
+  color: silver; }
 
 :-ms-input-placeholder {
-  color: silver;
-  /* 4 */ }
-
-/*
- * Actions - Contains buttons
- */
-.form-actions {
-  margin: 1em 0;
-  padding: 1em 0; }
+  color: silver; }
 
 @-moz-document url-prefix() {
-    /*
-	 * Remove excess padding in Firefox
-	 */
-  input[type="color"] {
-    min-height: 1.8em;
+  input[type='color'] {
+    min-height: 1.8rem;
     padding: 0; } }
 
 @media (-webkit-min-device-pixel-ratio: 0) {
-    /*
-	 * Fix changing height issues on iOS7.
-	 */
-  input[type="datetime-local"],
-  input[type="date"],
-  input[type="week"],
-  input[type="month"],
-  input[type="time"],
-  input[type="number"] {
-    min-height: 2em; }
+  input[type='datetime-local'],
+  input[type='date'],
+  input[type='week'],
+  input[type='month'],
+  input[type='time'],
+  input[type='number'] {
+    min-height: 2rem; }
 
-    /*
-     * Remove excess padding in Webkit
-	 */
-  input[type="color"] {
-    min-height: 1.8em;
+  input[type='color'] {
+    min-height: 1.8rem;
     padding: 0; }
-    input[type="color"]::-webkit-color-swatch-wrapper {
+    input[type='color']::-webkit-color-swatch-wrapper {
       padding: 0; }
-    input[type="color"]::-webkit-color-swatch {
+    input[type='color']::-webkit-color-swatch {
       border: none; }
 
-    /*
-	 * Fix field styling on iPhone and iPad.
-	 * 1. Add a select indicator
-	 */
   select {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);
-    /* 1 */
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cG9seWdvbiBmaWxsPSIjMjIyIiBwb2ludHM9IjExLDAgNS41LDkgMCwwIi8+PC9zdmc+");
     background-repeat: no-repeat;
-    background-position: right center;
-    padding-right: 1.67em; }
-    [dir="rtl"] select {
-      background-position: .67em center;
+    background-position: right .6rem center;
+    padding-right: 1.67rem; }
+    [dir=rtl] select {
+      background-position: .6rem center;
       padding-right: 0;
-      padding-left: 1.67em; } }
+      padding-left: 1.67rem; } }
+input.inline-block,
+select.inline-block {
+  width: auto; }
+
+.form-actions {
+  margin: 1rem 0;
+  padding: 1rem 0; }
+
 /*
  * Unordered and ordered lists
  * Scale the padding/margin with the base font.
