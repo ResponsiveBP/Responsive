@@ -177,9 +177,10 @@
     var init = function () {
         $("textarea[data-autosize]").each(function () {
             var $this = $(this),
-                options = $this.data("r.autosizeOptions");
-            if (!options) {
-                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+                     loaded = $this.data("r.autosizeLoaded");
+            if (!loaded) {
+                $this.data("r.autosizeLoaded", true);
+                $this.addClass("autosize").autoSize($.buildDataOptions($this, "autosize"));
             }
         });
     },

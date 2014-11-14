@@ -734,9 +734,10 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                options = $this.data("r.modalOptions");
-            if (!options) {
-                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+                loaded = $this.data("r.tableLoaded");
+            if (!loaded) {
+                $this.data("r.tableLoaded", true);
+                $this.modal($.buildDataOptions($this, "modal"));
             }
         });
     },

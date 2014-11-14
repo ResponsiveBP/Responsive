@@ -138,9 +138,10 @@
     var init = function () {
         $(":attrStart(data-conditional)").each(function () {
             var $this = $(this),
-                options = $this.data("r.conditionalOptions");
-            if (!options) {
-                $this.conditional($.buildDataOptions($this, {}, "conditional", "r"));
+                loaded = $this.data("r.conditionalLoaded");
+            if (!loaded) {
+                $this.data("r.conditionalLoaded", true);
+                $this.conditional($.buildDataOptions($this, "conditional"));
             }
         });
     },

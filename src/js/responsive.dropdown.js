@@ -288,9 +288,10 @@
     var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                options = $this.data("r.dropdownOptions");
-            if (!options) {
-                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+                loaded = $this.data("r.dropdownLoaded");
+            if (!loaded) {
+                $this.data("r.dropdownLoaded", true);
+                $this.dropdown($.buildDataOptions($this, "dropdown"));
             }
         });
     },

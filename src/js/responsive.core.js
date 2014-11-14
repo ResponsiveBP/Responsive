@@ -415,36 +415,24 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, options, prefix, namespace) {
+    $.buildDataOptions = function ($elem, filter) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
-        /// <param name="options" type="Object">The object to extend</param>
-        /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
-        /// <param name="namespace" type="String">The namespace with which to segregate the data attribute.</param>
+        /// <param name="filter" type="String">The prefix with filter to identify the data attribute.</param>
         /// <returns type="Object">The extended object.</returns>
+        var options = {};
         $.each($elem.data(), function (key, val) {
-
-            if (key.indexOf(prefix) === 0 && key.length > prefix.length) {
+            if (key.indexOf(filter) === 0 && key.length > filter.length) {
 
                 // Build a key with the correct format.
-                var length = prefix.length,
+                var length = filter.length,
                     newKey = key.charAt(length).toLowerCase() + key.substring(length + 1);
 
                 options[newKey] = val;
-
-                // Clean up.
-                $elem.removeData(key);
             }
-
         });
 
-        if (namespace) {
-            $elem.data(namespace + "." + prefix + "Options", options);
-        } else {
-            $elem.data(prefix + "Options", options);
-        }
-
-        return options;
+        return Object.keys(options).length ? options : $elem.data();
     };
 
     $.debounce = function (func, wait, immediate) {

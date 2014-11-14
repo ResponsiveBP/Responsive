@@ -111,8 +111,9 @@
     var init = function () {
         $("table[data-table-list]").each(function () {
             var $this = $(this),
-                options = $this.data("r.tablelistOptions");
-            if (!options) {
+                loaded = $this.data("r.tableLoaded");
+            if (!loaded) {
+                $this.data("r.tableLoaded", true);
                 $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
             }
         });

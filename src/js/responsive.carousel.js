@@ -562,9 +562,10 @@
     var init = function () {
         $(".carousel").each(function () {
             var $this = $(this),
-                options = $this.data("r.carouselOptions");
-            if (!options) {
-                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+                loaded = $this.data("r.carouselLoaded");
+            if (!loaded) {
+                $this.data("r.carouselLoaded", true);
+                $this.carousel($.buildDataOptions($this, "carousel"));
             }
         });
     },

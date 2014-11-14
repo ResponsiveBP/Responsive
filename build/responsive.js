@@ -415,36 +415,24 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, options, prefix, namespace) {
+    $.buildDataOptions = function ($elem, filter) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
-        /// <param name="options" type="Object">The object to extend</param>
-        /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
-        /// <param name="namespace" type="String">The namespace with which to segregate the data attribute.</param>
+        /// <param name="filter" type="String">The prefix with filter to identify the data attribute.</param>
         /// <returns type="Object">The extended object.</returns>
+        var options = {};
         $.each($elem.data(), function (key, val) {
-
-            if (key.indexOf(prefix) === 0 && key.length > prefix.length) {
+            if (key.indexOf(filter) === 0 && key.length > filter.length) {
 
                 // Build a key with the correct format.
-                var length = prefix.length,
+                var length = filter.length,
                     newKey = key.charAt(length).toLowerCase() + key.substring(length + 1);
 
                 options[newKey] = val;
-
-                // Clean up.
-                $elem.removeData(key);
             }
-
         });
 
-        if (namespace) {
-            $elem.data(namespace + "." + prefix + "Options", options);
-        } else {
-            $elem.data(prefix + "Options", options);
-        }
-
-        return options;
+        return Object.keys(options).length ? options : $elem.data();
     };
 
     $.debounce = function (func, wait, immediate) {
@@ -680,9 +668,10 @@
     var init = function () {
         $("textarea[data-autosize]").each(function () {
             var $this = $(this),
-                options = $this.data("r.autosizeOptions");
-            if (!options) {
-                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+                     loaded = $this.data("r.autosizeLoaded");
+            if (!loaded) {
+                $this.data("r.autosizeLoaded", true);
+                $this.addClass("autosize").autoSize($.buildDataOptions($this, "autosize"));
             }
         });
     },
@@ -1259,9 +1248,10 @@
     var init = function () {
         $(".carousel").each(function () {
             var $this = $(this),
-                options = $this.data("r.carouselOptions");
-            if (!options) {
-                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+                loaded = $this.data("r.carouselLoaded");
+            if (!loaded) {
+                $this.data("r.carouselLoaded", true);
+                $this.carousel($.buildDataOptions($this, "carousel"));
             }
         });
     },
@@ -1414,9 +1404,10 @@
     var init = function () {
         $(":attrStart(data-conditional)").each(function () {
             var $this = $(this),
-                options = $this.data("r.conditionalOptions");
-            if (!options) {
-                $this.conditional($.buildDataOptions($this, {}, "conditional", "r"));
+                loaded = $this.data("r.conditionalLoaded");
+            if (!loaded) {
+                $this.data("r.conditionalLoaded", true);
+                $this.conditional($.buildDataOptions($this, "conditional"));
             }
         });
     },
@@ -1548,9 +1539,10 @@
     var init = function () {
         $("button[data-dismiss-target]").each(function () {
             var $this = $(this),
-                options = $this.data("r.dismissOptions");
-            if (!options) {
-                $this.dismiss($.buildDataOptions($this, {}, "dismiss", "r"));
+                loaded = $this.data("r.dismissLoaded");
+            if (!loaded) {
+                $this.data("r.dismissLoaded", true);
+                $this.dismiss($.buildDataOptions($this, "dismiss"));
             }
         });
     },
@@ -1853,9 +1845,10 @@
     var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                options = $this.data("r.dropdownOptions");
-            if (!options) {
-                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+                loaded = $this.data("r.dropdownLoaded");
+            if (!loaded) {
+                $this.data("r.dropdownLoaded", true);
+                $this.dropdown($.buildDataOptions($this, "dropdown"));
             }
         });
     },
@@ -2605,9 +2598,10 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                options = $this.data("r.modalOptions");
-            if (!options) {
-                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+                loaded = $this.data("r.tableLoaded");
+            if (!loaded) {
+                $this.data("r.tableLoaded", true);
+                $this.modal($.buildDataOptions($this, "modal"));
             }
         });
     },
@@ -2733,8 +2727,9 @@
     var init = function () {
         $("table[data-table-list]").each(function () {
             var $this = $(this),
-                options = $this.data("r.tablelistOptions");
-            if (!options) {
+                loaded = $this.data("r.tableLoaded");
+            if (!loaded) {
+                $this.data("r.tableLoaded", true);
                 $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
             }
         });

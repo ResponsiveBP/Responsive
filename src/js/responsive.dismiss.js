@@ -117,9 +117,10 @@
     var init = function () {
         $("button[data-dismiss-target]").each(function () {
             var $this = $(this),
-                options = $this.data("r.dismissOptions");
-            if (!options) {
-                $this.dismiss($.buildDataOptions($this, {}, "dismiss", "r"));
+                loaded = $this.data("r.dismissLoaded");
+            if (!loaded) {
+                $this.data("r.dismissLoaded", true);
+                $this.dismiss($.buildDataOptions($this, "dismiss"));
             }
         });
     },
