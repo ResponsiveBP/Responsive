@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.0.0| MIT License | responsivebp.com */
+/*! Responsive v4.0.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -52,7 +52,7 @@
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
         /// <returns type="Object">
         ///      An object containing two properties.
-        ///      &#10;    1: grid - The current applied grid; either xs, s, m, or l.
+        ///      &#10;    1: grid - The current applied grid; either xxs, xs, s, m, or l.
         ///      &#10;    2: index - The index of the current grid in the range.
         ///      &#10;    3: range - The available grid range.
         ///</returns>
@@ -61,7 +61,7 @@
 
         return function () {
             // These numbers match values in the css
-            var grids = ["xs", "s", "m", "l"],
+            var grids = ["xxs", "xs", "s", "m", "l"],
                 key = parseInt($div.width(), 10);
 
             return {

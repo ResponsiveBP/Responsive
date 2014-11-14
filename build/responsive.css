@@ -4407,258 +4407,292 @@ x::-ms-reveal,
   .tabs .tab-pane-active {
     display: block; }
 
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *	`contenteditable` attribute is included anywhere else in the document.
- *	Otherwise it causes space to appear at the top and bottom of elements
- *	that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *	`:before` to contain the top-margins of child elements.
- */
 .clearfix:before, .row:before, .alert:before, .btn-group:before, .tabs > ul:before, .clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
   content: "";
-  /* 1 */
-  display: table;
-  /*2 */ }
+  display: table; }
 .clearfix:after, .row:after, .alert:after, .btn-group:after, .tabs > ul:after {
   clear: both; }
 
-/*
- * Float helpers
- */
 .push {
-  float: right !important; }
+  float: right; }
   [dir="rtl"] .push {
-    float: left !important; }
+    float: left; }
 
 .pull {
-  float: left !important; }
+  float: left; }
   [dir="rtl"] .pull {
-    float: right !important; }
+    float: right; }
 
-.push-xs {
-  float: right !important; }
-  [dir="rtl"] .push-xs {
-    float: left !important; }
+.push-xxs {
+  float: right; }
+  [dir="rtl"] .push-xxs {
+    float: left; }
 
-.pull-xs {
-  float: left !important; }
-  [dir="rtl"] .pull-xs {
-    float: right !important; }
+.pull-xxs {
+  float: left; }
+  [dir="rtl"] .pull-xxs {
+    float: right; }
 
-@media print and (max-width: 536px), screen and (max-width: 47.99em) {
+@media (max-width: 37.49em) {
+  .push-xxs-only {
+    float: right; }
+    [dir="rtl"] .push-xxs-only {
+      float: left; }
+
+  .pull-xxs-only {
+    float: left; }
+    [dir="rtl"] .pull-xxs-only {
+      float: right; } }
+@media print and (min-width: 536px), screen and (min-width: 37.5em) {
+  .push-xs {
+    float: right; }
+    [dir="rtl"] .push-xs {
+      float: left; }
+
+  .pull-xs {
+    float: left; }
+    [dir="rtl"] .pull-xs {
+      float: right; } }
+@media print and (min-width: 536px) and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
   .push-xs-only {
-    float: right !important; }
+    float: right; }
     [dir="rtl"] .push-xs-only {
-      float: left !important; }
+      float: left; }
 
   .pull-xs-only {
-    float: left !important; }
+    float: left; }
     [dir="rtl"] .pull-xs-only {
-      float: right !important; } }
+      float: right; } }
 @media print and (min-width: 537px), screen and (min-width: 48em) {
   .push-s {
-    float: right !important; }
+    float: right; }
     [dir="rtl"] .push-s {
-      float: left !important; }
+      float: left; }
 
   .pull-s {
-    float: left !important; }
+    float: left; }
     [dir="rtl"] .pull-s {
-      float: right !important; } }
+      float: right; } }
 @media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .push-s-only {
-    float: right !important; }
+    float: right; }
     [dir="rtl"] .push-s-only {
-      float: left !important; }
+      float: left; }
 
   .pull-s-only {
-    float: left !important; }
+    float: left; }
     [dir="rtl"] .pull-s-only {
-      float: right !important; } }
+      float: right; } }
 @media (min-width: 62em) {
   .push-m {
-    float: right !important; }
+    float: right; }
     [dir="rtl"] .push-m {
-      float: left !important; }
+      float: left; }
 
   .pull-m {
-    float: left !important; }
+    float: left; }
     [dir="rtl"] .pull-m {
-      float: right !important; } }
+      float: right; } }
 @media (min-width: 62em) and (max-width: 74.99em) {
   .push-m-only {
-    float: right !important; }
+    float: right; }
     [dir="rtl"] .push-m-only {
-      float: left !important; }
+      float: left; }
 
   .pull-m-only {
-    float: left !important; }
+    float: left; }
     [dir="rtl"] .pull-m-only {
-      float: right !important; } }
+      float: right; } }
 @media (min-width: 75em) {
   .push-l {
-    float: right !important; }
+    float: right; }
     [dir="rtl"] .push-l {
-      float: left !important; }
+      float: left; }
 
   .pull-l {
-    float: left !important; }
+    float: left; }
     [dir="rtl"] .pull-l {
-      float: right !important; } }
-/*
- * Layout helpers
- */
+      float: right; } }
 .block {
-  display: block !important; }
-
-.inline-block {
-  display: inline-block !important; }
-
-.inline {
-  display: inline !important; }
-
-.block-xs {
   display: block; }
 
-.inline-block-xs {
+.inline-block {
   display: inline-block; }
 
-.inline-xs {
+.inline {
   display: inline; }
 
-@media print and (max-width: 536px), screen and (max-width: 47.99em) {
+.block-xxs {
+  display: block; }
+
+.inline-block-xxs {
+  display: inline-block; }
+
+.inline-xxs {
+  display: inline; }
+
+@media (max-width: 37.49em) {
+  .block-xxs-only {
+    display: block; }
+
+  .inline-block-xxs-only {
+    display: inline-block; }
+
+  .inline-xxs-only {
+    display: inline; } }
+@media print and (min-width: 536px), screen and (min-width: 37.5em) {
+  .block-xs {
+    display: block; }
+
+  .inline-block-xs {
+    display: inline-block; }
+
+  .inline-xs {
+    display: inline; } }
+@media print and (min-width: 536px) and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
   .block-xs-only {
-    display: block !important; }
+    display: block; }
 
   .inline-block-xs-only {
-    display: inline-block !important; }
+    display: inline-block; }
 
   .inline-xs-only {
-    display: inline !important; } }
+    display: inline; } }
 @media print and (min-width: 537px), screen and (min-width: 48em) {
   .block-s {
-    display: block !important; }
+    display: block; }
 
   .inline-block-s {
-    display: inline-block !important; }
+    display: inline-block; }
 
   .inline-s {
-    display: inline !important; } }
+    display: inline; } }
 @media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .block-s-only {
-    display: block !important; }
+    display: block; }
 
   .inline-block-s-only {
-    display: inline-block !important; }
+    display: inline-block; }
 
   .inline-s-only {
-    display: inline !important; } }
+    display: inline; } }
 @media (min-width: 62em) {
   .block-m {
-    display: block !important; }
+    display: block; }
 
   .inline-block-m {
-    display: inline-block !important; }
+    display: inline-block; }
 
   .inline-m {
-    display: inline !important; } }
+    display: inline; } }
 @media (min-width: 62em) and (max-width: 74.99em) {
   .block-m-only {
-    display: block !important; }
+    display: block; }
 
   .inline-block-m-only {
-    display: inline-block !important; }
+    display: inline-block; }
 
   .inline-m-only {
-    display: inline !important; } }
+    display: inline; } }
 @media (min-width: 75em) {
   .block-l {
-    display: block !important; }
+    display: block; }
 
   .inline-block-l {
-    display: inline-block !important; }
+    display: inline-block; }
 
   .inline-l {
-    display: inline !important; } }
-/*
- * Text align helpers
- */
+    display: inline; } }
 .text-left {
-  text-align: left !important; }
+  text-align: left; }
 
 .text-right {
-  text-align: right !important; }
+  text-align: right; }
 
 .text-center {
-  text-align: center !important; }
+  text-align: center; }
 
-.text-xs-left {
-  text-align: left !important; }
+.text-xxs-left {
+  text-align: left; }
 
-.text-xs-right {
-  text-align: right !important; }
+.text-xxs-right {
+  text-align: right; }
 
-.text-xs-center {
-  text-align: center !important; }
+.text-xxs-center {
+  text-align: center; }
 
-@media print and (max-width: 536px), screen and (max-width: 47.99em) {
-  .text-xs-left-only {
-    text-align: left !important; }
+@media (max-width: 37.49em) {
+  .text-xxs-left-only {
+    text-align: left; }
 
-  .text-xs-right-only {
-    text-align: right !important; }
+  .text-xxs-right-only {
+    text-align: right; }
 
-  .text-xs-center-only {
-    text-align: center !important; } }
+  .text-xxs-center-only {
+    text-align: center; } }
+@media print and (min-width: 536px), screen and (min-width: 37.5em) {
+  .text-xs-left {
+    text-align: left; }
+
+  .text-xs-right {
+    text-align: right; }
+
+  .text-xs-center {
+    text-align: center; } }
+@media print and (min-width: 536px) and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
+  .text-xs-left {
+    text-align: left; }
+
+  .text-xs-right {
+    text-align: right; }
+
+  .text-xs-center {
+    text-align: center; } }
 @media print and (min-width: 537px), screen and (min-width: 48em) {
   .text-s-left {
-    text-align: left !important; }
+    text-align: left; }
 
   .text-s-right {
-    text-align: right !important; }
+    text-align: right; }
 
   .text-s-center {
-    text-align: center !important; } }
+    text-align: center; } }
 @media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .text-s-left {
-    text-align: left !important; }
+    text-align: left; }
 
   .text-s-right {
-    text-align: right !important; }
+    text-align: right; }
 
   .text-s-center {
-    text-align: center !important; } }
+    text-align: center; } }
 @media (min-width: 62em) {
   .text-m-left {
-    text-align: left !important; }
+    text-align: left; }
 
   .text-m-right {
-    text-align: right !important; }
+    text-align: right; }
 
   .text-m-center {
-    text-align: center !important; } }
+    text-align: center; } }
 @media (min-width: 62em) and (max-width: 74.99em) {
   .text-m-left {
-    text-align: left !important; }
+    text-align: left; }
 
   .text-m-right {
-    text-align: right !important; }
+    text-align: right; }
 
   .text-m-center {
-    text-align: center !important; } }
+    text-align: center; } }
 @media (min-width: 75em) {
   .text-l-left {
-    text-align: left !important; }
+    text-align: left; }
 
   .text-l-right {
-    text-align: right !important; }
+    text-align: right; }
 
   .text-l-center {
-    text-align: center !important; } }
+    text-align: center; } }
 .grid-state-indicator {
   position: absolute;
   top: -99999px;
@@ -4669,18 +4703,21 @@ x::-ms-reveal,
     left: auto;
     right: -99999px; }
 
-@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
+@media (max-width: 37.49em) {
   .grid-state-indicator {
     width: 1px !important; } }
-@media (min-width: 62em) and (max-width: 74.99em) {
+@media print and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
   .grid-state-indicator {
     width: 2px !important; } }
-@media (min-width: 75em) {
+@media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .grid-state-indicator {
     width: 3px !important; } }
-/*
- * Image replacement
- */
+@media (min-width: 62em) and (max-width: 74.99em) {
+  .grid-state-indicator {
+    width: 4px !important; } }
+@media (min-width: 75em) {
+  .grid-state-indicator {
+    width: 5px !important; } }
 .ir {
   background-color: transparent;
   border: 0;
@@ -4691,16 +4728,10 @@ x::-ms-reveal,
     height: 150%;
     width: 0; }
 
-/*
- * Hide from both screen readers and browsers: h5bp.com/u
- */
 .hidden {
   display: none !important;
   visibility: hidden; }
 
-/*
- * Hide only visually, but have it available for screen readers: h5bp.com/v
- */
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -4709,11 +4740,7 @@ x::-ms-reveal,
   overflow: hidden;
   padding: 0;
   position: absolute;
-  width: 1px;
-    /*
-	 * Extends the .visuallyhidden class to allow the element to be focusable
-	 * when navigated to via the keyboard: h5bp.com/p
-	 */ }
+  width: 1px; }
   .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
     clip: auto;
     height: auto;
@@ -4722,21 +4749,12 @@ x::-ms-reveal,
     position: static;
     width: auto; }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
 .invisible {
   visibility: hidden; }
 
-/*
- * Fade opacity with animation
- */
 .fade-out {
   opacity: 0 !important; }
 
-/*
- * Opacity helper to add to elements to allow fade animation
- */
 .fade-out,
 .fade-in {
   -webkit-transition: opacity .3s;
@@ -4745,15 +4763,41 @@ x::-ms-reveal,
 .fade-in {
   opacity: 1 !important; }
 
-/*
- * Responsive helpers to toggle visibility.
- */
+.visible-xxs,
 .visible-xs,
 .visible-s,
 .visible-m,
 .visible-l {
   display: none !important; }
 
+@media (max-width: 37.49em) {
+  .hidden-xxs {
+    display: none !important; }
+
+  .visible-xxs {
+    display: block !important; }
+
+  table.visible-xxs {
+    display: table; }
+
+  thead.visible-xxs {
+    display: table-header-group !important; }
+
+  tfoot.visible-xxs {
+    display: table-footer-group !important; }
+
+  tr.visible-xxs {
+    display: table-row !important; }
+
+  th.visible-xxs,
+  td.visible-xxs {
+    display: table-cell !important; }
+
+  col.visible-xxs {
+    display: table-column !important; }
+
+  caption.visible-xxs {
+    display: table-caption !important; } }
 @media print and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
   .hidden-xs {
     display: none !important; }
