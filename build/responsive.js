@@ -668,7 +668,7 @@
     var init = function () {
         $("textarea[data-autosize]").each(function () {
             var $this = $(this),
-                     loaded = $this.data("r.autosizeLoaded");
+                loaded = $this.data("r.autosizeLoaded");
             if (!loaded) {
                 $this.data("r.autosizeLoaded", true);
                 $this.addClass("autosize").autoSize($.getDataOptions($this, "autosize"));
