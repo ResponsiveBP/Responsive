@@ -291,7 +291,7 @@
                 loaded = $this.data("r.dropdownLoaded");
             if (!loaded) {
                 $this.data("r.dropdownLoaded", true);
-                $this.dropdown($.buildDataOptions($this, "dropdown"));
+                $this.dropdown($.getDataOptions($this, "dropdown"));
             }
         });
     },

@@ -141,7 +141,7 @@
                 loaded = $this.data("r.conditionalLoaded");
             if (!loaded) {
                 $this.data("r.conditionalLoaded", true);
-                $this.conditional($.buildDataOptions($this, "conditional"));
+                $this.conditional($.getDataOptions($this, "conditional"));
             }
         });
     },

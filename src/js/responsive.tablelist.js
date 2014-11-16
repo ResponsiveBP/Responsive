@@ -114,7 +114,7 @@
                 loaded = $this.data("r.tableLoaded");
             if (!loaded) {
                 $this.data("r.tableLoaded", true);
-                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+                $this.tablelist($.getDataOptions($this, {}, "tablelist", "r"));
             }
         });
     },

@@ -415,7 +415,7 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, filter) {
+    $.getDataOptions = function ($elem, filter) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
         /// <param name="filter" type="String">The prefix with filter to identify the data attribute.</param>

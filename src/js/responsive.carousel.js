@@ -565,7 +565,7 @@
                 loaded = $this.data("r.carouselLoaded");
             if (!loaded) {
                 $this.data("r.carouselLoaded", true);
-                $this.carousel($.buildDataOptions($this, "carousel"));
+                $this.carousel($.getDataOptions($this, "carousel"));
             }
         });
     },

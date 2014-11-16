@@ -415,7 +415,7 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, filter) {
+    $.getDataOptions = function ($elem, filter) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
         /// <param name="filter" type="String">The prefix with filter to identify the data attribute.</param>
@@ -671,7 +671,7 @@
                      loaded = $this.data("r.autosizeLoaded");
             if (!loaded) {
                 $this.data("r.autosizeLoaded", true);
-                $this.addClass("autosize").autoSize($.buildDataOptions($this, "autosize"));
+                $this.addClass("autosize").autoSize($.getDataOptions($this, "autosize"));
             }
         });
     },
@@ -1251,7 +1251,7 @@
                 loaded = $this.data("r.carouselLoaded");
             if (!loaded) {
                 $this.data("r.carouselLoaded", true);
-                $this.carousel($.buildDataOptions($this, "carousel"));
+                $this.carousel($.getDataOptions($this, "carousel"));
             }
         });
     },
@@ -1407,7 +1407,7 @@
                 loaded = $this.data("r.conditionalLoaded");
             if (!loaded) {
                 $this.data("r.conditionalLoaded", true);
-                $this.conditional($.buildDataOptions($this, "conditional"));
+                $this.conditional($.getDataOptions($this, "conditional"));
             }
         });
     },
@@ -1542,7 +1542,7 @@
                 loaded = $this.data("r.dismissLoaded");
             if (!loaded) {
                 $this.data("r.dismissLoaded", true);
-                $this.dismiss($.buildDataOptions($this, "dismiss"));
+                $this.dismiss($.getDataOptions($this, "dismiss"));
             }
         });
     },
@@ -1848,7 +1848,7 @@
                 loaded = $this.data("r.dropdownLoaded");
             if (!loaded) {
                 $this.data("r.dropdownLoaded", true);
-                $this.dropdown($.buildDataOptions($this, "dropdown"));
+                $this.dropdown($.getDataOptions($this, "dropdown"));
             }
         });
     },
@@ -2601,7 +2601,7 @@
                 loaded = $this.data("r.tableLoaded");
             if (!loaded) {
                 $this.data("r.tableLoaded", true);
-                $this.modal($.buildDataOptions($this, "modal"));
+                $this.modal($.getDataOptions($this, "modal"));
             }
         });
     },
@@ -2730,7 +2730,7 @@
                 loaded = $this.data("r.tableLoaded");
             if (!loaded) {
                 $this.data("r.tableLoaded", true);
-                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+                $this.tablelist($.getDataOptions($this, {}, "tablelist", "r"));
             }
         });
     },

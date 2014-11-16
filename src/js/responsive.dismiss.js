@@ -120,7 +120,7 @@
                 loaded = $this.data("r.dismissLoaded");
             if (!loaded) {
                 $this.data("r.dismissLoaded", true);
-                $this.dismiss($.buildDataOptions($this, "dismiss"));
+                $this.dismiss($.getDataOptions($this, "dismiss"));
             }
         });
     },

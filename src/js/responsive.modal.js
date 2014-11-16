@@ -737,7 +737,7 @@
                 loaded = $this.data("r.tableLoaded");
             if (!loaded) {
                 $this.data("r.tableLoaded", true);
-                $this.modal($.buildDataOptions($this, "modal"));
+                $this.modal($.getDataOptions($this, "modal"));
             }
         });
     },
