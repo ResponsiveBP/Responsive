@@ -364,22 +364,14 @@ td,
 th {
   padding: 0; }
 
-/**
- * 1. Use the iOS devices hardware accelerator to provide native scrolling.
- */
 html {
   -webkit-overflow-scrolling: touch;
-  /* 1 */
   color: #222222;
   font-size: 100%;
   line-height: 1.4;
   -moz-box-sizing: border-box;
        box-sizing: border-box; }
 
-/**
- * Fix the box model
- * Overwrite Normalize rather than edit it.
- */
 *, :before, :after,
 hr, input[type=search] {
   -moz-box-sizing: inherit;
@@ -391,34 +383,13 @@ a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, text
   outline-width: 1px;
   outline-offset: -1px; }
 
-/**
- * Set a focus on elements that can recieve it.
- * http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex
- */
-/**
- * Suppress the focus outline on links that cannot be accessed via keyboard.
- * This prevents an unwanted focus outline from appearing around elements that
- * might still respond to pointer events.
- */
 [tabindex="-1"]:focus {
   outline: none !important; }
 
-/**
- * Headers
- * 1: Improve rendering of screen fonts.
- * 2: Prevent page breaking.
- */
 h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
-  /* 1 */
-  page-break-after: avoid;
-  /*2 */ }
+  page-break-after: avoid; }
 
-/**
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background colour to match your design.
- */
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none; }
@@ -427,9 +398,6 @@ h1, h2, h3, h4, h5, h6 {
   background: #b3d4fc;
   text-shadow: none; }
 
-/**
- * A better looking default horizontal rule
- */
 hr {
   display: block;
   height: 1px;
@@ -438,9 +406,6 @@ hr {
   margin: 1em 0;
   padding: 0; }
 
-/**
- * Add query indicator to abbr
- */
 abbr {
   cursor: help; }
 
@@ -3890,21 +3855,7 @@ table {
 
 .autosize,
 [data-autosize] {
-  overflow: hidden;
-  -webkit-transition: height .3s linear;
-          transition: height .3s linear; }
-
-.autosize-clone {
-  position: absolute;
-  top: -99999px;
-  left: -99999px;
-  visibility: hidden;
-  overflow: hidden;
-  -webkit-transition: none;
-          transition: none; }
-  [dir="rtl"] .autosize-clone {
-    left: auto;
-    right: -99999px; }
+  overflow: hidden; }
 
 /*
  * 1: Prevent font shift on chrome.
