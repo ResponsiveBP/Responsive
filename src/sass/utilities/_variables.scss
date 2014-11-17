@@ -32,9 +32,9 @@ $grid-breakpoint-m-min: 62em !default;
 $grid-breakpoint-m-max: 74.99em !default;
 $grid-breakpoint-l-min: 75em !default;
 
-// Print Breakpoints. Printing on A4 only maintains 
-// xs grid layout so we shift the xs/s breakpoint to force it to print using the 
-// s grid. These are deliberately set at pixel values to ensure 
+// Print Breakpoints. Printing on A4 only maintains
+// xs grid layout so we shift the xs/s breakpoint to force it to print using the
+// s grid. These are deliberately set at pixel values to ensure
 // that font-size doesn't affect output.
 $grid-print-breakpoint-xs-max: 536px !default;
 $grid-print-breakpoint-s-min: 537px !default;
@@ -55,6 +55,7 @@ $table-striped-background-color: #ebebeb !default;
 //##
 
 // Forms
+$form-line-height: 1.2rem !default;
 $form-placeholder: #c0c0c0 !default;
 $form-input-background: #fff !default;
 $form-input-border: 1px solid #c0c0c0 !default;

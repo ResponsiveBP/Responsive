@@ -3435,7 +3435,7 @@ label > select {
 select,
 textarea,
 input,
-.no-edit {
+.readonly {
   background: white;
   border: 1px solid silver;
   border-radius: 0;
@@ -3451,8 +3451,8 @@ input,
   textarea[disabled], fieldset[disabled]
   input,
   input[disabled], fieldset[disabled]
-  .no-edit,
-  .no-edit[disabled] {
+  .readonly,
+  .readonly[disabled] {
     background: #ebebeb;
     border-color: silver;
     color: silver;
@@ -3516,30 +3516,18 @@ input[type='color'] {
 select option {
   height: 100%; }
 
-/*
- * Textareas : Multiple resizable options.
- * 1: Horizontal
- * 2: Vertical
- * 3: None
- */
 textarea {
   height: auto;
   min-height: 5.25rem;
   resize: both; }
   textarea.horizontal {
-    resize: horizontal;
-    /* 1 */ }
+    resize: horizontal; }
   textarea.vertical {
-    resize: vertical;
-    /*2 */ }
+    resize: vertical; }
   textarea.no-resize {
-    resize: none;
-    /* 3 */ }
+    resize: none; }
 
-/*
- * Read only
- */
-.no-edit,
+.readonly,
 [readonly] {
   border-color: #ebebeb;
   cursor: not-allowed; }

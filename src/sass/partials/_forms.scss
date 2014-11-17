@@ -43,14 +43,14 @@ label {
 select,
 textarea,
 input,
-.no-edit {
+.readonly {
     background: $form-input-background;
     border: $form-input-border;
     border-radius: $form-input-border-radius;
     color: $form-input-color;
     display: block;
     font-family: inherit;
-    line-height: 1.2rem;
+    line-height: $form-line-height;
     margin-bottom: 1rem;
     padding: .25rem;
     width: 100%;
@@ -142,34 +142,30 @@ select option {
     height: 100%;
 }
 
-/*
- * Textareas : Multiple resizable options.
- * 1: Horizontal
- * 2: Vertical
- * 3: None
- */
+// Textareas : Multiple resizable options.
+// 1: Horizontal
+// 2: Vertical
+// 3: None
 textarea {
     height: auto;
     min-height: 5.25rem;
     resize: both;
 
     &.horizontal {
-        resize: horizontal; /* 1 */
+        resize: horizontal; // 1
     }
 
     &.vertical {
-        resize: vertical; /*2 */
+        resize: vertical; // 2
     }
 
     &.no-resize {
-        resize: none; /* 3 */
+        resize: none; // 3
     }
 }
 
-/*
- * Read only
- */
-.no-edit,
+// Read only
+.readonly,
 [readonly] {
     background-color: $form-input-background-readonly;
     border-color: $form-input-border-color-readonly;

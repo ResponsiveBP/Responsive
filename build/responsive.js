@@ -51,10 +51,10 @@
     $.support.currentGrid = (function () {
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
         /// <returns type="Object">
-        ///      An object containing two properties.
-        ///      &#10;    1: grid - The current applied grid; either xxs, xs, s, m, or l.
-        ///      &#10;    2: index - The index of the current grid in the range.
-        ///      &#10;    3: range - The available grid range.
+        ///   An object containing two properties.
+        ///   &#10;    1: grid - The current applied grid; either xxs, xs, s, m, or l.
+        ///   &#10;    2: index - The index of the current grid in the range.
+        ///   &#10;    3: range - The available grid range.
         ///</returns>
 
         var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
@@ -140,8 +140,8 @@
         /// <summary>Performs the given callback at the end of a css transition.</summary>
         /// <param name="callback" type="Function">The function to call on transition end.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        var supportTransition = $.support.transition;
 
+        var supportTransition = $.support.transition;
         return this.each(function () {
 
             if (!$.isFunction(callback)) {
