@@ -10,16 +10,25 @@
     }
 }
 
-.row {
+.row,
+[class*="block-row-"] {
     @extend .clearfix;
 }
 
-// Columns
-[class*=col-] {
+// Block-row
+[class*="block-row-"] {
     display: block;
-    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+[class*=col-],
+[class*="block-row-"] > * {
+    display: block;
     float: left;
     min-height: 1px;
+    width: 100%;
     // Reset margin to zero for first column.
     &:first-of-type {
         margin-left: 0;
@@ -32,7 +41,10 @@
             margin-right: 0;
         }
     }
+}
 
+// Columns
+[class*=col-] {
     &[class*=offset],
     &[class*=push],
     &[class*=pull] {
@@ -40,6 +52,12 @@
     }
 }
 
+// Sometimes !important should just be used.
+[class*="block-row-"].no-gutter > * {
+    margin: 0 !important;
+}
+
+[class*="block-row-"].no-gutter.pad-gutter > *,
 .no-gutter.pad-gutter > [class*=col-] {
     padding: 0 $grid-column-gutter/2;
 }
@@ -47,18 +65,21 @@
 // Extra, extra small
 @include grid-base(xxs);
 @include grid-columns(xxs);
+@include block-grid-columns(xxs);
 
 // Extra small
 @include bp-min(xs) {
-
     @include grid-base(xs);
     @include grid-columns(xs);
+    @include block-grid-columns(xs);
 }
+
 // Small
 @include bp-min(s) {
 
     @include grid-base(s);
     @include grid-columns(s);
+    @include block-grid-columns(s);
 }
 
 // Medium
@@ -66,6 +87,7 @@
 
     @include grid-base(m);
     @include grid-columns(m);
+    @include block-grid-columns(m);
 }
 
 // Large
@@ -73,4 +95,5 @@
 
     @include grid-base(l);
     @include grid-columns(l);
+    @include block-grid-columns(l);
 }

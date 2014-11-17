@@ -64,7 +64,7 @@
 // Grid System - Columns
 //##
 @mixin grid-columns($breakpoint) {
-    // Calculate column width and width with gutter.
+    // Calculate column width and without gutter.
     $column-width: (100% / $grid-column-count);
     $column-width-with-gutter: (100% - ($grid-column-gutter * ($grid-column-count - 1 ))) / $grid-column-count;
 
@@ -166,6 +166,59 @@
                     right: auto;
                     left: $temp-width;
                 }
+            }
+        }
+    }
+}
+
+//==
+// Grid System - Block Grid Columns
+//##
+@mixin block-grid-columns($breakpoint) {
+    // Loop through and set width.
+    @for $i from 1 to ($grid-column-count + 1) {
+        // Calculate column width with and without gutter.
+        $column-width-with-gutter: (100% - ($grid-column-gutter * ($i - 1 ))) / $i;
+        $column-width: (100% / $i);
+
+        .block-row-#{$breakpoint}-#{$i} {
+
+            > * {
+                width: $column-width-with-gutter;
+            }
+
+            > :nth-of-type(n+1) {
+                clear: none;
+                margin-left: $grid-column-gutter;
+
+                [dir="rtl"] & {
+                    margin-left: 0;
+                    margin-right: $grid-column-gutter;
+                }
+            }
+
+            > :nth-of-type(#{$i}n+1) {
+                clear: both;
+                margin-left: 0;
+
+                [dir="rtl"] & {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .block-row-#{$breakpoint}-#{$i}.no-gutter {
+
+            > * {
+                width: $column-width;
+            }
+
+            > :nth-of-type(n+1) {
+                clear: none;
+            }
+
+            > :nth-of-type(#{$i}n+1) {
+                clear: both;
             }
         }
     }
