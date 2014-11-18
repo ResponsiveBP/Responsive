@@ -4858,26 +4858,19 @@ select.inline-block {
   margin: 1rem 0;
   padding: 1rem 0; }
 
-/*
- * Unordered and ordered lists
- * Scale the padding/margin with the base font.
- */
 ul,
 ol {
-  margin: 1em 0;
-  padding-left: 2.5em; }
+  margin: 1rem 0;
+  padding-left: 2.5rem; }
   [dir="rtl"] ul, [dir="rtl"]
   ol {
     padding-left: 0;
-    padding-right: 2.5em; }
+    padding-right: 2.5rem; }
 
 ul ul,
 ol ol {
   margin: 0; }
 
-/*
- * No bullets on first level.
- */
 ul.no-bullets,
 ol.no-bullets {
   padding-left: 0; }
@@ -4888,80 +4881,52 @@ ol.no-bullets {
   ol.no-bullets > li {
     list-style: none; }
 
-/*
- * Coloured lists.
- */
 ul.colored,
 ol.colored {
-  padding-left: 40px; }
+  padding-left: 2.5rem; }
   ul.colored > li,
   ol.colored > li {
     list-style-type: none;
-    position: relative;
-    /*
-     * 1. Normalize funky webkit margin
-     * 2. Escaped unicode coloured circle.
-     * 3. Edit this property to change all colored class lists.
-     */ }
+    position: relative; }
     ul.colored > li:before,
     ol.colored > li:before {
       position: absolute;
-      top: 0;
-      left: -1em;
-      -webkit-margin-start: -.25em;
-      /* 1 */
+      top: .1rem;
+      left: -1rem;
+      -webkit-margin-start: -.25rem;
       content: "\25cf";
-      /*2 */
       color: #00a9ec;
-      /* 3 */
-      font-size: 1em;
-      font-weight: bold;
+      font-size: .8rem;
       text-align: right;
       text-decoration: none; }
       [dir="rtl"] ul.colored > li:before, [dir="rtl"]
       ol.colored > li:before {
         left: auto;
-        right: -1em;
+        right: -1rem;
         text-align: left; }
 
-/*
- * Counter increment to replace standard numbers.
- */
 ol.colored {
   counter-reset: foo; }
   ol.colored > li {
-    counter-increment: foo;
-        /*
-		 * Use the :before pseudo element to supply numbers.
-		 * 1. The counter value.
-		 * 2. Normalize funky webkit margin
-		 */ }
+    counter-increment: foo; }
     ol.colored > li:before {
       content: counter(foo) ".";
-      /* 1 */
-      font-weight: normal;
-      left: -3.125em;
-      width: 2.5em;
+      top: 0;
+      left: -3.125rem;
+      width: 2.5rem;
       -webkit-margin-start: 0;
-      /*2 */ }
+      font-size: 1rem; }
       [dir="rtl"] ol.colored > li:before {
-        left: auto;
-        right: -3.125em; }
+        right: -3.125rem; }
 
-/**Definition lists 
- * Prevent dt and dd collapse.
- */
 dt, dd {
-  min-height: 1.4em; }
+  min-height: 1.4rem; }
 
 @media print and (min-width: 537px), screen and (min-width: 48em) {
-    /*
-	 * Horizontally styled definition list
-	 */
   .dl-horizontal > dt {
     clear: left;
     float: left;
-    width: 9.375em;
+    width: 9.375rem;
     white-space: nowrap;
     overflow: hidden;
     text-align: right;
@@ -4971,10 +4936,10 @@ dt, dd {
       float: right;
       text-align: left; }
   .dl-horizontal > dd {
-    margin-left: 10.375em; }
+    margin-left: 10.375rem; }
     [dir="rtl"] .dl-horizontal > dd {
       margin-left: auto;
-      margin-right: 10.375em; } }
+      margin-right: 10.375rem; } }
 /*
  * Remove the gap between images, videos, audio and canvas and the bottom of
  * their containers: h5bp.com/i/440
