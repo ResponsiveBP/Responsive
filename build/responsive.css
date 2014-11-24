@@ -5540,7 +5540,7 @@ x::-ms-reveal,
         .tabs > ul > li > a:hover {
           background-color: #ebebeb;
           border-color: silver; }
-      .tabs > ul > li.tab-active > a, .tabs > ul > li.tab-active > a:hover {
+      .tabs > ul > li > [aria-selected='true'], .tabs > ul > li > [aria-selected='true']:hover {
         background-color: white;
         border: 1px solid silver;
         border-bottom-color: transparent;
@@ -5549,7 +5549,7 @@ x::-ms-reveal,
   .tabs > * {
     display: none; }
   .tabs > ul,
-  .tabs .tab-pane-active {
+  .tabs [tabIndex='0'] {
     display: block; }
 
 .clearfix:before, .row:before,

@@ -39,7 +39,7 @@
                 }
             }
 
-            &.tab-active > a {
+            & > [aria-selected='true'] {
                 &,
                 &:hover {
                     background-color: $tabs-nav-item-background-color-active;
@@ -57,7 +57,7 @@
     }
 
     > ul,
-    .tab-pane-active {
+    [tabIndex='0'] {
         display: block;
     }
 }
