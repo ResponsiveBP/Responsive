@@ -1225,6 +1225,7 @@
 
         this.$element = $(element);
         this.defaults = {
+            xxs: null,
             xs: null,
             s: null,
             m: null,
@@ -1295,7 +1296,7 @@
 
                         // Cache the result so no further requests are made. This uses the internal `parseHTML`
                         // method so be aware that could one day change.
-                        self.cache[grid] = selector ? jQuery("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
+                        self.cache[grid] = selector ? $("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
                                                     : responseText;
 
                         self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
