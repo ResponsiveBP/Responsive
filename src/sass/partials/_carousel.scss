@@ -24,21 +24,6 @@
             transition: .7s ease-in-out right;
         }
 
-        &:focus {
-
-            &:before {
-                @extend %focus;
-                content: "";
-                position: absolute;
-                z-index: 1;
-                top: $selection-focus-width;
-                right: $selection-focus-width;
-                bottom: $selection-focus-width;
-                left: $selection-focus-width;
-                pointer-events: none;
-            }
-        }
-
         > img {
             display: block;
             width: 100%;

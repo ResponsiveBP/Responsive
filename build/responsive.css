@@ -377,7 +377,7 @@ hr, input[type=search] {
   -moz-box-sizing: inherit;
        box-sizing: inherit; }
 
-a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus, .carousel > figure:focus:before {
+a:focus, area:focus, button:focus, input:focus, object:focus, select:focus, textarea:focus, [tabindex]:focus {
   outline-color: #4d90fe;
   outline-style: solid;
   outline-width: 1px;
@@ -5119,15 +5119,6 @@ table {
     [dir="rtl"] .carousel > figure {
       -webkit-transition: .7s ease-in-out right;
               transition: .7s ease-in-out right; }
-    .carousel > figure:focus:before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 1px;
-      right: 1px;
-      bottom: 1px;
-      left: 1px;
-      pointer-events: none; }
     .carousel > figure > img {
       display: block;
       width: 100%; }
