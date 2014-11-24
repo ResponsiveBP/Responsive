@@ -2721,13 +2721,14 @@
 
         $triggers.each(function (index) {
             var $this = $(this),
-                $tab = $this.children("a");
+                $tab = $this.children("a"),
+                isActive = $this.hasClass("tab-active");
 
             $tab.attr({
                 "role": "tab",
                 "id": "tab-" + id + "-" + index,
                 "aria-controls": "pane-" + id + "-" + index,
-                "aria-selected": $this.hasClass("tab-active") ? true : false,
+                "aria-selected": isActive ? true : false,
                 "tabIndex": 0
             });
 
@@ -2735,7 +2736,7 @@
                 "role": "tabpanel",
                 "id": "pane-" + id + "-" + index,
                 "aria-labelledby": "tab-" + id + "-" + index,
-                "tabIndex": $this.hasClass("tab-active") ? 0 : -1
+                "tabIndex": isActive ? 0 : -1
             });
         });
 
