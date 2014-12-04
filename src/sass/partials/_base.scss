@@ -47,13 +47,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // Remove text-shadow in selection highlight: h5bp.com/i
-// These selection rule sets have to be separate.
-// Customize the background colour to match your design.
-::-moz-selection {
-    background: $selection-background;
-    text-shadow: none;
-}
-
 ::selection {
     background: $selection-background;
     text-shadow: none;
@@ -65,7 +58,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid $horizontal-rule-color;
-    margin: 1em 0;
+    margin: 1rem 0;
     padding: 0;
 }
 
