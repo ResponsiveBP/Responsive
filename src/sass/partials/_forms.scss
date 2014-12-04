@@ -74,6 +74,18 @@ input[type='file']::-ms-value {
 }
 
 input[type='file']::-ms-browse {
+    -webkit-appearance: none; 
+    background: $button-background;
+    border: $button-border;
+    color: $form-input-color;
+
+    &:active {
+        background-color: lighten($button-background, 5);
+    }
+}
+
+input[type='file']::-webkit-file-upload-button {
+    -webkit-appearance: none; 
     background: $button-background;
     border: $button-border;
     color: $form-input-color;
