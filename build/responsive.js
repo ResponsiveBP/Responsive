@@ -676,13 +676,15 @@
         this.sliding = null;
         this.$items = null;
         this.translationDuration = null;
-        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.find(".carousel-control.forward");
-        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.find(".carousel-control.back");
-        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("ol > li");
+        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.children("button.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.children("button:not(.forward)");
+        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.children("ol").children("li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
         var self = this,
             activeIndex = this.activeindex();
+
+        console.log("active" + activeIndex);
 
         // Hide the previous button if no wrapping.
         if (!this.options.wrap) {
@@ -705,12 +707,11 @@
         }
 
         // Add a11y features.
-        this.$element.attr({ "role": "listbox", "id": this.id });
-        this.$element.children("figure").each(function () {
-            var $this = $(this),
-                active = $this.hasClass("carousel-active");
+        this.$element.attr({ "role": "listbox", "aria-live": "polite", "id": this.id });
 
-            $this.attr({
+        this.$element.children("figure").each(function (index) {
+            var active = index === activeIndex;
+            $(this).attr({
                 "role": "option",
                 "aria-selected": active,
                 "tabindex": active ? 0 : -1
@@ -730,7 +731,7 @@
         });
 
         // Find and a11y indicators.
-        this.$indicators.attr({ "role": "button", "aria-controls": self.id });
+        this.$indicators.attr({ "role": "button", "aria-controls": self.id }).eq(activeIndex).addClass("active");
 
         // Bind events
         // Not namespaced as we want to keep behaviour when not using data api.
@@ -1013,10 +1014,10 @@
 
         if (indicator) {
             this.to($this.index());
-        } else if ($this.is(this.$nextTrigger.selector)) {
+        } else if ($this.hasClass("forward")) {
             this.next();
         }
-        else if ($this.is(this.$previousTrigger.selector)) {
+        else if ($this.is("button")) {
             this.prev();
         }
     };

@@ -5112,11 +5112,13 @@ table {
       display: block;
       width: 100%; }
     .carousel > figure > figcaption {
-      /*position: absolute;*/
+      position: absolute;
       bottom: 0;
       width: 100%;
-      padding: 1px 1rem;
-      background-color: #222;
+      max-height: 50%;
+      overflow-y: auto;
+      padding: 1px 3rem;
+      background-color: rgba(34, 34, 34, 0.4);
       color: #fff; }
   .carousel > ol {
     left: 0;
@@ -5160,8 +5162,6 @@ table {
   .carousel .carousel-active {
     position: relative !important;
     z-index: 1; }
-    .carousel .carousel-active > figcaption {
-      position: static; }
   .carousel .next,
   .carousel .prev,
   .carousel .swipe {
@@ -5190,35 +5190,34 @@ table {
       [dir="rtl"] .carousel .prev.swiping, [dir="rtl"]
       .carousel .carousel-active.left.swiping {
         right: 100%; }
-
-.carousel-control {
-  position: absolute;
-  left: 1px;
-  top: 40%;
-  z-index: 3;
-  display: block;
-  width: 2rem;
-  margin-top: -1rem;
-  padding: .5rem;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center; }
-  [dir="rtl"] .carousel-control {
-    left: auto;
-    right: 1px; }
-  .carousel-control.forward {
-    left: auto;
-    right: 1px; }
-    [dir="rtl"] .carousel-control.forward {
-      right: auto;
-      left: 1px; }
-  .carousel-control, .carousel-control:active, .carousel-control:visited, .carousel-control:hover, .carousel-control:focus {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    text-decoration: none; }
-  .carousel-control:hover {
-    text-decoration: underline; }
+  .carousel > button {
+    position: absolute;
+    left: 1px;
+    top: 40%;
+    z-index: 3;
+    display: block;
+    width: 3rem;
+    margin-top: -1rem;
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center; }
+    [dir="rtl"] .carousel > button {
+      left: auto;
+      right: 1px; }
+    .carousel > button.forward {
+      left: auto;
+      right: 1px; }
+      [dir="rtl"] .carousel > button.forward {
+        right: auto;
+        left: 1px; }
+    .carousel > button, .carousel > button:active, .carousel > button:visited, .carousel > button:hover, .carousel > button:focus {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      text-decoration: none; }
+    .carousel > button:hover {
+      text-decoration: underline; }
 
 .carousel-fade > figure {
   position: absolute;

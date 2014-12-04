@@ -26,10 +26,12 @@
         }
 
         > figcaption {
-            /*position: absolute;*/
+            position: absolute;
             bottom: 0;
             width: 100%;
-            padding: 1px 1rem;
+            max-height: 50%;
+            overflow-y: auto;
+            padding: 1px 3rem;
             background-color: $carousel-caption-background-color;
             color: $carousel-caption-color;
         }
@@ -94,10 +96,6 @@
     .carousel-active {
         position: relative !important;
         z-index: 1;
-
-        > figcaption {
-            position: static;
-        }
     }
 
     .next,
@@ -137,49 +135,49 @@
             }
         }
     }
-}
 
-.carousel-control {
-    position: absolute;
-    left: 1px;
-    top: 40%;
-    z-index: 3;
-    display: block;
-    width: 2rem;
-    margin-top: -1rem;
-    padding: .5rem;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-
-    [dir="rtl"] & {
-        left: auto;
-        right: 1px;
-    }
-
-    &.forward {
-        left: auto;
-        right: 1px;
+    > button {
+        position: absolute;
+        left: 1px;
+        top: 40%;
+        z-index: 3;
+        display: block;
+        width: 3rem;
+        margin-top: -1rem;
+        padding: 1rem;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
 
         [dir="rtl"] & {
-            right: auto;
-            left: 1px;
+            left: auto;
+            right: 1px;
         }
-    }
 
-    &,
-    &:active,
-    &:visited,
-    &:hover,
-    &:focus {
-        background-color: transparent;
-        border: none;
-        color: $carousel-control-color;
-        text-decoration: none;
-    }
+        &.forward {
+            left: auto;
+            right: 1px;
 
-    &:hover {
-        text-decoration: underline;
+            [dir="rtl"] & {
+                right: auto;
+                left: 1px;
+            }
+        }
+
+        &,
+        &:active,
+        &:visited,
+        &:hover,
+        &:focus {
+            background-color: transparent;
+            border: none;
+            color: $carousel-control-color;
+            text-decoration: none;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
