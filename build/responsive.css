@@ -5088,26 +5088,12 @@ table {
 [data-autosize] {
   overflow: hidden; }
 
-/*
- * 1: Prevent font shift on chrome.
- */
 .carousel {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   overflow: hidden;
   position: relative;
   -webkit-backface-visibility: hidden;
-  /* 1 */
-  -webkit-perspective: 1000
-  /* 1 */
-    /*
-	 * Default slide version
-	 */
-    /*
-	 * Indicators
-	 */
-    /*
-	 * Next Last version
-	 */ }
+  -webkit-perspective: 1000; }
   .carousel.no-transition > figure {
     -webkit-transition-duration: 0s !important;
             transition-duration: 0s !important; }
@@ -5129,7 +5115,7 @@ table {
       /*position: absolute;*/
       bottom: 0;
       width: 100%;
-      padding: 1px 1em;
+      padding: 1px 1rem;
       background-color: #222;
       color: #fff; }
   .carousel > ol {
@@ -5140,17 +5126,17 @@ table {
     position: absolute;
     right: 0;
     text-align: center;
-    top: 1em;
+    top: 1rem;
     z-index: 3; }
     .carousel > ol li {
       background-color: transparent;
       border: 2px solid #222;
       cursor: pointer;
       display: inline-block;
-      height: 1em;
+      height: 1rem;
       margin: 1px;
       text-indent: -9999px;
-      width: 1em; }
+      width: 1rem; }
       .carousel > ol li:hover {
         background-color: #c0c0c0; }
     .carousel > ol .active {
@@ -5211,10 +5197,10 @@ table {
   top: 40%;
   z-index: 3;
   display: block;
-  width: 2em;
-  margin-top: -1em;
-  padding: .5em;
-  font-size: 2em;
+  width: 2rem;
+  margin-top: -1rem;
+  padding: .5rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center; }
   [dir="rtl"] .carousel-control {
@@ -5234,9 +5220,6 @@ table {
   .carousel-control:hover {
     text-decoration: underline; }
 
-/*
- * Fade version
- */
 .carousel-fade > figure {
   position: absolute;
   top: 0;
