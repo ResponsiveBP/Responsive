@@ -5033,25 +5033,19 @@ a img {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; }
 
-/*
- *  Make it responsive
- */
 table {
-  margin: 1em 0;
+  margin: 1rem 0;
   max-width: 100%;
   width: 100%; }
   table th,
   table td {
-    padding: .5em;
+    padding: .5rem;
     text-align: left;
     vertical-align: top; }
     [dir="rtl"] table th, [dir="rtl"]
     table td {
       text-align: right; }
 
-/*
- *  Bordered tables
- */
 .table-bordered {
   border: 1px solid #c0c0c0;
   border-left-width: 0;
@@ -5064,20 +5058,12 @@ table {
   .table-bordered tbody:first-child tr:first-child td {
     border-top-width: 0; }
 
-/*
- *  Striped tables
- */
 .table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th,
-.table-row-alt > td,
-.table-row-alt > th {
+.table-striped tbody > tr:nth-child(odd) > th {
   background-color: #ebebeb; }
 
-/*
- * Overflow helpers
- */
 .table-scrollable {
-  margin: 1em 0;
+  margin: 1rem 0;
   overflow-y: hidden;
   overflow-x: auto;
   width: 100%; }
@@ -5132,7 +5118,7 @@ table {
     z-index: 3; }
     .carousel > ol li {
       background-color: transparent;
-      border: 2px solid #222;
+      border: 1px solid #222;
       cursor: pointer;
       display: inline-block;
       height: 1rem;
@@ -5484,13 +5470,13 @@ x::-ms-reveal,
         float: right; }
     .table-list td:before, .table-list td:after {
       display: block;
-      padding: .5em 0;
+      padding: .5rem 0;
       font-weight: bold; }
     .table-list td:before {
       content: attr(data-thead); }
     .table-list th[scope=row]:before, .table-list th[scope=row]:after {
       display: block;
-      padding: .5em 0;
+      padding: .5rem 0;
       font-weight: bold; }
     .table-list th[scope=row]:before {
       content: attr(data-thead); }
@@ -5861,6 +5847,7 @@ x::-ms-reveal,
     height: 150%;
     width: 0; }
 
+[aria-hidden="true"],
 .hidden {
   display: none !important;
   visibility: hidden; }

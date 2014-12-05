@@ -13,6 +13,7 @@
         thead,
         tfoot,
         th {
+            // Hide but allow screenreaders to continue to read the values
             position: absolute;
             clip: rect(0 0 0 0);
             overflow: hidden;
@@ -55,11 +56,12 @@
             &:before,
             &:after {
                 display: block;
-                padding: .5em 0;
+                padding: .5rem 0;
                 font-weight: bold;
             }
 
             &:before {
+                // Populate with dynamically generated attribute.
                 content: attr(data-thead);
             }
         }
@@ -68,7 +70,7 @@
             &:before,
             &:after {
                 display: block;
-                padding: .5em 0;
+                padding: .5rem 0;
                 font-weight: bold;
             }
 
