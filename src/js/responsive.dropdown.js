@@ -176,8 +176,7 @@
                     "aria-hidden": !doShow,
                     "tabindex": doShow ? 0 : -1,
                 });
-
-
+                
                 var $tab = $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
                     "aria-expanded": doShow

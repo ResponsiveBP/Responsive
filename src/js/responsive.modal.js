@@ -61,6 +61,7 @@
             external: false,
             group: null,
             image: false,
+            immediate: false,
             iframe: false,
             iframeScroll: true,
             keyboard: true,
@@ -87,9 +88,14 @@
         }
 
         // Bind events.
+        if ($body.length === 0) { $body = $("body"); }
         this.$element.on(eclick, $.proxy(this.click, this));
         var onResize = $.debounce($.proxy(this.resize, this), 15);
         $(w).off(eresize).on(eresize, onResize);
+
+        if (this.options.immediate) {
+            this.show();
+        }
     };
 
     Modal.prototype.show = function () {
