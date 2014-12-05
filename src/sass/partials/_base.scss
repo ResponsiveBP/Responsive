@@ -46,6 +46,36 @@ h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid; // 2
 }
 
+h1 {
+    font-size: $h1-font-size;
+    margin: $h1-margin;
+}
+
+h2 {
+    font-size: $h2-font-size;
+    margin: $h2-margin;
+}
+
+h3 {
+    font-size: $h3-font-size;
+    margin: $h3-margin;
+}
+
+h4 {
+    font-size: $h4-font-size;
+    margin: $h4-margin;
+}
+
+h5 {
+    font-size: $h5-font-size;
+    margin: $h5-margin;
+}
+
+h6 {
+    font-size: $h6-font-size;
+    margin: $h6-margin;
+}
+
 // Remove text-shadow in selection highlight: h5bp.com/i
 ::selection {
     background: $selection-background;
