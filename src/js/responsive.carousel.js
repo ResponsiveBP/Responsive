@@ -63,8 +63,6 @@
         var self = this,
             activeIndex = this.activeindex();
 
-        console.log("active" + activeIndex);
-
         // Hide the previous button if no wrapping.
         if (!this.options.wrap) {
             if (activeIndex === 0) {
@@ -287,11 +285,11 @@
                 var activePosition = self.activeindex();
                 if (self.$items && activePosition === self.$items.length - 1) {
                     self.$nextTrigger.hide().attr("aria-hidden", true);
-                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.$previousTrigger.show().removeAttr("aria-hidden").focus();
                 }
                 else if (self.$items && activePosition === 0) {
                     self.$previousTrigger.hide().attr("aria-hidden", true);
-                    self.$nextTrigger.show().removeAttr("aria-hidden");
+                    self.$nextTrigger.show().removeAttr("aria-hidden").focus();
                 } else {
                     self.$nextTrigger.show().removeAttr("aria-hidden");
                     self.$previousTrigger.show().removeAttr("aria-hidden");
@@ -450,6 +448,8 @@
             percent *= -1;
         }
 
+        // This is crazy complicated. Basically swipe behaviour change direction in rtl
+        // So you need to handle that.
         this.$element.addClass("no-transition");
         if (this.options.mode === "slide") {
             if (rtl) {
