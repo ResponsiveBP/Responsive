@@ -2635,7 +2635,7 @@
     };
 
     // Plug-in definition 
-    $.fn.tablelist = function (options) {
+    function Plugin(options) {
 
         return this.each(function () {
 
@@ -2655,11 +2655,13 @@
         });
     };
 
-    // Set the public constructor.
-    $.fn.tablelist.Constructor = Table;
-
     // No conflict.
     var old = $.fn.table;
+
+    // Assign and set the public constructor.
+    $.fn.tablelist = Plugin;
+    $.fn.tablelist.Constructor = Table;
+
     $.fn.tablelist.noConflict = function () {
         $.fn.tablelist = old;
         return this;
@@ -2866,7 +2868,7 @@
     };
 
     // Plug-in definition 
-    $.fn.tabs = function (options) {
+    function Plugin (options) {
 
         return this.each(function () {
 
@@ -2885,11 +2887,14 @@
         });
     };
 
-    // Set the public constructor.
-    $.fn.tabs.Constructor = Tabs;
-
     // No conflict.
     var old = $.fn.tabs;
+
+    // Assign and set the public constructor.
+    $.fn.tabs = Plugin;
+    $.fn.tabs.Constructor = Tabs;
+
+
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;

@@ -77,7 +77,7 @@
     };
 
     // Plug-in definition 
-    $.fn.tablelist = function (options) {
+    function Plugin(options) {
 
         return this.each(function () {
 
@@ -97,11 +97,13 @@
         });
     };
 
-    // Set the public constructor.
-    $.fn.tablelist.Constructor = Table;
-
     // No conflict.
     var old = $.fn.table;
+
+    // Assign and set the public constructor.
+    $.fn.tablelist = Plugin;
+    $.fn.tablelist.Constructor = Table;
+
     $.fn.tablelist.noConflict = function () {
         $.fn.tablelist = old;
         return this;

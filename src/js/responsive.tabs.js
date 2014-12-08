@@ -179,7 +179,7 @@
     };
 
     // Plug-in definition 
-    $.fn.tabs = function (options) {
+    function Plugin (options) {
 
         return this.each(function () {
 
@@ -198,11 +198,14 @@
         });
     };
 
-    // Set the public constructor.
-    $.fn.tabs.Constructor = Tabs;
-
     // No conflict.
     var old = $.fn.tabs;
+
+    // Assign and set the public constructor.
+    $.fn.tabs = Plugin;
+    $.fn.tabs.Constructor = Tabs;
+
+
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;
