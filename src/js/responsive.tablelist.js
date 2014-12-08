@@ -76,8 +76,11 @@
         this.$element.onTransitionEnd(complete);
     };
 
+    // No conflict.
+    var old = $.fn.table;
+
     // Plug-in definition 
-    function Plugin(options) {
+    $.fn.tablelist = function (options) {
 
         return this.each(function () {
 
@@ -97,11 +100,7 @@
         });
     };
 
-    // No conflict.
-    var old = $.fn.table;
-
-    // Assign and set the public constructor.
-    $.fn.tablelist = Plugin;
+    // Set the public constructor.
     $.fn.tablelist.Constructor = Table;
 
     $.fn.tablelist.noConflict = function () {

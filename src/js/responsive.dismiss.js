@@ -83,6 +83,9 @@
         this.close();
     };
 
+    // No conflict.
+    var old = $.fn.dismiss;
+
     // Plug-in definition 
     $.fn.dismiss = function (options) {
 
@@ -106,8 +109,6 @@
     // Set the public constructor.
     $.fn.dismiss.Constructor = Dismiss;
 
-    // No conflict.
-    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;

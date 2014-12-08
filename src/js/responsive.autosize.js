@@ -78,6 +78,9 @@
 
     };
 
+    // No conflict.
+    var old = $.fn.autoSize;
+
     // Plug-in definition 
     $.fn.autoSize = function (options) {
 
@@ -101,8 +104,6 @@
     // Set the public constructor.
     $.fn.autoSize.Constructor = AutoSize;
 
-    // No conflict.
-    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;

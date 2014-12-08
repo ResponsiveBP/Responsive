@@ -254,6 +254,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.dropdown;
+
     // Plug-in definition 
     $.fn.dropdown = function (options) {
         return this.each(function () {
@@ -276,8 +279,6 @@
     // Set the public constructor.
     $.fn.dropdown.Constructor = Dropdown;
 
-    // No conflict.
-    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;

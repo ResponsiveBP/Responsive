@@ -141,7 +141,7 @@
 
         this.show(index);
     };
-
+    
     Tabs.prototype.keydown = function (event) {
 
         var which = event.which;
@@ -178,8 +178,11 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.tabs;
+
     // Plug-in definition 
-    function Plugin (options) {
+    $.fn.tabs = function (options) {
 
         return this.each(function () {
 
@@ -198,13 +201,8 @@
         });
     };
 
-    // No conflict.
-    var old = $.fn.tabs;
-
-    // Assign and set the public constructor.
-    $.fn.tabs = Plugin;
+    // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
-
 
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;

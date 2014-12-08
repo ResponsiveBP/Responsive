@@ -521,6 +521,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.carousel;
+
     // Plug-in definition 
     $.fn.carousel = function (options) {
 
@@ -552,8 +555,6 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    // No conflict.
-    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;

@@ -702,6 +702,9 @@
         this[(event.direction === "right") ? "next" : "prev"]();
     };
 
+    // No conflict.
+    var old = $.fn.modal;
+
     // Plug-in definition 
     $.fn.modal = function (options) {
 
@@ -729,8 +732,6 @@
     // Set the public constructor.
     $.fn.modal.Constructor = Modal;
 
-    // No conflict.
-    var old = $.fn.modal;
     $.fn.modal.noConflict = function () {
         $.fn.modal = old;
         return this;

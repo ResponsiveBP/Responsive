@@ -569,6 +569,9 @@
 
     };
 
+    // No conflict.
+    var old = $.fn.autoSize;
+
     // Plug-in definition 
     $.fn.autoSize = function (options) {
 
@@ -592,8 +595,6 @@
     // Set the public constructor.
     $.fn.autoSize.Constructor = AutoSize;
 
-    // No conflict.
-    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;
@@ -1142,6 +1143,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.carousel;
+
     // Plug-in definition 
     $.fn.carousel = function (options) {
 
@@ -1173,8 +1177,6 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    // No conflict.
-    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;
@@ -1307,6 +1309,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.conditional;
+
     // Plug-in definition 
     $.fn.conditional = function (options) {
 
@@ -1330,8 +1335,6 @@
     // Set the public constructor.
     $.fn.conditional.Constructor = Conditional;
 
-    // No conflict.
-    var old = $.fn.conditional;
     $.fn.conditional.noConflict = function () {
         $.fn.conditional = old;
         return this;
@@ -1442,6 +1445,9 @@
         this.close();
     };
 
+    // No conflict.
+    var old = $.fn.dismiss;
+
     // Plug-in definition 
     $.fn.dismiss = function (options) {
 
@@ -1465,8 +1471,6 @@
     // Set the public constructor.
     $.fn.dismiss.Constructor = Dismiss;
 
-    // No conflict.
-    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;
@@ -1748,6 +1752,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.dropdown;
+
     // Plug-in definition 
     $.fn.dropdown = function (options) {
         return this.each(function () {
@@ -1770,8 +1777,6 @@
     // Set the public constructor.
     $.fn.dropdown.Constructor = Dropdown;
 
-    // No conflict.
-    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;
@@ -2502,6 +2507,9 @@
         this[(event.direction === "right") ? "next" : "prev"]();
     };
 
+    // No conflict.
+    var old = $.fn.modal;
+
     // Plug-in definition 
     $.fn.modal = function (options) {
 
@@ -2529,8 +2537,6 @@
     // Set the public constructor.
     $.fn.modal.Constructor = Modal;
 
-    // No conflict.
-    var old = $.fn.modal;
     $.fn.modal.noConflict = function () {
         $.fn.modal = old;
         return this;
@@ -2634,8 +2640,11 @@
         this.$element.onTransitionEnd(complete);
     };
 
+    // No conflict.
+    var old = $.fn.table;
+
     // Plug-in definition 
-    function Plugin(options) {
+    $.fn.tablelist = function (options) {
 
         return this.each(function () {
 
@@ -2655,11 +2664,7 @@
         });
     };
 
-    // No conflict.
-    var old = $.fn.table;
-
-    // Assign and set the public constructor.
-    $.fn.tablelist = Plugin;
+    // Set the public constructor.
     $.fn.tablelist.Constructor = Table;
 
     $.fn.tablelist.noConflict = function () {
@@ -2830,7 +2835,7 @@
 
         this.show(index);
     };
-
+    
     Tabs.prototype.keydown = function (event) {
 
         var which = event.which;
@@ -2867,8 +2872,11 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.tabs;
+
     // Plug-in definition 
-    function Plugin (options) {
+    $.fn.tabs = function (options) {
 
         return this.each(function () {
 
@@ -2887,13 +2895,8 @@
         });
     };
 
-    // No conflict.
-    var old = $.fn.tabs;
-
-    // Assign and set the public constructor.
-    $.fn.tabs = Plugin;
+    // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
-
 
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;

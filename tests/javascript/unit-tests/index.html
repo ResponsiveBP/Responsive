@@ -6,8 +6,20 @@
     <meta name="description" content="Your site description." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Responsive Unit Tests</title>
-    
+
     <link href="../test-assets/qunit/qunit-1.16.0.css" rel="stylesheet" />
+
+    <style>
+        /*#qunit-tests > li.pass {
+            display: none; /* Make it easier to see failing tests in Sauce screencasts */
+        /*}*/
+
+        #qunit-fixture {
+            top: 0;
+            left: 0;
+        }
+    </style>
+
 </head>
 <body>
     <div id="qunit"></div>
@@ -15,8 +27,22 @@
 
     <script src="../../../build/vendor/jquery-2.1.1.min.js"></script>
     <script src="../test-assets/qunit/qunit-1.16.0.js"></script>
-    <script src="../../../build/responsive.js"></script>
+
+    <script src="../../../src/js/responsive.core.js"></script>
+
+    <script>
+        // Disable transition support so all events fire.
+        $.support.transition = false;
+
+        // Cleanup
+        QUnit.testDone(function () {
+          //  $("#qunit-fixture").empty();
+        });
+    </script>
+    <script src="../../../src/js/responsive.tabs.js"></script>
+
 
     <script src="tabs.js"></script>
+
 </body>
 </html>

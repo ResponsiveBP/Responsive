@@ -105,6 +105,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.conditional;
+
     // Plug-in definition 
     $.fn.conditional = function (options) {
 
@@ -128,8 +131,6 @@
     // Set the public constructor.
     $.fn.conditional.Constructor = Conditional;
 
-    // No conflict.
-    var old = $.fn.conditional;
     $.fn.conditional.noConflict = function () {
         $.fn.conditional = old;
         return this;
