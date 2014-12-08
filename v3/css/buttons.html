@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Buttons ::  Responsive</title>
+    <meta name="description" content=" Cross browser buttons with easy styling. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/css">css</a> &#187; </li>
+
+    
+    
+    
+    <li>buttons</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Buttons
+                <span>Cross browser buttons with easy styling.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#standard">Standard Layout</a></li><li><a href="#disabled">Disabled</a></li><li><a href="#inline">Inline</a></li><li><a href="#grouped">Grouped</a></li>
+</ul>
+
+    </nav>
+    <article class="col-m-9">
+        <section>
+    <h1>Button Elements</h1>
+    <p>
+        Button styling in Responsive has, like everything else, been designed with the bare minimum of CSS.
+        Styles have been normalized across all button states with no extra css classes added.
+    </p>
+    <div class="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            We have deliberately not styled elements with <code>[role="alert"]</code> to match their native counterparts.
+            This is for accessibility reasons as we believe that is will promote misuse to do so.
+        </p>
+    </div>
+    <hr />
+    <section id="standard">
+        <h1>Default Button Styles</h1>
+        <p>All styles are attribute based with all four button states covered:</p>
+        <ul>
+            <li><code>:hover</code></li>
+            <li><code>:focus</code></li>
+            <li><code>:active</code></li>
+            <li><code>:disabled</code></li>
+        </ul>
+        <div class="row">
+            <div class="col-s-6">
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <button>button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button" />
+                </div>
+            </div>
+            <div class="col-s-6">
+                <div>
+                    <h3>Input : Submit </h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <input type="submit" value="submit" />
+                </div>
+                <div>
+                    <h3>Input : Reset </h3>
+                    <p>Standard <code>input[type="reset"]</code> element.</p>
+                    <input type="reset" value="reset" />
+                </div>
+            </div>
+        </div>
+        <div class="alert" role="alert">
+            <h4>Heads Up!</h4>
+            <p>
+                We strongly recommend using the <code>&lt;button&gt;&lt;/button&gt;</code> element over
+                the <code>&lt;input /&gt;</code> element for all button style markup.
+            </p>
+        </div>
+    </section>
+    <hr />
+    <section id="disabled">
+        <h1>Disabled State</h1>
+        <p>Hyperlink disabled state are styled by adding the class <code>.disabled</code>. The developer would have to additionally use JavaScript to prevent the default behaviour.</p>
+        <div class="row">
+            <div class="col-s-6">
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <button disabled>button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button" disabled />
+                </div>
+            </div>
+            <div class="col-s-6">
+                <div>
+                    <h3>Input : Submit</h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <input type="submit" value="submit" disabled />
+                </div>
+                <div>
+                    <h3>Input : Reset</h3>
+                    <p>Standard <code>input[type="reset"]</code> element.</p>
+                    <input type="reset" value="reset" disabled />
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr />
+    <section id="inline">
+        <h1>Inline Buttons </h1>
+        <p>Add the class <code>.btn-inline</code> </p>
+        <div class="row">
+            <div class="col-s-6">
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <input type="text" class="inline-block" />
+                    <button class="btn-inline">button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <input type="text" class="inline-block" />
+                    <input type="button" value="button" class="btn-inline" />
+                </div>
+            </div>
+            <div class="col-s-6">
+                <div>
+                    <h3>Input : Submit</h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <input type="text" class="inline-block" />
+                    <input type="submit" value="submit" class="btn-inline" />
+                </div>
+                <div>
+                    <h3>Input : Reset</h3>
+                    <p>Standard <code>input[type="reset"]</code> element.</p>
+                    <input type="text" class="inline-block" />
+                    <input type="reset" value="reset" class="btn-inline" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr />
+    <section id="grouped">
+        <h1>Grouped Buttons</h1>
+        <p>Wrap the buttons in a div with class <code>.btn-group</code></p>
+        <div class="row">
+            <div class="col-s-6">
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard <code>button</code> element.</p>
+                    <div class="btn-group">
+                        <button>first</button>
+                        <button>second</button>
+                        <button>third</button>
+                        <button>fourth</button>
+                    </div>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard <code>input[type="button"]</code> element.</p>
+                    <div class="btn-group">
+                        <input type="button" value="first" />
+                        <input type="button" value="second" />
+                        <input type="button" value="third" />
+                        <input type="button" value="fourth" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-s-6">
+                <div>
+                    <h3>Input : Submit</h3>
+                    <p>Standard <code>input[type="submit"]</code> element.</p>
+                    <div class="btn-group">
+                        <input type="submit" value="first" />
+                        <input type="submit" value="second" />
+                        <input type="submit" value="third" />
+                        <input type="submit" value="fourth" />
+                    </div>
+                </div>
+                <div>
+                    <h3>Input : Reset</h3>
+                    <p>Standard <code>input[type="reset"]</code> element.</p>
+                    <div class="btn-group">
+                        <input type="reset" value="first" />
+                        <input type="reset" value="second" />
+                        <input type="reset" value="third" />
+                        <input type="reset" value="fourth" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

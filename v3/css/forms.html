@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Forms ::  Responsive</title>
+    <meta name="description" content=" Cross browser, normalized, responsive forms. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/css">css</a> &#187; </li>
+
+    
+    
+    
+    <li>forms</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Forms
+                <span>Cross browser, normalized, responsive forms.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#examples">Examples</a></li><li><a href="#markup">The Markup</a></li><li><a href="#ios">IOS</a></li>
+</ul>
+
+    </nav>
+    <article class="col-m-9">
+        <section>
+    <h1>Form Elements</h1>
+    <p>Cross browser, normalized, responsive forms with minimal styling to allow easy overrides and lean CSS.</p>
+    <p>
+        All inputs are responsive with progressively enhanced fallbacks for unsupported types. A hook class <code>.no-edit</code> can be used to mimic non-editable inputs,
+        and all fields can be made to display inline by adding the class <code>.inline-block</code>.
+    </p>
+    <p>Smaller elements such as radio and checkbox inputs can be aligned by wrapping them in an element with the class <code>.input-group</code>.</p>
+    <div class="alert" role="alert">
+        <h4>Right-to-Left Language Support</h4>
+        <p>
+            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the layout of form inputs to allow for right-to-left languages.
+        </p>
+    </div>
+    <hr />
+
+    <div id="examples">
+        <section>
+            <h1>Vertical Form</h1>
+            <p>
+                Responsive form elements span 100% by default; their width is designed to be constrained by the existing grid system.
+                This makes them extremely flexible.
+            </p>
+            <form action="#">
+                <fieldset>
+                    <legend>Standard Form</legend>
+                    <div class="row">
+                        <div class="col-s-6">
+                            <label for="input1">Standard</label>
+                            <input type="text" id="input1" value="standard input...">
+                            <label for="input-disabled1">Disabled</label>
+                            <input type="text" id="input-disabled1" disabled value="disabled input...">
+                            <p>Support text to help describe the input.</p>
+                            <label for="input-no-edit1">Non editable</label>
+                            <span id="input-no-edit1" class="no-edit">No edit</span>
+                            <label for="select-default1">Select</label>
+                            <select id="select-default1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <label for="input-file1">File upload</label>
+                            <input id="input-file1" type="file">
+                            <label for="input-number1">Number</label>
+                            <input type="number" id="input-number1">
+                            <label for="input-password1">Password</label>
+                            <input type="password" id="input-password1">
+                            <label for="input-time1">Time</label>
+                            <input type="time" id="input-time1">
+                            <label for="input-week1">Week</label>
+                            <input type="week" id="input-week1">
+                            <label for="input-month1">Month</label>
+                            <input type="month" id="input-month1">
+                            <label for="input-date1">Date</label>
+                            <input type="date" id="input-date1">
+                        </div>
+                        <div class="col-s-6">
+                            <label for="input-datetime1">Datetime</label>
+                            <input type="datetime" id="input-datetime1">
+                            <label for="input-datetime-local1">Datetime Local</label>
+                            <input type="datetime-local" id="input-datetime-local1">
+                            <label for="input-search1">Search</label>
+                            <input type="search" id="input-search1">
+                            <label for="input-color1">Color</label>
+                            <input type="color" id="input-color1">
+                            <label for="input-range1">Range</label>
+                            <input type="range" id="input-range1" min="0" max="100" value="50">
+                            <label for="input-email1">Email</label>
+                            <input type="email" id="input-email1">
+                            <label for="check-disabled1"><input type="checkbox" id="check-disabled1" value="option1" disabled class="inline-block"> Disabled Checkbox</label>
+                            <label for="check1"><input type="checkbox" id="check1" value="option1" class="inline-block"> Checkbox 1</label>
+                            <label for="check2"><input type="checkbox" id="check2" value="option2" class="inline-block"> Checkbox 2</label>
+                            <label for="radio1"><input type="radio" id="radio1" name="radio" value="option1"> Radio 1</label>
+                            <label for="radio2"><input type="radio" id="radio2" name="radio" value="option1"> Radio 2</label>
+                            <label for="textarea1">Textarea</label>
+                            <textarea id="textarea1"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit">Save changes</button>
+                    <button>Cancel</button>
+                </div>
+            </form>
+        </section>
+        <section>
+            <h1>Horizontal Form</h1>
+            <form action="#">
+                <fieldset>
+                    <legend>Standard Form spanning two columns</legend>
+                    <div class="row">
+                        <div class="col-s-6">
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input3">Standard</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="text" id="input3" value="standard input...">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-disabled3">Disabled</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="text" id="input-disabled3" disabled value="disabled input...">
+                                    <p>Support text to help describe the input.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-no-edit3">Non editable</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <span id="input-no-edit3" class="no-edit">No edit</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="select-default3">Select</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <select id="select-default3">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-file3">File upload</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input id="input-file3" type="file">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-number3">Number</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="number" id="input-number3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-password3">Password</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="password" id="input-password3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-time3">Time</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="time" id="input-time3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-week3">Week</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="week" id="input-week3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-month3">Month</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="month" id="input-month3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-date3">Date</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="date" id="input-date3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-s-6">
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-datetime3">Datetime</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="datetime" id="input-datetime3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-datetime-local3">Datetime Local</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="datetime-local" id="input-datetime-local3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-search3">Search</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="search" id="input-search3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-color3">Color</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="color" id="input-color3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-range3">Range</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="range" id="input-range3" min="0" max="100" value="50">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="input-email3">Email</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="email" id="input-email3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="check-disabled3">Disabled Checkbox</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="checkbox" id="check-disabled3" value="option1" disabled class="inline-block">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="check3">Checkbox 3</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="checkbox" id="check3" value="option1">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="check4">Checkbox 4</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="checkbox" id="check4" value="option2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="radio3">Radio 3</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="radio" id="radio3" name="radio" value="option2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="radio4">Radio 4</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <input type="radio" id="radio4" name="radio" value="option1">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="textarea3">Textarea</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <textarea id="textarea3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit">Save changes</button>
+                    <button type="button">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <hr />
+    <section id="markup">
+        <h1>The Markup</h1>
+        <p>The entire markup for the second form. Note the grid wrappers required for arranging inputs.</p>
+        <pre class="language-markup"><code>&lt;form action="#"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Standard Form spanning two columns&lt;/legend&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-s-6"&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input3"&gt;Standard&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="text" id="input3"  value="standard input..."&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-disabled3"&gt;Disabled&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="text" id="input-disabled3" disabled value="disabled input..."&gt;
+                        &lt;p&gt;Support text to help describe the input.&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-no-edit3"&gt;Non editable&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;span id="input-no-edit3" class="no-edit"&gt;No edit&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="select-default3"&gt;Select&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;select id="select-default3"&gt;
+                            &lt;option&gt;1&lt;/option&gt;
+                            &lt;option&gt;2&lt;/option&gt;
+                            &lt;option&gt;3&lt;/option&gt;
+                            &lt;option&gt;4&lt;/option&gt;
+                            &lt;option&gt;5&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-file3"&gt;File upload&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input id="input-file3" type="file"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-number3"&gt;Number&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="number" id="input-number3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-password3"&gt;Password&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="password" id="input-password3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-time3"&gt;Time&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="time" id="input-time3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-week3"&gt;Week&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="week" id="input-week3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-month3"&gt;Month&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="month" id="input-month3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-date3"&gt;Date&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="date" id="input-date3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-s-6"&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-datetime3"&gt;Datetime&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="datetime" id="input-datetime3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-datetime-local3"&gt;Datetime Local&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="datetime-local" id="input-datetime-local3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-search3"&gt;Search&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="search" id="input-search3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-color3"&gt;Color&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="color" id="input-color3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-range3"&gt;Range&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="range" id="input-range3" min="0" max="100" value="50"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-email3"&gt;Email&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="email" id="input-email3"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="check-disabled3"&gt;Disabled Checkbox&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="checkbox" id="check-disabled3" value="option2" disabled class="inline-block"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="check3"&gt;Checkbox 3&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="checkbox" id="check3" value="option1"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="check4"&gt;Checkbox 4&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="checkbox" id="check4" value="option2"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="radio3"&gt;Radio 3&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="radio" id="radio3" name="radio" value="option1"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="radio4"&gt;Radio 4&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="radio" id="radio4" name="radio" value="option1"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="textarea3"&gt;Textarea&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;textarea id="textarea3"&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    &lt;div class="form-actions"&gt;
+        &lt;button type="submit"&gt;Save changes&lt;/button&gt;
+        &lt;button type="button"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+    </section>
+    <section id="ios">
+        <h1>IOS</h1>
+        <p>On IOS devices the OS chroma is stripped from select and certain input fields allowing them to be styled with the same flexibility of desktop browsers. As such the dropdown indicator needs to be replaced. This is done using a data encoded svg image embedded in the CSS.</p>
+        <p>The data for this image is as follows:</p>
+        <pre class="language-css"><code>background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);</code></pre>
+    </section>
+</section>
+
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

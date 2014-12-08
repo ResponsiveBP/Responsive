@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Base ::  Responsive</title>
+    <meta name="description" content=" Normalized content across all browsers. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/css">css</a> &#187; </li>
+
+    
+    
+    
+    <li>base</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Base
+                <span>Normalized content across all browsers.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#normalize">Normalize</a></li><li><a href="#typography">Typography</a></li><li><a href="#inlinetype">Inline Type</a></li><li><a href="#visibilityhelpers">Visibility Helpers</a></li><li><a href="#layouthelpers">Layout Helpers</a></li>
+</ul>
+
+    </nav>
+    <article class="col-m-9">
+        <section id="normalize">
+    <h1>Normalize</h1>
+    <p>
+        Responsive provides lots of building blocks that are specifically designed to speed up your development by
+        boilerplating common components from normalized styles.
+    </p>
+    <p>
+        The base CSS for this comes from <a href="http://necolas.github.com/normalize.css/" rel="external">Normalize.css</a>; an open-source project by
+        <a href="http://twitter.com/necolas" rel="external">Nicolas Gallagher</a> and <a href="http://twitter.com/jon_neal" rel="external">Jonathan Neal</a>.
+    </p>
+    <p>
+        <a href="http://nicolasgallagher.com/about-normalize-css/" rel="external">In their own words</a>:
+    </p>
+    <blockquote>
+        Normalize.css is a small CSS file that provides better cross-browser consistency in the default styling of HTML elements.
+        It's a modern, HTML5-ready, alternative to the traditional CSS reset.
+    </blockquote>
+</section>
+<hr />
+<section id="typography">
+    <h1>Typography</h1>
+    <p>
+        Responsive does not add any additional styles to basic typographical elements such as <code>&lt;p/&gt;</code>. Header tags and other elements conform to cross-browser normalized standards.
+    </p>
+    <table class="table-list table-striped table-bordered" data-table-list="">
+        <thead>
+            <tr>
+                <th>Header Element</th>
+                <th>Default Dimensions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <h1>h1 element</h1>
+                </td>
+                <td>
+                    <pre class="narrow-code"><code>font-size: 2em;
+margin: .67em 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2>h2 element</h2>
+                </td>
+                <td>
+                    <pre class="narrow-code"><code>font-size: 1.5em;
+margin: .83em 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>h3 element</h3>
+                </td>
+                <td>
+                    <pre class="narrow-code"><code>font-size: 1.17em;
+margin: 1em 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>h4 element</h4>
+                </td>
+                <td>
+                    <pre class="narrow-code"><code>font-size: 1em;
+margin: 1.33em 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>h5 element</h5>
+                </td>
+                <td>
+                    <pre class="narrow-code"><code>font-size: .83em;
+margin: 1.67em 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6>h6 element</h6>
+                </td>
+                <td>
+                    <pre class="narrow-code"><code>font-size: .67em;
+margin: 2.33em 0;</code></pre>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><code>&lt;hr/&gt;</code> elements have been tweaked slightly though to allow developers to more easily style them. For example:</p>
+    <hr />
+    <div class="alert" role="alert">
+        <p>Responsive also adds some light styling to code driven elements. See <a href="code.html" rel="bookmark">Code</a> for examples of that styling.</p>
+    </div>
+</section>
+<hr />
+<section id="inlinetype">
+    <h1>Inline Typographical Elements</h1>
+    <div class="row">
+        <div class="column-6">
+            <p>
+                <q>q element <q>inside</q> a q element</q> example<br />
+                <small>small element</small> example<br />
+                <span>span element</span> example<br />
+                <strong>strong element</strong> example<br />
+                <sub>sub element</sub> example<br />
+                <sup>sup element</sup> example<br />
+                <var>var element</var>
+                example
+            </p>
+        </div>
+        <div class="column-6">
+            <p>
+                <cite>cite element</cite> example<br />
+                <del>del element</del> example<br />
+                <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples<br />
+                <em>em element</em> example<br />
+                <i>i element</i> example<br />
+                <ins>ins element</ins> example<br />
+                <mark>mark element</mark> example<br />
+                <abbr title="Abbreviation">abbr</abbr>
+                example<br />
+                <ruby>ruby</ruby> example
+            </p>
+        </div>
+    </div>
+</section>
+<hr />
+<section id="visibilityhelpers">
+    <h1>Visibility helpers.</h1>
+    <p>
+        These helpers allow you to toggle the visibility of elements as the viewport scales.
+        <var>Em</var>
+        values are calculated at the browser body default of
+        <var>16px = 1em</var>.
+    </p>
+    <div class="row">
+        <h3>Visible Example: Green means visible</h3>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>&lt; 48em</h3>
+                <code>.visible-xs</code>
+                <div class="visible-xs responsive-helper-alert is-shown">
+                    <h3>&lt; 48em</h3>
+                    <code>.visible-xs</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>48em to 62em</h3>
+                <code>.visible-s</code>
+                <div class="visible-s responsive-helper-alert is-shown">
+                    <h3>48em to 62em</h3>
+                    <code>.visible-s</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>62em to 75em</h3>
+                <code>.visible-m</code>
+                <div class="visible-m responsive-helper-alert is-shown">
+                    <h3>62em to 75em</h3>
+                    <code>.visible-m</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>&gt; 75em</h3>
+                <code>.visible-l</code>
+                <div class="visible-l responsive-helper-alert is-shown">
+                    <h3>&gt; 75em</h3>
+                    <code>.visible-l</code>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Hidden Example: Red means hidden</h3>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>&lt; 48em</h3>
+                <code>.hidden-xs</code>
+                <div class="hidden-xs responsive-helper-alert is-shown">
+                    <h3>&lt; 48em</h3>
+                    <code>.hidden-xs</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>48em to 62em</h3>
+                <code>.hidden-s</code>
+                <div class="hidden-s responsive-helper-alert is-shown">
+                    <h3>48em to 62em</h3>
+                    <code>.hidden-s</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>62em to 75em</h3>
+                <code>.hidden-m</code>
+                <div class="hidden-m responsive-helper-alert is-shown">
+                    <h3>62em to 75em</h3>
+                    <code>.hidden-m</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="responsive-helper-pane is-hidden">
+                <h3>&gt; 75em</h3>
+                <code>.hidden-l</code>
+                <div class="hidden-l responsive-helper-alert is-shown">
+                    <h3>&gt; 75em</h3>
+                    <code>.hidden-l</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Extra Visibility Helpers</h2>
+    <p>These extra utility classes help you perform addition visibility tasks.</p>
+    <dl>
+        <dt><code>.hidden</code></dt>
+        <dd>Hides an element from both screen-readers and browsers.</dd>
+        <dt><code>.visuallyhidden</code></dt>
+        <dd>Hides an element visually, but has it available for screen readers.</dd>
+        <dt><code>.invisible</code></dt>
+        <dd>Hides an element visually and from screen readers, but maintain layout.</dd>
+        <dt><code>.ir</code></dt>
+        <dd>Hides an elements text so that a background image can be used instead; requires the height of the element to be set via CSS to work. Useful for logos.</dd>
+    </dl>
+</section>
+<hr />
+<section id="layouthelpers">
+    <h1>Layout Helpers</h1>
+    <p>Responsive also comes bundled with utility classes help you layout elements within the grid columns.</p>
+
+    <h3>Floating Classes</h3>
+    <p>
+        Push or pull elements floating them to the extremes of their immediate parent. Add the class <code>.clearfix</code>
+        to the parent element to contain floats without resorting to using presentational markup.
+    </p>
+    <div class="row">
+        <div class="col-s-6">
+            <div class="responsive-helper-pane clearfix">
+                <p class="push"><code>.push</code></p>
+            </div>
+        </div>
+        <div class="col-s-6">
+            <div class="responsive-helper-pane clearfix">
+                <p class="pull"><code>.pull</code></p>
+            </div>
+        </div>
+    </div>
+    <div class="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            Both <code>.push</code> and <code>.pull</code> have <code>.push/.pull-{grid range}</code> and <code>.push/.pull-{grid range}-only</code>
+            variants for each grid range.
+        </p>
+    </div>
+
+    <h3>Display Classes</h3>
+    <p>The following classes are available for changing the layout of elements</p>
+    <dl>
+        <dt><code>.block</code></dt>
+        <dd>
+            Changes an elements display style to
+            <var>block</var>.
+        </dd>
+        <dt><code>.inline-block</code></dt>
+        <dd>
+            Changes an elements display style to
+            <var>inline-block</var>.
+        </dd>
+        <dt><code>.inline</code></dt>
+        <dd>
+            Changes an elements display style to
+            <var>inline</var>.
+        </dd>
+    </dl>
+    <div class="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            <code>.block</code>, <code>.inline-block</code>, and <code>.inline</code> have <code>{display type}-{grid range}</code> and
+            <code>{display type}-{grid range}-only</code> variants for each grid range.
+        </p>
+    </div>
+</section>
+
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

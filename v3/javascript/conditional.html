@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Conditional ::  Responsive</title>
+    <meta name="description" content=" A plugin that replaces content within a page based on the current grid level. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/javascript">javascript</a> &#187; </li>
+
+    
+    
+    
+    <li>conditional</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Conditional
+                <span>A plugin that replaces content within a page based on the current grid level.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#examples">Examples</a></li><li><a href="#markup">Markup</a></li><li><a href="#methods">Methods</a></li><li><a href="#events">Events</a></li><li><a href="#dataapi">Data API</a></li>
+</ul>
+
+    </nav>
+    <article class="col-m-9">
+        <section id="normalize">
+    <h1>Conditional</h1>
+    <p>
+        A jQuery plugin that replaces content within a page based on the grid level <code>xs, s, m, l</code> that the current viewport width falls within.
+    </p>
+    <p>
+        The plugin uses ajax to load in the defined content. The url paths to the content are defined in the same format as
+        jQuery's <a href="http://api.jquery.com/load/" rel="external">Load()</a> method which allows you to specify selectors. After each initial call the content
+        is cached so that no further requests are made. If no fallback is defined then any html contained withing the plugin element will be saved and cached instead.
+    </p>
+    <p>
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
+        This is Responsive's first class API and should be your first consideration when using a plugin.
+    </p>
+    <h3>Resize the browser window to see dynamically loaded content change.</h3>
+    <hr />
+    <section id="examples">
+        <h1>Examples</h1>
+        <section class="row">
+            <h3>Standard</h3>
+            <div data-conditional-xs="../css/grid.html #basic" data-conditional-fallback="tabs.html #examples" data-conditional-l="carousel.html #carousel-1">
+            </div>
+        </section>
+        <section class="row">
+            <h3>Initial Content as Fallback</h3>
+            <p>
+                In this example the content that is within the bounds of the plugin element before the plugin initializes is saved and used as fallback content for
+                any undefined grid ranges. This ensures that search engine crawlers can find content to add to their results.
+            </p>
+            <div data-conditional-xs="../css/grid.html #basic" data-conditional-l="carousel.html #carousel-1">
+                <blockquote>
+                    <p>
+                        The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation
+                        of the printed page. We should embrace the fact that the web doesn't have the same constraints, and design for this flexibility.
+                        But first, we must 'accept the ebb and flow of things.'
+                    </p>
+                    <cite>- John Allsopp, <a href="http://www.alistapart.com/articles/dao/">"A Dao of Web Design"</a></cite>
+                </blockquote>
+            </div>
+        </section>
+        <div class="alert" role="alert">
+            <p>All Responsive plugins within loaded markup that use the Data-API will automatically register themselves.</p>
+        </div>
+    </section>
+    <hr />
+    <section id="markup">
+        <h1>Markup</h1>
+        <pre class="language-markup"><code>&lt;div data-conditional-xs="../css/grid.html #basic" 
+     data-conditional-fallback="tabs.html #examples" 
+     data-conditional-l="carousel.html #carousel-1"&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="methods">
+        <h1>Methods</h1>
+        <p>The conditional plugin exposes the following method signatures.</p>
+        <dl>
+            <dt><strong>.conditional(options)</strong>  </dt>
+            <dd>
+                Initialises the plugin with an optional options <code>object</code>
+                <dl class="dl-horizontal">
+                    <dt><strong>options</strong></dt>
+                    <dd>
+                        Contains parameters to pass to the plugin.
+                        <dl>
+                            <dt><strong>xs</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>xs</code> mode.</dd>
+                            <dt><strong>s</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>s</code> mode.</dd>
+                            <dt><strong>m</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>m</code> mode.</dd>
+                            <dt><strong>l</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>l</code> mode.</dd>
+                            <dt><strong>fallback</strong></dt>
+                            <dd>The path to the content to load when no specific content to load has been defined for each mode.</dd>
+                        </dl>
+                    </dd>
+                </dl>
+            </dd>
+            <dt><strong>.conditional("resize")</strong>  </dt>
+            <dd>Triggers the plugin to reload the content.</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="events">
+        <h1>Events</h1>
+        <p>The conditional plugin exposes the following events allowing the developer to tap into its behaviour.</p>
+        <dl>
+            <dt><strong>loaded.r.conditional</strong></dt>
+            <dd>
+                This event is fired when the plugins <code>resize</code> instance method is invoked and content is loaded.
+                The event data contains three custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The containing element that the plugin is bound to.</dd>
+                    <dt><strong>loadtarget</strong></dt>
+                    <dd>The url to the target html to load.</dd>
+                    <dt><strong>grid</strong></dt>
+                    <dd>The current grid range in which the event is firing. <var>xs</var>, <var>s</var>, <var>m</var>, or <var>l</var></dd>
+                </dl>
+            </dd>
+            <dt><strong>error.r.conditional</strong></dt>
+            <dd>
+                This event is fired when the plugin encounters an error when attempting to load ajax content.
+                The event data contains three custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The containing element that the plugin is bound to.</dd>
+                    <dt><strong>loadtarget</strong></dt>
+                    <dd>The url to the target html to load.</dd>
+                    <dt><strong>grid</strong></dt>
+                    <dd>The current grid range in which the event is firing. <var>xs</var>, <var>s</var>, <var>m</var>, or <var>l</var></dd>
+                </dl>
+            </dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The conditional's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Override the default behaviour
+$(document).off("ready.r.conditional domchanged.r.conditional")
+           .on("ready.r.conditional domchanged.r.conditional", function () {
+    // Your custom behaviour...
+}); 
+// Bind to the loaded event.
+$("YOUR_SELECTOR").on("loaded.r.conditional", function(event) {
+    // Your custom behaviour...
+});
+                                               
+// Bind to the error event.
+$("YOUR_SELECTOR").on("error.r.conditional", function(event) {
+    // Your custom behaviour...
+});</code></pre>
+    </section>
+</section>
+
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

@@ -1,9 +1,64 @@
----
-layout: top-level
-title: Getting Started
-heading: Getting Started
-subheading: An introduction to Responsive, how to use it, with basic templates and examples.
----
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Getting Started ::  Responsive</title>
+    <meta name="description" content=" An introduction to Responsive, how to use it, with basic templates and examples. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li> 
+    
+    <li>getting-started</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Getting Started
+                <span>An introduction to Responsive, how to use it, with basic templates and examples.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
 <div class="row">
     <nav class="col-m-3" role="complementary">
         <ul class="no-bullets">
@@ -15,7 +70,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
     <section class="col-m-9">
         <div class="alert" role="alert">
             <h4>Heads Up!</h4>
-            <p>Looking for the legacy v3 documentation? You can find it <a href="/v3/">here</a>.</p>
+            <p>Looking for the legacy v2 documentation? You can find it <a href="/v3/v2/">here</a>.</p>
         </div>
         <section id="download">
             <h1>Download Responsive</h1>
@@ -25,7 +80,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                         The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
                         No documentation or original source code files are included.
                     </p>
-                    <a href="{{site.release}}" role="button" class="download icon-left" 
+                    <a href="https://github.com/ResponsiveBP/Responsive/releases/download/3.1.4/responsive.zip" role="button" class="download icon-left" 
                        data-ga-category="Getting Started Actions" 
                        data-ga-action="Getting Started Links" 
                        data-ga-label="Framework Download"><i class="fa fa-download"></i>Download Responsive</a>
@@ -41,7 +96,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                         If you are feeling more adventurous and want to tweak Responsive before use you can download the full Sass and JavaScript source
                         directly from Github. This will require the use of <a href="http://gulpjs.com/" rel="external">gulp.js</a> to build.
                     </p>
-                    <a href="{{site.sourcefiles}}" role="button" class="download icon-left" 
+                    <a href="https://github.com/ResponsiveBP/Responsive/archive/3.1.4.zip" role="button" class="download icon-left" 
                        data-ga-category="Getting Started Actions" 
                        data-ga-action="Getting Started Links" 
                        data-ga-label="Source Download"><i class="fa fa-download"></i>Download Source</a>
@@ -49,10 +104,10 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
             </div>
             <ul class="download-links">
                 <li>
-                    <a href="{{site.repo}}" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="GitHub project" rel="external">GitHub project</a>
+                    <a href="https://github.com/responsivebp/responsive" data-ga-category="Getting Started Actions" data-ga-action="Getting Started Links" data-ga-label="GitHub project" rel="external">GitHub project</a>
                 </li>
                 <li>
-                    Version {{site.version}}
+                    Version 3.1.4
                 </li>
             </ul>
         </section>
@@ -143,3 +198,62 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         </section>
     </section>
 </div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

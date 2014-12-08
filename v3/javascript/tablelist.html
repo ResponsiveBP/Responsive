@@ -8,77 +8,76 @@
     <meta name="description" content=" Responsive table layout. " />
     <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
     <meta name="author" content="James South, and Responsive contributers">
-    
-    <script src="/v2/assets/js/responsive.ie10mobilefix.min.js"></script>
 
-    <link href="/v2/assets/css/responsive.min.css" rel="stylesheet" />
-    <link href="/v2/assets/css/docs.min.css" rel="stylesheet" />
-    <link href="/v2/assets/css/vendor/prism.min.css" rel="stylesheet" />
-
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <!--[if lt IE 9 &!(IEMobile)]>
-        <script src="/v2/assets/js/vendor/html5shiv.min.js"></script>
-        <script src="/v2/assets/js/vendor/respond.min.js"></script>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
     <![endif]-->
-    
+
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v2/assets/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
 </head>
 <body>
-    <nav role="navigation">
+    <nav role="navigation" class="shadow">
         <div class="container">
             <div class="row">
-                <a href="/v2/" rel="home">Responsive</a>
+                <a href="/v3/" rel="home">Responsive</a>
                 <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
-                <div id="navigation" class="collapse"><a href="/v2/getting-started.html">Getting Started</a><a href="/v2/css/">CSS</a><a href="/v2/javascript/">JavaScript</a></div>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
             </div>
         </div>
     </nav>
-<main class="container" role="main">
-    <header role="banner">
-        ﻿
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
 
 
 
 
 <ol class="breadcrumb">
     
-    <li><a href="/v2">home</a> &#187; </li> 
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/javascript">javascript</a> &#187; </li>
+
+    
+    
     
     <li>tablelist</li>
 </ol>
 
- 
-        <h1>
-            TableList
-            <span>Responsive table layout.</span>
-        </h1>
-    </header>
-    <hr />
+
     <div class="row">
-        <nav class="col-m-3" role="complementary">
-            <h3>Contents</h3>
-            <ul class="no-bullets">
-    
-       
-       <li><a href="#examples">Examples</a></li>
-    
-       
-       <li><a href="#markup">Markup</a></li>
-    
-       
-       <li><a href="#methods">Methods</a></li>
-    
-       
-       <li><a href="#events">Events</a></li>
-    
-       
-       <li><a href="#dataapi">Data API</a></li>
-    
+        <div class="col-m-6">
+            <h1>
+                TableList
+                <span>Responsive table layout.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#examples">Examples</a></li><li><a href="#markup">Markup</a></li><li><a href="#methods">Methods</a></li><li><a href="#events">Events</a></li><li><a href="#dataapi">Data API</a></li>
 </ul>
 
-        </nav>
-        <article class="col-m-9">
-            <section id="normalize">
+    </nav>
+    <article class="col-m-9">
+        <section id="normalize">
     <h1>TableList</h1>
     <p>A jQuery plugin that populates a table with the necessary data attributes in order to display as a list on smaller viewports.</p>
     <p>
@@ -88,7 +87,7 @@
     <hr />
     <section id="examples">
         <h1>Examples</h1>
-        <table data-table-list="" class="table-list table-striped table-bordered">
+        <table data-table-list class="table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Title</th>
@@ -131,7 +130,7 @@
     <hr />
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>&lt;table data-table-list="" class="table-list table-striped table-bordered"&gt;
+        <pre class="language-markup"><code>&lt;table data-table-list class="table-striped table-bordered"&gt;
     &lt;thead&gt;
         &lt;tr&gt;
             &lt;th scope="col"&gt;Title&lt;/th&gt;
@@ -167,7 +166,7 @@
         <h1>Methods</h1>
         <p>The tablelist plugin exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.add()</strong></dt>
+            <dt><strong>.tablelist()</strong></dt>
             <dd>
                 Initialises the plugin adding the necessary data attributes to the table.
             </dd>
@@ -192,60 +191,81 @@
             If you need to override this behaviour the following code will allow you to do so.
         </p>
         <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.table")
-           .on("ready.r.table", "[data-tablelist]", function (event) {    
-               // Your custom behaviour...
-           });</code></pre>
+$(document).off("ready.r.tablelist domchanged.r.tablelist")
+           .on("ready.r.tablelist domchanged.r.tablelist", function (event) {    
+    // Your custom behaviour...
+});
+            
+// Bind to the add event.
+$("YOUR_SELECTOR").on("add.r.tablelist", function(event) {
+    // Your custom behaviour...
+});
+
+// Bind to the added event.
+$("YOUR_SELECTOR").on("added.r.tablelist", function(event) {
+    // Your custom behaviour...
+});</code></pre>
     </section>
 </section>
 
-        </article>
-    </div>
-</main>
-﻿<footer role="contentinfo" class="container">
-    <hr>
-    <div class="row">
-        <div class="col-s-8">
-            <p>
-                <strong>Responsive</strong> is a responsive web development boilerplate built for your benefit by <a href="http://twitter.com/James_M_South" rel="author external"  data-ga-category="Home Actions" data-ga-action="Home Links" data-ga-label="Twitter View">@james_m_south</a>
-            </p>
-            <p>
-                Excerpts of this code are based on the incredibly hard work by the good people responsible for <a href="http://necolas.github.io/normalize.css/"  rel="external nofollow">Normalize.css</a>, <a href="http://html5boilerplate.com/" rel="external nofollow" >HTML5 Boilerplate</a>, and <a href="http://getbootstrap.com/" rel="external nofollow" >Twitter Bootstrap</a>. 
-            </p>
-            <p>
-                Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external nofollow" >MIT License</a>.
-            </p>
-        </div>
-        <div class="col-s-4">
-            <div class="clearfix">
-                <button class="to-top push-right">Back to Top ^</button>
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-<!--[if IE 8]>     
-    <script src="/v2/assets/js/vendor/jquery-1.11.0.min.js"></script>
-<![endif]-->
-<!--[if gt IE 8]><!-->
-<script src="/v2/assets/js/vendor/jquery-2.1.0.min.js"></script>
-<!--<![endif]-->
-<script src="/v2/assets/js/vendor/prism.js"></script>
-<script src="/v2/assets/js/responsive.min.js"></script>
-<script src="/v2/assets/js/docs.min.js"></script>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
 
-<!-- Google Analytics: -->
+    <!-- Google Analytics: -->
 
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-42035025-1', 'responsivebp.com');
-    ga('send', 'pageview');
-</script>
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
 
-<script src="/v2/assets/js/ga-event-tracking.js"></script>
+    <script src="/assets/js/ga-event-tracking.js"></script>
 
 </body>
 </html>

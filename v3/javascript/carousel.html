@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Carousel ::  Responsive</title>
+    <meta name="description" content=" A responsive carousel for cycling through objects. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/javascript">javascript</a> &#187; </li>
+
+    
+    
+    
+    <li>carousel</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Carousel
+                <span>A responsive carousel for cycling through objects.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#examples">Examples</a></li><li><a href="#markup">Markup</a></li><li><a href="#methods">Methods</a></li><li><a href="#events">Events</a></li><li><a href="#dataapi">Data API</a></li>
+</ul>
+
+    </nav>
+    <article class="col-m-9">
+        <article id="normalize">
+    <h1>Carousel</h1>
+    <p>A jQuery plugin that creates a carousel for cycling through elements. Uses CSS transitions to perform the animation.</p>
+    <p>
+        The carousel comes in two modes: Slide and Fade, both animated via CSS3 transitions. On browsers that do not support transitions they
+        simply change without special effects.
+    </p>
+    <p>
+        Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
+        This is Responsive's first class API and should be your first consideration when using a plugin.
+    </p>
+    <div class="alert" role="alert">
+        <h4>Accessibility</h4>
+        <p>The carousel, by default, will not transition automatically. This makes it less confusing for screenreaders to follow.</p>
+        <p>
+            On devices that support touch, grouped items will iterate though their collection via swiping either left or right.
+            Keybord support can also be utilised to navigate when the carousel is in focus by using the <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> keys.
+        </p>
+
+        <h4>Right-to-Left Language Support</h4>
+        <p>
+            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the order of carousel items and all other
+            input behaviour will be reversed.
+        </p>
+    </div>
+    <hr />
+    <section id="examples">
+        <h1>Examples</h1>
+        <div class="row">
+            <div class="col-s-6">
+                <h2>Slide Mode</h2>
+                <div id="carousel-1" class="carousel">
+                    <ol>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+
+                    <figure class="carousel-active">
+                        <img src="../assets/img/hydrangeas.jpg" alt="hydrangeas">
+                        <figcaption>
+                            <h4>First Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                        <figcaption>
+                            <h4>Second Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../assets/img/desert.jpg" alt="desert">
+                        <figcaption>
+                            <h4>Third Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+
+                    <button class="back carousel-control">&lt;</button>
+                    <button class="forward carousel-control">&gt;</button>
+                </div>
+            </div>
+            <div class="col-s-6">
+                <h2>Fade Mode</h2>
+                <div id="carousel-2" class="carousel" data-carousel-mode="fade">
+                    <figure class="carousel-active">
+                        <img src="../assets/img/hydrangeas.jpg" alt="hydrangeas">
+                        <figcaption>
+                            <h4>First Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                        <figcaption>
+                            <h4>Second Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../assets/img/desert.jpg" alt="desert">
+                        <figcaption>
+                            <h4>Third Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </figcaption>
+                    </figure>
+
+                    <button class="back carousel-control">&lt;</button>
+                    <button class="forward carousel-control">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr />
+    <div class="alert" role="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            Replace image <code>src</code> attributes with <code>data-src</code> to allow lazy loading of images.
+        </p>
+    </div>
+    <section id="markup">
+        <h1>Markup</h1>
+        <pre class="language-markup"><code>&lt;div id="carousel-2" class="carousel" data-carousel-mode="fade"&gt;
+    &lt;!-- Carousel Indicators--&gt;
+    &lt;ol&gt;
+        &lt;li class="active"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;!-- Carousel Items--&gt;
+    &lt;figure class="carousel-active"&gt;
+        &lt;img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas"&gt;
+        &lt;figcaption&gt;
+            &lt;h4&gt;First Thumbnail label&lt;/h4&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
+        &lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure&gt;
+        &lt;img src="../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum"&gt;
+        &lt;figcaption&gt;
+            &lt;h4&gt;Second Thumbnail label&lt;/h4&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
+        &lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure&gt;
+        &lt;img src="../test-assets/img/desert.jpg" alt="desert"&gt;
+        &lt;figcaption&gt;
+            &lt;h4&gt;Third Thumbnail label&lt;/h4&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
+        &lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;!-- Carousel Controls--&gt;
+    &lt;button class="back carousel-control"&gt;&lt;&lt;/button&gt;
+    &lt;button class="forward carousel-control"&gt;&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="methods">
+        <h1>Methods</h1>
+        <p>The carousel exposes the following method signatures.</p>
+        <dl>
+            <dt><strong>.carousel(options)</strong>  </dt>
+            <dd>
+                Initialises the plugin with an optional options <code>object</code>
+
+                <table data-table-list class="table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Default Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">mode</th>
+                            <td>string</td>
+                            <td>A string containing either the values <var>fade</var> or <var>slide</var>.</td>
+                            <td><var>slide</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">interval</th>
+                            <td>number</td>
+                            <td>The time in milliseconds between carousel transitions.</td>
+                            <td><var>0</var> (Better for accessibility)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">pause</th>
+                            <td>string</td>
+                            <td>The event to bind the pause behaviour to</td>
+                            <td><var>hover</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">wrap</th>
+                            <td>boolean</td>
+                            <td>Whether the carousel items should wrap</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">keyboard</th>
+                            <td>boolean</td>
+                            <td>Whether the carousel responds to keyboard events</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">touch</th>
+                            <td>boolean</td>
+                            <td>Whether the carousel responds to touch events</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">lazyLoadImages</th>
+                            <td>boolean</td>
+                            <td>Whether to lazily load any images on page load.</td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">lazyOnDemand</th>
+                            <td>boolean</td>
+                            <td>Whether to lazily load any images on demand when sliding. Overwrites <var>lazyLoadImages</var></td>
+                            <td><var>true</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">nextTrigger</th>
+                            <td>string</td>
+                            <td>A jQuery selector to define any external element to trigger the <code>next()</code> method.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">nextHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the next trigger for accessibility purposes. The default language direction indicator is reversed by
+                                setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
+                            </td>
+                            <td><var>Next {Left|Right} Arrow</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">previousTrigger</th>
+                            <td>string</td>
+                            <td>A jQuery selector to define any external element to trigger the <code>prev()</code> method.</td>
+                            <td><var>null</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">previousHint</th>
+                            <td>string</td>
+                            <td>
+                                A hidden value that is added to the previous trigger for accessibility purposes. The default language direction indicator is reversed by
+                                setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
+                            </td>
+                            <td><var>Previous {Left|Right} Arrow</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">indicators</th>
+                            <td>string</td>
+                            <td>A jQuery selector to define any external indicators <code>&lt;ol/&gt;</code> that highlight the carousels current position</td>
+                            <td><var>null</var></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+            <dt><strong>.carousel("cycle")</strong></dt>
+            <dd>Cycles through the carousel instance items in a logical order.</dd>
+            <dt><strong>.carousel("pause")</strong></dt>
+            <dd>Triggers the pause event of the carousel instance stopping it cycling.</dd>
+            <dt><strong>.carousel("prev")</strong></dt>
+            <dd>Cycles the carousel instance to the previous item.</dd>
+            <dt><strong>.carousel("next")</strong></dt>
+            <dd>Cycles the carousel instance to the next item.</dd>
+            <dt><strong>.carousel(number)</strong></dt>
+            <dd>Cycles the carousel to a particular item with at the given index (zero based).</dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="events">
+        <h1>Events</h1>
+        <p>The carousel exposes the following events allowing the developer to tap into its behaviour.</p>
+        <dl>
+            <dt><strong>slide.r.carousel</strong></dt>
+            <dd>
+                This event is fired immediately when the plugins <code>slide</code> instance method is invoked. The event data contains two custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The carousel item that will be next in the logical order.</dd>
+                    <dt><strong>direction</strong></dt>
+                    <dd>The direction in which the carousel is transitioning.</dd>
+                </dl>
+            </dd>
+            <dt><strong>slid.r.carousel</strong></dt>
+            <dd>
+                This event is fired when the plugins <code>slid</code> instance method is invoked once the carousel has completed sliding. The event data contains two custom properties:
+                <dl>
+                    <dt><strong>relatedTarget</strong></dt>
+                    <dd>The carousel item that will be next in the logical order.</dd>
+                    <dt><strong>direction</strong></dt>
+                    <dd>The direction in which the carousel is transitioning.</dd>
+                </dl>
+            </dd>
+        </dl>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Override the default loading behaviour
+$(document).off("ready.r.carousel domchanged.r.carousel")
+           .on("ready.r.carousel domchanged.r.carousel", function () {
+    // Your custom behaviour...
+}); 
+           
+// Bind to the slide event.
+$("YOUR_SELECTOR").on("slide.r.carousel", function(event) {
+    // Your custom behaviour...
+});
+                                               
+// Bind to the slid event.
+$("YOUR_SELECTOR").on("slid.r.carousel", function(event) {
+    // Your custom behaviour...
+});</code></pre>
+    </section>
+</article>
+
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>

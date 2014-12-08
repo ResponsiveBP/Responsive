@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Extras ::  Responsive</title>
+    <meta name="description" content=" Bundled JavaScript tools. " />
+    <meta name="keywords" content="HTML, Sass, CSS, JS, JavaScript, framework, responsive, rwd, front-end, frontend, web development, boilerplate">
+    <meta name="author" content="James South, and Responsive contributers">
+
+    <link href="/v3/assets/css/responsive.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/docs.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/prism.min.css" rel="stylesheet" />
+    <link href="/v3/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if lt IE 9 &!(IEMobile)]>
+        <script src="/assets/js/vendor/html5shiv.min.js"></script>
+        <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/v3/assets/ico/apple-touch-icon-144x144.png" />
+</head>
+<body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/v3/" rel="home">Responsive</a>
+                <button data-dropdown-target="#navigation" class="visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse"><a href="/v3/getting-started.html">Getting Started</a><a href="/v3/css/">CSS</a><a href="/v3/javascript/">JavaScript</a></div>
+            </div>
+        </div>
+    </nav>
+    <main class="container" role="main">
+        <header role="banner">
+    ﻿
+
+
+
+
+<ol class="breadcrumb">
+    
+    <li><a href="">home</a> &#187; </li>
+
+    
+    
+    
+
+    <li><a href="/v3/javascript">javascript</a> &#187; </li>
+
+    
+    
+    
+    <li>extras</li>
+</ol>
+
+
+    <div class="row">
+        <div class="col-m-6">
+            <h1>
+                Extras
+                <span>Bundled JavaScript tools.</span>
+            </h1>
+        </div>
+        <div class="col-m-6">
+            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="row">
+    <nav class="col-m-3" role="complementary">
+        <h3>Contents</h3>
+        <ul class="no-bullets">
+<li><a href="#general">General Tools</a></li><li><a href="#transition">Transition Tools</a></li><li><a href="#touch">Touch Tools</a></li>
+</ul>
+
+    </nav>
+    <article class="col-m-9">
+        <h1>Overview</h1>
+<p>
+    Responsive utilizes several advanced techniques in order to provide a true cross browser experience.
+    Within the core these are exposed via jQuery to all the plugins and to all developers allowing them to expand
+    upon the framework.
+</p>
+<section id="general">
+    <h1>General Tools</h1>
+    <p>The following tools are used for the general running of the framework.</p>
+    <dl>
+        <dt><strong>$.pseudoUnique(length)</strong></dt>
+        <dd>Returns a pseudo unique alpha-numeric string of the given length. Defaults to 8 which gives a very low collision rate.</dd>
+        <dt><strong>$.support.currentGrid()</strong></dt>
+        <dd>
+            Returns an object indicating what grid range the current browser width is within.
+            <dl class="dl-horizontal">
+                <dt>grid</dt>
+                <dd>The current applied grid; either , <var>s</var>, <var>m</var>, or <var>l</var>.</dd>
+                <dt>index</dt>
+                <dd>The index of the current grid in the range. Zero based.</dd>
+                <dt>range</dt>
+                <dd>An array containing the available grid range.</dd>
+            </dl>
+        </dd>
+        <dt><strong>$.debounce()</strong></dt>
+        <dd>
+            Creates and returns a new debounced version of the passed function which will postpone its execution until after wait
+            milliseconds have elapsed since the last time it was invoked.
+            <dl class="dl-horizontal">
+                <dt>function</dt>
+                <dd> The function to debounce.</dd>
+                <dt>wait</dt>
+                <dd>The number of milliseconds to delay.</dd>
+                <dt>immediate</dt>
+                <dd> Specify execution on the leading edge of the timeout.</dd>
+            </dl>
+        </dd>
+        <dt><code>:attrStart(value)</code> selector</dt>
+        <dd>This selector matches any target that contains an attribute starting with the given value.</dd>
+        <dt><strong>$.buildDataOptions($elem, options, prefix, namespace)</strong></dt>
+        <dd>
+            Creates an object containing options populated from an elements data attributes.
+            <dl class="dl-horizontal">
+                <dt>$elem</dt>
+                <dd>The object representing the DOM element.</dd>
+                <dt>options</dt>
+                <dd>The object to extend.</dd>
+                <dt>prefix</dt>
+                <dd>The prefix with which to identify the data attribute.</dd>
+                <dt>namespace</dt>
+                <dd>The namespace with which to segregate the data attribute.</dd>
+            </dl>
+        </dd>
+    </dl>
+</section>
+<hr />
+<section id="transition">
+    <h1>Transition Tools</h1>
+    <p>The following methods aid with the management of CSS transitions.</p>
+    <dl>
+        <dt><strong>$.support.transition</strong></dt>
+        <dd>Returns an object with a single property <code>.end</code> if the browser supports CSS transitions. Otherwise; false.</dd>
+        <dt><strong>$(target).redraw()</strong></dt>
+        <dd>Forces the browser to repaint which will trigger a CSS transition.</dd>
+        <dt><strong>$(target).ensureTransitionEnd(duration)</strong></dt>
+        <dd>
+            Ensures that the transition end callback is triggered after the given duration in milliseconds.
+            If no duration is set then it will attempt to work out the transition time using the elements style rules.
+        </dd>
+        <dt><strong>$(target).onTransitionEnd(callback)</strong></dt>
+        <dd>Performs the given callback function at the end of a CSS transition.</dd>
+    </dl>
+</section>
+<hr />
+<section id="touch">
+    <h1>Touch Tools</h1>
+    <p>The following methods aid with the management of touch detection and support.</p>
+    <dl>
+        <dt><strong>$.support.touchEvents</strong></dt>
+        <dd>Returns true if the browser supports <a href="https://dvcs.w3.org/hg/webevents/raw-file/v1/touchevents.html">touch events</a>. Otherwise; false.</dd>
+        <dt><strong>$.support.pointerEvents</strong></dt>
+        <dd>Returns true if the browser supports <a href="https://dvcs.w3.org/hg/pointerevents/raw-file/tip/pointerEvents.html">pointer events</a>. Otherwise; false.</dd>
+        <dt><code>swipe</code> <strong>event</strong></dt>
+        <dd>
+            <p>
+                A <a href="http://learn.jquery.com/events/event-extensions/#special-event-hooks" rel="external nofollow">special event</a> that can be bound or
+                unbound to an target using jquery's<code>on()</code> and <code>off()</code>. This allows the element to register and respond to swipe actions.
+            </p>
+            <p>The following data can be passed to handler in <code>event.data</code> when the event is triggered.</p>
+            <dl>
+                <dt><strong>touchAction</strong></dt>
+                <dd>The touch action to respond to which restricts the direction that you can scroll within. <var>pan-x</var>, <var>pan-y</var>, or the default <var>none</var></dd>
+                <dt><strong>sensitivity</strong></dt>
+                <dd>Defined as a percentage of the target elements height or width. Defaults to <var>5</var>.</dd>
+            </dl>
+            <p>Once bound the element exposes the following events. These can be suffixed on initialization.</p>
+            <dl>
+                <dt><strong>swipestart</strong></dt>
+                <dd>
+                    This event is fired immediately when a swipe instance is detected on pointer down. The event data contains three custom properties:
+                    <dl>
+                        <dt><strong>x</strong></dt>
+                        <dd>The horizontal position in pixels within the current viewport.</dd>
+                        <dt><strong>y</strong></dt>
+                        <dd>The vertical position in pixels within the current viewport.</dd>
+                        <dt><strong>time</strong></dt>
+                        <dd>The current <code>Date</code>.</dd>
+                    </dl>
+                </dd>
+                <dt><strong>swipemove</strong></dt>
+                <dd>
+                    This event is fired when the pointer is moved across the surface of the device. The event data contain the custom property <code>delta</code>:
+                    <dl>
+                        <dt><strong>x</strong></dt>
+                        <dd>The horizontal position in pixels within the current viewport.</dd>
+                        <dt><strong>y</strong></dt>
+                        <dd>The vertical position in pixels within the current viewport.</dd>
+                    </dl>
+                </dd>
+                <dt><strong>swipeend</strong></dt>
+                <dd>
+                    This event is fired immediately when on pointer up or mouse leave. The event data contains three custom properties:
+                    <dl>
+                        <dt><strong>delta</strong></dt>
+                        <dd>The horizontal and vertical position in pixels within the current viewport.</dd>
+                        <dt><strong>direction</strong></dt>
+                        <dd>The direction of the swipe: <var>up, down, left, right</var>.</dd>
+                        <dt><strong>duration</strong></dt>
+                        <dd>The time in milliseconds between the beginning and end of a swipe action instance.</dd>
+                    </dl>
+                </dd>
+            </dl>
+        </dd>
+    </dl>
+</section>
+
+    </article>
+</div>
+
+    </main>
+    <footer role="contentinfo" class="container">
+        <hr>
+        <div class="row">
+            <div class="col-s-8">
+                <p>
+                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <a href="http://twitter.com/James_M_South" rel="author external"
+                       data-ga-category="Home Actions"
+                       data-ga-action="Home Links"
+                       data-ga-label="Twitter View">@james_m_south</a>
+                </p>
+                <p>
+                    Excerpts of this code are based on the incredibly hard work by the good people responsible for
+                    <a href="http://necolas.github.io/normalize.css/" rel="external">Normalize.css</a>,
+                    <a href="http://html5boilerplate.com/" rel="external">HTML5 Boilerplate</a>, and
+                    <a href="http://getbootstrap.com/" rel="external">Bootstrap</a>.
+                </p>
+                <p>
+                    Licensed under the <a href="http://opensource.org/licenses/MIT" rel="external">MIT License</a>.
+                </p>
+            </div>
+            <div class="col-s-4">
+                <div class="clearfix">
+                    <button class="to-top push-right icon-right">Back to Top<i class="fa fa-caret-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if IE 8]>
+        <script src="/assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="/assets/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/vendor/prism.js"></script>
+    <!--<![endif]-->
+    <script src="/assets/js/responsive.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+
+    <!-- Google Analytics: -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42035025-1', 'responsivebp.com');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="/assets/js/ga-event-tracking.js"></script>
+
+</body>
+</html>
