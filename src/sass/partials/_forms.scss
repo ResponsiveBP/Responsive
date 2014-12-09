@@ -186,9 +186,10 @@ textarea {
     cursor: not-allowed;
 }
 
-// Placeholder 
+// Placeholder
 ::placeholder {
     color: $form-placeholder;
+    opacity: 1;
 }
 
 @-moz-document url-prefix() {
