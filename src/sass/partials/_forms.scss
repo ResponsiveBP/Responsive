@@ -55,14 +55,14 @@ input,
     padding: .25rem;
     width: 100%;
     // Disabled
-    // 1. Override the value set in normalize.css
+    // 1. Add cursor for disabled elements.
     // 2. Fix IOS 6/7 opacity issue
     fieldset[disabled] &,
     &[disabled] {
         background: $form-input-background-disabled;
         border-color: $form-input-border-color-disabled;
         color: $form-input-color-disabled;
-        cursor: not-allowed !important; // 1
+        cursor: not-allowed; // 1
         opacity: 1; // 2
     }
 }

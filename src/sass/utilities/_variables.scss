@@ -67,6 +67,7 @@ $grid-print-breakpoint-s-min: 537px !default;
 $horizontal-rule-color: #c0c0c0 !default;
 
 // Tables
+$table-cell-pad: .5rem !default;
 $table-bordered-border: 1px solid #c0c0c0 !default;
 $table-striped-background-color: #ebebeb !default;
 
@@ -102,6 +103,7 @@ $list-colored-bullet: #00a9ec !default;
 $alert-color-scheme: #fcf8e3 !default;
 
 // Code
+$code-font-family: monospace, monospace !default;
 $code-background-color: #f7f7f9 !default;
 $code-border-color: #c0c0c0 !default;
 $code-color: #ad0d36 !default;

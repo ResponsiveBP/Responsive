@@ -1,11 +1,14 @@
 // Colors and padding.
+// 1: Address odd `em`-unit font size rendering in all browsers.
 pre,
 code,
 samp,
 kbd {
     padding: .5rem;
+    font-size: 1rem; // 1
     background-color: $code-background-color;
     border: 1px solid $code-border-color;
+    font-family: $code-font-family;
     color: $code-color;
 }
 

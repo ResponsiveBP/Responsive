@@ -8,9 +8,7 @@ html {
 }
 
 // Fix the box model
-// Overwrite Normalize rather than edit it.
-*, :before, :after,
-hr, input[type=search] {
+*, :before, :after {
     box-sizing: inherit;
 }
 
@@ -46,6 +44,8 @@ h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid; // 2
 }
 
+// Address variable `h1` font-size and margin within `section` and `article`
+// contexts in Firefox 4+, Safari, and Chrome.
 h1 {
     font-size: $h1-font-size;
     margin: $h1-margin;

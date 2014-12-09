@@ -28,7 +28,6 @@ input[type="reset"] {
         outline: none;
     }
     // 1. Fix IOS 6/7 opacity issue
-    fieldset[disabled] &,
     &[disabled] {
         background-color: lighten($button-background, 5);
         color: $button-color-disabled;

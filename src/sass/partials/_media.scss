@@ -1,7 +1,5 @@
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
+// Remove the gap between images, videos, audio and canvas and the bottom of
+// their containers: h5bp.com/i/440
 audio,
 canvas,
 img,
@@ -9,40 +7,34 @@ video {
     vertical-align: middle;
 }
 
-/*
- * Make the image responsive.
- * 1: Fix svg aspect scaling in IE
- */
+// Make the image responsive.
+// 1: Fix svg aspect scaling in IE
 img {
     max-width: 100%;
     height: auto;
 
     &[src*=".svg"] {
-        width: 100% \9; /* 1 */
+        width: 100% \9; // 1
     }
 }
 
-x::-ms-reveal,
+_::-ms-reveal,
 img[src*=".svg"] {
-    width: 100%; /* 1 */
+    width: 100%; // 1
 }
 
-/*
- * Remove the border around images in anchors.
- */
+// Remove the border around images in anchors.
 a img {
     border: none;
 }
 
-/*
- * Properly scale your video on any device based on common ratios.
- * The code here is based on research and work by Theirry Koblentz, Anders Andersen, 
- * Niklaus Gerber, and Jeff Hobbs.
- */
+// Properly scale your video on any device based on common ratios.
+// The code here is based on research and work by Theirry Koblentz, Anders Andersen,
+// Niklaus Gerber, and Jeff Hobbs.
 .media {
     height: 0;
     height: auto;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
     max-width: 100%;
     overflow: hidden;
     padding-bottom: 56.25%;
@@ -86,12 +78,10 @@ a img {
     }
 
     img {
-        /*
-	     * Position the image absolutely and then move it's four positions
-	     * 1000000% out of the container. This with an auto margin is the core of the trick.
-	     * Why such a large number? Firefox seems to have issue when using larger images even
-	     * at 100%.
-	     */
+        // Position the image absolutely and then move it's four positions
+        // 1000000% out of the container. This with an auto margin is the core of the trick.
+        // Why such a large number? Firefox seems to have issue when using larger images even
+        // at 100%.
         bottom: -1000000%;
         left: -1000000%;
         margin: auto;
