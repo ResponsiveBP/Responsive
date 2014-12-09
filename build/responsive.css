@@ -5036,10 +5036,13 @@ table {
     width: 0; }
 
 .modal-on,
-.modal-lock > body {
+.modal-on body {
   -ms-touch-action: none;
       touch-action: none;
-  height: 100%;
+  height: 100%; }
+
+.modal-on,
+.modal-lock body {
   overflow: hidden; }
 
 .modal-overlay {

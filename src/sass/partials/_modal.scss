@@ -1,7 +1,11 @@
 .modal-on,
-.modal-lock > body {
+.modal-on body {
     touch-action: none;
     height: 100%;
+}
+
+.modal-on,
+.modal-lock body {
     overflow: hidden;
 }
 

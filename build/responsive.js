@@ -1893,6 +1893,7 @@
         }
 
         // Bind events.
+        // Ensure script works if loaded at the top of the page.
         if ($body.length === 0) { $body = $("body"); }
         this.$element.on(eclick, $.proxy(this.click, this));
         var onResize = $.debounce($.proxy(this.resize, this), 15);
@@ -2056,15 +2057,12 @@
                 if (hide) {
                     // Put scroll position etc back as before.
                     $overlay.addClass("hidden");
-                    $html.removeClass("modal-on")
+                    $html.removeClass("modal-on modal-lock")
                          .css("margin-right", "");
-
-                    if ($html.hasClass("modal-lock")) {
-                        $html.removeClass("modal-lock");
-                        if (lastScroll !== $window.scrollTop()) {
-                            $window.scrollTop(lastScroll);
-                            lastScroll = 0;
-                        }
+                    
+                    if (lastScroll !== $window.scrollTop()) {
+                        $window.scrollTop(lastScroll);
+                        lastScroll = 0;
                     }
 
                     return;
