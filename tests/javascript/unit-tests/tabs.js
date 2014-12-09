@@ -38,6 +38,16 @@
         strictEqual($.fn.tabs, undefined, "tabs plugin was set to undefined.");
     });
 
+    // Data
+    test("Tabs plugin should assign data to target element.", function () {
+        var $tabs = $(tabsHtml).appendTo("#qunit-fixture")
+               .responsiveTabs();
+
+        notEqual($tabs.data("r.tabs"), undefined, "Tabs target has data assigned.");
+        equal(typeof ($tabs.data("r.tabs")), "object", "Tabs target has data assigned.");
+        equal($tabs.data("r.tabs").constructor, $.fn.responsiveTabs.Constructor, "Tabs target has data assigned with the correct type.");
+    });
+
     // Events
     test("Tabs plugin should fire show and shown events.", function (assert) {
 
