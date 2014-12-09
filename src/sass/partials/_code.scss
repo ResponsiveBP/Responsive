@@ -1,11 +1,9 @@
-/*
- * Colors and padding.
- */
+// Colors and padding.
 pre,
 code,
 samp,
 kbd {
-    padding: .5em;
+    padding: .5rem;
     background-color: $code-background-color;
     border: 1px solid $code-border-color;
     color: $code-color;
@@ -15,30 +13,22 @@ code > kbd {
     background-color: darken($code-background-color, 5);
 }
 
-/*
- * Prevent overlap on concurrent lines.
- */
+// Prevent overlap on concurrent lines.
 code,
 samp,
 kbd {
-    padding: .0667em .25em;
+    padding: .0667rem .25rem;
 }
 
-/*
- * Prevent wrapping.
- */
+// Prevent wrapping.
 kbd {
     white-space: nowrap;
 }
 
-/*
- * Reassert no wrapping.
- */
+// Reassert no wrapping.
 pre {
     overflow-x: auto;
-    /*
-	 * Remove borders etc in pre.
-	 */
+    // Remove borders etc in pre.
     code,
     samp {
         padding: 0;
@@ -51,10 +41,9 @@ pre {
     }
 }
 
-/*
- * Fixed height with overflow.
- */
+
+// Fixed height with overflow.
 .pre-scrollable {
-    max-height: 20em;
+    max-height: 20rem;
     overflow-y: scroll;
 }

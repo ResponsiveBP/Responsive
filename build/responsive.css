@@ -4642,14 +4642,11 @@ input[type="submit"], input[type="reset"], input[type="button"] {
     .btn-group > input[type="reset"] {
       float: right; }
 
-/*
- * Colors and padding.
- */
 pre,
 code,
 samp,
 kbd {
-  padding: .5em;
+  padding: .5rem;
   background-color: #f7f7f9;
   border: 1px solid #c0c0c0;
   color: #ad0d36; }
@@ -4657,28 +4654,16 @@ kbd {
 code > kbd {
   background-color: #e8e8ee; }
 
-/*
- * Prevent overlap on concurrent lines.
- */
 code,
 samp,
 kbd {
-  padding: .0667em .25em; }
+  padding: .0667rem .25rem; }
 
-/*
- * Prevent wrapping.
- */
 kbd {
   white-space: nowrap; }
 
-/*
- * Reassert no wrapping.
- */
 pre {
-  overflow-x: auto
-    /*
-	 * Remove borders etc in pre.
-	 */ }
+  overflow-x: auto; }
   pre code,
   pre samp {
     padding: 0;
@@ -4687,11 +4672,8 @@ pre {
     word-wrap: normal;
     white-space: pre; }
 
-/*
- * Fixed height with overflow.
- */
 .pre-scrollable {
-  max-height: 20em;
+  max-height: 20rem;
   overflow-y: scroll; }
 
 .form {
