@@ -74,7 +74,7 @@ input[type='file']::-ms-value {
 }
 
 input[type='file']::-ms-browse {
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
     background: $button-background;
     border: $button-border;
     color: $form-input-color;
@@ -85,7 +85,8 @@ input[type='file']::-ms-browse {
 }
 
 input[type='file']::-webkit-file-upload-button {
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
+    border-radius: 0;
     background: $button-background;
     border: $button-border;
     color: $form-input-color;
@@ -185,25 +186,9 @@ textarea {
     cursor: not-allowed;
 }
 
-// Placeholder : These have to be kept separate
-// 1. Safari and Chrome
-// 2. Firefox 4-18
-// 3. Firefox 19+
-// 4. IE10+
-::-webkit-input-placeholder {
-    color: $form-placeholder; // 1
-}
-
-:-moz-placeholder {
-    color: $form-placeholder; // 2
-}
-
-::-moz-placeholder {
-    color: $form-placeholder; // 3
-}
-
-:-ms-input-placeholder {
-    color: $form-placeholder; // 4
+// Placeholder 
+::placeholder {
+    color: $form-placeholder;
 }
 
 @-moz-document url-prefix() {

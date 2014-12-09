@@ -4532,6 +4532,7 @@ input[type='file']::-ms-browse {
 
 input[type='file']::-webkit-file-upload-button {
   -webkit-appearance: none;
+  border-radius: 0;
   background: #dadada;
   border: solid 1px #c0c0c0;
   color: #222; }
@@ -4603,13 +4604,13 @@ textarea {
 ::-webkit-input-placeholder {
   color: #c0c0c0; }
 
-:-moz-placeholder {
-  color: #c0c0c0; }
-
 ::-moz-placeholder {
   color: #c0c0c0; }
 
 :-ms-input-placeholder {
+  color: #c0c0c0; }
+
+::placeholder {
   color: #c0c0c0; }
 
 @-moz-document url-prefix() {
