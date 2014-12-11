@@ -29,6 +29,10 @@
             // Reassign and cleanup.
             $.fn.conditional = $.fn.responsiveConditional;
             delete $.fn.responsiveConditional;
+
+            // qunit is throwing when resizing outside test.
+            // Uncaught Error: assertion outside test context.
+            $(w).off(["resize", "orientationchange"].join(".conditional "));
         }
     });
 

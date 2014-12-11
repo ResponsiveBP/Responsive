@@ -504,7 +504,7 @@
     // General variables and methods.
     var eready = "ready" + ns,
         echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = "resize orientationchange",
+        eresize = ["resize", "orientationchange"].join(".autosize "),
         einput = "input",
         ekeyup = "keyup",
         esize = "size" + ns,
@@ -2634,6 +2634,7 @@
         var self = this,
             addEvent = $.Event(eadd),
             complete = function () {
+                console.log("added");
                 self.$element.trigger($.Event(eadded));
             };
 

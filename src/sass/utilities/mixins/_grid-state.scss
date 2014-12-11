@@ -4,7 +4,7 @@
 @mixin grid-state($breakpoint, $width) {
     @include bp($breakpoint) {
         .grid-state-indicator {
-            width: $width !important;
+            width: $width;
         }
     }
 }

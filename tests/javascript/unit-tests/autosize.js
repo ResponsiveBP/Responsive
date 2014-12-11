@@ -32,6 +32,10 @@
             // Reassign and cleanup.
             $.fn.autoSize = $.fn.responsiveAutoSize;
             delete $.fn.responsiveAutoSize;
+
+            // qunit is throwing when resizing outside test.
+            // Uncaught Error: assertion outside test context.
+            $(w).off(["resize", "orientationchange"].join(".autosize "));
         }
     });
 

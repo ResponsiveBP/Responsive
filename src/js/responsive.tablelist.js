@@ -42,6 +42,7 @@
         var self = this,
             addEvent = $.Event(eadd),
             complete = function () {
+                console.log("added");
                 self.$element.trigger($.Event(eadded));
             };
 
