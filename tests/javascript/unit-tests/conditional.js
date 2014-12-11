@@ -21,11 +21,11 @@
 
     // Initialisation code.
     module("conditional.plugin", {
-        setup: function () {
+        beforeEach: function () {
             // Run all tests in noConflict mode. This allows us to test the reassignment functionality.
             $.fn.responsiveConditional = $.fn.conditional.noConflict();
         },
-        teardown: function () {
+        afterEach: function () {
             // Reassign and cleanup.
             $.fn.conditional = $.fn.responsiveConditional;
             delete $.fn.responsiveConditional;

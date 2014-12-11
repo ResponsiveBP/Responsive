@@ -24,11 +24,11 @@
 
     // Initialisation code.
     module("autoSize.plugin", {
-        setup: function () {
+        beforeEach: function () {
             // Run all tests in noConflict mode. This allows us to test the reassignment functionality.
             $.fn.responsiveAutoSize = $.fn.autoSize.noConflict();
         },
-        teardown: function () {
+        afterEach: function () {
             // Reassign and cleanup.
             $.fn.autoSize = $.fn.responsiveAutoSize;
             delete $.fn.responsiveAutoSize;

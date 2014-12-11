@@ -22,11 +22,11 @@
 
     // Initialisation code.
     module("tabs.plugin", {
-        setup: function () {
+        beforeEach: function () {
             // Run all tests in noConflict mode. This allows us to test the reassignment functionality.
             $.fn.responsiveTabs = $.fn.tabs.noConflict();
         },
-        teardown: function () {
+        afterEach: function () {
             // Reassign and cleanup.
             $.fn.tabs = $.fn.responsiveTabs;
             delete $.fn.responsiveTabs;

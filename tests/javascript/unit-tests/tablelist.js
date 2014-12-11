@@ -23,11 +23,11 @@
 
     // Initialisation code.
     module("tablelist.plugin", {
-        setup: function () {
+        beforeEach: function () {
             // Run all tests in noConflict mode. This allows us to test the reassignment functionality.
             $.fn.responsiveTablelist = $.fn.tablelist.noConflict();
         },
-        teardown: function () {
+        afterEach: function () {
             // Reassign and cleanup.
             $.fn.tablelist = $.fn.responsiveTablelist;
             delete $.fn.responsiveTablelist;
