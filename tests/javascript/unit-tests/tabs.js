@@ -81,7 +81,7 @@
     // Accessibility
     test("Selected tab should have aria-selected equal to true.", function () {
         var $tabs = $(tabsHtml).appendTo("#qunit-fixture")
-               .responsiveTabs();
+                               .responsiveTabs();
 
         $tabs.find("li:last a").click();
         equal($tabs.find("li:last a").attr("aria-selected"), "true", "Shown tab has aria-selected = true.");
@@ -90,7 +90,7 @@
 
     test("Selected tab pane should have tabIndex equal to 0.", function () {
         var $tabs = $(tabsHtml).appendTo("#qunit-fixture")
-               .responsiveTabs();
+                               .responsiveTabs();
 
         $tabs.find("li:last a").click();
         equal($tabs.find("section:last").attr("tabIndex"), "0", "Shown tab has tabIndex = 0.");
