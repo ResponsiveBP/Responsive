@@ -475,8 +475,7 @@
             $d = $(d);
 
         $.fn.html = function () {
-            // Execute the original HTML method using the
-            // augmented arguments collection.
+            // Execute the original html() method using the augmented arguments collection.
             var result = old.apply(this, arguments);
 
             if (arguments.length) {
@@ -487,7 +486,6 @@
 
         };
     })($.fn.html);
-
 }(jQuery, window, document));
 /*
  * Responsive AutoSize
@@ -511,6 +509,25 @@
         ekeyup = "keyup",
         esize = "size" + ns,
         esized = "sized" + ns;
+
+    (function (oldVal) {
+        /// <summary>Override the core text method in the jQuery object to fire an input event on autosize plugins whenever it is called.</summary>
+        /// <param name="old" type="Function">
+        ///      The jQuery function being overridden.
+        /// </param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+        $.fn.val = function () {
+            // Execute the original val() method using the augmented arguments collection.
+            var result = oldVal.apply(this, arguments);
+
+            if (this.data("r.autosize") && arguments.length) {
+                this.trigger($.Event(einput));
+            }
+
+            return result;
+        };
+    })($.fn.val);
 
     // AutoSize class definition
     var AutoSize = function (element, options) {
@@ -551,7 +568,7 @@
             element = this.element,
             sizeEvent = $.Event(esize);
 
-        $element.trigger($.Event(esize));
+        $element.trigger(sizeEvent);
 
         if (this.sizing || sizeEvent.isDefaultPrevented()) {
             return;
@@ -1220,6 +1237,7 @@
     var eready = "ready" + ns,
         echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
         eresize = ["resize", "orientationchange"].join(".conditional "),
+        eload = "load" + ns,
         eloaded = "loaded" + ns,
         eerror = "error" + ns;
 
@@ -1240,7 +1258,7 @@
         this.options = $.extend({}, this.defaults, options);
         this.currentGrid = null;
         this.currentTarget = null;
-        this.sizing = null;
+        this.loading = null;
 
         // Bind events.
         $(w).on(eresize, $.debounce($.proxy(this.resize, this), 50));
@@ -1277,9 +1295,20 @@
             if (target && target !== this.currentTarget) {
                 this.currentTarget = target;
 
+                var loadEvent = $.Event(eload);
+
+                this.$element.trigger(loadEvent);
+
+                if (this.loading || loadEvent.isDefaultPrevented()) {
+                    return;
+                }
+
+                this.loading = true;
+
                 // First check the cache.
                 if (this.cache[this.currentGrid]) {
                     this.$element.empty().html(this.cache[this.currentGrid]);
+                    this.loading = false;
                     this.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: this.currentGrid }));
 
                 } else {
@@ -1289,6 +1318,7 @@
                         if (textStatus === "error") {
                             self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
                             self.$element.html(self.options.errorHint);
+                            self.loading = false;
                             return;
                         }
 
@@ -1301,7 +1331,7 @@
                         // method so be aware that could one day change.
                         self.cache[grid] = selector ? $("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
                                                     : responseText;
-
+                        self.loading = false;
                         self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
                     });
                 }

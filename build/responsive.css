@@ -5583,19 +5583,19 @@ table {
 
 @media (max-width: 37.49em) {
   .grid-state-indicator {
-    width: 1px !important; } }
+    width: 0 !important; } }
 @media print and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
   .grid-state-indicator {
-    width: 2px !important; } }
+    width: 1px !important; } }
 @media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
   .grid-state-indicator {
-    width: 3px !important; } }
+    width: 2px !important; } }
 @media (min-width: 62em) and (max-width: 74.99em) {
   .grid-state-indicator {
-    width: 4px !important; } }
+    width: 3px !important; } }
 @media (min-width: 75em) {
   .grid-state-indicator {
-    width: 5px !important; } }
+    width: 4px !important; } }
 .ir {
   background-color: transparent;
   border: 0;

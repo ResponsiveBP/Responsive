@@ -21,6 +21,25 @@
         esize = "size" + ns,
         esized = "sized" + ns;
 
+    (function (oldVal) {
+        /// <summary>Override the core text method in the jQuery object to fire an input event on autosize plugins whenever it is called.</summary>
+        /// <param name="old" type="Function">
+        ///      The jQuery function being overridden.
+        /// </param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+        $.fn.val = function () {
+            // Execute the original val() method using the augmented arguments collection.
+            var result = oldVal.apply(this, arguments);
+
+            if (this.data("r.autosize") && arguments.length) {
+                this.trigger($.Event(einput));
+            }
+
+            return result;
+        };
+    })($.fn.val);
+
     // AutoSize class definition
     var AutoSize = function (element, options) {
 
@@ -60,7 +79,7 @@
             element = this.element,
             sizeEvent = $.Event(esize);
 
-        $element.trigger($.Event(esize));
+        $element.trigger(sizeEvent);
 
         if (this.sizing || sizeEvent.isDefaultPrevented()) {
             return;

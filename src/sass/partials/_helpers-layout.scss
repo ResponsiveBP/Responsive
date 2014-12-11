@@ -95,9 +95,9 @@
         right: -99999px;
     }
 }
-// Breakpoint driven changes
-@include grid-state(xxs, 1px);
-@include grid-state(xs, 2px);
-@include grid-state(s, 3px);
-@include grid-state(m, 4px);
-@include grid-state(l, 5px);
+// Breakpoint driven changes. 0 based so we can parse easily with JavaScript.
+@include grid-state(xxs, 0);
+@include grid-state(xs, 1px);
+@include grid-state(s, 2px);
+@include grid-state(m, 3px);
+@include grid-state(l, 4px);

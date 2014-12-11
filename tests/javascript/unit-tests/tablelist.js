@@ -17,7 +17,7 @@
 
 
     // Ensure the plugin is present and accounted for.
-    test("Plugin should be defined on global jQuery object", function () {
+    test("Tablelist plugin should be defined on global jQuery object", function () {
         ok($(d.body).tablelist, "tablelist() method is defined.");
     });
 
@@ -34,14 +34,19 @@
         }
     });
 
+    // No conflict.
+    test("Tablelist plugin should provide noConflict() function.", function () {
+        strictEqual($.fn.tablelist, undefined, "tablelist plugin was set to undefined.");
+    });
+
     // Data
     test("Tablelist plugin should assign data to target element.", function () {
-        var $tabs = $(tableListHtml).appendTo("#qunit-fixture")
-               .responsiveTablelist();
+        var $tableList = $(tableListHtml).appendTo("#qunit-fixture")
+                                         .responsiveTablelist();
 
-        notEqual($tabs.data("r.tablelist"), undefined, "Tablelist target has data assigned.");
-        equal(typeof ($tabs.data("r.tablelist")), "object", "Tablelist target has data assigned.");
-        equal($tabs.data("r.tablelist").constructor, $.fn.responsiveTablelist.Constructor, "Tablelist target has data assigned with the correct type.");
+        notEqual($tableList.data("r.tablelist"), undefined, "Tablelist target has data assigned.");
+        equal(typeof ($tableList.data("r.tablelist")), "object", "Tablelist target has data assigned.");
+        equal($tableList.data("r.tablelist").constructor, $.fn.responsiveTablelist.Constructor, "Tablelist target has data assigned with the correct type.");
     });
 
     // Events

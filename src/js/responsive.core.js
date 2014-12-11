@@ -475,8 +475,7 @@
             $d = $(d);
 
         $.fn.html = function () {
-            // Execute the original HTML method using the
-            // augmented arguments collection.
+            // Execute the original html() method using the augmented arguments collection.
             var result = old.apply(this, arguments);
 
             if (arguments.length) {
@@ -487,5 +486,4 @@
 
         };
     })($.fn.html);
-
 }(jQuery, window, document));

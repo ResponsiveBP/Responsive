@@ -16,7 +16,7 @@
     module("tabs");
 
     // Ensure the plugin is present and accounted for.
-    test("Plugin should be defined on global jQuery object", function () {
+    test("Tabs plugin should be defined on global jQuery object", function () {
         ok($(d.body).tabs, "tabs() method is defined.");
     });
 
@@ -34,14 +34,14 @@
     });
 
     // No conflict.
-    test("Plugin should provide noConflict() function.", function () {
+    test("Tabs plugin should provide noConflict() function.", function () {
         strictEqual($.fn.tabs, undefined, "tabs plugin was set to undefined.");
     });
 
     // Data
     test("Tabs plugin should assign data to target element.", function () {
         var $tabs = $(tabsHtml).appendTo("#qunit-fixture")
-               .responsiveTabs();
+                               .responsiveTabs();
 
         notEqual($tabs.data("r.tabs"), undefined, "Tabs target has data assigned.");
         equal(typeof ($tabs.data("r.tabs")), "object", "Tabs target has data assigned.");
