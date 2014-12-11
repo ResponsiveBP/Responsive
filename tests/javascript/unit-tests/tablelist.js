@@ -2,13 +2,19 @@
 
     module("tablelist");
 
-    var tableListHtml = "<table>" +                            "<thead>" +
+    var tableListHtml = "<table>" +
+                            "<thead>" +
                                 "<tr>" +
                                     "<th>Title</th>" +
                                 "</tr>" +
-                            "</thead>" +                            "<tbody>" +                                "<tr>" +
+                            "</thead>" +
+                            "<tbody>" +
+                                "<tr>" +
                                     "<td/>" +
-                                "</tr>" +                            "</tbody>" +                        "</table>";
+                                "</tr>" +
+                            "</tbody>" +
+                        "</table>";
+
 
     // Ensure the plugin is present and accounted for.
     test("Plugin should be defined on global jQuery object", function () {

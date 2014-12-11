@@ -22,23 +22,34 @@
             <h1>Responsive helpers.</h1>
             <p>
                 These helpers allow you to toggle the visibility of elements as the viewport scales.
-                <var>Em</var>
+                <var>rem</var>
                 values are calculated at the browser body default of
-                <var>16px = 1em</var>.
+                <var>16px = 1rem</var>.
             </p>
-            <div class="row">
-                <h3>Visible Example: Green means visible</h3>
-                <div class="col-s-3">
+
+            <h3>Visible Example: Green means visible</h3>
+            <div class="block-row-s-5 pad-gutter">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
-                        <h3>&lt; 48em</h3>
+                        <h3>&lt; 37.5em</h3>
+                        <code>.visible-xxs</code>
+                        <div class="visible-xxs responsive-helper-alert is-shown">
+                            <h3>&lt; 37.5em</h3>
+                            <code>.visible-xxs</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>37.5em to 48em</h3>
                         <code>.visible-xs</code>
                         <div class="visible-xs responsive-helper-alert is-shown">
-                            <h3>&lt; 48em</h3>
+                            <h3>37.5em to 48em</h3>
                             <code>.visible-xs</code>
                         </div>
                     </div>
                 </div>
-                <div class="col-s-3">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
                         <h3>48em to 62em</h3>
                         <code>.visible-s</code>
@@ -48,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-s-3">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
                         <h3>62em to 75em</h3>
                         <code>.visible-m</code>
@@ -58,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-s-3">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
                         <h3>&gt; 75em</h3>
                         <code>.visible-l</code>
@@ -69,19 +80,29 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <h3>Hidden Example: Red means hidden</h3>
-                <div class="col-s-3">
+            <h3>Hidden Example: Red means hidden</h3>
+            <div class="block-row-s-5">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
-                        <h3>&lt; 48em</h3>
+                        <h3>&lt; 37.5em</h3>
+                        <code>.hidden-xxs</code>
+                        <div class="hidden-xxs responsive-helper-alert is-shown">
+                            <h3>&lt; 37.5em</h3>
+                            <code>.hidden-xxs</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>37.5em to 48em</h3>
                         <code>.hidden-xs</code>
                         <div class="hidden-xs responsive-helper-alert is-shown">
-                            <h3>&lt; 48em</h3>
+                            <h3>37.5em to 48em</h3>
                             <code>.hidden-xs</code>
                         </div>
                     </div>
                 </div>
-                <div class="col-s-3">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
                         <h3>48em to 62em</h3>
                         <code>.hidden-s</code>
@@ -91,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-s-3">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
                         <h3>62em to 75em</h3>
                         <code>.hidden-m</code>
@@ -101,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-s-3">
+                <div>
                     <div class="responsive-helper-pane is-hidden">
                         <h3>&gt; 75em</h3>
                         <code>.hidden-l</code>
