@@ -35,15 +35,10 @@ input[type="reset"] {
         opacity: 1; // 1
     }
     // Inline buttons designed for rendering next to inputs.
-    // 1. Fix inline-block margin.
-    // 2. Pad buttons.
-    &.btn-inline {
-        margin-left: -.27rem; // 1
-        padding: .25rem 1rem; // 2
-        [dir="rtl"] & {
-            margin-left: auto;
-            margin-right: -.27em;
-        }
+    // 1. Pad buttons.
+    .input-group & {
+        padding: .25rem 1rem; // 1
+        width: auto;
     }
 }
 

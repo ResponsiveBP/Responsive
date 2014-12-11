@@ -4390,18 +4390,12 @@ input[type="reset"] {
     color: #5d5d5d;
     cursor: not-allowed;
     opacity: 1; }
-  button.btn-inline,
-  input[type="submit"].btn-inline,
-  input[type="button"].btn-inline,
-  input[type="reset"].btn-inline {
-    margin-left: -.27rem;
-    padding: .25rem 1rem; }
-    [dir="rtl"] button.btn-inline, [dir="rtl"]
-    input[type="submit"].btn-inline, [dir="rtl"]
-    input[type="button"].btn-inline, [dir="rtl"]
-    input[type="reset"].btn-inline {
-      margin-left: auto;
-      margin-right: -.27em; }
+  .input-group button, .input-group
+  input[type="submit"], .input-group
+  input[type="button"], .input-group
+  input[type="reset"] {
+    padding: .25rem 1rem;
+    width: auto; }
 
 input[type="submit"], input[type="reset"], input[type="button"] {
   max-width: none;
@@ -4472,24 +4466,23 @@ legend {
   width: 100%;
   margin-bottom: 1rem; }
 
-label,
-label .input-group {
+label {
   display: block;
   margin-bottom: 1rem; }
-label[for] {
-  cursor: pointer; }
-label > input,
-label > input[type='checkbox'],
-label > input[type='radio'],
-label > select {
-  display: inline-block;
-  margin: 0 1rem 0 0;
-  vertical-align: text-top; }
-  [dir=rtl] label > input, [dir=rtl]
-  label > input[type='checkbox'], [dir=rtl]
-  label > input[type='radio'], [dir=rtl]
+  label[for] {
+    cursor: pointer; }
+  label > input,
+  label > input[type='checkbox'],
+  label > input[type='radio'],
   label > select {
-    margin: 0 0 0 1rem; }
+    display: inline-block;
+    margin: 0 1rem 0 0;
+    vertical-align: text-top; }
+    [dir=rtl] label > input, [dir=rtl]
+    label > input[type='checkbox'], [dir=rtl]
+    label > input[type='radio'], [dir=rtl]
+    label > select {
+      margin: 0 0 0 1rem; }
 
 select,
 textarea,
@@ -4654,6 +4647,21 @@ select.inline-block {
 .form-actions {
   margin: 1rem 0;
   padding: 1rem 0; }
+
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  margin-bottom: 1rem; }
+
+.input-group > * {
+  display: table-cell;
+  width: auto;
+  margin-bottom: 0;
+  white-space: nowrap;
+  float: left; }
+  [dir=rtl] .input-group > * {
+    float: right; }
 
 ul,
 ol {

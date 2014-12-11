@@ -16,11 +16,8 @@ legend {
 }
 
 label {
-    &,
-    .input-group {
-        display: block;
-        margin-bottom: 1rem;
-    }
+    display: block;
+    margin-bottom: 1rem;
 
     &[for] {
         cursor: pointer;
@@ -251,4 +248,23 @@ select.inline-block {
 .form-actions {
     margin: 1rem 0;
     padding: 1rem 0;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    margin-bottom: 1rem;
+}
+
+.input-group > * {
+    display: table-cell;
+    width: auto;
+    margin-bottom: 0;
+    white-space: nowrap;
+    float: left;
+
+    [dir=rtl] & {
+        float: right;
+    }
 }
