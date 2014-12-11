@@ -22,7 +22,7 @@
         esized = "sized" + ns;
 
     (function (oldVal) {
-        /// <summary>Override the core text method in the jQuery object to fire an input event on autosize plugins whenever it is called.</summary>
+        /// <summary>Override the core val method in the jQuery object to fire an input event on autosize plugins whenever it is called.</summary>
         /// <param name="old" type="Function">
         ///      The jQuery function being overridden.
         /// </param>
