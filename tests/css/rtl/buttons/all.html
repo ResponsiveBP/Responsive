@@ -76,30 +76,75 @@
             </div>
             <div class="col-s-6">
                 <h2>Inline buttons</h2>
-                <p>Add the class <code>.btn-inline</code> </p>
+                <p>
+                    Wrap inputs in a div with the class <code>.input-group</code> and button in a span
+                    with the class <code>.input-group-addon</code>.
+                </p>
                 <div>
                     <h3>Button</h3>
                     <p>Standard <code>button</code> element.</p>
-                    <input type="text" class="inline-block" />
-                    <button class="btn-inline">button</button>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <button>button</button>
+                        </span>
+                        <input type="text" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" />
+                        <span class="input-group-addon">
+                            <button>button</button>
+                        </span>
+                    </div>
                 </div>
                 <div>
                     <h3>Input : Button</h3>
                     <p>Standard <code>input[type="button"]</code> element.</p>
-                    <input type="text" class="inline-block" />
-                    <input type="button" value="button" class="btn-inline" />
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="button" value="button" />
+                        </span>
+                        <input type="text" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" />
+                        <span class="input-group-addon">
+                            <input type="button" value="button" />
+                        </span>
+                    </div>
                 </div>
                 <div>
                     <h3>Input : Submit</h3>
-                    <p>Standard <code>input[type="submit"]</code> element.</p>
-                    <input type="text" class="inline-block" />
-                    <input type="submit" value="submit" class="btn-inline" />
+                    <p>
+                        Standard <code>input[type="submit"]</code> element.
+                    </p>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="submit" value="submit" />
+                        </span>
+                        <input type="text" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" />
+                        <span class="input-group-addon">
+                            <input type="submit" value="submit" />
+                        </span>
+                    </div>
                 </div>
                 <div>
                     <h3>Input : Reset</h3>
                     <p>Standard <code>input[type="reset"]</code> element.</p>
-                    <input type="text" class="inline-block" />
-                    <input type="reset" value="reset" class="btn-inline" />
+                    <div class="input-group">
+                        <input type="text" />
+                        <span class="input-group-addon">
+                            <input type="reset" value="reset" />
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="reset" value="reset" />
+                        </span>
+                        <input type="text" />
+                    </div>
                 </div>
             </div>
         </section>

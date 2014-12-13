@@ -107,9 +107,11 @@ input[type='checkbox'] {
     width: auto;
 }
 
-// Remove border in IE9
+// 1: Fix background in IE
+// 2: Remove border in IE9
 input[type='radio'] {
-    border: none \9;
+    border-radius: 100%; // 1
+    border: none \9; // 2
 }
 
 // Add range styles for IE9
@@ -150,6 +152,10 @@ input[type='color'] {
 
 select option {
     height: 100%;
+}
+
+[multiple] option {
+    height: auto;
 }
 
 // Textareas : Multiple resizable options.
@@ -224,6 +230,7 @@ textarea {
 
     // Fix field styling on iPhone and iPad.
     // 1. Add a select indicator
+    // 2. Remove for multiple
     select {
         background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cG9seWdvbiBmaWxsPSIjMjIyIiBwb2ludHM9IjExLDAgNS41LDkgMCwwIi8+PC9zdmc+'); // 1
         background-repeat: no-repeat;
@@ -234,6 +241,12 @@ textarea {
             background-position: .6rem center;
             padding-right: 0;
             padding-left: 1.67rem;
+        }
+
+        &[multiple] {
+            background-image: none; // 2
+            padding-left: 0;
+            padding-right: 0;
         }
     }
 }
@@ -250,21 +263,56 @@ select.inline-block {
     padding: 1rem 0;
 }
 
-.input-group {
+// Grouped inputs.
+.input-group,
+.btn-group {
     position: relative;
     display: table;
     border-collapse: separate;
+    width: 100%;
     margin-bottom: 1rem;
 }
 
-.input-group > * {
-    display: table-cell;
+.btn-group {
     width: auto;
-    margin-bottom: 0;
-    white-space: nowrap;
-    float: left;
+}
 
-    [dir=rtl] & {
-        float: right;
+.input-group > *,
+.btn-group > * {
+    display: table-cell;
+    margin-bottom: 0;
+}
+
+.input-group-addon {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    // Force no margin on checkbox, radio
+    & > * {
+        margin-bottom: 0 !important; // 1
+    }
+}
+
+// Supplementary content for displaying symbols.
+.supplement {
+    padding: 0 1rem;
+    line-height: $form-line-height;
+    background: $button-background;
+    border: $button-border;
+
+    html:not([dir=rtl]) &:first-child {
+        border-right: none;
+    }
+
+    html:not([dir=rtl]) &:last-child {
+        border-left: none;
+    }
+
+    [dir=rtl] &:first-child {
+        border-left: none;
+    }
+
+    [dir=rtl] &:last-child {
+        border-right: none;
     }
 }

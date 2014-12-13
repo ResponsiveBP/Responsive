@@ -36,9 +36,16 @@ input[type="reset"] {
     }
     // Inline buttons designed for rendering next to inputs.
     // 1. Pad buttons.
+    // 2. Fix height on IE
     .input-group & {
-        padding: .25rem 1rem; // 1
-        width: auto;
+        padding: 0 1rem; // 1
+        line-height: 1.7;
+        line-height: 1.65 \9; // 2
+    }
+
+    _::-ms-reveal,
+    .input-group & {
+        line-height: 1.65; // 2
     }
 }
 
@@ -53,21 +60,10 @@ input {
 }
 
 // Grouped buttons.
-.btn-group {
-    @extend .clearfix;
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    white-space: nowrap;
+.btn-group > * {
+    float: left;
 
-    > button,
-    > input[type="submit"],
-    > input[type="button"],
-    > input[type="reset"] {
-        float: left;
-
-        [dir="rtl"] & {
-            float: right;
-        }
+    [dir="rtl"] & {
+        float: right;
     }
 }

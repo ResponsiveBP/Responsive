@@ -38,6 +38,27 @@
                                 <option>4</option>
                                 <option>5</option>
                             </select>
+                            <label for="multiple-select-default1">Multiple Select</label>
+                            <select id="multiple-select-default1" multiple="" size="3">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <label for="multiple-select-optgroup-default1">Multiple Select with opt groups</label>
+                            <select id="multiple-select-optgroup-default1" multiple size="5">
+                                <option selected> 1</option>
+                                <optgroup label="Group 1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </optgroup>
+                                <option> 2</option>
+                                <option> 3</option>
+                                <option> 4</option>
+                                <option> 5</option>
+                            </select>
                             <label for="input-file1">File upload</label>
                             <input id="input-file1" type="file">
                             <label for="input-number1">Number</label>
@@ -125,6 +146,39 @@
                                         <option>3</option>
                                         <option>4</option>
                                         <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="multiple-select-default2">Multiple Select</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <select id="multiple-select-default2" multiple="" size="3">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-s-4">
+                                    <label for="multiple-select-optgroup-default2">Multiple Select with opt groups</label>
+                                </div>
+                                <div class="col-s-8">
+                                    <select id="multiple-select-optgroup-default2" multiple size="5">
+                                        <option selected> 1</option>
+                                        <optgroup label="Group 1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </optgroup>
+                                        <option> 2</option>
+                                        <option> 3</option>
+                                        <option> 4</option>
+                                        <option> 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -286,13 +340,95 @@
                     </div>
                 </fieldset>
                 <div class="form-actions">
-                    <input type="submit" value="Save changes" />
-                    <input type="reset" value="Cancel" />
-                </div>
-                <div class="form-actions">
                     <button type="submit">Save changes</button>
                     <button type="button">Cancel</button>
                 </div>
+            </form>
+        </section>
+        <hr />
+        <section>
+            <h2>Input groups</h2>
+            <p>Wrap the inputs in a class <code>.input-group</code></p>
+            <form action="#">
+                <fieldset>
+                    <legend>Supplementary addons. Add class <code>.input-group-addon .supplement</code></legend>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement">£</span>
+                        <input type="text" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" /><span class="input-group-addon supplement">.00</span>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement">£</span><input type="text" /><span class="input-group-addon supplement">.00</span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon supplement">Turtle</span>
+                        <select>
+                            <option>Leonardo</option>
+                            <option>Donetello</option>
+                            <option>Michaelangelo</option>
+                            <option>Raphael</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select>
+                            <option>AED</option>
+                            <option>AFN</option>
+                            <option>ALL</option>
+                            <option>AMD</option>
+                        </select>
+                        <span class="input-group-addon supplement">Currency</span>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement">£</span><select>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                        </select><span class="input-group-addon supplement">.00</span>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement">£</span>
+                        <input type="text" /><select>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                        </select><span class="input-group-addon supplement">.00</span>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Checkboxes and radio</legend>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement"><input type="checkbox" /></span>
+                        <input type="text" />
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement"><input type="radio" /></span>
+                        <input type="text" />
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon supplement"><input type="checkbox" /></span>
+                        <select>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon supplement"><input type="radio" /></span>
+                        <select>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                        </select>
+                    </div>
+                </fieldset>
             </form>
         </section>
     </article>

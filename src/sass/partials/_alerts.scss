@@ -1,27 +1,25 @@
 .alert {
     @extend .clearfix;
     position: relative;
-    margin: 1em 0;
-    padding: 0 1em;
+    margin: 1rem 0;
+    padding: 0 1rem;
     background-color: $alert-color-scheme;
     border: 1px solid darken($alert-color-scheme, 20);
     color: darken($alert-color-scheme, 70);
 
     .close {
         position: relative;
-        right: -1.73em;
-        top: .13em;
+        right: -2.73rem;
+        top: .13rem;
         float: right;
         color: inherit;
-        font-size: 1.17em;
+        font-size: 1.17rem;
         font-weight: bold;
-        line-height: 1em;
-
 
         [dir="rtl"] & {
             float: left;
             right: auto;
-            left: -1.73em;
+            left: -2.73rem;
         }
 
         &,
@@ -39,11 +37,11 @@
 }
 
 .alert-dismissable {
-    padding-right: 2.17em;
+    padding-right: 2.87rem;
 
     [dir="rtl"] & {
-        padding-right: 1em;
-        padding-left: 2.17em;
+        padding-right: 1rem;
+        padding-left: 2.87rem;
     }
 }
 
