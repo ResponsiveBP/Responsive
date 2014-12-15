@@ -1,7 +1,7 @@
 ﻿(function ($, w, d) {
 
     "use strict";
-
+    var rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/;
     var conditionalHtml = "<div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>";
 
     var conditionalOptions = {
@@ -51,34 +51,38 @@
         equal($autoSize.data("r.conditional").constructor, $.fn.responsiveConditional.Constructor, "Conditional target has data assigned with the correct type.");
     });
 
-    // Events
-    test("Conditional plugin should fire load and loaded events.", function (assert) {
+    // Don't run in file system. TODO: Build a way to fix this.
+    if (!rlocalProtocol.test(w.location.protocol)) {
 
-        var done = assert.async();
-        $(conditionalHtml).appendTo("#qunit-fixture")
-            .on("load.r.conditional", function () {
-                ok(true, "Load event fired.");
-            })
-            .on("loaded.r.conditional", function () {
-                ok(true, "Loaded event fired.");
-                done();
-            })
-            .responsiveConditional(conditionalOptions);
-    });
+        // Events
+        test("Conditional plugin should fire load and loaded events when not local.", function (assert) {
 
-    test("Conditional plugin should not fire loaded event when load event is prevented.", function (assert) {
+            var done = assert.async();
+            $(conditionalHtml).appendTo("#qunit-fixture")
+                .on("load.r.conditional", function () {
+                    ok(true, "Load event fired.");
+                })
+                .on("loaded.r.conditional", function () {
+                    ok(true, "Loaded event fired.");
+                    done();
 
-        var done = assert.async();
-        $(conditionalHtml).appendTo("#qunit-fixture")
-            .on("load.r.conditional", function (event) {
-                event.preventDefault();
-                ok(true, "Load event fired.");
-                done();
-            })
-            .on("loaded.r.conditional", function () {
-                ok(false, "Loaded event fired.");
-            })
-            .responsiveConditional(conditionalOptions);
-    });
+                })
+                .responsiveConditional(conditionalOptions);
+        });
 
+        test("Conditional plugin should not fire loaded event when load event is prevented.", function (assert) {
+
+            var done = assert.async();
+            $(conditionalHtml).appendTo("#qunit-fixture")
+                .on("load.r.conditional", function (event) {
+                    event.preventDefault();
+                    ok(true, "Load event fired.");
+                    done();
+                })
+                .on("loaded.r.conditional", function () {
+                    ok(false, "Loaded event fired.");
+                })
+                .responsiveConditional(conditionalOptions);
+        });
+    }
 }(jQuery, window, document))

@@ -1723,6 +1723,8 @@
                 self.$element.trigger(eventToTrigger);
             };
 
+        this.$element.trigger(startEvent);
+
         if (this.transitioning || startEvent.isDefaultPrevented()) {
             return;
         }
@@ -1730,7 +1732,6 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$element.trigger(startEvent);
         this.$target[method]("collapse");
         this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
