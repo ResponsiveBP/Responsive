@@ -32,7 +32,7 @@
 
             // qunit is throwing when resizing outside test.
             // Uncaught Error: assertion outside test context.
-            $(w).off(["resize", "orientationchange"].join(".conditional "));
+            $(w).off("resize.r.conditional orientationchange.r.conditional");
         }
     });
 

@@ -35,13 +35,13 @@
 
             // qunit is throwing when resizing outside test.
             // Uncaught Error: assertion outside test context.
-            $(w).off(["resize", "orientationchange"].join(".autosize "));
+            $(w).off("resize.r.autosize orientationchange.r.autosize");
         }
     });
 
     // No conflict.
     test("AutoSize plugin should provide noConflict() function.", function () {
-        strictEqual($.fn.autoSize, undefined, "autoSize plugin was set to undefined.");
+        strictEqual($.fn.autoSize, undefined, "AutoSize plugin was set to undefined.");
     });
 
     // Data
@@ -59,10 +59,10 @@
 
         var done = assert.async();
         $(autoSizeHtml).appendTo("#qunit-fixture")
-            .on("size.r.autosize", function () {
+            .one("size.r.autosize", function () {
                 ok(true, "Size event fired.");
             })
-            .on("sized.r.autosize", function () {
+            .one("sized.r.autosize", function () {
                 ok(true, "Sized event fired.");
                 done();
             })
@@ -73,12 +73,12 @@
 
         var done = assert.async();
         $(autoSizeHtml).appendTo("#qunit-fixture")
-            .on("size.r.autosize", function (event) {
+            .one("size.r.autosize", function (event) {
                 event.preventDefault();
                 ok(true, "Size event fired.");
                 done();
             })
-            .on("sized.r.autosize", function () {
+            .one("sized.r.autosize", function () {
                 ok(false, "Sized event fired.");
             })
             .responsiveAutoSize().val(text);

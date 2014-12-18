@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,8 +13,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -133,4 +133,4 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss"));
+}(jQuery, window, ".r.dismiss", ".data-api"));

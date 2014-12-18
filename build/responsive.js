@@ -493,7 +493,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -502,9 +502,9 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = ["resize", "orientationchange"].join(".autosize "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         einput = "input",
         ekeyup = "keyup",
         esize = "size" + ns,
@@ -636,14 +636,14 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize"));
+}(jQuery, window, ".r.autosize", ".data-api"));
 /*
  * Responsive Carousel
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -658,8 +658,8 @@
         emouseleave = "mouseleave",
         ekeydown = "keydown",
         eclick = "click",
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
@@ -1181,7 +1181,7 @@
                 // Cycle to the given number.
                 data.to(options);
 
-            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts.slide)) {
+            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts && opts.slide)) {
 
                 data[options]();
 
@@ -1218,14 +1218,14 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));
+}(jQuery, window, ".r.carousel", ".data-api"));
 /*
  * Responsive Conditional
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1234,9 +1234,9 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = ["resize", "orientationchange"].join(".conditional "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eload = "load" + ns,
         eloaded = "loaded" + ns,
         eerror = "error" + ns;
@@ -1389,14 +1389,14 @@
 
     w.RESPONSIVE_CONDITIONAL = true;
 
-}(jQuery, window, ".r.conditional"));
+}(jQuery, window, ".r.conditional", ".data-api"));
 /*
  * Responsive Dismiss 
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1405,8 +1405,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -1525,13 +1525,13 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss"));
+}(jQuery, window, ".r.dismiss", ".data-api"));
 /*
  * Responsive Dropdown 
  */
 /*jshint expr:true*/
 /*global jQuery*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1542,8 +1542,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -1704,7 +1704,7 @@
                     "aria-hidden": !doShow,
                     "tabindex": doShow ? 0 : -1,
                 });
-                
+
                 var $tab = $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
                     "aria-expanded": doShow
@@ -1832,7 +1832,7 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));
+}(jQuery, window, ".r.dropdown", ".data-api"));
 
 /*
  * Responsive Lightbox
@@ -1841,7 +1841,7 @@
 /*global jQuery*/
 /*jshint expr:true*/
 
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1861,9 +1861,9 @@
         $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
-        eready = "ready" + ns,
-        echanged = "domchanged" + ns,
-        eresize = ["resize", "orientationchange"].join(".modal "),
+        eready = "ready" + ns + da,
+        echanged = "domchanged" + ns + da,
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         efocusin = "focusin",
@@ -2090,7 +2090,7 @@
                     $overlay.addClass("hidden");
                     $html.removeClass("modal-on modal-lock")
                          .css("margin-right", "");
-                    
+
                     if (lastScroll !== $window.scrollTop()) {
                         $window.scrollTop(lastScroll);
                         lastScroll = 0;
@@ -2590,14 +2590,14 @@
 
     w.RESPONSIVE_MODAL = true;
 
-}(jQuery, window, ".r.modal"));
+}(jQuery, window, ".r.modal", ".data-api"));
 /*
  * Responsive Tables
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -2606,8 +2606,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -2635,7 +2635,6 @@
         var self = this,
             addEvent = $.Event(eadd),
             complete = function () {
-                console.log("added");
                 self.$element.trigger($.Event(eadded));
             };
 
@@ -2721,14 +2720,14 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.tablelist"));
+}(jQuery, window, ".r.tablelist", ".data-api"));
 /*
  * Responsive tabs
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -2738,8 +2737,8 @@
 
     // General variables.
     var rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -2865,7 +2864,7 @@
 
         this.show(index);
     };
-    
+
     Tabs.prototype.keydown = function (event) {
 
         var which = event.which;
@@ -2952,4 +2951,4 @@
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".r.tabs"));
+}(jQuery, window, ".r.tabs", ".data-api"));

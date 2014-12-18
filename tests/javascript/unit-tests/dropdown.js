@@ -4,7 +4,7 @@
 
     var dropdownHtml = "<button>Click me to toggle</button>";
 
-    var dropdownTargetHtml = "<div class=\"collapse\" id=\"collapse1\">" +
+    var dropdownTargetHtml = "<div class=\"collapse\" id=\"collapse\">" +
                              "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporincididunt " +
                              "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco " +
                              "laboris nisi ut aliquip ex ea commodo consequat. Duis auteirure dolor in reprehenderit in voluptate " +
@@ -61,7 +61,7 @@
                 ok(true, "Shown event fired.");
                 done();
             })
-            .responsiveDropdown({ target: "#collapse1" }).responsiveDropdown("show");
+            .responsiveDropdown({ target: "#collapse" }).responsiveDropdown("show");
     });
 
     test("Dropdown plugin should not fire shown event when show event is prevented.", function (assert) {
@@ -77,7 +77,7 @@
             .on("shown.r.dropdown", function () {
                 ok(false, "Shown event fired.");
             })
-            .responsiveDropdown({ target: "#collapse1" }).responsiveDropdown("show");
+            .responsiveDropdown({ target: "#collapse" }).responsiveDropdown("show");
     });
 
     test("Dropdown plugin should fire hide and hidden events.", function (assert) {
@@ -92,7 +92,7 @@
                 ok(true, "Hidden event fired.");
                 done();
             })
-            .responsiveDropdown({ target: "#collapse1" }).responsiveDropdown("hide");
+            .responsiveDropdown({ target: "#collapse" }).responsiveDropdown("hide");
     });
 
     test("Dropdown plugin should not fire hidden event when hide event is prevented.", function (assert) {
@@ -108,7 +108,7 @@
             .on("hidden.r.dropdown", function () {
                 ok(false, "Hidden event fired.");
             })
-            .responsiveDropdown({ target: "#collapse1" }).responsiveDropdown("hide");
+            .responsiveDropdown({ target: "#collapse" }).responsiveDropdown("hide");
     });
 
 }(jQuery, window, document))

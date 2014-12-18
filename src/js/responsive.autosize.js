@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,9 +13,9 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = ["resize", "orientationchange"].join(".autosize "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         einput = "input",
         ekeyup = "keyup",
         esize = "size" + ns,
@@ -147,4 +147,4 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize"));
+}(jQuery, window, ".r.autosize", ".data-api"));

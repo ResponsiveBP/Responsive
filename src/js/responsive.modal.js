@@ -5,7 +5,7 @@
 /*global jQuery*/
 /*jshint expr:true*/
 
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -25,9 +25,9 @@
         $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
-        eready = "ready" + ns,
-        echanged = "domchanged" + ns,
-        eresize = ["resize", "orientationchange"].join(".modal "),
+        eready = "ready" + ns + da,
+        echanged = "domchanged" + ns + da,
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         efocusin = "focusin",
@@ -254,7 +254,7 @@
                     $overlay.addClass("hidden");
                     $html.removeClass("modal-on modal-lock")
                          .css("margin-right", "");
-                    
+
                     if (lastScroll !== $window.scrollTop()) {
                         $window.scrollTop(lastScroll);
                         lastScroll = 0;
@@ -754,4 +754,4 @@
 
     w.RESPONSIVE_MODAL = true;
 
-}(jQuery, window, ".r.modal"));
+}(jQuery, window, ".r.modal", ".data-api"));

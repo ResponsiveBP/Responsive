@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -14,8 +14,8 @@
 
     // General variables.
     var rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -141,7 +141,7 @@
 
         this.show(index);
     };
-    
+
     Tabs.prototype.keydown = function (event) {
 
         var which = event.which;
@@ -228,4 +228,4 @@
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".r.tabs"));
+}(jQuery, window, ".r.tabs", ".data-api"));

@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,8 +13,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -42,7 +42,6 @@
         var self = this,
             addEvent = $.Event(eadd),
             complete = function () {
-                console.log("added");
                 self.$element.trigger($.Event(eadded));
             };
 
@@ -128,4 +127,4 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.tablelist"));
+}(jQuery, window, ".r.tablelist", ".data-api"));

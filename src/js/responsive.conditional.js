@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,9 +13,9 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = ["resize", "orientationchange"].join(".conditional "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eload = "load" + ns,
         eloaded = "loaded" + ns,
         eerror = "error" + ns;
@@ -168,4 +168,4 @@
 
     w.RESPONSIVE_CONDITIONAL = true;
 
-}(jQuery, window, ".r.conditional"));
+}(jQuery, window, ".r.conditional", ".data-api"));

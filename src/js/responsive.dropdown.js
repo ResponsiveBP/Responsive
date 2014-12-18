@@ -3,7 +3,7 @@
  */
 /*jshint expr:true*/
 /*global jQuery*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -14,8 +14,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -176,7 +176,7 @@
                     "aria-hidden": !doShow,
                     "tabindex": doShow ? 0 : -1,
                 });
-                
+
                 var $tab = $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
                     "aria-expanded": doShow
@@ -304,4 +304,4 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));
+}(jQuery, window, ".r.dropdown", ".data-api"));

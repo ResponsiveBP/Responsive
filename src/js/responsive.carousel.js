@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -19,8 +19,8 @@
         emouseleave = "mouseleave",
         ekeydown = "keydown",
         eclick = "click",
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
@@ -542,7 +542,7 @@
                 // Cycle to the given number.
                 data.to(options);
 
-            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts.slide)) {
+            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts && opts.slide)) {
 
                 data[options]();
 
@@ -579,4 +579,4 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));
+}(jQuery, window, ".r.carousel", ".data-api"));
