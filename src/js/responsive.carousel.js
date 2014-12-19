@@ -54,6 +54,7 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
+        this.keyboardTriggered = null;
         this.translationDuration = null;
         this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.children("button.forward");
         this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.children("button:not(.forward)");
@@ -285,14 +286,17 @@
                 var activePosition = self.activeindex();
                 if (self.$items && activePosition === self.$items.length - 1) {
                     self.$nextTrigger.hide().attr("aria-hidden", true);
-                    self.$previousTrigger.show().removeAttr("aria-hidden").focus();
+                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                    if (self.keyboardTriggered) { self.$previousTrigger.focus(); self.keyboardTriggered = false; }
                 }
                 else if (self.$items && activePosition === 0) {
                     self.$previousTrigger.hide().attr("aria-hidden", true);
-                    self.$nextTrigger.show().removeAttr("aria-hidden").focus();
+                    self.$nextTrigger.show().removeAttr("aria-hidden");
+                    if (self.keyboardTriggered) { self.$nextTrigger.focus(); self.keyboardTriggered = false; }
                 } else {
                     self.$nextTrigger.show().removeAttr("aria-hidden");
                     self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.keyboardTriggered = false;
                 }
             }
 
@@ -350,6 +354,8 @@
         var which = event && event.which;
 
         if (which === keys.LEFT || which === keys.RIGHT) {
+
+            this.keyboardTriggered = true;
 
             event.preventDefault();
             event.stopPropagation();
