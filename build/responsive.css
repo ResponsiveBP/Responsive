@@ -4330,6 +4330,8 @@ abbr {
     right: -2.73rem;
     top: .13rem;
     float: right;
+    background-color: transparent;
+    border: none;
     color: inherit;
     font-size: 1.17rem;
     font-weight: bold; }
@@ -4337,9 +4339,6 @@ abbr {
       float: left;
       right: auto;
       left: -2.73rem; }
-    .alert .close, .alert .close:active, .alert .close:focus, .alert .close:hover {
-      background-color: transparent;
-      border: none; }
     .alert .close:hover {
       text-decoration: underline; }
 
@@ -4991,9 +4990,13 @@ table {
     width: 3rem;
     margin-top: -1rem;
     padding: 1rem;
+    background-color: transparent;
+    border: none;
     font-size: 2rem;
     font-weight: bold;
-    text-align: center; }
+    color: white;
+    text-align: center;
+    text-decoration: none; }
     [dir="rtl"] .carousel > button {
       left: auto;
       right: 1px; }
@@ -5003,11 +5006,6 @@ table {
       [dir="rtl"] .carousel > button.forward {
         right: auto;
         left: 1px; }
-    .carousel > button, .carousel > button:active, .carousel > button:visited, .carousel > button:hover, .carousel > button:focus {
-      background-color: transparent;
-      border: none;
-      color: white;
-      text-decoration: none; }
     .carousel > button:hover {
       text-decoration: underline; }
 
@@ -5210,16 +5208,13 @@ table {
       right: auto;
       left: 0; }
 
-.modal-close, .modal-close:hover, .modal-close:active, .modal-close:focus,
-.modal-direction,
-.modal-direction:hover,
-.modal-direction:active,
-.modal-direction:focus {
+button.modal-close,
+button.modal-direction {
   background-color: transparent;
   border: none; }
-.modal-close:hover,
-.modal-direction:hover {
-  text-decoration: underline; }
+  button.modal-close:hover,
+  button.modal-direction:hover {
+    text-decoration: underline; }
 
 @media print and (max-width: 536px), screen and (max-width: 47.99em) {
     /*

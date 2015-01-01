@@ -12,22 +12,16 @@
         right: -2.73rem;
         top: .13rem;
         float: right;
+        background-color: transparent;
+        border: none;
         color: inherit;
-        font-size: 1.17rem;
+        font-size: $h3-font-size;
         font-weight: bold;
 
         [dir="rtl"] & {
             float: left;
             right: auto;
             left: -2.73rem;
-        }
-
-        &,
-        &:active,
-        &:focus,
-        &:hover {
-            background-color: transparent;
-            border: none;
         }
 
         &:hover {

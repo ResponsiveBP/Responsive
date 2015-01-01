@@ -48,32 +48,32 @@ h1, h2, h3, h4, h5, h6 {
 // contexts in Firefox 4+, Safari, and Chrome.
 h1 {
     font-size: $h1-font-size;
-    margin: $h1-margin;
+    margin: $h1-margin 0;
 }
 
 h2 {
     font-size: $h2-font-size;
-    margin: $h2-margin;
+    margin: $h2-margin 0;
 }
 
 h3 {
     font-size: $h3-font-size;
-    margin: $h3-margin;
+    margin: $h3-margin 0;
 }
 
 h4 {
     font-size: $h4-font-size;
-    margin: $h4-margin;
+    margin: $h4-margin 0;
 }
 
 h5 {
     font-size: $h5-font-size;
-    margin: $h5-margin;
+    margin: $h5-margin 0;
 }
 
 h6 {
     font-size: $h6-font-size;
-    margin: $h6-margin;
+    margin: $h6-margin 0;
 }
 
 // Remove text-shadow in selection highlight: h5bp.com/i
