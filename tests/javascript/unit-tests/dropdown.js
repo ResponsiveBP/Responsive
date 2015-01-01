@@ -111,6 +111,7 @@
             .responsiveDropdown({ target: "#collapse" }).responsiveDropdown("hide");
     });
 
+    // Accessibility
     test("Collapsed dropdown should have aria-expanded and aria-selected equal to false.", function () {
         $(dropdownTargetHtml).removeClass("collapse").appendTo("#qunit-fixture");
         var $dropdownHtml = $(dropdownHtml).prependTo("#qunit-fixture")
