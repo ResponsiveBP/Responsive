@@ -1594,13 +1594,12 @@
             $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
         }
 
-        var $tab = $("[href='" + this.options.target + "'], [data-dropdown-target='" + this.options.target + "']"),
-            tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
+        var id = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
 
-        $tab.attr({
-            "id": tabId,
+        this.$element.attr({
+            "id": id,
             "role": "tab",
             "aria-controls": paneId,
             "aria-selected": active,
@@ -1611,7 +1610,7 @@
         this.$target.attr({
             "id": paneId,
             "role": "tabpanel",
-            "aria-labelledby": tabId,
+            "aria-labelledby": id,
             "aria-hidden": !active,
             "tabindex": active ? 0 : -1
         });

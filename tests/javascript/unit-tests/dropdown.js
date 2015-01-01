@@ -111,4 +111,54 @@
             .responsiveDropdown({ target: "#collapse" }).responsiveDropdown("hide");
     });
 
+    test("Collapsed dropdown should have aria-expanded and aria-selected equal to false.", function () {
+        $(dropdownTargetHtml).removeClass("collapse").appendTo("#qunit-fixture");
+        var $dropdownHtml = $(dropdownHtml).prependTo("#qunit-fixture")
+                                           .responsiveDropdown({ target: "#collapse" })
+                                           .responsiveDropdown("hide");
+
+        equal($dropdownHtml.attr("aria-expanded"), "false", "Collapsed dropdown has aria-expanded = false.");
+        equal($dropdownHtml.attr("aria-selected"), "false", "Collapsed dropdown has aria-selected = false.");
+    });
+
+    test("Expanded dropdown should have aria-expanded and aria-selected equal to true.", function () {
+        $(dropdownTargetHtml).removeClass("collapse").appendTo("#qunit-fixture");
+        var $dropdownHtml = $(dropdownHtml).prependTo("#qunit-fixture")
+                                           .responsiveDropdown({ target: "#collapse" })
+                                           .responsiveDropdown("show");
+
+        equal($dropdownHtml.attr("aria-expanded"), "true", "Collapsed dropdown has aria-expanded = true.");
+        equal($dropdownHtml.attr("aria-selected"), "true", "Collapsed dropdown has aria-selected = true.");
+    });
+
+    test("Collapsed dropdown should have aria-hidden equal to true.", function () {
+        var $dropdownTargetHtml = $(dropdownTargetHtml).removeClass("collapse").appendTo("#qunit-fixture");
+        $(dropdownHtml).prependTo("#qunit-fixture")
+                       .responsiveDropdown({ target: "#collapse" })
+                       .responsiveDropdown("hide");
+
+        equal($dropdownTargetHtml.attr("aria-hidden"), "true", "Collapsed dropdown has aria-hidden = true.");
+    });
+
+    test("Expanded dropdown should have aria-hidden equal to false.", function () {
+        var $dropdownTargetHtml = $(dropdownTargetHtml).removeClass("collapse").appendTo("#qunit-fixture");
+        $(dropdownHtml).prependTo("#qunit-fixture")
+                       .responsiveDropdown({ target: "#collapse" })
+                       .responsiveDropdown("show");
+
+        equal($dropdownTargetHtml.attr("aria-hidden"), "false", "Collapsed dropdown has aria-hidden = false.");
+    });
+
+    test("Dropdown trigger and target should have aria connected id's.", function () {
+        var $dropdownTargetHtml = $(dropdownTargetHtml).removeClass("collapse").appendTo("#qunit-fixture");
+        var $dropdownHtml = $(dropdownHtml).prependTo("#qunit-fixture")
+                       .responsiveDropdown({ target: "#collapse" });
+
+        var targetId = $dropdownTargetHtml.attr("id"),
+            triggerId = $dropdownHtml.attr("id");
+
+        equal($dropdownTargetHtml.attr("aria-labelledby"), triggerId, "Dropdown target is labelled by tab via aria-labelledby.");
+        equal($dropdownHtml.attr("aria-controls"), targetId, "Dropdown trigger controls target via aria-controls.");
+    });
+
 }(jQuery, window, document))

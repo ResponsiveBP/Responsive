@@ -99,7 +99,7 @@
 
     test("Tab pane and tabs should have aria connected id's.", function () {
         var $tabs = $(tabsHtml).appendTo("#qunit-fixture")
-               .responsiveTabs();
+                               .responsiveTabs();
 
         var tabId = $tabs.find("li:last a").attr("id"),
             paneId = $tabs.find("section:last").attr("id");
