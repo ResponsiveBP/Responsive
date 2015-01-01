@@ -5,7 +5,6 @@
 }
 
 .accordion-head {
-    border-bottom: solid 1px $accordion-border-color;
     display: block;
 
     a {
@@ -16,20 +15,13 @@
 
 .accordion-body {
     padding: 0 .5rem;
-
-    &.collapse {
-        margin-top: -1px;
-    }
+    border-top: solid 1px $accordion-border-color;
 }
 
 // Animation styles
-.trans,
-.collapse {
-    transition: height .5s ease, width .5s ease;
-}
-
 .expand,
 .collapse {
+    transition: height .5s ease, width .5s ease;
     display: block;
     height: auto;
     margin-top: 0;
@@ -40,7 +32,6 @@
 
 .collapse {
     height: 0;
-
     // Width variant
     &.width {
         height: auto;

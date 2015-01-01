@@ -110,7 +110,9 @@
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$target[dimension]("auto");
+            this.$target[dimension]("auto").attr({ "aria-hidden": false });
+            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false });
+
             this.endSize = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset to zero and force repaint.
@@ -167,7 +169,7 @@
                 var eventToTrigger = $.Event(completeEvent);
 
                 // Ensure the height/width is set to auto.
-                self.$target.removeClass("trans")[self.options.dimension]("");
+                self.$target[self.options.dimension]("");
 
                 self.transitioning = false;
 
@@ -205,7 +207,7 @@
 
         // Remove or add the expand classes.
         this.$target[method]("collapse");
-        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand");
 
         this.$target.onTransitionEnd(complete);
     };
