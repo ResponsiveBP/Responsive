@@ -94,7 +94,6 @@
         // Do our callback
         this.sizing = false;
         $element.trigger($.Event(esized));
-
     };
 
     // No conflict.

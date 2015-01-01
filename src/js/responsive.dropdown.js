@@ -174,7 +174,7 @@
                 // Set the correct aria attributes.
                 self.$target.attr({
                     "aria-hidden": !doShow,
-                    "tabindex": doShow ? 0 : -1,
+                    "tabindex": doShow ? 0 : -1
                 });
 
                 var $tab = $("#" + self.$target.attr("aria-labelledby")).attr({
@@ -189,7 +189,7 @@
                 // Toggle any children.
                 self.$target.find("[tabindex]:not(.collapse)").attr({
                     "aria-hidden": !doShow,
-                    "tabindex": doShow ? 0 : -1,
+                    "tabindex": doShow ? 0 : -1
                 });
 
                 self.$element.trigger(eventToTrigger);
