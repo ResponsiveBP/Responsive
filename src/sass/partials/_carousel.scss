@@ -145,9 +145,13 @@
         width: 3rem;
         margin-top: -1rem;
         padding: 1rem;
+        background-color: transparent;
+        border: none;
         font-size: 2rem;
         font-weight: bold;
+        color: $carousel-control-color;
         text-align: center;
+        text-decoration: none;
 
         [dir="rtl"] & {
             left: auto;
@@ -162,17 +166,6 @@
                 right: auto;
                 left: 1px;
             }
-        }
-
-        &,
-        &:active,
-        &:visited,
-        &:hover,
-        &:focus {
-            background-color: transparent;
-            border: none;
-            color: $carousel-control-color;
-            text-decoration: none;
         }
 
         &:hover {

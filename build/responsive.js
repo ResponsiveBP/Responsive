@@ -664,6 +664,7 @@
 
     var keys = {
         SPACE: 32,
+        ENTER: 13,
         LEFT: 37,
         RIGHT: 39
     };
@@ -696,7 +697,7 @@
         this.translationDuration = null;
         this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.children("button.forward");
         this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.children("button:not(.forward)");
-        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.children("ol").children("li");
+        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("> ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
         var self = this,
@@ -770,7 +771,7 @@
             this.$element.on(ekeydown, $.proxy(this.keydown, this));
         }
 
-        $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
+        $(document).on(this.options.keyboard ? [eclick, ekeydown].join(" ") : eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
     Carousel.prototype.activeindex = function () {
@@ -1028,18 +1029,24 @@
             return;
         }
 
+        var which = event.which;
+
+        if (which === keys.SPACE || which === keys.ENTER) {
+
+            this.keyboardTriggered = true;
+        }
+
         event.preventDefault();
         event.stopPropagation();
-        var $this = $(event.target),
-            indicator = $this.is(this.$indicators.selector);
+        var $this = $(event.target);
 
-        if (indicator) {
-            this.to($this.index());
-        } else if ($this.hasClass("forward")) {
+        if ($this.hasClass("forward")) {
             this.next();
         }
         else if ($this.is("button")) {
             this.prev();
+        } else {
+            this.to($this.index());
         }
     };
 
