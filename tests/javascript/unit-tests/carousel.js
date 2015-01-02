@@ -96,4 +96,16 @@
         equal($carouselHtml.find("figure:not(.carousel-active)").attr("aria-selected"), "false", "Hidden pane has aria-selected = false.");
 
     });
+
+    test("Carousel plugin should have aria-controls attributes added.", function () {
+
+        var $carouselHtml = $(carouselHtml).appendTo("#qunit-fixture")
+                                           .responsiveCarousel();
+
+        var id = $carouselHtml.attr("id");
+
+        equal($carouselHtml.find("> ol > li").attr("aria-controls"), id, "Indicators control carousel via aria-controls.");
+        equal($carouselHtml.find("> button").attr("aria-controls"), id, "Buttons control carousel via aria-controls.");
+
+    });
 }(jQuery, window, document))
