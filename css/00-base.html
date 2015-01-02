@@ -1,8 +1,7 @@
 ---
-permalink: css/base.html
-layout: subpage
-group: css
+permalink: css/base/
 title: Base
+description: Base css styles for providing a normalized cross browser experience.
 heading: Base
 subheading: Normalized content across all browsers.
 sublinks: ["#normalize|Normalize",
@@ -11,8 +10,8 @@ sublinks: ["#normalize|Normalize",
             "#visibilityhelpers|Visibility Helpers",
             "#layouthelpers|Layout Helpers"]
 ---
-<section id="normalize">
-    <h1>Normalize</h1>
+<section>
+    <h1 id="normalize">Normalize</h1>
     <p>
         Responsive provides lots of building blocks that are specifically designed to speed up your development by
         boilerplating common components from normalized styles.
@@ -30,12 +29,12 @@ sublinks: ["#normalize|Normalize",
     </blockquote>
 </section>
 <hr />
-<section id="typography">
-    <h1>Typography</h1>
+<section>
+    <h1 id="typography">Typography</h1>
     <p>
         Responsive does not add any additional styles to basic typographical elements such as <code>&lt;p/&gt;</code>. Header tags and other elements conform to cross-browser normalized standards.
     </p>
-    <table class="table-list table-striped table-bordered" data-table-list="">
+    <table class="table-list table-striped table-bordered" data-table-list>
         <thead>
             <tr>
                 <th>Header Element</th>
@@ -45,56 +44,56 @@ sublinks: ["#normalize|Normalize",
         <tbody>
             <tr>
                 <td>
-                    <h1>h1 element</h1>
+                    <h1>h1</h1>
                 </td>
                 <td>
-                    <pre class="narrow-code"><code>font-size: 2em;
-margin: .67em 0;</code></pre>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h2>h2 element</h2>
-                </td>
-                <td>
-                    <pre class="narrow-code"><code>font-size: 1.5em;
-margin: .83em 0;</code></pre>
+                    <pre><code>font-size: 2rem;
+margin: 1.34rem 0;</code></pre>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h3>h3 element</h3>
+                    <h2>h2</h2>
                 </td>
                 <td>
-                    <pre class="narrow-code"><code>font-size: 1.17em;
-margin: 1em 0;</code></pre>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h4>h4 element</h4>
-                </td>
-                <td>
-                    <pre class="narrow-code"><code>font-size: 1em;
-margin: 1.33em 0;</code></pre>
+                    <pre><code>font-size: 1.5rem;
+margin: 1.245rem 0;</code></pre>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h5>h5 element</h5>
+                    <h3>h3</h3>
                 </td>
                 <td>
-                    <pre class="narrow-code"><code>font-size: .83em;
-margin: 1.67em 0;</code></pre>
+                    <pre><code>font-size: 1.17rem;
+margin: 1.17rem 0;</code></pre>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h6>h6 element</h6>
+                    <h4>h4</h4>
                 </td>
                 <td>
-                    <pre class="narrow-code"><code>font-size: .67em;
-margin: 2.33em 0;</code></pre>
+                    <pre><code>font-size: 1rem;
+margin: 1.33rem 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>h5</h5>
+                </td>
+                <td>
+                    <pre><code>font-size: .83rem;
+margin: 1.386rem 0;</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6>h6</h6>
+                </td>
+                <td>
+                    <pre><code>font-size: .67rem;
+margin: 1.561rem 0;</code></pre>
                 </td>
             </tr>
         </tbody>
@@ -103,14 +102,14 @@ margin: 2.33em 0;</code></pre>
     <p><code>&lt;hr/&gt;</code> elements have been tweaked slightly though to allow developers to more easily style them. For example:</p>
     <hr />
     <div class="alert" role="alert">
-        <p>Responsive also adds some light styling to code driven elements. See <a href="code.html" rel="bookmark">Code</a> for examples of that styling.</p>
+        <p>Responsive also adds some light styling to code driven elements. See <a href="/css/code/" rel="bookmark">Code</a> for examples of that styling.</p>
     </div>
 </section>
 <hr />
-<section id="inlinetype">
-    <h1>Inline Typographical Elements</h1>
+<section>
+    <h1 id="inlinetype">Inline Typographical Elements</h1>
     <div class="row">
-        <div class="column-6">
+        <div class="col-s-6">
             <p>
                 <q>q element <q>inside</q> a q element</q> example<br />
                 <small>small element</small> example<br />
@@ -122,7 +121,7 @@ margin: 2.33em 0;</code></pre>
                 example
             </p>
         </div>
-        <div class="column-6">
+        <div class="col-s-6">
             <p>
                 <cite>cite element</cite> example<br />
                 <del>del element</del> example<br />
@@ -139,27 +138,38 @@ margin: 2.33em 0;</code></pre>
     </div>
 </section>
 <hr />
-<section id="visibilityhelpers">
-    <h1>Visibility helpers.</h1>
+<section>
+    <h1 id="visibilityhelpers">Visibility helpers.</h1>
     <p>
         These helpers allow you to toggle the visibility of elements as the viewport scales.
-        <var>Em</var>
+        <var>rem</var>
         values are calculated at the browser body default of
-        <var>16px = 1em</var>.
+        <var>16px = 1rem</var>.
     </p>
-    <div class="row">
-        <h3>Visible Example: Green means visible</h3>
-        <div class="col-s-3">
+
+    <h3>Visible Example: Green means visible</h3>
+    <div class="block-row-s-5 pad-gutter">
+        <div>
             <div class="responsive-helper-pane is-hidden">
-                <h3>&lt; 48em</h3>
+                <h3>&lt; 37.5em</h3>
+                <code>.visible-xxs</code>
+                <div class="visible-xxs responsive-helper-alert is-shown">
+                    <h3>&lt; 37.5em</h3>
+                    <code>.visible-xxs</code>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="responsive-helper-pane is-hidden">
+                <h3>37.5em to 48em</h3>
                 <code>.visible-xs</code>
                 <div class="visible-xs responsive-helper-alert is-shown">
-                    <h3>&lt; 48em</h3>
+                    <h3>37.5em to 48em</h3>
                     <code>.visible-xs</code>
                 </div>
             </div>
         </div>
-        <div class="col-s-3">
+        <div>
             <div class="responsive-helper-pane is-hidden">
                 <h3>48em to 62em</h3>
                 <code>.visible-s</code>
@@ -169,7 +179,7 @@ margin: 2.33em 0;</code></pre>
                 </div>
             </div>
         </div>
-        <div class="col-s-3">
+        <div>
             <div class="responsive-helper-pane is-hidden">
                 <h3>62em to 75em</h3>
                 <code>.visible-m</code>
@@ -179,7 +189,7 @@ margin: 2.33em 0;</code></pre>
                 </div>
             </div>
         </div>
-        <div class="col-s-3">
+        <div>
             <div class="responsive-helper-pane is-hidden">
                 <h3>&gt; 75em</h3>
                 <code>.visible-l</code>
@@ -190,42 +200,55 @@ margin: 2.33em 0;</code></pre>
             </div>
         </div>
     </div>
-    <div class="row">
-        <h3>Hidden Example: Red means hidden</h3>
-        <div class="col-s-3">
+    <h3>Hidden Example: Red means hidden</h3>
+    <div class="block-row-s-5">
+        <div>
             <div class="responsive-helper-pane is-hidden">
-                <h3>&lt; 48em</h3>
+                <h3>&lt; 37.5em</h3>
+                <code>.hidden-xxs</code>
+                <div class="hidden-xxs responsive-helper-alert is-shown">
+                    <h3>&lt; 37.5em</h3>
+                    <code>.hidden-xxs</code>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="responsive-helper-pane is-hidden">
+                <h3>37.5em to 48em</h3>
                 <code>.hidden-xs</code>
                 <div class="hidden-xs responsive-helper-alert is-shown">
-                    <h3>&lt; 48em</h3>
+                    <h3>37.5em to 48em</h3>
                     <code>.hidden-xs</code>
                 </div>
             </div>
         </div>
-        <div class="col-s-3">
+        <div>
             <div class="responsive-helper-pane is-hidden">
                 <h3>48em to 62em</h3>
                 <code>.hidden-s</code>
+
                 <div class="hidden-s responsive-helper-alert is-shown">
                     <h3>48em to 62em</h3>
                     <code>.hidden-s</code>
                 </div>
             </div>
         </div>
-        <div class="col-s-3">
+        <div>
             <div class="responsive-helper-pane is-hidden">
                 <h3>62em to 75em</h3>
                 <code>.hidden-m</code>
+
                 <div class="hidden-m responsive-helper-alert is-shown">
                     <h3>62em to 75em</h3>
                     <code>.hidden-m</code>
                 </div>
             </div>
         </div>
-        <div class="col-s-3">
+        <div>
             <div class="responsive-helper-pane is-hidden">
                 <h3>&gt; 75em</h3>
                 <code>.hidden-l</code>
+
                 <div class="hidden-l responsive-helper-alert is-shown">
                     <h3>&gt; 75em</h3>
                     <code>.hidden-l</code>
@@ -248,8 +271,8 @@ margin: 2.33em 0;</code></pre>
     </dl>
 </section>
 <hr />
-<section id="layouthelpers">
-    <h1>Layout Helpers</h1>
+<section>
+    <h1 id="layouthelpers">Layout Helpers</h1>
     <p>Responsive also comes bundled with utility classes help you layout elements within the grid columns.</p>
 
     <h3>Floating Classes</h3>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% if page.title %} {{ page.title }} :: {% endif %} {{ site.name }}</title>
-    <meta name="description" content="{% if page.subheading %} {{ page.subheading }} {% else %} {{ site.description }} {% endif %}" />
+    <meta name="description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}" />
     <meta name="keywords" content="{{ site.keywords }}">
     <meta name="author" content="{{ site.author }}">
 
@@ -13,10 +13,6 @@
     <link href="{{ site.baseurl }}/assets/css/docs.css" rel="stylesheet" />
     <link href="{{ site.baseurl }}/assets/css/vendor/prism.min.css" rel="stylesheet" />
     <link href="{{ site.baseurl }}/assets/css/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <!--[if lt IE 9 &!(IEMobile)]>
-        <script src="{{ site.baseurl }}/assets/js/vendor/html5shiv.min.js"></script>
-        <script src="{{ site.baseurl }}/assets/js/vendor/respond.min.js"></script>
-    <![endif]-->
 
     <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.ico" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/assets/ico/apple-touch-icon-144x144.png" />

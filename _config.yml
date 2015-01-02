@@ -1,18 +1,31 @@
-﻿# Allows the running of the site in a subdirectory on Github Pages
+# Allows the running of the site in a subdirectory on Github Pages
 # Note - if you enable this, and attempt to view your site locally you have to 
 # pass the  --baseurl parameter when serving as an empty string e.g jekyll serve --baseurl ''
 # http://jekyllrb.com/docs/github-pages/
 baseurl : ""
 
+# General settings
+permalink: pretty
 markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  parse_block_html: true
 
-relative_permalinks: false
+defaults:
+  -
+    scope:
+      path: "css"
+    values:
+      layout: "subpage"
+      group: "css"
+      type: "pages"
 
 # Name of the website
 name: Responsive
 
 # Server
-exclude:          ["CNAME","node_modules","Gemfile","Gemfile.lock"]
+exclude:          ["CNAME","node_modules","Gemfile*"]
 
 # Meta Details
 description: A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites.
@@ -22,9 +35,9 @@ author: "James South, and Responsive contributers"
 
 
 # Custom variables
-version: 3.1.4
+version: 4.0.0
 buildsize : 25.5
 repo: https://github.com/responsivebp/responsive
-sourcefiles: https://github.com/ResponsiveBP/Responsive/archive/3.1.4.zip
+sourcefiles: https://github.com/ResponsiveBP/Responsive/archive/4.0.0.zip
 release: https://github.com/ResponsiveBP/Responsive/releases/download/3.1.4/responsive.zip
 
