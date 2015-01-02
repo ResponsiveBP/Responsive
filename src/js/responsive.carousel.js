@@ -393,9 +393,12 @@
 
         var which = event.which;
 
-        if (which === keys.SPACE || which === keys.ENTER) {
-
-            this.keyboardTriggered = true;
+        if (which) {
+            if (which === keys.SPACE || which === keys.ENTER) {
+                this.keyboardTriggered = true;
+            } else {
+                return;
+            }
         }
 
         event.preventDefault();
