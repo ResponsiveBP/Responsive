@@ -321,6 +321,8 @@
 
         $overlay.addClass("modal-loader");
 
+        var self = this;
+
         var isExternalUrl = function (url) {
 
             // Handle different host types.
@@ -354,8 +356,7 @@
             $overlay.removeClass("modal-loader");
         };
 
-        var self = this,
-            title = this.options.title,
+        var title = this.options.title,
             description = this.options.description,
             modal = this.options.modal,
             target = this.options.target,
@@ -739,9 +740,9 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                loaded = $this.data("r.tableLoaded");
+                loaded = $this.data("r.modalLoaded");
             if (!loaded) {
-                $this.data("r.tableLoaded", true);
+                $this.data("r.modalLoaded", true);
                 $this.modal($.getDataOptions($this, "modal"));
             }
         });
