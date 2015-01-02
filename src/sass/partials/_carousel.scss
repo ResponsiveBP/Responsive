@@ -199,12 +199,8 @@
         opacity: 1;
     }
 
-    > .carousel-active.swipe {
+    .carousel-active.swipe {
         z-index: 2;
-    }
-
-    > .carousel-active {
-        position: relative;
     }
 
     .carousel-active {

@@ -331,8 +331,7 @@
                     // Normalize the variables.
                     var isMouse = event.type === "mousedown",
                         isPointer = event.type !== "touchstart" && !isMouse,
-                        original = event.originalEvent,
-                        startEvent;
+                        original = event.originalEvent;
 
                     if ((isPointer || isMouse) && $(event.target).is("img")) {
                         event.preventDefault();
@@ -350,7 +349,7 @@
                         time: +new Date()
                     };
 
-                    startEvent = $.Event(eswipestart, { start: start });
+                    var startEvent = $.Event(eswipestart, { start: start });
 
                     $this.trigger(startEvent);
 

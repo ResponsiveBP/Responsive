@@ -36,11 +36,13 @@ input[type="reset"] {
     }
     // Inline buttons designed for rendering next to inputs.
     // 1. Pad buttons.
-    // 2. Fix height on IE
+    // 2. Fix height on IE.
+    // 3. Fix width on Chrome. 
     .input-group & {
         padding: 0 1rem; // 1
         line-height: 1.7;
         line-height: 1.65 \9; // 2
+        min-width: 100%; // 3
     }
 
     _::-ms-reveal,

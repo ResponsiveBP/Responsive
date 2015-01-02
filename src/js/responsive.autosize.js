@@ -53,7 +53,7 @@
         this.init();
 
         // Bind events. Keyup is required for IE9.
-        this.$element.on([einput, ekeyup].join(" "), $.proxy(this.size, this));
+        this.$element.on([einput, ekeyup].join(" "), $.debounce($.proxy(this.size, this), 100));
         $(w).on(eresize, $.debounce($.proxy(this.size, this), 100));
     };
 

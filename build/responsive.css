@@ -4394,7 +4394,8 @@ input[type="reset"] {
   input[type="reset"] {
     padding: 0 1rem;
     line-height: 1.7;
-    line-height: 1.65 \9; }
+    line-height: 1.65 \9;
+    min-width: 100%; }
   button _::-ms-reveal, .input-group button,
   input[type="submit"] _::-ms-reveal, .input-group
   input[type="submit"],
@@ -5026,10 +5027,8 @@ table {
 .carousel-fade > figure.prev {
   z-index: 1;
   opacity: 1; }
-.carousel-fade > .carousel-active.swipe {
+.carousel-fade .carousel-active.swipe {
   z-index: 2; }
-.carousel-fade > .carousel-active {
-  position: relative; }
 .carousel-fade .carousel-active {
   opacity: 1; }
   .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {

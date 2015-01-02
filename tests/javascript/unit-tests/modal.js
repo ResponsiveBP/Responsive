@@ -132,12 +132,18 @@
         equal($(".modal-overlay").attr("role"), "document", "Modal overlay has role = document.");
     });
 
-    //test("Modal plugin should have aria-labelled applied.", function () {
+    test("Modal plugin should have aria-labelledby applied.", function () {
 
-    //    $(modalTargetHtml).appendTo("#qunit-fixture");
-    //    $(modalHtml).prependTo("#qunit-fixture")
-    //                .responsiveModal({ target: "#modal-target" }).responsiveModal("show");
+        $(modalTargetHtml).appendTo("#qunit-fixture");
+        $(modalHtml).prependTo("#qunit-fixture")
+                    .responsiveModal({
+                        target: "#modal-target",
+                        title: "test"
+                    })
+                    .responsiveModal("show");
 
-    //    equal($(".modal-overlay").attr("role"), "document", "Modal overlay has role = document.");
-    //});
+        var id = $(".modal-header h2").attr("id");
+
+        equal($(".modal-overlay").attr("aria-labelledby"), id, "Modal overlay has correct label.");
+    });
 }(jQuery, window, document))

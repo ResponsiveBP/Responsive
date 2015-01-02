@@ -331,8 +331,7 @@
                     // Normalize the variables.
                     var isMouse = event.type === "mousedown",
                         isPointer = event.type !== "touchstart" && !isMouse,
-                        original = event.originalEvent,
-                        startEvent;
+                        original = event.originalEvent;
 
                     if ((isPointer || isMouse) && $(event.target).is("img")) {
                         event.preventDefault();
@@ -350,7 +349,7 @@
                         time: +new Date()
                     };
 
-                    startEvent = $.Event(eswipestart, { start: start });
+                    var startEvent = $.Event(eswipestart, { start: start });
 
                     $this.trigger(startEvent);
 
@@ -542,7 +541,7 @@
         this.init();
 
         // Bind events. Keyup is required for IE9.
-        this.$element.on([einput, ekeyup].join(" "), $.proxy(this.size, this));
+        this.$element.on([einput, ekeyup].join(" "), $.debounce($.proxy(this.size, this), 100));
         $(w).on(eresize, $.debounce($.proxy(this.size, this), 100));
     };
 
@@ -1031,9 +1030,12 @@
 
         var which = event.which;
 
-        if (which === keys.SPACE || which === keys.ENTER) {
-
-            this.keyboardTriggered = true;
+        if (which) {
+            if (which === keys.SPACE || which === keys.ENTER) {
+                this.keyboardTriggered = true;
+            } else {
+                return;
+            }
         }
 
         event.preventDefault();
