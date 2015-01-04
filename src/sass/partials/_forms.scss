@@ -120,7 +120,7 @@ input[type='range'] {
     border: $form-input-border \9;
     background-color: $form-input-background \9;
     padding: $form-input-padding 0;
-    padding: $form-input-padding\9;
+    padding: $form-input-padding \9;
 }
 
 // 1. Remove borders and padding on range controls in IE10+

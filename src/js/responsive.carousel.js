@@ -388,12 +388,12 @@
     Carousel.prototype.click = function (event) {
 
         if (!event) {
-            return;
+            return; 
         }
 
         var which = event.which;
 
-        if (which) {
+        if (which && which !== 1) {
             if (which === keys.SPACE || which === keys.ENTER) {
                 this.keyboardTriggered = true;
             } else {
