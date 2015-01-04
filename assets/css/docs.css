@@ -157,7 +157,8 @@ nav[role="navigation"] [data-dropdown-target] {
  */
 header[role="banner"] {
     background-image: url('trianglify-background.svg');
-    background-position: center bottom;
+    background-color: #395179;
+    background-position: center top;
     background-size: cover;
     padding-top: 1px; /* 1 */
     padding-bottom: 2rem;
@@ -171,17 +172,22 @@ header[role="banner"] {
         header[role="banner"] h1 span {
             display: block;
             font-size: 55%;
-            color: #fff;
-            margin: .34em 0;
+            margin: .34rem 0;
         }
 
+    header[role="banner"] a {
+        color: inherit;
+    }
+
 .download {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     padding: 1em;
-    background-color: #222;
-    color: #fff;
+    background-color: #333;
+    border-radius: 6px;
+    color: #fff !important;
     display: inline-block;
     text-decoration: none;
+    box-shadow: 0 3px 0 #000;
 }
 
 @media (min-width: 62em) {
@@ -191,11 +197,11 @@ header[role="banner"] {
 }
 
 .download:hover {
-    background-color: #333;
+    background-color: #393939;
 }
 
 .download:active {
-    background-color: #555;
+    background-color: #434343;
 }
 
 .download-links {
@@ -306,6 +312,12 @@ header[role="banner"] {
     -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
     -ms-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
     box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
+}
+
+.fa.icon {
+    color: #395179;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 .icon-left > i {
