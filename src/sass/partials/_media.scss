@@ -31,17 +31,18 @@ a img {
 // Properly scale your video on any device based on common ratios.
 // The code here is based on research and work by Theirry Koblentz, Anders Andersen,
 // Niklaus Gerber, and Jeff Hobbs.
+// 1: Default to widescreen 16:9 aspect ratio.
 .media {
     height: 0;
     height: auto;
     margin-bottom: 1rem;
     max-width: 100%;
     overflow: hidden;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; // 1
     position: relative;
 
-    &.widescreen {
-        padding-bottom: 45%;
+    &.four-by-three {
+        padding-bottom: 75%;
     }
 
     &.instagram {
@@ -73,7 +74,7 @@ a img {
         outline: none;
         padding: 0;
         position: absolute;
-        top: 0;
+        top: 0; 
         width: 100%;
     }
 
@@ -84,7 +85,7 @@ a img {
         // at 100%.
         bottom: -1000000%;
         left: -1000000%;
-        margin: auto;
+        margin: auto; 
         position: absolute;
         right: -1000000%;
         top: -1000000%;
