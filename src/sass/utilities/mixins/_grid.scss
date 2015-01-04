@@ -24,7 +24,7 @@
     [class*=col-#{$breakpoint}] {
         margin-left: $grid-column-gutter;
 
-        &:first-of-type {
+        &:first-child {
             margin-left: 0;
         }
 
@@ -32,7 +32,7 @@
             margin-left: 0;
             margin-right: $grid-column-gutter;
 
-            &:first-of-type {
+            &:first-child {
                 margin-right: 0;
             }
         }
@@ -78,27 +78,19 @@
         // We don't want add offsets etc to full width columns.
         @if $i != $grid-column-count {
             .offset-#{$breakpoint}-#{$i} {
+                margin-left: $temp-width + $grid-column-gutter;
 
-                &:first-of-type {
+                &:first-child {
                     margin-left: $temp-width;
                 }
 
                 [dir="rtl"] & {
                     margin-left: 0;
-                    margin-right: $temp-width;
+                    margin-right: $temp-width + $grid-column-gutter;
 
-                    &:first-of-type {
+                    &:first-child {
                         margin-right: $temp-width;
                     }
-                }
-            }
-
-            .offset-#{$breakpoint}-#{$i} {
-                margin-left: $temp-width + $grid-column-gutter;
-
-                [dir="rtl"] & {
-                    margin-left: 0;
-                    margin-right: $temp-width + $grid-column-gutter;
                 }
             }
 
@@ -122,7 +114,7 @@
         }
         @else {
             // Ensure that the gutter is reset on full width columns.
-            .col-#{$breakpoint}-#{$i}:first-of-type,
+            .col-#{$breakpoint}-#{$i}:first-child,
             [class*=col-#{$breakpoint}-#{$i}] {
                 margin-left: 0;
 

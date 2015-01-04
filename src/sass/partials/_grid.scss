@@ -30,14 +30,14 @@
     min-height: 1px;
     width: 100%;
     // Reset margin to zero for first column.
-    &:first-of-type {
+    &:first-child {
         margin-left: 0;
     }
 
     [dir="rtl"] & {
         float: right;
 
-        &:first-of-type {
+        &:first-child {
             margin-right: 0;
         }
     }
