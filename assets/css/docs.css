@@ -113,19 +113,31 @@ nav[role="navigation"] [data-dropdown-target] {
     }
 }
 
+/*
+ * 1: Counteract jekyll whitespace bug.
+ */
 .breadcrumb {
-    list-style: none;
-    padding-left: 0;
+    background-color: #395179;
+    color: #fff;
+    position: relative;
+    margin-top: -1rem; /* 1 */
+    margin-bottom: 2rem;
 }
 
-[dir="rtl"] .breadcrumb {
-    padding-right: 0;
-}
+    .breadcrumb ol {
+        list-style: none;
+        padding: 1rem 0;
+        margin: 0;
+    }
 
-.breadcrumb li {
-    display: inline-block;
-    text-transform: capitalize;
-}
+    .breadcrumb li {
+        display: inline-block;
+        text-transform: capitalize;
+    }
+
+    .breadcrumb a {
+        color: inherit;
+    }
 
 @media (max-width: 61.99em) {
     nav[role="complementary"] a {
@@ -140,17 +152,28 @@ nav[role="navigation"] [data-dropdown-target] {
     }
 }
 
-header[role="banner"] h1 {
-    font-size: 3em;
-    margin-bottom: 0;
+/*
+ * 1: Prevent margin overflow
+ */
+header[role="banner"] {
+    background-image: url('trianglify-background.svg');
+    background-position: center bottom;
+    background-size: cover;
+    padding-top: 1px; /* 1 */
+    padding-bottom: 2rem;
 }
 
-    header[role="banner"] h1 span {
-        display: block;
-        font-size: 55%;
-        color: #888;
-        margin: .34em 0;
+    header[role="banner"] h1 {
+        font-size: 3em;
+        margin-bottom: 0;
     }
+
+        header[role="banner"] h1 span {
+            display: block;
+            font-size: 55%;
+            color: #fff;
+            margin: .34em 0;
+        }
 
 .download {
     font-size: 1.3em;
@@ -318,6 +341,7 @@ pre code {
 #carbonads {
     padding: 1em;
     border: 1px solid #c0c0c0;
+    background-color: #fff;
     border-radius: 4px;
 }
 

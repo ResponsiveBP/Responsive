@@ -2,8 +2,7 @@
 layout: master
 ---
 <header role="banner">
-    {% include breadcrumb.html %}
-    <div class="row">
+    {% include breadcrumb.html %}<div class="container row">
         <div class="col-m-6">
             <h1>
                 {{page.heading}}
@@ -15,8 +14,7 @@ layout: master
         </div>
     </div>
 </header>
-<hr />
-<div class="row">
+<div class="container row">
     <nav class="col-m-3" role="complementary">
         <h3>Contents</h3>
         {% include rootnav.html param=page.root %}
