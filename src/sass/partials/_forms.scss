@@ -41,16 +41,16 @@ select,
 textarea,
 input,
 .readonly {
+    display: block;
+    height: $form-input-height;
+    padding: $form-input-padding;
+    width: 100%;
+    margin-bottom: 1rem;
     background: $form-input-background;
     border: $form-input-border;
     border-radius: $form-input-border-radius;
     color: $form-input-color;
-    display: block;
     font-family: inherit;
-    line-height: $form-line-height;
-    margin-bottom: 1rem;
-    padding: .25rem;
-    width: 100%;
     // Disabled
     // 1. Add cursor for disabled elements.
     // 2. Fix IOS 6/7 opacity issue
@@ -100,7 +100,7 @@ input[type='color'] {
 // Declared separately to reduce selector duplication for padding
 input[type='radio'],
 input[type='checkbox'] {
-    min-height: 1.334rem;
+    height: 1.334rem;
     min-width: 1.334rem;
     margin-bottom: 1.1rem;
     padding: 0;
@@ -117,10 +117,10 @@ input[type='radio'] {
 // Add range styles for IE9
 input[type='range'] {
     border: 1px solid transparent;
-    border: 1px solid #c0c0c0 \9;
-    background-color: #fff \9;
-    padding: .25rem 0;
-    padding: .25rem\9;
+    border: $form-input-border \9;
+    background-color: $form-input-background \9;
+    padding: $form-input-padding 0;
+    padding: $form-input-padding\9;
 }
 
 // 1. Remove borders and padding on range controls in IE10+
@@ -152,6 +152,10 @@ input[type='color'] {
 
 select option {
     height: 100%;
+}
+
+[multiple] {
+    height: auto;
 }
 
 [multiple] option {
@@ -190,33 +194,27 @@ textarea {
 }
 
 // Placeholder
+// 1: Ensure color is correct in Firefox
 ::placeholder {
     color: $form-placeholder;
-    opacity: 1;
+    opacity: 1; // 1
 }
 
 @-moz-document url-prefix() {
     // Remove excess padding in Firefox
     input[type='color'] {
-        min-height: 1.8rem;
         padding: 0;
+    }
+    // 1: Fix file display height.
+    input[type='file'] {
+        height: auto;
+        min-height: $form-input-height; // 1
     }
 }
 
 @media (-webkit-min-device-pixel-ratio:0) {
-    // Fix changing height issues on iOS7.
-    input[type='datetime-local'],
-    input[type='date'],
-    input[type='week'],
-    input[type='month'],
-    input[type='time'],
-    input[type='number'] {
-        min-height: 2rem;
-    }
-
     // Remove excess padding in Webkit
     input[type='color'] {
-        min-height: 1.8rem;
         padding: 0;
 
         &::-webkit-color-swatch-wrapper {

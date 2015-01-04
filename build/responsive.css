@@ -4360,8 +4360,8 @@ input[type="reset"] {
   color: inherit;
   cursor: pointer;
   display: inline-block;
-  padding: .5rem 1rem;
-  line-height: 1.2;
+  min-height: 2rem;
+  padding: 0 1rem;
   margin-bottom: 0;
   background: #dadada;
   border: solid 1px silver;
@@ -4392,18 +4392,7 @@ input[type="reset"] {
   input[type="submit"], .input-group
   input[type="button"], .input-group
   input[type="reset"] {
-    padding: 0 1rem;
-    line-height: 1.7;
-    line-height: 1.65 \9;
     min-width: 100%; }
-  button _::-ms-reveal, .input-group button,
-  input[type="submit"] _::-ms-reveal, .input-group
-  input[type="submit"],
-  input[type="button"] _::-ms-reveal, .input-group
-  input[type="button"],
-  input[type="reset"] _::-ms-reveal, .input-group
-  input[type="reset"] {
-    line-height: 1.65; }
 
 input[type="submit"], input[type="reset"], input[type="button"] {
   max-width: none;
@@ -4485,16 +4474,16 @@ select,
 textarea,
 input,
 .readonly {
+  display: block;
+  height: 2rem;
+  padding: 0.25rem;
+  width: 100%;
+  margin-bottom: 1rem;
   background: white;
   border: 1px solid silver;
   border-radius: 0;
   color: #222222;
-  display: block;
-  font-family: inherit;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  padding: .25rem;
-  width: 100%; }
+  font-family: inherit; }
   fieldset[disabled] select, select[disabled], fieldset[disabled]
   textarea,
   textarea[disabled], fieldset[disabled]
@@ -4534,7 +4523,7 @@ input[type='color'] {
 
 input[type='radio'],
 input[type='checkbox'] {
-  min-height: 1.334rem;
+  height: 1.334rem;
   min-width: 1.334rem;
   margin-bottom: 1.1rem;
   padding: 0;
@@ -4576,6 +4565,9 @@ input[type='color'] {
 select option {
   height: 100%; }
 
+[multiple] {
+  height: auto; }
+
 [multiple] option {
   height: auto; }
 
@@ -4613,8 +4605,11 @@ textarea {
 
 @-moz-document url-prefix() {
   input[type='color'] {
-    min-height: 1.8rem;
-    padding: 0; } }
+    padding: 0; }
+
+  input[type='file'] {
+    height: auto;
+    min-height: 2rem; } }
 
 @media (-webkit-min-device-pixel-ratio: 0) {
   input[type='datetime-local'],
@@ -4679,7 +4674,7 @@ select.inline-block {
 
 .supplement {
   padding: 0 1rem;
-  line-height: 1.2;
+  line-height: 1.4;
   background: #dadada;
   border: solid 1px silver; }
   html:not([dir=rtl]) .supplement:first-child {

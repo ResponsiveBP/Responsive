@@ -10,8 +10,8 @@ input[type="reset"] {
     color: inherit;
     cursor: pointer;
     display: inline-block;
-    padding: .5rem 1rem;
-    line-height: $form-line-height;
+    min-height: $form-input-height;
+    padding: 0 1rem;
     margin-bottom: 0;
     background: $button-background;
     border: $button-border;
@@ -35,19 +35,9 @@ input[type="reset"] {
         opacity: 1; // 1
     }
     // Inline buttons designed for rendering next to inputs.
-    // 1. Pad buttons.
-    // 2. Fix height on IE.
-    // 3. Fix width on Chrome. 
+    // 1. Fix width on Chrome.
     .input-group & {
-        padding: 0 1rem; // 1
-        line-height: 1.7;
-        line-height: 1.65 \9; // 2
-        min-width: 100%; // 3
-    }
-
-    _::-ms-reveal,
-    .input-group & {
-        line-height: 1.65; // 2
+        min-width: 100%; // 1
     }
 }
 
