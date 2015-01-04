@@ -2,6 +2,7 @@
 layout: top-level
 title: Getting Started
 heading: Getting Started
+description: An overview of Responsive, how to download and use it, basic templates and examples, and more.
 subheading: An introduction to Responsive, how to use it, with basic templates and examples.
 ---
 <div class="row">
@@ -10,9 +11,10 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
             <li><a href="#download">Download Responsive</a></li>
             <li><a href="#html">The HTML</a></li>
             <li><a href="#support">Browser Support</a></li>
+            <li><a href="#accessibility">Accessibility</a></li>
         </ul>
     </nav>
-    <section class="col-m-9">
+    <div class="col-m-9">
         <div class="alert" role="alert">
             <h4>Heads Up!</h4>
             <p>Looking for the legacy v3 documentation? You can find it <a href="/v3/">here</a>.</p>
@@ -25,9 +27,9 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                         The simplest and fastest way to get Responsive is to download the precompiled and minified versions of our CSS, and JavaScript.
                         No documentation or original source code files are included.
                     </p>
-                    <a href="{{site.release}}" role="button" class="download icon-left" 
-                       data-ga-category="Getting Started Actions" 
-                       data-ga-action="Getting Started Links" 
+                    <a href="{{site.release}}" role="button" class="download icon-left"
+                       data-ga-category="Getting Started Actions"
+                       data-ga-action="Getting Started Links"
                        data-ga-label="Framework Download"><i class="fa fa-download"></i>Download Responsive</a>
                     <p>
                         You can also install Responsive with <a href="http://bower.io" rel="external">Bower</a>:
@@ -41,9 +43,9 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                         If you are feeling more adventurous and want to tweak Responsive before use you can download the full Sass and JavaScript source
                         directly from Github. This will require the use of <a href="http://gulpjs.com/" rel="external">gulp.js</a> to build.
                     </p>
-                    <a href="{{site.sourcefiles}}" role="button" class="download icon-left" 
-                       data-ga-category="Getting Started Actions" 
-                       data-ga-action="Getting Started Links" 
+                    <a href="{{site.sourcefiles}}" role="button" class="download icon-left"
+                       data-ga-category="Getting Started Actions"
+                       data-ga-action="Getting Started Links"
                        data-ga-label="Source Download"><i class="fa fa-download"></i>Download Source</a>
                 </div>
             </div>
@@ -80,28 +82,13 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
         &lt;title&gt;Your Page Title&lt;/title&gt;
  
         &lt;link href="responsive.min.css" rel="stylesheet" /&gt;
-        &lt;!-- 
-             HTML5 Shiv and Respond.js IE8 support of HTML5 elements 
-             and media queries 
-             WARNING: Respond.js doesn't work if you view the 
-             page via file:// 
-        --&gt;
-        &lt;!--[if lt IE 9 &!(IEMobile)]&gt;
-            &lt;script src="vendor/html5shiv.min.js"&gt;&lt;/script&gt;
-            &lt;script src="vendor/respond.min.js"&gt;&lt;/script&gt;
-        &lt;![endif]--&gt;
     &lt;/head&gt;
     &lt;body&gt;
         Your Body Content
     
         &lt;!-- Scripts at the bottom for improved performance. --&gt;
         &lt;!-- jQuery, required for all responsive plugins. --&gt;
-        &lt;!--[if IE 8]&gt;     
-            &lt;script src="vendor/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
-        &lt;![endif]--&gt;
-        &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
-            &lt;script src="vendor/jquery-2.1.1.min.js"&gt;&lt;/script&gt;
-        &lt;!--&lt;![endif]--&gt;
+        &lt;script src="vendor/jquery-2.1.1.min.js"&gt;&lt;/script&gt;
         &lt;script src="responsive.min.js"&gt;&lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -118,7 +105,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
 
             <ul>
                 <li>Chrome (Mac, Windows, iOS, and Android)</li>
-                <li>Internet Explorer (Windows, WP7/8)</li>
+                <li>Internet Explorer (Windows - Latest plus IE9, IE10, WP7/8)</li>
                 <li>Firefox (Mac, Windows)</li>
                 <li>Opera (Mac, Windows)</li>
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
@@ -126,20 +113,27 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
 
             <h2>Safari 7</h2>
             <p>
-                Safari 7 up to and including v7.0.5  on Mac and iOS do not calculate percentages properly and will render 12 individual columns defined using the
+                Safari 7 up to and including v7.0.5 on Mac and iOS do not calculate percentages properly and will render 12 individual columns defined using the
                 <code>col-{range}-1</code> classes slightly narrower than they should be. See <a href="https://github.com/ResponsiveBP/Responsive/issues/40" rel="external">#40</a>.
             </p>
             <p>
                 Unfortunately there is not much that can be done about this at the moment without resorting to hacks to tweak the percentages using JavaScript or by using the
                 <code>push-{range}</code> or <code>push-{range}-only</code> classes to offset the last column. Hopefully Apple will fix this in upcoming releases.
             </p>
-
-            <h2>Internet Explorer 8</h2>
+        </section>
+        <hr />
+        <section id="accessibility">
+            <h1>Accessibility</h1>
             <p>
-                Internet Explorer 8 is also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by this browser.
-                In addition, Internet Explorer 8 requires the use of <a href="https://code.google.com/p/html5shiv/" rel="external">html5shiv</a> to correctly display those elements
-                and <a href="https://github.com/scottjehl/Respond" rel="external">Respond.js</a>  to enable media query support.
+                Responsive is built using common web standards and has been designed to support Assistive Technology.
+                All the default colors have been chosen to conform to the <a href="http://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast" rel="external">recommended ratio of 4.5:1</a>
+                to ensure that users with low vision or who are color blind are catered for appropriately.
+            </p>
+            <p>
+                All Responsive's plugins have been built from the ground up to be mouse, touch and keyboard accessible. They also add the appropriate
+                <a href="http://www.w3.org/TR/wai-aria/" rel="external">ARIA</a> attribution where necessary to ensure that screenreaders can follow
+                each plugin's functionality.
             </p>
         </section>
-    </section>
+    </div>
 </div>
