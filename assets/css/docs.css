@@ -203,6 +203,7 @@ header[role="banner"] {
 
 .download:active {
     background-color: #434343;
+    outline: none;
 }
 
 .download-links {
@@ -232,7 +233,7 @@ footer[role=contentinfo] {
 .to-top {
     margin: 1rem 0;
     background-color: #395179;
-    border-color: #395179 !important;
+    border-color: #395179;
     border-radius: 6px;
     box-shadow: 0 3px 0 #273a5b;
 }

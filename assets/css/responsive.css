@@ -4152,8 +4152,7 @@ input[type="reset"] {
   input[type="submit"]:hover,
   input[type="button"]:hover,
   input[type="reset"]:hover {
-    background-color: #cdcdcd;
-    border: solid 1px silver; }
+    background-color: #cdcdcd; }
   button:active,
   input[type="submit"]:active,
   input[type="button"]:active,
