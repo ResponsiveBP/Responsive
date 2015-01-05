@@ -14,12 +14,14 @@ layout: master
         </div>
     </div>
 </header>
-<div class="container row">
-    <nav class="col-m-3" role="complementary">
-        <h3>Contents</h3>
-        {% include rootnav.html param=page.root %}
-    </nav>
-    <article class="col-m-9">
-        {{ content }}
-    </article>
-</div>
+<main role="main">
+    <div class="container row">
+        <nav class="col-m-3" role="complementary">
+            <h3>Contents</h3>
+            {% include rootnav.html param=page.root %}
+        </nav>
+        <article class="col-m-9">
+            {{ content }}
+        </article>
+    </div>
+</main>

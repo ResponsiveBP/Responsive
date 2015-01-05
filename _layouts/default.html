@@ -3,7 +3,8 @@ layout: master
 ---
 <header role="banner">
     <div class="container">
-        <h1>{{page.heading}}
+        <h1>
+            {{page.heading}}
             <span>{{page.subheading}}</span>
         </h1>
         <section>
@@ -50,6 +51,8 @@ layout: master
         </section>
     </div>
 </header>
-<div class="container">
-    {{ content }}
-</div>
+<main role="main">
+    <div class="container">
+        {{ content }}
+    </div>
+</main>
