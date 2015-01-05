@@ -20,7 +20,6 @@ input[type="reset"] {
 
     &:hover {
         background-color: darken($button-background, 5);
-        border: $button-border;
     }
 
     &:active {
