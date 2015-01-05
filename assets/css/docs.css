@@ -157,7 +157,7 @@ nav[role="navigation"] [data-dropdown-target] {
  */
 header[role="banner"] {
     background-image: url('trianglify-background.svg');
-    background-color: #395179;
+    background-color: #C53E40;
     background-position: center top;
     background-size: cover;
     padding-top: 1px; /* 1 */
@@ -173,6 +173,9 @@ header[role="banner"] {
             display: block;
             font-size: 55%;
             margin: .34rem 0;
+            color: #fff;
+            filter: progid:DXImageTransform.Microsoft.Shadow(color=#395179,direction=90);
+            text-shadow: 0 0 1px #395179;
         }
 
     header[role="banner"] a {
