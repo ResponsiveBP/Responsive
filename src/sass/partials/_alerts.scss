@@ -4,7 +4,7 @@
     margin: 1em 0;
     padding: 0 1em;
     background-color: $alert-color-scheme;
-    border: 1px solid darken($alert-color-scheme, 20);
+    border-left: 5px solid darken($alert-color-scheme, 20);
     color: darken($alert-color-scheme, 70);
 
     .close {
