@@ -1,15 +1,17 @@
 ---
-permalink: css/media.html
-layout: subpage
-group: css
+permalink: css/media/
 title: Media
+description: Responsive image, iframes and video that adapt to the vviewport.
 heading: Media
 subheading: Responsive media elements that scale with your browser.
 sublinks: ["#images|Images","#iframes|Iframes", "#video|Video"]
 ---
 
 <h1>Media</h1>
-<p>Responsive media elements that scale with your browser.</p>
+<p>
+    Responsive media elements that scale with your browser. Images, Iframes and Video have all been styled to ensure
+    they adapt to your viewport.
+</p>
     The code here is based on research and work by <a href="http://alistapart.com/article/creating-intrinsic-ratios-for-video">Theirry Koblentz</a>, <a href="http://amobil.se/2011/11/responsive-embeds/">Anders Andersen</a>, <a href="http://niklausgerber.com/blog/responsive-google-or-bing-maps/">Niklaus Gerber</a>, and <a href="http://embedresponsively.com/">Jeff Hobbs</a>.
 <hr />
 <section id="images">
@@ -17,16 +19,16 @@ sublinks: ["#images|Images","#iframes|Iframes", "#video|Video"]
     <p>Images are responsive by default ensuring they do not overflow the bounds of their container.</p>
     <div class="row">
         <div class="col-s-3">
-            <img src="../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+            <img src="../../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
         </div>
         <div class="col-s-3">
-            <img src="../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+            <img src="../../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
         </div>
         <div class="col-s-3">
-            <img src="../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+            <img src="../../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
         </div>
         <div class="col-s-3">
-            <img src="../assets/img/SVG_logo.svg" alt="responsive image" title="responsive image" />
+            <img src="../../assets/img/SVG_logo.svg" alt="responsive image" title="responsive image" />
         </div>
     </div>
     <h2>Constrained Images</h2>
@@ -34,28 +36,50 @@ sublinks: ["#images|Images","#iframes|Iframes", "#video|Video"]
     <div class="row">
         <div class="col-s-3">
             <div class="media">
-                <img src="../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                <img src="../../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
             </div>
         </div>
         <div class="col-s-3">
             <div class="media">
-                <img src="../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                <img src="../../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
             </div>
         </div>
         <div class="col-s-3">
             <div class="media">
-                <img src="../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                <img src="../../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
             </div>
         </div>
         <div class="col-s-3">
             <div class="media">
-                <img src="../assets/img/SVG_logo.svg" alt="responsive image" title="responsive image" />
+                <img src="../../assets/img/SVG_logo.svg" alt="responsive image" title="responsive image" />
             </div>
         </div>
     </div>
-
+    <p>Adding the class <code>.four-by-three</code> will change the aspect ration from the default of <var>16:9</var>.</p>
+    <div class="row">
+        <div class="col-s-3">
+            <div class="media four-by-three">
+                <img src="../../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="media four-by-three">
+                <img src="../../assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="media four-by-three">
+                <img src="../../assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+            </div>
+        </div>
+        <div class="col-s-3">
+            <div class="media four-by-three">
+                <img src="../../assets/img/SVG_logo.svg" alt="responsive image" title="responsive image" />
+            </div>
+        </div>
+    </div>
     <aside class="alert" role="alert">
-        <h4>Heads Up:</h4>
+        <h4>Heads Up!</h4>
         <p>
             Internet Explorer versions 9/10/11 do not scale svg images correctly when loaded using an <code>&lt;img/&gt;</code> tag.
         </p>
@@ -121,18 +145,17 @@ sublinks: ["#images|Images","#iframes|Iframes", "#video|Video"]
             </div>
         </div>
     </div>
-    <div class="row">
+    <div>
         <h2>Getty</h2>
         <p>Add classes <code>.media</code> and <code>.getty</code> to the media container.</p>
-        <div class="col-s-6">
-            <div class="media getty">
-                <iframe src="http://embed.gettyimages.com/embed/137668307?et=0kKQE3OQU06k6Y-tD9FdZA&sig=MuEspy0rbDdvg7lpUAk77Pwaha2oc1_tUWsZTdH6IHE=" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        <div class="row">
+            <div class="col-s-6">
+                <div class="media getty">
+                    <iframe src="http://embed.gettyimages.com/embed/137668307?et=0kKQE3OQU06k6Y-tD9FdZA&sig=MuEspy0rbDdvg7lpUAk77Pwaha2oc1_tUWsZTdH6IHE=" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                </div>
             </div>
         </div>
     </div>
-
-    <p>Adding the class <code>.widescreen</code> sets up the media container for widescreen videos.</p>
-
     <div class="alert" role="alert">
         <p>
             Twitter, Facebook, SoundCloud, Storify, and Scribd (select 'Autosize') already provide responsive embed code.

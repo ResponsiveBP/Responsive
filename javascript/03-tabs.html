@@ -1,8 +1,7 @@
 ---
-permalink: javascript/tabs.html
-layout: subpage
-group: javascript
+permalink: javascript/tabs/
 title: Tabs
+description: An accessible plugin for displaying responsive tabbed content.
 heading: Tabs
 subheading: Responsive tabbed content.
 sublinks: ["#examples|Examples",
@@ -33,26 +32,27 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="examples">
         <h1>Examples</h1>
+        <p>By default the tabs will </p>
         <div class="row">
             <div class="col-s-6">
-                <div class="tabs" data-tabs="">
+                <div class="tabs" data-tabs>
                     <ul>
-                        <li class="tab-active"><a href="#">tab1</a></li>
+                        <li><a href="#">tab1</a></li>
                         <li><a href="#">tab2</a></li>
                         <li><a href="#">tab3</a></li>
                     </ul>
-                    <section class="tab-pane-active">
+                    <section>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </section>
                     <section>
                         <h3>I am nested</h3>
-                        <div class="tabs" data-tabs="">
+                        <div class="tabs" data-tabs>
                             <ul>
-                                <li class="tab-active"><a href="#">tab1</a></li>
+                                <li><a href="#">tab1</a></li>
                                 <li><a href="#">tab2</a></li>
                                 <li><a href="#">tab3</a></li>
                             </ul>
-                            <section class="tab-pane-active">
+                            <section>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                             </section>
                             <section>
@@ -76,12 +76,12 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>&lt;div class="tabs" data-tabs=""&gt;
+        <pre class="language-markup"><code>&lt;div class="tabs" data-tabs&gt;
     &lt;ul&gt;
-        &lt;li class="tab-active"&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#"&gt;tab2&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
-    &lt;section class="tab-pane-active"&gt;
+    &lt;section&gt;
         ....
     &lt;/section&gt;
     &lt;section&gt;...&lt;/section&gt;

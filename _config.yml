@@ -19,6 +19,15 @@ defaults:
     values:
       layout: "subpage"
       group: "css"
+      navgroup: "css"
+      type: "pages"
+  -
+    scope:
+      path: "javascript"
+    values:
+      layout: "subpage"
+      group: "javascript"
+      navgroup: "javascript"
       type: "pages"
 
 # Name of the website

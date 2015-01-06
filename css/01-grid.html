@@ -1,24 +1,30 @@
 ---
 permalink: css/grid/
 title: Grid
-description: A powerful responsive grid for building flexible layouts.
+description: An incredible powerful responsive grid for building flexible layouts.
 heading: The Grid
 subheading: Flexible grid layouts across all devices.
 sublinks: ["#mediaqueries|Media Queries",
             "#basic|Example : Basic",
             "#nogutter|Example : No Gutter",
             "#padded|Example : Padded",
-            "#fixed|Example : Fixed",
             "#nested|Example : Nested",
             "#resizing|Example : Resizing",
             "#offsetting|Example : Offsetting",
             "#ordering|Example : Ordering",
-            "#resetting|Example : Resetting"]
+            "#resetting|Example : Resetting",
+            "#block|Example : Block Grid"]
 ---
 <h1>The Grid System</h1>
 <p>
-    Responsive comes, not with one but with <strong>4 tiers of 12 column fluid grids in three variants</strong> that allow for granular control over layout across all
-    devices. No other grid offers the power and flexibility that is provided by the framework. The system has been written from an <strong>entirely mobile first</strong> perspective with each level overwriting the previous one as the viewport width
+    Responsive comes with an incredibly flexible and powerful grid system offering, not just one
+    but <strong>5 tiers of 12 column fluid grids in three variants</strong> that allow for granular
+    control over layout across all devices. It also offers a self resetting block grid for equal column
+    widths again in the three variants.
+</p>
+<p>
+    No other grid offers the power and flexibility that is provided by the Responsive framework. The system has been
+    written from an <strong>entirely mobile first</strong> perspective with each level overwriting the previous one as the viewport width
     scales up.
 </p>
 <p>
@@ -26,9 +32,17 @@ sublinks: ["#mediaqueries|Media Queries",
     class <code>.container</code>. This constrains the grid to 95% of the viewport width up to a maximum of 1140px.
 </p>
 <div class="alert" role="alert">
+    <h4>Heads Up!</h4>
+    <p>
+        The grid system is designed to be used as a wrapping scaffold only.
+        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
+    </p>
+
     <h4>Right-to-Left Language Support</h4>
-    Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the order of columns and all other
-    column overload behaviour to allow for right-to-left languages.
+    <p>
+        Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the order of columns and all other
+        column overload behaviour to allow for right-to-left languages.
+    </p>
 
     <h4>Fixed Layout</h4>
     <p>
@@ -43,15 +57,9 @@ sublinks: ["#mediaqueries|Media Queries",
             Add the class <code>.fixed</code> to the container.
         </li>
         <li>
-            Use <code>.col-xs-{number}</code> range on the columns.
+            Use <code>.col-xxs-{number}</code> range on the columns.
         </li>
     </ol>
-
-    <h4>Heads Up!</h4>
-    <p>
-        The grid system is designed to be used as a wrapping scaffold only.
-        All custom styling should be added to elements within each column. Doing otherwise could break your layout.
-    </p>
 </div>
 <hr />
 <section id="mediaqueries">
@@ -67,9 +75,14 @@ sublinks: ["#mediaqueries|Media Queries",
         </thead>
         <tbody>
             <tr>
-                <td>Extra small (initial)</td>
+                <td>Extra, extra small (initial)</td>
+                <td><code>.col-xxs-{number}</code></td>
+                <td>Up to 37.5em <small>(600px at 16px/1em)</small></td>
+            </tr>
+            <tr>
+                <td>Extra small</td>
                 <td><code>.col-xs-{number}</code></td>
-                <td>Up to 48em <small>(768px at 16px/1em)</small></td>
+                <td>37.5em to 48em <small>(768px at 16px/1em)</small></td>
             </tr>
             <tr>
                 <td>Small</td>
@@ -95,331 +108,315 @@ sublinks: ["#mediaqueries|Media Queries",
 <hr />
 <section id="examples">
     <h1>Examples</h1>
+    <p>
+        In the following examples the markup is rendered using the <code>.col-xxs-{number}</code> tier.
+        This is to ensure column visibilty for all viewports. In your sites you can use any <code>.col-{size}-{number}</code>
+        tier to start with.
+    </p>
     <section id="basic">
         <h3>Basic</h3>
         <p>
-            Here is a very basic example of the grid system. In this example the columns are styled using the <code>.col-s-{number}</code> tier meaning that on viewport widths
-            below 48em <small>(768px at 16px/1em)</small> the columns will collapse to a horizontal layout.
+            Here is a very basic example of the grid system showing all 12 columns.
         </p>
-        <p class="hidden-xs clearfix">
+        <p class="clearfix">
             <button type="button" data-modal-target="#basic-test" class="push">Click to test</button>
         </p>
         <div id="basic-test" class="grid-demo">
             <div class="row">
-                <div class="col-s-12">
+                <div class="col-xxs-12">
                     12
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-11">
+                <div class="col-xxs-11">
                     11
                 </div>
-                <div class="col-s-1">
+                <div class="col-xxs-1">
                     1
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-10">
+                <div class="col-xxs-10">
                     10
                 </div>
-                <div class="col-s-2">
+                <div class="col-xxs-2">
                     2
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-9">
+                <div class="col-xxs-9">
                     9
                 </div>
-                <div class="col-s-3">
+                <div class="col-xxs-3">
                     3
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-8">
+                <div class="col-xxs-8">
                     8
                 </div>
-                <div class="col-s-4">
+                <div class="col-xxs-4">
                     4
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-7">
+                <div class="col-xxs-7">
                     7
                 </div>
-                <div class="col-s-5">
+                <div class="col-xxs-5">
                     5
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     6
                 </div>
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     6
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-5">
+                <div class="col-xxs-5">
                     5
                 </div>
-                <div class="col-s-7">
+                <div class="col-xxs-7">
                     7
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-4">
+                <div class="col-xxs-4">
                     4
                 </div>
-                <div class="col-s-8">
+                <div class="col-xxs-8">
                     8
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-3">
+                <div class="col-xxs-3">
                     3
                 </div>
-                <div class="col-s-9">
+                <div class="col-xxs-9">
                     9
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-2">
+                <div class="col-xxs-2">
                     2
                 </div>
-                <div class="col-s-10">
+                <div class="col-xxs-10">
                     10
                 </div>
             </div>
             <div class="row">
-                <div class="col-s-1">
+                <div class="col-xxs-1">
                     1
                 </div>
-                <div class="col-s-11">
+                <div class="col-xxs-11">
                     11
                 </div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-s-12"&gt;
+    &lt;div class="col-xxs-12"&gt;
         12
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
-    &lt;div class="col-s-11"&gt;
+    &lt;div class="col-xxs-11"&gt;
         11
     &lt;/div&gt;
-    &lt;div class="col-s-1"&gt;
+    &lt;div class="col-xxs-1"&gt;
         1
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <hr />
     <section id="nogutter">
         <h3>No Gutter</h3>
         <p>
             Adding the class <code>.no-gutter</code> to a row triggers the gutterless column layout.
         </p>
-        <p class="hidden-xs clearfix">
+        <p class="clearfix">
             <button type="button" data-modal-target="#nogutter-test" class="push">Click to test</button>
         </p>
         <div id="nogutter-test" class="grid-demo">
             <div class="row no-gutter">
-                <div class="col-s-12">
+                <div class="col-xxs-12">
                     12
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-s-11">
+                <div class="col-xxs-11">
                     11
                 </div>
-                <div class="col-s-1">
+                <div class="col-xxs-1">
                     1
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-s-10">
+                <div class="col-xxs-10">
                     10
                 </div>
-                <div class="col-s-2">
+                <div class="col-xxs-2">
                     2
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-s-9">
+                <div class="col-xxs-9">
                     9
                 </div>
-                <div class="col-s-3">
+                <div class="col-xxs-3">
                     3
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-s-8">
+                <div class="col-xxs-8">
                     8
                 </div>
-                <div class="col-s-4">
+                <div class="col-xxs-4">
                     4
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-s-7">
+                <div class="col-xxs-7">
                     7
                 </div>
-                <div class="col-s-5">
+                <div class="col-xxs-5">
                     5
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     6
                 </div>
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     6
                 </div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row no-gutter"&gt;
-    &lt;div class="col-s-12"&gt;
+    &lt;div class="col-xxs-12"&gt;
         12
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
-    &lt;div class="col-s-11"&gt;
+    &lt;div class="col-xxs-11"&gt;
         11
     &lt;/div&gt;
-    &lt;div class="col-s-1"&gt;
+    &lt;div class="col-xxs-1"&gt;
         1
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <hr />
     <section id="padded">
         <h3>Padded</h3>
         <p>
             Adding the classes <code>.no-gutter .pad-gutter</code> to a row triggers the padded column layout similar to that of Bootstrap.
         </p>
-        <p class="hidden-xs clearfix">
+        <p class="clearfix">
             <button type="button" data-modal-target="#padded-test" class="push">Click to test</button>
         </p>
         <div id="padded-test" class="grid-demo">
             <div class="row no-gutter pad-gutter ">
-                <div class="col-s-12">
+                <div class="col-xxs-12">
                     <div>12</div>
                 </div>
             </div>
             <div class="row no-gutter pad-gutter">
-                <div class="col-s-11">
+                <div class="col-xxs-11">
                     <div>11</div>
                 </div>
-                <div class="col-s-1">
+                <div class="col-xxs-1">
                     <div>1</div>
                 </div>
             </div>
             <div class="row no-gutter pad-gutter">
-                <div class="col-s-10">
+                <div class="col-xxs-10">
                     <div>10</div>
                 </div>
-                <div class="col-s-2">
+                <div class="col-xxs-2">
                     <div>2</div>
                 </div>
             </div>
             <div class="row no-gutter pad-gutter">
-                <div class="col-s-9">
+                <div class="col-xxs-9">
                     <div>9</div>
                 </div>
-                <div class="col-s-3">
+                <div class="col-xxs-3">
                     <div>3</div>
                 </div>
             </div>
             <div class="row no-gutter pad-gutter">
-                <div class="col-s-8">
+                <div class="col-xxs-8">
                     <div>8</div>
                 </div>
-                <div class="col-s-4">
+                <div class="col-xxs-4">
                     <div>4</div>
                 </div>
             </div>
             <div class="row no-gutter pad-gutter">
-                <div class="col-s-7">
+                <div class="col-xxs-7">
                     <div>7</div>
                 </div>
-                <div class="col-s-5">
+                <div class="col-xxs-5">
                     <div>5</div>
                 </div>
             </div>
             <div class="row no-gutter pad-gutter">
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     <div>6</div>
                 </div>
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     <div>6</div>
                 </div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row no-gutter pad-gutter"&gt;
-    &lt;div class="col-s-12"&gt;
+    &lt;div class="col-xxs-12"&gt;
         &lt;div&gt;12&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
-    &lt;div class="col-s-11"&gt;
+    &lt;div class="col-xxs-11"&gt;
         &lt;div&gt;11&lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class="col-s-1"&gt;
+    &lt;div class="col-xxs-1"&gt;
         &lt;div&gt;1&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
-    <section id="fixed">
-        <h3>Fixed</h3>
-        <p>In this example the columns will persist their width from the base view all the way up. This is performed using the <code>.col-xs-{number}</code> tier system.</p>
-        <p class="hidden-xs clearfix">
-            <button type="button" data-modal-target="#fixed-test" class="push">Click to test</button>
-        </p>
-        <div id="fixed-test" class="grid-demo">
-            <div class="row">
-                <div class="col-xs-6">
-                    6
-                </div>
-                <div class="col-xs-6">
-                    6
-                </div>
-            </div>
-        </div>
-        <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-xs-6"&gt;
-        6
-    &lt;/div&gt;
-    &lt;div class="col-xs-6"&gt;
-        6
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    </section>
+    <hr />
     <section id="nested">
         <h3>Nesting</h3>
-        <p>Nesting is supported. Add a new <code>.row</code> class to a div to designate a new level.</p>
-        <p class="hidden-xs clearfix">
+        <p>
+            By adding a new <code>.row</code> class to a div to designate a new level it is possible to nest the grid.
+        </p>
+        <p class="clearfix">
             <button type="button" data-modal-target="#nested-test" class="push">Click to test</button>
         </p>
         <div id="nested-test" class="grid-demo">
             <div class="row">
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     6
                     <div class="row">
-                        <div class="col-s-6">
+                        <div class="col-xxs-6">
                             6
                         </div>
-                        <div class="col-s-6">
+                        <div class="col-xxs-6">
                             6
                         </div>
                     </div>
                 </div>
-                <div class="col-s-6">
+                <div class="col-xxs-6">
                     6
                     <div class="row">
-                        <div class="col-s-6">
+                        <div class="col-xxs-6">
                             6
 
 
                         </div>
-                        <div class="col-s-6">
+                        <div class="col-xxs-6">
                             6
 
 
@@ -429,149 +426,216 @@ sublinks: ["#mediaqueries|Media Queries",
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-s-6"&gt;
+    &lt;div class="col-xxs-6"&gt;
         6
         &lt;div class="row"&gt;
-            &lt;div class="col-s-6"&gt;
+            &lt;div class="col-xxs-6"&gt;
                 6
             &lt;/div&gt;
-            &lt;div class="col-s-6"&gt;
+            &lt;div class="col-xxs-6"&gt;
                 6
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class="col-s-6"&gt;
+    &lt;div class="col-xxs-6"&gt;
         6
         &lt;div class="row"&gt;
-            &lt;div class="col-s-6"&gt;
+            &lt;div class="col-xxs-6"&gt;
                 6
             &lt;/div&gt;
-            &lt;div class="col-s-6"&gt;
+            &lt;div class="col-xxs-6"&gt;
                 6
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <hr />
     <section id="resizing">
         <h3>Resizing</h3>
         <p>In this example the grid from each tier is being overwritten as the viewport scales up.</p>
-        <p class="hidden-xs clearfix">
+        <p class="clearfix">
             <button type="button" data-modal-target="#resizing-test" class="push">Click to test</button>
         </p>
         <div id="resizing-test" class="grid-demo">
             <div class="row">
-                <div class="col-xs-6 col-s-4">
+                <div class="col-xxs-4 col-xs-6 col-s-4">
                     <div class="visible-xs">6</div>
-                    <div class="hidden-xs ">4</div>
+                    <div class="hidden-xs">4</div>
                 </div>
-                <div class="col-xs-6 col-s-4">
+                <div class="col-xxs-4 col-xs-6 col-s-4">
                     <div class="visible-xs">6</div>
-                    <div class="hidden-xs ">4</div>
+                    <div class="hidden-xs">4</div>
                 </div>
-                <div class="col-xs-12 col-s-4">
+                <div class="col-xxs-4 col-xs-12 col-s-4">
                     <div class="visible-xs">12</div>
                     <div class="hidden-xs">4</div>
                 </div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-xs-6 col-s-4"&gt;
-        6
-    &lt;/div&gt;
-    &lt;div class="col-xs-6 col-s-4"&gt;
-        6
-    &lt;/div&gt;
-    &lt;div class="col-xs-12 col-s-4"&gt;
-        6
-    &lt;/div&gt;
+    &lt;div class="col-xxs-4 col-xs-6 col-s-4"&gt;...&lt;/div&gt;
+    &lt;div class="col-xxs-4 col-xs-6 col-s-4"&gt;...&lt;/div&gt;
+    &lt;div class="col-xxs-4 col-xs-12 col-s-4"&gt;...&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <hr />
     <section id="offsetting">
         <h3>Offsetting Columns</h3>
         <p>Columns can be offset by each column width.</p>
         <p>
             Use classes <code>.offset-{range}-{number}</code> to push by column width.
         </p>
-        <p class="hidden-xs clearfix">
+        <p class="clearfix">
             <button type="button" data-modal-target="#offsetting-test" class="push">Click to test</button>
         </p>
         <div id="offsetting-test" class="grid-demo">
             <div class="row">
-                <div class="col-xs-4">4</div>
-                <div class="col-xs-4 offset-xs-4">4</div>
+                <div class="col-xxs-4">4</div>
+                <div class="col-xxs-4 offset-xxs-4">4</div>
             </div>
             <div class="row">
-                <div class="col-xs-4 offset-xs-4">4</div>
+                <div class="col-xxs-4 offset-xxs-4">4</div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-xs-4"&gt;4&lt;/div&gt;
-    &lt;div class="col-xs-4 offset-xs-4"&gt;4&lt;/div&gt;
+    &lt;div class="col-xxs-4"&gt;4&lt;/div&gt;
+    &lt;div class="col-xxs-4 offset-xxs-4"&gt;4&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
-    &lt;div class="col-xs-4 offset-xs-4"&gt;4&lt;/div&gt;
+    &lt;div class="col-xxs-4 offset-xxs-4"&gt;4&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <hr />
     <section id="ordering">
         <h3>Ordering Columns</h3>
-        <p>The order of columns can be flipped by combining classes <code>.push-{range}-{number}</code> and <code>.pull-{range}-{number}</code>.</p>
-        <p class="hidden-xs clearfix">
+        <p>
+            The order of columns can be reversed by combining classes <code>.push-{range}-{number}</code> and <code>.pull-{range}-{number}</code>.
+        </p>
+        <p class="clearfix">
             <button type="button" data-modal-target="#ordering-test" class="push">Click to test</button>
         </p>
         <div id="ordering-test" class="grid-demo">
             <div class="row">
-                <div class="col-xs-4 push-xs-8">4</div>
-                <div class="col-xs-8 pull-xs-4">8</div>
+                <div class="col-xxs-4 push-xxs-8">4</div>
+                <div class="col-xxs-8 pull-xxs-4">8</div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-xs-4 push-xs-8"&gt;4&lt;/div&gt;
-    &lt;div class="col-xs-8 pull-xs-4"&gt;8&lt;/div&gt;
+    &lt;div class="col-xxs-4 push-xxs-8"&gt;4&lt;/div&gt;
+    &lt;div class="col-xxs-8 pull-xxs-4"&gt;8&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
+    <hr />
     <section id="resetting">
         <h3>Resets</h3>
         <p>
             Each tier comes with a <code>.reset-{range}</code> and <code>.reset-{range}-only</code> class which allows you to reset the flow of the layout as the viewport scales.
             This allows you to perform more complicated layouts with relative ease.
         </p>
-        <p class="hidden-xs clearfix">
+        <p class="clearfix">
             <button type="button" data-modal-target="#resetting-test" class="push">Click to test</button>
         </p>
         <div id="resetting-test" class="grid-demo">
             <div class="row">
-                <div class="col-s-3 col-m-6">
-                    <div class="visible-xs">12</div>
-                    <div class="visible-s">3</div>
-                    <div class="hidden-xs hidden-s">6</div>
+                <div class="col-xxs-6">
+                    6
                 </div>
-                <div class="col-s-3 col-m-6">
-                    <div class="visible-xs">12</div>
-                    <div class="visible-s">3</div>
-                    <div class="hidden-xs hidden-s">6</div>
+                <div class="col-xxs-6">
+                    6
                 </div>
-                <div class="col-s-3 col-m-6 reset-m">
-                    <div class="visible-xs">12</div>
-                    <div class="visible-s">3</div>
-                    <div class="hidden-xs hidden-s">6</div>
+                <div class="col-xxs-6 reset-xxs">
+                    6
                 </div>
-                <div class="col-s-3 col-m-6">
-                    <div class="visible-xs">12</div>
-                    <div class="visible-s">3</div>
-                    <div class="hidden-xs hidden-s">6</div>
+                <div class="col-xxs-6">
+                    6
                 </div>
             </div>
         </div>
         <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-s-3 col-m-6"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-s-3 col-m-6"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-s-3 col-m-6 reset-m"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-s-3 col-m-6"&gt;
-    &lt;/div&gt;
+    &lt;div class="col-xxs-6"&gt;6&lt;/div&gt;
+    &lt;div class="col-xxs-6"&gt;6&lt;/div&gt;
+    &lt;div class="col-xxs-6 reset-xxs"&gt;6&lt;/div&gt;
+    &lt;div class="col-xxs-6"&gt;6&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    <hr />
+    <section id="block">
+        <h3>Block Grid</h3>
+        <p>
+            The block grid allows us to evenly split contents of a list within the viewport. These items will automatically
+            reset to a new row based on the set column count.
+        </p>
+        <p>Assignment of the grid is done by using <code>.block-row-{size}-{number}</code> classes on the parent element.</p>
+
+        <div class="alert" role="alert">
+            <h4>Heads Up!</h4>
+            <p>
+                Column numbers within the block grid system work differently to the rest of the grid.
+                Instead of designating the number out of 12 columns to represent, they designate instead the number of
+                columns to show.
+            </p>
+            <p>
+                For example: <code>.block-row-xxs-6</code> instructs the browser to show 6 equal columns resetting
+                on each 7<sup>th</sup> item.
+            </p>
+        </div>
+        <p class="clearfix">
+            <button type="button" data-modal-target="#block-test" class="push">Click to test</button>
+        </p>
+        <div id="block-test" class="grid-demo">
+            <div class="block-row-xxs-2 block-row-xs-3 block-row-s-4 block-row-m-5 block-row-l-6">
+                <div>
+                    <span class="visible-xxs">2</span>
+                    <span class="visible-xs">3</span>
+                    <span class="visible-s">4</span>
+                    <span class="visible-m">5</span>
+                    <span class="visible-l">6</span>
+                </div>
+                <div>
+                    <span class="visible-xxs">2</span>
+                    <span class="visible-xs">3</span>
+                    <span class="visible-s">4</span>
+                    <span class="visible-m">5</span>
+                    <span class="visible-l">6</span>
+                </div>
+                <div>
+                    <span class="visible-xxs">2</span>
+                    <span class="visible-xs">3</span>
+                    <span class="visible-s">4</span>
+                    <span class="visible-m">5</span>
+                    <span class="visible-l">6</span>
+                </div>
+                <div>
+                    <span class="visible-xxs">2</span>
+                    <span class="visible-xs">3</span>
+                    <span class="visible-s">4</span>
+                    <span class="visible-m">5</span>
+                    <span class="visible-l">6</span>
+                </div>
+                <div>
+                    <span class="visible-xxs">2</span>
+                    <span class="visible-xs">3</span>
+                    <span class="visible-s">4</span>
+                    <span class="visible-m">5</span>
+                    <span class="visible-l">6</span>
+                </div>
+                <div>
+                    <span class="visible-xxs">2</span>
+                    <span class="visible-xs">3</span>
+                    <span class="visible-s">4</span>
+                    <span class="visible-m">5</span>
+                    <span class="visible-l">6</span>
+                </div>
+            </div>
+        </div>
+<pre class="language-markup"><code>&lt;div class="block-row-xxs-2 block-row-xs-3 block-row-s-4 block-row-m-5 block-row-l-6"&gt;
+    &lt;div&gt;...&lt;/div&gt;
+    &lt;div&gt;...&lt;/div&gt;
+    &lt;div&gt;...&lt;/div&gt;
+    &lt;div&gt;...&lt;/div&gt;
+    &lt;div&gt;...&lt;/div&gt;
+    &lt;div&gt;...&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
 </section>

@@ -23,7 +23,11 @@
             <div class="row">
                 <a href="{{ site.baseurl }}/" rel="home">Responsive</a>
                 <button data-dropdown-target="#navigation" class="visible-xxs visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
-                <div id="navigation" class="collapse"><a href="{{ site.baseurl }}/getting-started/">Getting Started</a><a href="{{ site.baseurl }}/css/">CSS</a><a href="{{ site.baseurl }}/javascript/">JavaScript</a></div>
+                <div id="navigation" class="collapse">
+                    <a href="{{ site.baseurl }}/getting-started/" {% if page.navgroup == "gettingstarted" %} class="active" {% endif %}>Getting Started</a>
+                    <a href="{{ site.baseurl }}/css/" {% if page.navgroup == "css" %} class="active" {% endif %}>CSS</a>
+                    <a href="{{ site.baseurl }}/javascript/" {% if page.navgroup == "javascript" %} class="active" {% endif %}>JavaScript</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -32,7 +36,7 @@
         <div class="container row">
             <div class="col-s-8">
                 <p>
-                    <strong>Responsive</strong> is a responsive web development boilerplate built with unlimited &#x2661;<span class="visuallyhidden">love</span> by
+                    <strong>Responsive</strong> is a modern web development boilerplate built with unlimited &hearts;<span class="visuallyhidden">love</span> by
                     <a href="http://twitter.com/James_M_South" rel="author external"
                        data-ga-category="Home Actions"
                        data-ga-action="Home Links"

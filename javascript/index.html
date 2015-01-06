@@ -1,36 +1,61 @@
 ---
 layout: rootpage
 root: javascript
-title: JavaScript
-heading: JavaScript
+group: nil
+title: The JavaScript Framework
+heading: JavaScript Framework
 subheading: jQuery plugins for common web components
 ---
-<h1>JavaScript</h1>
+<h1>Responsive JavaScript Plugins</h1>
 <p>
     Responsive comes with a series of jQuery plugins and methods that provide common webpage components in a responsive format.
 </p>
-<p>
-    All plugins come with a markup API that allows running the plugin without writing a single line of JavaScript.
-    This is Responsive's first class API and should be your first consideration when using the plugins.
-</p>
-<p>
-    When plugins are added to the page using this API they will also automatically register when loaded dynamically 
-    by any method utilizing jQuery's <a href="http://api.jquery.com/html/" rel="external">html()</a>
-    function.
-</p>
-<p>Each plugin has also been built to be extensible, providing events that can be tapped into to allow you to further enhance your site.</p>
 <p>Check out the details in each section.</p>
-<aside class="alert" role="alert">
-    <h4>Accessibility</h4>
+<hr />
+<section id="jquery">
+    <h1>Powered by jQuery</h1>
+    <p>
+        All the plugins depend on jQuery (this means jQuery must be included before the plugin files).
+        Consult the frameworks <a href="https://github.com/ResponsiveBP/Responsive/blob/master/bower.json">bower.json</a> to see which versions of jQuery are supported.
+    </p>
+    <p>Each plugin has also been built to be extensible, providing events that can be tapped into to allow you to further enhance your site.</p>
+    <div class="alert" role="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            Within Responsive's Javascript core we have extended jQuery's <a href="http://api.jquery.com/html/" rel="external">html()</a> function to
+            fire an event: <code>domchanged</code>. This allows the developer to bind to and handle the event and respond to content dynamically loaded
+            using that method.
+        </p>
+    </div>
+</section>
+<hr />
+<section id="accessibility">
+    <h1>Accessibility</h1>
     <p>
         All Responsive's plugins have been built from the ground up to be mouse, touch and keyboard accessible. They also add the appropriate
         <a href="http://www.w3.org/TR/wai-aria/" rel="external">ARIA</a> attribution where necessary to ensure that screenreaders can follow
         each plugin's functionality.
     </p>
-
-    <h4>jQuery</h4>
+</section>
+<hr />
+<section id="data-api">
+    <h1>Data-API</h1>
     <p>
-        All the plugins depend on jQuery (this means jQuery must be included before the plugin files).
-        Consult the frameworks <a href="https://github.com/ResponsiveBP/Responsive/blob/master/bower.json">bower.json</a> to see which versions of jQuery are supported.
+        All plugins come with a data-attribute driven, markup API that allows running the plugin without writing a single line of JavaScript.
+        This is Responsive's first class API and should be your first consideration when using the plugins.
+        This API works in a similar, yet enhanced way to Bootstraps Markup API.
     </p>
-</aside>
+    <p>
+        To allow for situations where you might want to turn the functionality off a method has been provided
+        that allows the ability to disable the API by unbinding all events on the document namespaced with <var>data-api</var>.
+    </p>
+    <pre class="language-javascript"><code>// Globally turn off the Responsive Data-API.
+$(document).off(".data-api");</code></pre>
+    <p>Each plugin can be individually turned off by prefixing the name of the plugin to the namespace.</p>
+    <pre class="language-javascript"><code>// Turn off the Responsive Data-API for the carousel plugin.
+$(document).off(".r.carousel.data-api");</code></pre>
+    <p>
+        When plugins are added to the page using this API they will also automatically register when loaded dynamically.
+        function.
+    </p>
+</section>

@@ -1,5 +1,7 @@
 ---
+permalink: css/code/
 title: Code
+description: Code blocks for responsive samples.
 heading: Code
 subheading: Responsive, normalized code blocks.
 sublinks: ["#inline|Example : Inline",
@@ -14,18 +16,11 @@ sublinks: ["#inline|Example : Inline",
 <section id="inline">
     <h1>Inline Code</h1>
 
-    <p>Wrap your inline con in a <code>&lt;code&gt;&lt;/code&gt;</code> block.</p>
+    <p>Wrap your inline code in a <code>&lt;code&gt;&lt;/code&gt;</code> block to highlight a fragment of computer code.</p>
 
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.
-        Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et <code>mollis dolor</code>. Praesent et diam eget
-        libero egestas mattis sit amet vitae augue. Nam <code>tincidunt</code> congue enim, ut porta lorem lacinia consectetur. Donec ut
-        libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut
-        gravida lorem. <code>press <kbd>shift</kbd> + <kbd>f5</kbd> </code>, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna
-        consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero
-        in urna <code>ultrices</code> accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis
-        natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi
-        at sem facilisis semper ac in est.
+        Use the <samp>samp</samp>. <code>&lt;samp&gt;&lt;/samp&gt;</code> element to present sample output from a computer or operating system.
+        Keyboard input or voice commands can be displayed using the <code>&lt;kbd&gt;&lt;/kbd&gt;</code> element for example: <code>press <kbd>shift</kbd> + <kbd>f5</kbd> </code>
     </p>
 </section>
 <section id="pre">
@@ -65,7 +60,7 @@ A leaflet.
 </section>
 <section id="fixed">
     <h1>Fixed Height</h1>
-    <p>Add the class <code>.pre-scrollable</code>.</p>
+    <p>Add the class <code>.pre-scrollable</code>. to constrain pre blocks to a fixed height.</p>
     <pre class="pre-scrollable"><code>pre, code, samp, kbd {
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;

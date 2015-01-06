@@ -3,347 +3,506 @@ permalink: css/forms/
 title: Forms
 heading: Forms
 subheading: Cross browser, normalized, responsive forms.
-sublinks: ["#examples|Examples",
+sublinks: ["#vertical|Example : Vertical",
+            "#horizontal|Example : Horizontal",
+            "#grouped|Example: Grouped",
             "#markup|The Markup",
             "#ios|IOS"]
 ---
-<section>
-    <h1>Form Elements</h1>
-    <p>Cross browser, normalized, responsive forms with minimal styling to allow easy overrides and lean CSS.</p>
+<h1>Form Elements</h1>
+<p>Cross browser, normalized, responsive forms with minimal styling to allow easy overrides and lean CSS.</p>
+<p>
+    Responsive does not require you to add extra classes to style form inputs, instead all valid HTML5
+    input types have been responsively styled with progressively enhanced fallbacks for unsupported types.
+</p>
+<p>
+    Supported HTML5 types: <code>text</code>, <code>password</code>, <code>email</code>, <code>url</code>, <code>search</code>,
+    <code>tel</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>, <code>month</code>, <code>time</code>,
+    <code>week</code>, <code>number</code>, <code>range</code>, and <code>color</code>.
+</p>
+<p>
+    A hook class <code>.readonly</code> can be used to mimic non-editable inputs,
+    and all fields can be made to display inline by adding the class <code>.inline-block</code>.
+</p>
+<div class="alert" role="alert">
+    <h4>Right-to-Left Language Support</h4>
     <p>
-        All inputs are responsive with progressively enhanced fallbacks for unsupported types. A hook class <code>.no-edit</code> can be used to mimic non-editable inputs,
-        and all fields can be made to display inline by adding the class <code>.inline-block</code>.
+        Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the layout
+        of form inputs to allow for right-to-left languages.
     </p>
-    <p>Smaller elements such as radio and checkbox inputs can be aligned by wrapping them in an element with the class <code>.input-group</code>.</p>
-    <div class="alert" role="alert">
-        <h4>Right-to-Left Language Support</h4>
+</div>
+<hr />
+<section id="examples">
+    <section id="vertical">
+        <h1>Vertical Form</h1>
         <p>
-            Adding the attribute <code>dir="rtl"</code> to the <code>html</code> tag will reverse the layout of form inputs to allow for right-to-left languages.
+            Responsive form elements span 100% by default; their width is designed to be constrained by the existing grid system.
+            This makes them extremely flexible.
         </p>
-    </div>
-    <hr />
-
-    <div id="examples">
-        <section>
-            <h1>Vertical Form</h1>
-            <p>
-                Responsive form elements span 100% by default; their width is designed to be constrained by the existing grid system.
-                This makes them extremely flexible.
-            </p>
-            <form action="#">
-                <fieldset>
-                    <legend>Standard Form</legend>
-                    <div class="row">
-                        <div class="col-s-6">
-                            <label for="input1">Standard</label>
-                            <input type="text" id="input1" value="standard input...">
-                            <label for="input-disabled1">Disabled</label>
-                            <input type="text" id="input-disabled1" disabled value="disabled input...">
-                            <p>Support text to help describe the input.</p>
-                            <label for="input-no-edit1">Non editable</label>
-                            <span id="input-no-edit1" class="no-edit">No edit</span>
-                            <label for="select-default1">Select</label>
-                            <select id="select-default1">
+        <form action="#">
+            <fieldset>
+                <legend>Standard Form</legend>
+                <div class="row">
+                    <div class="col-s-6">
+                        <label for="input1">Text</label>
+                        <input type="text" id="input1" value="standard input...">
+                        <label for="input-disabled1">Disabled</label>
+                        <input type="text" id="input-disabled1" disabled value="disabled input...">
+                        <p>Support text to help describe the input.</p>
+                        <label for="input-no-edit1">Non editable</label>
+                        <span id="input-no-edit1" class="readonly">No edit</span>
+                        <label for="select-default1">Select</label>
+                        <select id="select-default1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <label for="multiple-select-default1">Multiple Select</label>
+                        <select id="multiple-select-default1" multiple="" size="3">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <label for="multiple-select-optgroup-default1">Multiple Select with opt groups</label>
+                        <select id="multiple-select-optgroup-default1" multiple size="5">
+                            <option selected> 1</option>
+                            <optgroup label="Group 1">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                            <label for="input-file1">File upload</label>
-                            <input id="input-file1" type="file">
-                            <label for="input-number1">Number</label>
-                            <input type="number" id="input-number1">
-                            <label for="input-password1">Password</label>
-                            <input type="password" id="input-password1">
-                            <label for="input-time1">Time</label>
-                            <input type="time" id="input-time1">
-                            <label for="input-week1">Week</label>
-                            <input type="week" id="input-week1">
-                            <label for="input-month1">Month</label>
-                            <input type="month" id="input-month1">
-                            <label for="input-date1">Date</label>
-                            <input type="date" id="input-date1">
-                        </div>
-                        <div class="col-s-6">
-                            <label for="input-datetime1">Datetime</label>
-                            <input type="datetime" id="input-datetime1">
-                            <label for="input-datetime-local1">Datetime Local</label>
-                            <input type="datetime-local" id="input-datetime-local1">
-                            <label for="input-search1">Search</label>
-                            <input type="search" id="input-search1">
-                            <label for="input-color1">Color</label>
-                            <input type="color" id="input-color1">
-                            <label for="input-range1">Range</label>
-                            <input type="range" id="input-range1" min="0" max="100" value="50">
-                            <label for="input-email1">Email</label>
-                            <input type="email" id="input-email1">
-                            <label for="check-disabled1"><input type="checkbox" id="check-disabled1" value="option1" disabled class="inline-block"> Disabled Checkbox</label>
-                            <label for="check1"><input type="checkbox" id="check1" value="option1" class="inline-block"> Checkbox 1</label>
-                            <label for="check2"><input type="checkbox" id="check2" value="option2" class="inline-block"> Checkbox 2</label>
-                            <label for="radio1"><input type="radio" id="radio1" name="radio" value="option1"> Radio 1</label>
-                            <label for="radio2"><input type="radio" id="radio2" name="radio" value="option1"> Radio 2</label>
-                            <label for="textarea1">Textarea</label>
-                            <textarea id="textarea1"></textarea>
-                        </div>
+                            </optgroup>
+                            <option> 2</option>
+                            <option> 3</option>
+                            <option> 4</option>
+                            <option> 5</option>
+                        </select>
+                        <label for="input-file1">File upload</label>
+                        <input id="input-file1" type="file">
+                        <label for="input-number1">Number</label>
+                        <input type="number" id="input-number1">
+                        <label for="input-password1">Password</label>
+                        <input type="password" id="input-password1">
+                        <label for="input-time1">Time</label>
+                        <input type="time" id="input-time1">
+                        <label for="input-week1">Week</label>
+                        <input type="week" id="input-week1">
+                        <label for="input-month1">Month</label>
+                        <input type="month" id="input-month1">
+                        <label for="input-date1">Date</label>
+                        <input type="date" id="input-date1">
                     </div>
-                </fieldset>
-                <div class="form-actions">
-                    <button type="submit">Save changes</button>
-                    <button>Cancel</button>
+                    <div class="col-s-6">
+                        <label for="input-datetime1">Datetime</label>
+                        <input type="datetime" id="input-datetime1">
+                        <label for="input-datetime-local1">Datetime Local</label>
+                        <input type="datetime-local" id="input-datetime-local1">
+                        <label for="input-search1">Search</label>
+                        <input type="search" id="input-search1" placeholder="Search...">
+                        <label for="input-color1">Color</label>
+                        <input type="color" id="input-color1">
+                        <label for="input-range1">Range</label>
+                        <input type="range" id="input-range1" min="0" max="100" value="50">
+                        <label for="input-email1">Email</label>
+                        <input type="email" id="input-email1">
+                        <label for="check-disabled1"><input type="checkbox" id="check-disabled1" value="option1" disabled> Disabled Checkbox</label>
+                        <label for="check1"><input type="checkbox" id="check1" value="option1"> Checkbox 1</label>
+                        <label for="check2"><input type="checkbox" id="check2" value="option2"> Checkbox 2</label>
+                        <label for="radio1"><input type="radio" id="radio1" name="radio" value="option1" checked> Radio 1</label>
+                        <label for="radio2"><input type="radio" id="radio2" name="radio" value="option1"> Radio 2</label>
+                        <label for="textarea1">Textarea</label>
+                        <textarea id="textarea1"></textarea>
+                    </div>
                 </div>
-            </form>
-        </section>
-        <section>
-            <h1>Horizontal Form</h1>
-            <form action="#">
-                <fieldset>
-                    <legend>Standard Form spanning two columns</legend>
-                    <div class="row">
-                        <div class="col-s-6">
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input3">Standard</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="text" id="input3" value="standard input...">
-                                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit">Save changes</button>
+                <button type="button">Cancel</button>
+            </div>
+        </form>
+    </section>
+    <section id="horizontal">
+        <h1>Horizontal Form</h1>
+        <form action="#">
+            <fieldset>
+                <legend>Standard Form spanning two columns</legend>
+                <div class="row">
+                    <div class="col-s-6">
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input2">Text</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-disabled3">Disabled</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="text" id="input-disabled3" disabled value="disabled input...">
-                                    <p>Support text to help describe the input.</p>
-                                </div>
+                            <div class="col-s-8">
+                                <input type="text" id="input2" value="standard input...">
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-no-edit3">Non editable</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <span id="input-no-edit3" class="no-edit">No edit</span>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-disabled2">Disabled</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="select-default3">Select</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <select id="select-default3">
+                            <div class="col-s-8">
+                                <input type="text" id="input-disabled2" disabled value="disabled input...">
+                                <p>Support text to help describe the input.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-no-edit2">Non editable</label>
+                            </div>
+                            <div class="col-s-8">
+                                <span id="input-no-edit2" class="readonly">No edit</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="select-default2">Select</label>
+                            </div>
+                            <div class="col-s-8">
+                                <select id="select-default2">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="multiple-select-default2">Multiple Select</label>
+                            </div>
+                            <div class="col-s-8">
+                                <select id="multiple-select-default2" multiple="" size="3">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="multiple-select-optgroup-default2">Multiple Select with opt groups</label>
+                            </div>
+                            <div class="col-s-8">
+                                <select id="multiple-select-optgroup-default2" multiple size="5">
+                                    <option selected> 1</option>
+                                    <optgroup label="Group 1">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-file3">File upload</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input id="input-file3" type="file">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-number3">Number</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="number" id="input-number3">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-password3">Password</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="password" id="input-password3">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-time3">Time</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="time" id="input-time3">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-week3">Week</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="week" id="input-week3">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-month3">Month</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="month" id="input-month3">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-date3">Date</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="date" id="input-date3">
-                                </div>
+                                    </optgroup>
+                                    <option> 2</option>
+                                    <option> 3</option>
+                                    <option> 4</option>
+                                    <option> 5</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-s-6">
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-datetime3">Datetime</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="datetime" id="input-datetime3">
-                                </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-file2">File upload</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-datetime-local3">Datetime Local</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="datetime-local" id="input-datetime-local3">
-                                </div>
+                            <div class="col-s-8">
+                                <input id="input-file2" type="file">
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-search3">Search</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="search" id="input-search3">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-number2">Number</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-color3">Color</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="color" id="input-color3">
-                                </div>
+                            <div class="col-s-8">
+                                <input type="number" id="input-number2">
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-range3">Range</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="range" id="input-range3" min="0" max="100" value="50">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-password2">Password</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="input-email3">Email</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="email" id="input-email3">
-                                </div>
+                            <div class="col-s-8">
+                                <input type="password" id="input-password2">
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="check-disabled3">Disabled Checkbox</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="checkbox" id="check-disabled3" value="option1" disabled class="inline-block">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-time2">Time</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="check3">Checkbox 3</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="checkbox" id="check3" value="option1">
-                                </div>
+                            <div class="col-s-8">
+                                <input type="time" id="input-time2">
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="check4">Checkbox 4</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="checkbox" id="check4" value="option2">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-week2">Week</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="radio3">Radio 3</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="radio" id="radio3" name="radio" value="option2">
-                                </div>
+                            <div class="col-s-8">
+                                <input type="week" id="input-week2">
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="radio4">Radio 4</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <input type="radio" id="radio4" name="radio" value="option1">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-month2">Month</label>
                             </div>
-                            <div class="row">
-                                <div class="col-s-4">
-                                    <label for="textarea3">Textarea</label>
-                                </div>
-                                <div class="col-s-8">
-                                    <textarea id="textarea3"></textarea>
-                                </div>
+                            <div class="col-s-8">
+                                <input type="month" id="input-month2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-date2">Date</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="date" id="input-date2">
                             </div>
                         </div>
                     </div>
-                </fieldset>
-                <div class="form-actions">
-                    <button type="submit">Save changes</button>
-                    <button type="button">Cancel</button>
+                    <div class="col-s-6">
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-datetime2">Datetime</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="datetime" id="input-datetime2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-datetime-local2">Datetime Local</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="datetime-local" id="input-datetime-local2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-search2">Search</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="search" id="input-search2" placeholder="Search...">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-color2">Color</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="color" id="input-color2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-range2">Range</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="range" id="input-range2" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="input-email2">Email</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="email" id="input-email2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="check-disabled3">Disabled Checkbox</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="checkbox" id="check-disabled3" value="option1" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="check3">Checkbox 3</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="checkbox" id="check3" value="option1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="check4">Checkbox 4</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="checkbox" id="check4" value="option2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="radio3">Radio 3</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="radio" id="radio3" name="radio" value="option2" checked>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="radio4">Radio 4</label>
+                            </div>
+                            <div class="col-s-8">
+                                <input type="radio" id="radio4" name="radio" value="option1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-s-4">
+                                <label for="textarea2">Textarea</label>
+                            </div>
+                            <div class="col-s-8">
+                                <textarea id="textarea2"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </section>
-    </div>
-    <hr />
-    <section id="markup">
-        <h1>The Markup</h1>
-        <p>The entire markup for the second form. Note the grid wrappers required for arranging inputs.</p>
-        <pre class="language-markup"><code>&lt;form action="#"&gt;
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit">Save changes</button>
+                <button type="button">Cancel</button>
+            </div>
+        </form>
+    </section>
+    <section id="grouped">
+        <h1>Grouped Inputs</h1>
+        <p>
+            Inputs can be grouped with prefixes and suffixes attached by wrapping in a container with the
+            classs <code>.input-group</code> to group them. These groups are fully responsive and will adapt to the full width
+            of their containing element.
+        </p>
+        <p>
+            Adding the class <code>.input-group-addon .supplement</code>
+            to the spans within the input group will style them appropriately.
+        </p>
+        <form action="#">
+            <fieldset>
+                <legend>Supplementary addons.</legend>
+                <div class="input-group">
+                    <span class="input-group-addon supplement">£</span>
+                    <input type="text" />
+                </div>
+                <div class="input-group">
+                    <input type="text" /><span class="input-group-addon supplement">.00</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon supplement">£</span><input type="text" /><span class="input-group-addon supplement">.00</span>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon supplement">Turtle</span>
+                    <select>
+                        <option>Leonardo</option>
+                        <option>Donetello</option>
+                        <option>Michaelangelo</option>
+                        <option>Raphael</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <select>
+                        <option>AED</option>
+                        <option>AFN</option>
+                        <option>ALL</option>
+                        <option>AMD</option>
+                    </select>
+                    <span class="input-group-addon supplement">Currency</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon supplement">£</span><select>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                    </select><span class="input-group-addon supplement">.00</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon supplement">£</span>
+                    <input type="text" /><select>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                    </select><span class="input-group-addon supplement">.00</span>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Checkboxes and radio</legend>
+                <div class="input-group">
+                    <span class="input-group-addon supplement"><input type="checkbox" /></span>
+                    <input type="text" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon supplement"><input type="radio" /></span>
+                    <input type="text" />
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon supplement"><input type="checkbox" /></span>
+                    <select>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon supplement"><input type="radio" /></span>
+                    <select>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                    </select>
+                </div>
+            </fieldset>
+        </form>
+
+    </section>
+</section>
+<hr />
+<section id="markup">
+    <h1>The Markup</h1>
+    <p>The entire markup for the second form. Note the grid wrappers required for arranging inputs.</p>
+<pre class="language-markup"><code>&lt;form action="#"&gt;
     &lt;fieldset&gt;
         &lt;legend&gt;Standard Form spanning two columns&lt;/legend&gt;
         &lt;div class="row"&gt;
             &lt;div class="col-s-6"&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input3"&gt;Standard&lt;/label&gt;
+                        &lt;label for="input2"&gt;Text&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="text" id="input3"  value="standard input..."&gt;
+                        &lt;input type="text" id="input2" value="standard input..."&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-disabled3"&gt;Disabled&lt;/label&gt;
+                        &lt;label for="input-disabled2"&gt;Disabled&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="text" id="input-disabled3" disabled value="disabled input..."&gt;
+                        &lt;input type="text" id="input-disabled2" disabled value="disabled input..."&gt;
                         &lt;p&gt;Support text to help describe the input.&lt;/p&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-no-edit3"&gt;Non editable&lt;/label&gt;
+                        &lt;label for="input-no-edit2"&gt;Non editable&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;span id="input-no-edit3" class="no-edit"&gt;No edit&lt;/span&gt;
+                        &lt;span id="input-no-edit2" class="readonly"&gt;No edit&lt;/span&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="select-default3"&gt;Select&lt;/label&gt;
+                        &lt;label for="select-default2"&gt;Select&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;select id="select-default3"&gt;
+                        &lt;select id="select-default2"&gt;
                             &lt;option&gt;1&lt;/option&gt;
                             &lt;option&gt;2&lt;/option&gt;
                             &lt;option&gt;3&lt;/option&gt;
@@ -354,108 +513,141 @@ sublinks: ["#examples|Examples",
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-file3"&gt;File upload&lt;/label&gt;
+                        &lt;label for="multiple-select-default2"&gt;Multiple Select&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input id="input-file3" type="file"&gt;
+                        &lt;select id="multiple-select-default2" multiple="" size="3"&gt;
+                            &lt;option&gt;1&lt;/option&gt;
+                            &lt;option&gt;2&lt;/option&gt;
+                            &lt;option&gt;3&lt;/option&gt;
+                            &lt;option&gt;4&lt;/option&gt;
+                            &lt;option&gt;5&lt;/option&gt;
+                        &lt;/select&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-number3"&gt;Number&lt;/label&gt;
+                        &lt;label for="multiple-select-optgroup-default2"&gt;Multiple Select with opt groups&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="number" id="input-number3"&gt;
+                        &lt;select id="multiple-select-optgroup-default2" multiple size="5"&gt;
+                            &lt;option selected&gt; 1&lt;/option&gt;
+                            &lt;optgroup label="Group 1"&gt;
+                                &lt;option&gt;1&lt;/option&gt;
+                                &lt;option&gt;2&lt;/option&gt;
+                                &lt;option&gt;3&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                            &lt;option&gt; 2&lt;/option&gt;
+                            &lt;option&gt; 3&lt;/option&gt;
+                            &lt;option&gt; 4&lt;/option&gt;
+                            &lt;option&gt; 5&lt;/option&gt;
+                        &lt;/select&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-password3"&gt;Password&lt;/label&gt;
+                        &lt;label for="input-file2"&gt;File upload&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="password" id="input-password3"&gt;
+                        &lt;input id="input-file2" type="file"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-time3"&gt;Time&lt;/label&gt;
+                        &lt;label for="input-number2"&gt;Number&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="time" id="input-time3"&gt;
+                        &lt;input type="number" id="input-number2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-week3"&gt;Week&lt;/label&gt;
+                        &lt;label for="input-password2"&gt;Password&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="week" id="input-week3"&gt;
+                        &lt;input type="password" id="input-password2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-month3"&gt;Month&lt;/label&gt;
+                        &lt;label for="input-time2"&gt;Time&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="month" id="input-month3"&gt;
+                        &lt;input type="time" id="input-time2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-date3"&gt;Date&lt;/label&gt;
+                        &lt;label for="input-week2"&gt;Week&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="date" id="input-date3"&gt;
+                        &lt;input type="week" id="input-week2"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-month2"&gt;Month&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="month" id="input-month2"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-s-4"&gt;
+                        &lt;label for="input-date2"&gt;Date&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-s-8"&gt;
+                        &lt;input type="date" id="input-date2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
             &lt;div class="col-s-6"&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-datetime3"&gt;Datetime&lt;/label&gt;
+                        &lt;label for="input-datetime2"&gt;Datetime&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="datetime" id="input-datetime3"&gt;
+                        &lt;input type="datetime" id="input-datetime2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-datetime-local3"&gt;Datetime Local&lt;/label&gt;
+                        &lt;label for="input-datetime-local2"&gt;Datetime Local&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="datetime-local" id="input-datetime-local3"&gt;
+                        &lt;input type="datetime-local" id="input-datetime-local2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-search3"&gt;Search&lt;/label&gt;
+                        &lt;label for="input-search2"&gt;Search&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="search" id="input-search3"&gt;
+                        &lt;input type="search" id="input-search2" placeholder="Search..."&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-color3"&gt;Color&lt;/label&gt;
+                        &lt;label for="input-color2"&gt;Color&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="color" id="input-color3"&gt;
+                        &lt;input type="color" id="input-color2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-range3"&gt;Range&lt;/label&gt;
+                        &lt;label for="input-range2"&gt;Range&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="range" id="input-range3" min="0" max="100" value="50"&gt;
+                        &lt;input type="range" id="input-range2" min="0" max="100" value="50"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="input-email3"&gt;Email&lt;/label&gt;
+                        &lt;label for="input-email2"&gt;Email&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="email" id="input-email3"&gt;
+                        &lt;input type="email" id="input-email2"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
@@ -463,7 +655,7 @@ sublinks: ["#examples|Examples",
                         &lt;label for="check-disabled3"&gt;Disabled Checkbox&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="checkbox" id="check-disabled3" value="option2" disabled class="inline-block"&gt;
+                        &lt;input type="checkbox" id="check-disabled3" value="option1" disabled&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
@@ -487,7 +679,7 @@ sublinks: ["#examples|Examples",
                         &lt;label for="radio3"&gt;Radio 3&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;input type="radio" id="radio3" name="radio" value="option1"&gt;
+                        &lt;input type="radio" id="radio3" name="radio" value="option2" checked&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
@@ -500,10 +692,10 @@ sublinks: ["#examples|Examples",
                 &lt;/div&gt;
                 &lt;div class="row"&gt;
                     &lt;div class="col-s-4"&gt;
-                        &lt;label for="textarea3"&gt;Textarea&lt;/label&gt;
+                        &lt;label for="textarea2"&gt;Textarea&lt;/label&gt;
                     &lt;/div&gt;
                     &lt;div class="col-s-8"&gt;
-                        &lt;textarea id="textarea3"&gt;&lt;/textarea&gt;
+                        &lt;textarea id="textarea2"&gt;&lt;/textarea&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -514,11 +706,11 @@ sublinks: ["#examples|Examples",
         &lt;button type="button"&gt;Cancel&lt;/button&gt;
     &lt;/div&gt;
 &lt;/form&gt;</code></pre>
-    </section>
-    <section id="ios">
-        <h1>IOS</h1>
-        <p>On IOS devices the OS chroma is stripped from select and certain input fields allowing them to be styled with the same flexibility of desktop browsers. As such the dropdown indicator needs to be replaced. This is done using a data encoded svg image embedded in the CSS.</p>
-        <p>The data for this image is as follows:</p>
-        <pre class="language-css"><code>background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMC4wMzEiIGhlaWdodD0iMTAuNSI+PHBvbHlnb24gZmlsbD0iIzIyMiIgcG9pbnRzPSIxMSwwIDUuNSw5IDAsMCIvPjwvc3ZnPg==);</code></pre>
-    </section>
 </section>
+<section id="ios">
+    <h1>IOS</h1>
+    <p>On IOS devices the OS chroma is stripped from select and certain input fields allowing them to be styled with the same flexibility of desktop browsers. As such the dropdown indicator needs to be replaced. This is done using a data encoded svg image embedded in the CSS.</p>
+    <p>The data for this image is as follows:</p>
+    <pre class="language-css"><code>background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cG9seWdvbiBmaWxsPSIjMjIyIiBwb2ludHM9IjExLDAgNS41LDkgMCwwIi8+PC9zdmc+);</code></pre>
+</section>
+

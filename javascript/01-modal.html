@@ -1,8 +1,7 @@
 ---
-permalink: javascript/modal.html
-layout: subpage
-group: javascript
+permalink: javascript/modal/
 title: Modal
+description: A touch enabled responsive popup plugin for displaying modal content.
 heading: Modal
 subheading: A responsive plugin for presenting modal content.
 sublinks: ["#examples|Examples",
@@ -36,8 +35,8 @@ sublinks: ["#examples|Examples",
         <h1>Examples</h1>
         <h3>Relatively loaded target</h3>
 
-        <a href="../css/alerts.html #examples" data-modal-title="Relative Url">Launch relative overlay</a>
-        <pre class="language-markup"><code>&lt;a href="../css/alerts.html #examples" data-modal-title="Relative Url"&gt;
+        <a href="../../css/alerts/ #examples" data-modal-title="Relative Url">Launch relative overlay</a>
+        <pre class="language-markup"><code>&lt;a href="../../css/alerts/ #examples" data-modal-title="Relative Url"&gt;
     Launch relative overlay
 &lt;/a&gt;</code></pre>
 
@@ -198,21 +197,21 @@ Launch Youtube overlay
 
         <h3>Wrapped Image</h3>
         <div class="row">
-            <a href="../assets/img/768x900.jpg" data-modal-title="Kittens!">
-                <img src="../assets/img/768x900_thumb.jpg" />
+            <a href="../../assets/img/768x900.jpg" data-modal-title="Kittens!">
+                <img src="../../assets/img/768x900_thumb.jpg" />
             </a>
         </div>
-<pre class="language-markup"><code>&lt;a href="../assets/img/768x900.jpg" data-modal-title="Kittens!"&gt;
-    &lt;img src="../assets/img/768x900_thumb.jpg" /&gt;
+<pre class="language-markup"><code>&lt;a href="../../assets/img/768x900.jpg" data-modal-title="Kittens!"&gt;
+    &lt;img src="../../assets/img/768x900_thumb.jpg" /&gt;
 &lt;/a&gt;</code></pre>
         <h3>Mobile Redirect</h3>
         <p>Redirects on viewports of grid range <var>s</var> and below. (settable)</p>
         <div class="row">
-            <a href="../assets/img/768x900.jpg" data-modal-mobile-target="../assets/img/768x900.jpg" data-modal-mobile-viewport-width="s">
-                <img src="../assets/img/768x900_thumb.jpg" />
+            <a href="../../assets/img/768x900.jpg" data-modal-mobile-target="../../assets/img/768x900.jpg" data-modal-mobile-viewport-width="s">
+                <img src="../../assets/img/768x900_thumb.jpg" />
             </a>
         </div>
-        <pre class="language-markup"><code>&lt;a href="../assets/img/768x900.jpg" 
+        <pre class="language-markup"><code>&lt;a href="../../assets/img/768x900.jpg" 
    data-modal-mobile-target="../assets/img/768x900.jpg" 
    data-modal-mobile-viewport-width="s"&gt;
     &lt;img src="../assets/img/768x900_thumb.jpg" /&gt;
@@ -220,19 +219,19 @@ Launch Youtube overlay
         <h3>Grouped</h3>
         <div class="row">
             <div class="col-s-3">
-                <a class="grouped" href="../assets/img/hydrangeas.jpg" data-modal-title="Hydrangeas with a long title appended" data-modal-group=".grouped">Grouped Item 1</a>
+                <a class="grouped" href="../../assets/img/hydrangeas.jpg" data-modal-title="Hydrangeas with a long title appended" data-modal-group=".grouped">Grouped Item 1</a>
             </div>
             <div class="col-s-3">
-                <a class="grouped" href="../assets/img/chrysanthemum.jpg" data-modal-title="Chrysanthemum" data-modal-group=".grouped">Grouped Item 2</a>
+                <a class="grouped" href="../../assets/img/chrysanthemum.jpg" data-modal-title="Chrysanthemum" data-modal-group=".grouped">Grouped Item 2</a>
             </div>
             <div class="col-s-3">
-                <a class="grouped" href="../assets/img/desert.jpg" data-modal-title="Desert" data-modal-group=".grouped">Grouped Item 3</a>
+                <a class="grouped" href="../../assets/img/desert.jpg" data-modal-title="Desert" data-modal-group=".grouped">Grouped Item 3</a>
             </div>
             <div class="col-s-3">
-                <a class="grouped" href="../assets/img/768x900.jpg" data-modal-title="Large image with a longer title to see what happens when the title wraps." data-modal-group=".grouped">Grouped Item 4</a>
+                <a class="grouped" href="../../assets/img/768x900.jpg" data-modal-title="Large image with a longer title to see what happens when the title wraps." data-modal-group=".grouped">Grouped Item 4</a>
             </div>
         </div>
-<pre class="language-markup"><code>&lt;a class="grouped" href="../assets/img/hydrangeas.jpg" 
+<pre class="language-markup"><code>&lt;a class="grouped" href="../../assets/img/hydrangeas.jpg" 
    data-modal-title="Hydrangeas with a long title appended" 
    data-modal-group=".grouped"&gt;
     Grouped Item 1
@@ -294,6 +293,12 @@ modal trigger
                             <th scope="row">image</th>
                             <td>boolean</td>
                             <td>Whether the target is an image. Used for forcing image behaviour when automatic detection fails.</td>
+                            <td><var>false</var></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">immediate</th>
+                            <td>boolean</td>
+                            <td>Whether to show the modal immediately.</td>
                             <td><var>false</var></td>
                         </tr>
                         <tr>
@@ -395,7 +400,7 @@ modal trigger
                             <td>number</td>
                             <td>
                                 The maximum viewport width to present the alternative url for. This can either be given by passing either
-                                one of the grid ranges <var>xs</var> ,<var>s</var>,<var>m</var>, or<var>l</var> or by in a pixel value.
+                                one of the grid ranges <var>xxs</var>, <var>xs</var> ,<var>s</var>,<var>m</var>, or<var>l</var> or by in a pixel value.
                             </td>
                             <td><var>xs</var></td>
                         </tr>
@@ -428,21 +433,8 @@ modal trigger
             <dt><strong>error.r.modal</strong></dt>
             <dd>This event is fired when the plugin encounters an error when attempting to load ajax content.</dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The modal's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("ready.r.modal domchanged.r.modal")
-                .on("ready.r.modal domchanged.r.modal", function (event) {    
-    // Your custom behaviour...
-});
-                    
-// Bind to the show event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the show event.
 $("YOUR_TRIGGER_SELECTOR").on("show.r.modal", function(event) {
     // Your custom behaviour...
 });
@@ -466,5 +458,15 @@ $("YOUR_TRIGGER_SELECTOR").on("hidden.r.modal", function(event) {
 $("YOUR_TRIGGER_SELECTOR").on("error.r.modal", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The modal's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.modal.data-api");</code></pre>
     </section>
 </section>

@@ -12,6 +12,7 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
             <li><a href="#html">The HTML</a></li>
             <li><a href="#support">Browser Support</a></li>
             <li><a href="#accessibility">Accessibility</a></li>
+            <li><a href="#right-to-left">Right-to-Left Languages</a></li>
         </ul>
     </nav>
     <div class="col-m-9">
@@ -65,13 +66,6 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                 Inside the zip file you will also find a HTML file containing the default template for including
                 responsive in your webpage.<br /> Set up your layout as follows.
             </p>
-            <div class="alert" role="alert">
-                <h4>Heads Up!</h4>
-                <p>
-                    To enable right-to-left language support for such languages such as Hebrew or Arabic add the attribute
-                    <code>dir="rtl"</code> to the <code>html</code> tag.
-                </p>
-            </div>
             <pre class="language-markup"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
     &lt;head&gt;
@@ -111,14 +105,14 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                 <li>Safari (Mac and iOS only, as the Windows version is being abandoned)</li>
             </ul>
 
-            <h2>Safari 7</h2>
+            <h2>Safari</h2>
             <p>
-                Safari 7 up to and including v7.0.5 on Mac and iOS do not calculate percentages properly and will render 12 individual columns defined using the
+                Safari 7 prior to v7.1 for OS X and Safari for iOS v8.0 do not calculate percentages properly and will render 12 individual columns defined using the
                 <code>col-{range}-1</code> classes slightly narrower than they should be. See <a href="https://github.com/ResponsiveBP/Responsive/issues/40" rel="external">#40</a>.
             </p>
             <p>
-                Unfortunately there is not much that can be done about this at the moment without resorting to hacks to tweak the percentages using JavaScript or by using the
-                <code>push-{range}</code> or <code>push-{range}-only</code> classes to offset the last column. Hopefully Apple will fix this in upcoming releases.
+                Unfortunately other than upgrading your browser there is not much that can be done about this without resorting to hacks to tweak the percentages using JavaScript or by using the
+                <code>push-{range}</code> or <code>push-{range}-only</code> classes to offset the last column. 
             </p>
         </section>
         <hr />
@@ -133,6 +127,17 @@ subheading: An introduction to Responsive, how to use it, with basic templates a
                 All Responsive's plugins have been built from the ground up to be mouse, touch and keyboard accessible. They also add the appropriate
                 <a href="http://www.w3.org/TR/wai-aria/" rel="external">ARIA</a> attribution where necessary to ensure that screenreaders can follow
                 each plugin's functionality.
+            </p>
+        </section>
+        <hr/>
+        <section id="right-to-left">
+            <h1>Right-to-Left Languages</h1>
+            <p>
+                Responsive has built in support for right-to-left languages such as Hebrew or Arabic.
+                All aspects of the framework from grid columns to swiping directional behaviour have right-to-left counterparts.
+            </p>
+            <p>
+                To enable right-to-left language support add the attribute <code>dir="rtl"</code> to the <code>html</code> tag.
             </p>
         </section>
     </div>

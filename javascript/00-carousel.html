@@ -1,8 +1,9 @@
 ---
-permalink: javascript/carousel.html
+permalink: javascript/carousel/
 layout: subpage
 group: javascript
 title: Carousel
+description: A touch enabled, responsive, accessible carousel plugin.
 heading: Carousel
 subheading: A responsive carousel for cycling through objects.
 sublinks: ["#examples|Examples",
@@ -26,7 +27,7 @@ sublinks: ["#examples|Examples",
         <h4>Accessibility</h4>
         <p>The carousel, by default, will not transition automatically. This makes it less confusing for screenreaders to follow.</p>
         <p>
-            On devices that support touch, grouped items will iterate though their collection via swiping either left or right.
+            On devices that support touch, the carousel will iterate though the item collection via swiping either left or right.
             Keybord support can also be utilised to navigate when the carousel is in focus by using the <kbd>LEFT</kbd>, and <kbd>RIGHT</kbd> keys.
         </p>
 
@@ -44,64 +45,68 @@ sublinks: ["#examples|Examples",
                 <h2>Slide Mode</h2>
                 <div id="carousel-1" class="carousel">
                     <ol>
-                        <li class="active"></li>
+                        <li></li>
                         <li></li>
                         <li></li>
                     </ol>
-
                     <figure class="carousel-active">
-                        <img src="../assets/img/hydrangeas.jpg" alt="hydrangeas">
+                        <img src="../../assets/img/hydrangeas.jpg" alt="hydrangeas">
                         <figcaption>
                             <h4>First Thumbnail label</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="../assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                        <img src="../../assets/img/chrysanthemum.jpg" alt="chrysanthemum">
                         <figcaption>
                             <h4>Second Thumbnail label</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="../assets/img/desert.jpg" alt="desert">
+                        <img src="../../assets/img/desert.jpg" alt="desert">
                         <figcaption>
                             <h4>Third Thumbnail label</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
                         </figcaption>
                     </figure>
 
-                    <button class="back carousel-control">&lt;</button>
-                    <button class="forward carousel-control">&gt;</button>
+                    <button>&lt;</button>
+                    <button class="forward">&gt;</button>
                 </div>
             </div>
             <div class="col-s-6">
                 <h2>Fade Mode</h2>
                 <div id="carousel-2" class="carousel" data-carousel-mode="fade">
+                    <ol>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
                     <figure class="carousel-active">
-                        <img src="../assets/img/hydrangeas.jpg" alt="hydrangeas">
+                        <img src="../../assets/img/hydrangeas.jpg" alt="hydrangeas">
                         <figcaption>
                             <h4>First Thumbnail label</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="../assets/img/chrysanthemum.jpg" alt="chrysanthemum">
+                        <img src="../../assets/img/chrysanthemum.jpg" alt="chrysanthemum">
                         <figcaption>
                             <h4>Second Thumbnail label</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="../assets/img/desert.jpg" alt="desert">
+                        <img src="../../assets/img/desert.jpg" alt="desert">
                         <figcaption>
                             <h4>Third Thumbnail label</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
                         </figcaption>
                     </figure>
 
-                    <button class="back carousel-control">&lt;</button>
-                    <button class="forward carousel-control">&gt;</button>
+                    <button>&lt;</button>
+                    <button class="forward">&gt;</button>
                 </div>
             </div>
         </div>
@@ -118,35 +123,35 @@ sublinks: ["#examples|Examples",
         <pre class="language-markup"><code>&lt;div id="carousel-2" class="carousel" data-carousel-mode="fade"&gt;
     &lt;!-- Carousel Indicators--&gt;
     &lt;ol&gt;
-        &lt;li class="active"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
         &lt;li&gt;&lt;/li&gt;
         &lt;li&gt;&lt;/li&gt;
     &lt;/ol&gt;
     &lt;!-- Carousel Items--&gt;
     &lt;figure class="carousel-active"&gt;
-        &lt;img src="../test-assets/img/hydrangeas.jpg" alt="hydrangeas"&gt;
+        &lt;img src="../../test-assets/img/hydrangeas.jpg" alt="hydrangeas"&gt;
         &lt;figcaption&gt;
             &lt;h4&gt;First Thumbnail label&lt;/h4&gt;
             &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
         &lt;/figcaption&gt;
     &lt;/figure&gt;
     &lt;figure&gt;
-        &lt;img src="../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum"&gt;
+        &lt;img src="../../test-assets/img/chrysanthemum.jpg" alt="chrysanthemum"&gt;
         &lt;figcaption&gt;
             &lt;h4&gt;Second Thumbnail label&lt;/h4&gt;
             &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
         &lt;/figcaption&gt;
     &lt;/figure&gt;
     &lt;figure&gt;
-        &lt;img src="../test-assets/img/desert.jpg" alt="desert"&gt;
+        &lt;img src="../../test-assets/img/desert.jpg" alt="desert"&gt;
         &lt;figcaption&gt;
             &lt;h4&gt;Third Thumbnail label&lt;/h4&gt;
             &lt;p&gt;Lorem ipsum dolor sit amet, consectetur ...&lt;/p&gt;
         &lt;/figcaption&gt;
     &lt;/figure&gt;
     &lt;!-- Carousel Controls--&gt;
-    &lt;button class="back carousel-control"&gt;&lt;&lt;/button&gt;
-    &lt;button class="forward carousel-control"&gt;&gt;&lt;/button&gt;
+    &lt;button&gt;&lt;&lt;/button&gt;
+    &lt;button class="forward"&gt;&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
     </section>
     <hr />
@@ -293,21 +298,8 @@ sublinks: ["#examples|Examples",
                 </dl>
             </dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default loading behaviour
-$(document).off("ready.r.carousel domchanged.r.carousel")
-           .on("ready.r.carousel domchanged.r.carousel", function () {
-    // Your custom behaviour...
-}); 
-           
-// Bind to the slide event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the slide event.
 $("YOUR_SELECTOR").on("slide.r.carousel", function(event) {
     // Your custom behaviour...
 });
@@ -316,5 +308,15 @@ $("YOUR_SELECTOR").on("slide.r.carousel", function(event) {
 $("YOUR_SELECTOR").on("slid.r.carousel", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The carousel's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.carousel.data-api");</code></pre>
     </section>
 </article>

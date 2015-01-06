@@ -1,8 +1,7 @@
 ---
-permalink: javascript/dropdown.html
-layout: subpage
-group: javascript
+permalink: javascript/dropdown/
 title: Dropdown
+description: A responsive popup plugin for toggling the visibility of content.
 heading: Dropdown
 subheading: Responsive visibility toggling.
 sublinks: ["#standard|Example : Standard",
@@ -281,13 +280,13 @@ sublinks: ["#standard|Example : Standard",
                             <th scope="row">target</th>
                             <td>string</td>
                             <td>A jQuery selector indicating what target to toggle the visibility of.</td>
-                            <td></td>
+                            <td><var>null</var></td>
                         </tr>
                         <tr>
                             <th scope="row">parent</th>
                             <td>string</td>
                             <td>A jQuery selector indicating what parent of the dropdown trigger should force grouped mode.</td>
-                            <td></td>
+                            <td><var>null</var></td>
                         </tr>
                     </tbody>
                 </table>
@@ -314,21 +313,8 @@ sublinks: ["#standard|Example : Standard",
             <dt><strong>hidden.r.dropdown</strong></dt>
             <dd>This event is fired once when the plugins <code>hidden</code> instance method is invoked and the collapsed region of the given instance has been hidden from the user.</dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The dropdown's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("ready.r.dropdown domchanged.r.dropdown")
-                .on("ready.r.dropdown domchanged.r.dropdown", function (event) {
-    // Your custom behaviour...
-}); 
-
-// Bind to the show event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the show event.
 $("YOUR_TRIGGER_SELECTOR").on("show.r.dropdown", function(event) {
     // Your custom behaviour...
 });
@@ -347,5 +333,15 @@ $("YOUR_TRIGGER_SELECTOR").on("hide.r.dropdown", function(event) {
 $("YOUR_TRIGGER_SELECTOR").on("hidden.r.dropdown", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The dropdown's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.dropdown.data-api");</code></pre>
     </section>
 </section>
