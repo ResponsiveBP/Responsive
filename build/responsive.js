@@ -2799,13 +2799,13 @@
             $triggers = $tablist.children().attr("role", "presentation"),
             $panes = this.$element.children(":not(ul)"),
             id = $.pseudoUnique(),
-            activeIndex = $triggers.filter("[aria-selected=true]").index(),
+            activeIndex = $tablist.find("[aria-selected=true]").parent().index(),
             hasActive = activeIndex > -1;
 
         $triggers.each(function (index) {
             var $this = $(this),
                 $tab = $this.children("a"),
-                isActive = (hasActive && index === activeIndex) || index === 0;
+                isActive = (hasActive && index === activeIndex) || (!hasActive && index === 0);
 
             $tab.attr({
                 "role": "tab",
