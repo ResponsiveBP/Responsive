@@ -536,6 +536,7 @@
         this.options = $.extend({}, this.defaults, options);
         this.sizing = null;
         this.difference = 0;
+        this.height = this.$element.height();
 
         // Initial setup.
         this.init();
@@ -563,11 +564,26 @@
 
     AutoSize.prototype.size = function () {
 
-        var $element = this.$element,
+        var self = this,
+            $element = this.$element,
             element = this.element,
             sizeEvent = $.Event(esize);
 
-        $element.trigger(sizeEvent);
+        if (this.sizing) {
+            return;
+        }
+
+        // Check and get the height
+        $element.height("auto");
+        var scrollHeight = element.scrollHeight - this.difference,
+            different = this.height !== scrollHeight;
+
+        $element.height(this.height);
+
+        // Trigger events if need be.
+        if (different) {
+            $element.trigger(sizeEvent);
+        }
 
         if (this.sizing || sizeEvent.isDefaultPrevented()) {
             return;
@@ -575,13 +591,19 @@
 
         this.sizing = true;
 
-        // Reset the height
-        $element.height("auto");
-        $element.height(element.scrollHeight - this.difference);
+        $element.height(scrollHeight);
 
-        // Do our callback
+        if (different) {
+            // Do our callback
+            $element.onTransitionEnd(function() {
+                self.sizing = false;
+                self.height = scrollHeight;
+                $element.trigger($.Event(esized));
+            });
+            return;
+        }
+
         this.sizing = false;
-        $element.trigger($.Event(esized));
     };
 
     // No conflict.
@@ -2264,7 +2286,7 @@
             this.isLocalHidden = $target.is(":hidden");
             $modal.addClass(this.options.fitViewport ? "container" : "");
             $placeholder.detach().insertAfter($target);
-            $target.detach().appendTo($content).removeClass("hidden");
+            $target.detach().appendTo($content).removeClass("hidden").attr({ "aria-hidden": false });
             $content.appendTo($modal);
             // Fade in.
             fadeIn();
@@ -2365,7 +2387,9 @@
         if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax, .modal-image")) {
 
             // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "")
+                                  .attr({ "aria-hidden": this.isLocalHidden ? true : false })
+                                  .detach().insertAfter($placeholder);
             $placeholder.detach().insertAfter($overlay);
 
         }
@@ -2777,13 +2801,13 @@
             $triggers = $tablist.children().attr("role", "presentation"),
             $panes = this.$element.children(":not(ul)"),
             id = $.pseudoUnique(),
-            activeIndex = $triggers.filter("[aria-selected=true]").index(),
+            activeIndex = $tablist.find("[aria-selected=true]").parent().index(),
             hasActive = activeIndex > -1;
 
         $triggers.each(function (index) {
             var $this = $(this),
                 $tab = $this.children("a"),
-                isActive = (hasActive && index === activeIndex) || index === 0;
+                isActive = (hasActive && index === activeIndex) || (!hasActive && index === 0);
 
             $tab.attr({
                 "role": "tab",

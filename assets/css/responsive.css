@@ -4640,7 +4640,9 @@ table {
 
 .autosize,
 [data-autosize] {
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-transition: height .2s linear;
+          transition: height .2s linear; }
 
 .carousel {
   margin-bottom: 1rem;
@@ -5268,93 +5270,133 @@ button.modal-direction {
 
   .inline-l {
     display: inline; } }
-.text-left {
+.text-pull {
   text-align: left; }
+  [dir="rtl"] .text-pull {
+    text-align: right; }
 
-.text-right {
+.text-push {
   text-align: right; }
+  [dir="rtl"] .text-push {
+    text-align: left; }
 
 .text-center {
   text-align: center; }
 
-.text-xxs-left {
+.text-xxs-pull {
   text-align: left; }
+  [dir="rtl"] .text-xxs-pull {
+    text-align: right; }
 
-.text-xxs-right {
+.text-xxs-push {
   text-align: right; }
+  [dir="rtl"] .text-xxs-push {
+    text-align: left; }
 
 .text-xxs-center {
   text-align: center; }
 
 @media (max-width: 37.49em) {
-  .text-xxs-left-only {
+  .text-xxs-pull-only {
     text-align: left; }
+    [dir="rtl"] .text-xxs-pull-only {
+      text-align: right; }
 
-  .text-xxs-right-only {
+  .text-xxs-push-only {
     text-align: right; }
+    [dir="rtl"] .text-xxs-push-only {
+      text-align: left; }
 
   .text-xxs-center-only {
     text-align: center; } }
 @media print and (min-width: 536px), screen and (min-width: 37.5em) {
-  .text-xs-left {
+  .text-xs-pull {
     text-align: left; }
+    [dir="rtl"] .text-xs-pull {
+      text-align: right; }
 
-  .text-xs-right {
+  .text-xs-push {
     text-align: right; }
+    [dir="rtl"] .text-xs-push {
+      text-align: left; }
 
   .text-xs-center {
     text-align: center; } }
 @media print and (min-width: 536px) and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
-  .text-xs-left {
+  .text-xs-pull {
     text-align: left; }
+    [dir="rtl"] .text-xs-pull {
+      text-align: right; }
 
-  .text-xs-right {
+  .text-xs-push {
     text-align: right; }
+    [dir="rtl"] .text-xs-push {
+      text-align: left; }
 
   .text-xs-center {
     text-align: center; } }
 @media print and (min-width: 537px), screen and (min-width: 48em) {
-  .text-s-left {
+  .text-s-pull {
     text-align: left; }
+    [dir="rtl"] .text-s-pull {
+      text-align: right; }
 
-  .text-s-right {
+  .text-s-push {
     text-align: right; }
+    [dir="rtl"] .text-s-push {
+      text-align: left; }
 
   .text-s-center {
     text-align: center; } }
 @media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
-  .text-s-left {
+  .text-s-pull {
     text-align: left; }
+    [dir="rtl"] .text-s-pull {
+      text-align: right; }
 
-  .text-s-right {
+  .text-s-push {
     text-align: right; }
+    [dir="rtl"] .text-s-push {
+      text-align: left; }
 
   .text-s-center {
     text-align: center; } }
 @media (min-width: 62em) {
-  .text-m-left {
+  .text-m-pull {
     text-align: left; }
+    [dir="rtl"] .text-m-pull {
+      text-align: right; }
 
-  .text-m-right {
+  .text-m-push {
     text-align: right; }
+    [dir="rtl"] .text-m-push {
+      text-align: left; }
 
   .text-m-center {
     text-align: center; } }
 @media (min-width: 62em) and (max-width: 74.99em) {
-  .text-m-left {
+  .text-m-pull {
     text-align: left; }
+    [dir="rtl"] .text-m-pull {
+      text-align: right; }
 
-  .text-m-right {
+  .text-m-push {
     text-align: right; }
+    [dir="rtl"] .text-m-push {
+      text-align: left; }
 
   .text-m-center {
     text-align: center; } }
 @media (min-width: 75em) {
-  .text-l-left {
+  .text-l-pull {
     text-align: left; }
+    [dir="rtl"] .text-l-pull {
+      text-align: right; }
 
-  .text-l-right {
+  .text-l-push {
     text-align: right; }
+    [dir="rtl"] .text-l-push {
+      text-align: left; }
 
   .text-l-center {
     text-align: center; } }
