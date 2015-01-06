@@ -1,8 +1,8 @@
 ---
-permalink: javascript/dismiss.html
-layout: subpage
-group: javascript
+permalink: javascript/dismiss/
+redirect_from: "javascript/dismiss.html"
 title: Dismiss
+description: A plugin that allows you to remove content from a page.
 heading: Dismiss
 subheading: Responsive content toggler.
 sublinks: ["#examples|Examples",
@@ -24,19 +24,17 @@ sublinks: ["#examples|Examples",
         <div class="alert alert-dismissable" role="alert">
             <button data-dismiss-target=".alert" class="close">x</button>
             <p>
-                <strong>Adding the plugin inside any element will hide the closest parent to the plugin matching the given selector on click.</strong>
+                <strong>
+                    Adding the plugin inside any element will hide the closest parent to the plugin matching
+                    the given selector on click.
+                </strong>
             </p>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo leo, tincidunt at nulla sed, aliquam fermentum mauris.
-                Quisque laoreet, enim et volutpat faucibus, nisi ante gravida dolor, nec ornare libero sapien quis est. Curabitur nec aliquet
-                lacus, sed suscipit neque. Etiam ut sapien tempus, malesuada enim ut, semper diam. Aliquam erat volutpat. Donec eget posuere ligula.
-                Proin fermentum et turpis ut rutrum. Nunc vitae nunc fermentum, aliquam mauris ac, tincidunt dui.
-            </p>
-            <p>
-                Cras at laoreet enim. Etiam tincidunt mi ut mi tristique facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Cras sed nunc ut nisl laoreet adipiscing. Quisque a fermentum libero. Nam at facilisis neque, quis tempus purus. Quisque ultrices
-                est at augue ultricies, vitae rutrum nisl imperdiet. Nullam non erat non mauris eleifend laoreet. Ut nibh nisl, consequat id eleifend
-                nec, tristique quis mauris. Maecenas cursus mi nec lorem elementum pulvinar. Vestibulum eu sem quam.
+                The concept that launched a thousand site redesigns. For years, web designers have coveted print
+                for its precision layouts, lamenting the varying user contexts on the web that compromise their
+                designs. Responsive design advocates that we shift our design thinking to make a virtue of these
+                constraints. Using fluid grids, flexible images, and media queries to embrace the ebb and flow of
+                the web.
             </p>
         </div>
     </section>
@@ -79,21 +77,8 @@ sublinks: ["#examples|Examples",
             <dt><strong>dismissed.r.dismiss</strong></dt>
             <dd>This event is fired when the plugins <code>dismissed</code> instance method is invoked once the target has completed the animation and is hidden.</dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The dismiss plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document.body).off("ready.r.dismiss domchanged.r.dismiss")
-                .on("ready.r.dismiss domchanged.r.dismiss", function (event) {    
-    // Your custom behaviour...
-});
-                
-// Bind to the close event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the close event.
 $("YOUR_TRIGGER_SELECTOR").on("dismiss.r.dismiss", function(event) {
     // Your custom behaviour...
 });
@@ -102,5 +87,15 @@ $("YOUR_TRIGGER_SELECTOR").on("dismiss.r.dismiss", function(event) {
 $("YOUR_TRIGGER_SELECTOR").on("dismissed.r.dismiss", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The dismiss plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to override this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.dismiss.data-api");</code></pre>
     </section>
 </section>

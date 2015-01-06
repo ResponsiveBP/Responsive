@@ -1,9 +1,11 @@
 ---
-permalink: javascript/extras.html
+permalink: javascript/extras/
+redirect_from: "javascript/extras.html"
 layout: subpage
 group: javascript
 title: Extras
-heading: Extras
+description: Useful JavaScript methods for building responsive websites.
+heading: Useful Extras
 subheading: Bundled JavaScript tools.
 sublinks: ["#general|General Tools",
            "#transition|Transition Tools",
@@ -26,7 +28,7 @@ sublinks: ["#general|General Tools",
             Returns an object indicating what grid range the current browser width is within.
             <dl class="dl-horizontal">
                 <dt>grid</dt>
-                <dd>The current applied grid; either , <var>s</var>, <var>m</var>, or <var>l</var>.</dd>
+                <dd>The current applied grid; either <var>xxs</var>, <var>xs</var>, <var>s</var>, <var>m</var>, or <var>l</var>.</dd>
                 <dt>index</dt>
                 <dd>The index of the current grid in the range. Zero based.</dd>
                 <dt>range</dt>
@@ -48,18 +50,14 @@ sublinks: ["#general|General Tools",
         </dd>
         <dt><code>:attrStart(value)</code> selector</dt>
         <dd>This selector matches any target that contains an attribute starting with the given value.</dd>
-        <dt><strong>$.buildDataOptions($elem, options, prefix, namespace)</strong></dt>
+        <dt><strong>$.buildDataOptions($elem, filter)</strong></dt>
         <dd>
             Creates an object containing options populated from an elements data attributes.
             <dl class="dl-horizontal">
                 <dt>$elem</dt>
                 <dd>The object representing the DOM element.</dd>
-                <dt>options</dt>
-                <dd>The object to extend.</dd>
-                <dt>prefix</dt>
+                <dt>filter</dt>
                 <dd>The prefix with which to identify the data attribute.</dd>
-                <dt>namespace</dt>
-                <dd>The namespace with which to segregate the data attribute.</dd>
             </dl>
         </dd>
     </dl>
@@ -95,7 +93,7 @@ sublinks: ["#general|General Tools",
         <dd>
             <p>
                 A <a href="http://learn.jquery.com/events/event-extensions/#special-event-hooks" rel="external nofollow">special event</a> that can be bound or
-                unbound to an target using jquery's<code>on()</code> and <code>off()</code>. This allows the element to register and respond to swipe actions.
+                unbound to an target using jquery's <code>on()</code> and <code>off()</code> functions. This allows the element to register and respond to swipe actions.
             </p>
             <p>The following data can be passed to handler in <code>event.data</code> when the event is triggered.</p>
             <dl>

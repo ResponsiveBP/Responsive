@@ -1,8 +1,8 @@
 ---
-permalink: javascript/tablelist.html
-layout: subpage
-group: javascript
+permalink: javascript/tablelist/
+redirect_from: "javascript/tablelist.html"
 title: TableList
+description: A plugin that allows tables to display as a list on smaller viewports.
 heading: TableList
 subheading: Responsive table layout.
 sublinks: ["#examples|Examples",
@@ -116,21 +116,8 @@ sublinks: ["#examples|Examples",
             <dt><strong>added.r.table</strong></dt>
             <dd>This event is fired when the plugins <code>added</code> instance method is invoked once the target has had all the attributes added.</dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The tablelist's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.tablelist domchanged.r.tablelist")
-           .on("ready.r.tablelist domchanged.r.tablelist", function (event) {    
-    // Your custom behaviour...
-});
-            
-// Bind to the add event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the add event.
 $("YOUR_SELECTOR").on("add.r.tablelist", function(event) {
     // Your custom behaviour...
 });
@@ -139,5 +126,15 @@ $("YOUR_SELECTOR").on("add.r.tablelist", function(event) {
 $("YOUR_SELECTOR").on("added.r.tablelist", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The tablelist's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.tablelist.data-api");</code></pre>
     </section>
 </section>

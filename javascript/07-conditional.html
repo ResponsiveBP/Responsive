@@ -1,8 +1,10 @@
 ---
-permalink: javascript/conditional.html
+permalink: javascript/conditional/
+redirect_from: "javascript/conditional.html"
 layout: subpage
 group: javascript
 title: Conditional
+description: A plugin that allows dynamic replacement of responsive content based on the viewport.
 heading: Conditional
 subheading: A plugin that replaces content within a page based on the current grid level.
 sublinks: ["#examples|Examples",
@@ -14,7 +16,7 @@ sublinks: ["#examples|Examples",
 <section id="normalize">
     <h1>Conditional</h1>
     <p>
-        A jQuery plugin that replaces content within a page based on the grid level <code>xs, s, m, l</code> that the current viewport width falls within.
+        A jQuery plugin that replaces content within a page based on the grid level <code>xxs, xs, s, m, l</code> that the current viewport width falls within.
     </p>
     <p>
         The plugin uses ajax to load in the defined content. The url paths to the content are defined in the same format as
@@ -31,7 +33,7 @@ sublinks: ["#examples|Examples",
         <h1>Examples</h1>
         <section class="row">
             <h3>Standard</h3>
-            <div data-conditional-xs="../css/grid.html #basic" data-conditional-fallback="tabs.html #examples" data-conditional-l="carousel.html #carousel-1">
+            <div data-conditional-xs="../../css/grid/ #basic" data-conditional-fallback="../tabs #examples" data-conditional-l="../carousel #carousel-1">
             </div>
         </section>
         <section class="row">
@@ -40,7 +42,7 @@ sublinks: ["#examples|Examples",
                 In this example the content that is within the bounds of the plugin element before the plugin initializes is saved and used as fallback content for
                 any undefined grid ranges. This ensures that search engine crawlers can find content to add to their results.
             </p>
-            <div data-conditional-xs="../css/grid.html #basic" data-conditional-l="carousel.html #carousel-1">
+            <div data-conditional-xs="../../css/grid #basic" data-conditional-l="../carousel #carousel-1">
                 <blockquote>
                     <p>
                         The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation
@@ -58,9 +60,9 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="markup">
         <h1>Markup</h1>
-        <pre class="language-markup"><code>&lt;div data-conditional-xs="../css/grid.html #basic" 
-     data-conditional-fallback="tabs.html #examples" 
-     data-conditional-l="carousel.html #carousel-1"&gt;
+        <pre class="language-markup"><code>&lt;div data-conditional-xs="../../css/grid #basic" 
+     data-conditional-fallback="../tabs #examples" 
+     data-conditional-l="../carousel #carousel-1"&gt;
 &lt;/div&gt;</code></pre>
     </section>
     <hr />
@@ -76,6 +78,8 @@ sublinks: ["#examples|Examples",
                     <dd>
                         Contains parameters to pass to the plugin.
                         <dl>
+                            <dt><strong>xxs</strong></dt>
+                            <dd>The path to the content to load when the grid is in <code>xxs</code> mode.</dd>
                             <dt><strong>xs</strong></dt>
                             <dd>The path to the content to load when the grid is in <code>xs</code> mode.</dd>
                             <dt><strong>s</strong></dt>
@@ -99,6 +103,10 @@ sublinks: ["#examples|Examples",
         <h1>Events</h1>
         <p>The conditional plugin exposes the following events allowing the developer to tap into its behaviour.</p>
         <dl>
+            <dt><strong>load.r.conditional</strong></dt>
+            <dd>
+                This event is fired when the plugins <code>resize</code> instance method is invoked and content is about to be loaded.
+            </dd>
             <dt><strong>loaded.r.conditional</strong></dt>
             <dd>
                 This event is fired when the plugins <code>resize</code> instance method is invoked and content is loaded.
@@ -126,19 +134,12 @@ sublinks: ["#examples|Examples",
                 </dl>
             </dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The conditional's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.conditional domchanged.r.conditional")
-           .on("ready.r.conditional domchanged.r.conditional", function () {
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the load event.
+$("YOUR_SELECTOR").on("load.r.conditional", function(event) {
     // Your custom behaviour...
-}); 
+});
+
 // Bind to the loaded event.
 $("YOUR_SELECTOR").on("loaded.r.conditional", function(event) {
     // Your custom behaviour...
@@ -149,4 +150,13 @@ $("YOUR_SELECTOR").on("error.r.conditional", function(event) {
     // Your custom behaviour...
 });</code></pre>
     </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The conditional's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.conditional.data-api");</code></pre></section>
 </section>

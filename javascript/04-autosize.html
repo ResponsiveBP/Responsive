@@ -1,8 +1,8 @@
 ---
-permalink: javascript/autosize.html
-layout: subpage
-group: javascript
+permalink: javascript/autosize/
+redirect_from: "javascript/autosize.html"
 title: Autosize
+description: A plugin that allows textareas to automatically resize to their content.
 heading: Autosize
 subheading: A plugin for adding automatic vertical resizing to textareas.
 sublinks: ["#examples|Examples",
@@ -21,21 +21,24 @@ sublinks: ["#examples|Examples",
         Comes with a markup API that allows running the plugin without writing a single line of JavaScript.
         This is Responsive's first class API and should be your first consideration when using a plugin.
     </p>
+    <div class="alert" role="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            The Autosize plugin extends jQuery's <a href="http://api.jquery.com/val/" rel="external">val()</a> function to
+            fire an event: <code>input</code>. This allows the developer to bind to and handle the event when setting the content
+            programatically.
+        </p>
+    </div>
     <hr />
     <section id="examples">
         <h1>Examples</h1>
         <section class="row">
             <div class="col-s-6">
-                <h2>Standard</h2>
-                <textarea id="textarea1" name="textarea1" data-autosize class="full-width"></textarea>
-            </div>
-            <div class="col-s-6">
-                <h2>Extra Data-Attributes</h2>
-                <textarea id="textarea2" name="textarea2" data-autosize data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate" class="full-width validate" data-val-message="Generic error message"></textarea>
-                <p>Extra data-attributes configured to allow removal of problematic classes or attributes that could affect the cloned element used for calculating size.</p>
+                <textarea id="textarea1" name="textarea1" data-autosize></textarea>
             </div>
         </section>
         <div class="alert" role="alert">
+            <h4>Heads Up!</h4>
             <p>If running the plugin without using the markup API, add the class <code>.autosize</code> to the plugin to get the desired style behaviour.</p>
         </div>
     </section>
@@ -43,30 +46,16 @@ sublinks: ["#examples|Examples",
     <section id="markup">
         <h1>Markup</h1>
         <pre class="language-markup"><code>&lt;!-- Standard markup --&gt;
-&lt;textarea id="textarea1" name="textarea1" data-autosize &gt;&lt;/textarea &gt;
-&lt;!-- Additional remove attributes/classes markup (space separated values) --&gt;
-&lt;textarea id="textarea2" name="textarea2" data-autosize data-autosize-remove-attributes="data-val-message" data-autosize-remove-classes="validate error" &gt;&lt;/textarea &gt;</code></pre>
+&lt;textarea id="textarea1" name="textarea1" data-autosize&gt;&lt;/textarea&gt;</code></pre>
     </section>
     <hr />
     <section id="methods">
         <h1>Methods</h1>
         <p>The autosize exposes the following method signatures.</p>
         <dl>
-            <dt><strong>.autosize(options)</strong>  </dt>
+            <dt><strong>.autosize()</strong>  </dt>
             <dd>
-                Initialises the plugin with an optional options <code>object</code>
-                <dl class="dl-horizontal">
-                    <dt><strong>options</strong></dt>
-                    <dd>
-                        Contains parameters to pass to the plugin.
-                        <dl>
-                            <dt><strong>removeAttributes</strong></dt>
-                            <dd>A space separated list of attributes to remove from the cloned textarea</dd>
-                            <dt><strong>removeClasses</strong></dt>
-                            <dd>A space separated list of CSS classes to remove from the cloned textarea</dd>
-                        </dl>
-                    </dd>
-                </dl>
+                Initialises the plugin.
             </dd>
             <dt><strong>.autosize("size")</strong>  </dt>
             <dd>Triggers the plugin to resize to match its text.</dd>
@@ -82,21 +71,8 @@ sublinks: ["#examples|Examples",
             <dt><strong>sized.r.autosize</strong></dt>
             <dd>This event is fired when the plugins <code>sized</code> instance method is invoked once the textarea has completed the animation and is resized.</dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The autosize's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.autosize domchanged.r.autosize")
-           .on("ready.r.autosize domchanged.r.autosize", function () {
-    // Your custom behaviour...
-}); 
-
-// Bind to the size event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the size event.
 $("YOUR_SELECTOR").on("size.r.autosize", function(event) {
     // Your custom behaviour...
 });
@@ -105,5 +81,15 @@ $("YOUR_SELECTOR").on("size.r.autosize", function(event) {
 $("YOUR_SELECTOR").on("sized.r.autosize", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The autosize's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.autosize.data-api");</code></pre>
     </section>
 </section>

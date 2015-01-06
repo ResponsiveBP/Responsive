@@ -12,6 +12,9 @@ kramdown:
   hard_wrap: false
   parse_block_html: true
 
+gems:
+  - jekyll-redirect-from
+
 defaults:
   -
     scope:
@@ -45,8 +48,8 @@ author: "James South, and Responsive contributers"
 
 # Custom variables
 version: 4.0.0
-buildsize : 25.5
+buildsize : 27.7
 repo: https://github.com/responsivebp/responsive
 sourcefiles: https://github.com/ResponsiveBP/Responsive/archive/4.0.0.zip
-release: https://github.com/ResponsiveBP/Responsive/releases/download/3.1.4/responsive.zip
+release: https://github.com/ResponsiveBP/Responsive/releases/download/4.0.0/responsive.zip
 

@@ -1,5 +1,6 @@
 ---
 permalink: javascript/tabs/
+redirect_from: "javascript/tabs.html"
 title: Tabs
 description: An accessible plugin for displaying responsive tabbed content.
 heading: Tabs
@@ -32,7 +33,6 @@ sublinks: ["#examples|Examples",
     <hr />
     <section id="examples">
         <h1>Examples</h1>
-        <p>By default the tabs will </p>
         <div class="row">
             <div class="col-s-6">
                 <div class="tabs" data-tabs>
@@ -72,6 +72,16 @@ sublinks: ["#examples|Examples",
                 </div>
             </div>
         </div>
+        <p>
+            By default the tabs plugin will show the first pane. To change the default active pane in the markup add the
+            attribute <code>aria-selected="true"</code> to the target <code>&lt;a/&gt;</code> element.
+        </p>
+        <pre class="language-markup"><code>&lt;div class="tabs" data-tabs&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#" aria-selected="true"&gt;tab2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;tab3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;</code></pre>
     </section>
     <hr />
     <section id="markup">
@@ -80,10 +90,10 @@ sublinks: ["#examples|Examples",
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#"&gt;tab1&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#"&gt;tab2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;tab3&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
-    &lt;section&gt;
-        ....
-    &lt;/section&gt;
+    &lt;section&gt;...&lt;/section&gt;
+    &lt;section&gt;...&lt;/section&gt;
     &lt;section&gt;...&lt;/section&gt;
 &lt;/div&gt;</code></pre>
     </section>
@@ -113,21 +123,8 @@ sublinks: ["#examples|Examples",
                 animation and the new pane is visible.
             </dd>
         </dl>
-    </section>
-    <hr />
-    <section id="dataapi">
-        <h1>Data API</h1>
-        <p>
-            The tabs plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
-            If you need to override this behaviour the following code will allow you to do so.
-        </p>
-        <pre class="language-javascript"><code>// Override the default behaviour
-$(document).off("ready.r.tabs domchanged.r.tabs")
-           .on("ready.r.tabs domchanged.r.tabs", function (event) {
-    // Your custom behaviour...
-}); 
-
-// Bind to the show event.
+        <p>Binding to these events is as follows:</p>
+        <pre class="language-javascript"><code>// Bind to the show event.
 $("YOUR_SELECTOR").on("show.r.tabs", function(event) {
     // Your custom behaviour...
 });
@@ -136,5 +133,15 @@ $("YOUR_SELECTOR").on("show.r.tabs", function(event) {
 $("YOUR_SELECTOR").on("shown.r.tabs", function(event) {
     // Your custom behaviour...
 });</code></pre>
+    </section>
+    <hr />
+    <section id="dataapi">
+        <h1>Data API</h1>
+        <p>
+            The tabs plugin's default behaviour is bound using a markup API that allows running the plugin without writing a single line of JavaScript.
+            If you need to disable this behaviour the following code will allow you to do so.
+        </p>
+        <pre class="language-javascript"><code>// Disable the default loading behaviour
+$(document).off(".r.tabs.data-api");</code></pre>
     </section>
 </section>
