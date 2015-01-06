@@ -1,42 +1,49 @@
 {
-  "name": "responsive",
-  "description": "A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites.",
-  "version": "4.0.0",
-  "keywords": [
-    "responsive",
-    "css",
-    "javascript",
-    "html",
-    "rwd"
-  ],
-  "homepage": "http://responsivebp.com",
-  "author": "James South",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/responsivebp/responsive.git"
-  },
-  "bugs": {
-    "url": "https://github.com/responsivebp/responsive/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/ResponsiveBP/Responsive/blob/master/MIT-LICENSE.txt"
+    "name": "responsive",
+    "description": "A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites.",
+    "version": "4.0.0",
+    "keywords": [
+        "html",
+        "css",
+        "js",
+        "javascript",
+        "sass",
+        "mobile-first",
+        "responsive",
+        "rwd",
+        "front-end",
+        "framework",
+        "boilerplate",
+        "web"
+    ],
+    "homepage": "http://responsivebp.com",
+    "author": "James South",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/responsivebp/responsive.git"
+    },
+    "bugs": {
+        "url": "https://github.com/responsivebp/responsive/issues"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/ResponsiveBP/Responsive/blob/master/MIT-LICENSE.txt"
+        }
+    ],
+    "devDependencies": {
+        "del": "^1.1.1",
+        "event-stream": "^3.2.1",
+        "gulp": "^3.8.10",
+        "gulp-autoprefixer": "^2.0.0",
+        "gulp-concat": "^2.4.3",
+        "gulp-jshint": "^1.9.0",
+        "gulp-load-plugins": "^0.8.0",
+        "gulp-minify-css": "^0.3.11",
+        "gulp-rename": "^1.2.0",
+        "gulp-ruby-sass": "^0.7.1",
+        "gulp-uglify": "^1.0.2",
+        "gulp-util": "^3.0.1",
+        "gulp-zip": "^2.0.2"
     }
-  ],
-  "devDependencies": {
-    "del": "^1.1.1",
-    "event-stream": "^3.2.1",
-    "gulp": "^3.8.10",
-    "gulp-autoprefixer": "^2.0.0",
-    "gulp-concat": "^2.4.3",
-    "gulp-jshint": "^1.9.0",
-    "gulp-load-plugins": "^0.8.0",
-    "gulp-minify-css": "^0.3.11",
-    "gulp-rename": "^1.2.0",
-    "gulp-ruby-sass": "^0.7.1",
-    "gulp-uglify": "^1.0.2",
-    "gulp-util": "^3.0.1",
-    "gulp-zip": "^2.0.2"
-  }
 }
