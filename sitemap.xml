@@ -12,7 +12,7 @@ layout: nil
   </url>
   {% for page in site.pages %}
   <url>
-    <loc>http://responsivebp.com{{ site.baseurl }}{{ page.url }}</loc>
+    <loc>http://responsivebp.com{{ page.url }}</loc>
     {% if page.sitemap.lastmod %}
     <lastmod>{{ page.sitemap.lastmod | date: "%Y-%m-%d" }}</lastmod>
     {% elsif page.lastmod %}
