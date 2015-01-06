@@ -9,7 +9,8 @@ sublinks: ["#normalize|Normalize",
             "#typography|Typography",
             "#inlinetype|Inline Type",
             "#visibilityhelpers|Visibility Helpers",
-            "#layouthelpers|Layout Helpers"]
+            "#layouthelpers|Layout Helpers",
+            "#texthelpers|Text Layout Helpers"]
 ---
 <section id="normalize">
     <h1>Normalize</h1>
@@ -327,4 +328,29 @@ margin: 1.561rem 0;</code></pre>
             and <code>{display}-{grid range}-only</code> variants for each grid range.
         </p>
     </div>
+</section>
+<hr />
+<section id="texthelpers">
+    <h1>Text Layout Helpers</h1>
+    <p>Responsive provides methods for lining up text within a container</p>
+    <p>The following classes are available for changing the layout of text</p>
+    <dl>
+        <dt><code>.text-push</code></dt>
+        <dd>
+            Lines up text to the right hand side of the container. Left in rtl mode.
+        </dd>
+        <dt><code>.text-pull</code></dt>
+        <dd>
+            Lines up text to the left hand side of the container. Right in rtl mode.
+        </dd>
+        <dt><code>.text-center</code></dt>
+        <dd>
+            Lines up text to the center of the container.
+        </dd>
+    </dl>
+    <h4>Heads Up!</h4>
+    <p>
+        <code>.text-pull</code>, <code>.text-push</code>, and <code>.text-center</code> have <code>{text-align}-{grid range}</code>
+        <br />and <code>{text-align}-{grid range}-only</code> variants for each grid range.
+    </p>
 </section>
