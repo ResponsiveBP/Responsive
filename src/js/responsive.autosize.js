@@ -48,6 +48,7 @@
         this.options = $.extend({}, this.defaults, options);
         this.sizing = null;
         this.difference = 0;
+        this.height = this.$element.height();
 
         // Initial setup.
         this.init();
@@ -75,11 +76,26 @@
 
     AutoSize.prototype.size = function () {
 
-        var $element = this.$element,
+        var self = this,
+            $element = this.$element,
             element = this.element,
             sizeEvent = $.Event(esize);
 
-        $element.trigger(sizeEvent);
+        if (this.sizing) {
+            return;
+        }
+
+        // Check and get the height
+        $element.height("auto");
+        var scrollHeight = element.scrollHeight - this.difference,
+            different = this.height !== scrollHeight;
+
+        $element.height(this.height);
+
+        // Trigger events if need be.
+        if (different) {
+            $element.trigger(sizeEvent);
+        }
 
         if (this.sizing || sizeEvent.isDefaultPrevented()) {
             return;
@@ -87,13 +103,19 @@
 
         this.sizing = true;
 
-        // Reset the height
-        $element.height("auto");
-        $element.height(element.scrollHeight - this.difference);
+        $element.height(scrollHeight);
 
-        // Do our callback
+        if (different) {
+            // Do our callback
+            $element.onTransitionEnd(function() {
+                self.sizing = false;
+                self.height = scrollHeight;
+                $element.trigger($.Event(esized));
+            });
+            return;
+        }
+
         this.sizing = false;
-        $element.trigger($.Event(esized));
     };
 
     // No conflict.

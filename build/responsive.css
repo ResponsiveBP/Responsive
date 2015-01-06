@@ -4640,7 +4640,9 @@ table {
 
 .autosize,
 [data-autosize] {
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-transition: height .2s linear;
+          transition: height .2s linear; }
 
 .carousel {
   margin-bottom: 1rem;
