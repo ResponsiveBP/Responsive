@@ -2286,7 +2286,7 @@
             this.isLocalHidden = $target.is(":hidden");
             $modal.addClass(this.options.fitViewport ? "container" : "");
             $placeholder.detach().insertAfter($target);
-            $target.detach().appendTo($content).removeClass("hidden");
+            $target.detach().appendTo($content).removeClass("hidden").attr({ "aria-hidden": false });
             $content.appendTo($modal);
             // Fade in.
             fadeIn();
@@ -2387,7 +2387,9 @@
         if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax, .modal-image")) {
 
             // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "")
+                                  .attr({ "aria-hidden": this.isLocalHidden ? true : false })
+                                  .detach().insertAfter($placeholder);
             $placeholder.detach().insertAfter($overlay);
 
         }
