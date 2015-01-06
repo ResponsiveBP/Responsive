@@ -5,12 +5,20 @@
     // XS doesn't have a min value.
     @if $bp == xxs {
 
-        .text-#{$bp}-left {
+        .text-#{$bp}-pull {
             text-align: left;
+
+            [dir="rtl"] & {
+                text-align: right;
+            }
         }
 
-        .text-#{$bp}-right {
+        .text-#{$bp}-push {
             text-align: right;
+
+            [dir="rtl"] & {
+                text-align: left;
+            }
         }
 
         .text-#{$bp}-center {
@@ -18,12 +26,20 @@
         }
 
         @include bp-max($bp) {
-            .text-#{$bp}-left-only {
+            .text-#{$bp}-pull-only {
                 text-align: left;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
             }
 
-            .text-#{$bp}-right-only {
+            .text-#{$bp}-push-only {
                 text-align: right;
+
+                [dir="rtl"] & {
+                    text-align: left;
+                }
             }
 
             .text-#{$bp}-center-only {
@@ -35,12 +51,20 @@
 
         @include bp-min($bp) {
 
-            .text-#{$bp}-left {
+            .text-#{$bp}-pull {
                 text-align: left;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
             }
 
-            .text-#{$bp}-right {
+            .text-#{$bp}-push {
                 text-align: right;
+
+                [dir="rtl"] & {
+                    text-align: left;
+                }
             }
 
             .text-#{$bp}-center {
@@ -49,12 +73,20 @@
             // Large doesn't need an "only" since it operates on min width.
             @if $bp != l {
                 @include bp-max($bp) {
-                    .text-#{$bp}-left {
+                    .text-#{$bp}-pull {
                         text-align: left;
+
+                        [dir="rtl"] & {
+                            text-align: right;
+                        }
                     }
 
-                    .text-#{$bp}-right {
+                    .text-#{$bp}-push {
                         text-align: right;
+
+                        [dir="rtl"] & {
+                            text-align: left;
+                        }
                     }
 
                     .text-#{$bp}-center {

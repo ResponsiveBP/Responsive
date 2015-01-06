@@ -63,12 +63,20 @@
 @include layout(l);
 
 // Text align helpers
-.text-left {
+.text-pull {
     text-align: left;
+
+    [dir="rtl"] & {
+        text-align: right;
+    }
 }
 
-.text-right {
+.text-push {
     text-align: right;
+
+    [dir="rtl"] & {
+        text-align: left;
+    }
 }
 
 .text-center {
