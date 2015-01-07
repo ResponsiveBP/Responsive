@@ -19,9 +19,13 @@
 }
 
 // Animation styles
-.expand,
+.trans,
 .collapse {
     transition: height .5s ease, width .5s ease;
+}
+
+.expand,
+.collapse {
     display: block;
     height: auto;
     margin-top: 0;
