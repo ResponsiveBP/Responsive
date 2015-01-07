@@ -3,7 +3,7 @@
 
 ###Responsive is the developers framework.
 
-Frameworks like Bootstrap and Foundation are too design opinionated and heavy. They're great for prototyping but every time
+Other frameworks are too design opinionated and heavy. They're great for prototyping but every time
 you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
 functionality of the website. That costs developers time and money.
 
@@ -11,17 +11,18 @@ functionality of the website. That costs developers time and money.
 testing; specifically developed to be as lightweight as possible to prevent the need to undo styles set by the framework itself
 and allow developers to write efficient code and lower costs.
   
-**Responsive is tiny**. The combined output CSS and JavaScript is **only 25.4kb minified and gzipped** but there is a lot of functionality 
-built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
+**Responsive is tiny**. The combined output CSS and JavaScript is **only 22.9kb minified and gzipped** but there is a lot of functionality 
+built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website 
+such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
 
-Browser support covers IE8+ as well as all other modern browsers.
+Browser support covers IE9+ as well as all other modern browsers.
 
 ##Downloading Responsive
 
 Several options are available for downloading Responsive:
 
-- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/3.1.0/responsive.zip).
-- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/3.1.0.zip).
+- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.0.0/responsive.zip).
+- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.0.0.zip).
 - Clone the repo: `git clone https://github.com/ResponsiveBP/Responsive.git`.
 - Install with [Bower](http://bower.io): `bower install responsive`.
 
@@ -29,9 +30,9 @@ Several options are available for downloading Responsive:
 
 Responsives' documentation, included in the [gh-pages](https://github.com/ResponsiveBP/Responsive/tree/gh-pages) repo. It is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at [http://responsivebp.com](http://responsivebp.com). The docs may also be run locally.
 
-1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v2.2).
+1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v2.5.2).
  - **If you are running Windows** please read this [unofficial guide](https://github.com/juthilo/run-jekyll-on-windows/) to get Jekyll up and running without problems.
-2. From the root `/Responsive` directory, run `jekyll serve --watch` in the command line.
+2. From the root `/Responsive` directory, run `jekyll serve` in the command line.
  - Open [http://localhost:4000](http://localhost:4000) in your browser to view the compiled docs.
 
 
@@ -39,9 +40,17 @@ Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com
 
 ##Contributing
 
-Contribution is most welcome, that's the whole idea! Together as a community we can build a boilerplate for building responsive sites that will ensure that high standards can be delivered across all devices.   
+Contribution is most welcome, that's the whole idea! Together as a community we can build a boilerplate for building 
+responsive sites that will ensure that high standards can be delivered across all devices.   
 
-Please adhere to existing JavaScript and Sass styles though when submitting code and ensure that you test thoroughly on multiple devices.
+Please adhere to existing JavaScript and Sass styles though when submitting code and ensure 
+that you test thoroughly on multiple devices.
+
+Please take a moment to review the [guidelines for contributing](CONTRIBUTING.md).
+
+* [Bug reports](CONTRIBUTING.md#bugs)
+* [Feature requests](CONTRIBUTING.md#features)
+* [Pull requests](CONTRIBUTING.md#pull-requests)
 
 ##Building the Sass and JavaScript
 
@@ -66,12 +75,13 @@ Have a bug or a feature request? Please open a new [issue](https://github.com/re
 
 ##Authors
 
-James South [@james_m_south](http://twitter.com/james_m_south)
+James South [@james_m_south](http://twitter.com/james_m_south) and the Responsive contributors.
 
 ##Community
 
 Follow [@responsivebp](http://twitter.com/responsivebp) on Twitter.
+Discuss Responsive on [Gitter](https://gitter.im/ResponsiveBP/Responsive).
 
 ###Copyright and license
 
-Copyright 2013 James South under the [MIT license](http://opensource.org/licenses/MIT).
+Copyright 2013-2015 James South under the [MIT license](http://opensource.org/licenses/MIT).
