@@ -1,6 +1,8 @@
 #Responsive
 ##A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/ResponsiveBP/Responsive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ###Responsive is the developers framework.
 
 Other frameworks are too design opinionated and heavy. They're great for prototyping but every time
