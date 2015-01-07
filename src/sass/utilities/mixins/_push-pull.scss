@@ -2,39 +2,39 @@
 // Creates float classes for each breakpoint.
 //##
 @mixin push-pull($bp) {
-    // XS doesn't have a min value.
-    @if $bp == xs {
+    // XXS doesn't have a min value.
+    @if $bp == xxs {
 
         .push-#{$bp} {
-            float: right !important;
+            float: right ;
 
             [dir="rtl"] & {
-                float: left !important;
+                float: left ;
             }
         }
 
         .pull-#{$bp} {
-            float: left !important;
+            float: left ;
 
             [dir="rtl"] & {
-                float: right !important;
+                float: right ;
             }
         }
 
         @include bp-max($bp) {
             .push-#{$bp}-only {
-                float: right !important;
+                float: right ;
 
                 [dir="rtl"] & {
-                    float: left !important;
+                    float: left ;
                 }
             }
 
             .pull-#{$bp}-only {
-                float: left !important;
+                float: left ;
 
                 [dir="rtl"] & {
-                    float: right !important;
+                    float: right ;
                 }
             }
         }
@@ -44,36 +44,36 @@
         @include bp-min($bp) {
 
             .push-#{$bp} {
-                float: right !important;
+                float: right ;
 
                 [dir="rtl"] & {
-                    float: left !important;
+                    float: left ;
                 }
             }
 
             .pull-#{$bp} {
-                float: left !important;
+                float: left ;
 
                 [dir="rtl"] & {
-                    float: right !important;
+                    float: right ;
                 }
             }
             // Large doesn't need an "only" since it operates on min width.
             @if $bp != l {
                 @include bp-max($bp) {
                     .push-#{$bp}-only {
-                        float: right !important;
+                        float: right ;
 
                         [dir="rtl"] & {
-                            float: left !important;
+                            float: left ;
                         }
                     }
 
                     .pull-#{$bp}-only {
-                        float: left !important;
+                        float: left ;
 
                         [dir="rtl"] & {
-                            float: right !important;
+                            float: right ;
                         }
                     }
                 }

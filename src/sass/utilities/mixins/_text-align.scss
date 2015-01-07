@@ -3,31 +3,47 @@
 //##
 @mixin text-align($bp) {
     // XS doesn't have a min value.
-    @if $bp == xs {
+    @if $bp == xxs {
 
-        .text-#{$bp}-left {
-            text-align: left !important;
+        .text-#{$bp}-pull {
+            text-align: left;
+
+            [dir="rtl"] & {
+                text-align: right;
+            }
         }
 
-        .text-#{$bp}-right {
-            text-align: right !important;
+        .text-#{$bp}-push {
+            text-align: right;
+
+            [dir="rtl"] & {
+                text-align: left;
+            }
         }
 
         .text-#{$bp}-center {
-            text-align: center !important;
+            text-align: center;
         }
 
         @include bp-max($bp) {
-            .text-#{$bp}-left-only {
-                text-align: left !important;
+            .text-#{$bp}-pull-only {
+                text-align: left;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
             }
 
-            .text-#{$bp}-right-only {
-                text-align: right !important;
+            .text-#{$bp}-push-only {
+                text-align: right;
+
+                [dir="rtl"] & {
+                    text-align: left;
+                }
             }
 
             .text-#{$bp}-center-only {
-                text-align: center !important;
+                text-align: center;
             }
         }
     }
@@ -35,30 +51,46 @@
 
         @include bp-min($bp) {
 
-            .text-#{$bp}-left {
-                text-align: left !important;
+            .text-#{$bp}-pull {
+                text-align: left;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
             }
 
-            .text-#{$bp}-right {
-                text-align: right !important;
+            .text-#{$bp}-push {
+                text-align: right;
+
+                [dir="rtl"] & {
+                    text-align: left;
+                }
             }
 
             .text-#{$bp}-center {
-                text-align: center !important;
+                text-align: center;
             }
             // Large doesn't need an "only" since it operates on min width.
             @if $bp != l {
                 @include bp-max($bp) {
-                    .text-#{$bp}-left {
-                        text-align: left !important;
+                    .text-#{$bp}-pull {
+                        text-align: left;
+
+                        [dir="rtl"] & {
+                            text-align: right;
+                        }
                     }
 
-                    .text-#{$bp}-right {
-                        text-align: right !important;
+                    .text-#{$bp}-push {
+                        text-align: right;
+
+                        [dir="rtl"] & {
+                            text-align: left;
+                        }
                     }
 
                     .text-#{$bp}-center {
-                        text-align: center !important;
+                        text-align: center;
                     }
                 }
             }

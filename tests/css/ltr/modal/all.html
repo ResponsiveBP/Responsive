@@ -7,14 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>modal Tests</title>
 
-    <!-- Combined CSS as respond.js cannot cater for imports-->
     <link href="../../../../build/responsive.css" rel="stylesheet" />
-
-    <!--[if lt IE 9 &!(IEMobile)]>
-        <script src="../../../../build/vendor/html5shiv.min.js"></script>
-        <script src="../../../../build/vendor/respond.min.js"></script>
-    <![endif]-->
-
     <link href="../../test-assets/css/tests.css" rel="stylesheet" />
 </head>
 <body>
@@ -44,7 +37,7 @@
 
         <h3>Internal target</h3>
         <a href="#" data-modal-target="#overlay1">Launch internal overlay</a>
-        <div id="overlay1" class="hidden">
+        <div id="overlay1" aria-hidden="true">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -167,14 +160,7 @@
         </div>
     </article>
 
-    <!-- Scripts at the bottom for improved performance. -->
-    <!--[if IE 8]>
-    <script src="../../../../build/vendor/jquery-1.11.1.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 8]><!-->
-    <script src="../../../../build/vendor/jquery-2.1.1.min.js"></script>
-    <!--<![endif]-->
-
+    <script src="../../../../build/vendor/jquery-2.1.3.min.js"></script>
     <script src="../../../../build/responsive.js"></script>
     <script>
         var $target = $(":attrStart(data-modal)"),

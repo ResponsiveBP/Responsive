@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -19,13 +19,14 @@
         emouseleave = "mouseleave",
         ekeydown = "keydown",
         eclick = "click",
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
     var keys = {
         SPACE: 32,
+        ENTER: 13,
         LEFT: 37,
         RIGHT: 39
     };
@@ -54,10 +55,11 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
+        this.keyboardTriggered = null;
         this.translationDuration = null;
-        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.find(".carousel-control.forward");
-        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.find(".carousel-control.back");
-        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("ol > li");
+        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.children("button.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.children("button:not(.forward)");
+        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("> ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
         var self = this,
@@ -84,12 +86,11 @@
         }
 
         // Add a11y features.
-        this.$element.attr({ "role": "listbox", "id": this.id });
-        this.$element.children("figure").each(function () {
-            var $this = $(this),
-                active = $this.hasClass("carousel-active");
+        this.$element.attr({ "role": "listbox", "aria-live": "polite", "id": this.id });
 
-            $this.attr({
+        this.$element.children("figure").each(function (index) {
+            var active = index === activeIndex;
+            $(this).attr({
                 "role": "option",
                 "aria-selected": active,
                 "tabindex": active ? 0 : -1
@@ -109,7 +110,7 @@
         });
 
         // Find and a11y indicators.
-        this.$indicators.attr({ "role": "button", "aria-controls": self.id });
+        this.$indicators.attr({ "role": "button", "aria-controls": self.id }).eq(activeIndex).addClass("active");
 
         // Bind events
         // Not namespaced as we want to keep behaviour when not using data api.
@@ -132,7 +133,7 @@
             this.$element.on(ekeydown, $.proxy(this.keydown, this));
         }
 
-        $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
+        $(document).on(this.options.keyboard ? [eclick, ekeydown].join(" ") : eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
     Carousel.prototype.activeindex = function () {
@@ -287,13 +288,16 @@
                 if (self.$items && activePosition === self.$items.length - 1) {
                     self.$nextTrigger.hide().attr("aria-hidden", true);
                     self.$previousTrigger.show().removeAttr("aria-hidden");
+                    if (self.keyboardTriggered) { self.$previousTrigger.focus(); self.keyboardTriggered = false; }
                 }
                 else if (self.$items && activePosition === 0) {
                     self.$previousTrigger.hide().attr("aria-hidden", true);
                     self.$nextTrigger.show().removeAttr("aria-hidden");
+                    if (self.keyboardTriggered) { self.$nextTrigger.focus(); self.keyboardTriggered = false; }
                 } else {
                     self.$nextTrigger.show().removeAttr("aria-hidden");
                     self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.keyboardTriggered = false;
                 }
             }
 
@@ -352,6 +356,8 @@
 
         if (which === keys.LEFT || which === keys.RIGHT) {
 
+            this.keyboardTriggered = true;
+
             event.preventDefault();
             event.stopPropagation();
 
@@ -382,21 +388,30 @@
     Carousel.prototype.click = function (event) {
 
         if (!event) {
-            return;
+            return; 
+        }
+
+        var which = event.which;
+
+        if (which && which !== 1) {
+            if (which === keys.SPACE || which === keys.ENTER) {
+                this.keyboardTriggered = true;
+            } else {
+                return;
+            }
         }
 
         event.preventDefault();
         event.stopPropagation();
-        var $this = $(event.target),
-            indicator = $this.is(this.$indicators.selector);
+        var $this = $(event.target);
 
-        if (indicator) {
-            this.to($this.index());
-        } else if ($this.is(this.$nextTrigger.selector)) {
+        if ($this.hasClass("forward")) {
             this.next();
         }
-        else if ($this.is(this.$previousTrigger.selector)) {
+        else if ($this.is("button")) {
             this.prev();
+        } else {
+            this.to($this.index());
         }
     };
 
@@ -449,6 +464,8 @@
             percent *= -1;
         }
 
+        // This is crazy complicated. Basically swipe behaviour change direction in rtl
+        // So you need to handle that.
         this.$element.addClass("no-transition");
         if (this.options.mode === "slide") {
             if (rtl) {
@@ -520,6 +537,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.carousel;
+
     // Plug-in definition 
     $.fn.carousel = function (options) {
 
@@ -538,7 +558,7 @@
                 // Cycle to the given number.
                 data.to(options);
 
-            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts.slide)) {
+            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts && opts.slide)) {
 
                 data[options]();
 
@@ -551,8 +571,6 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    // No conflict.
-    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;
@@ -562,9 +580,10 @@
     var init = function () {
         $(".carousel").each(function () {
             var $this = $(this),
-                options = $this.data("r.carouselOptions");
-            if (!options) {
-                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+                loaded = $this.data("r.carouselLoaded");
+            if (!loaded) {
+                $this.data("r.carouselLoaded", true);
+                $this.carousel($.getDataOptions($this, "carousel"));
             }
         });
     },
@@ -576,4 +595,4 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));
+}(jQuery, window, ".r.carousel", ".data-api"));

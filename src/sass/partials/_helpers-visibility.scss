@@ -1,6 +1,4 @@
-/*
- * Image replacement
- */
+// Image replacement
 .ir {
     background-color: transparent;
     border: 0;
@@ -14,17 +12,14 @@
     }
 }
 
-/*
- * Hide from both screen readers and browsers: h5bp.com/u
- */
+// Hide from both screen readers and browsers: h5bp.com/u
+[aria-hidden="true"],
 .hidden {
     display: none !important;
     visibility: hidden;
 }
 
-/*
- * Hide only visually, but have it available for screen readers: h5bp.com/v
- */
+// Hide only visually, but have it available for screen readers: h5bp.com/v
 .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -34,10 +29,8 @@
     padding: 0;
     position: absolute;
     width: 1px;
-    /*
-	 * Extends the .visuallyhidden class to allow the element to be focusable
-	 * when navigated to via the keyboard: h5bp.com/p
-	 */
+    // Extends the .visuallyhidden class to allow the element to be focusable
+    // when navigated to via the keyboard: h5bp.com/p
     &.focusable {
         &:active, &:focus {
             clip: auto;
@@ -50,23 +43,17 @@
     }
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
+// Hide visually and from screen readers, but maintain layout
 .invisible {
     visibility: hidden;
 }
 
-/*
- * Fade opacity with animation
- */
+// Fade opacity with animation
 .fade-out {
     opacity: 0 !important;
 }
 
-/*
- * Opacity helper to add to elements to allow fade animation
- */
+// Opacity helper to add to elements to allow fade animation
 .fade-out,
 .fade-in {
     transition: opacity .3s;
@@ -76,9 +63,8 @@
     opacity: 1 !important;
 }
 
-/*
- * Responsive helpers to toggle visibility.
- */
+// Responsive helpers to toggle visibility.
+.visible-xxs,
 .visible-xs,
 .visible-s,
 .visible-m,
@@ -87,6 +73,7 @@
 }
 
 // XS, S, M, L viewports.
+@include visibility(xxs);
 @include visibility(xs);
 @include visibility(s);
 @include visibility(m);

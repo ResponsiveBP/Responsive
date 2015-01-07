@@ -1,35 +1,27 @@
 .alert {
     @extend .clearfix;
     position: relative;
-    margin: 1em 0;
-    padding: 0 1em;
-    background-color: $alert-color-scheme;
-    border: 1px solid darken($alert-color-scheme, 20);
-    color: darken($alert-color-scheme, 70);
+    margin: 1rem 0;
+    padding: 0 1rem;
+    background-color: $alert-background-color;
+    border-left: 5px solid $alert-border-color;
+    color: darken($alert-background-color, 50);
 
     .close {
         position: relative;
-        right: -1.73em;
-        top: .13em;
+        right: -2.73rem;
+        top: .13rem;
         float: right;
+        background-color: transparent;
+        border: none;
         color: inherit;
-        font-size: 1.17em;
+        font-size: $h3-font-size;
         font-weight: bold;
-        line-height: 1em;
-
 
         [dir="rtl"] & {
             float: left;
             right: auto;
-            left: -1.73em;
-        }
-
-        &,
-        &:active,
-        &:focus,
-        &:hover {
-            background-color: transparent;
-            border: none;
+            left: -2.73rem;
         }
 
         &:hover {
@@ -39,11 +31,11 @@
 }
 
 .alert-dismissable {
-    padding-right: 2.17em;
+    padding-right: 2.87rem;
 
     [dir="rtl"] & {
-        padding-right: 1em;
-        padding-left: 2.17em;
+        padding-right: 1rem;
+        padding-left: 2.87rem;
     }
 }
 

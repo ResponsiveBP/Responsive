@@ -1,12 +1,13 @@
 {
     "name": "responsive",
     "description": "A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites.",
-    "version": "3.1.4",
+    "version": "4.0.0",
     "homepage": "http://responsivebp.com",
     "authors": [
         "James South"
     ],
     "keywords": [
+        "html",
         "css",
         "js",
         "javascript",
@@ -36,9 +37,6 @@
         "tests"
     ],
     "dependencies": {
-        "html5shiv": "3.7.2",
-        "jquery": "2.1.1",
-        "jquery-legacy": "jquery#1.11.1",
-        "respond": "1.4.2"
+        "jquery": "2.1.3"
     }
 }

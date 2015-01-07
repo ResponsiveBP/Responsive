@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,135 +13,113 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = "resize orientationchange",
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
+        einput = "input",
         ekeyup = "keyup",
-        epaste = "paste",
-        ecut = "cut",
         esize = "size" + ns,
         esized = "sized" + ns;
+
+    (function (oldVal) {
+        /// <summary>Override the core val method in the jQuery object to fire an input event on autosize plugins whenever it is called.</summary>
+        /// <param name="old" type="Function">
+        ///      The jQuery function being overridden.
+        /// </param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+        $.fn.val = function () {
+            // Execute the original val() method using the augmented arguments collection.
+            var result = oldVal.apply(this, arguments);
+
+            if (this.data("r.autosize") && arguments.length) {
+                this.trigger($.Event(einput));
+            }
+
+            return result;
+        };
+    })($.fn.val);
 
     // AutoSize class definition
     var AutoSize = function (element, options) {
 
         this.$element = $(element);
-        this.defaults = {
-            removeAttributes: null,
-            removeClasses: null
-        };
+        this.element = element,
         this.options = $.extend({}, this.defaults, options);
-        this.$clone = null;
         this.sizing = null;
+        this.difference = 0;
+        this.height = this.$element.height();
 
         // Initial setup.
-        this.clone();
+        this.init();
 
-        // Bind events
-        this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
-        $(w).off(eresize).on(eresize, $.debounce($.proxy(this.size, this), 50));
+        // Bind events. Keyup is required for IE9.
+        this.$element.on([einput, ekeyup].join(" "), $.debounce($.proxy(this.size, this), 100));
+        $(w).on(eresize, $.debounce($.proxy(this.size, this), 100));
     };
 
-    AutoSize.prototype.clone = function () {
+    AutoSize.prototype.init = function () {
+        var height = this.$element.outerHeight();
+        this.difference = parseFloat(this.$element.css("paddingBottom")) +
+                          parseFloat(this.$element.css("paddingTop"));
 
-        var self = this,
-            attributes = this.options.removeAttributes,
-            classes = this.options.removeClasses,
-            $element = this.$element,
-            clone = function () {
+        // Firefox: scrollHeight isn't full height on border-box
+        if (this.element.scrollHeight + this.difference <= height) {
+            this.difference = 0;
+        }
 
-                // Create a clone and offset it removing all specified attributes classes and data.
-                self.$clone = self.$element.clone()
-                                  .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
-                                  .removeAttr("id name data-autosize " + attributes)
-                                  .removeClass(classes)
-                                  .removeClass(classes)
-                                  .addClass("autosize-clone")
-                                  .insertAfter($element);
-
-                // jQuery goes spare if you try to remove null data.
-                if (classes) {
-                    self.$clone.removeData(classes);
-                }
-            };
-
-        $.when(clone()).then(this.size());
+        // Only set the height if textarea has value.
+        if (this.element.value.replace(/\s/g, "").length > 0) {
+            this.$element.height(this.element.scrollHeight);
+        }
     };
 
     AutoSize.prototype.size = function () {
 
         var self = this,
             $element = this.$element,
-            element = this.$element[0],
-            $clone = this.$clone,
-            clone = $clone[0],
-            heightComparer = 0,
-            startHeight,
-            endHeight,
-            sizeEvent = $.Event(esize),
-            complete = function () {
-                self.sizing = false;
-                $element.trigger($.Event(esized));
-            };
+            element = this.element,
+            sizeEvent = $.Event(esize);
 
-        // Set the width of the clone to match.
-        $clone.width($element.width());
-
-        // Copy the text across.
-        $clone.val($element.val());
-
-        // Set the height so animation will work.
-        startHeight = $clone.height();
-        $element.height(startHeight);
-
-        // Shrink
-        while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
-            clone.rows -= 1;
+        if (this.sizing) {
+            return;
         }
 
-        // Grow
-        while (clone.scrollHeight > clone.offsetHeight && heightComparer !== clone.offsetHeight) {
-            heightComparer = element.offsetHeight;
-            clone.rows += 1;
+        // Check and get the height
+        $element.height("auto");
+        var scrollHeight = element.scrollHeight - this.difference,
+            different = this.height !== scrollHeight;
+
+        $element.height(this.height);
+
+        // Trigger events if need be.
+        if (different) {
+            $element.trigger(sizeEvent);
         }
-        clone.rows += 1;
 
-        endHeight = $clone.height();
+        if (this.sizing || sizeEvent.isDefaultPrevented()) {
+            return;
+        }
 
-        if (startHeight !== endHeight) {
+        this.sizing = true;
 
-            $element.trigger($.Event(esize));
+        $element.height(scrollHeight);
 
-            if (this.sizing || sizeEvent.isDefaultPrevented()) {
-                return;
-            }
-
-            this.sizing = true;
-
-            // Reset the height
-            $element.height($clone.height());
-
+        if (different) {
             // Do our callback
-            $element.onTransitionEnd(complete);
-        }
-    };
-
-    AutoSize.prototype.change = function (event) {
-
-        var self = this,
-            delay = 0;
-
-        if (event.type === "paste" || event.type === "cut") {
-            delay = 5;
+            $element.onTransitionEnd(function() {
+                self.sizing = false;
+                self.height = scrollHeight;
+                $element.trigger($.Event(esized));
+            });
+            return;
         }
 
-        w.setTimeout(function () {
-
-            // Run the size method.
-            self.size();
-
-        }, delay);
+        this.sizing = false;
     };
+
+    // No conflict.
+    var old = $.fn.autoSize;
 
     // Plug-in definition 
     $.fn.autoSize = function (options) {
@@ -166,8 +144,6 @@
     // Set the public constructor.
     $.fn.autoSize.Constructor = AutoSize;
 
-    // No conflict.
-    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;
@@ -177,9 +153,10 @@
     var init = function () {
         $("textarea[data-autosize]").each(function () {
             var $this = $(this),
-                options = $this.data("r.autosizeOptions");
-            if (!options) {
-                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+                loaded = $this.data("r.autosizeLoaded");
+            if (!loaded) {
+                $this.data("r.autosizeLoaded", true);
+                $this.addClass("autosize").autoSize($.getDataOptions($this, "autosize"));
             }
         });
     },
@@ -191,4 +168,4 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize"));
+}(jQuery, window, ".r.autosize", ".data-api"));

@@ -7,14 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>modal Tests</title>
 
-    <!-- Combined CSS as respond.js cannot cater for imports-->
     <link href="../../../../build/responsive.css" rel="stylesheet" />
-
-    <!--[if lt IE 9 &!(IEMobile)]>
-        <script src="../../../../build/vendor/html5shiv.min.js"></script>
-        <script src="../../../../build/vendor/respond.min.js"></script>
-    <![endif]-->
-
     <link href="../../test-assets/css/tests.css" rel="stylesheet" />
 </head>
 <body>
@@ -167,14 +160,31 @@
         </div>
     </article>
 
-    <!-- Scripts at the bottom for improved performance. -->
-    <!--[if IE 8]>
-    <script src="../../../../build/vendor/jquery-1.11.1.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 8]><!-->
-    <script src="../../../../build/vendor/jquery-2.1.1.min.js"></script>
-    <!--<![endif]-->
-
+    <script src="../../../../build/vendor/jquery-2.1.3.min.js"></script>
     <script src="../../../../build/responsive.js"></script>
+    <script>
+        var $target = $(":attrStart(data-modal)"),
+            $h1 = $("h1");
+
+        // Bind to the show event.
+        $target.on("show.r.modal", function (event) {
+            $h1.text("show");
+        });
+
+        // Bind to the shown event.
+        $target.on("shown.r.modal", function (event) {
+            $h1.text("shown");
+        });
+
+        // Bind to the hide event.
+        $target.on("hide.r.modal", function (event) {
+            $h1.text("hide");
+        });
+
+        // Bind to the hidden event.
+        $target.on("hidden.r.modal", function (event) {
+            $h1.text("hidden");
+        });
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
  */
 /*jshint expr:true*/
 /*global jQuery*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -14,8 +14,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -54,13 +54,12 @@
             $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
         }
 
-        var $tab = $("[href='" + this.options.target + "'], [data-dropdown-target='" + this.options.target + "']"),
-            tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
+        var id = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
 
-        $tab.attr({
-            "id": tabId,
+        this.$element.attr({
+            "id": id,
             "role": "tab",
             "aria-controls": paneId,
             "aria-selected": active,
@@ -71,7 +70,7 @@
         this.$target.attr({
             "id": paneId,
             "role": "tabpanel",
-            "aria-labelledby": tabId,
+            "aria-labelledby": id,
             "aria-hidden": !active,
             "tabindex": active ? 0 : -1
         });
@@ -110,7 +109,9 @@
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$target[dimension]("auto");
+            this.$target[dimension]("auto").attr({ "aria-hidden": false });
+            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false });
+
             this.endSize = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset to zero and force repaint.
@@ -167,16 +168,15 @@
                 var eventToTrigger = $.Event(completeEvent);
 
                 // Ensure the height/width is set to auto.
-                self.$target.removeClass("trans")[self.options.dimension]("");
+                self.$target[self.options.dimension]("");
 
                 self.transitioning = false;
 
                 // Set the correct aria attributes.
                 self.$target.attr({
                     "aria-hidden": !doShow,
-                    "tabindex": doShow ? 0 : -1,
+                    "tabindex": doShow ? 0 : -1
                 });
-
 
                 var $tab = $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
@@ -190,11 +190,13 @@
                 // Toggle any children.
                 self.$target.find("[tabindex]:not(.collapse)").attr({
                     "aria-hidden": !doShow,
-                    "tabindex": doShow ? 0 : -1,
+                    "tabindex": doShow ? 0 : -1
                 });
 
                 self.$element.trigger(eventToTrigger);
             };
+
+        this.$element.trigger(startEvent);
 
         if (this.transitioning || startEvent.isDefaultPrevented()) {
             return;
@@ -203,9 +205,8 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$element.trigger(startEvent);
         this.$target[method]("collapse");
-        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand");
 
         this.$target.onTransitionEnd(complete);
     };
@@ -255,6 +256,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.dropdown;
+
     // Plug-in definition 
     $.fn.dropdown = function (options) {
         return this.each(function () {
@@ -277,8 +281,6 @@
     // Set the public constructor.
     $.fn.dropdown.Constructor = Dropdown;
 
-    // No conflict.
-    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;
@@ -288,9 +290,10 @@
     var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                options = $this.data("r.dropdownOptions");
-            if (!options) {
-                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+                loaded = $this.data("r.dropdownLoaded");
+            if (!loaded) {
+                $this.data("r.dropdownLoaded", true);
+                $this.dropdown($.getDataOptions($this, "dropdown"));
             }
         });
     },
@@ -302,4 +305,4 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));
+}(jQuery, window, ".r.dropdown", ".data-api"));

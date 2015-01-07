@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,8 +13,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -76,6 +76,9 @@
         this.$element.onTransitionEnd(complete);
     };
 
+    // No conflict.
+    var old = $.fn.table;
+
     // Plug-in definition 
     $.fn.tablelist = function (options) {
 
@@ -100,8 +103,6 @@
     // Set the public constructor.
     $.fn.tablelist.Constructor = Table;
 
-    // No conflict.
-    var old = $.fn.table;
     $.fn.tablelist.noConflict = function () {
         $.fn.tablelist = old;
         return this;
@@ -111,9 +112,10 @@
     var init = function () {
         $("table[data-table-list]").each(function () {
             var $this = $(this),
-                options = $this.data("r.tablelistOptions");
-            if (!options) {
-                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+                loaded = $this.data("r.tableLoaded");
+            if (!loaded) {
+                $this.data("r.tableLoaded", true);
+                $this.tablelist($.getDataOptions($this, {}, "tablelist", "r"));
             }
         });
     },
@@ -125,4 +127,4 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.tablelist"));
+}(jQuery, window, ".r.tablelist", ".data-api"));

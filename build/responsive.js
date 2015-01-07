@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.4 | MIT License | responsivebp.com */
+/*! Responsive v4.0.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -51,17 +51,17 @@
     $.support.currentGrid = (function () {
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
         /// <returns type="Object">
-        ///      An object containing two properties.
-        ///      &#10;    1: grid - The current applied grid; either xs, s, m, or l.
-        ///      &#10;    2: index - The index of the current grid in the range.
-        ///      &#10;    3: range - The available grid range.
+        ///   An object containing two properties.
+        ///   &#10;    1: grid - The current applied grid; either xxs, xs, s, m, or l.
+        ///   &#10;    2: index - The index of the current grid in the range.
+        ///   &#10;    3: range - The available grid range.
         ///</returns>
 
         var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
 
         return function () {
             // These numbers match values in the css
-            var grids = ["xs", "s", "m", "l"],
+            var grids = ["xxs", "xs", "s", "m", "l"],
                 key = parseInt($div.width(), 10);
 
             return {
@@ -140,8 +140,8 @@
         /// <summary>Performs the given callback at the end of a css transition.</summary>
         /// <param name="callback" type="Function">The function to call on transition end.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        var supportTransition = $.support.transition;
 
+        var supportTransition = $.support.transition;
         return this.each(function () {
 
             if (!$.isFunction(callback)) {
@@ -331,8 +331,7 @@
                     // Normalize the variables.
                     var isMouse = event.type === "mousedown",
                         isPointer = event.type !== "touchstart" && !isMouse,
-                        original = event.originalEvent,
-                        startEvent;
+                        original = event.originalEvent;
 
                     if ((isPointer || isMouse) && $(event.target).is("img")) {
                         event.preventDefault();
@@ -350,7 +349,7 @@
                         time: +new Date()
                     };
 
-                    startEvent = $.Event(eswipestart, { start: start });
+                    var startEvent = $.Event(eswipestart, { start: start });
 
                     $this.trigger(startEvent);
 
@@ -415,36 +414,24 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, options, prefix, namespace) {
+    $.getDataOptions = function ($elem, filter) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
-        /// <param name="options" type="Object">The object to extend</param>
-        /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
-        /// <param name="namespace" type="String">The namespace with which to segregate the data attribute.</param>
+        /// <param name="filter" type="String">The prefix with filter to identify the data attribute.</param>
         /// <returns type="Object">The extended object.</returns>
+        var options = {};
         $.each($elem.data(), function (key, val) {
-
-            if (key.indexOf(prefix) === 0 && key.length > prefix.length) {
+            if (key.indexOf(filter) === 0 && key.length > filter.length) {
 
                 // Build a key with the correct format.
-                var length = prefix.length,
+                var length = filter.length,
                     newKey = key.charAt(length).toLowerCase() + key.substring(length + 1);
 
                 options[newKey] = val;
-
-                // Clean up.
-                $elem.removeData(key);
             }
-
         });
 
-        if (namespace) {
-            $elem.data(namespace + "." + prefix + "Options", options);
-        } else {
-            $elem.data(prefix + "Options", options);
-        }
-
-        return options;
+        return Object.keys(options).length ? options : $elem.data();
     };
 
     $.debounce = function (func, wait, immediate) {
@@ -487,8 +474,7 @@
             $d = $(d);
 
         $.fn.html = function () {
-            // Execute the original HTML method using the
-            // augmented arguments collection.
+            // Execute the original html() method using the augmented arguments collection.
             var result = old.apply(this, arguments);
 
             if (arguments.length) {
@@ -499,7 +485,6 @@
 
         };
     })($.fn.html);
-
 }(jQuery, window, document));
 /*
  * Responsive AutoSize
@@ -507,7 +492,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -516,135 +501,113 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = "resize orientationchange",
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
+        einput = "input",
         ekeyup = "keyup",
-        epaste = "paste",
-        ecut = "cut",
         esize = "size" + ns,
         esized = "sized" + ns;
+
+    (function (oldVal) {
+        /// <summary>Override the core val method in the jQuery object to fire an input event on autosize plugins whenever it is called.</summary>
+        /// <param name="old" type="Function">
+        ///      The jQuery function being overridden.
+        /// </param>
+        /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+        $.fn.val = function () {
+            // Execute the original val() method using the augmented arguments collection.
+            var result = oldVal.apply(this, arguments);
+
+            if (this.data("r.autosize") && arguments.length) {
+                this.trigger($.Event(einput));
+            }
+
+            return result;
+        };
+    })($.fn.val);
 
     // AutoSize class definition
     var AutoSize = function (element, options) {
 
         this.$element = $(element);
-        this.defaults = {
-            removeAttributes: null,
-            removeClasses: null
-        };
+        this.element = element,
         this.options = $.extend({}, this.defaults, options);
-        this.$clone = null;
         this.sizing = null;
+        this.difference = 0;
+        this.height = this.$element.height();
 
         // Initial setup.
-        this.clone();
+        this.init();
 
-        // Bind events
-        this.$element.on([ekeyup, epaste, ecut].join(" "), $.proxy(this.change, this));
-        $(w).off(eresize).on(eresize, $.debounce($.proxy(this.size, this), 50));
+        // Bind events. Keyup is required for IE9.
+        this.$element.on([einput, ekeyup].join(" "), $.debounce($.proxy(this.size, this), 100));
+        $(w).on(eresize, $.debounce($.proxy(this.size, this), 100));
     };
 
-    AutoSize.prototype.clone = function () {
+    AutoSize.prototype.init = function () {
+        var height = this.$element.outerHeight();
+        this.difference = parseFloat(this.$element.css("paddingBottom")) +
+                          parseFloat(this.$element.css("paddingTop"));
 
-        var self = this,
-            attributes = this.options.removeAttributes,
-            classes = this.options.removeClasses,
-            $element = this.$element,
-            clone = function () {
+        // Firefox: scrollHeight isn't full height on border-box
+        if (this.element.scrollHeight + this.difference <= height) {
+            this.difference = 0;
+        }
 
-                // Create a clone and offset it removing all specified attributes classes and data.
-                self.$clone = self.$element.clone()
-                                  .attr({ "tabindex": -1, "rows": 2, "aria-hidden": true })
-                                  .removeAttr("id name data-autosize " + attributes)
-                                  .removeClass(classes)
-                                  .removeClass(classes)
-                                  .addClass("autosize-clone")
-                                  .insertAfter($element);
-
-                // jQuery goes spare if you try to remove null data.
-                if (classes) {
-                    self.$clone.removeData(classes);
-                }
-            };
-
-        $.when(clone()).then(this.size());
+        // Only set the height if textarea has value.
+        if (this.element.value.replace(/\s/g, "").length > 0) {
+            this.$element.height(this.element.scrollHeight);
+        }
     };
 
     AutoSize.prototype.size = function () {
 
         var self = this,
             $element = this.$element,
-            element = this.$element[0],
-            $clone = this.$clone,
-            clone = $clone[0],
-            heightComparer = 0,
-            startHeight,
-            endHeight,
-            sizeEvent = $.Event(esize),
-            complete = function () {
-                self.sizing = false;
-                $element.trigger($.Event(esized));
-            };
+            element = this.element,
+            sizeEvent = $.Event(esize);
 
-        // Set the width of the clone to match.
-        $clone.width($element.width());
-
-        // Copy the text across.
-        $clone.val($element.val());
-
-        // Set the height so animation will work.
-        startHeight = $clone.height();
-        $element.height(startHeight);
-
-        // Shrink
-        while (clone.rows > 1 && clone.scrollHeight < clone.offsetHeight) {
-            clone.rows -= 1;
+        if (this.sizing) {
+            return;
         }
 
-        // Grow
-        while (clone.scrollHeight > clone.offsetHeight && heightComparer !== clone.offsetHeight) {
-            heightComparer = element.offsetHeight;
-            clone.rows += 1;
+        // Check and get the height
+        $element.height("auto");
+        var scrollHeight = element.scrollHeight - this.difference,
+            different = this.height !== scrollHeight;
+
+        $element.height(this.height);
+
+        // Trigger events if need be.
+        if (different) {
+            $element.trigger(sizeEvent);
         }
-        clone.rows += 1;
 
-        endHeight = $clone.height();
+        if (this.sizing || sizeEvent.isDefaultPrevented()) {
+            return;
+        }
 
-        if (startHeight !== endHeight) {
+        this.sizing = true;
 
-            $element.trigger($.Event(esize));
+        $element.height(scrollHeight);
 
-            if (this.sizing || sizeEvent.isDefaultPrevented()) {
-                return;
-            }
-
-            this.sizing = true;
-
-            // Reset the height
-            $element.height($clone.height());
-
+        if (different) {
             // Do our callback
-            $element.onTransitionEnd(complete);
-        }
-    };
-
-    AutoSize.prototype.change = function (event) {
-
-        var self = this,
-            delay = 0;
-
-        if (event.type === "paste" || event.type === "cut") {
-            delay = 5;
+            $element.onTransitionEnd(function() {
+                self.sizing = false;
+                self.height = scrollHeight;
+                $element.trigger($.Event(esized));
+            });
+            return;
         }
 
-        w.setTimeout(function () {
-
-            // Run the size method.
-            self.size();
-
-        }, delay);
+        this.sizing = false;
     };
+
+    // No conflict.
+    var old = $.fn.autoSize;
 
     // Plug-in definition 
     $.fn.autoSize = function (options) {
@@ -669,8 +632,6 @@
     // Set the public constructor.
     $.fn.autoSize.Constructor = AutoSize;
 
-    // No conflict.
-    var old = $.fn.autoSize;
     $.fn.autoSize.noConflict = function () {
         $.fn.autoSize = old;
         return this;
@@ -680,9 +641,10 @@
     var init = function () {
         $("textarea[data-autosize]").each(function () {
             var $this = $(this),
-                options = $this.data("r.autosizeOptions");
-            if (!options) {
-                $this.addClass("autosize").autoSize($.buildDataOptions($this, {}, "autosize", "r"));
+                loaded = $this.data("r.autosizeLoaded");
+            if (!loaded) {
+                $this.data("r.autosizeLoaded", true);
+                $this.addClass("autosize").autoSize($.getDataOptions($this, "autosize"));
             }
         });
     },
@@ -694,14 +656,14 @@
 
     w.RESPONSIVE_AUTOSIZE = true;
 
-}(jQuery, window, ".r.autosize"));
+}(jQuery, window, ".r.autosize", ".data-api"));
 /*
  * Responsive Carousel
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -716,13 +678,14 @@
         emouseleave = "mouseleave",
         ekeydown = "keydown",
         eclick = "click",
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
     var keys = {
         SPACE: 32,
+        ENTER: 13,
         LEFT: 37,
         RIGHT: 39
     };
@@ -751,10 +714,11 @@
         this.interval = null;
         this.sliding = null;
         this.$items = null;
+        this.keyboardTriggered = null;
         this.translationDuration = null;
-        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.find(".carousel-control.forward");
-        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.find(".carousel-control.back");
-        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("ol > li");
+        this.$nextTrigger = this.options.nextTrigger ? $(this.options.nextTrigger) : this.$element.children("button.forward");
+        this.$previousTrigger = this.options.previousTrigger ? $(this.options.previousTrigger) : this.$element.children("button:not(.forward)");
+        this.$indicators = this.options.indicators ? $(this.options.indicators) : this.$element.find("> ol > li");
         this.id = this.$element.attr("id") || "carousel-" + $.pseudoUnique();
 
         var self = this,
@@ -781,12 +745,11 @@
         }
 
         // Add a11y features.
-        this.$element.attr({ "role": "listbox", "id": this.id });
-        this.$element.children("figure").each(function () {
-            var $this = $(this),
-                active = $this.hasClass("carousel-active");
+        this.$element.attr({ "role": "listbox", "aria-live": "polite", "id": this.id });
 
-            $this.attr({
+        this.$element.children("figure").each(function (index) {
+            var active = index === activeIndex;
+            $(this).attr({
                 "role": "option",
                 "aria-selected": active,
                 "tabindex": active ? 0 : -1
@@ -806,7 +769,7 @@
         });
 
         // Find and a11y indicators.
-        this.$indicators.attr({ "role": "button", "aria-controls": self.id });
+        this.$indicators.attr({ "role": "button", "aria-controls": self.id }).eq(activeIndex).addClass("active");
 
         // Bind events
         // Not namespaced as we want to keep behaviour when not using data api.
@@ -829,7 +792,7 @@
             this.$element.on(ekeydown, $.proxy(this.keydown, this));
         }
 
-        $(document).on(eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
+        $(document).on(this.options.keyboard ? [eclick, ekeydown].join(" ") : eclick, "[aria-controls=" + this.id + "]", $.proxy(this.click, this));
     };
 
     Carousel.prototype.activeindex = function () {
@@ -984,13 +947,16 @@
                 if (self.$items && activePosition === self.$items.length - 1) {
                     self.$nextTrigger.hide().attr("aria-hidden", true);
                     self.$previousTrigger.show().removeAttr("aria-hidden");
+                    if (self.keyboardTriggered) { self.$previousTrigger.focus(); self.keyboardTriggered = false; }
                 }
                 else if (self.$items && activePosition === 0) {
                     self.$previousTrigger.hide().attr("aria-hidden", true);
                     self.$nextTrigger.show().removeAttr("aria-hidden");
+                    if (self.keyboardTriggered) { self.$nextTrigger.focus(); self.keyboardTriggered = false; }
                 } else {
                     self.$nextTrigger.show().removeAttr("aria-hidden");
                     self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.keyboardTriggered = false;
                 }
             }
 
@@ -1049,6 +1015,8 @@
 
         if (which === keys.LEFT || which === keys.RIGHT) {
 
+            this.keyboardTriggered = true;
+
             event.preventDefault();
             event.stopPropagation();
 
@@ -1079,21 +1047,30 @@
     Carousel.prototype.click = function (event) {
 
         if (!event) {
-            return;
+            return; 
+        }
+
+        var which = event.which;
+
+        if (which && which !== 1) {
+            if (which === keys.SPACE || which === keys.ENTER) {
+                this.keyboardTriggered = true;
+            } else {
+                return;
+            }
         }
 
         event.preventDefault();
         event.stopPropagation();
-        var $this = $(event.target),
-            indicator = $this.is(this.$indicators.selector);
+        var $this = $(event.target);
 
-        if (indicator) {
-            this.to($this.index());
-        } else if ($this.is(this.$nextTrigger.selector)) {
+        if ($this.hasClass("forward")) {
             this.next();
         }
-        else if ($this.is(this.$previousTrigger.selector)) {
+        else if ($this.is("button")) {
             this.prev();
+        } else {
+            this.to($this.index());
         }
     };
 
@@ -1146,6 +1123,8 @@
             percent *= -1;
         }
 
+        // This is crazy complicated. Basically swipe behaviour change direction in rtl
+        // So you need to handle that.
         this.$element.addClass("no-transition");
         if (this.options.mode === "slide") {
             if (rtl) {
@@ -1217,6 +1196,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.carousel;
+
     // Plug-in definition 
     $.fn.carousel = function (options) {
 
@@ -1235,7 +1217,7 @@
                 // Cycle to the given number.
                 data.to(options);
 
-            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts.slide)) {
+            } else if (typeof options === "string" && /(cycle|pause|next|prev)/.test(options) || (options = opts && opts.slide)) {
 
                 data[options]();
 
@@ -1248,8 +1230,6 @@
     // Set the public constructor.
     $.fn.carousel.Constructor = Carousel;
 
-    // No conflict.
-    var old = $.fn.carousel;
     $.fn.carousel.noConflict = function () {
         $.fn.carousel = old;
         return this;
@@ -1259,9 +1239,10 @@
     var init = function () {
         $(".carousel").each(function () {
             var $this = $(this),
-                options = $this.data("r.carouselOptions");
-            if (!options) {
-                $this.carousel($.buildDataOptions($this, {}, "carousel", "r"));
+                loaded = $this.data("r.carouselLoaded");
+            if (!loaded) {
+                $this.data("r.carouselLoaded", true);
+                $this.carousel($.getDataOptions($this, "carousel"));
             }
         });
     },
@@ -1273,14 +1254,14 @@
 
     w.RESPONSIVE_CAROUSEL = true;
 
-}(jQuery, window, ".r.carousel"));
+}(jQuery, window, ".r.carousel", ".data-api"));
 /*
  * Responsive Conditional
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1289,9 +1270,10 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
-        eresize = ["resize", "orientationchange"].join(".conditional "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
+        eload = "load" + ns,
         eloaded = "loaded" + ns,
         eerror = "error" + ns;
 
@@ -1300,6 +1282,7 @@
 
         this.$element = $(element);
         this.defaults = {
+            xxs: null,
             xs: null,
             s: null,
             m: null,
@@ -1311,7 +1294,7 @@
         this.options = $.extend({}, this.defaults, options);
         this.currentGrid = null;
         this.currentTarget = null;
-        this.sizing = null;
+        this.loading = null;
 
         // Bind events.
         $(w).on(eresize, $.debounce($.proxy(this.resize, this), 50));
@@ -1348,9 +1331,20 @@
             if (target && target !== this.currentTarget) {
                 this.currentTarget = target;
 
+                var loadEvent = $.Event(eload);
+
+                this.$element.trigger(loadEvent);
+
+                if (this.loading || loadEvent.isDefaultPrevented()) {
+                    return;
+                }
+
+                this.loading = true;
+
                 // First check the cache.
                 if (this.cache[this.currentGrid]) {
                     this.$element.empty().html(this.cache[this.currentGrid]);
+                    this.loading = false;
                     this.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: this.currentGrid }));
 
                 } else {
@@ -1360,6 +1354,7 @@
                         if (textStatus === "error") {
                             self.$element.trigger($.Event(eerror, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
                             self.$element.html(self.options.errorHint);
+                            self.loading = false;
                             return;
                         }
 
@@ -1370,16 +1365,18 @@
 
                         // Cache the result so no further requests are made. This uses the internal `parseHTML`
                         // method so be aware that could one day change.
-                        self.cache[grid] = selector
-                            ? jQuery("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
-                            : responseText;
-
+                        self.cache[grid] = selector ? $("<div>").append($.parseHTML(responseText)).find(selector).wrap("<div>").parent().html()
+                                                    : responseText;
+                        self.loading = false;
                         self.$element.trigger($.Event(eloaded, { relatedTarget: self.$element[0], loadTarget: target, grid: self.currentGrid }));
                     });
                 }
             }
         }
     };
+
+    // No conflict.
+    var old = $.fn.conditional;
 
     // Plug-in definition 
     $.fn.conditional = function (options) {
@@ -1404,8 +1401,6 @@
     // Set the public constructor.
     $.fn.conditional.Constructor = Conditional;
 
-    // No conflict.
-    var old = $.fn.conditional;
     $.fn.conditional.noConflict = function () {
         $.fn.conditional = old;
         return this;
@@ -1415,9 +1410,10 @@
     var init = function () {
         $(":attrStart(data-conditional)").each(function () {
             var $this = $(this),
-                options = $this.data("r.conditionalOptions");
-            if (!options) {
-                $this.conditional($.buildDataOptions($this, {}, "conditional", "r"));
+                loaded = $this.data("r.conditionalLoaded");
+            if (!loaded) {
+                $this.data("r.conditionalLoaded", true);
+                $this.conditional($.getDataOptions($this, "conditional"));
             }
         });
     },
@@ -1429,14 +1425,14 @@
 
     w.RESPONSIVE_CONDITIONAL = true;
 
-}(jQuery, window, ".r.conditional"));
+}(jQuery, window, ".r.conditional", ".data-api"));
 /*
  * Responsive Dismiss 
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1445,8 +1441,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -1490,7 +1486,7 @@
             self = this,
             complete = function () {
                 self.dismissing = false;
-                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 });
+                $target.removeClass("fade-out").attr({ "aria-hidden": true, "tabindex": -1 });
                 self.$element.trigger($.Event(edismissed));
             };
 
@@ -1515,6 +1511,9 @@
         this.close();
     };
 
+    // No conflict.
+    var old = $.fn.dismiss;
+
     // Plug-in definition 
     $.fn.dismiss = function (options) {
 
@@ -1538,8 +1537,6 @@
     // Set the public constructor.
     $.fn.dismiss.Constructor = Dismiss;
 
-    // No conflict.
-    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;
@@ -1549,9 +1546,10 @@
     var init = function () {
         $("button[data-dismiss-target]").each(function () {
             var $this = $(this),
-                options = $this.data("r.dismissOptions");
-            if (!options) {
-                $this.dismiss($.buildDataOptions($this, {}, "dismiss", "r"));
+                loaded = $this.data("r.dismissLoaded");
+            if (!loaded) {
+                $this.data("r.dismissLoaded", true);
+                $this.dismiss($.getDataOptions($this, "dismiss"));
             }
         });
     },
@@ -1563,13 +1561,13 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss"));
+}(jQuery, window, ".r.dismiss", ".data-api"));
 /*
  * Responsive Dropdown 
  */
 /*jshint expr:true*/
 /*global jQuery*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1580,8 +1578,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -1620,13 +1618,12 @@
             $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
         }
 
-        var $tab = $("[href='" + this.options.target + "'], [data-dropdown-target='" + this.options.target + "']"),
-            tabId = $tab.attr("id") || "dropdown-" + $.pseudoUnique(),
+        var id = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
 
-        $tab.attr({
-            "id": tabId,
+        this.$element.attr({
+            "id": id,
             "role": "tab",
             "aria-controls": paneId,
             "aria-selected": active,
@@ -1637,7 +1634,7 @@
         this.$target.attr({
             "id": paneId,
             "role": "tabpanel",
-            "aria-labelledby": tabId,
+            "aria-labelledby": id,
             "aria-hidden": !active,
             "tabindex": active ? 0 : -1
         });
@@ -1676,7 +1673,9 @@
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$target[dimension]("auto");
+            this.$target[dimension]("auto").attr({ "aria-hidden": false });
+            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false });
+
             this.endSize = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset to zero and force repaint.
@@ -1733,16 +1732,15 @@
                 var eventToTrigger = $.Event(completeEvent);
 
                 // Ensure the height/width is set to auto.
-                self.$target.removeClass("trans")[self.options.dimension]("");
+                self.$target[self.options.dimension]("");
 
                 self.transitioning = false;
 
                 // Set the correct aria attributes.
                 self.$target.attr({
                     "aria-hidden": !doShow,
-                    "tabindex": doShow ? 0 : -1,
+                    "tabindex": doShow ? 0 : -1
                 });
-
 
                 var $tab = $("#" + self.$target.attr("aria-labelledby")).attr({
                     "aria-selected": doShow,
@@ -1756,11 +1754,13 @@
                 // Toggle any children.
                 self.$target.find("[tabindex]:not(.collapse)").attr({
                     "aria-hidden": !doShow,
-                    "tabindex": doShow ? 0 : -1,
+                    "tabindex": doShow ? 0 : -1
                 });
 
                 self.$element.trigger(eventToTrigger);
             };
+
+        this.$element.trigger(startEvent);
 
         if (this.transitioning || startEvent.isDefaultPrevented()) {
             return;
@@ -1769,9 +1769,8 @@
         this.transitioning = true;
 
         // Remove or add the expand classes.
-        this.$element.trigger(startEvent);
         this.$target[method]("collapse");
-        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand");
 
         this.$target.onTransitionEnd(complete);
     };
@@ -1821,6 +1820,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.dropdown;
+
     // Plug-in definition 
     $.fn.dropdown = function (options) {
         return this.each(function () {
@@ -1843,8 +1845,6 @@
     // Set the public constructor.
     $.fn.dropdown.Constructor = Dropdown;
 
-    // No conflict.
-    var old = $.fn.dropdown;
     $.fn.dropdown.noConflict = function () {
         $.fn.dropdown = old;
         return this;
@@ -1854,9 +1854,10 @@
     var init = function () {
         $(":attrStart(data-dropdown)").each(function () {
             var $this = $(this),
-                options = $this.data("r.dropdownOptions");
-            if (!options) {
-                $this.dropdown($.buildDataOptions($this, {}, "dropdown", "r"));
+                loaded = $this.data("r.dropdownLoaded");
+            if (!loaded) {
+                $this.data("r.dropdownLoaded", true);
+                $this.dropdown($.getDataOptions($this, "dropdown"));
             }
         });
     },
@@ -1868,7 +1869,7 @@
 
     w.RESPONSIVE_DROPDOWN = true;
 
-}(jQuery, window, ".r.dropdown"));
+}(jQuery, window, ".r.dropdown", ".data-api"));
 
 /*
  * Responsive Lightbox
@@ -1877,7 +1878,7 @@
 /*global jQuery*/
 /*jshint expr:true*/
 
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -1897,9 +1898,9 @@
         $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
-        eready = "ready" + ns,
-        echanged = "domchanged" + ns,
-        eresize = ["resize", "orientationchange"].join(".modal "),
+        eready = "ready" + ns + da,
+        echanged = "domchanged" + ns + da,
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         efocusin = "focusin",
@@ -1933,6 +1934,7 @@
             external: false,
             group: null,
             image: false,
+            immediate: false,
             iframe: false,
             iframeScroll: true,
             keyboard: true,
@@ -1959,9 +1961,15 @@
         }
 
         // Bind events.
+        // Ensure script works if loaded at the top of the page.
+        if ($body.length === 0) { $body = $("body"); }
         this.$element.on(eclick, $.proxy(this.click, this));
         var onResize = $.debounce($.proxy(this.resize, this), 15);
         $(w).off(eresize).on(eresize, onResize);
+
+        if (this.options.immediate) {
+            this.show();
+        }
     };
 
     Modal.prototype.show = function () {
@@ -2117,15 +2125,12 @@
                 if (hide) {
                     // Put scroll position etc back as before.
                     $overlay.addClass("hidden");
-                    $html.removeClass("modal-on")
+                    $html.removeClass("modal-on modal-lock")
                          .css("margin-right", "");
 
-                    if ($html.hasClass("modal-lock")) {
-                        $html.removeClass("modal-lock");
-                        if (lastScroll !== $window.scrollTop()) {
-                            $window.scrollTop(lastScroll);
-                            lastScroll = 0;
-                        }
+                    if (lastScroll !== $window.scrollTop()) {
+                        $window.scrollTop(lastScroll);
+                        lastScroll = 0;
                     }
 
                     return;
@@ -2189,6 +2194,8 @@
 
         $overlay.addClass("modal-loader");
 
+        var self = this;
+
         var isExternalUrl = function (url) {
 
             // Handle different host types.
@@ -2222,8 +2229,7 @@
             $overlay.removeClass("modal-loader");
         };
 
-        var self = this,
-            title = this.options.title,
+        var title = this.options.title,
             description = this.options.description,
             modal = this.options.modal,
             target = this.options.target,
@@ -2280,7 +2286,7 @@
             this.isLocalHidden = $target.is(":hidden");
             $modal.addClass(this.options.fitViewport ? "container" : "");
             $placeholder.detach().insertAfter($target);
-            $target.detach().appendTo($content).removeClass("hidden");
+            $target.detach().appendTo($content).removeClass("hidden").attr({ "aria-hidden": false });
             $content.appendTo($modal);
             // Fade in.
             fadeIn();
@@ -2381,7 +2387,9 @@
         if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax, .modal-image")) {
 
             // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "")
+                                  .attr({ "aria-hidden": this.isLocalHidden ? true : false })
+                                  .detach().insertAfter($placeholder);
             $placeholder.detach().insertAfter($overlay);
 
         }
@@ -2568,6 +2576,9 @@
         this[(event.direction === "right") ? "next" : "prev"]();
     };
 
+    // No conflict.
+    var old = $.fn.modal;
+
     // Plug-in definition 
     $.fn.modal = function (options) {
 
@@ -2595,8 +2606,6 @@
     // Set the public constructor.
     $.fn.modal.Constructor = Modal;
 
-    // No conflict.
-    var old = $.fn.modal;
     $.fn.modal.noConflict = function () {
         $.fn.modal = old;
         return this;
@@ -2606,9 +2615,10 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                options = $this.data("r.modalOptions");
-            if (!options) {
-                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+                loaded = $this.data("r.modalLoaded");
+            if (!loaded) {
+                $this.data("r.modalLoaded", true);
+                $this.modal($.getDataOptions($this, "modal"));
             }
         });
     },
@@ -2620,14 +2630,14 @@
 
     w.RESPONSIVE_MODAL = true;
 
-}(jQuery, window, ".r.modal"));
+}(jQuery, window, ".r.modal", ".data-api"));
 /*
  * Responsive Tables
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -2636,8 +2646,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -2699,6 +2709,9 @@
         this.$element.onTransitionEnd(complete);
     };
 
+    // No conflict.
+    var old = $.fn.table;
+
     // Plug-in definition 
     $.fn.tablelist = function (options) {
 
@@ -2723,8 +2736,6 @@
     // Set the public constructor.
     $.fn.tablelist.Constructor = Table;
 
-    // No conflict.
-    var old = $.fn.table;
     $.fn.tablelist.noConflict = function () {
         $.fn.tablelist = old;
         return this;
@@ -2734,9 +2745,10 @@
     var init = function () {
         $("table[data-table-list]").each(function () {
             var $this = $(this),
-                options = $this.data("r.tablelistOptions");
-            if (!options) {
-                $this.tablelist($.buildDataOptions($this, {}, "tablelist", "r"));
+                loaded = $this.data("r.tableLoaded");
+            if (!loaded) {
+                $this.data("r.tableLoaded", true);
+                $this.tablelist($.getDataOptions($this, {}, "tablelist", "r"));
             }
         });
     },
@@ -2748,14 +2760,14 @@
 
     w.RESPONSIVE_TABLE = true;
 
-}(jQuery, window, ".r.tablelist"));
+}(jQuery, window, ".r.tablelist", ".data-api"));
 /*
  * Responsive tabs
  */
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -2765,8 +2777,8 @@
 
     // General variables.
     var rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -2788,25 +2800,28 @@
         var $tablist = this.$element.children("ul:first").attr("role", "tablist"),
             $triggers = $tablist.children().attr("role", "presentation"),
             $panes = this.$element.children(":not(ul)"),
-            id = $.pseudoUnique();
+            id = $.pseudoUnique(),
+            activeIndex = $tablist.find("[aria-selected=true]").parent().index(),
+            hasActive = activeIndex > -1;
 
         $triggers.each(function (index) {
             var $this = $(this),
-                $tab = $this.children("a");
+                $tab = $this.children("a"),
+                isActive = (hasActive && index === activeIndex) || (!hasActive && index === 0);
 
             $tab.attr({
                 "role": "tab",
                 "id": "tab-" + id + "-" + index,
                 "aria-controls": "pane-" + id + "-" + index,
-                "aria-selected": $this.hasClass("tab-active") ? true : false,
-                "tabIndex": 0
+                "aria-selected": isActive ? true : false,
+                "tabindex": 0
             });
 
             $panes.eq(index).attr({
                 "role": "tabpanel",
                 "id": "pane-" + id + "-" + index,
                 "aria-labelledby": "tab-" + id + "-" + index,
-                "tabIndex": $this.hasClass("tab-active") ? 0 : -1
+                "tabindex": isActive ? 0 : -1
             });
         });
 
@@ -2817,9 +2832,9 @@
 
     Tabs.prototype.show = function (position) {
 
-        var $activeItem = this.$element.children("ul").children(".tab-active"),
-            $children = $activeItem.parent().children(),
-            activePosition = $children.index($activeItem),
+        var $activeItem = this.$element.children("ul").find("[aria-selected=true]"),
+            $children = $activeItem.closest("ul").children(),
+            activePosition = $activeItem.parent().index(),
             self = this;
 
         if (position > ($children.length - 1) || position < 0) {
@@ -2836,7 +2851,8 @@
 
             var complete = function () {
                 self.tabbing = false;
-                self.$element.trigger($.Event(eshown));
+                $item.siblings().addBack().removeClass("fade-out fade-in");
+                self.$element.trigger($.Event(eshown, { relatedTarget: $item[0] }));
             };
 
             // Do our callback
@@ -2847,12 +2863,12 @@
     Tabs.prototype.tab = function (activePosition, postion, callback) {
 
         var showEvent = $.Event(eshow),
-           $element = this.$element,
-           $childTabs = $element.children("ul").children("li"),
-           $childPanes = $element.children(":not(ul)"),
-           $nextTab = $childTabs.eq(postion),
-           $currentPane = $childPanes.eq(activePosition),
-           $nextPane = $childPanes.eq(postion);
+            $element = this.$element,
+            $childTabs = $element.children("ul").children("li"),
+            $childPanes = $element.children(":not(ul)"),
+            $nextTab = $childTabs.eq(postion),
+            $currentPane = $childPanes.eq(activePosition),
+            $nextPane = $childPanes.eq(postion);
 
         $element.trigger(showEvent);
 
@@ -2862,13 +2878,13 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true }).focus();
+        $childTabs.children("a").attr({ "aria-selected": false });
+        $nextTab.children("a").attr({ "aria-selected": true }).focus();
 
         // Do some class shuffling to allow the transition.
         $currentPane.addClass("fade-out fade-in");
-        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
+        $nextPane.attr({ "tabIndex": 0 }).addClass("fade-out");
+        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("fade-in");
 
         // Force redraw.
         $nextPane.redraw().addClass("fade-in");
@@ -2925,6 +2941,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.tabs;
+
     // Plug-in definition 
     $.fn.tabs = function (options) {
 
@@ -2948,8 +2967,6 @@
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
-    // No conflict.
-    var old = $.fn.tabs;
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;
@@ -2974,4 +2991,4 @@
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".r.tabs"));
+}(jQuery, window, ".r.tabs", ".data-api"));

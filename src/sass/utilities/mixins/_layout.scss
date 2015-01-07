@@ -1,6 +1,6 @@
 ﻿@mixin layout($bp) {
-    // XS doesn't have a min value.
-    @if $bp == xs {
+    // XXS doesn't have a min value.
+    @if $bp == xxs {
 
         .block-#{$bp} {
             display: block;
@@ -16,15 +16,15 @@
 
         @include bp-max($bp) {
             .block-#{$bp}-only {
-                display: block !important;
+                display: block ;
             }
 
             .inline-block-#{$bp}-only {
-                display: inline-block !important;
+                display: inline-block ;
             }
 
             .inline-#{$bp}-only {
-                display: inline !important;
+                display: inline ;
             }
         }
     }
@@ -33,29 +33,29 @@
         @include bp-min($bp) {
 
             .block-#{$bp} {
-                display: block !important;
+                display: block ;
             }
 
             .inline-block-#{$bp} {
-                display: inline-block !important;
+                display: inline-block ;
             }
 
             .inline-#{$bp} {
-                display: inline !important;
+                display: inline ;
             }
             // Large doesn't need an "only" since it operates on min width.
             @if $bp != l {
                 @include bp-max($bp) {
                     .block-#{$bp}-only {
-                        display: block !important;
+                        display: block ;
                     }
 
                     .inline-block-#{$bp}-only {
-                        display: inline-block !important;
+                        display: inline-block ;
                     }
 
                     .inline-#{$bp}-only {
-                        display: inline !important;
+                        display: inline ;
                     }
                 }
             }

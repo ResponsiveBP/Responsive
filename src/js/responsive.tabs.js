@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -14,8 +14,8 @@
 
     // General variables.
     var rtl = $.support.rtl,
-        eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+        eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -37,25 +37,28 @@
         var $tablist = this.$element.children("ul:first").attr("role", "tablist"),
             $triggers = $tablist.children().attr("role", "presentation"),
             $panes = this.$element.children(":not(ul)"),
-            id = $.pseudoUnique();
+            id = $.pseudoUnique(),
+            activeIndex = $tablist.find("[aria-selected=true]").parent().index(),
+            hasActive = activeIndex > -1;
 
         $triggers.each(function (index) {
             var $this = $(this),
-                $tab = $this.children("a");
+                $tab = $this.children("a"),
+                isActive = (hasActive && index === activeIndex) || (!hasActive && index === 0);
 
             $tab.attr({
                 "role": "tab",
                 "id": "tab-" + id + "-" + index,
                 "aria-controls": "pane-" + id + "-" + index,
-                "aria-selected": $this.hasClass("tab-active") ? true : false,
-                "tabIndex": 0
+                "aria-selected": isActive ? true : false,
+                "tabindex": 0
             });
 
             $panes.eq(index).attr({
                 "role": "tabpanel",
                 "id": "pane-" + id + "-" + index,
                 "aria-labelledby": "tab-" + id + "-" + index,
-                "tabIndex": $this.hasClass("tab-active") ? 0 : -1
+                "tabindex": isActive ? 0 : -1
             });
         });
 
@@ -66,9 +69,9 @@
 
     Tabs.prototype.show = function (position) {
 
-        var $activeItem = this.$element.children("ul").children(".tab-active"),
-            $children = $activeItem.parent().children(),
-            activePosition = $children.index($activeItem),
+        var $activeItem = this.$element.children("ul").find("[aria-selected=true]"),
+            $children = $activeItem.closest("ul").children(),
+            activePosition = $activeItem.parent().index(),
             self = this;
 
         if (position > ($children.length - 1) || position < 0) {
@@ -85,7 +88,8 @@
 
             var complete = function () {
                 self.tabbing = false;
-                self.$element.trigger($.Event(eshown));
+                $item.siblings().addBack().removeClass("fade-out fade-in");
+                self.$element.trigger($.Event(eshown, { relatedTarget: $item[0] }));
             };
 
             // Do our callback
@@ -96,12 +100,12 @@
     Tabs.prototype.tab = function (activePosition, postion, callback) {
 
         var showEvent = $.Event(eshow),
-           $element = this.$element,
-           $childTabs = $element.children("ul").children("li"),
-           $childPanes = $element.children(":not(ul)"),
-           $nextTab = $childTabs.eq(postion),
-           $currentPane = $childPanes.eq(activePosition),
-           $nextPane = $childPanes.eq(postion);
+            $element = this.$element,
+            $childTabs = $element.children("ul").children("li"),
+            $childPanes = $element.children(":not(ul)"),
+            $nextTab = $childTabs.eq(postion),
+            $currentPane = $childPanes.eq(activePosition),
+            $nextPane = $childPanes.eq(postion);
 
         $element.trigger(showEvent);
 
@@ -111,13 +115,13 @@
 
         this.tabbing = true;
 
-        $childTabs.removeClass("tab-active").children("a").attr({ "aria-selected": false });
-        $nextTab.addClass("tab-active").children("a").attr({ "aria-selected": true }).focus();
+        $childTabs.children("a").attr({ "aria-selected": false });
+        $nextTab.children("a").attr({ "aria-selected": true }).focus();
 
         // Do some class shuffling to allow the transition.
         $currentPane.addClass("fade-out fade-in");
-        $nextPane.attr({ "tabIndex": 0 }).addClass("tab-pane-active fade-out");
-        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("tab-pane-active fade-in");
+        $nextPane.attr({ "tabIndex": 0 }).addClass("fade-out");
+        $childPanes.filter(".fade-in").attr({ "tabIndex": -1 }).removeClass("fade-in");
 
         // Force redraw.
         $nextPane.redraw().addClass("fade-in");
@@ -174,6 +178,9 @@
         }
     };
 
+    // No conflict.
+    var old = $.fn.tabs;
+
     // Plug-in definition 
     $.fn.tabs = function (options) {
 
@@ -197,8 +204,6 @@
     // Set the public constructor.
     $.fn.tabs.Constructor = Tabs;
 
-    // No conflict.
-    var old = $.fn.tabs;
     $.fn.tabs.noConflict = function () {
         $.fn.tabs = old;
         return this;
@@ -223,4 +228,4 @@
 
     w.RESPONSIVE_TABS = true;
 
-}(jQuery, window, ".r.tabs"));
+}(jQuery, window, ".r.tabs", ".data-api"));

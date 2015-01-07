@@ -1,19 +1,17 @@
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *	`contenteditable` attribute is included anywhere else in the document.
- *	Otherwise it causes space to appear at the top and bottom of elements
- *	that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *	`:before` to contain the top-margins of child elements.
- */
+// Clearfix: contain floats
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//	  `contenteditable` attribute is included anywhere else in the document.
+//	  Otherwise it causes space to appear at the top and bottom of elements
+//	  that receive the `clearfix` class.
+// 2. The use of `table` rather than `block` is only necessary if using
+//	  `:before` to contain the top-margins of child elements.
 .clearfix {
     &:before,
     &:after {
-        content: ""; /* 1 */
-        display: table; /*2 */
+        content: ""; // 1
+        display: table; // 2
     }
 
     &:after {
@@ -21,67 +19,72 @@
     }
 }
 
-/*
- * Float helpers
- */
+// Float helpers
 .push {
-    float: right !important;
+    float: right;
 
     [dir="rtl"] & {
-        float: left !important;
+        float: left;
     }
 }
 
 .pull {
-    float: left !important;
+    float: left;
 
     [dir="rtl"] & {
-        float: right !important;
+        float: right;
     }
 }
-// XS, S, M, L viewports.
+// XXS, XS, S, M, L viewports.
+@include push-pull(xxs);
 @include push-pull(xs);
 @include push-pull(s);
 @include push-pull(m);
 @include push-pull(l);
 
-/*
- * Layout helpers
- */
+// Layout helpers
 .block {
-    display: block !important;
+    display: block;
 }
 
 .inline-block {
-    display: inline-block !important;
+    display: inline-block;
 }
 
 .inline {
-    display: inline !important;
+    display: inline;
 }
 
-// XS, S, M, L viewports.
+// XXS, XS, S, M, L viewports.
+@include layout(xxs);
 @include layout(xs);
 @include layout(s);
 @include layout(m);
 @include layout(l);
 
-/*
- * Text align helpers
- */
-.text-left {
-    text-align: left !important;
+// Text align helpers
+.text-pull {
+    text-align: left;
+
+    [dir="rtl"] & {
+        text-align: right;
+    }
 }
 
-.text-right {
-    text-align: right !important;
+.text-push {
+    text-align: right;
+
+    [dir="rtl"] & {
+        text-align: left;
+    }
 }
 
 .text-center {
-    text-align: center !important;
+    text-align: center;
 }
 
-// XS, S, M, L viewports.
+// XXS, XS, S, M, L viewports.
+@include text-align(xxs);
 @include text-align(xs);
 @include text-align(s);
 @include text-align(m);
@@ -100,7 +103,9 @@
         right: -99999px;
     }
 }
-// Breakpoint driven changes
-@include grid-state(s, 1px);
-@include grid-state(m, 2px);
-@include grid-state(l, 3px);
+// Breakpoint driven changes. 0 based so we can parse easily with JavaScript.
+@include grid-state(xxs, 0);
+@include grid-state(xs, 1px);
+@include grid-state(s, 2px);
+@include grid-state(m, 3px);
+@include grid-state(l, 4px);

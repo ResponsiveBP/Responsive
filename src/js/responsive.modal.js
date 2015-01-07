@@ -5,7 +5,7 @@
 /*global jQuery*/
 /*jshint expr:true*/
 
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -25,9 +25,9 @@
         $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
-        eready = "ready" + ns,
-        echanged = "domchanged" + ns,
-        eresize = ["resize", "orientationchange"].join(".modal "),
+        eready = "ready" + ns + da,
+        echanged = "domchanged" + ns + da,
+        eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         efocusin = "focusin",
@@ -61,6 +61,7 @@
             external: false,
             group: null,
             image: false,
+            immediate: false,
             iframe: false,
             iframeScroll: true,
             keyboard: true,
@@ -87,9 +88,15 @@
         }
 
         // Bind events.
+        // Ensure script works if loaded at the top of the page.
+        if ($body.length === 0) { $body = $("body"); }
         this.$element.on(eclick, $.proxy(this.click, this));
         var onResize = $.debounce($.proxy(this.resize, this), 15);
         $(w).off(eresize).on(eresize, onResize);
+
+        if (this.options.immediate) {
+            this.show();
+        }
     };
 
     Modal.prototype.show = function () {
@@ -245,15 +252,12 @@
                 if (hide) {
                     // Put scroll position etc back as before.
                     $overlay.addClass("hidden");
-                    $html.removeClass("modal-on")
+                    $html.removeClass("modal-on modal-lock")
                          .css("margin-right", "");
 
-                    if ($html.hasClass("modal-lock")) {
-                        $html.removeClass("modal-lock");
-                        if (lastScroll !== $window.scrollTop()) {
-                            $window.scrollTop(lastScroll);
-                            lastScroll = 0;
-                        }
+                    if (lastScroll !== $window.scrollTop()) {
+                        $window.scrollTop(lastScroll);
+                        lastScroll = 0;
                     }
 
                     return;
@@ -317,6 +321,8 @@
 
         $overlay.addClass("modal-loader");
 
+        var self = this;
+
         var isExternalUrl = function (url) {
 
             // Handle different host types.
@@ -350,8 +356,7 @@
             $overlay.removeClass("modal-loader");
         };
 
-        var self = this,
-            title = this.options.title,
+        var title = this.options.title,
             description = this.options.description,
             modal = this.options.modal,
             target = this.options.target,
@@ -408,7 +413,7 @@
             this.isLocalHidden = $target.is(":hidden");
             $modal.addClass(this.options.fitViewport ? "container" : "");
             $placeholder.detach().insertAfter($target);
-            $target.detach().appendTo($content).removeClass("hidden");
+            $target.detach().appendTo($content).removeClass("hidden").attr({ "aria-hidden": false });
             $content.appendTo($modal);
             // Fade in.
             fadeIn();
@@ -509,7 +514,9 @@
         if (!this.options.external && !$modal.is(".modal-iframe, .modal-ajax, .modal-image")) {
 
             // Put that kid back where it came from or so help me.
-            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "").detach().insertAfter($placeholder);
+            $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "")
+                                  .attr({ "aria-hidden": this.isLocalHidden ? true : false })
+                                  .detach().insertAfter($placeholder);
             $placeholder.detach().insertAfter($overlay);
 
         }
@@ -696,6 +703,9 @@
         this[(event.direction === "right") ? "next" : "prev"]();
     };
 
+    // No conflict.
+    var old = $.fn.modal;
+
     // Plug-in definition 
     $.fn.modal = function (options) {
 
@@ -723,8 +733,6 @@
     // Set the public constructor.
     $.fn.modal.Constructor = Modal;
 
-    // No conflict.
-    var old = $.fn.modal;
     $.fn.modal.noConflict = function () {
         $.fn.modal = old;
         return this;
@@ -734,9 +742,10 @@
     var init = function () {
         $(":attrStart(data-modal)").each(function () {
             var $this = $(this),
-                options = $this.data("r.modalOptions");
-            if (!options) {
-                $this.modal($.buildDataOptions($this, {}, "modal", "r"));
+                loaded = $this.data("r.modalLoaded");
+            if (!loaded) {
+                $this.data("r.modalLoaded", true);
+                $this.modal($.getDataOptions($this, "modal"));
             }
         });
     },
@@ -748,4 +757,4 @@
 
     w.RESPONSIVE_MODAL = true;
 
-}(jQuery, window, ".r.modal"));
+}(jQuery, window, ".r.modal", ".data-api"));

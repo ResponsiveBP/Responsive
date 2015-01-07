@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v3.1.4 | MIT License | responsivebp.com */
+/*! Responsive v4.0.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -51,17 +51,17 @@
     $.support.currentGrid = (function () {
         /// <summary>Returns a value indicating what grid range the current browser width is within.</summary>
         /// <returns type="Object">
-        ///      An object containing two properties.
-        ///      &#10;    1: grid - The current applied grid; either xs, s, m, or l.
-        ///      &#10;    2: index - The index of the current grid in the range.
-        ///      &#10;    3: range - The available grid range.
+        ///   An object containing two properties.
+        ///   &#10;    1: grid - The current applied grid; either xxs, xs, s, m, or l.
+        ///   &#10;    2: index - The index of the current grid in the range.
+        ///   &#10;    3: range - The available grid range.
         ///</returns>
 
         var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
 
         return function () {
             // These numbers match values in the css
-            var grids = ["xs", "s", "m", "l"],
+            var grids = ["xxs", "xs", "s", "m", "l"],
                 key = parseInt($div.width(), 10);
 
             return {
@@ -140,8 +140,8 @@
         /// <summary>Performs the given callback at the end of a css transition.</summary>
         /// <param name="callback" type="Function">The function to call on transition end.</param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
-        var supportTransition = $.support.transition;
 
+        var supportTransition = $.support.transition;
         return this.each(function () {
 
             if (!$.isFunction(callback)) {
@@ -331,8 +331,7 @@
                     // Normalize the variables.
                     var isMouse = event.type === "mousedown",
                         isPointer = event.type !== "touchstart" && !isMouse,
-                        original = event.originalEvent,
-                        startEvent;
+                        original = event.originalEvent;
 
                     if ((isPointer || isMouse) && $(event.target).is("img")) {
                         event.preventDefault();
@@ -350,7 +349,7 @@
                         time: +new Date()
                     };
 
-                    startEvent = $.Event(eswipestart, { start: start });
+                    var startEvent = $.Event(eswipestart, { start: start });
 
                     $this.trigger(startEvent);
 
@@ -415,36 +414,24 @@
         }
     });
 
-    $.buildDataOptions = function ($elem, options, prefix, namespace) {
+    $.getDataOptions = function ($elem, filter) {
         /// <summary>Creates an object containing options populated from an elements data attributes.</summary>
         /// <param name="$elem" type="jQuery">The object representing the DOM element.</param>
-        /// <param name="options" type="Object">The object to extend</param>
-        /// <param name="prefix" type="String">The prefix with which to identify the data attribute.</param>
-        /// <param name="namespace" type="String">The namespace with which to segregate the data attribute.</param>
+        /// <param name="filter" type="String">The prefix with filter to identify the data attribute.</param>
         /// <returns type="Object">The extended object.</returns>
+        var options = {};
         $.each($elem.data(), function (key, val) {
-
-            if (key.indexOf(prefix) === 0 && key.length > prefix.length) {
+            if (key.indexOf(filter) === 0 && key.length > filter.length) {
 
                 // Build a key with the correct format.
-                var length = prefix.length,
+                var length = filter.length,
                     newKey = key.charAt(length).toLowerCase() + key.substring(length + 1);
 
                 options[newKey] = val;
-
-                // Clean up.
-                $elem.removeData(key);
             }
-
         });
 
-        if (namespace) {
-            $elem.data(namespace + "." + prefix + "Options", options);
-        } else {
-            $elem.data(prefix + "Options", options);
-        }
-
-        return options;
+        return Object.keys(options).length ? options : $elem.data();
     };
 
     $.debounce = function (func, wait, immediate) {
@@ -487,8 +474,7 @@
             $d = $(d);
 
         $.fn.html = function () {
-            // Execute the original HTML method using the
-            // augmented arguments collection.
+            // Execute the original html() method using the augmented arguments collection.
             var result = old.apply(this, arguments);
 
             if (arguments.length) {
@@ -499,5 +485,4 @@
 
         };
     })($.fn.html);
-
 }(jQuery, window, document));

@@ -4,7 +4,7 @@
 
 /*global jQuery*/
 /*jshint expr:true*/
-(function ($, w, ns) {
+(function ($, w, ns, da) {
 
     "use strict";
 
@@ -13,8 +13,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns,
-        echanged = ["domchanged" + ns, "shown.r.modal"].join(" "),
+    var eready = "ready" + ns + da,
+        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -58,7 +58,7 @@
             self = this,
             complete = function () {
                 self.dismissing = false;
-                $target.addClass("hidden").attr({ "aria-hidden": true, "tabindex": -1 });
+                $target.removeClass("fade-out").attr({ "aria-hidden": true, "tabindex": -1 });
                 self.$element.trigger($.Event(edismissed));
             };
 
@@ -83,6 +83,9 @@
         this.close();
     };
 
+    // No conflict.
+    var old = $.fn.dismiss;
+
     // Plug-in definition 
     $.fn.dismiss = function (options) {
 
@@ -106,8 +109,6 @@
     // Set the public constructor.
     $.fn.dismiss.Constructor = Dismiss;
 
-    // No conflict.
-    var old = $.fn.dismiss;
     $.fn.dismiss.noConflict = function () {
         $.fn.dismiss = old;
         return this;
@@ -117,9 +118,10 @@
     var init = function () {
         $("button[data-dismiss-target]").each(function () {
             var $this = $(this),
-                options = $this.data("r.dismissOptions");
-            if (!options) {
-                $this.dismiss($.buildDataOptions($this, {}, "dismiss", "r"));
+                loaded = $this.data("r.dismissLoaded");
+            if (!loaded) {
+                $this.data("r.dismissLoaded", true);
+                $this.dismiss($.getDataOptions($this, "dismiss"));
             }
         });
     },
@@ -131,4 +133,4 @@
 
     w.RESPONSIVE_DISMISS = true;
 
-}(jQuery, window, ".r.dismiss"));
+}(jQuery, window, ".r.dismiss", ".data-api"));

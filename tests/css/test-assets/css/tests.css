@@ -6,7 +6,8 @@
    Grid
    ========================================================================== */
 
-.grid-test .row {
+.grid-test .row,
+.grid-test [class*="block-row-"] {
     text-align: center;
     background: #ebebeb;
 }
@@ -20,17 +21,18 @@
         background-color: #3876a7;
     }
 
-.grid-test [class*="col-"] {
-    line-height: 2em;
-    background-color: #3876a7;
-    color: #fff;
-}
-
-    .grid-test [class*="col-"] [class*="col-"] {
-        background-color: #434343;
+    .grid-test [class*="block-row-"] > *,
+    .grid-test [class*="col-"] {
+        line-height: 2em;
+        background-color: #3876a7;
+        color: #fff;
     }
 
-.pad-gutter > [class*="col-"] span {
+        .grid-test [class*="col-"] [class*="col-"] {
+            background-color: #434343;
+        }
+
+.pad-gutter > * span {
     background-color: #de3838;
     display: block;
 }

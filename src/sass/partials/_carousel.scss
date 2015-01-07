@@ -1,18 +1,14 @@
-/*
- * 1: Prevent font shift on chrome.
- */
+// 1: Prevent font shift on chrome.
 .carousel {
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
     overflow: hidden;
     position: relative;
-    -webkit-backface-visibility: hidden; /* 1 */
-    -webkit-perspective: 1000; /* 1 */
+    -webkit-backface-visibility: hidden; // 1
+    -webkit-perspective: 1000; // 1
     &.no-transition > figure {
         transition-duration: 0s !important;
     }
-    /*
-	 * Default slide version
-	 */
+    // Default slide version
     > figure {
         margin: 0;
         display: none;
@@ -24,38 +20,23 @@
             transition: .7s ease-in-out right;
         }
 
-        &:focus {
-
-            &:before {
-                @extend %focus;
-                content: "";
-                position: absolute;
-                z-index: 1;
-                top: $selection-focus-width;
-                right: $selection-focus-width;
-                bottom: $selection-focus-width;
-                left: $selection-focus-width;
-                pointer-events: none;
-            }
-        }
-
         > img {
             display: block;
             width: 100%;
         }
 
         > figcaption {
-            /*position: absolute;*/
+            position: absolute;
             bottom: 0;
             width: 100%;
-            padding: 1px 1em;
+            max-height: 50%;
+            overflow-y: auto;
+            padding: 1px 3rem;
             background-color: $carousel-caption-background-color;
             color: $carousel-caption-color;
         }
     }
-    /*
-	 * Indicators
-	 */
+    // Indicators
     > ol {
         left: 0;
         list-style: none;
@@ -64,7 +45,7 @@
         position: absolute;
         right: 0;
         text-align: center;
-        top: 1em;
+        top: 1rem;
         z-index: 3;
 
         li {
@@ -72,10 +53,10 @@
             border: $carousel-nav-border;
             cursor: pointer;
             display: inline-block;
-            height: 1em;
+            height: 1rem;
             margin: 1px;
             text-indent: -9999px;
-            width: 1em;
+            width: 1rem;
 
             &:hover {
                 background-color: $carousel-nav-background-color-hover;
@@ -93,9 +74,7 @@
             }
         }
     }
-    /*
-	 * Next Last version
-	 */
+    // Next Last version
     .carousel-active,
     .next,
     .prev,
@@ -117,10 +96,6 @@
     .carousel-active {
         position: relative !important;
         z-index: 1;
-
-        > figcaption {
-            position: static;
-        }
     }
 
     .next,
@@ -160,55 +135,46 @@
             }
         }
     }
-}
 
-.carousel-control {
-    position: absolute;
-    left: 1px;
-    top: 40%;
-    z-index: 3;
-    display: block;
-    width: 2em;
-    margin-top: -1em;
-    padding: .5em;
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-
-    [dir="rtl"] & {
-        left: auto;
-        right: 1px;
-    }
-
-    &.forward {
-        left: auto;
-        right: 1px;
-
-        [dir="rtl"] & {
-            right: auto;
-            left: 1px;
-        }
-    }
-
-    &,
-    &:active,
-    &:visited,
-    &:hover,
-    &:focus {
+    > button {
+        position: absolute;
+        left: 1px;
+        top: 40%;
+        z-index: 3;
+        display: block;
+        width: 3rem;
+        margin-top: -1rem;
+        padding: 1rem;
         background-color: transparent;
         border: none;
+        font-size: 2rem;
+        font-weight: bold;
         color: $carousel-control-color;
+        text-align: center;
         text-decoration: none;
-    }
 
-    &:hover {
-        text-decoration: underline;
+        [dir="rtl"] & {
+            left: auto;
+            right: 1px;
+        }
+
+        &.forward {
+            left: auto;
+            right: 1px;
+
+            [dir="rtl"] & {
+                right: auto;
+                left: 1px;
+            }
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
-/*
- * Fade version
- */
+// Fade version
 .carousel-fade {
     > figure {
         position: absolute;
@@ -233,12 +199,8 @@
         opacity: 1;
     }
 
-    > .carousel-active.swipe {
+    .carousel-active.swipe {
         z-index: 2;
-    }
-
-    > .carousel-active {
-        position: relative;
     }
 
     .carousel-active {

@@ -41,8 +41,13 @@ var jsSrc = [
 // Concatenate & Minify SCSS
 gulp.task("sass", function (cb) {
     gulp.src(sassSrc)
-        .pipe(plugins.rubySass({ unixNewlines: true, precision: 4, noCache: true, sourcemap: false }))
-        .pipe(plugins.autoprefixer("last 2 version", "> 1%", "ie 8", { cascade: true }))
+        //.pipe(plugins.rubySass({ unixNewlines: true, precision: 4, noCache: true, "sourcemap=none": true })) //hack to allow autoprefixer to work
+        .pipe(plugins.rubySass({ unixNewlines: true, precision: 4, noCache: true, sourcemap: false })) 
+        .pipe(plugins.autoprefixer({
+            browsers: ["> 1%", "last 2 versions", "ie 9"],
+            cascade: true,
+            remove: false
+        }))
         .pipe(gulp.dest(path.sass.build))
         .pipe(plugins.rename({ suffix: ".min" }))
         .pipe(plugins.minifyCss())
