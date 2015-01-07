@@ -168,7 +168,7 @@
                 var eventToTrigger = $.Event(completeEvent);
 
                 // Ensure the height/width is set to auto.
-                self.$target[self.options.dimension]("");
+                self.$target.removeClass("trans")[self.options.dimension]("");
 
                 self.transitioning = false;
 
@@ -206,7 +206,7 @@
 
         // Remove or add the expand classes.
         this.$target[method]("collapse");
-        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
 
         this.$target.onTransitionEnd(complete);
     };
