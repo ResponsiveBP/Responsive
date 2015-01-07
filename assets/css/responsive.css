@@ -5,7 +5,7 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/*! Responsive v4.0.0 | MIT License | responsivebp.com */
+/*! Responsive v4.0.1 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -4815,10 +4815,13 @@ table {
   padding: 0 .5rem;
   border-top: solid 1px silver; }
 
-.expand,
+.trans,
 .collapse {
   -webkit-transition: height .5s ease, width .5s ease;
-          transition: height .5s ease, width .5s ease;
+          transition: height .5s ease, width .5s ease; }
+
+.expand,
+.collapse {
   display: block;
   height: auto;
   margin-top: 0;
