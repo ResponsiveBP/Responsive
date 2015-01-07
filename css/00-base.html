@@ -266,6 +266,11 @@ margin: 1.561rem 0;</code></pre>
         <dd>Hides an element from both screen-readers and browsers.</dd>
         <dt><code>.visuallyhidden</code></dt>
         <dd>Hides an element visually, but has it available for screen readers.</dd>
+        <dt><code>.visuallyhidden.focusable</code></dt>
+        <dd>
+            Extends the <code>.visuallyhidden</code> class to allow the element to be focusable when navigated
+            to via the keyboard
+        </dd>
         <dt><code>.invisible</code></dt>
         <dd>Hides an element visually and from screen readers, but maintain layout.</dd>
         <dt><code>.ir</code></dt>
@@ -348,9 +353,11 @@ margin: 1.561rem 0;</code></pre>
             Lines up text to the center of the container.
         </dd>
     </dl>
-    <h4>Heads Up!</h4>
-    <p>
-        <code>.text-pull</code>, <code>.text-push</code>, and <code>.text-center</code> have <code>{text-align}-{grid range}</code>
-        <br />and <code>{text-align}-{grid range}-only</code> variants for each grid range.
-    </p>
+    <div class="alert">
+        <h4>Heads Up!</h4>
+        <p>
+            <code>.text-pull</code>, <code>.text-push</code>, and <code>.text-center</code> have <code>{text-align}-{grid range}</code>
+            <br />and <code>{text-align}-{grid range}-only</code> variants for each grid range.
+        </p>
+    </div>
 </section>
