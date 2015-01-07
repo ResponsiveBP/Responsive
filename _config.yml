@@ -48,7 +48,7 @@ author: "James South, and Responsive contributers"
 
 # Custom variables
 version: 4.0.0
-buildsize : 27.7
+buildsize : 22.9
 repo: https://github.com/responsivebp/responsive
 sourcefiles: https://github.com/ResponsiveBP/Responsive/archive/4.0.0.zip
 release: https://github.com/ResponsiveBP/Responsive/releases/download/4.0.0/responsive.zip

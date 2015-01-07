@@ -59,3 +59,25 @@ $(document).off(".r.carousel.data-api");</code></pre>
         function.
     </p>
 </section>
+<hr />
+<section id="progam-api">
+    <h1>Programatic API</h1>
+    <p>
+        As well as the recommended Data-API, Responsive also comes with a Programatic API that can be called via JavaScript.
+        Each plugin runs in the standard jQuery format with a single chainable structure.
+    </p>
+    <pre class="language-javascript"><code>// Create a modal window targeting and element with the id 'modal-target'
+// and immediately show it.
+$("&lt;a/&gt;").modal({target: "#modal-target", immediate : true});</code></pre>
+</section>
+<hr />
+<section id="no-conflict">
+    <h1>Namespace Collision</h1>
+    <p>
+        Many jQuery plugins within UI frameworks use the same naming conventions and to prevent namespace collision each plugin has been given the ability to
+        reassign it's functionality to a new object via a <code>.noConflict()</code> method call. This allows the two conflicting plugins to exist side by side.
+    </p>
+    <pre class="language-javascript"><code>// Reassign the Responsive Carousel plugin to a new function name. 
+var responsiveCarousel = $.fn.carousel.noConflict();
+$.fn.responsiveCarousel = responsiveCarousel;</code></pre>
+</section>

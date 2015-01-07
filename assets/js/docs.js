@@ -3,13 +3,12 @@
     "use strict";
 
     // Ensure the navigation is accessible.
-    var resisizeTimer,
-        $navigation = $("#navigation"),
+    var $navigation = $("#navigation"),
         resize = function () {
             var currentIndex = $.support.currentGrid().index;
 
             // Small.
-            if (currentIndex >= 1) {
+            if (currentIndex >= 2) {
                 $navigation.attr({
                     "aria-hidden": false,
                     "tabindex": ""
@@ -20,16 +19,14 @@
                     "tabindex": -1
                 });
             }
-        };
+        },
+         debouncedResize = $.debounce(resize, 50);;
 
     $(w).on("resize orientationchange", function () {
-        if (resisizeTimer) {
-            w.clearTimeout(resisizeTimer);
-        }
-        resisizeTimer = w.setTimeout(resize, 50);
+        debouncedResize();
     });
 
-    $(d).on("ready", function() {
+    $(d).on("ready", function () {
         resize();
     });
 
