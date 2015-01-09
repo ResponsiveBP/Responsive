@@ -130,18 +130,18 @@
             shownEvent = $.Event(eshown),
             complete = function () {
 
-                $modal.data("currentModal", self.$element);
-
-                $modal.focus();
+                $body.attr({ "tabindex": -1 });
+                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 }).focus();
 
                 // Ensure that focus is maintained within the modal.
                 $(document).on(efocusin, function (event) {
-                    if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
-                        var $newTarget = $modal.find("input, select, a, iframe, img, button").first();
-                        $newTarget.length ? $newTarget.focus() : ((!self.options.modal && $close.focus()) || $overlay.focus());
-                        return false;
-                    }
 
+                    if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
+                        var $newTarget = $modal.find("a, area, button, input, object, select, textarea, [tabindex]").first();
+                        $newTarget.length ? $newTarget.focus() : $modal.focus();
+
+                        return false;
+                    }               
                     return true;
                 });
 
@@ -208,8 +208,9 @@
             hiddenEvent = $.Event(ehidden),
             complete = function () {
                 self.destroy(callback);
-                $modal.removeData("currentModal");
-                self.$element.trigger(hiddenEvent);
+                $body.removeAttr("tabindex");
+                $modal.removeData("currentModal").removeAttr("tabindex");
+                self.$element.trigger(hiddenEvent).focus();
             };
 
         this.$element.trigger(hideEvent);
