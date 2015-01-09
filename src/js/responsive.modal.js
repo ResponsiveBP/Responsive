@@ -1,7 +1,3 @@
-﻿/*
- * Responsive Lightbox
- */
-
 /*global jQuery*/
 /*jshint expr:true*/
 
@@ -589,7 +585,7 @@
     };
 
     Modal.prototype.resize = function () {
-        // Resize the model
+        // Resize the modal
         var windowHeight = $window.height(),
             headerHeight = $header.length && $header.height() || 0,
             closeHeight = $close.length && $close.outerHeight() || 0,
@@ -629,7 +625,7 @@
             });
 
             // Prevent IEMobile10+ scrolling when content overflows the modal.
-            // This causes the content to jump behind the model but it's all I can
+            // This causes the content to jump behind the modal but it's all I can
             // find for now.
             if (w.MSPointerEvent) {
                 if ($content.length && $content.children("*:first")[0].scrollHeight > $content.height()) {
