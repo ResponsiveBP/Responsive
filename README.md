@@ -71,10 +71,6 @@ There are three types of build available:
  2. `gulp watch` For debug purposes. Compiles the framework to the **build** folder and watches for further changes
  3. `gulp release` Compiles the framework to the **build** folder and zips up the build in the **dist** folder for release.
 
-##Bugs and feature requests
-
-Have a bug or a feature request? Please open a new [issue](https://github.com/responsivebp/responsive/issues) or even better submit a pull request. Before opening any issue, please search for existing issues and read the Issue Guidelines, written by [Nicolas Gallagher](https://github.com/necolas/).
-
 ##Authors
 
 James South [@james_m_south](http://twitter.com/james_m_south) and the Responsive contributors.
