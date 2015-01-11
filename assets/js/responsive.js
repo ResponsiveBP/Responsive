@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.0.1 | MIT License | responsivebp.com */
+/*! Responsive v4.0.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -1011,6 +1011,10 @@
 
     Carousel.prototype.keydown = function (event) {
 
+        if (/input|textarea/i.test(event.target.tagName)) {
+            return;
+        }
+
         var which = event && event.which;
 
         if (which === keys.LEFT || which === keys.RIGHT) {
@@ -1047,7 +1051,7 @@
     Carousel.prototype.click = function (event) {
 
         if (!event) {
-            return; 
+            return;
         }
 
         var which = event.which;
@@ -1650,8 +1654,11 @@
             return;
         }
 
+        this.transitioning = true;
+
         var self = this,
             dimension = this.options.dimension,
+            size,
             $actives = [];
 
         if (this.$parent) {
@@ -1676,13 +1683,13 @@
             this.$target[dimension]("auto").attr({ "aria-hidden": false });
             this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false });
 
-            this.endSize = w.getComputedStyle(this.$target[0])[dimension];
+            size = w.getComputedStyle(this.$target[0])[dimension];
 
             // Reset to zero and force repaint.
             this.$target[dimension](0).redraw();
         }
 
-        this.$target[dimension](this.endSize || "");
+        this.$target[dimension](size || "");
 
         this.transition("removeClass", $.Event(eshow), eshown);
 
@@ -1698,6 +1705,8 @@
         if (this.transitioning || this.$target.hasClass("collapse")) {
             return;
         }
+
+        this.transitioning = true;
 
         // Reset the height/width and then reduce to zero.
         var dimension = this.options.dimension,
@@ -1718,6 +1727,11 @@
     };
 
     Dropdown.prototype.toggle = function () {
+
+        if (this.transitioning) {
+            return;
+        }
+
         // Run the correct command based on the presence of the class "collapse".
         this[this.$target.hasClass("collapse") ? "show" : "hide"]();
     };
@@ -1733,8 +1747,6 @@
 
                 // Ensure the height/width is set to auto.
                 self.$target.removeClass("trans")[self.options.dimension]("");
-
-                self.transitioning = false;
 
                 // Set the correct aria attributes.
                 self.$target.attr({
@@ -1757,20 +1769,20 @@
                     "tabindex": doShow ? 0 : -1
                 });
 
+                self.transitioning = false;
+
                 self.$element.trigger(eventToTrigger);
             };
 
         this.$element.trigger(startEvent);
 
-        if (this.transitioning || startEvent.isDefaultPrevented()) {
+        if (startEvent.isDefaultPrevented()) {
             return;
         }
 
-        this.transitioning = true;
-
         // Remove or add the expand classes.
         this.$target[method]("collapse");
-        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("expand trans");
+        this.$target[startEvent.type === "show" ? "addClass" : "removeClass"]("trans expand");
 
         this.$target.onTransitionEnd(complete);
     };
@@ -1783,6 +1795,10 @@
 
     Dropdown.prototype.keydown = function (event) {
 
+        if (/input|textarea/i.test(event.target.tagName)) {
+            return;
+        }
+
         var which = event.which;
 
         if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {
@@ -1790,16 +1806,17 @@
             event.preventDefault();
             event.stopPropagation();
 
-            var $this = $(event.target),
-                $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
+            var $this = $(event.target);
+
+            if (which === keys.SPACE) {
+                this.toggle();
+                return;
+            }
+
+            var $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
                 $items = $parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]"),
                 index = $items.index($items.filter(":focus")),
                 length = $items.length;
-
-            if (which === keys.SPACE) {
-                $($items.eq(index)).data("r.dropdown").toggle();
-                return;
-            }
 
             if (which === keys.LEFT) {
                 rtl ? index += 1 : index -= 1;
@@ -1870,10 +1887,6 @@
     w.RESPONSIVE_DROPDOWN = true;
 
 }(jQuery, window, ".r.dropdown", ".data-api"));
-
-/*
- * Responsive Lightbox
- */
 
 /*global jQuery*/
 /*jshint expr:true*/
@@ -2003,18 +2016,18 @@
             shownEvent = $.Event(eshown),
             complete = function () {
 
-                $modal.data("currentModal", self.$element);
-
-                $modal.focus();
+                $body.attr({ "tabindex": -1 });
+                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 }).focus();
 
                 // Ensure that focus is maintained within the modal.
                 $(document).on(efocusin, function (event) {
-                    if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
-                        var $newTarget = $modal.find("input, select, a, iframe, img, button").first();
-                        $newTarget.length ? $newTarget.focus() : ((!self.options.modal && $close.focus()) || $overlay.focus());
-                        return false;
-                    }
 
+                    if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
+                        var $newTarget = $modal.find("a, area, button, input, object, select, textarea, [tabindex]").first();
+                        $newTarget.length ? $newTarget.focus() : $modal.focus();
+
+                        return false;
+                    }               
                     return true;
                 });
 
@@ -2081,8 +2094,9 @@
             hiddenEvent = $.Event(ehidden),
             complete = function () {
                 self.destroy(callback);
-                $modal.removeData("currentModal");
-                self.$element.trigger(hiddenEvent);
+                $body.removeAttr("tabindex");
+                $modal.removeData("currentModal").removeAttr("tabindex");
+                self.$element.trigger(hiddenEvent).focus();
             };
 
         this.$element.trigger(hideEvent);
@@ -2448,6 +2462,11 @@
 
         // Bind the next/prev keys.
         if (this.options.group) {
+
+            if (/input|textarea/i.test(event.target.tagName)) {
+                return;
+            }
+
             // Bind the left arrow key.
             if (event.which === keys.LEFT) {
                 rtl ? this.next() : this.prev();
@@ -2461,7 +2480,7 @@
     };
 
     Modal.prototype.resize = function () {
-        // Resize the model
+        // Resize the modal
         var windowHeight = $window.height(),
             headerHeight = $header.length && $header.height() || 0,
             closeHeight = $close.length && $close.outerHeight() || 0,
@@ -2501,7 +2520,7 @@
             });
 
             // Prevent IEMobile10+ scrolling when content overflows the modal.
-            // This causes the content to jump behind the model but it's all I can
+            // This causes the content to jump behind the modal but it's all I can
             // find for now.
             if (w.MSPointerEvent) {
                 if ($content.length && $content.children("*:first")[0].scrollHeight > $content.height()) {
@@ -2631,6 +2650,7 @@
     w.RESPONSIVE_MODAL = true;
 
 }(jQuery, window, ".r.modal", ".data-api"));
+
 /*
  * Responsive Tables
  */

@@ -335,26 +335,26 @@ modal trigger
                         <tr>
                             <th scope="row">title</th>
                             <td>string</td>
-                            <td>The text to insert as the title of the modal.</td>
+                            <td>The html to insert as the title of the modal.</td>
                             <td><var>null</var></td>
                         </tr>
                         <tr>
                             <th scope="row">description</th>
                             <td>string</td>
-                            <td>The text to insert as the description of the modal in the footer.</td>
+                            <td>The html to insert as the description of the modal in the footer.</td>
                             <td><var>null</var></td>
                         </tr>
                         <tr>
                             <th scope="row">next</th>
                             <td>string</td>
-                            <td>The text to insert into the next indicator.</td>
+                            <td>The html to insert into the next indicator.</td>
                             <td><var>&gt;</var></td>
                         </tr>
                         <tr>
                             <th scope="row">nextHint</th>
                             <td>string</td>
                             <td>
-                                A hidden value that is added to the next trigger for accessibility purposes. The default language direction indicator is reversed by
+                                A hidden html value that is added to the next trigger for accessibility purposes. The default language direction indicator is reversed by
                                 setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
                             </td>
                             <td><var>Next {Left|Right} Arrow</var></td>
@@ -362,14 +362,14 @@ modal trigger
                         <tr>
                             <th scope="row">previous</th>
                             <td>string</td>
-                            <td>The text to insert into the previous indicator.</td>
-                            <td><var>&gt;</var></td>
+                            <td>The html to insert into the previous indicator.</td>
+                            <td><var>&lt;</var></td>
                         </tr>
                         <tr>
                             <th scope="row">previousHint</th>
                             <td>string</td>
                             <td>
-                                A hidden value that is added to the previous trigger for accessibility purposes. The default language direction indicator is reversed by
+                                A hidden html value that is added to the previous trigger for accessibility purposes. The default language direction indicator is reversed by
                                 setting the <code>dir="rtl"</code> attribute on the <code>html</code> element.
                             </td>
                             <td><var>Previous {Left|Right} Arrow</var></td>
@@ -378,7 +378,7 @@ modal trigger
                             <th scope="row">closeHint</th>
                             <td>string</td>
                             <td>
-                                A hidden value that is added to the close trigger for accessibility purposes.
+                                A hidden html value that is added to the close trigger for accessibility purposes.
                             </td>
                             <td><var>Close (Esc)</var></td>
                         </tr>
@@ -386,7 +386,7 @@ modal trigger
                             <th scope="row">errorHint</th>
                             <td>string</td>
                             <td>
-                                The message inserted into the modal when an ajax error occurs.
+                                The html containing a message that will be inserted into the modal when an ajax error occurs.
                             </td>
                             <td><var>&lt;p&gt;An error has occured.&lt;/p&gt;</var></td>
                         </tr>
