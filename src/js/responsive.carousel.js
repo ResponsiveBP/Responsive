@@ -352,6 +352,10 @@
 
     Carousel.prototype.keydown = function (event) {
 
+        if (/input|textarea/i.test(event.target.tagName)) {
+            return;
+        }
+
         var which = event && event.which;
 
         if (which === keys.LEFT || which === keys.RIGHT) {
@@ -388,7 +392,7 @@
     Carousel.prototype.click = function (event) {
 
         if (!event) {
-            return; 
+            return;
         }
 
         var which = event.which;

@@ -227,6 +227,10 @@
 
     Dropdown.prototype.keydown = function (event) {
 
+        if (/input|textarea/i.test(event.target.tagName)) {
+            return;
+        }
+
         var which = event.which;
 
         if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {

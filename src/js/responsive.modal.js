@@ -572,6 +572,11 @@
 
         // Bind the next/prev keys.
         if (this.options.group) {
+
+            if (/input|textarea/i.test(event.target.tagName)) {
+                return;
+            }
+
             // Bind the left arrow key.
             if (event.which === keys.LEFT) {
                 rtl ? this.next() : this.prev();

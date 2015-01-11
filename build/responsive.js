@@ -1011,6 +1011,10 @@
 
     Carousel.prototype.keydown = function (event) {
 
+        if (/input|textarea/i.test(event.target.tagName)) {
+            return;
+        }
+
         var which = event && event.which;
 
         if (which === keys.LEFT || which === keys.RIGHT) {
@@ -1047,7 +1051,7 @@
     Carousel.prototype.click = function (event) {
 
         if (!event) {
-            return; 
+            return;
         }
 
         var which = event.which;
@@ -1791,6 +1795,10 @@
 
     Dropdown.prototype.keydown = function (event) {
 
+        if (/input|textarea/i.test(event.target.tagName)) {
+            return;
+        }
+
         var which = event.which;
 
         if (which === keys.SPACE || which === keys.LEFT || which === keys.RIGHT) {
@@ -1879,10 +1887,6 @@
     w.RESPONSIVE_DROPDOWN = true;
 
 }(jQuery, window, ".r.dropdown", ".data-api"));
-
-/*
- * Responsive Lightbox
- */
 
 /*global jQuery*/
 /*jshint expr:true*/
@@ -2458,6 +2462,11 @@
 
         // Bind the next/prev keys.
         if (this.options.group) {
+
+            if (/input|textarea/i.test(event.target.tagName)) {
+                return;
+            }
+
             // Bind the left arrow key.
             if (event.which === keys.LEFT) {
                 rtl ? this.next() : this.prev();
@@ -2471,7 +2480,7 @@
     };
 
     Modal.prototype.resize = function () {
-        // Resize the model
+        // Resize the modal
         var windowHeight = $window.height(),
             headerHeight = $header.length && $header.height() || 0,
             closeHeight = $close.length && $close.outerHeight() || 0,
@@ -2511,7 +2520,7 @@
             });
 
             // Prevent IEMobile10+ scrolling when content overflows the modal.
-            // This causes the content to jump behind the model but it's all I can
+            // This causes the content to jump behind the modal but it's all I can
             // find for now.
             if (w.MSPointerEvent) {
                 if ($content.length && $content.children("*:first")[0].scrollHeight > $content.height()) {
@@ -2641,6 +2650,7 @@
     w.RESPONSIVE_MODAL = true;
 
 }(jQuery, window, ".r.modal", ".data-api"));
+
 /*
  * Responsive Tables
  */
