@@ -1,9 +1,9 @@
 #Responsive
-##A super lightweight HTML, Sass, CSS, and JavaScript framework for building responsive websites
+##A powerful, accessible, developer friendly framework for building responsive websites
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/ResponsiveBP/Responsive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-###Responsive is the developers framework.
+###Responsive is the developers' framework.
 
 Other frameworks are too design opinionated and heavy. They're great for prototyping but every time
 you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
@@ -23,8 +23,8 @@ Browser support covers IE9+ as well as all other modern browsers.
 
 Several options are available for downloading Responsive:
 
-- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.0.2/responsive.zip).
-- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.0.2.zip).
+- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.0.3/responsive.zip).
+- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.0.3.zip).
 - Clone the repo: `git clone https://github.com/ResponsiveBP/Responsive.git`.
 - Install with [Bower](http://bower.io): `bower install responsive`.
 
