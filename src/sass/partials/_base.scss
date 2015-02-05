@@ -12,21 +12,13 @@ html {
     box-sizing: inherit;
 }
 
-// Add a placeholder for focus events so we can manage
-// both global and button styles.
-%focus {
-    outline-color: $selection-focus-color;
+// Set focus on elements that can recieve it.
+// http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex
+:focus {
+    outline: $selection-focus-color;
     outline-style: $selection-focus-style;
     outline-width: $selection-focus-width;
     outline-offset: $selection-focus-offset;
-}
-
-// Set a focus on elements that can recieve it.
-// http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex
-a, area, button, input, object, select, textarea, [tabindex] {
-    &:focus {
-        @extend %focus;
-    }
 }
 
 // Suppress the focus outline on links that cannot be accessed via keyboard.

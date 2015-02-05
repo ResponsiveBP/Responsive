@@ -125,9 +125,11 @@
             showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown),
             complete = function () {
-
+                var $autofocus = $modal.find("[autofocus]");
                 $body.attr({ "tabindex": -1 });
-                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 }).focus();
+
+                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 });
+                $autofocus.length ? $autofocus.focus() : $modal.focus();
 
                 // Ensure that focus is maintained within the modal.
                 $(document).on(efocusin, function (event) {
@@ -137,7 +139,7 @@
                         $newTarget.length ? $newTarget.focus() : $modal.focus();
 
                         return false;
-                    }               
+                    }
                     return true;
                 });
 
