@@ -171,6 +171,10 @@ Launch Youtube overlay
         <a href="#" data-modal-target="#form-overlay" data-modal-fit-viewport="false">
             Launch internal overlay containing a form that should not stretch to the full viewport width.
         </a>
+        <div class="alert" role="alert">
+            <h4>Heads Up</h4>
+            <p>Adding the attribute <code>autofocus</code> to an input will cause the modal plugin to focus on that element on load.</p>
+        </div>
         <pre class="language-markup"><code>&lt;a href="#" data-modal-target="#form-overlay" data-modal-fit-viewport="false"&gt;
     Launch internal overlay containing a form
 &lt;/a&gt;</code></pre>
@@ -179,7 +183,7 @@ Launch Youtube overlay
                 <fieldset>
                     <legend>Default Form</legend>
                     <label for="field-one">Field One</label>
-                    <input type="text" id="field-one" />
+                    <input type="text" id="field-one" autofocus />
                     <label for="field-two">Field Two</label>
                     <select id="field-two">
                         <option>1</option>
@@ -444,17 +448,14 @@ $("YOUR_TRIGGER_SELECTOR").on("show.r.modal", function(event) {
 $("YOUR_TRIGGER_SELECTOR").on("shown.r.modal", function(event) {
     // Your custom behaviour...
 });
-
 // Bind to the hide event.
 $("YOUR_TRIGGER_SELECTOR").on("hide.r.modal", function(event) {
     // Your custom behaviour...
 });
-
 // Bind to the hidden event.
 $("YOUR_TRIGGER_SELECTOR").on("hidden.r.modal", function(event) {
     // Your custom behaviour...
 });
-
 // Bind to the ajax error event.
 $("YOUR_TRIGGER_SELECTOR").on("error.r.modal", function(event) {
     // Your custom behaviour...
