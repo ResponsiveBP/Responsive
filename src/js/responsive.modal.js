@@ -64,7 +64,7 @@
             touch: true,
             next: ">",
             nextHint: "Next (" + (rtl ? "Left" : "Right") + " Arrow)",
-            prev: "<",
+            previous: "<",
             previousHint: "Previous (" + (rtl ? "Right" : "Left") + " Arrow)",
             closeHint: "Close (Esc)",
             errorHint: "<p>An error has occured.</p>",
@@ -125,9 +125,11 @@
             showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown),
             complete = function () {
-
+                var $autofocus = $modal.find("[autofocus]");
                 $body.attr({ "tabindex": -1 });
-                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 }).focus();
+
+                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 });
+                $autofocus.length ? $autofocus.focus() : $modal.focus();
 
                 // Ensure that focus is maintained within the modal.
                 $(document).on(efocusin, function (event) {
@@ -137,7 +139,7 @@
                         $newTarget.length ? $newTarget.focus() : $modal.focus();
 
                         return false;
-                    }               
+                    }
                     return true;
                 });
 
@@ -362,7 +364,7 @@
             local = !notHash && !external,
             $group = this.$group,
             nextText = this.options.next + "<span class=\"visuallyhidden\">" + this.options.nextHint + "</span>",
-            prevText = this.options.prev + "<span class=\"visuallyhidden\">" + this.options.prevHint + "</span>",
+            prevText = this.options.previous + "<span class=\"visuallyhidden\">" + this.options.previousHint + "</span>",
             iframeScroll = this.options.iframeScroll,
             image = this.options.image || rimage.test(target),
             iframe = this.options.iframe || notHash && external ? !image : false,

@@ -2,8 +2,10 @@
 // their containers: h5bp.com/i/440
 audio,
 canvas,
+iframe,
 img,
-video {
+video,
+svg {
     vertical-align: middle;
 }
 
@@ -74,7 +76,7 @@ a img {
         outline: none;
         padding: 0;
         position: absolute;
-        top: 0; 
+        top: 0;
         width: 100%;
     }
 
@@ -85,7 +87,7 @@ a img {
         // at 100%.
         bottom: -1000000%;
         left: -1000000%;
-        margin: auto; 
+        margin: auto;
         position: absolute;
         right: -1000000%;
         top: -1000000%;
