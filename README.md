@@ -3,7 +3,7 @@
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/ResponsiveBP/Responsive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-###Responsive is the developers framework.
+###Responsive is the developers' framework.
 
 Other frameworks are too design opinionated and heavy. They're great for prototyping but every time
 you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
