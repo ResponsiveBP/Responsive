@@ -114,7 +114,7 @@
 
             var value = options[val];
 
-            if (value) {
+            if (value || value === null) {
                 params.push(value);
             }
 
