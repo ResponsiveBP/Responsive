@@ -128,7 +128,7 @@
             if (!$.isPlainObject(last)) {
                 params.push(defaults);
             } else {
-                $.extend(last, defaults);
+                params[params.length - 1] = $.extend(last, defaults);
             }
         }
         return params;
