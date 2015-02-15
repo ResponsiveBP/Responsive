@@ -104,7 +104,7 @@
             eventParams = ["type", "category", "action", "label", "value", (isUniversal ? "options" : "nonInteraction")],
             params = isUniversal ? ["send"] : [],
             defaults = {
-                "hitCallback": callback
+                hitCallback: callback
             };
 
         var toParse = /event|_trackEvent/.test(options.type) ? eventParams : pageParams;
