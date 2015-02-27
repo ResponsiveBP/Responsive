@@ -79,7 +79,7 @@ nav[role="navigation"] [data-dropdown-target] {
             background-color: #333;
         }
 
-@media (min-width: 48rem) {
+@media (min-width: 48em) {
     #navigation {
         clear: none;
         float: left;
@@ -144,7 +144,7 @@ main {
     padding: 2rem 0;
 }
 
-@media (max-width: 61.99rem) {
+@media (max-width: 61.99em) {
     nav[role="complementary"] a {
         line-height: 44px;
         display: block;
@@ -209,7 +209,7 @@ header[role="banner"] {
     box-shadow: 0 3px 0 #000;
 }
 
-@media (min-width: 62rem) {
+@media (min-width: 62em) {
     .download {
         font-size: 1.5rem;
     }
