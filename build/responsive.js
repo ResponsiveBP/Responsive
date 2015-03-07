@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.0.3 | MIT License | responsivebp.com */
+/*! Responsive v4.0.4 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -88,11 +88,11 @@
                     "OTransition": "oTransitionEnd otransitionend"
                 };
 
-            // Could use the other method but I'm intentionally keeping them
-            // separate for now.
-            for (var name in transEndEventNames) {
-                if (div.style[name] !== undefined) {
-                    return { end: transEndEventNames[name] };
+            var names = Object.keys(transEndEventNames),
+                len = names.length;
+            for (var i = 0; i < len; i++) {
+                if (div.style[names[i]] !== undefined) {
+                    return { end: transEndEventNames[names[i]] };
                 }
             }
 
@@ -727,14 +727,14 @@
         // Hide the previous button if no wrapping.
         if (!this.options.wrap) {
             if (activeIndex === 0) {
-                this.$previousTrigger.hide().attr("aria-hidden", true);
+                this.$previousTrigger.attr({ "aria-hidden": true, "hidden": true });
             }
         }
 
         // Hide both if one item.
         if (this.$items.length === 1) {
-            this.$previousTrigger.hide().attr("aria-hidden", true);
-            this.$nextTrigger.hide().attr("aria-hidden", true);
+            this.$previousTrigger.attr({ "aria-hidden": true, "hidden": true });
+            this.$nextTrigger.attr({ "aria-hidden": true, "hidden": true });
         }
 
         // Add the css class to support fade.
@@ -945,17 +945,17 @@
             if (!self.options.wrap) {
                 var activePosition = self.activeindex();
                 if (self.$items && activePosition === self.$items.length - 1) {
-                    self.$nextTrigger.hide().attr("aria-hidden", true);
-                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.$nextTrigger.attr({ "aria-hidden": true, "hidden": true });
+                    self.$previousTrigger.removeAttr("aria-hidden").removeAttr("hidden");
                     if (self.keyboardTriggered) { self.$previousTrigger.focus(); self.keyboardTriggered = false; }
                 }
                 else if (self.$items && activePosition === 0) {
-                    self.$previousTrigger.hide().attr("aria-hidden", true);
-                    self.$nextTrigger.show().removeAttr("aria-hidden");
+                    self.$previousTrigger.attr({ "aria-hidden": true, "hidden": true });
+                    self.$nextTrigger.show().removeAttr("aria-hidden").removeAttr("hidden");
                     if (self.keyboardTriggered) { self.$nextTrigger.focus(); self.keyboardTriggered = false; }
                 } else {
-                    self.$nextTrigger.show().removeAttr("aria-hidden");
-                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.$nextTrigger.removeAttr("aria-hidden").removeAttr("hidden");
+                    self.$previousTrigger.removeAttr("aria-hidden").removeAttr("hidden");
                     self.keyboardTriggered = false;
                 }
             }
@@ -1490,7 +1490,7 @@
             self = this,
             complete = function () {
                 self.dismissing = false;
-                $target.removeClass("fade-out").attr({ "aria-hidden": true, "tabindex": -1 });
+                $target.removeClass("fade-out").attr({ "aria-hidden": true, "hidden": true, "tabindex": -1 });
                 self.$element.trigger($.Event(edismissed));
             };
 
@@ -1640,6 +1640,7 @@
             "role": "tabpanel",
             "aria-labelledby": id,
             "aria-hidden": !active,
+            "hidden": !active,
             "tabindex": active ? 0 : -1
         });
 
@@ -1680,8 +1681,8 @@
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$target[dimension]("auto").attr({ "aria-hidden": false });
-            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false });
+            this.$target[dimension]("auto").attr({ "aria-hidden": false, "hidden": false });
+            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false, "hidden": false });
 
             size = w.getComputedStyle(this.$target[0])[dimension];
 
@@ -1751,6 +1752,7 @@
                 // Set the correct aria attributes.
                 self.$target.attr({
                     "aria-hidden": !doShow,
+                    "hidden": !doShow,
                     "tabindex": doShow ? 0 : -1
                 });
 
@@ -1766,6 +1768,7 @@
                 // Toggle any children.
                 self.$target.find("[tabindex]:not(.collapse)").attr({
                     "aria-hidden": !doShow,
+                    "hidden": !doShow,
                     "tabindex": doShow ? 0 : -1
                 });
 

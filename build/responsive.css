@@ -5,7 +5,7 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/*! Responsive v4.0.3 | MIT License | responsivebp.com */
+/*! Responsive v4.0.4 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -247,6 +247,12 @@ abbr {
 [class*=col-][class*=offset], [class*=col-][class*=push], [class*=col-][class*=pull] {
   position: relative; }
 
+.no-gutter > [class*=col-] {
+  margin-left: 0; }
+  [dir="rtl"] .no-gutter > [class*=col-] {
+    margin-left: 0;
+    margin-right: 0; }
+
 [class*="block-row-"].no-gutter > * {
   margin: 0 !important; }
 
@@ -269,12 +275,6 @@ abbr {
     margin-right: 2%; }
     [dir="rtl"] [class*=col-xxs]:first-child {
       margin-right: 0; }
-
-.no-gutter > [class*=col-xxs] {
-  margin-left: 0; }
-  [dir="rtl"] .no-gutter > [class*=col-xxs] {
-    margin-left: 0;
-    margin-right: 0; }
 
 [class*=col-].reset-xxs {
   clear: both;
@@ -1034,12 +1034,6 @@ abbr {
       margin-right: 2%; }
       [dir="rtl"] [class*=col-xs]:first-child {
         margin-right: 0; }
-
-  .no-gutter > [class*=col-xs] {
-    margin-left: 0; }
-    [dir="rtl"] .no-gutter > [class*=col-xs] {
-      margin-left: 0;
-      margin-right: 0; }
 
   [class*=col-].reset-xs {
     clear: both;
@@ -1805,12 +1799,6 @@ abbr {
       [dir="rtl"] [class*=col-s]:first-child {
         margin-right: 0; }
 
-  .no-gutter > [class*=col-s] {
-    margin-left: 0; }
-    [dir="rtl"] .no-gutter > [class*=col-s] {
-      margin-left: 0;
-      margin-right: 0; }
-
   [class*=col-].reset-s {
     clear: both;
     margin-left: 0; }
@@ -2575,12 +2563,6 @@ abbr {
       [dir="rtl"] [class*=col-m]:first-child {
         margin-right: 0; }
 
-  .no-gutter > [class*=col-m] {
-    margin-left: 0; }
-    [dir="rtl"] .no-gutter > [class*=col-m] {
-      margin-left: 0;
-      margin-right: 0; }
-
   [class*=col-].reset-m {
     clear: both;
     margin-left: 0; }
@@ -3344,12 +3326,6 @@ abbr {
       margin-right: 2%; }
       [dir="rtl"] [class*=col-l]:first-child {
         margin-right: 0; }
-
-  .no-gutter > [class*=col-l] {
-    margin-left: 0; }
-    [dir="rtl"] .no-gutter > [class*=col-l] {
-      margin-left: 0;
-      margin-right: 0; }
 
   [class*=col-].reset-l {
     clear: both;
@@ -5440,7 +5416,6 @@ button.modal-direction {
     height: 150%;
     width: 0; }
 
-[aria-hidden="true"],
 .hidden {
   display: none !important; }
 

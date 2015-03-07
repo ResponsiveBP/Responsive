@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.0.3 | MIT License | responsivebp.com */
+/*! Responsive v4.0.4 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -88,11 +88,11 @@
                     "OTransition": "oTransitionEnd otransitionend"
                 };
 
-            // Could use the other method but I'm intentionally keeping them
-            // separate for now.
-            for (var name in transEndEventNames) {
-                if (div.style[name] !== undefined) {
-                    return { end: transEndEventNames[name] };
+            var names = Object.keys(transEndEventNames),
+                len = names.length;
+            for (var i = 0; i < len; i++) {
+                if (div.style[names[i]] !== undefined) {
+                    return { end: transEndEventNames[names[i]] };
                 }
             }
 

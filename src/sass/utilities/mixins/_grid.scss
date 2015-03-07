@@ -37,15 +37,6 @@
             }
         }
     }
-    // Gutterless
-    .no-gutter > [class*=col-#{$breakpoint}] {
-        margin-left: 0;
-
-        [dir="rtl"] & {
-            margin-left: 0;
-            margin-right: 0;
-        }
-    }
 
     [class*=col-] {
         // Global reset classes.
