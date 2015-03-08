@@ -1,90 +1,24 @@
 //==
-// Grid System - Base
-//##
-
-@mixin grid-base($breakpoint) {
-    // Large doesn't need an "only" since it operates on min width.
-    @if $breakpoint != l {
-        @include bp-max($breakpoint) {
-
-            [class*=col-] {
-                // Reset classes for each level.
-                &.reset-#{$breakpoint}-only {
-                    clear: both;
-                    margin-left: 0;
-
-                    [dir="rtl"] & {
-                        margin-right: 0;
-                    }
-                }
-            }
-        }
-    }
-    // Set the margin for each following column.
-    [class*=col-#{$breakpoint}] {
-        margin-left: $grid-column-gutter;
-
-        &:first-child {
-            margin-left: 0;
-        }
-
-        [dir="rtl"] & {
-            margin-left: 0;
-            margin-right: $grid-column-gutter;
-
-            &:first-child {
-                margin-right: 0;
-            }
-        }
-    }
-
-    [class*=col-] {
-        // Global reset classes.
-        &.reset-#{$breakpoint} {
-            clear: both;
-            margin-left: 0;
-
-            [dir="rtl"] & {
-                margin-right: 0;
-            }
-        }
-    }
-}
-
-//==
 // Grid System - Columns
 //##
 @mixin grid-columns($breakpoint) {
     // Calculate column width and without gutter.
     $column-width: (100% / $grid-column-count);
     $column-width-with-gutter: (100% - ($grid-column-gutter * ($grid-column-count - 1 ))) / $grid-column-count;
+    $max-columns: $grid-column-count + 1;
 
-    // Loop through and set width.
-    @for $i from 1 to ($grid-column-count + 1) {
-        $temp-width: $column-width-with-gutter * $i + ($grid-column-gutter * $i);
+    // Loop through and build the columns.
+    @for $i from 1 to ($max-columns) {
+        $temp-width: $column-width * $i;
 
         .col-#{$breakpoint}-#{$i} {
-            width: $temp-width - $grid-column-gutter;
+            width: $temp-width;
         }
         // We don't want add offsets etc to full width columns.
-        @if $i != $grid-column-count {
-            .offset-#{$breakpoint}-#{$i} {
-                margin-left: $temp-width + $grid-column-gutter;
+        @if $i < $max-columns {
 
-                &:first-child {
-                    margin-left: $temp-width;
-                }
-
-                [dir="rtl"] & {
-                    margin-left: 0;
-                    margin-right: $temp-width + $grid-column-gutter;
-
-                    &:first-child {
-                        margin-right: $temp-width;
-                    }
-                }
-            }
-
+            // Keep offset for now for backwards compatibility.
+            .offset-#{$breakpoint}-#{$i},
             .push-#{$breakpoint}-#{$i} {
                 left: $temp-width;
 
@@ -103,54 +37,6 @@
                 }
             }
         }
-        @else {
-            // Ensure that the gutter is reset on full width columns.
-            .col-#{$breakpoint}-#{$i}:first-child,
-            [class*=col-#{$breakpoint}-#{$i}] {
-                margin-left: 0;
-
-                [dir="rtl"] & {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
-    // Loop through and build the "no-gutter" columns.
-    .no-gutter {
-        @for $i from 1 to ($grid-column-count + 1) {
-            $temp-width: $column-width * $i;
-
-            > .col-#{$breakpoint}-#{$i} {
-                width: $temp-width;
-            }
-
-            > .offset-#{$breakpoint}-#{$i} {
-                margin-left: $temp-width;
-
-                [dir="rtl"] & {
-                    margin-left: 0;
-                    margin-right: $temp-width;
-                }
-            }
-
-            > .push-#{$breakpoint}-#{$i} {
-                left: $temp-width;
-
-                [dir="rtl"] & {
-                    left: auto;
-                    right: $temp-width;
-                }
-            }
-
-            > .pull-#{$breakpoint}-#{$i} {
-                right: $temp-width;
-
-                [dir="rtl"] & {
-                    right: auto;
-                    left: $temp-width;
-                }
-            }
-        }
     }
 }
 
@@ -158,39 +44,14 @@
 // Grid System - Block Grid Columns
 //##
 @mixin block-grid-columns($breakpoint) {
+    $max-columns: $grid-column-count + 1;
     // Loop through and set width.
-    @for $i from 1 to ($grid-column-count + 1) {
+    @for $i from 1 to ($max-columns) {
         // Calculate column width with and without gutter.
         $column-width-with-gutter: (100% - ($grid-column-gutter * ($i - 1 ))) / $i;
         $column-width: (100% / $i);
 
         .block-row-#{$breakpoint}-#{$i} {
-
-            > * {
-                width: $column-width-with-gutter;
-            }
-
-            > :nth-of-type(n+1) {
-                clear: none;
-                margin-left: $grid-column-gutter;
-
-                [dir="rtl"] & {
-                    margin-left: 0;
-                    margin-right: $grid-column-gutter;
-                }
-            }
-
-            > :nth-of-type(#{$i}n+1) {
-                clear: both;
-                margin-left: 0;
-
-                [dir="rtl"] & {
-                    margin-right: 0;
-                }
-            }
-        }
-
-        .block-row-#{$breakpoint}-#{$i}.no-gutter {
 
             > * {
                 width: $column-width;
