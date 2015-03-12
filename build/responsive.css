@@ -284,7 +284,7 @@ abbr {
   float: none;
   vertical-align: top; }
   .equal-height > [class*=col-] > .cell-fill {
-    display: table-cell;
+    display: table;
     height: 100%;
     vertical-align: top;
     margin: 0; }
