@@ -39,7 +39,7 @@
     }
     // Equal height
     .equal-height > [class*=col-#{$breakpoint}] {
-        display: table-row;
+        display: table-cell;
     }
 
     .equal-height > .col-#{$breakpoint}-#{$max-columns} {
