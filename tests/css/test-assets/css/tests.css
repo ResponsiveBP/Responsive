@@ -20,20 +20,33 @@
         padding-top: .5em;
     }
 
+    .grid-test .row.equal-height {
+        padding-top: 0;
+    }
+
+        .grid-test .row.equal-height > [class*=col-] > * {
+            /*height: 100%;*/
+        }
     /*.grid-test .row .row {
         background-color: #3876a7;
     }*/
 
     .grid-test [class*="block-row-"] > * > *,
-    .grid-test [class*="col-"] > *:not(.row) {
+    .grid-test [class*="col-"] > span {
         line-height: 2em;
         background-color: #3876a7;
         display: block;
         color: #fff;
     }
 
+.grid-test .equal-height [class*="col-"] {
+    background-color: #ff00ff;
+}
+
+.grid-test .cell-fill,
 .grid-test [class*="col-"] [class*="col-"] {
     background-color: #434343;
+    color: #fff;
 }
 
 /*.grid-test [class*="col-"] > span {

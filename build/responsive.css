@@ -165,6 +165,10 @@ html {
 [tabindex="-1"]:focus {
   outline: none !important; }
 
+_::-ms-reveal,
+div:not([tabindex]):focus {
+  outline: none !important; }
+
 h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
   page-break-after: avoid; }
@@ -264,6 +268,26 @@ abbr {
 [class*="block-row-"].no-gutter > *,
 .no-gutter > [class*=col-] {
   padding: 0; }
+
+.equal-height {
+  display: table;
+  table-layout: fixed;
+  height: 1px;
+  width: 102%; }
+  .equal-height.no-gutter {
+    width: 100%; }
+  .equal-height:before {
+    display: none !important; }
+
+.equal-height > [class*=col-] {
+  height: 1px;
+  float: none;
+  vertical-align: top; }
+  .equal-height > [class*=col-] > .cell-fill {
+    display: table-cell;
+    height: 100%;
+    vertical-align: top;
+    margin: 0; }
 
 .col-xxs-1 {
   width: 8.3333%; }
@@ -468,6 +492,12 @@ abbr {
   [dir="rtl"] .pull-xxs-12 {
     right: auto;
     left: 100%; }
+
+.equal-height > [class*=col-xxs] {
+  display: table-row; }
+
+.equal-height > .col-xxs-13 {
+  display: table-caption; }
 
 .block-row-xxs-1 > * {
   width: 100%; }
@@ -758,6 +788,12 @@ abbr {
       right: auto;
       left: 100%; }
 
+  .equal-height > [class*=col-xs] {
+    display: table-row; }
+
+  .equal-height > .col-xs-13 {
+    display: table-caption; }
+
   .block-row-xs-1 > * {
     width: 100%; }
   .block-row-xs-1 > :nth-of-type(n+1) {
@@ -1045,6 +1081,12 @@ abbr {
     [dir="rtl"] .pull-s-12 {
       right: auto;
       left: 100%; }
+
+  .equal-height > [class*=col-s] {
+    display: table-row; }
+
+  .equal-height > .col-s-13 {
+    display: table-caption; }
 
   .block-row-s-1 > * {
     width: 100%; }
@@ -1334,6 +1376,12 @@ abbr {
       right: auto;
       left: 100%; }
 
+  .equal-height > [class*=col-m] {
+    display: table-row; }
+
+  .equal-height > .col-m-13 {
+    display: table-caption; }
+
   .block-row-m-1 > * {
     width: 100%; }
   .block-row-m-1 > :nth-of-type(n+1) {
@@ -1621,6 +1669,12 @@ abbr {
     [dir="rtl"] .pull-l-12 {
       right: auto;
       left: 100%; }
+
+  .equal-height > [class*=col-l] {
+    display: table-row; }
+
+  .equal-height > .col-l-13 {
+    display: table-caption; }
 
   .block-row-l-1 > * {
     width: 100%; }

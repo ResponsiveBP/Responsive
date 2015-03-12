@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        /* 
+ * 1. Stop columns and rows collapsing. 
+ * 2. Set height so Chrome and IE11 work. 
+ */
+.equal-height {
+    display: table;
+    table-layout: fixed; /*1*/
+    height: 1px; /*2*/
+    width: 100%;
+}
+
+/* 
+ * 1. Inherit and pass on height. 
+ * 2. Fill full height. 
+ */
+.col-50{
+    width:50%;
+    height:100%; /*1*/
+    display:table-cell; /*2*/
+}
+
+/* 
+ * 1. Force Layout. 
+ * 2. Fill full height. 
+ */
+.cell-fill{
+    display:table; /*1*/
+    height:100%; /*2*/
+    background-color: #ff69b4
+}
+    </style>
+</head>
+<body>
+    <div class="equal-height">
+        <div class="col-50">
+            <div class="cell-fill">
+                Dejah Thoris related many interesting facts and legends concerning this lost race of noble
+                and kindly people. She said that the city in which we were camping was supposed to have been
+                a center of commerce and culture known as Korad. It had been built upon a beautiful,
+                natural harbor, landlocked by magnificent hills. The little valley on the west front of the
+                city, she explained, was all that remained of the harbor, while the pass through the hills
+                to the old sea bottom had been the channel through which the shipping passed up to the city's
+                gates.
+            </div>
+        </div>
+        <div class="col-50">
+            <div class="cell-fill">
+                Dejah Thoris related many interesting facts and legends concerning this lost race of noble
+                and kindly people.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

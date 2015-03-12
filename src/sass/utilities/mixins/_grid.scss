@@ -16,7 +16,6 @@
         }
         // We don't want add offsets etc to full width columns.
         @if $i < $max-columns {
-
             // Keep offset for now for backwards compatibility.
             .offset-#{$breakpoint}-#{$i},
             .push-#{$breakpoint}-#{$i} {
@@ -37,6 +36,14 @@
                 }
             }
         }
+    }
+    // Equal height
+    .equal-height > [class*=col-#{$breakpoint}] {
+        display: table-row;
+    }
+
+    .equal-height > .col-#{$breakpoint}-#{$max-columns} {
+        display: table-caption;
     }
 }
 

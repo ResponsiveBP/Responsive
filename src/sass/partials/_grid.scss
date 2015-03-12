@@ -32,6 +32,7 @@
     @extend .clearfix;
 }
 
+// No margin required.
 .no-gutter {
     margin: 0;
 }
@@ -43,6 +44,7 @@
     list-style: none;
 }
 
+// Columns
 [class*=col-],
 [class*="block-row-"] > * {
     display: block;
@@ -56,7 +58,7 @@
     }
 }
 
-// Columns
+// Movable columns
 [class*=col-] {
     &[class*=offset],
     &[class*=push],
@@ -65,9 +67,40 @@
     }
 }
 
+// Remove gutter
 [class*="block-row-"].no-gutter > *,
 .no-gutter > [class*=col-] {
     padding: 0;
+}
+
+// Equal height
+// Stop rows collapsing
+.equal-height {
+    display: table;
+    table-layout: fixed; // 1
+    height: 1px;
+    width: 100% + $grid-column-gutter;
+
+    &.no-gutter {
+        width: 100%;
+    }
+    // Without this columns shift right.
+    &:before {
+        display: none !important; // 1
+    }
+}
+
+.equal-height > [class*=col-] {
+    height: 1px;
+    float: none;
+    vertical-align: top;
+
+    & > .cell-fill {
+        display: table-cell;
+        height: 100%;
+        vertical-align: top;
+        margin: 0;
+    }
 }
 
 // Extra, extra small
