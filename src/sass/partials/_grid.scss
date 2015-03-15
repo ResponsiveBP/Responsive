@@ -18,7 +18,7 @@
 // 1: Ensure .row negative gutter cannot cause horizontal scrollbar.
 .container {
     max-width: $grid-container-max-width;
-    width: min($grid-container-width, 100% - $grid-column-gutter); // 1
+    width: calc(100% - #{$grid-column-gutter}); // 1
     &.fixed,
     .fixed & {
         width: $grid-container-max-width; // 1
@@ -45,14 +45,17 @@
 }
 
 // Columns
+// 1: Use transparent borders for padding.
+// 2: Clip to allow setting a background color without filling the whole area.
 [class*=col-],
 [class*="block-row-"] > * {
     display: block;
     float: left;
     min-height: 1px;
     width: 100%;
-    padding: 0 $grid-column-gutter/2;
-
+    border-left: ($grid-column-gutter/2) solid transparent; // 1
+    border-right: ($grid-column-gutter/2) solid transparent; // 1
+    background-clip: padding-box; // 2
     [dir="rtl"] & {
         float: right;
     }
@@ -67,10 +70,11 @@
     }
 }
 
-// Remove gutter
+// 1: Remove gutter
 [class*="block-row-"].no-gutter > *,
 .no-gutter > [class*=col-] {
-    padding: 0;
+    border: none; // 1
+    background-clip: border-box; // 1
 }
 
 // Equal height
@@ -79,7 +83,7 @@
     display: table;
     table-layout: fixed; // 1
     height: 1px;
-    width: 100% + $grid-column-gutter;
+    width: calc(100% + #{$grid-column-gutter});
 
     &.no-gutter {
         width: 100%;
@@ -94,13 +98,6 @@
     height: 100%;
     float: none;
     vertical-align: top;
-
-    & > .cell-fill {
-        display: table;
-        height: 100%;
-        vertical-align: top;
-        margin: 0;
-    }
 }
 
 // Extra, extra small

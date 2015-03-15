@@ -4,7 +4,6 @@
 @mixin grid-columns($breakpoint) {
     // Calculate column width and without gutter.
     $column-width: (100% / $grid-column-count);
-    $column-width-with-gutter: (100% - ($grid-column-gutter * ($grid-column-count - 1 ))) / $grid-column-count;
     $max-columns: $grid-column-count + 1;
 
     // Loop through and build the columns.
@@ -54,8 +53,7 @@
     $max-columns: $grid-column-count + 1;
     // Loop through and set width.
     @for $i from 1 to ($max-columns) {
-        // Calculate column width with and without gutter.
-        $column-width-with-gutter: (100% - ($grid-column-gutter * ($i - 1 ))) / $i;
+        // Calculate column width .
         $column-width: (100% / $i);
 
         .block-row-#{$breakpoint}-#{$i} {
