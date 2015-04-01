@@ -716,7 +716,7 @@
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.modal"),
-                opts = typeof options === "object" ? options : {};
+                opts = typeof options === "object" ? $.extend({}, options) : {};
 
             if (!opts.target) {
                 opts.target = $this.attr("href");

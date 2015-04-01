@@ -616,7 +616,7 @@
 
             var $this = $(this),
                 data = $this.data("r.autosize"),
-                opts = typeof options === "object" ? options : null;
+                opts = typeof options === "object" ? $.extend({}, options) : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
@@ -1389,7 +1389,7 @@
 
             var $this = $(this),
                 data = $this.data("r.conditional"),
-                opts = typeof options === "object" ? options : null;
+                opts = typeof options === "object" ? $.extend({}, options) : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
@@ -1848,7 +1848,7 @@
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdown"),
-                opts = typeof options === "object" ? options : null;
+                opts = typeof options === "object" ? $.extend({}, options) : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
@@ -2609,7 +2609,7 @@
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.modal"),
-                opts = typeof options === "object" ? options : {};
+                opts = typeof options === "object" ? $.extend({}, options) : {};
 
             if (!opts.target) {
                 opts.target = $this.attr("href");
