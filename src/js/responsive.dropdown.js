@@ -280,7 +280,7 @@
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdown"),
-                opts = typeof options === "object" ? options : null;
+                opts = typeof options === "object" ? $.extend({}, options) : null;
 
             if (!data) {
                 // Check the data and reassign if not present.
