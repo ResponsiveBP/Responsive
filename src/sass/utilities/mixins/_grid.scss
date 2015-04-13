@@ -39,6 +39,7 @@
     // Equal height
     .equal-height > [class*=col-#{$breakpoint}] {
         display: table-cell;
+        height: 100%;
     }
 
     .equal-height > .col-#{$breakpoint}-#{$max-columns} {
