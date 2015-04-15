@@ -5,7 +5,7 @@
 	Copyright (c),  James South.
 	Licensed under the MIT License.
 	============================================================================== */
-/*! Responsive v4.0.4 | MIT License | responsivebp.com */
+/*! Responsive v4.1.0 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -2304,6 +2304,65 @@ table {
   .table-scrollable table {
     margin: 0; }
 
+[data-navigation],
+.canvas-navigation {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  position: fixed;
+  z-index: 2147483647;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  visibility: hidden;
+  background-color: #222222;
+  color: white;
+  -webkit-transition: .3s linear width;
+          transition: .3s linear width; }
+  [data-navigation].open,
+  .canvas-navigation.open {
+    width: 260px; }
+  [data-navigation].visible,
+  .canvas-navigation.visible {
+    visibility: visible; }
+  [data-navigation] > button:first-child,
+  .canvas-navigation > button:first-child {
+    visibility: visible;
+    background-color: #222222;
+    color: white;
+    width: 55px;
+    height: 48px;
+    padding: 0;
+    position: absolute;
+    left: 1px;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+    border: none; }
+  [dir="rtl"] [data-navigation], [dir="rtl"]
+  .canvas-navigation {
+    right: auto;
+    left: 0; }
+    [dir="rtl"] [data-navigation] > button, [dir="rtl"]
+    .canvas-navigation > button {
+      left: auto;
+      right: 1px;
+      -webkit-transform: translate3d(100%, 0, 0);
+              transform: translate3d(100%, 0, 0); }
+  [data-navigation] > ul,
+  .canvas-navigation > ul {
+    list-style: none;
+    margin: 0;
+    padding: .5rem 0;
+    width: 260px;
+    height: 100%;
+    overflow-y: auto; }
+  [data-navigation] a,
+  .canvas-navigation a {
+    color: inherit;
+    display: block;
+    padding: .5rem 1rem; }
+
 .autosize,
 [data-autosize] {
   overflow: hidden;
@@ -3077,13 +3136,9 @@ button.modal-direction {
     text-align: center; } }
 .grid-state-indicator {
   position: absolute;
-  top: -99999px;
-  left: -99999px;
+  top: -9999px;
   height: 1px;
   width: 0; }
-  [dir="rtl"] .grid-state-indicator {
-    left: auto;
-    right: -99999px; }
 
 @media (max-width: 37.49em) {
   .grid-state-indicator {
@@ -3100,6 +3155,17 @@ button.modal-direction {
 @media (min-width: 75em) {
   .grid-state-indicator {
     width: 4px; } }
+.scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll; }
+
+[data-lock], [data-lock] body {
+  height: 100%;
+  overflow: hidden; }
+
 .ir {
   background-color: transparent;
   border: 0;

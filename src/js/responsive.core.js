@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.0.4 | MIT License | responsivebp.com */
+/*! Responsive v4.1.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -56,13 +56,14 @@
         ///   &#10;    2: index - The index of the current grid in the range.
         ///   &#10;    3: range - The available grid range.
         ///</returns>
-
-        var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
-
         return function () {
+            var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
+
             // These numbers match values in the css
             var grids = ["xxs", "xs", "s", "m", "l"],
                 key = parseInt($div.width(), 10);
+
+            $div.remove();
 
             return {
                 grid: grids[key],
@@ -71,6 +72,54 @@
             };
         };
     }());
+
+    $.support.scrollbarWidth = (function () {
+        /// <summary>Returns a value indicating the width of the browser scrollbar.</summary>
+        /// <returns type="Number">The width in pixels.</returns>
+        return function () {
+            var $div = $("<div/>").addClass("scrollbar-measure").prependTo("body"),
+                width = $div[0].offsetWidth - $div[0].clientWidth;
+
+            $div.remove();
+            return width;
+        };
+    }());
+
+    $.toggleBodyLock = function () {
+        /// <summary>
+        /// Toggles a locked state on the body which toggles both scrollbar visibility and padding on the body.
+        /// </summary>
+
+        var $html = $("html"),
+            $body = $("body"),
+            bodyPad;
+
+        if ($html.attr("data-lock") !== undefined) {
+
+            bodyPad = $body.data("bodyPad");
+
+            if (bodyPad) {
+                $body.css("padding-right", bodyPad)
+                     .removeData("bodyPad");
+            }
+
+            $html.removeAttr("data-lock");
+            return;
+        }
+
+        bodyPad = parseInt($body.css("padding-right") || 0);
+        var scrollWidth = $.support.scrollbarWidth();
+
+        if (scrollWidth) {
+            $body.css("padding-right", bodyPad + scrollWidth);
+
+            if (bodyPad) {
+                $body.data("bodyPad", bodyPad);
+            }
+
+            $html.attr("data-lock", "");
+        }
+    };
 
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
