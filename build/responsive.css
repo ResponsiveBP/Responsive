@@ -2560,16 +2560,6 @@ table {
     height: auto;
     width: 0; }
 
-.modal-on,
-.modal-on body {
-  -ms-touch-action: none;
-      touch-action: none;
-  height: 100%; }
-
-.modal-on,
-.modal-lock body {
-  overflow: hidden; }
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -3164,7 +3154,9 @@ button.modal-direction {
 
 [data-lock], [data-lock] body {
   height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  -ms-touch-action: none;
+      touch-action: none; }
 
 .ir {
   background-color: transparent;

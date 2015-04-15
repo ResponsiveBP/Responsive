@@ -1,14 +1,3 @@
-.modal-on,
-.modal-on body {
-    touch-action: none;
-    height: 100%;
-}
-
-.modal-on,
-.modal-lock body {
-    overflow: hidden;
-}
-
 .modal-overlay {
     position: fixed;
     top: 0;

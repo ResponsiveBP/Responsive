@@ -10,7 +10,6 @@
     }
 
     var $window = $(w),
-        $html = $("html"),
         $body = $("body"),
         $overlay = $("<div/>").attr({ "role": "document" }).addClass("modal-overlay modal-loader fade-out"),
         $modal = $("<div/>").addClass("modal fade-out").appendTo($overlay),
@@ -251,8 +250,7 @@
                 if (hide) {
                     // Put scroll position etc back as before.
                     $overlay.addClass("hidden");
-                    $html.removeClass("modal-on modal-lock")
-                         .css("margin-right", "");
+                    $.toggleBodyLock();
 
                     if (lastScroll !== $window.scrollTop()) {
                         $window.scrollTop(lastScroll);
@@ -288,28 +286,19 @@
                 });
             };
 
-        // Show the overlay.
-        var getScrollbarWidth = function () {
-            var $scroll = $("<div/>").css({ width: 99, height: 99, overflow: "scroll", position: "absolute", top: -9999 });
-            $body.append($scroll);
-            var scrollbarWidth = $scroll[0].offsetWidth - $scroll[0].clientWidth;
-            $scroll.remove();
-            return scrollbarWidth;
-        };
-
         // Add the overlay to the body if not done already.
         if (!$(".modal-overlay").length) {
             $body.append($overlay);
         }
 
         if (!hide) {
+
             // Take note of the current scroll position then remove the scrollbar.
             if (lastScroll === 0) {
                 lastScroll = $window.scrollTop();
             }
 
-            $html.addClass("modal-on")
-                 .css("margin-right", getScrollbarWidth());
+            $.toggleBodyLock();
         }
 
         $overlay.removeClass("hidden").redraw()[fade]("fade-in").redraw();
@@ -630,15 +619,6 @@
                     "max-height": maxHeight
                 });
             });
-
-            // Prevent IEMobile10+ scrolling when content overflows the modal.
-            // This causes the content to jump behind the modal but it's all I can
-            // find for now.
-            if (w.MSPointerEvent) {
-                if ($content.length && $content.children("*:first")[0].scrollHeight > $content.height()) {
-                    $html.addClass("modal-lock");
-                }
-            }
         }
 
         // Reassign the current grid.
