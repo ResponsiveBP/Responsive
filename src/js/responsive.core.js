@@ -77,10 +77,16 @@
         /// <summary>Returns a value indicating the width of the browser scrollbar.</summary>
         /// <returns type="Number">The width in pixels.</returns>
         return function () {
-            var $div = $("<div/>").addClass("scrollbar-measure").prependTo("body"),
+
+            var width = 0;
+            if (d.body.clientWidth < w.innerWidth) {
+
+                var $div = $("<div/>").addClass("scrollbar-measure").prependTo("body");
                 width = $div[0].offsetWidth - $div[0].clientWidth;
 
-            $div.remove();
+                $div.remove();
+            }
+
             return width;
         };
     }());

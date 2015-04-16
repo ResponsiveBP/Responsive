@@ -53,11 +53,20 @@
         <h1>Navigation Tests</h1>
         <hr />
         <p>
-            When open pressing <kbd>tab</kbd> or <kbd>shift + tab</kbd> will focus elements within the menu only. Pressing <kbd>esc</kbd> will close the menu.
+            On init a clone of the navigation landmarks is placed, hidden at the bottom of the page. When tabbing, once that clone is hit, the navigation will open.
         </p>
         <p>
-            Aria attribution has been added for accessibility but is unfinished at present.
+            When open pressing <kbd>tab</kbd> or will focus elements within the menu only <kbd>shift + tab</kbd> Will allow you to exit from the top. Pressing <kbd>esc</kbd> will close the menu.<br/>
+            Opening the navigation locks the page to prevent double scrollbars appearing on certain viewport sizes.
         </p>
+        <p>
+            Aria attribution has been added for accessibility but does not have <code>aria-label</code> on the button. I'm still deciding whether control should be given entirely to the developer for that attribute.
+        </p>
+        <p>
+            Note: The second anchor <samp>There was nothing else to</samp> triggers a modal. If that is triggered while the navigation is open, the navigation will close.
+        </p>
+        <p>Adding <code>dir="rtl"</code> to the <code>html</code> tag will cause the navigation to switch sides.</p>
+        <hr/>
         <div class="row equal-height">
             <div class="col-m-6">
                 <p>
