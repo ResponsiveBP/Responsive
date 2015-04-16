@@ -23,9 +23,9 @@
         eready = "ready" + ns + da,
         echanged = "domchanged" + ns + da,
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
-        eclick = "click",
-        ekeydown = "keydown",
-        efocusin = "focusin",
+        eclick = "click" + ns,
+        ekeydown = "keydown" + ns,
+        efocusin = "focusin" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -94,10 +94,19 @@
         }
     };
 
-    Modal.prototype.show = function () {
+    Modal.prototype.show = function (noLock) {
 
         if (this.isShown) {
             return;
+        }
+
+        if (!noLock) {
+            // Take note of the current scroll position then remove the scrollbar.
+            if (lastScroll === 0) {
+                lastScroll = $window.scrollTop();
+            }
+
+            $.toggleBodyLock();
         }
 
         // If the trigger has a mobile target and the viewport is smaller than the mobile limit
@@ -188,9 +197,8 @@
 
         this.isShown = true;
         this.overlay();
-        this.create();
-
         // Call the callback.
+        this.create();
         $modal.onTransitionEnd(complete);
     };
 
@@ -200,15 +208,20 @@
             return;
         }
 
-        var self = this,
-            hideEvent = $.Event(ehide),
+        var hideEvent = $.Event(ehide),
             hiddenEvent = $.Event(ehidden),
             complete = function () {
-                self.destroy(callback);
+
+                if (!preserveOverlay) {
+                    this.overlay(true);
+                }
+
+                this.destroy(callback);
                 $body.removeAttr("tabindex");
                 $modal.removeData("currentModal").removeAttr("tabindex");
-                self.$element.trigger(hiddenEvent).focus();
-            };
+                this.$element.trigger(hiddenEvent).focus();
+
+            }.bind(this);
 
         this.$element.trigger(hideEvent);
 
@@ -219,9 +232,11 @@
         this.isShown = false;
 
         $.each([$header, $footer, $close, $modal, $next, $prev], function () {
-            this.removeClass("fade-in")
-                .redraw();
+            this.removeClass("fade-in");
+
         });
+
+        $modal.redraw();
 
         // Return focus events back to normal.
         $(document).off(efocusin);
@@ -235,27 +250,23 @@
             $modal.off("swipe.modal swipeend.modal");
         }
 
-        if (!preserveOverlay) {
-            this.overlay(true);
-        }
-
-        $modal.onTransitionEnd(complete).ensureTransitionEnd();
+        $modal.onTransitionEnd(complete);
     };
 
     Modal.prototype.overlay = function (hide) {
 
-        var fade = hide ? "removeClass" : "addClass",
+        var toggle = hide ? "removeClass" : "addClass",
             self = this,
             complete = function () {
                 if (hide) {
-                    // Put scroll position etc back as before.
-                    $overlay.addClass("hidden");
-                    $.toggleBodyLock();
 
+                    $.toggleBodyLock();
                     if (lastScroll !== $window.scrollTop()) {
                         $window.scrollTop(lastScroll);
                         lastScroll = 0;
                     }
+
+                    $overlay.addClass("hidden");
 
                     return;
                 }
@@ -291,17 +302,7 @@
             $body.append($overlay);
         }
 
-        if (!hide) {
-
-            // Take note of the current scroll position then remove the scrollbar.
-            if (lastScroll === 0) {
-                lastScroll = $window.scrollTop();
-            }
-
-            $.toggleBodyLock();
-        }
-
-        $overlay.removeClass("hidden").redraw()[fade]("fade-in").redraw();
+        $overlay.removeClass("hidden").redraw()[toggle]("fade-in").redraw();
         $overlay.onTransitionEnd(complete);
     };
 
@@ -336,11 +337,11 @@
 
             $.each([$header, $footer, $close, $next, $prev, $modal], function () {
 
-                this.addClass("fade-in")
-                    .redraw();
+                this.addClass("fade-in");
             });
 
-            // self.overlay();
+            $modal.redraw();
+
             $overlay.removeClass("modal-loader");
         };
 
@@ -525,6 +526,7 @@
     };
 
     Modal.prototype.click = function (event) {
+
         event.preventDefault();
 
         // Check to see if there is a current instance running. Useful for 
@@ -535,10 +537,10 @@
             var self = this,
             complete = function () {
                 if (supportTransition) {
-                    self.show();
+                    self.show(true);
                 } else {
                     w.setTimeout(function () {
-                        self.show();
+                        self.show(true);
                     }, 300);
                 }
             };
@@ -638,10 +640,10 @@
                 complete = function () {
                     if (self.$sibling && self.$sibling.data("r.modal")) {
                         if (supportTransition) {
-                            self.$sibling.data("r.modal").show();
+                            self.$sibling.data("r.modal").show(true);
                         } else {
                             w.setTimeout(function () {
-                                self.$sibling.data("r.modal").show();
+                                self.$sibling.data("r.modal").show(true);
                             }, 300);
                         }
                     }

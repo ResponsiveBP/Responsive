@@ -3191,13 +3191,13 @@ button.modal-direction {
 .invisible {
   visibility: hidden; }
 
-.fade-out {
-  opacity: 0 !important; }
-
 .fade-out,
 .fade-in {
   -webkit-transition: opacity .3s;
           transition: opacity .3s; }
+
+.fade-out {
+  opacity: 0 !important; }
 
 .fade-in {
   opacity: 1 !important; }

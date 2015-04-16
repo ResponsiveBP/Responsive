@@ -94,19 +94,18 @@
             $body = $("body"),
             bodyPad;
 
+        // Remove.
         if ($html.attr("data-lock") !== undefined) {
 
             bodyPad = $body.data("bodyPad");
-
-            if (bodyPad) {
-                $body.css("padding-right", bodyPad)
-                     .removeData("bodyPad");
-            }
+            $body.css("padding-right", bodyPad || "")
+                 .removeData("bodyPad");
 
             $html.removeAttr("data-lock");
             return;
         }
 
+        // Add
         bodyPad = parseInt($body.css("padding-right") || 0);
         var scrollWidth = $.support.scrollbarWidth();
 
@@ -171,7 +170,7 @@
             return this;
         }
 
-        var rtransition = /\d+(.\d+)/,
+        var rtransition = /\d+(.\d+)?/,
             called = false,
             $this = $(this),
             callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
@@ -197,8 +196,24 @@
                 return;
             }
 
-            var $this = $(this).redraw();
-            supportTransition ? $this.one(supportTransition.end, callback) : callback();
+            var $this = $(this),
+                rtransition = /\d+(.\d+)?/,
+                duration = (rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000,
+                error = duration / 10,
+                start = new Date();
+
+            $this.redraw();
+            supportTransition ? $this.one(supportTransition.end, function () {
+                // Prevent events firing too early.
+                var end = new Date();
+                if (end.getMilliseconds() - start.getMilliseconds() <= error) {
+                    w.setTimeout(callback, duration);
+                    return;
+                }
+
+                callback();
+
+            }) : callback();
         });
     };
 

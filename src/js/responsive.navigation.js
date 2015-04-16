@@ -13,11 +13,13 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns + da,
+    var $window = $(w),
+        eready = "ready" + ns + da,
         echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
-        eclick = "click",
-        efocusin = "focusin",
-        ekeydown = "keydown",
+        emodalShow = "show.r.modal" + da,
+        eclick = "click" + ns,
+        efocusin = "focusin" + ns,
+        ekeydown = "keydown" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
         ehide = "hide" + ns,
@@ -33,6 +35,7 @@
         this.$element = $(element).addClass("canvas-navigation");
         this.$button = this.$element.children().first();
         this.transitioning = false;
+        this.lastScroll = 0;
 
         if (!this.$button.length) {
             this.$button = $("<button/>").text("Menu").prependTo(this.$element);
@@ -61,7 +64,7 @@
 
         // Bind events.
         this.$button.on(eclick, this.click.bind(this));
-        $(document).on(efocusin, this.focus.bind(this));
+        $(document).on(efocusin, this.focus.bind(this)).on(emodalShow, function () { this.hide(true); }.bind(this));
     };
 
     Navigation.prototype.toggle = function () {
@@ -97,15 +100,14 @@
 
         }.bind(this);
 
-        this.$element.addClass("open visible");
-
+        this.lastScroll = $window.scrollTop();
         $.toggleBodyLock();
 
         // Do our callback
-        this.$element.onTransitionEnd(complete);
+        this.$element.addClass("open visible").onTransitionEnd(complete);
     };
 
-    Navigation.prototype.hide = function () {
+    Navigation.prototype.hide = function (noLock) {
 
         if (this.transitioning) {
             return;
@@ -136,16 +138,18 @@
 
         }.bind(this);
 
-        this.$element.removeClass("open");
-
-        $.toggleBodyLock();
+        if (!noLock) {
+            $.toggleBodyLock();
+            $window.scrollTop(this.lastScroll);
+        }
 
         // Do our callback
-        this.$element.onTransitionEnd(complete);
+        this.$element.removeClass("open")
+            .onTransitionEnd(complete)
+            .ensureTransitionEnd();
     };
 
     Navigation.prototype.click = function () {
-
         this.toggle();
     };
 
@@ -192,7 +196,7 @@
             }
 
             // Run the appropriate function is a string is passed.
-            if (typeof options === "string") {
+            if (typeof options === "string" && /(show|hide)/.test(options)) {
                 data[options]();
             }
         });
