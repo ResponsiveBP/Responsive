@@ -13,7 +13,7 @@ functionality of the website. That costs developers time and money.
 testing; specifically developed to be as lightweight as possible to prevent the need to undo styles set by the framework itself
 and allow developers to write efficient code and lower costs.
   
-**Responsive is tiny**. The combined output CSS and JavaScript is **only 22.9kb minified and gzipped** but there is a lot of functionality 
+**Responsive is tiny**. The combined output CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality 
 built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website 
 such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
 
@@ -23,8 +23,8 @@ Browser support covers IE9+ as well as all other modern browsers.
 
 Several options are available for downloading Responsive:
 
-- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.0.3/responsive.zip).
-- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.0.3.zip).
+- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.1.0/responsive.zip).
+- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.1.0.zip).
 - Clone the repo: `git clone https://github.com/ResponsiveBP/Responsive.git`.
 - Install with [Bower](http://bower.io): `bower install responsive`.
 
