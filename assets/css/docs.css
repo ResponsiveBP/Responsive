@@ -3,7 +3,7 @@
  *============================================================*/
 body {
     font-family: Arial, sans-serif;
-    padding-top: 2rem;
+    padding-top: 48px;
 }
 
 blockquote {
@@ -20,7 +20,7 @@ blockquote {
  *
  *============================================================*/
 
-nav[role="navigation"] {
+.nav-bar {
     color: #fff;
     background: #222;
     position: fixed;
@@ -28,91 +28,14 @@ nav[role="navigation"] {
     left: 0;
     right: 0;
     z-index: 1030;
-    padding: .2rem 0;
+    padding: .5rem 0;
 }
 
-    nav[role="navigation"] a {
+    .nav-bar [rel="home"] {
         color: #fff;
         text-decoration: none;
-        display: block;
-        float: left;
+        font-size: 1.5rem;
     }
-
-[dir="rtl"] nav[role="navigation"] a {
-    float: right;
-}
-
-nav[role="navigation"] a[rel="home"] {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-}
-
-[dir="rtl"] nav[role="navigation"] a[rel="home"] {
-    margin-right: 0;
-    margin-left: 1rem;
-}
-
-nav[role="navigation"] [data-dropdown-target] {
-    border: 1px solid #222;
-    background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUVCMDMzMTZFM0ZBMTFFMjgwRkY4QzM1MTM0ODI5MTkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUVCMDMzMTdFM0ZBMTFFMjgwRkY4QzM1MTM0ODI5MTkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBRUIwMzMxNEUzRkExMUUyODBGRjhDMzUxMzQ4MjkxOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBRUIwMzMxNUUzRkExMUUyODBGRjhDMzUxMzQ4MjkxOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pgt6AmsAAAApSURBVHjaYvwPBAw0BEwMNAZD3wIWIGYc8j4YTUWjqWg0FQ11CwACDADmUQYkjaDs3gAAAABJRU5ErkJggg==') /*/assets/css/mobile-nav.png*/ no-repeat center center;
-    width: 24px;
-    height: 27px;
-    float: right;
-}
-
-[dir="rtl"] nav[role="navigation"] [data-dropdown-target] {
-    float: left;
-}
-
-#navigation {
-    clear: both;
-}
-
-    #navigation a {
-        display: block;
-        float: none;
-        padding: 1rem .5rem;
-    }
-
-        #navigation a:hover,
-        #navigation a.active {
-            background-color: #333;
-        }
-
-@media (min-width: 48em) {
-    #navigation {
-        clear: none;
-        float: left;
-    }
-
-    [dir="rtl"] #navigation {
-        float: right;
-    }
-
-    #navigation.collapse {
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    #navigation a {
-        line-height: 2.15rem;
-        float: left;
-        padding: 0 .5rem;
-    }
-
-    [dir="rtl"] #navigation a {
-        float: right;
-    }
-
-    nav[role="navigation"] a + a {
-        margin-left: 1rem;
-    }
-
-    [dir="rtl"] nav[role="navigation"] a + a {
-        margin-left: 0;
-        margin-right: 1rem;
-    }
-}
 
 /*
  * 1: Counteract jekyll whitespace bug.
@@ -121,7 +44,7 @@ nav[role="navigation"] [data-dropdown-target] {
     background-color: #395179;
     color: #fff;
     position: relative;
-    margin-top: -1rem; /* 1 */
+    margin-top: -1.5rem; /* 1 */
     margin-bottom: 2rem;
 }
 
@@ -274,7 +197,6 @@ footer[role=contentinfo] {
     .grid-demo .row,
     .grid-demo [class*="block-row"] {
         text-align: center;
-        background: #f0d3d5;
     }
 
         .grid-demo .row + .row {
@@ -288,19 +210,9 @@ footer[role=contentinfo] {
             color: #fff;
         }
 
-    .grid-demo .pad-gutter [class*="col-"] {
-        line-height: 2rem;
-        background-color: #de9a9f;
-        color: #fff;
-    }
-
-        .grid-demo .pad-gutter [class*="col-"] > div {
-            background-color: #c44e55;
-        }
-
-    .grid-demo [class*="col-"] [class*="col-"] {
-        background-color: #434343;
-    }
+            .grid-demo [class*="col-"] [class*="col-"] {
+                background-color: #434343;
+            }
 
 /*==|Alerts|==================================================
  *

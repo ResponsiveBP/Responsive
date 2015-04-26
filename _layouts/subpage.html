@@ -2,29 +2,33 @@
 layout: master
 ---
 <header role="banner">
-    {% include breadcrumb.html %}<div class="container row">
-        <div class="col-m-6">
-            <h1>
-                {{page.heading}}
-                <span>{{page.subheading}}</span>
-            </h1>
-        </div>
-        <div class="col-m-6">
-            <div class="clearfix">
-                <a class="edit-page push" href="{{site.github.repository_url}}/blob/gh-pages/{{page.path}}"><i class="fa fa-github"></i> Edit page on GitHub</a>
+    {% include breadcrumb.html %}<div class="container">
+        <div class="row">
+            <div class="col-m-6">
+                <h1>
+                    {{page.heading}}
+                    <span>{{page.subheading}}</span>
+                </h1>
             </div>
-            <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+            <div class="col-m-6">
+                <div class="clearfix">
+                    <a class="edit-page push" href="{{site.github.repository_url}}/blob/gh-pages/{{page.path}}"><i class="fa fa-github"></i> Edit page on GitHub</a>
+                </div>
+                <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=responsivebp" id="_carbonads_js"></script>
+            </div>
         </div>
     </div>
 </header>
 <main role="main">
-    <div class="container row">
-        <nav class="col-m-3" role="complementary">
-            <h3>Contents</h3>
-            {% include subnav.html %}
-        </nav>
-        <article class="col-m-9">
-            {{ content }}
-        </article>
+    <div class="container">
+        <div class="row">
+            <nav class="col-m-3" role="complementary">
+                <h3>Contents</h3>
+                {% include subnav.html %}
+            </nav>
+            <article class="col-m-9">
+                {{ content }}
+            </article>
+        </div>
     </div>
 </main>

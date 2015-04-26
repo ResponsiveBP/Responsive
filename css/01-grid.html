@@ -8,20 +8,19 @@ subheading: Flexible grid layouts across all devices.
 sublinks: ["#mediaqueries|Media Queries",
             "#basic|Example : Basic",
             "#nogutter|Example : No Gutter",
-            "#padded|Example : Padded",
             "#nested|Example : Nested",
             "#resizing|Example : Resizing",
             "#offsetting|Example : Offsetting",
             "#ordering|Example : Ordering",
-            "#resetting|Example : Resetting",
+            "#equal|Example : Equal Height",
             "#block|Example : Block Grid"]
 ---
 <h1>The Grid System</h1>
 <p>
     Responsive comes with an incredibly flexible and powerful grid system offering, not just one
-    but <strong>5 tiers of 12 column fluid grids in three variants</strong> that allow for granular
-    control over layout across all devices. It also offers a self resetting block grid for equal column
-    widths again in the three variants.
+    but <strong>5 tiers of 12 column fluid grids in two variants</strong> that allow for granular
+    control over layout across all devices. It also offers equal height columns and a self resetting block grid for equal column
+    widths again in the two variants.
 </p>
 <p>
     No other grid offers the power and flexibility that is provided by the Responsive framework. The system has been
@@ -29,8 +28,11 @@ sublinks: ["#mediaqueries|Media Queries",
     scales up.
 </p>
 <p>
-    To prevent content hitting the side of the viewport by standard all grids would be wrapped in a div with the
-    class <code>.container</code>. This constrains the grid to <var>95%</var> of the viewport width up to a maximum of <var>1140px</var>.
+    To prevent content hitting the side of the viewport by standard all grid rows would be wrapped in a div with the
+    class <code>.container</code>. This constrains the grid to <var>98%</var> of the viewport width up to a maximum of <var>1140px</var>.
+</p>
+<p>
+    Full width rows should be wrapped in div with the class <code>.container-full</code>.
 </p>
 <div class="alert" role="alert">
     <h4>Heads Up!</h4>
@@ -310,84 +312,6 @@ sublinks: ["#mediaqueries|Media Queries",
 &lt;/div&gt;</code></pre>
     </section>
     <hr />
-    <section id="padded">
-        <h3>Padded</h3>
-        <p>
-            Adding the classes <code>.no-gutter .pad-gutter</code> to a row triggers the padded column layout similar to that of Bootstrap.
-        </p>
-        <p class="clearfix">
-            <button type="button" data-modal-target="#padded-test" class="push">Click to test</button>
-        </p>
-        <div id="padded-test" class="grid-demo">
-            <div class="row no-gutter pad-gutter ">
-                <div class="col-xxs-12">
-                    <div>12</div>
-                </div>
-            </div>
-            <div class="row no-gutter pad-gutter">
-                <div class="col-xxs-11">
-                    <div>11</div>
-                </div>
-                <div class="col-xxs-1">
-                    <div>1</div>
-                </div>
-            </div>
-            <div class="row no-gutter pad-gutter">
-                <div class="col-xxs-10">
-                    <div>10</div>
-                </div>
-                <div class="col-xxs-2">
-                    <div>2</div>
-                </div>
-            </div>
-            <div class="row no-gutter pad-gutter">
-                <div class="col-xxs-9">
-                    <div>9</div>
-                </div>
-                <div class="col-xxs-3">
-                    <div>3</div>
-                </div>
-            </div>
-            <div class="row no-gutter pad-gutter">
-                <div class="col-xxs-8">
-                    <div>8</div>
-                </div>
-                <div class="col-xxs-4">
-                    <div>4</div>
-                </div>
-            </div>
-            <div class="row no-gutter pad-gutter">
-                <div class="col-xxs-7">
-                    <div>7</div>
-                </div>
-                <div class="col-xxs-5">
-                    <div>5</div>
-                </div>
-            </div>
-            <div class="row no-gutter pad-gutter">
-                <div class="col-xxs-6">
-                    <div>6</div>
-                </div>
-                <div class="col-xxs-6">
-                    <div>6</div>
-                </div>
-            </div>
-        </div>
-        <pre class="language-markup"><code>&lt;div class="row no-gutter pad-gutter"&gt;
-    &lt;div class="col-xxs-12"&gt;
-        &lt;div&gt;12&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="row"&gt;
-    &lt;div class="col-xxs-11"&gt;
-        &lt;div&gt;11&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-xxs-1"&gt;
-        &lt;div&gt;1&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    </section>
-    <hr />
     <section id="nested">
         <h3>Nesting</h3>
         <p>
@@ -528,36 +452,38 @@ sublinks: ["#mediaqueries|Media Queries",
 &lt;/div&gt;</code></pre>
     </section>
     <hr />
-    <section id="resetting">
-        <h3>Resets</h3>
+    <section id="equal">
+        <h3>Equal Height</h3>
         <p>
-            Each tier comes with a <code>.reset-{range}</code> and <code>.reset-{range}-only</code> class which allows you to reset the flow of the layout as the viewport scales.
-            This allows you to perform more complicated layouts with relative ease.
+            Adding the class <code>.equal-height</code> to the row renders the columns in each row equal in height.
+            When stretching the full width of their container, columns collapse to the height of their content.
         </p>
+        <div class="alert" role="alert">
+            <h4>Heads Up!</h4>
+            <p>
+                Equal height columns do not work with the block row grid as that layout uses a single row with wrapping columns.
+            </p>
+        </div>
         <p class="clearfix">
-            <button type="button" data-modal-target="#resetting-test" class="push">Click to test</button>
+            <button type="button" data-modal-target="#equal-test" class="push">Click to test</button>
         </p>
-        <div id="resetting-test" class="grid-demo">
-            <div class="row">
+        <div id="equal-test" class="grid-demo">
+            <div class="row equal-height">
                 <div class="col-xxs-6">
-                    6
+                    <p>A column with a short amount of copy.</p>
                 </div>
                 <div class="col-xxs-6">
-                    6
-                </div>
-                <div class="col-xxs-6 reset-xxs">
-                    6
-                </div>
-                <div class="col-xxs-6">
-                    6
+                    <img src="../../assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
                 </div>
             </div>
         </div>
-        <pre class="language-markup"><code>&lt;div class="row"&gt;
-    &lt;div class="col-xxs-6"&gt;6&lt;/div&gt;
-    &lt;div class="col-xxs-6"&gt;6&lt;/div&gt;
-    &lt;div class="col-xxs-6 reset-xxs"&gt;6&lt;/div&gt;
-    &lt;div class="col-xxs-6"&gt;6&lt;/div&gt;
+        <pre class="language-markup"><code>&lt;div class="row equal-height"&gt;
+    &lt;div class="col-xxs-6"&gt;
+        &lt;p&gt;A column with a short amount of copy.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-xxs-6"&gt;
+        &lt;img src="../../assets/img/768x900.jpg" alt="responsive image" title="responsive image" /&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </section>
     <hr />
