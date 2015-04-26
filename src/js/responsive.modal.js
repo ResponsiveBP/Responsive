@@ -1,4 +1,4 @@
-/*global jQuery*/
+﻿/*global jQuery*/
 /*jshint expr:true*/
 
 (function ($, w, ns, da) {
@@ -25,6 +25,7 @@
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click" + ns,
         ekeydown = "keydown" + ns,
+
         efocusin = "focusin" + ns,
         eshow = "show" + ns,
         eshown = "shown" + ns,
@@ -32,7 +33,6 @@
         ehidden = "hidden" + ns,
         eerror = "error" + ns,
         rtl = $.support.rtl,
-        supportTransition = $.support.transition,
         currentGrid = $.support.currentGrid(),
         keys = {
             ESCAPE: 27,
@@ -85,8 +85,8 @@
         // Bind events.
         // Ensure script works if loaded at the top of the page.
         if ($body.length === 0) { $body = $("body"); }
-        this.$element.on(eclick, $.proxy(this.click, this));
-        var onResize = $.debounce($.proxy(this.resize, this), 15);
+        this.$element.on(eclick, this.click.bind(this));
+        var onResize = $.debounce(this.resize.bind(this), 15);
         $(w).off(eresize).on(eresize, onResize);
 
         if (this.options.immediate) {
@@ -94,20 +94,43 @@
         }
     };
 
-    Modal.prototype.show = function (noLock) {
+    Modal.prototype.click = function (event) {
+
+        event.preventDefault();
+
+        // Check to see if there is a current instance running
+        // so we can cater for nested triggers.
+        var $current = $modal.data("currentModal");
+        if ($current && $current[0] !== this.$element[0]) {
+            var complete = function () {
+                // Timeout > time required to fix flash error for IE9.
+                w.setTimeout(function () {
+                    this.show(true);
+                }.bind(this), 150);
+            }.bind(this);
+
+            $current.data("r.modal").toggleModal(true, true);
+            $modal.onTransitionEnd(complete);
+            return;
+        }
+
+        this.show();
+    };
+
+    Modal.prototype.show = function (noOverlay) {
 
         if (this.isShown) {
             return;
         }
 
-        if (!noLock) {
-            // Take note of the current scroll position then remove the scrollbar.
-            if (lastScroll === 0) {
-                lastScroll = $window.scrollTop();
-            }
+        var showEvent = $.Event(eshow);
+        this.$element.trigger(showEvent);
 
-            $.toggleBodyLock();
+        if (showEvent.isDefaultPrevented()) {
+            return;
         }
+
+        this.isShown = true;
 
         // If the trigger has a mobile target and the viewport is smaller than the mobile limit
         // then redirect to that page instead.
@@ -129,99 +152,98 @@
             }
         }
 
-        var self = this,
-            showEvent = $.Event(eshow),
-            shownEvent = $.Event(eshown),
-            complete = function () {
-                var $autofocus = $modal.find("[autofocus]");
-                $body.attr({ "tabindex": -1 });
-
-                $modal.data("currentModal", self.$element).attr({ "tabindex": 0 });
-                $autofocus.length ? $autofocus.focus() : $modal.focus();
-
-                // Ensure that focus is maintained within the modal.
-                $(document).on(efocusin, function (event) {
-
-                    if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
-                        var $newTarget = $modal.find("a, area, button, input, object, select, textarea, [tabindex]").first();
-                        $newTarget.length ? $newTarget.focus() : $modal.focus();
-
-                        return false;
-                    }
-                    return true;
-                });
-
-                // Bind the keyboard and touch actions.
-                if (self.options.keyboard) {
-                    $(document).on(ekeydown, $.proxy(self.keydown, self));
-                }
-
-                if (self.options.group) {
-                    if (self.options.touch) {
-                        $modal.on("swipe.modal", true)
-                              .on("swipeend.modal", $.proxy(self.swipeend, self));
-                    }
-                }
-
-                // Bind the next/prev/close events.
-                $modal.off(eclick).on(eclick, $.proxy(function (event) {
-                    var next = $next[0],
-                        prev = $prev[0],
-                        eventTarget = event.target;
-
-                    if (eventTarget === next || eventTarget === prev) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        this[eventTarget === next ? "next" : "prev"]();
-                        return;
-                    }
-
-                    if (this.options.modal) {
-                        if (eventTarget === $modal.find(this.options.modal)[0]) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            this.hide();
-                        }
-                    }
-
-                }, self));
-
-                self.$element.trigger(shownEvent);
-            };
-
-        this.$element.trigger(showEvent);
-
-        if (showEvent.isDefaultPrevented()) {
+        if (!noOverlay) {
+            this.overlay();
             return;
         }
 
-        this.isShown = true;
-        this.overlay();
-        // Call the callback.
-        this.create();
-        $modal.onTransitionEnd(complete);
+        this.toggleModal();
     };
 
-    Modal.prototype.hide = function (preserveOverlay, callback) {
+    Modal.prototype.hide = function () {
 
+        // Destroy the modal
+        this.toggleModal(true);
+
+    };
+
+    Modal.prototype.overlay = function () {
+
+        // Add the overlay to the body if not done already.
+        if (!$(".modal-overlay").length) {
+            $body.append($overlay);
+        }
+
+        // Fade out.
+        if ($overlay.hasClass("fade-in")) {
+
+            var complete = function () {
+                $modal.removeData("currentModal").removeAttr("tabindex");
+                $.toggleBodyLock();
+                $overlay.attr("hidden", " ");
+                $window.scrollTop(lastScroll);
+            }.bind(this);
+
+            $overlay.removeClass("fade-in").onTransitionEnd(complete);
+            return;
+        }
+
+        // Fade in and fire modal.
+        if ($("html").attr("data-lock") === undefined) {
+            lastScroll = $window.scrollTop();
+            $.toggleBodyLock();
+        }
+        $overlay.removeAttr("hidden")
+            .redraw()
+            .addClass("fade-in")
+            .onTransitionEnd(function () { this.toggleModal(); }.bind(this));
+    };
+
+    Modal.prototype.toggleModal = function (destroy, nested) {
+
+        var complete;
+        if (!destroy) {
+            complete = function () {
+                var $autofocus = $modal.find("[autofocus]");
+
+                $body.attr({ "tabindex": -1 });
+                $modal.data("currentModal", this.$element).attr({ "tabindex": 0 });
+                $autofocus.length ? $autofocus.focus() : $modal.focus();
+
+                // Ensure that focus is maintained within the modal.
+                $(document).off(efocusin).on(efocusin, this.focus.bind(this));
+
+                // Bind the keyboard and touch actions.
+                if (this.options.keyboard) {
+                    $(document).off(ekeydown).on(ekeydown, this.keydown.bind(this));
+                }
+
+                if (this.options.group) {
+                    if (this.options.touch) {
+                        $modal.off("swipe.modal").on("swipe.modal", true)
+                              .off("swipeend.modal").on("swipeend.modal", this.swipeend.bind(this));
+                    }
+                }
+
+                $overlay.off(eclick).on(eclick, this.overlayclick.bind(this));
+
+                this.$element.trigger($.Event(eshown));
+
+            }.bind(this);
+
+            // Create the modal contents.
+            this.create();
+            $modal.onTransitionEnd(complete)
+                  .off(eclick).on(eclick, this.modalclick.bind(this));
+            return;
+        }
+
+        // We're destroying the current modal.
         if (!this.isShown) {
             return;
         }
 
-        var hideEvent = $.Event(ehide),
-            hiddenEvent = $.Event(ehidden),
-            complete = function () {
-
-                if (!preserveOverlay) {
-                    this.overlay(true);
-                }
-
-                this.destroy(callback);
-                $body.removeAttr("tabindex");
-                $modal.removeData("currentModal").removeAttr("tabindex");
-                this.$element.trigger(hiddenEvent).focus();
-
-            }.bind(this);
+        var hideEvent = $.Event(ehide);
 
         this.$element.trigger(hideEvent);
 
@@ -231,87 +253,44 @@
 
         this.isShown = false;
 
-        $.each([$header, $footer, $close, $modal, $next, $prev], function () {
-            this.removeClass("fade-in");
+        $overlay.removeClass("modal-loader");
+        $.each([$header, $footer, $close, $next, $prev, $modal], function () {
 
+            this.removeClass("fade-in");
         });
 
-        $modal.redraw();
+        complete = function () {
 
-        // Return focus events back to normal.
-        $(document).off(efocusin);
+            // Launch the next/pre grouped item.
+            if (this.$sibling && this.$sibling.data("r.modal")) {
+                this.destroy(true);
+                this.$element.trigger($.Event(ehidden));
+                // Timeout > time required to fix flash error for IE9.
+                w.setTimeout(function () {
+                    this.$sibling.data("r.modal").show(true);
+                    this.$sibling = null;
+                }.bind(this), 150);
+                return;
+            }
 
-        // Unbind the keyboard and touch actions.
-        if (this.options.keyboard) {
-            $(document).off(ekeydown);
-        }
+            if (nested) {
+                this.destroy(true);
+                this.$element.trigger($.Event(ehidden));
+                return;
+            }
 
-        if (this.options.touch) {
-            $modal.off("swipe.modal swipeend.modal");
-        }
+            this.destroy();
+            this.$element.trigger($.Event(ehidden));
 
+        }.bind(this);
+
+        // Destroy modal contents.
         $modal.onTransitionEnd(complete);
-    };
-
-    Modal.prototype.overlay = function (hide) {
-
-        var toggle = hide ? "removeClass" : "addClass",
-            self = this,
-            complete = function () {
-                if (hide) {
-
-                    $.toggleBodyLock();
-                    if (lastScroll !== $window.scrollTop()) {
-                        $window.scrollTop(lastScroll);
-                        lastScroll = 0;
-                    }
-
-                    $overlay.addClass("hidden");
-
-                    return;
-                }
-
-                // Bind click events to handle hide.
-                $overlay.off(eclick).on(eclick, function (event) {
-
-                    if (self.options.modal) {
-                        return;
-                    }
-
-                    var closeTarget = $close[0],
-                        eventTarget = event.target;
-
-                    if (eventTarget === $modal[0] || $.contains($modal[0], eventTarget)) {
-                        return;
-                    }
-
-                    if (eventTarget === closeTarget) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        self.hide();
-                    }
-
-                    if (eventTarget === $overlay[0] || ($.contains($overlay[0], eventTarget))) {
-                        self.hide();
-                    }
-                });
-            };
-
-        // Add the overlay to the body if not done already.
-        if (!$(".modal-overlay").length) {
-            $body.append($overlay);
-        }
-
-        $overlay.removeClass("hidden").redraw()[toggle]("fade-in").redraw();
-        $overlay.onTransitionEnd(complete);
     };
 
     Modal.prototype.create = function () {
 
         $overlay.addClass("modal-loader");
-
-        var self = this;
-
         var isExternalUrl = function (url) {
 
             // Handle different host types.
@@ -331,9 +310,9 @@
             return !rexternalHost.test(locationParts[2]);
         };
 
-        var fadeIn = function () {
+        var complete = function () {
 
-            self.resize();
+            this.resize();
 
             $.each([$header, $footer, $close, $next, $prev, $modal], function () {
 
@@ -343,7 +322,8 @@
             $modal.redraw();
 
             $overlay.removeClass("modal-loader");
-        };
+
+        }.bind(this);
 
         var title = this.options.title,
             description = this.options.description,
@@ -405,7 +385,7 @@
             $target.detach().appendTo($content).removeClass("hidden").attr({ "aria-hidden": false, "hidden": false });
             $content.appendTo($modal);
             // Fade in.
-            fadeIn();
+            complete();
         } else {
             if (iframe) {
 
@@ -427,7 +407,6 @@
                                 return [p, "scaled"].join(" ");
                             }
                         }
-
                         return false;
                     };
 
@@ -443,7 +422,7 @@
                     "allowfullscreen": ""
                 }).one("load error", function () {
                     // Fade in. Can be slow but ensures concurrency.
-                    fadeIn();
+                    complete();
                 }).appendTo($iframeWrap).attr("src", src);
 
                 // Test and add additional media classes.
@@ -459,12 +438,13 @@
                 if (image) {
 
                     $modal.addClass("modal-image");
-
                     $("<img/>").one("load error", function () {
                         // Fade in.
-                        fadeIn();
+                        complete();
                     }).appendTo($modal).attr("src", target);
+
                 } else {
+
                     $modal.addClass("modal-ajax");
                     $modal.addClass(this.options.fitViewport ? "container" : "");
 
@@ -472,21 +452,21 @@
                     $content.load(target, null, function (responseText, textStatus) {
 
                         if (textStatus === "error") {
-                            self.$element.trigger($.Event(eerror, { relatedTarget: $content[0] }));
-                            $content.html(self.options.errorHint);
+                            this.$element.trigger($.Event(eerror, { relatedTarget: $content[0] }));
+                            $content.html(this.options.errorHint);
                         }
 
                         $content.appendTo($modal);
 
                         // Fade in.
-                        fadeIn();
-                    });
+                        complete();
+                    }.bind(this));
                 }
             }
         }
     };
 
-    Modal.prototype.destroy = function (callback) {
+    Modal.prototype.destroy = function (noOverlay) {
 
         // Clean up the next/prev.
         $next.detach();
@@ -506,50 +486,77 @@
             $(this.options.target).addClass(this.isLocalHidden ? "hidden" : "")
                                   .attr({ "aria-hidden": this.isLocalHidden ? true : false, "hidden": this.isLocalHidden ? true : false })
                                   .detach().insertAfter($placeholder);
-            $placeholder.detach().insertAfter($overlay);
 
+            $placeholder.detach().insertAfter($overlay);
         }
 
-        var self = this;
-        // Fix __flash__removeCallback' is undefined error.
+        // Fix __flash__removeCallback' is undefined error in IE9.
         $modal.find("iframe").attr("src", "");
         w.setTimeout(function () {
-
             $modal.removeClass("modal-iframe iframe-full modal-ajax modal-image container").css({
                 "max-height": "",
                 "max-width": ""
             }).empty();
 
-            // Handle callback passed from direction and linked calls.
-            callback && callback.call(self);
-        }, 100);
+        }.bind(this), 100);
+
+        if (!noOverlay) { this.overlay(); }
     };
 
-    Modal.prototype.click = function (event) {
+    Modal.prototype.overlayclick = function (event) {
 
-        event.preventDefault();
-
-        // Check to see if there is a current instance running. Useful for 
-        // nested triggers.
-        var $current = $modal.data("currentModal");
-
-        if ($current && $current[0] !== this.$element[0]) {
-            var self = this,
-            complete = function () {
-                if (supportTransition) {
-                    self.show(true);
-                } else {
-                    w.setTimeout(function () {
-                        self.show(true);
-                    }, 300);
-                }
-            };
-
-            $current.data("r.modal").hide(true, complete);
+        if (this.options.modal) {
             return;
         }
 
-        this.show();
+        var closeTarget = $close[0],
+            eventTarget = event.target;
+
+        if (eventTarget === $modal[0] || $.contains($modal[0], eventTarget)) {
+            return;
+        }
+
+        if (eventTarget === closeTarget) {
+            this.hide();
+            return;
+        }
+
+        if (eventTarget === $overlay[0] || ($.contains($overlay[0], eventTarget))) {
+            this.hide();
+        }
+    };
+
+    Modal.prototype.modalclick = function (event) {
+
+        var next = $next[0],
+            prev = $prev[0],
+            eventTarget = event.target;
+
+        if (eventTarget === next || eventTarget === prev) {
+            event.preventDefault();
+            event.stopPropagation();
+            this[eventTarget === next ? "next" : "prev"]();
+            return;
+        }
+
+        if (this.options.modal) {
+            if (eventTarget === $modal.find(this.options.modal)[0]) {
+                event.preventDefault();
+                event.stopPropagation();
+                this.hide();
+            }
+        }
+    };
+
+    Modal.prototype.focus = function (event) {
+
+        if (event.target !== $overlay[0] && !$.contains($overlay[0], event.target)) {
+            var $newTarget = $modal.find("a, area, button, input, object, select, textarea, [tabindex]").first();
+            $newTarget.length ? $newTarget.focus() : $modal.focus();
+
+            return false;
+        }
+        return true;
     };
 
     Modal.prototype.keydown = function (event) {
@@ -561,6 +568,7 @@
         // Bind the escape key.
         if (event.which === keys.ESCAPE) {
             this.hide();
+            return;
         }
 
         // Bind the next/prev keys.
@@ -582,7 +590,17 @@
         }
     };
 
+    Modal.prototype.swipeend = function (event) {
+        if (rtl) {
+            this[(event.direction === "right") ? "prev" : "next"]();
+            return;
+        }
+
+        this[(event.direction === "right") ? "next" : "prev"]();
+    };
+
     Modal.prototype.resize = function () {
+
         // Resize the modal
         var windowHeight = $window.height(),
             headerHeight = $header.length && $header.height() || 0,
@@ -628,26 +646,15 @@
     };
 
     Modal.prototype.direction = function (course) {
+
         if (!this.isShown) {
             return;
         }
 
         if (this.options.group) {
-            var self = this,
-                index = this.$group.index(this.$element),
+            var index = this.$group.index(this.$element),
                 length = this.$group.length,
-                position = course === "next" ? index + 1 : index - 1,
-                complete = function () {
-                    if (self.$sibling && self.$sibling.data("r.modal")) {
-                        if (supportTransition) {
-                            self.$sibling.data("r.modal").show(true);
-                        } else {
-                            w.setTimeout(function () {
-                                self.$sibling.data("r.modal").show(true);
-                            }, 300);
-                        }
-                    }
-                };
+                position = course === "next" ? index + 1 : index - 1;
 
             if (course === "next") {
 
@@ -667,10 +674,12 @@
                 }
             }
 
+            // Assign the sibling and destroy the current modal.
             this.$sibling = $(this.$group[position]);
-            this.hide(true, complete);
+            this.hide();
         }
     };
+
 
     Modal.prototype.next = function () {
         this.direction("next");
@@ -678,15 +687,6 @@
 
     Modal.prototype.prev = function () {
         this.direction("prev");
-    };
-
-    Modal.prototype.swipeend = function (event) {
-        if (rtl) {
-            this[(event.direction === "right") ? "prev" : "next"]();
-            return;
-        }
-
-        this[(event.direction === "right") ? "next" : "prev"]();
     };
 
     // No conflict.

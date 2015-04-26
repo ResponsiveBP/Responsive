@@ -1,5 +1,5 @@
 ﻿[data-navigation],
-.canvas-navigation {
+.navigation {
     transform: translate3d(0, 0, 0);
     position: fixed;
     z-index: 2147483647;
@@ -33,15 +33,30 @@
         transform: translate3d(-100%, 0, 0);
         border: none;
     }
-
-    [dir="rtl"] & {
+    // Rtl + pull support.
+    [dir="rtl"] &,
+    &.pull {
+        float: none;
         right: auto;
         left: 0;
 
-        > button {
+        > button:first-child {
             left: auto;
             right: 1px;
             transform: translate3d(100%, 0, 0);
+        }
+    }
+    // Ensure Rtl switches side with pull
+    [dir="rtl"] & {
+        &.pull {
+            left: auto;
+            right: 0;
+
+            > button:first-child {
+                right: auto;
+                left: 1px;
+                transform: translate3d(-100%, 0, 0);
+            }
         }
     }
 

@@ -144,6 +144,7 @@
 
             var names = Object.keys(transEndEventNames),
                 len = names.length;
+
             for (var i = 0; i < len; i++) {
                 if (div.style[names[i]] !== undefined) {
                     return { end: transEndEventNames[names[i]] };
@@ -166,62 +167,70 @@
         });
     };
 
-    $.fn.ensureTransitionEnd = function (duration) {
-        /// <summary>
-        /// Ensures that the transition end callback is triggered.
-        /// http://blog.alexmaccaw.com/css-transitions
-        ///</summary>
+    (function () {
+        var getDuration = function ($element) {
+            var rtransition = /\d+(.\d+)?/;
+            return (rtransition.test($element.css("transition-duration")) ? $element.css("transition-duration").match(rtransition)[0] : 0) * 1000;
+        };
 
-        if (!$.support.transition) {
-            return this;
-        }
+        $.fn.ensureTransitionEnd = function (duration) {
+            /// <summary>
+            /// Ensures that the transition end callback is triggered.
+            /// http://blog.alexmaccaw.com/css-transitions
+            ///</summary>
 
-        var rtransition = /\d+(.\d+)?/,
-            called = false,
-            $this = $(this),
-            callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
-
-        if (!duration) {
-            duration = (rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000;
-        }
-
-        $this.one($.support.transition.end, function () { called = true; });
-        w.setTimeout(callback, duration);
-        return this;
-    };
-
-    $.fn.onTransitionEnd = function (callback) {
-        /// <summary>Performs the given callback at the end of a css transition.</summary>
-        /// <param name="callback" type="Function">The function to call on transition end.</param>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
-
-        var supportTransition = $.support.transition;
-        return this.each(function () {
-
-            if (!$.isFunction(callback)) {
-                return;
+            if (!$.support.transition) {
+                return this;
             }
 
-            var $this = $(this),
-                rtransition = /\d+(.\d+)?/,
-                duration = (rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000,
-                error = duration / 10,
-                start = new Date();
+            var called = false,
+                $this = $(this),
+                callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
 
-            $this.redraw();
-            supportTransition ? $this.one(supportTransition.end, function () {
-                // Prevent events firing too early.
-                var end = new Date();
-                if (end.getMilliseconds() - start.getMilliseconds() <= error) {
-                    w.setTimeout(callback, duration);
+            if (!duration) {
+                duration = getDuration($this);
+            }
+
+            $this.one($.support.transition.end, function () { called = true; });
+            w.setTimeout(callback, duration);
+            return this;
+        };
+
+        $.fn.onTransitionEnd = function (callback) {
+            /// <summary>Performs the given callback at the end of a css transition.</summary>
+            /// <param name="callback" type="Function">The function to call on transition end.</param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+            var supportTransition = $.support.transition;
+            return this.each(function () {
+
+                if (!$.isFunction(callback)) {
                     return;
                 }
 
-                callback();
+                var $this = $(this),
+                    duration = getDuration($this),
+                    error = duration / 10,
+                    start = new Date(),
+                    args = arguments;
 
-            }) : callback();
-        });
-    };
+                $this.redraw();
+                supportTransition ? $this.one(supportTransition.end, function () {
+                    // Prevent events firing too early.
+                    var end = new Date();
+                    if (end.getMilliseconds() - start.getMilliseconds() <= error) {
+                        w.setTimeout(function () {
+                            callback.apply(this, args);
+                        }.bind(this), duration);
+                        return;
+                    }
+
+                    callback.apply(this, args);
+
+                }) : callback.apply(this, args);
+            });
+        };
+    }());
 
     $.support.touchEvents = (function () {
         return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);

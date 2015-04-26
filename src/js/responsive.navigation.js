@@ -32,7 +32,7 @@
 
     // The Navigation class definition
     var Navigation = function (element) {
-        this.$element = $(element).addClass("canvas-navigation");
+        this.$element = $(element).addClass("navigation");
         this.$button = this.$element.children().first();
         this.transitioning = false;
         this.lastScroll = 0;

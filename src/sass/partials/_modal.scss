@@ -8,6 +8,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    touch-action: none;
     background-color: $modal-overlay-background-color;
     -webkit-overflow-scrolling: touch;
     -webkit-backface-visibility: hidden;
