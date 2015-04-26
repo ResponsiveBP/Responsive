@@ -28,6 +28,12 @@ html {
     outline: none !important;
 }
 
+// IE11 on Windows 8 & WP8 show outline on divs.
+_::-ms-reveal,
+div:not([tabindex]):focus {
+    outline: none !important;
+}
+
 // Headers
 // 1: Improve rendering of screen fonts.
 // 2: Prevent page breaking.

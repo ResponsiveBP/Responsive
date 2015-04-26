@@ -58,7 +58,7 @@
             self = this,
             complete = function () {
                 self.dismissing = false;
-                $target.removeClass("fade-out").attr({ "aria-hidden": true, "tabindex": -1 });
+                $target.removeClass("fade-out").attr({ "aria-hidden": true, "hidden": true, "tabindex": -1 });
                 self.$element.trigger($.Event(edismissed));
             };
 

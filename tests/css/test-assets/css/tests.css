@@ -5,6 +5,9 @@
 /* ==========================================================================
    Grid
    ========================================================================== */
+.container {
+   /* background-color: #ffffbb;*/
+}
 
 .grid-test .row,
 .grid-test [class*="block-row-"] {
@@ -17,8 +20,8 @@
         padding-top: .5em;
     }
 
-    .grid-test .row .row {
-        background-color: #3876a7;
+    .grid-test .row.equal-height {
+        padding-top: 0;
     }
 
     .grid-test [class*="block-row-"] > *,
@@ -30,12 +33,8 @@
 
         .grid-test [class*="col-"] [class*="col-"] {
             background-color: #434343;
+            color: #fff;
         }
-
-.pad-gutter > * span {
-    background-color: #de3838;
-    display: block;
-}
 
 /* ==========================================================================
    Dropdown

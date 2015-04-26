@@ -114,6 +114,7 @@ input[type='radio'] {
 input[type='range'] {
     border: 1px solid transparent;
     border: $form-input-border \9;
+    background-color: transparent;
     background-color: $form-input-background \9;
     padding: $form-input-padding 0;
     padding: $form-input-padding \9;

@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.0.3 | MIT License | responsivebp.com */
+/*! Responsive v4.1.0 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -56,13 +56,14 @@
         ///   &#10;    2: index - The index of the current grid in the range.
         ///   &#10;    3: range - The available grid range.
         ///</returns>
-
-        var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
-
         return function () {
+            var $div = $("<div/>").addClass("grid-state-indicator").prependTo("body");
+
             // These numbers match values in the css
             var grids = ["xxs", "xs", "s", "m", "l"],
                 key = parseInt($div.width(), 10);
+
+            $div.remove();
 
             return {
                 grid: grids[key],
@@ -71,6 +72,59 @@
             };
         };
     }());
+
+    $.support.scrollbarWidth = (function () {
+        /// <summary>Returns a value indicating the width of the browser scrollbar.</summary>
+        /// <returns type="Number">The width in pixels.</returns>
+        return function () {
+
+            var width = 0;
+            if (d.body.clientWidth < w.innerWidth) {
+
+                var $div = $("<div/>").addClass("scrollbar-measure").prependTo("body");
+                width = $div[0].offsetWidth - $div[0].clientWidth;
+
+                $div.remove();
+            }
+
+            return width;
+        };
+    }());
+
+    $.toggleBodyLock = function () {
+        /// <summary>
+        /// Toggles a locked state on the body which toggles both scrollbar visibility and padding on the body.
+        /// </summary>
+
+        var $html = $("html"),
+            $body = $("body"),
+            bodyPad;
+
+        // Remove.
+        if ($html.attr("data-lock") !== undefined) {
+
+            bodyPad = $body.data("bodyPad");
+            $body.css("padding-right", bodyPad || "")
+                 .removeData("bodyPad");
+
+            $html.removeAttr("data-lock");
+            return;
+        }
+
+        // Add
+        bodyPad = parseInt($body.css("padding-right") || 0);
+        var scrollWidth = $.support.scrollbarWidth();
+
+        if (scrollWidth) {
+            $body.css("padding-right", bodyPad + scrollWidth);
+
+            if (bodyPad) {
+                $body.data("bodyPad", bodyPad);
+            }
+
+            $html.attr("data-lock", "");
+        }
+    };
 
     $.support.transition = (function () {
         /// <summary>Returns a value indicating whether the browser supports CSS transitions.</summary>
@@ -88,11 +142,12 @@
                     "OTransition": "oTransitionEnd otransitionend"
                 };
 
-            // Could use the other method but I'm intentionally keeping them
-            // separate for now.
-            for (var name in transEndEventNames) {
-                if (div.style[name] !== undefined) {
-                    return { end: transEndEventNames[name] };
+            var names = Object.keys(transEndEventNames),
+                len = names.length;
+
+            for (var i = 0; i < len; i++) {
+                if (div.style[names[i]] !== undefined) {
+                    return { end: transEndEventNames[names[i]] };
                 }
             }
 
@@ -112,46 +167,70 @@
         });
     };
 
-    $.fn.ensureTransitionEnd = function (duration) {
-        /// <summary>
-        /// Ensures that the transition end callback is triggered.
-        /// http://blog.alexmaccaw.com/css-transitions
-        ///</summary>
+    (function () {
+        var getDuration = function ($element) {
+            var rtransition = /\d+(.\d+)?/;
+            return (rtransition.test($element.css("transition-duration")) ? $element.css("transition-duration").match(rtransition)[0] : 0) * 1000;
+        };
 
-        if (!$.support.transition) {
-            return this;
-        }
+        $.fn.ensureTransitionEnd = function (duration) {
+            /// <summary>
+            /// Ensures that the transition end callback is triggered.
+            /// http://blog.alexmaccaw.com/css-transitions
+            ///</summary>
 
-        var rtransition = /\d+(.\d+)/,
-            called = false,
-            $this = $(this),
-            callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
-
-        if (!duration) {
-            duration = (rtransition.test($this.css("transition-duration")) ? $this.css("transition-duration").match(rtransition)[0] : 0) * 1000;
-        }
-
-        $this.one($.support.transition.end, function () { called = true; });
-        w.setTimeout(callback, duration);
-        return this;
-    };
-
-    $.fn.onTransitionEnd = function (callback) {
-        /// <summary>Performs the given callback at the end of a css transition.</summary>
-        /// <param name="callback" type="Function">The function to call on transition end.</param>
-        /// <returns type="jQuery">The jQuery object for chaining.</returns>
-
-        var supportTransition = $.support.transition;
-        return this.each(function () {
-
-            if (!$.isFunction(callback)) {
-                return;
+            if (!$.support.transition) {
+                return this;
             }
 
-            var $this = $(this).redraw();
-            supportTransition ? $this.one(supportTransition.end, callback) : callback();
-        });
-    };
+            var called = false,
+                $this = $(this),
+                callback = function () { if (!called) { $this.trigger($.support.transition.end); } };
+
+            if (!duration) {
+                duration = getDuration($this);
+            }
+
+            $this.one($.support.transition.end, function () { called = true; });
+            w.setTimeout(callback, duration);
+            return this;
+        };
+
+        $.fn.onTransitionEnd = function (callback) {
+            /// <summary>Performs the given callback at the end of a css transition.</summary>
+            /// <param name="callback" type="Function">The function to call on transition end.</param>
+            /// <returns type="jQuery">The jQuery object for chaining.</returns>
+
+            var supportTransition = $.support.transition;
+            return this.each(function () {
+
+                if (!$.isFunction(callback)) {
+                    return;
+                }
+
+                var $this = $(this),
+                    duration = getDuration($this),
+                    error = duration / 10,
+                    start = new Date(),
+                    args = arguments;
+
+                $this.redraw();
+                supportTransition ? $this.one(supportTransition.end, function () {
+                    // Prevent events firing too early.
+                    var end = new Date();
+                    if (end.getMilliseconds() - start.getMilliseconds() <= error) {
+                        w.setTimeout(function () {
+                            callback.apply(this, args);
+                        }.bind(this), duration);
+                        return;
+                    }
+
+                    callback.apply(this, args);
+
+                }) : callback.apply(this, args);
+            });
+        };
+    }());
 
     $.support.touchEvents = (function () {
         return ("ontouchstart" in w) || (w.DocumentTouch && d instanceof w.DocumentTouch);

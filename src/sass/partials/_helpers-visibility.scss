@@ -13,7 +13,6 @@
 }
 
 // Hide from both screen readers and browsers: h5bp.com/u
-[aria-hidden="true"],
 .hidden {
     display: none !important;
 }
@@ -47,15 +46,16 @@
     visibility: hidden;
 }
 
-// Fade opacity with animation
-.fade-out {
-    opacity: 0 !important;
-}
 
 // Opacity helper to add to elements to allow fade animation
 .fade-out,
 .fade-in {
     transition: opacity .3s;
+}
+
+// Fade opacity with animation
+.fade-out {
+    opacity: 0 !important;
 }
 
 .fade-in {

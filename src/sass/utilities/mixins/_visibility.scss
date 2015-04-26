@@ -12,6 +12,14 @@
             display: block !important;
         }
 
+        .visible-#{$bp}.inline {
+            display: inline !important;
+        }
+
+        .visible-#{$bp}.inline-block {
+            display: inline-block !important;
+        }
+
         table.visible-#{$bp} {
             display: table;
         }

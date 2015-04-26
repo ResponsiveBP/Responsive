@@ -72,6 +72,7 @@
             "role": "tabpanel",
             "aria-labelledby": id,
             "aria-hidden": !active,
+            "hidden": !active,
             "tabindex": active ? 0 : -1
         });
 
@@ -112,8 +113,8 @@
         if (supportTransition) {
 
             // Calculate the height/width.
-            this.$target[dimension]("auto").attr({ "aria-hidden": false });
-            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false });
+            this.$target[dimension]("auto").attr({ "aria-hidden": false, "hidden": false });
+            this.$target.find("[tabindex]:not(.collapse)").attr({ "aria-hidden": false, "hidden": false });
 
             size = w.getComputedStyle(this.$target[0])[dimension];
 
@@ -183,6 +184,7 @@
                 // Set the correct aria attributes.
                 self.$target.attr({
                     "aria-hidden": !doShow,
+                    "hidden": !doShow,
                     "tabindex": doShow ? 0 : -1
                 });
 
@@ -198,6 +200,7 @@
                 // Toggle any children.
                 self.$target.find("[tabindex]:not(.collapse)").attr({
                     "aria-hidden": !doShow,
+                    "hidden": !doShow,
                     "tabindex": doShow ? 0 : -1
                 });
 
@@ -277,7 +280,7 @@
         return this.each(function () {
             var $this = $(this),
                 data = $this.data("r.dropdown"),
-                opts = typeof options === "object" ? options : null;
+                opts = typeof options === "object" ? $.extend({}, options) : null;
 
             if (!data) {
                 // Check the data and reassign if not present.

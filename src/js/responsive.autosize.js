@@ -128,7 +128,7 @@
 
             var $this = $(this),
                 data = $this.data("r.autosize"),
-                opts = typeof options === "object" ? options : null;
+                opts = typeof options === "object" ? $.extend({}, options) : null;
 
             if (!data) {
                 // Check the data and reassign if not present.

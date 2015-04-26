@@ -68,14 +68,14 @@
         // Hide the previous button if no wrapping.
         if (!this.options.wrap) {
             if (activeIndex === 0) {
-                this.$previousTrigger.hide().attr("aria-hidden", true);
+                this.$previousTrigger.attr({ "aria-hidden": true, "hidden": true });
             }
         }
 
         // Hide both if one item.
         if (this.$items.length === 1) {
-            this.$previousTrigger.hide().attr("aria-hidden", true);
-            this.$nextTrigger.hide().attr("aria-hidden", true);
+            this.$previousTrigger.attr({ "aria-hidden": true, "hidden": true });
+            this.$nextTrigger.attr({ "aria-hidden": true, "hidden": true });
         }
 
         // Add the css class to support fade.
@@ -286,17 +286,17 @@
             if (!self.options.wrap) {
                 var activePosition = self.activeindex();
                 if (self.$items && activePosition === self.$items.length - 1) {
-                    self.$nextTrigger.hide().attr("aria-hidden", true);
-                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.$nextTrigger.attr({ "aria-hidden": true, "hidden": true });
+                    self.$previousTrigger.removeAttr("aria-hidden").removeAttr("hidden");
                     if (self.keyboardTriggered) { self.$previousTrigger.focus(); self.keyboardTriggered = false; }
                 }
                 else if (self.$items && activePosition === 0) {
-                    self.$previousTrigger.hide().attr("aria-hidden", true);
-                    self.$nextTrigger.show().removeAttr("aria-hidden");
+                    self.$previousTrigger.attr({ "aria-hidden": true, "hidden": true });
+                    self.$nextTrigger.show().removeAttr("aria-hidden").removeAttr("hidden");
                     if (self.keyboardTriggered) { self.$nextTrigger.focus(); self.keyboardTriggered = false; }
                 } else {
-                    self.$nextTrigger.show().removeAttr("aria-hidden");
-                    self.$previousTrigger.show().removeAttr("aria-hidden");
+                    self.$nextTrigger.removeAttr("aria-hidden").removeAttr("hidden");
+                    self.$previousTrigger.removeAttr("aria-hidden").removeAttr("hidden");
                     self.keyboardTriggered = false;
                 }
             }
