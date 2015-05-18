@@ -33,6 +33,10 @@
     // The Navigation class definition
     var Navigation = function (element) {
         this.$element = $(element).addClass("navigation");
+        this.defaults= {
+            start: "xxs",
+            end: "l"
+        };
         this.$button = this.$element.children().first();
         this.transitioning = false;
         this.lastScroll = 0;
