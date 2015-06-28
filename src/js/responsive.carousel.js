@@ -104,7 +104,7 @@
             !$this.is("button") ? $this.attr({ "role": "button" }) : $this.attr({ "type": "button" });
             if (!$this.find(".visuallyhidden").length) {
                 $("<span/>").addClass("visuallyhidden")
-                            .html($this.is(self.$nextTrigger.selector) ? self.options.nextHint : self.options.previousHint)
+                            .html(this === self.$nextTrigger ? self.options.nextHint : self.options.previousHint)
                             .appendTo($this);
             }
         });

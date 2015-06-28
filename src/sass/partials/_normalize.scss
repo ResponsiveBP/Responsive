@@ -1,4 +1,4 @@
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.3 | MIT License | git.io/normalize */
 
 // This has been tweaked to prevent repetition within the framework.
 
@@ -80,9 +80,11 @@ a:hover {
 // Text-level semantics
 //  ==========================================================================
 
-// Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+// 1: Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+// 2: Add query indicator to abbr
 abbr[title] {
-    border-bottom: 1px dotted;
+    border-bottom: 1px dotted; // 1
+    cursor: help; // 2
 }
 
 // Address style set to `bolder` in Firefox 4+, Safari, and Chrome.

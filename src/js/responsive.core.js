@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.0 | MIT License | responsivebp.com */
+/*! Responsive v4.1.1 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -107,7 +107,8 @@
             $body.css("padding-right", bodyPad || "")
                  .removeData("bodyPad");
 
-            $html.removeAttr("data-lock");
+            $html.removeAttr("data-lock")
+                 .trigger($.Event("unlock.r.bodylock"));
             return;
         }
 
@@ -122,7 +123,8 @@
                 $body.data("bodyPad", bodyPad);
             }
 
-            $html.attr("data-lock", "");
+            $html.attr("data-lock", "")
+                 .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
         }
     };
 
@@ -441,7 +443,7 @@
 
                     // Attach touchmove and touchend listeners.
                     $this.on(etouch.move, onMove)
-                         .on(etouch.end, onEnd);
+                        .on(etouch.end, onEnd);
                 });
             });
         };
@@ -457,7 +459,7 @@
                 // Disable extended touch events on ie.
                 // Unbind events.
                 $(this).css({ "-ms-touch-action": "", "touch-action": "" })
-                       .off(etouch.start).off(etouch.move).off(etouch.end);
+                    .off(etouch.start).off(etouch.move).off(etouch.end);
             });
         };
 
@@ -564,4 +566,4 @@
 
         };
     })($.fn.html);
-}(jQuery, window, document));
+} (jQuery, window, document));

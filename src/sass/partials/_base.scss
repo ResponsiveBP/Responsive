@@ -28,8 +28,9 @@ html {
     outline: none !important;
 }
 
-// IE11 on Windows 8 & WP8 show outline on divs.
+// IE11 on Windows 8 & WP8 show outline on the body and divs.
 _::-ms-reveal,
+body:not([tabindex]):focus,
 div:not([tabindex]):focus {
     outline: none !important;
 }
@@ -88,9 +89,4 @@ hr {
     border-top: 1px solid $horizontal-rule-color;
     margin: 1rem 0;
     padding: 0;
-}
-
-// Add query indicator to abbr
-abbr {
-    cursor: help;
 }
