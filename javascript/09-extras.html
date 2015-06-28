@@ -60,6 +60,20 @@ sublinks: ["#general|General Tools",
                 <dd>The prefix with which to identify the data attribute.</dd>
             </dl>
         </dd>
+        <dt><strong>$.toggleBodyLock()</strong></dt>
+        <dd>
+            Toggles a locked state on the body which toggles both scrollbar visibility and padding on the body.
+            The plugin exposes the following events that are bound to the <code>html</code> element.
+            <dl class="dl-horizontal">
+                <dt><strong>lock.r.bodylock</strong></dt>
+                <dd>This event is fired immediately when the plugins <code>lock</code> instance method is invoked. 
+                    A <var>padding</var> property on the event carries any padded added to the body to take into
+                    account scrollbar width.
+                </dd>
+                <dt><strong>unlock.r.bodylock</strong></dt>
+                <dd>This event is fired when the plugins <code>unlock</code> instance method is invoked.</dd>
+            </dl>
+        </dd>
     </dl>
 </section>
 <hr />
