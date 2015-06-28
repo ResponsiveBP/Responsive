@@ -124,7 +124,7 @@
             }
 
             $html.attr("data-lock", "")
-                 .trigger($.Event("lock.r.bodylock", { padding: bodyPad }));
+                 .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
         }
     };
 
