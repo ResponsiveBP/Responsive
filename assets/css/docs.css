@@ -36,7 +36,16 @@ blockquote {
         text-decoration: none;
         font-size: 1.5rem;
     }
-
+.navigation>button:first-child, 
+[data-navigation]>button:first-child {
+    width: 79px;
+}
+.navigation>button:first-child:after, 
+[data-navigation]>button:first-child:after {
+    content: "\2630";
+    display: inline-block;
+    margin-left: 8px;
+}
 /*
  * 1: Counteract jekyll whitespace bug.
  */

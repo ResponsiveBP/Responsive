@@ -16,4 +16,13 @@
         }, relativeTime);
 
     });
+    
+    $("html").on("lock.r.bodylock", function(event){
+        var rtl = $.support.rtl;        
+        $(".nav-bar").css(rtl ? "padding-left" : "padding-right", event.padding);        
+    }).on("unlock.r.bodylock",function(event){
+        var rtl = $.support.rtl;
+        $(".nav-bar").css(rtl ? "padding-left" : "padding-right", "");        
+    });
+    
 }(jQuery, window, document));
