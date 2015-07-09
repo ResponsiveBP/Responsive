@@ -1940,7 +1940,7 @@ input[type='file']::-ms-value {
   border: none; }
 
 input[type='file']::-ms-browse {
-  -webkit-appearance: none;
+  padding-top: 0;
   background: #dadada;
   border: solid 1px #c0c0c0;
   color: #222; }
