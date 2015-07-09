@@ -67,7 +67,7 @@ input[type='file']::-ms-value {
 }
 
 input[type='file']::-ms-browse {
-    -webkit-appearance: none;
+    padding-top: 0;
     background: $button-background;
     border: $button-border;
     color: $form-input-color;
