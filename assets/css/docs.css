@@ -124,6 +124,7 @@ header[role="banner"] {
     background-color: #C4E4EE;
     text-decoration: none;
     border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 
     .edit-page:hover {
