@@ -276,9 +276,9 @@ footer[role=contentinfo] {
     }
 
 .shadow {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
-    -ms-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
-    box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px 0;
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    -ms-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 
 .fa.icon {
