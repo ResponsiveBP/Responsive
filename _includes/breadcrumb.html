@@ -1,4 +1,4 @@
-﻿<div class="breadcrumb">
+﻿<div class="breadcrumb shadow">
     <div class="container">
         <ol>
             {% capture whitespace_hack %}{% capture url_parts %} {{ page.url | remove: "/index.html" | replace:'/'," " }}{% endcapture %}{% capture num_parts %}{{ url_parts | number_of_words | minus: 1 }}{% endcapture %}{% assign previous="" %}{% assign splitwords={{url_parts | replace:'.html',"" | split: " "}} %}{% assign lastword={{splitwords.last}} %}{% endcapture %}{% assign whitespace_hack = nil %}
