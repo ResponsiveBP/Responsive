@@ -56,6 +56,10 @@ abbr[title] {
   border-bottom: 1px dotted;
   cursor: help; }
 
+@supports (text-decoration: dotted underline) {
+  abbr[title], acronym[title] {
+    text-decoration: dotted underline;
+    border-bottom: none; } }
 b,
 strong {
   font-weight: bold; }
