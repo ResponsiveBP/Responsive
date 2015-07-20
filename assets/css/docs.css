@@ -182,7 +182,8 @@ header[role="banner"] {
     outline: none;
 }
 
-.download-links {
+.download-links,
+[dir="rtl"] .download-links {
     list-style: none;
     padding: 0;
 }
