@@ -35,16 +35,25 @@ blockquote {
         color: #fff;
         text-decoration: none;
         font-size: 1.5rem;
+        display: inline-block;
     }
-.navigation>button:first-child, 
-[data-navigation]>button:first-child {
+
+.navigation > button:first-child,
+[data-navigation] > button:first-child {
     width: 79px;
 }
-.navigation>button:first-child:after, 
-[data-navigation]>button:first-child:after {
-    content: "\2630";
-    display: inline-block;
-    margin-left: 8px;
+
+    .navigation > button:first-child:after,
+    [data-navigation] > button:first-child:after {
+        content: "\2630";
+        display: inline-block;
+        margin-left: 8px;
+    }
+
+[dir="rtl"] .navigation > button:first-child:after,
+[dir="rtl"] [data-navigation] > button:first-child:after {
+    margin-left: 0;
+    margin-right: 8px;
 }
 /*
  * 1: Counteract jekyll whitespace bug.
@@ -89,6 +98,12 @@ main {
     }
 }
 
+@media (min-width: 62em) {
+    nav[role="complementary"] {
+        padding-top: 1rem;
+    }
+}
+
 /*
  * 1: Prevent margin overflow
  */
@@ -119,17 +134,26 @@ header[role="banner"] {
         color: inherit;
     }
 
-.edit-page {
+.toggler {
     padding: .5rem;
     background-color: #C4E4EE;
     text-decoration: none;
     border-radius: 4px;
+    border: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 
-    .edit-page:hover {
-        text-decoration: underline;
+    .toggler:hover {
+        background-color: #a6d6e5;
     }
+
+    .toggler:active {
+        background-color: #e2f2f7;
+    }
+
+.direction-trigger {
+    margin-bottom: .5rem;
+}
 
 .download {
     font-size: 1.3rem;

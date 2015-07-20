@@ -110,6 +110,7 @@ GEM
       parslet (~> 1.5.0)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    wdm (0.1.1)
     yajl-ruby (1.1.0)
     yajl-ruby (1.1.0-x86-mingw32)
 
@@ -119,3 +120,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  wdm (>= 0.1.0)
+
+BUNDLED WITH
+   1.10.5
