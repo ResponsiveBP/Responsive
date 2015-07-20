@@ -10,8 +10,8 @@ pre[class*="language-"] {
 	color: black;
 	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', monospace;
-	direction: ltr;
-	text-align: left;
+	/*direction: ltr;
+	text-align: left;*/
 	white-space: pre;
 	word-spacing: normal;
 	word-break: normal;
