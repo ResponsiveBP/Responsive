@@ -1939,6 +1939,9 @@ input,
     cursor: not-allowed;
     opacity: 1; }
 
+.readonly[hidden] {
+  display: none; }
+
 input[type='file']::-ms-value {
   background: #fff;
   border: none; }

@@ -60,6 +60,10 @@ input,
     }
 }
 
+.readonly[hidden]{
+    display: none;
+}
+
 // Clean up that hideous file input.
 input[type='file']::-ms-value {
     background: $form-input-background;
