@@ -2496,8 +2496,8 @@ table {
     z-index: 3;
     display: block;
     width: 3rem;
+    height: 3rem;
     margin-top: -1rem;
-    padding: 1rem;
     background-color: transparent;
     border: none;
     font-size: 2rem;
