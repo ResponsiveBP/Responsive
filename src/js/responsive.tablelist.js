@@ -21,13 +21,13 @@
     // Table class definition.
     var Table = function (element) {
 
-        this.$element = $(element).addClass("table-list");
+        this.$element = $(element).addClass("table-list").attr("aria-role","grid");
         this.$thead = this.$element.find("thead");
         this.$tfoot = this.$element.find("tfoot");
         this.$tbody = this.$element.find("tbody");
-        this.$headerColumns = this.$thead.find("th");
-        this.$footerColumns = this.$tfoot.find("th");
-        this.$bodyRows = this.$tbody.find("tr");
+        this.$headerColumns = this.$thead.find("th").attr({"aria-role":"columnheader","aria-hidden":"false"});
+        this.$footerColumns = this.$tfoot.find("th").attr({"aria-role":"columnheader","aria-hidden":"false"});
+        this.$bodyRows = this.$tbody.find("tr").attr("aria-role","row");
         this.isAdded = null;
 
         this.add();
@@ -57,15 +57,23 @@
         $.each(this.$bodyRows, function () {
 
             $(this).find("th, td").each(function (index) {
+                
                 var $this = $(this),
-                    theadAttribute = $(self.$headerColumns[index]).text();
-
-                $this.attr("data-thead", theadAttribute);
+                    $headerColumn = $(self.$headerColumns[index]),
+                    theadAttribute = $headerColumn.text(),
+                    headerId = $headerColumn.attr("id") || "tablelist-" + $.pseudoUnique();
+                    
+                $headerColumn.attr("id", headerId);
+                $this.attr("data-thead", theadAttribute);                
+                $this.attr({"aria-role":"gridcell", "aria-describedby": headerId});
 
                 if (self.$tfoot.length) {
-
-                    var tfootAttribute = $(self.$footerColumns[index]).text();
+                    var $footerColumn = $(self.$footerColumns[index]),
+                        tfootAttribute = $footerColumn.text(),
+                        footerId = $footerColumn.attr("id") || "tablelist-" + $.pseudoUnique();
+                                          
                     $this.attr("data-tfoot", tfootAttribute);
+                    $this.attr({"aria-role":"gridcell", "aria-describedby": footerId});
                 }
             });
         });

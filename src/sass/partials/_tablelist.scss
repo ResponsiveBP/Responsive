@@ -11,8 +11,7 @@
         display: block;
 
         thead,
-        tfoot,
-        th {
+        tfoot {
             // Hide but allow screenreaders to continue to read the values
             position: absolute;
             clip: rect(0 0 0 0);

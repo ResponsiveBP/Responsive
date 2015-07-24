@@ -2728,8 +2728,7 @@ button.modal-direction {
   .table-list {
     display: block; }
     .table-list thead,
-    .table-list tfoot,
-    .table-list th {
+    .table-list tfoot {
       position: absolute;
       clip: rect(0 0 0 0);
       overflow: hidden;
