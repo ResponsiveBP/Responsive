@@ -136,6 +136,8 @@
         }
     }
 
+    // Ensure element is clickable in IE9
+    // See: https://developer.mozilla.org/en-US/docs/Web/Events/click#Internet_Explorer
     > button {
         position: absolute;
         left: 1px;
@@ -145,7 +147,7 @@
         width: 3rem;
         margin-top: -1rem;
         padding: 1rem;
-        background-color: transparent;
+        background-color: rgba(0,0,0,0); // 1
         border: none;
         font-size: 2rem;
         font-weight: bold;
