@@ -15,7 +15,7 @@ and allow developers to write efficient code and lower costs.
   
 **Responsive is tiny**. The combined output CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality 
 built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website 
-such as you would with [Normalize.css](http://necolas.github.io/normalize.css/){:target="_blank"}.
+such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
 
 Browser support covers IE9+ as well as all other modern browsers.
 
@@ -30,15 +30,15 @@ Several options are available for downloading Responsive:
 
 ##Documentation
 
-Responsives' documentation, included in the [gh-pages](https://github.com/ResponsiveBP/Responsive/tree/gh-pages) repo. It is built with [Jekyll](http://jekyllrb.com){:target="_blank"} and publicly hosted on GitHub Pages at [http://responsivebp.com](http://responsivebp.com){:target="_blank"}. The docs may also be run locally.
+Responsives' documentation, included in the [gh-pages](https://github.com/ResponsiveBP/Responsive/tree/gh-pages) repo. It is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at [http://responsivebp.com](http://responsivebp.com). The docs may also be run locally.
 
-1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation){:target="_blank"} (requires v2.5.2).
- - **If you are running Windows** please read this [unofficial guide](https://github.com/juthilo/run-jekyll-on-windows/){:target="_blank"} to get Jekyll up and running without problems.
+1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v2.5.2).
+ - **If you are running Windows** please read this [unofficial guide](https://github.com/juthilo/run-jekyll-on-windows/) to get Jekyll up and running without problems.
 2. From the root `/Responsive` directory, run `jekyll serve` in the command line.
- - Open [http://localhost:4000](http://localhost:4000){:target="_blank"} in your browser to view the compiled docs.
+ - Open [http://localhost:4000](http://localhost:4000) in your browser to view the compiled docs.
 
 
-Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com/docs/home/){:target="_blank"}.
+Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com/docs/home/).
 
 ##Contributing
 
@@ -56,7 +56,7 @@ Please take a moment to review the [guidelines for contributing](CONTRIBUTING.md
 
 ##Building the Sass and JavaScript
 
-The build process for Responsive is powered by [gulpjs](http://gulpjs.com/){:target="_blank"}. To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
+The build process for Responsive is powered by [gulpjs](http://gulpjs.com/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
 
 1. `npm install -g gulp` To install gulp globally.
 2. `npm install` to install the necessary build dependencies based on the contents of the `package.json` file.
@@ -73,13 +73,13 @@ There are three types of build available:
 
 ##Authors
 
-James South [@james_m_south](http://twitter.com/james_m_south){:target="_blank"} and the Responsive contributors.
+James South [@james_m_south](http://twitter.com/james_m_south) and the Responsive contributors.
 
 ##Community
 
-Follow [@responsivebp](http://twitter.com/responsivebp){:target="_blank"} on Twitter.
-Discuss Responsive on [Gitter](https://gitter.im/ResponsiveBP/Responsive){:target="_blank"}.
+Follow [@responsivebp](http://twitter.com/responsivebp) on Twitter.
+Discuss Responsive on [Gitter](https://gitter.im/ResponsiveBP/Responsive).
 
 ###Copyright and license
 
-Copyright 2013-2015 James South under the [MIT license](http://opensource.org/licenses/MIT){:target="_blank"}.
+Copyright 2013-2015 James South under the [MIT license](http://opensource.org/licenses/MIT).
