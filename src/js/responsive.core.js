@@ -122,10 +122,10 @@
             if (bodyPad) {
                 $body.data("bodyPad", bodyPad);
             }
-
-            $html.attr("data-lock", "")
-                 .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
-        }
+		}
+		
+        $html.attr("data-lock", "")
+             .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
     };
 
     $.support.transition = (function () {
