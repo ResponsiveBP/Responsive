@@ -41,6 +41,7 @@ blockquote {
 .navigation > button:first-child,
 [data-navigation] > button:first-child {
     width: 79px;
+    background-color: #395179;
 }
 
     .navigation > button:first-child:after,
