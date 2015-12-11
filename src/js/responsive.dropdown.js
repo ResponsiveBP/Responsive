@@ -67,6 +67,16 @@
             "tabindex": 0
         });
 
+        if (this.$parent){
+            
+            // We're save to add the attribute here since if it's not used then
+            // data-api is disabled.
+            this.$element.attr({
+                "data-dropdown-parent": this.options.parent
+            });
+        
+        }
+
         this.$target.attr({
             "id": paneId,
             "role": "tabpanel",
@@ -96,7 +106,7 @@
 
         if (this.$parent) {
             // Get all the related open panes.
-            $actives = this.$parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]");
+            $actives = this.$parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]");
 
             $actives = $.grep($actives, function (a) {
                 var data = $(a).data("r.dropdown"),
