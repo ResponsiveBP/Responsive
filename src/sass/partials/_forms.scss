@@ -71,7 +71,7 @@ input[type='file']::-ms-value {
 }
 
 input[type='file']::-ms-browse {
-    padding-top: 0;
+    padding-top: .1rem;
     background: $button-background;
     border: $button-border;
     color: $form-input-color;
@@ -151,8 +151,15 @@ input[type='color'] {
     -webkit-appearance: none; // 1
 }
 
-select option {
-    height: 100%;
+// 1: Remove border and and bgcolor around caret on IE10+
+select {
+    &::-ms-expand {
+        border: 0;
+        background-color: inherit; // 1
+    }
+    option {
+        height: 100%;
+    }
 }
 
 [multiple] {
