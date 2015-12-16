@@ -112,7 +112,7 @@
                 var data = $(a).data("r.dropdown"),
                     $target = data && data.$target;
 
-                return $target && $target.hasClass("dropdown-group") && !$target.hasClass("collapse") && data.$parent && data.$parent[0] === self.$parent[0];
+                return $target && !$target.hasClass("collapse") && data.$parent && data.$parent[0] === self.$parent[0];
             });
         }
 

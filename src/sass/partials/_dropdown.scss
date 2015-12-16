@@ -16,12 +16,16 @@
 .accordion-body {
     padding: 0 .5rem;
     border-top: solid 1px $accordion-border-color;
+    
+    &.collapse{
+        border-top-color: transparent;
+    }
 }
 
 // Animation styles
 .trans,
 .collapse {
-    transition: height .5s ease, width .5s ease;
+    transition: height .3s ease, width .3s ease, border .3s ease;
 }
 
 .expand,

@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.1 | MIT License | responsivebp.com */
+/*! Responsive v4.1.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -152,8 +152,9 @@
                     return { end: transEndEventNames[names[i]] };
                 }
             }
-
-            return false;
+            
+            // Falsy and provides a common return expression for the function.
+            return null; 
         };
 
         return transitionEnd();
