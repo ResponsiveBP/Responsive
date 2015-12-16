@@ -67,14 +67,14 @@
             "tabindex": 0
         });
 
-        if (this.$parent){
-            
+        if (this.$parent) {
+
             // We're save to add the attribute here since if it's not used then
             // data-api is disabled.
             this.$element.attr({
                 "data-dropdown-parent": this.options.parent
             });
-        
+
         }
 
         this.$target.attr({
@@ -134,7 +134,7 @@
 
         this.$target[dimension](size || "");
 
-        this.transition("removeClass", $.Event(eshow), eshown);
+        this.transition("removeClass", $.Event(eshow, { relatedTarget: this.options.target }), eshown);
 
         if ($actives && $actives.length) {
             $.each($actives, function () {
@@ -166,7 +166,7 @@
 
         this.$target.removeClass("expand");
         this.$target[dimension](0);
-        this.transition("addClass", $.Event(ehide), ehidden);
+        this.transition("addClass", $.Event(ehide, { relatedTarget: this.options.target }), ehidden);
     };
 
     Dropdown.prototype.toggle = function () {
@@ -186,7 +186,7 @@
             complete = function () {
 
                 // The event to expose.
-                var eventToTrigger = $.Event(completeEvent);
+                var eventToTrigger = $.Event(completeEvent, { relatedTarget: self.options.target });
 
                 // Ensure the height/width is set to auto.
                 self.$target.removeClass("trans")[self.options.dimension]("");
@@ -259,7 +259,7 @@
             }
 
             var $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
-                $items = $parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]"),
+                $items = $parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]").children("[role=tab]"),
                 index = $items.index($items.filter(":focus")),
                 length = $items.length;
 
