@@ -15,24 +15,22 @@ html {
 // Set focus on elements that can recieve it.
 // http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex
 :focus {
-    outline: $selection-focus-color;
-    outline-style: $selection-focus-style;
-    outline-width: $selection-focus-width;
-    outline-offset: $selection-focus-offset;
+    outline: none;
+    box-shadow: 0 0 1px 2px $selection-focus-color;
 }
 
 // Suppress the focus outline on links that cannot be accessed via keyboard.
 // This prevents an unwanted focus outline from appearing around elements that
 // might still respond to pointer events.
 [tabindex="-1"]:focus {
-    outline: none !important;
+    box-shadow: none;
 }
 
-// IE11 on Windows 8 & WP8 show outline on the body and divs.
+// IE11 on Windows 7-8 & WP8 show outline on the body and divs.
 _::-ms-reveal,
 body:not([tabindex]):focus,
 div:not([tabindex]):focus {
-    outline: none !important;
+    box-shadow: none;
 }
 
 // Headers
