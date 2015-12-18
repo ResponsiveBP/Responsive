@@ -259,7 +259,7 @@
             }
 
             var $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
-                $items = $parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]").children("[role=tab]"),
+                $items = $parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]"),
                 index = $items.index($items.filter(":focus")),
                 length = $items.length;
 
