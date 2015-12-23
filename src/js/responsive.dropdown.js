@@ -47,13 +47,6 @@
         }
 
         // Add accessibility features.
-        if (this.$parent) {
-            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" })
-                .find("div:not(.collapse,.accordion-body)").attr("role", "presentation");
-        } else {
-            $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
-        }
-
         var id = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
@@ -68,8 +61,9 @@
         });
 
         if (this.$parent) {
+            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" });
 
-            // We're save to add the attribute here since if it's not used then
+            // We're safe to add the attribute here since if it's not used then
             // data-api is disabled.
             this.$element.attr({
                 "data-dropdown-parent": this.options.parent
