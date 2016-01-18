@@ -82,4 +82,4 @@ Discuss Responsive on [Gitter](https://gitter.im/ResponsiveBP/Responsive).
 
 ###Copyright and license
 
-Copyright 2013-2015 James South under the [MIT license](http://opensource.org/licenses/MIT).
+Copyright 2013-2016 James South under the [MIT license](http://opensource.org/licenses/MIT).
