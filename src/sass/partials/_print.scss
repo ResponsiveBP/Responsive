@@ -4,7 +4,7 @@
 // Source: https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css
 
 @media print {
-    *, :before, :after {
+    *, :before, :after, *:first-letter, *:first-line {
         box-shadow: none !important;
         text-shadow: none !important;
         background: transparent !important;
