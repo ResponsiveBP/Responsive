@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.1 | MIT License | responsivebp.com */
+/*! Responsive v4.1.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -122,10 +122,10 @@
             if (bodyPad) {
                 $body.data("bodyPad", bodyPad);
             }
-
-            $html.attr("data-lock", "")
-                 .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
-        }
+		}
+		
+        $html.attr("data-lock", "")
+             .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
     };
 
     $.support.transition = (function () {
@@ -152,8 +152,9 @@
                     return { end: transEndEventNames[names[i]] };
                 }
             }
-
-            return false;
+            
+            // Falsy and provides a common return expression for the function.
+            return null; 
         };
 
         return transitionEnd();
@@ -1696,13 +1697,6 @@
         }
 
         // Add accessibility features.
-        if (this.$parent) {
-            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" })
-                .find("div:not(.collapse,.accordion-body)").attr("role", "presentation");
-        } else {
-            $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
-        }
-
         var id = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
@@ -1715,6 +1709,17 @@
             "aria-expanded": active,
             "tabindex": 0
         });
+
+        if (this.$parent) {
+            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" });
+
+            // We're safe to add the attribute here since if it's not used then
+            // data-api is disabled.
+            this.$element.attr({
+                "data-dropdown-parent": this.options.parent
+            });
+
+        }
 
         this.$target.attr({
             "id": paneId,
@@ -1745,13 +1750,13 @@
 
         if (this.$parent) {
             // Get all the related open panes.
-            $actives = this.$parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]");
+            $actives = this.$parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]");
 
             $actives = $.grep($actives, function (a) {
                 var data = $(a).data("r.dropdown"),
                     $target = data && data.$target;
 
-                return $target && $target.hasClass("dropdown-group") && !$target.hasClass("collapse") && data.$parent && data.$parent[0] === self.$parent[0];
+                return $target && !$target.hasClass("collapse") && data.$parent && data.$parent[0] === self.$parent[0];
             });
         }
 
@@ -1773,7 +1778,7 @@
 
         this.$target[dimension](size || "");
 
-        this.transition("removeClass", $.Event(eshow), eshown);
+        this.transition("removeClass", $.Event(eshow, { relatedTarget: this.options.target }), eshown);
 
         if ($actives && $actives.length) {
             $.each($actives, function () {
@@ -1805,7 +1810,7 @@
 
         this.$target.removeClass("expand");
         this.$target[dimension](0);
-        this.transition("addClass", $.Event(ehide), ehidden);
+        this.transition("addClass", $.Event(ehide, { relatedTarget: this.options.target }), ehidden);
     };
 
     Dropdown.prototype.toggle = function () {
@@ -1825,7 +1830,7 @@
             complete = function () {
 
                 // The event to expose.
-                var eventToTrigger = $.Event(completeEvent);
+                var eventToTrigger = $.Event(completeEvent, { relatedTarget: self.options.target });
 
                 // Ensure the height/width is set to auto.
                 self.$target.removeClass("trans")[self.options.dimension]("");
@@ -1898,7 +1903,7 @@
             }
 
             var $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
-                $items = $parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]"),
+                $items = $parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]"),
                 index = $items.index($items.filter(":focus")),
                 length = $items.length;
 
@@ -1971,7 +1976,6 @@
     w.RESPONSIVE_DROPDOWN = true;
 
 }(jQuery, window, ".r.dropdown", ".data-api"));
-
 /*global jQuery*/
 /*jshint expr:true*/
 
@@ -2145,7 +2149,7 @@
 
         // Add the overlay to the body if not done already.
         if (!$(".modal-overlay").length) {
-            $body.append($overlay);
+            $body.append($overlay.removeClass("fade-in"));
         }
 
         // Fade out.
@@ -2759,7 +2763,7 @@
             end: "l"
         };
         this.$button = this.$element.children().first();
-        this.transitioning = false;
+        this.isShown = null;
         this.lastScroll = 0;
 
         if (!this.$button.length) {
@@ -2798,11 +2802,9 @@
 
     Navigation.prototype.show = function () {
 
-        if (this.transitioning) {
+        if (this.isShown) {
             return;
         }
-
-        this.transitioning = true;
 
         var showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown);
@@ -2812,6 +2814,8 @@
         if (showEvent.isDefaultPrevented()) {
             return;
         }
+        
+        this.isShown = true;
 
         var complete = function () {
             this.transitioning = false;
@@ -2834,11 +2838,9 @@
 
     Navigation.prototype.hide = function (noLock) {
 
-        if (this.transitioning) {
+        if (!this.isShown) {
             return;
         }
-
-        this.transitioning = true;
 
         var hideEvent = $.Event(ehide),
             hiddenEvent = $.Event(ehidden);
@@ -2848,6 +2850,8 @@
         if (hideEvent.isDefaultPrevented()) {
             return;
         }
+        
+        this.isShown = false;
 
         var complete = function () {
             this.$element.removeClass("visible");
@@ -2978,13 +2982,21 @@
     // Table class definition.
     var Table = function (element) {
 
-        this.$element = $(element).addClass("table-list").attr("aria-role","grid");
+        this.$element = $(element).addClass("table-list").attr("aria-role", "grid");
         this.$thead = this.$element.find("thead");
         this.$tfoot = this.$element.find("tfoot");
         this.$tbody = this.$element.find("tbody");
-        this.$headerColumns = this.$thead.find("th").attr({"aria-role":"columnheader","aria-hidden":"false"});
-        this.$footerColumns = this.$tfoot.find("th").attr({"aria-role":"columnheader","aria-hidden":"false"});
-        this.$bodyRows = this.$tbody.find("tr").attr("aria-role","row");
+        this.$headerColumns = this.$thead.find("th");
+        this.hasHeader = true;
+        if (!this.$headerColumns.length) {
+            this.hasHeader = false;
+            this.$element.addClass(".no-thead");
+            this.$headerColumns = this.$tbody.find("[scope=row]");
+        }
+
+        this.$headerColumns.attr({ "aria-role": "columnheader", "aria-hidden": "false" });
+        this.$footerColumns = this.$tfoot.find("th").attr({ "aria-role": "columnheader", "aria-hidden": "false" });
+        this.$bodyRows = this.$tbody.find("tr").attr("aria-role", "row");
         this.isAdded = null;
 
         this.add();
@@ -3013,25 +3025,29 @@
 
         $.each(this.$bodyRows, function () {
 
-            $(this).find("th, td").each(function (index) {
-                
+            var selector = self.hasHeader ? "th, td" : "td";
+
+            $(this).find(selector).each(function (index) {
+
                 var $this = $(this),
-                    $headerColumn = $(self.$headerColumns[index]),
+                    $headerColumn = selector === "td" ? $this.prev("[scope=row]") : $(self.$headerColumns[index]),
                     theadAttribute = $headerColumn.text(),
                     headerId = $headerColumn.attr("id") || "tablelist-" + $.pseudoUnique();
-                    
+
                 $headerColumn.attr("id", headerId);
-                $this.attr("data-thead", theadAttribute);                
-                $this.attr({"aria-role":"gridcell", "aria-describedby": headerId});
+                $this.attr("data-thead", theadAttribute);
+                $this.attr({ "aria-role": "gridcell", "aria-describedby": headerId });
 
                 if (self.$tfoot.length) {
                     var $footerColumn = $(self.$footerColumns[index]),
                         tfootAttribute = $footerColumn.text(),
                         footerId = $footerColumn.attr("id") || "tablelist-" + $.pseudoUnique();
-                                          
+
                     $this.attr("data-tfoot", tfootAttribute);
-                    $this.attr({"aria-role":"gridcell", "aria-describedby": footerId});
+                    $this.attr({ "aria-role": "gridcell", "aria-describedby": footerId });
                 }
+
+                return false;
             });
         });
 
