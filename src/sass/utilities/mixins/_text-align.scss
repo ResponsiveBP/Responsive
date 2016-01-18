@@ -73,7 +73,7 @@
             // Large doesn't need an "only" since it operates on min width.
             @if $bp != l {
                 @include bp-max($bp) {
-                    .text-#{$bp}-pull {
+                    .text-#{$bp}-pull-only {
                         text-align: left;
 
                         [dir="rtl"] & {
@@ -81,7 +81,7 @@
                         }
                     }
 
-                    .text-#{$bp}-push {
+                    .text-#{$bp}-push-only {
                         text-align: right;
 
                         [dir="rtl"] & {
@@ -89,7 +89,7 @@
                         }
                     }
 
-                    .text-#{$bp}-center {
+                    .text-#{$bp}-center-only {
                         text-align: center;
                     }
                 }

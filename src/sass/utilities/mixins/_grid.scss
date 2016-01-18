@@ -42,8 +42,9 @@
         height: 100%;
     }
 
-    .equal-height > .col-#{$breakpoint}-#{$max-columns} {
+    .equal-height > .col-#{$breakpoint}-#{$grid-column-count} {
         display: table-caption;
+		height: auto;
     }
 }
 

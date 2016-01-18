@@ -87,6 +87,14 @@ abbr[title] {
     cursor: help; // 2
 }
 
+// Prevent double underline. https://github.com/twbs/bootstrap/issues/16574#issuecomment-118759203
+@supports (text-decoration: dotted underline) {
+    abbr[title], acronym[title] {
+        text-decoration: dotted underline;
+        border-bottom: none;
+    }
+}
+
 // Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
 b,
 strong {

@@ -47,13 +47,6 @@
         }
 
         // Add accessibility features.
-        if (this.$parent) {
-            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" })
-                .find("div:not(.collapse,.accordion-body)").attr("role", "presentation");
-        } else {
-            $(".accordion").find("div:not(.collapse,.accordion-body)").addBack().attr("role", "presentation");
-        }
-
         var id = this.$element.attr("id") || "dropdown-" + $.pseudoUnique(),
             paneId = this.$target.attr("id") || "dropdown-" + $.pseudoUnique(),
             active = !this.$target.hasClass("collapse");
@@ -66,6 +59,17 @@
             "aria-expanded": active,
             "tabindex": 0
         });
+
+        if (this.$parent) {
+            this.$parent.attr({ "role": "tablist", "aria-multiselectable": "true" });
+
+            // We're safe to add the attribute here since if it's not used then
+            // data-api is disabled.
+            this.$element.attr({
+                "data-dropdown-parent": this.options.parent
+            });
+
+        }
 
         this.$target.attr({
             "id": paneId,
@@ -96,13 +100,13 @@
 
         if (this.$parent) {
             // Get all the related open panes.
-            $actives = this.$parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]");
+            $actives = this.$parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]");
 
             $actives = $.grep($actives, function (a) {
                 var data = $(a).data("r.dropdown"),
                     $target = data && data.$target;
 
-                return $target && $target.hasClass("dropdown-group") && !$target.hasClass("collapse") && data.$parent && data.$parent[0] === self.$parent[0];
+                return $target && !$target.hasClass("collapse") && data.$parent && data.$parent[0] === self.$parent[0];
             });
         }
 
@@ -124,7 +128,7 @@
 
         this.$target[dimension](size || "");
 
-        this.transition("removeClass", $.Event(eshow), eshown);
+        this.transition("removeClass", $.Event(eshow, { relatedTarget: this.options.target }), eshown);
 
         if ($actives && $actives.length) {
             $.each($actives, function () {
@@ -156,7 +160,7 @@
 
         this.$target.removeClass("expand");
         this.$target[dimension](0);
-        this.transition("addClass", $.Event(ehide), ehidden);
+        this.transition("addClass", $.Event(ehide, { relatedTarget: this.options.target }), ehidden);
     };
 
     Dropdown.prototype.toggle = function () {
@@ -176,7 +180,7 @@
             complete = function () {
 
                 // The event to expose.
-                var eventToTrigger = $.Event(completeEvent);
+                var eventToTrigger = $.Event(completeEvent, { relatedTarget: self.options.target });
 
                 // Ensure the height/width is set to auto.
                 self.$target.removeClass("trans")[self.options.dimension]("");
@@ -249,7 +253,7 @@
             }
 
             var $parent = this.options.parent ? $this.closest("[role=tablist]") : $this.closest(".accordion"),
-                $items = $parent.find(" > [role=presentation] > [role=presentation]").children("[role=tab]"),
+                $items = $parent.find("[data-dropdown-parent=\"" + this.options.parent + "\"]"),
                 index = $items.index($items.filter(":focus")),
                 length = $items.length;
 

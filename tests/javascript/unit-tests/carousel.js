@@ -58,7 +58,7 @@
                 ok(true, "Slid event fired.");
                 done();
             })
-            .responsiveCarousel({ interval: 1 });
+            .responsiveCarousel({ interval: 1, wrap: false });
     });
 
     test("Carousel plugin should not fire slid event when slide event is prevented.", function (assert) {
@@ -73,14 +73,14 @@
             .one("slid.r.carousel", function () {
                 ok(false, "Slid event fired.");
             })
-            .responsiveCarousel({ interval: 1 });
+            .responsiveCarousel({ interval: 1, wrap: false });
     });
 
     // Accessibility
     test("Carousel plugin should have role and aria-live attributes added.", function () {
 
         var $carouselHtml = $(carouselHtml).appendTo("#qunit-fixture")
-                                           .responsiveCarousel();
+                                           .responsiveCarousel({ wrap: false });
 
         equal($carouselHtml.attr("role"), "listbox", "Carousel has role = listbox.");
         equal($carouselHtml.attr("aria-live"), "polite", "Carousel has aria-live = polite.");
@@ -90,7 +90,7 @@
     test("Selected pane should have aria-selected equal to true.", function () {
 
         var $carouselHtml = $(carouselHtml).appendTo("#qunit-fixture")
-                                           .responsiveCarousel();
+                                           .responsiveCarousel({ wrap: false });
 
         equal($carouselHtml.find("figure.carousel-active").attr("aria-selected"), "true", "Shown pane has aria-selected = true.");
         equal($carouselHtml.find("figure:not(.carousel-active)").attr("aria-selected"), "false", "Hidden pane has aria-selected = false.");
@@ -100,7 +100,7 @@
     test("Carousel plugin should have aria-controls attributes added.", function () {
 
         var $carouselHtml = $(carouselHtml).appendTo("#qunit-fixture")
-                                           .responsiveCarousel();
+                                           .responsiveCarousel({ wrap: false });
 
         var id = $carouselHtml.attr("id");
 

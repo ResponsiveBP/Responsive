@@ -12,18 +12,21 @@
 
         thead,
         tfoot,
-        th {
+        th[scope=row] {
             // Hide but allow screenreaders to continue to read the values
-            position: absolute;
+            border: 0;
             clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
             overflow: hidden;
-            visibility: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
         }
 
         tbody,
         tr,
-        td,
-        th[scope=row] {
+        td {
             position: static;
             display: block;
             overflow: visible;
@@ -84,7 +87,7 @@
             content: attr(data-tfoot);
         }
 
-        &.table-bordered {
+        &.table-bordered:not(.no-thead) {
             border-top-style: none;
         }
     }

@@ -171,7 +171,7 @@
 
         // Add the overlay to the body if not done already.
         if (!$(".modal-overlay").length) {
-            $body.append($overlay);
+            $body.append($overlay.removeClass("fade-in"));
         }
 
         // Fade out.

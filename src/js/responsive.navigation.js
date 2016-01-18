@@ -38,7 +38,7 @@
             end: "l"
         };
         this.$button = this.$element.children().first();
-        this.transitioning = false;
+        this.isShown = null;
         this.lastScroll = 0;
 
         if (!this.$button.length) {
@@ -77,11 +77,9 @@
 
     Navigation.prototype.show = function () {
 
-        if (this.transitioning) {
+        if (this.isShown) {
             return;
         }
-
-        this.transitioning = true;
 
         var showEvent = $.Event(eshow),
             shownEvent = $.Event(eshown);
@@ -91,6 +89,8 @@
         if (showEvent.isDefaultPrevented()) {
             return;
         }
+        
+        this.isShown = true;
 
         var complete = function () {
             this.transitioning = false;
@@ -113,11 +113,9 @@
 
     Navigation.prototype.hide = function (noLock) {
 
-        if (this.transitioning) {
+        if (!this.isShown) {
             return;
         }
-
-        this.transitioning = true;
 
         var hideEvent = $.Event(ehide),
             hiddenEvent = $.Event(ehidden);
@@ -127,6 +125,8 @@
         if (hideEvent.isDefaultPrevented()) {
             return;
         }
+        
+        this.isShown = false;
 
         var complete = function () {
             this.$element.removeClass("visible");

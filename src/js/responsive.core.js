@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.1 | MIT License | responsivebp.com */
+/*! Responsive v4.1.2 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -122,10 +122,10 @@
             if (bodyPad) {
                 $body.data("bodyPad", bodyPad);
             }
-
-            $html.attr("data-lock", "")
-                 .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
-        }
+		}
+		
+        $html.attr("data-lock", "")
+             .trigger($.Event("lock.r.bodylock", { padding: bodyPad + scrollWidth }));
     };
 
     $.support.transition = (function () {
@@ -152,8 +152,9 @@
                     return { end: transEndEventNames[names[i]] };
                 }
             }
-
-            return false;
+            
+            // Falsy and provides a common return expression for the function.
+            return null; 
         };
 
         return transitionEnd();
