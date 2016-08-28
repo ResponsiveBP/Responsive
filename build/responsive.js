@@ -1,12 +1,12 @@
 /*  ==|== Responsive =============================================================
-    Author: James South
+    Author: James Jackson-South
     twitter : http://twitter.com/James_M_South
     github : https://github.com/ResponsiveBP/Responsive
-    Copyright (c),  James South.
+    Copyright (c),  James Jackson-South.
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.2 | MIT License | responsivebp.com */
+/*! Responsive v4.1.3 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -546,13 +546,13 @@
     };
 
     (function (old) {
-        /// <summary>Override the core html method in the jQuery object to fire a domchanged event whenever it is called.</summary>
+        /// <summary>Override the core html method in the jQuery object to fire a RBPchanged event whenever it is called.</summary>
         /// <param name="old" type="Function">
         ///      The jQuery function being overridden.
         /// </param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-        var echanged = $.Event("domchanged"),
+        var echanged = $.Event("RBPchanged"),
             $d = $(d);
 
         $.fn.html = function () {
@@ -583,8 +583,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+    var einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         einput = "input",
         ekeyup = "keyup",
@@ -732,9 +732,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_AUTOSIZE = true;
 
@@ -760,8 +760,8 @@
         emouseleave = "mouseleave",
         ekeydown = "keydown",
         eclick = "click",
-        eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
@@ -865,7 +865,7 @@
 
         if (this.options.touch) {
             // You always have to pass the third parameter if setting data.
-            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, true)
+            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, function(){return true;})
                          .on("swipemove.carousel", $.proxy(this.swipemove, this))
                          .on("swipeend.carousel", $.proxy(this.swipeend, this));
         }
@@ -1334,9 +1334,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_CAROUSEL = true;
 
@@ -1356,8 +1356,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+    var einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eload = "load" + ns,
         eloaded = "loaded" + ns,
@@ -1505,9 +1505,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_CONDITIONAL = true;
 
@@ -1527,8 +1527,8 @@
     }
 
     // General variables.
-    var eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+    var einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         edismiss = "dismiss" + ns,
         edismissed = "dismissed" + ns;
@@ -1641,9 +1641,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_DISMISS = true;
 
@@ -1664,8 +1664,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
-        eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -1922,7 +1922,8 @@
                 index = length - 1;
             }
 
-            $($items.eq(index)).data("r.dropdown").show();
+            var data = $($items.eq(index)).data("r.dropdown");
+            data && data.show();
         }
     };
 
@@ -1969,9 +1970,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_DROPDOWN = true;
 
@@ -1998,8 +1999,8 @@
         $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
-        eready = "ready" + ns + da,
-        echanged = "domchanged" + ns + da,
+        einit = "RBPinit" + ns + da,
+        echanged = "RBPchanged" + ns + da,
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click" + ns,
         ekeydown = "keydown" + ns,
@@ -2198,7 +2199,7 @@
 
                 if (this.options.group) {
                     if (this.options.touch) {
-                        $modal.off("swipe.modal").on("swipe.modal", true)
+                        $modal.off("swipe.modal").on("swipe.modal", function(){return true;})
                               .off("swipeend.modal").on("swipeend.modal", this.swipeend.bind(this));
                     }
                 }
@@ -2715,9 +2716,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged, eshown].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged, eshown].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_MODAL = true;
 
@@ -2739,8 +2740,8 @@
 
     // General variables and methods.
     var $window = $(w),
-        eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         emodalShow = "show.r.modal" + da,
         eclick = "click" + ns,
         efocusin = "focusin" + ns,
@@ -2952,9 +2953,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_NAVIGATION = true;
 
@@ -2974,8 +2975,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+    var einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eadd = "add" + ns,
         eadded = "added" + ns;
 
@@ -3102,9 +3103,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_TABLE = true;
 
@@ -3125,8 +3126,8 @@
 
     // General variables.
     var rtl = $.support.rtl,
-        eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -3333,9 +3334,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_TABS = true;
 

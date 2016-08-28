@@ -19,8 +19,8 @@
         emouseleave = "mouseleave",
         ekeydown = "keydown",
         eclick = "click",
-        eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eslide = "slide" + ns,
         eslid = "slid" + ns;
 
@@ -124,7 +124,7 @@
 
         if (this.options.touch) {
             // You always have to pass the third parameter if setting data.
-            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, true)
+            this.$element.on("swipe.carousel", { touchAction: "pan-y" }, function(){return true;})
                          .on("swipemove.carousel", $.proxy(this.swipemove, this))
                          .on("swipeend.carousel", $.proxy(this.swipeend, this));
         }
@@ -593,9 +593,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_CAROUSEL = true;
 

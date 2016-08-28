@@ -1,12 +1,12 @@
 /*  ==|== Responsive =============================================================
-    Author: James South
+    Author: James Jackson-South
     twitter : http://twitter.com/James_M_South
     github : https://github.com/ResponsiveBP/Responsive
-    Copyright (c),  James South.
+    Copyright (c),  James Jackson-South.
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.2 | MIT License | responsivebp.com */
+/*! Responsive v4.1.3 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -546,13 +546,13 @@
     };
 
     (function (old) {
-        /// <summary>Override the core html method in the jQuery object to fire a domchanged event whenever it is called.</summary>
+        /// <summary>Override the core html method in the jQuery object to fire a RBPchanged event whenever it is called.</summary>
         /// <param name="old" type="Function">
         ///      The jQuery function being overridden.
         /// </param>
         /// <returns type="jQuery">The jQuery object for chaining.</returns>
 
-        var echanged = $.Event("domchanged"),
+        var echanged = $.Event("RBPchanged"),
             $d = $(d);
 
         $.fn.html = function () {

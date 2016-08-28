@@ -13,8 +13,8 @@
     }
 
     // General variables and methods.
-    var eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+    var einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eload = "load" + ns,
         eloaded = "loaded" + ns,
@@ -162,9 +162,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_CONDITIONAL = true;
 
