@@ -20,8 +20,8 @@
         $next = $("<button/>").attr({ "type": "button" }).addClass("modal-direction next fade-out"),
         $placeholder = $("<div/>").addClass("modal-placeholder"),
         // Events
-        eready = "ready" + ns + da,
-        echanged = "domchanged" + ns + da,
+        einit = "RBPinit" + ns + da,
+        echanged = "RBPchanged" + ns + da,
         eresize = ["resize" + ns, "orientationchange" + ns].join(" "),
         eclick = "click" + ns,
         ekeydown = "keydown" + ns,
@@ -220,7 +220,7 @@
 
                 if (this.options.group) {
                     if (this.options.touch) {
-                        $modal.off("swipe.modal").on("swipe.modal", true)
+                        $modal.off("swipe.modal").on("swipe.modal", function(){return true;})
                               .off("swipeend.modal").on("swipeend.modal", this.swipeend.bind(this));
                     }
                 }
@@ -737,9 +737,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged, eshown].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged, eshown].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_MODAL = true;
 

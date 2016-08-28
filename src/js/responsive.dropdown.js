@@ -14,8 +14,8 @@
     // General variables.
     var supportTransition = w.getComputedStyle && $.support.transition,
         rtl = $.support.rtl,
-        eready = "ready" + ns + da,
-        echanged = ["domchanged" + ns + da, "shown.r.modal" + da].join(" "),
+        einit = "RBPinit" + ns + da,
+        echanged = ["RBPchanged" + ns + da, "shown.r.modal" + da].join(" "),
         eclick = "click",
         ekeydown = "keydown",
         eshow = "show" + ns,
@@ -272,7 +272,8 @@
                 index = length - 1;
             }
 
-            $($items.eq(index)).data("r.dropdown").show();
+            var data = $($items.eq(index)).data("r.dropdown");
+            data && data.show();
         }
     };
 
@@ -319,9 +320,9 @@
     },
     debouncedInit = $.debounce(init, 500);
 
-    $(document).on([eready, echanged].join(" "), function (event) {
-        event.type === "ready" ? init() : debouncedInit();
-    });
+    $(document).on([einit, echanged].join(" "), function (event) {
+        event.type === "RBPinit" ? init() : debouncedInit();
+    }).ready(function(){$(this).trigger(einit);});
 
     w.RESPONSIVE_DROPDOWN = true;
 

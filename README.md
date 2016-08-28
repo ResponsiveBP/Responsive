@@ -23,8 +23,8 @@ Browser support covers IE9+ as well as all other modern browsers.
 
 Several options are available for downloading Responsive:
 
-- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.1.0/responsive.zip).
-- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.1.0.zip).
+- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.1.3/responsive.zip).
+- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.1.3.zip).
 - Clone the repo: `git clone https://github.com/ResponsiveBP/Responsive.git`.
 - Install with [Bower](http://bower.io): `bower install responsive`.
 
@@ -82,4 +82,4 @@ Discuss Responsive on [Gitter](https://gitter.im/ResponsiveBP/Responsive).
 
 ###Copyright and license
 
-Copyright 2013-2016 James South under the [MIT license](http://opensource.org/licenses/MIT).
+Copyright 2013-2016 James Jackson-South under the [MIT license](http://opensource.org/licenses/MIT).
