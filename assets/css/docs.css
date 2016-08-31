@@ -397,13 +397,16 @@ pre code {
     text-align: right;
 }
 
-script + .alert{
+script + .alert:not {
     border-radius: 6px;
+}
+
+script + .alert:not(.out) {
     animation-name: fadeIn;
     animation-duration: 2s;
     animation-fill-mode: both;
 }
 
-#carbonads + .alert{
+#carbonads + .alert {
     display : none;
 }
