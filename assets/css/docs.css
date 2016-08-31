@@ -345,6 +345,16 @@ pre code {
  *
  *============================================================*/
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 #carbonads {
     padding: 1rem;
     margin: 1rem 0;
@@ -385,6 +395,12 @@ pre code {
 
 .carbon-wrap + a {
     text-align: right;
+}
+
+script + .alert{
+  animation-name: fadeIn;
+  animation-duration: .5s;
+  animation-fill-mode: both;
 }
 
 #carbonads + .alert{
