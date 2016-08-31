@@ -386,3 +386,7 @@ pre code {
 .carbon-wrap + a {
     text-align: right;
 }
+
+#carbonads + .alert{
+    display : none;
+}
