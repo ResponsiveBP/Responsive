@@ -346,13 +346,15 @@ pre code {
  *============================================================*/
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    70%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #carbonads {
@@ -397,13 +399,9 @@ pre code {
     text-align: right;
 }
 
-script + .alert:not {
-    border-radius: 6px;
-}
-
-script + .alert:not(.out) {
+script + .alert:not(.fade-out) {
     animation-name: fadeIn;
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-fill-mode: both;
 }
 
