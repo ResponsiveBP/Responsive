@@ -4,7 +4,14 @@
 // Source: https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css
 
 @media print {
-    *, :before, :after, *:first-letter, *:first-line {
+    *, :before, :after, 
+    *:first-letter, 
+    // Cannot use universal selector here as it causes the browser to hang.
+    // https://github.com/ResponsiveBP/Responsive/issues/89
+    p:first-line,
+    div:first-line,
+    blockquote:first-line,
+    li:first-line {
         box-shadow: none !important;
         text-shadow: none !important;
         background: transparent !important;
