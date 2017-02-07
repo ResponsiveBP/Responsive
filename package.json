@@ -1,5 +1,5 @@
 {
-    "name": "responsive",
+    "name": "responsive-bp",
     "description": "A powerful, accessible, developer friendly framework for building responsive websites.",
     "version": "4.1.2",
     "keywords": [
@@ -45,5 +45,8 @@
         "gulp-uglify": "^1.2.0",
         "gulp-util": "^3.0.6",
         "gulp-zip": "^3.0.2"
+    },
+    "dependencies": {
+         "jquery": "2.1.4"
     }
 }
