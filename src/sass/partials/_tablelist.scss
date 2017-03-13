@@ -11,8 +11,7 @@
         display: block;
 
         thead,
-        tfoot,
-        th[scope=row] {
+        tfoot {
             // Hide but allow screenreaders to continue to read the values
             border: 0;
             clip: rect(0 0 0 0);
