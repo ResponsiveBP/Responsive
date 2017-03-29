@@ -3020,7 +3020,6 @@ button.modal-direction {
 
 [data-lock],
 [data-lock] body {
-  height: 100%;
   overflow: hidden;
   -ms-touch-action: none;
       touch-action: none; }
