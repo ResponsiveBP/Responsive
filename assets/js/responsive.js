@@ -6,7 +6,7 @@
     Licensed under the MIT License.
     ============================================================================== */
 
-/*! Responsive v4.1.3 | MIT License | responsivebp.com */
+/*! Responsive v4.1.4 | MIT License | responsivebp.com */
 
 /*
  * Responsive Core
@@ -3015,19 +3015,19 @@
                 self.$element.trigger($.Event(eadded));
             };
 
-        this.$element.trigger(addEvent);
+        self.$element.trigger(addEvent);
 
         if (addEvent.isDefaultPrevented()) {
 
             return;
         }
 
-        this.isAdded = true;
+        self.isAdded = true;
 
-        $.each(this.$bodyRows, function () {
+        $.each(self.$bodyRows, function () {
 
             var selector = self.hasHeader ? "th, td" : "td";
-
+    
             $(this).find(selector).each(function (index) {
 
                 var $this = $(this),
@@ -3048,7 +3048,7 @@
                     $this.attr({ "aria-role": "gridcell", "aria-describedby": footerId });
                 }
 
-                return false;
+                return true;
             });
         });
 
