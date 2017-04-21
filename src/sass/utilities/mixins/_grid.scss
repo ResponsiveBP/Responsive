@@ -61,7 +61,7 @@
         .block-row-#{$breakpoint}-#{$i} {
 
             > * {
-                width: $column-width;
+                width: calc(#{$column-width} - #{$grid-column-gutter});
             }
 
             > :nth-of-type(n+1) {
