@@ -48,6 +48,6 @@
         "gulp-zip": "^3.0.2"
     },
     "dependencies": {
-         "jquery": "2.1.4"
+        "jquery": ">=2.1.4"
     }
 }
