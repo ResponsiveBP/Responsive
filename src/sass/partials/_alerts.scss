@@ -1,5 +1,6 @@
+// 1: Prevent margin overflow from child elements
 .alert {
-    @extend .clearfix;
+    @extend .clearfix; // 1:
     position: relative;
     margin: $alert-margin;
     padding: $alert-padding;
