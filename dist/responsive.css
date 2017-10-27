@@ -117,7 +117,7 @@ input[type="search"]::-webkit-search-decoration {
 html {
   -webkit-overflow-scrolling: touch;
   color: #222;
-  font-size: 100%;
+  font-size: 1rem;
   box-sizing: border-box; }
 
 *, :before, :after {
