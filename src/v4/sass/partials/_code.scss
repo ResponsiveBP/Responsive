@@ -1,0 +1,52 @@
+// Colors and padding.
+// 1: Address odd `em`-unit font size rendering in all browsers.
+pre,
+code,
+samp,
+kbd {
+    padding: .5rem;
+    font-size: 1rem; // 1
+    background-color: $code-background-color;
+    border: 1px solid $code-border-color;
+    font-family: $code-font-family;
+    color: $code-color;
+}
+
+code > kbd {
+    background-color: darken($code-background-color, 5);
+}
+
+// Prevent overlap on concurrent lines.
+code,
+samp,
+kbd {
+    padding: .0667rem .25rem;
+}
+
+// Prevent wrapping.
+kbd {
+    white-space: nowrap;
+}
+
+// Reassert no wrapping.
+pre {
+    overflow-x: auto;
+    // Remove borders etc in pre.
+    code,
+    samp {
+        padding: 0;
+        border: none;
+    }
+
+    code {
+        word-wrap: normal;
+        white-space: pre;
+    }
+}
+
+
+// Fixed height with overflow.
+.pre-scrollable {
+    max-height: 20rem;
+    overflow-y: scroll;
+}

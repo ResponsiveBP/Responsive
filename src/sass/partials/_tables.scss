@@ -1,8 +1,11 @@
-// Make it responsive
+// 1: Remove most spacing between table cells.
+// 2: Make it responsive
 table {
+    border-collapse: collapse; // 1
+    border-spacing: 0; // 1
     margin: 1rem 0;
-    max-width: 100%;
-    width: 100%;
+    max-width: 100%; // 2
+    width: 100%; // 2
 
     th,
     td {

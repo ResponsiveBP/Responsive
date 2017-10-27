@@ -1,0 +1,165 @@
+// General Styles
+$base-font-size: 100% !default;
+$base-font-size-px: 16px !default;
+$base-line-height: 1.4 !default;
+$base-text-color: #222 !default;
+
+// Typography
+// These have been calculated to match the default browser sizes.
+$h1-font-size: 2rem !default;
+$h1-margin: 1.34rem !default;
+
+$h2-font-size: 1.5rem !default;
+$h2-margin: 1.245rem !default;
+
+$h3-font-size: 1.17rem !default;
+$h3-margin: 1.17rem !default;
+
+$h4-font-size: 1rem !default;
+$h4-margin: 1.33rem !default;
+
+$h5-font-size: .83rem !default;
+$h5-margin: 1.386rem !default;
+
+$h6-font-size: .67rem !default;
+$h6-margin: 1.561rem !default;
+
+// Selected text
+$selection-background: #b3d4fc !default;
+
+// Focused objects
+$selection-focus-color: #3b99fc!default;
+
+//==
+// Grid System
+//##
+$grid-container-max-width: 1140px !default;
+$grid-column-gutter: 16px !default;
+$grid-column-count: 12!default;
+
+// Breakpoints. These have been carefully considered so it
+// is recommended to leave them as they are.
+$grid-breakpoint-xxs-max: 37.49em !default;
+$grid-breakpoint-xs-min: 37.5em !default;
+$grid-breakpoint-xs-max: 47.99em !default;
+$grid-breakpoint-s-min: 48em !default;
+$grid-breakpoint-s-max: 61.99em !default;
+$grid-breakpoint-m-min: 62em !default;
+$grid-breakpoint-m-max: 74.99em !default;
+$grid-breakpoint-l-min: 75em !default;
+
+// Print Breakpoints. Printing on A4 only maintains
+// xs grid layout so we shift the xs/s breakpoint to force it to print using the
+// s grid. These are deliberately set at pixel values to ensure
+// that font-size doesn't affect output.
+$grid-print-breakpoint-xs-max: 536px !default;
+$grid-print-breakpoint-s-min: 537px !default;
+
+//==
+// Basic Elements
+//##
+
+// Horizontal Rule
+$horizontal-rule-color: #c0c0c0 !default;
+
+// Tables
+$table-cell-pad: .5rem !default;
+$table-bordered-border: 1px solid #c0c0c0 !default;
+$table-striped-background-color: #ebebeb !default;
+
+//==
+// CSS Components
+//##
+
+// Forms
+$form-line-height: 1.4 !default;
+$form-placeholder: #767676 !default;
+$form-input-padding: .25rem !default;
+$form-input-height: 2rem !default;
+$form-input-background: #fff !default;
+$form-input-border: 1px solid #c0c0c0 !default;
+$form-input-border-radius: 0 !default;
+$form-input-color: #222 !default;
+
+$form-input-background-disabled: #ebebeb !default;
+$form-input-border-color-disabled: #c0c0c0 !default;
+$form-input-color-disabled: #c0c0c0 !default;
+
+$form-input-background-readonly: null !default;
+$form-input-border-color-readonly: #ebebeb !default;
+$form-input-color-readonly: null !default;
+
+// Buttons
+$button-background: #dadada !default;
+$button-border: solid 1px #c0c0c0 !default;
+$button-color-disabled: #5d5d5d !default;
+
+// Lists
+$list-colored-bullet: #00a9ec !default;
+
+// Alerts
+$alert-background-color: #ffd54f !default;
+$alert-border-color: #ff6f00 !default;
+
+// Code
+$code-font-family: monospace, monospace !default;
+$code-background-color: #f7f7f9 !default;
+$code-border-color: #c0c0c0 !default;
+$code-color: #950b2f !default;
+
+//==
+// JS Plugins
+//##
+
+// Navigation
+$navigation-width: 260px !default;
+$navigation-background-color: #222 !default;
+$navigation-color: #fff !default;
+
+// Modal
+$modal-overlay-background-color: rgba(0, 0, 0,.7) !default;
+
+$modal-header-background: transparent !default;
+$modal-header-color: #fff !default;
+
+$modal-footer-background: transparent !default;
+$modal-footer-color: #fff !default;
+
+$modal-content-background-color: #fff !default;
+
+$modal-media-background-color: #222 !default;
+
+$modal-control-color: #fff !default;
+
+// Carousel
+$carousel-caption-background-color: rgba(34, 34, 34,.4) !default;
+$carousel-caption-color: #fff !default;
+
+$carousel-control-color: #fff !default;
+
+$carousel-nav-background-color: transparent !default;
+$carousel-nav-border: 1px solid #222 !default;
+
+$carousel-nav-background-color-hover: #c0c0c0 !default;
+$carousel-nav-border-color-hover: null !default;
+
+$carousel-nav-background-color-active: #fff !default;
+$carousel-nav-border-color-active: null !default;
+
+// Tabs
+$tabs-nav-border-color: #c0c0c0 !default;
+
+$tabs-nav-item-background-color: null !default;
+$tabs-nav-item-border-color: transparent !default;
+$tabs-nav-item-color: null !default;
+
+$tabs-nav-item-background-color-hover: #ebebeb !default;
+$tabs-nav-item-border-color-hover: #c0c0c0 !default;
+$tabs-nav-item-color-hover: null !default;
+
+$tabs-nav-item-background-color-active: #fff !default;
+$tabs-nav-item-border-color-active: #c0c0c0 !default;
+$tabs-nav-item-color-active: #454545 !default;
+
+// Dropdown
+$accordion-border-color: #c0c0c0 !default;

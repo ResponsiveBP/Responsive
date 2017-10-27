@@ -1,14 +1,16 @@
-/*! normalize.css v3.0.3 | MIT License | git.io/normalize */
+/*! normalize.css v6.0.0 | MIT License | github.com/necolas/normalize.css */
 
 // This has been tweaked to prevent repetition within the framework.
 
-// 1. Set default font family to sans-serif.
-// 2. Prevent iOS text size adjust after orientation change, without disabling
+// 1: Correct the line height in all browsers
+// 2. Set default font family to system defaults.
+// 3. Prevent iOS text size adjust after orientation change, without disabling
 //    user zoom.
 html {
-    font-family: sans-serif; // 1
-    -ms-text-size-adjust: 100%; // 2
-    -webkit-text-size-adjust: 100%; // 2
+    line-height: $base-line-height; // 1
+    font-family: $base-font-family; // 2
+    -ms-text-size-adjust: 100%; // 3
+    -webkit-text-size-adjust: 100%; // 3
 }
 
 // Remove default margin.
@@ -19,46 +21,33 @@ body {
 // HTML5 display definitions
 // ==========================================================================
 
-// Correct `block` display not defined for any HTML5 element in IE 8/9.
-// Correct `block` display not defined for `details` or `summary` in IE 10/11
+// 1: Correct `block` display not defined for `details` Edge, IE, and Firefox.
 // and Firefox.
-// Correct `block` display not defined for `main` in IE 11.
-article,
-aside,
+// 1: Correct `block` display not defined for `main` in Edge, IE, and Firefox.
 details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
 main,
-menu,
-nav,
-section,
-summary {
+menu {
     display: block;
 }
 
-// 1. Correct `inline-block` display not defined in IE 8/9.
-// 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
-audio,
-canvas,
-progress,
-video {
-    display: inline-block; // 1
-    vertical-align: baseline; // 2
+// Correct `list-item` display not defined for `summary` in all browsers.
+summary {
+    display: list-item;
+}
+
+// Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+progress {
+    vertical-align: baseline; // 1
 }
 
 // Prevent modern browsers from displaying `audio` without controls.
-// Remove excess height in iOS 5 devices.
+// Remove excess height in iOS 4-7.
 audio:not([controls]) {
     display: none;
     height: 0;
 }
 
-// Address `[hidden]` styling not present in IE 8/9/10.
-// Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
-[hidden],
+// Hide the `template` element in IE 11.
 template {
     display: none;
 }
@@ -66,9 +55,9 @@ template {
 // Links
 // ==========================================================================
 
-// Remove the gray background color from active links in IE 10.
+// Remove gaps in links underline in iOS 8+ and Safari 8+.
 a {
-    background-color: transparent;
+    -webkit-text-decoration-skip: objects; 
 }
 
 // Improve readability when focused and also mouse hovered in all browsers.
@@ -80,36 +69,22 @@ a:hover {
 // Text-level semantics
 //  ==========================================================================
 
-// 1: Address styling not present in IE 8/9/10/11, Safari, and Chrome.
-// 2: Add query indicator to abbr
+// 1: Remove the bottom border in Chrome 57- and Firefox 39-.
+// 2: Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+// 3: Add query indicator to abbr
 abbr[title] {
-    border-bottom: 1px dotted; // 1
-    cursor: help; // 2
+  border-bottom: none; // 1
+  text-decoration: underline; // 2
+  text-decoration: underline dotted; // 2
+  cursor: help; // 2
 }
 
-// Prevent double underline. https://github.com/twbs/bootstrap/issues/16574#issuecomment-118759203
-@supports (text-decoration: dotted underline) {
-    abbr[title], acronym[title] {
-        text-decoration: dotted underline;
-        border-bottom: none;
-    }
-}
-
-// Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+// 1: Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+// 2: Add the correct font weight in Chrome, Edge, and Safari.
 b,
 strong {
+    font-weight: inherit;
     font-weight: bold;
-}
-
-// Address styling not present in Safari and Chrome.
-dfn {
-    font-style: italic;
-}
-
-// Address styling not present in IE 8/9.
-mark {
-    background: #ff0;
-    color: #000;
 }
 
 // Address inconsistent and variable font size in all browsers.
@@ -127,33 +102,19 @@ sup {
 }
 
 sup {
-    top: -0.375rem;
+    top: -0.25rem;
 }
 
 sub {
-    bottom: -0.1875rem;
+    bottom: -0.5rem;
 }
 
 // Embedded content
 // ==========================================================================
 
-// Remove border when inside `a` element in IE 8/9/10.
-img {
-    border: 0;
-}
-
-// Correct overflow not hidden in IE 9/10/11.
+// Correct overflow not hidden in IE 11.
 svg:not(:root) {
     overflow: hidden;
-}
-
-// Grouping content
-// ==========================================================================
-
-
-// Address margin not present in IE 8/9 and Safari.
-figure {
-    margin: 1rem 2.5rem;
 }
 
 // Forms
@@ -177,14 +138,14 @@ textarea {
 }
 
 //
-// Address `overflow` set to `hidden` in IE 8/9/10/11.
+// Address `overflow` set to `hidden` in IE 11.
 button {
     overflow: visible;
 }
 
 // Address inconsistent `text-transform` inheritance for `button` and `select`.
 // All other form control elements do not inherit `text-transform` values.
-// Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+// Correct `button` style inheritance in Firefox, IE 11, and Opera.
 // Correct `select` style inheritance in Firefox.
 button,
 select {
@@ -204,11 +165,19 @@ input[type="submit"] {
     cursor: pointer; // 3
 }
 
-// Remove inner padding and border in Firefox 4+.
+// Remove inner padding and border in Firefox.
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-    border: 0;
+    border-style: none;
     padding: 0;
+}
+
+//Restore the focus styles unset by the previous rule.
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
 }
 
 // Fix the cursor style for Chrome's increment/decrement buttons. For certain
@@ -219,6 +188,13 @@ input[type="number"]::-webkit-outer-spin-button {
     height: auto;
 }
 
+// 1: Correct the odd appearance in Chrome and Safari.
+// 2: Correct the outline style in Safari.
+[type="search"] {
+  -webkit-appearance: textfield; // 1
+  outline-offset: -2px; // 2
+}
+
 // Remove inner padding and search cancel button in Safari and Chrome on OS X.
 // Safari (but not Chrome) clips the cancel button when the search input has
 // padding (and `textfield` appearance).
@@ -227,36 +203,9 @@ input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
-// Define consistent border, margin, and padding.
-fieldset {
-    border: 1px solid #c0c0c0;
-    margin: 0 2px;
-    padding: 0.35rem 0.625rem 0.75rem;
-}
-
-// 1. Correct `color` not being inherited in IE 8/9/10/11.
-// 2. Remove padding so people aren't caught out if they zero out fieldsets.
-legend {
-    border: 0; // 1
-    padding: 0; // 2
-}
-
-// Remove default vertical scrollbar in IE 8/9/10/11.
-textarea {
-    overflow: auto;
-}
-
-// Don't inherit the `font-weight` (applied by a rule above).
-// NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
-optgroup {
-    font-weight: bold;
-}
-
-// Tables
-//   ==========================================================================
-
-// Remove most spacing between table cells.
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+// 1. Correct the inability to style clickable types in iOS and Safari.
+// 2. Change font properties to `inherit` in Safari.
+::-webkit-file-upload-button {
+  -webkit-appearance: button; // 1
+  font: inherit; // 2
 }

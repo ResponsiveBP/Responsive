@@ -3,7 +3,7 @@
 	 * Force the columns to display as rows on small viewports.
      * Headers are applied with data attributes.
 	 */
-    [data-table-list] {
+    [data-tablelist] {
         opacity: 0;
     }
 
@@ -86,8 +86,17 @@
             content: attr(data-tfoot);
         }
 
-        &.table-bordered:not(.no-thead) {
-            border-top-style: none;
+        &.table-bordered {
+            border-top-width: 0;
+
+            &.no-thead{
+                border-top-width: $table-bordered-border-width;
+            }
+
+            thead:first-child tr:first-child th, 
+            tbody:first-child tr:first-child td {
+                border-top-width: $table-bordered-border-width;
+            }
         }
     }
 }

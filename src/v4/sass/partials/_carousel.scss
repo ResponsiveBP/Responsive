@@ -1,0 +1,224 @@
+// 1: Prevent font shift on chrome.
+.carousel {
+    margin-bottom: 1rem;
+    overflow: hidden;
+    position: relative;
+    -webkit-backface-visibility: hidden; // 1
+    -webkit-perspective: 1000; // 1
+    &.no-transition > figure {
+        transition-duration: 0s !important;
+    }
+    // Default slide version
+    > figure {
+        margin: 0;
+        display: none;
+        position: relative;
+        transition: .7s ease-in-out left;
+        transform: translate3d(0, 0, 0);
+
+        [dir="rtl"] & {
+            transition: .7s ease-in-out right;
+        }
+
+        > img {
+            display: block;
+            width: 100%;
+        }
+
+        > figcaption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            max-height: 50%;
+            overflow-y: auto;
+            padding: 1px 3rem;
+            background-color: $carousel-caption-background-color;
+            color: $carousel-caption-color;
+        }
+    }
+    // Indicators
+    > ol {
+        left: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 1rem;
+        z-index: 3;
+
+        li {
+            background-color: $carousel-nav-background-color;
+            border: $carousel-nav-border;
+            cursor: pointer;
+            display: inline-block;
+            height: 1rem;
+            margin: 1px;
+            text-indent: -9999px;
+            width: 1rem;
+
+            &:hover {
+                background-color: $carousel-nav-background-color-hover;
+                border-color: $carousel-nav-border-color-hover;
+            }
+        }
+
+        .active {
+            background-color: $carousel-nav-background-color-active;
+            border-color: $carousel-nav-border-color-active;
+
+            &:hover {
+                background-color: $carousel-nav-background-color-active;
+                border-color: $carousel-nav-border-color-active;
+            }
+        }
+    }
+    // Next Last version
+    .carousel-active,
+    .next,
+    .prev,
+    .swipe {
+        display: block;
+    }
+
+    .carousel-active,
+    .next.left,
+    .prev.right {
+        left: 0;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: 0;
+        }
+    }
+
+    .carousel-active {
+        position: relative !important;
+        z-index: 1;
+    }
+
+    .next,
+    .prev,
+    .swipe {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .next,
+    .carousel-active.right {
+        left: 100%;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: 100%;
+
+            &.swiping {
+                right: -100%;
+            }
+        }
+    }
+
+    .prev,
+    .carousel-active.left {
+        left: -100%;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: -100%;
+
+            &.swiping {
+                right: 100%;
+            }
+        }
+    }
+
+    // Ensure element is clickable in IE9
+    // See: https://developer.mozilla.org/en-US/docs/Web/Events/click#Internet_Explorer
+    > button {
+        position: absolute;
+        left: 1px;
+        top: 40%;
+        z-index: 3;
+        display: block;
+        width: 3rem;
+        height: 3rem;        
+        margin-top: -1rem;
+        background-color: rgba(0,0,0,0); // 1
+        border: none;
+        font-size: 2rem;
+        font-weight: bold;
+        color: $carousel-control-color;
+        text-align: center;
+        text-decoration: none;
+
+        [dir="rtl"] & {
+            left: auto;
+            right: 1px;
+        }
+
+        &.forward {
+            left: auto;
+            right: 1px;
+
+            [dir="rtl"] & {
+                right: auto;
+                left: 1px;
+            }
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Fade version
+.carousel-fade {
+    > figure {
+        position: absolute;
+        top: 0;
+        right: 0 !important;
+        bottom: 0;
+        left: 0 !important;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+
+        &,
+        [dir="rtl"] & {
+            transition: opacity .7s ease-in-out;
+        }
+    }
+
+    > figure.swipe,
+    > figure.next,
+    > figure.prev {
+        z-index: 1;
+        opacity: 1;
+    }
+
+    .carousel-active.swipe {
+        z-index: 2;
+    }
+
+    .carousel-active {
+        opacity: 1;
+
+        &.left,
+        &.right {
+            z-index: 2;
+            opacity: 0;
+        }
+    }
+
+    .carousel-control {
+        &,
+        &:visited {
+            z-index: 3;
+        }
+    }
+}

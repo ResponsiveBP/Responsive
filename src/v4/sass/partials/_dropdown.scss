@@ -1,0 +1,48 @@
+// Set container styles
+.accordion {
+    border: solid 1px $accordion-border-color;
+    margin-bottom: .125rem;
+}
+
+.accordion-head {
+    display: block;
+
+    a {
+        display: block;
+        padding: .5rem;
+    }
+}
+
+.accordion-body {
+    padding: 0 .5rem;
+    border-top: solid 1px $accordion-border-color;
+    
+    &.collapse{
+        border-top-color: transparent;
+    }
+}
+
+// Animation styles
+.trans,
+.collapse {
+    transition: height .3s ease, width .3s ease, border .3s ease;
+}
+
+.expand,
+.collapse {
+    display: block;
+    height: auto;
+    margin-top: 0;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+}
+
+.collapse {
+    height: 0;
+    // Width variant
+    &.width {
+        height: auto;
+        width: 0;
+    }
+}

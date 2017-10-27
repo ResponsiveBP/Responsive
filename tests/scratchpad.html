@@ -1,0 +1,261 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../dist/responsive.css">
+    <style>
+        .target {
+            height: 200px;
+            background: hotpink;
+            line-height: 100%;
+            font-size: 2rem;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="target"></div>
+        <section>
+            <h3>Dismiss + Alert</h3>
+            <div class="alert alert-dismissable">
+                <button class="close" data-dismiss-target=".alert" data-dismiss-hint="close">x</button>
+                <p>The concept that launched a thousand site redesigns. For years, web designers have coveted print for its
+                    precision layouts, lamenting the varying user contexts on the web that compromise their designs. Responsive
+                    design advocates that we shift our design thinking to make a virtue of these constraints. Using fluid
+                    grids, flexible images, and media queries to embrace the ebb and flow of the web.</p>
+            </div>
+            <div dir="rtl">
+                <div class="alert alert-dismissable">
+                    <button class="close" data-dismiss-target=".alert" data-dismiss-hint="close">x</button>
+                    <p>The concept that launched a thousand site redesigns. For years, web designers have coveted print for
+                        its precision layouts, lamenting the varying user contexts on the web that compromise their designs.
+                        Responsive design advocates that we shift our design thinking to make a virtue of these constraints.
+                        Using fluid grids, flexible images, and media queries to embrace the ebb and flow of the web.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Tables</h3>
+            <table data-tablelist class="table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th>Director</th>
+                        <th>Synopsis</th>
+                        <th>Release Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Star Wars: Episode IV - A New Hope</th>
+                        <td>George Lucas</td>
+                        <td>Luke Skywalker joins forces with a Jedi Knight...</td>
+                        <td>1977</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Star Wars: Episode V - The Empire Strikes Back</th>
+                        <td>Irvin Kershner</td>
+                        <td>After the rebels have been brutally overpowered by...</td>
+                        <td>1980</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Star Wars: Episode VI - Return of the Jedi</th>
+                        <td>Richard Marquand</td>
+                        <td>After rescuing Han Solo from the palace of Jabba...</td>
+                        <td>1983</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div dir="rtl">
+                <table data-tablelist class="table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th>Director</th>
+                            <th>Synopsis</th>
+                            <th>Release Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Star Wars: Episode IV - A New Hope</th>
+                            <td>George Lucas</td>
+                            <td>Luke Skywalker joins forces with a Jedi Knight...</td>
+                            <td>1977</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Star Wars: Episode V - The Empire Strikes Back</th>
+                            <td>Irvin Kershner</td>
+                            <td>After the rebels have been brutally overpowered by...</td>
+                            <td>1980</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Star Wars: Episode VI - Return of the Jedi</th>
+                            <td>Richard Marquand</td>
+                            <td>After rescuing Han Solo from the palace of Jabba...</td>
+                            <td>1983</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section>
+            <h3>Tabs</h3>
+            <div class="tabs" data-tabs>
+                <ul>
+                    <li>
+                        <a href="#">tab1</a>
+                    </li>
+                    <li>
+                        <a href="#">tab2</a>
+                    </li>
+                    <li>
+                        <a href="#">tab3</a>
+                    </li>
+                </ul>
+                <section>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                        officia deserunt mollit anim id est laborum.</p>
+                </section>
+                <section>
+                    <h3>I am nested</h3>
+                    <div class="tabs" data-tabs>
+                        <ul>
+                            <li>
+                                <a href="#">tab1</a>
+                            </li>
+                            <li>
+                                <a href="#">tab2</a>
+                            </li>
+                            <li>
+                                <a href="#">tab3</a>
+                            </li>
+                        </ul>
+                        <section>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </section>
+                        <section>
+                            Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                            sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                            ad minim veniam, quis nostrud.
+                        </section>
+                        <section>
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                            ad minim veniam, quis nostrud.
+                        </section>
+                    </div>
+                </section>
+                <section>
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud.
+                </section>
+            </div>
+            <div dir="rtl">
+                <div class="tabs" data-tabs>
+                    <ul>
+                        <li>
+                            <a href="#">tab1</a>
+                        </li>
+                        <li>
+                            <a href="#">tab2</a>
+                        </li>
+                        <li>
+                            <a href="#">tab3</a>
+                        </li>
+                    </ul>
+                    <section>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </section>
+                    <section>
+                        <h3>I am nested</h3>
+                        <div class="tabs" data-tabs>
+                            <ul>
+                                <li>
+                                    <a href="#">tab1</a>
+                                </li>
+                                <li>
+                                    <a href="#">tab2</a>
+                                </li>
+                                <li>
+                                    <a href="#">tab3</a>
+                                </li>
+                            </ul>
+                            <section>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </section>
+                            <section>
+                                Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor
+                                sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                            </section>
+                            <section>
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                ad minim veniam, quis nostrud.
+                            </section>
+                        </div>
+                    </section>
+                    <section>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                        veniam, quis nostrud.
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../dist/responsive.js"></script>
+    <script>
+        let swiper = new Swiper(".target", "demo");
+        swiper.onSwipeMove(e => { console.log(e.detail.delta); })
+            .onSwipeEnd(e => {
+                swiper.elements.forEach(function (element) {
+                    element.innerHTML =
+                        "<br>Direction: " + e.detail.direction
+                        + "<br>Distance: x = " + e.detail.delta.x + ",y = " + e.detail.delta.y
+                        + "<br>Duration: " + e.detail.duration + "ms";
+                });
+            });
+
+        $d.on(window, "dismiss.rbp", null, (e) => {
+            console.log("dismiss");
+            console.log(e);
+        });
+
+        $d.on(window, "dismissed.rbp", null, (e) => {
+            console.log("dismissed");
+            console.log(e);
+        });
+    </script>
+</body>

@@ -1,0 +1,93 @@
+@include bp-max(xs) {
+    /*
+	 * Force the columns to display as rows on small viewports.
+     * Headers are applied with data attributes.
+	 */
+    [data-table-list] {
+        opacity: 0;
+    }
+
+    .table-list {
+        display: block;
+
+        thead,
+        tfoot {
+            // Hide but allow screenreaders to continue to read the values
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        tbody,
+        tr,
+        td {
+            position: static;
+            display: block;
+            overflow: visible;
+            visibility: visible;
+        }
+
+        tr {
+            &:before,
+            &:after {
+                content: "";
+                display: table;
+            }
+
+            &:after {
+                clear: both;
+            }
+        }
+
+        td,
+        th[scope=row] {
+            float: left;
+            width: 100%;
+
+            [dir="rtl"] & {
+                float: right;
+            }
+        }
+
+        td {
+            &:before,
+            &:after {
+                display: block;
+                padding: $table-cell-pad 0;
+                font-weight: bold;
+            }
+
+            &:before {
+                // Populate with dynamically generated attribute.
+                content: attr(data-thead);
+            }
+        }
+
+        th[scope=row] {
+            &:before,
+            &:after {
+                display: block;
+                padding: $table-cell-pad 0;
+                font-weight: bold;
+            }
+
+            &:before {
+                content: attr(data-thead);
+            }
+        }
+
+        td:after,
+        th[scope=row]:after {
+            content: attr(data-tfoot);
+        }
+
+        &.table-bordered:not(.no-thead) {
+            border-top-style: none;
+        }
+    }
+}

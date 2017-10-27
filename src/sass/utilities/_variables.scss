@@ -1,8 +1,15 @@
 // General Styles
-$base-font-size: 100% !default;
+$base-font-size: 100% !default; // Normalized default
 $base-font-size-px: 16px !default;
-$base-line-height: 1.4 !default;
-$base-text-color: #222 !default;
+
+// https://booking.design/implementing-system-fonts-on-booking-com-a-lesson-learned-bdc984df627f
+// Default system fonts, web fallbacks, emoji defaults
+$base-font-family:
+-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+Helvetica, Arial, sans-serif, 
+"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$base-line-height: 1.15 !default;
+$base-font-color: #222 !default;
 
 // Typography
 // These have been calculated to match the default browser sizes.
@@ -64,7 +71,8 @@ $horizontal-rule-color: #c0c0c0 !default;
 
 // Tables
 $table-cell-pad: .5rem !default;
-$table-bordered-border: 1px solid #c0c0c0 !default;
+$table-bordered-border-width: 1px !default;
+$table-bordered-border: $table-bordered-border-width solid #c0c0c0 !default;
 $table-striped-background-color: #ebebeb !default;
 
 //==
@@ -73,13 +81,17 @@ $table-striped-background-color: #ebebeb !default;
 
 // Forms
 $form-line-height: 1.4 !default;
-$form-placeholder: #767676 !default;
+$form-placeholder: lighten($base-font-color, 20) !default;
 $form-input-padding: .25rem !default;
+$form-input-margin-bottom: 1rem !default;
 $form-input-height: 2rem !default;
 $form-input-background: #fff !default;
 $form-input-border: 1px solid #c0c0c0 !default;
+$form-input-focus-outline-offset: -1px !default;
+$form-input-focus-outline: 1px solid $selection-focus-color !default;
 $form-input-border-radius: 0 !default;
-$form-input-color: #222 !default;
+$form-input-font-color: #222 !default;
+$form-input-ms-file-height: 1.25rem !default;
 
 $form-input-background-disabled: #ebebeb !default;
 $form-input-border-color-disabled: #c0c0c0 !default;
@@ -87,25 +99,57 @@ $form-input-color-disabled: #c0c0c0 !default;
 
 $form-input-background-readonly: null !default;
 $form-input-border-color-readonly: #ebebeb !default;
-$form-input-color-readonly: null !default;
+$form-input-font-color-readonly: #5d5d5d !default;
+
+$form-input-color-width: 6.563rem !default;
+
+$form-input-radio-checkbox-dimensions: 1.334rem !default;
+$form-input-radio-checkbox-margin: 1.1rem;
+
+// Overrides for webkit browsers to normalize the select input.
+$form-input-select-arrow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cGF0aCBmaWxsPSIjMjIyIiBkPSJNMTEgMEw1LjUgOSAwIDAiLz48L3N2Zz4=') !default;
+$form-input-select-arrow-position: .6rem !default;
+$form-input-select-arrow-padding: 1.67rem !default;
+
+$form-actions-margin: 1rem !default;
+$form-actions-padding: 1rem !default;
 
 // Buttons
 $button-background: #dadada !default;
-$button-border: solid 1px #c0c0c0 !default;
-$button-color-disabled: #5d5d5d !default;
+$button-hover-background: darken($button-background, 5) !default;
+$button-active-background: lighten($button-background, 5) !default;
+$button-disabled-background: lighten($button-background, 5) !default;
+$button-border: 1px solid darken($button-background, 10) !default;
+$button-color-disabled: lighten($base-font-color, 10) !default;
+$button-height: $form-input-height !default;
+$button-padding: 0 1rem !default;
 
 // Lists
+$list-margin: 1rem !default;
+$list-padding: 2.5rem !default;
 $list-colored-bullet: #00a9ec !default;
+$list-ol-offset: -3.125rem !default;
+$list-dt-dd-min-height: 1.4rem !default;
+$list-dt-width: 9.375rem !default;
+$list-dd-margin: 10.375rem !default;
 
 // Alerts
+$alert-padding: 0 1rem !default;
+$alert-margin: 1rem 0 !default;
 $alert-background-color: #ffd54f !default;
+$alert-border-width: 5px !default;
+$alert-border-style: solid !default;
 $alert-border-color: #ff6f00 !default;
+$alert-button-font-size: $h3-font-size !default;
+
 
 // Code
 $code-font-family: monospace, monospace !default;
 $code-background-color: #f7f7f9 !default;
-$code-border-color: #c0c0c0 !default;
 $code-color: #950b2f !default;
+$code-scrollable-max-height: 20rem !default;
+$code-pre-padding: .5rem !default;
+$code-code-padding: .0667rem .25rem !default;
 
 //==
 // JS Plugins

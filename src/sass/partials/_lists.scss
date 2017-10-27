@@ -2,12 +2,12 @@
 // Scale the padding/margin with the base font.
 ul,
 ol {
-    margin: 1rem 0;
-    padding-left: 2.5rem;
+    margin: $list-margin 0;
+    padding-left: $list-padding;
 
     [dir="rtl"] & {
         padding-left: 0;
-        padding-right: 2.5rem;
+        padding-right: $list-padding;
     }
 }
 
@@ -33,8 +33,6 @@ ol.no-bullets {
 // Coloured lists.
 ul.colored,
 ol.colored {
-    padding-left: 2.5rem;
-
     & > li {
         list-style-type: none;
         position: relative;
@@ -44,8 +42,8 @@ ol.colored {
         &:before {
             position: absolute;
             top: .1rem;
-            left: -1rem;
-            -webkit-margin-start: -.25rem; // 1
+            left: -$list-margin;
+            -webkit-margin-start: -($list-margin/4); // 1
             content: "\25cf"; // 2
             color: $list-colored-bullet; // 3
             font-size: .8rem;
@@ -54,7 +52,7 @@ ol.colored {
 
             [dir="rtl"] & {
                 left: auto;
-                right: -1rem;
+                right: -$list-margin;
                 text-align: left;
             }
         }
@@ -73,13 +71,13 @@ ol.colored {
         &:before {
             content: counter(foo) "."; // 1
             top: 0;
-            left: -3.125rem;
-            width: 2.5rem;
+            left: $list-ol-offset;
+            width: $list-padding;
             -webkit-margin-start: 0; // 2
-            font-size: 1rem;
+            font-size: inherit;
 
             [dir="rtl"] & {
-                right: -3.125rem;
+                right: $list-ol-offset;
             }
         }
     }
@@ -88,7 +86,7 @@ ol.colored {
 // Definition lists
 // Prevent dt and dd collapse.
 dt, dd {
-    min-height: 1.4rem;
+    min-height: $list-dt-dd-min-height;
 }
 
 @include bp-min(s) {
@@ -97,7 +95,7 @@ dt, dd {
         & > dt {
             clear: left;
             float: left;
-            width: 9.375rem;
+            width: $list-dt-width;
             white-space: nowrap;
             overflow: hidden;
             text-align: right;
@@ -111,11 +109,11 @@ dt, dd {
         }
 
         & > dd {
-            margin-left: 10.375rem;
+            margin-left: $list-dd-margin;
 
             [dir="rtl"] & {
                 margin-left: auto;
-                margin-right: 10.375rem;
+                margin-right: $list-dd-margin;
             }
         }
     }

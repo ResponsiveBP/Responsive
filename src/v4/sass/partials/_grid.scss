@@ -1,0 +1,128 @@
+
+.container,
+.container-full {
+    @extend .clearfix;
+    margin: 0 auto;
+
+    &.fixed,
+    .fixed & {
+        width: 100%;
+    }
+}
+
+// 1: Prevent horizontal scrollbar.
+.container-full {
+    overflow-x: hidden; // 1
+}
+
+// 1: Ensure .row negative gutter cannot cause horizontal scrollbar.
+.container {
+    max-width: $grid-container-max-width;
+    width: calc(100% - #{$grid-column-gutter}); // 1
+    &.fixed,
+    .fixed & {
+        width: $grid-container-max-width; // 1
+    }
+}
+// 1: .container not filling full width allows
+// for negative margin.
+.row,
+[class*="block-row-"] {
+    margin: 0 (-$grid-column-gutter/2); // 1
+    @extend .clearfix;
+}
+
+// No margin required.
+.no-gutter {
+    margin: 0;
+}
+
+// Block-row
+[class*="block-row-"] {
+    display: block;
+    padding: 0;
+    list-style: none;
+}
+
+// Columns
+// 1: Use transparent borders for padding.
+// 2: Clip to allow setting a background color without filling the whole area.
+[class*=col-],
+[class*="block-row-"] > * {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 100%;
+    border-left: ($grid-column-gutter/2) solid transparent; // 1
+    border-right: ($grid-column-gutter/2) solid transparent; // 1
+    background-clip: padding-box; // 2
+    [dir="rtl"] & {
+        float: right;
+    }
+}
+
+// Movable columns
+[class*=col-] {
+    &[class*=offset],
+    &[class*=push],
+    &[class*=pull] {
+        position: relative;
+    }
+}
+
+// 1: Remove gutter
+[class*="block-row-"].no-gutter > *,
+.no-gutter > [class*=col-] {
+    border: none; // 1
+    background-clip: border-box; // 1
+}
+
+// Equal height
+// Stop rows collapsing
+.equal-height {
+    display: table;
+    table-layout: fixed; // 1
+    height: 1px;
+    width: calc(100% + #{$grid-column-gutter});
+
+    &.no-gutter {
+        width: 100%;
+    }
+    // Without this columns shift right.
+    &:before {
+        display: none !important; // 1
+    }
+}
+
+.equal-height > [class*=col-] {
+    float: none;
+    vertical-align: top;
+}
+
+// Extra, extra small
+@include grid-columns(xxs);
+@include block-grid-columns(xxs);
+
+// Extra small
+@include bp-min(xs) {
+    @include grid-columns(xs);
+    @include block-grid-columns(xs);
+}
+
+// Small
+@include bp-min(s) {
+    @include grid-columns(s);
+    @include block-grid-columns(s);
+}
+
+// Medium
+@include bp-min(m) {
+    @include grid-columns(m);
+    @include block-grid-columns(m);
+}
+
+// Large
+@include bp-min(l) {
+    @include grid-columns(l);
+    @include block-grid-columns(l);
+}

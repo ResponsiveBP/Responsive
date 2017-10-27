@@ -1,0 +1,76 @@
+//==
+// Grid System - Columns
+//##
+@mixin grid-columns($breakpoint) {
+    // Calculate column width and without gutter.
+    $column-width: (100% / $grid-column-count);
+    $max-columns: $grid-column-count + 1;
+
+    // Loop through and build the columns.
+    @for $i from 1 to ($max-columns) {
+        $temp-width: $column-width * $i;
+
+        .col-#{$breakpoint}-#{$i} {
+            width: $temp-width;
+        }
+        // We don't want add offsets etc to full width columns.
+        @if $i < $max-columns {
+            // Keep offset for now for backwards compatibility.
+            .offset-#{$breakpoint}-#{$i},
+            .push-#{$breakpoint}-#{$i} {
+                left: $temp-width;
+
+                [dir="rtl"] & {
+                    left: auto;
+                    right: $temp-width;
+                }
+            }
+
+            .pull-#{$breakpoint}-#{$i} {
+                right: $temp-width;
+
+                [dir="rtl"] & {
+                    right: auto;
+                    left: $temp-width;
+                }
+            }
+        }
+    }
+    // Equal height
+    .equal-height > [class*=col-#{$breakpoint}] {
+        display: table-cell;
+        height: 100%;
+    }
+
+    .equal-height > .col-#{$breakpoint}-#{$grid-column-count} {
+        display: table-caption;
+		height: auto;
+    }
+}
+
+//==
+// Grid System - Block Grid Columns
+//##
+@mixin block-grid-columns($breakpoint) {
+    $max-columns: $grid-column-count + 1;
+    // Loop through and set width.
+    @for $i from 1 to ($max-columns) {
+        // Calculate column width .
+        $column-width: (100% / $i);
+
+        .block-row-#{$breakpoint}-#{$i} {
+
+            > * {
+                width: $column-width;
+            }
+
+            > :nth-of-type(n+1) {
+                clear: none;
+            }
+
+            > :nth-of-type(#{$i}n+1) {
+                clear: both;
+            }
+        }
+    }
+}

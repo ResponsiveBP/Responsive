@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resize - Grid Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+
+<body class="grid-test">
+    <article class="container grid-test">
+        <div>
+            <p class="clearfix">
+                <a class="push" href="../index.html">Back to Index</a>
+            </p>
+        </div>
+        <h1>Grid</h1>
+        <hr />
+        <h3>Resized Columns</h3>
+        <p>
+            Add class
+            <code>.col-{size}-{number}</code> to the column.
+        </p>
+        <p>
+            Add class
+            <code>.reset-{size}</code> to the columns to reset the margin.
+        </p>
+        <!-- reset n+1 instance-->
+        <section>
+            <h3>Resized LTR</h3>
+            <div class="row">
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-s-only">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-m">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-s-only">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-s">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+            </div>
+            <h3>Resized RTL</h3>
+            <div class="row" dir="rtl">
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-s-only">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-m">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-s-only">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4 reset-s">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+                <div class="col-s-6 col-m-4">
+                    <div class="visible-xs"><span>12</span></div>
+                    <div class="visible-s"><span>6</span></div>
+                    <div class="hidden-xs hidden-s"><span>4</span></div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <script src="../../../dist/responsive.js"></script>
+</body>
+
+</html>

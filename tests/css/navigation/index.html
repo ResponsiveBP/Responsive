@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Off Canvas Navigation Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <nav role="navigation" data-navigation>
+        <button>Menu</button>
+        <ul>
+            <li>
+                <a href="#">Link 1</a>
+            </li>
+            <li>
+                <a href="#">Link 2</a>
+            </li>
+            <li>
+                <a href="#">Longer Link 3</a>
+            </li>
+            <li>
+                <a href="#">Even Longer Link 4</a>
+            </li>
+            <li>
+                <a href="#">Even Even Longer Link 5</a>
+            </li>
+            <li>
+                <a href="#">Link 6</a>
+            </li>
+            <li>
+                <a href="#">Link 7</a>
+            </li>
+            <li>
+                <a href="#">Longer Link 8</a>
+            </li>
+            <li>
+                <a href="#">Even Longer Link 9</a>
+            </li>
+            <li>
+                <a href="#">Even Even Longer Link 10</a>
+            </li>
+        </ul>
+    </nav>
+    <article class="container">
+        <div>
+            <p class="clearfix"><a class="push" href="../index.html">Back to Index</a></p>
+        </div>
+        <h1>Navigation Tests</h1>
+        <hr />
+        <p>
+            On init a clone of the navigation landmarks is placed, hidden at the bottom of the page. When tabbing, once that clone is hit, the navigation will open.
+        </p>
+        <p>
+            When open pressing <kbd>tab</kbd> or will focus elements within the menu only <kbd>shift + tab</kbd> Will allow you to exit from the top. Pressing <kbd>esc</kbd> will close the menu.<br/>
+            Opening the navigation locks the page to prevent double scrollbars appearing on certain viewport sizes.
+        </p>
+        <p>
+            Aria attribution has been added for accessibility but does not have <code>aria-label</code> on the button. I'm still deciding whether control should be given entirely to the developer for that attribute.
+        </p>
+        <p>
+            Note: The second anchor <samp>There was nothing else to</samp> triggers a modal. If that is triggered while the navigation is open, the navigation will close.
+        </p>
+        <p>Adding <code>dir="rtl"</code> to the <code>html</code> tag will cause the navigation to switch sides.</p>
+        <hr/>
+        <div class="row equal-height">
+            <div class="col-m-6">
+                <p>
+                    Down, down, down. <a href="#">Would the fall NEVER come to an end!</a> 'I wonder how many miles I've fallen by this time?' she said aloud. 'I must be getting somewhere near the centre of the earth. Let me see: that would be four thousand miles down, I think—' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a VERY good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '—yes, that's about the right distance—but then I wonder what Latitude or Longitude I've got to?' (Alice had no idea what Latitude was, or Longitude either, but thought they were nice grand words to say.)
+                    Presently she began again. 'I wonder if I shall fall right THROUGH the earth! How funny it'll seem to come out among the people that walk with their heads downward! The Antipathies, I think—' (she was rather glad there WAS no one listening, this time, as it didn't sound at all the right word) '—but I shall have to ask them what the name of the country is, you know. Please, Ma'am, is this New Zealand or Australia?' (and she tried to curtsey as she spoke—fancy CURTSEYING as you're falling through the air! Do you think you could manage it?) 'And what an ignorant little girl she'll think me for asking! No, it'll never do to ask: perhaps I shall see it written up somewhere.'
+                </p>
+            </div>
+            <div class="col-m-6">
+                <p>
+                    Down, down, down. <a href="//player.vimeo.com/video/101980132" data-modal-title="Vimeo">There was nothing else to</a> do, so Alice soon began talking again. 'Dinah'll miss me very much to-night, I should think!' (Dinah was the cat.) 'I hope they'll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I'm afraid, but you might catch a bat, and that's very like a mouse, you know. But do cats eat bats, I wonder?' And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, 'Do cats eat bats? Do cats eat bats?' and sometimes, 'Do bats eat cats?' for, you see, as she couldn't answer either question, it didn't much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, 'Now, Dinah, tell me the truth: did you ever eat a bat?' when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over.
+                    Alice was not a bit hurt, and she jumped up on to her feet in a moment: she looked up, but it was all dark overhead; before her was another long passage, and the White Rabbit was still in sight, hurrying down it. There was not a moment to be lost: away went Alice like the wind, and was just in time to hear it say, as it turned a corner, 'Oh my ears and whiskers, how late it's getting!' She was close behind it when she turned the corner, but the Rabbit was no longer to be seen: she found herself in a long, low hall, which was lit up by a row of lamps hanging from the roof.
+                </p>
+            </div>
+        </div>
+    </article>
+
+    
+    <script src="../../../dist/responsive.js"></script>
+</body>
+</html>

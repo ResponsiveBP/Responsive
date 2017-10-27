@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .swipe-wrap {
+            margin: 2em 0;
+            position: relative;
+        }
+
+        .swipe {
+            background-color: #f357a1;
+            cursor: pointer;
+            color: #fff;
+            font-size: 2em;
+            height: 300px;
+            width: 300px;
+            text-align: center;
+            padding-top: 100px;
+            /* Make drag better */
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -moz-backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .swipe-2 {
+            background-color: #5764f3;
+            cursor: move;
+            position: absolute;
+            height: 150px;
+            width: 150px;
+            padding-top: 50px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <article class="container">
+        <h1>Swipe Tests</h1>
+        <p>Swipe the pink box to test directional detection support.</p>
+        <p>Swipe the blue box to test draggable support.</p>
+        <hr />
+
+        <div class="swipe-wrap">
+            <div class="swipe swipe-1">
+                Swipe Me
+            </div>
+        </div>
+
+        <div class="swipe-wrap">
+            <div class="swipe swipe-2">
+                Drag Me
+            </div>
+        </div>
+        <section>
+            <h3>Extra copy to test native scroll</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor nunc, volutpat fringilla tincidunt a, tempor quis massa. Etiam tincidunt pharetra turpis ut consequat. Nam at lobortis turpis. Nam condimentum id lectus ut feugiat. Suspendisse eget tellus nunc. Sed quis nunc blandit, vehicula tellus eu, adipiscing lacus. Phasellus metus felis, tincidunt in dapibus et, placerat sed mi. Praesent odio risus, accumsan at euismod et, posuere a ante. Sed mollis purus lacus. Morbi eget magna commodo, adipiscing nisl in, imperdiet lacus. Aliquam ut aliquet urna. Nam sit amet mollis erat, quis molestie nulla. Phasellus posuere at orci id blandit. Nunc varius risus non tortor tincidunt varius. Duis eros tellus, pulvinar sit amet iaculis eget, accumsan sit amet sapien. Phasellus metus diam, feugiat sed ipsum ut, luctus malesuada mi.
+            </p>
+            <p>
+                Donec mattis metus lacus, vitae vehicula lacus fringilla ut. Etiam et iaculis leo. Phasellus pellentesque turpis id nibh adipiscing congue. Integer id volutpat justo. Donec egestas leo non adipiscing interdum. Sed vestibulum viverra ipsum, nec sollicitudin tellus venenatis id. Phasellus sit amet tincidunt lorem, ut dignissim est. Ut a turpis metus. Sed accumsan lacinia felis eu feugiat. Morbi vel lacinia sem, convallis congue quam. Donec tincidunt adipiscing ornare. Donec cursus sapien sit amet placerat aliquam. Aenean posuere gravida nulla et tincidunt. Aliquam eget enim sit amet sem egestas suscipit ac vel ipsum.
+            </p>
+            <p>
+                Vestibulum ut tellus ut dui consequat porttitor et non dolor. Quisque dignissim condimentum justo in egestas. Mauris dui risus, laoreet at diam in, molestie imperdiet nisl. Suspendisse potenti. Aliquam in rutrum magna, a tincidunt nulla. Sed faucibus blandit erat consequat congue. Phasellus varius libero ipsum, sit amet fringilla tellus tempor nec. Nam blandit dignissim mauris sed ultrices. Morbi sollicitudin ipsum id eros scelerisque, vel fringilla magna hendrerit. Sed pellentesque ligula sem, vel bibendum mauris ultrices ac. Sed ac orci malesuada, sagittis enim at, vehicula est. Donec nec adipiscing tellus. Sed adipiscing sapien non quam molestie, sit amet lacinia est ullamcorper. Suspendisse aliquet consequat purus vel fringilla. Suspendisse fermentum tincidunt dolor ac congue. Suspendisse potenti.
+            </p>
+            <p>
+                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam eu elit id nulla porttitor pellentesque iaculis vitae turpis. Integer blandit ante vitae lectus ultrices, porta sodales quam condimentum. Aenean viverra aliquet risus, ut eleifend risus blandit vel. Sed sollicitudin felis ut adipiscing molestie. Cras risus urna, porta sed mi interdum, semper laoreet magna. In fermentum mauris dolor. Duis sodales imperdiet lorem, quis pretium nibh vehicula fermentum.
+            </p>
+            <p>
+                Phasellus quis sapien blandit nunc congue egestas. Sed sagittis arcu mollis nunc fermentum dapibus. Integer eu sem eu magna tincidunt feugiat ac nec elit. Pellentesque eget libero accumsan, convallis eros sed, euismod lectus. Nulla facilisi. Aenean sit amet lorem vitae enim vulputate ultrices at id nunc. Integer dapibus vehicula fermentum. Etiam at bibendum sapien, eget pretium felis. Ut gravida arcu nunc. Aliquam erat magna, dictum elementum accumsan non, dapibus ut massa. Mauris aliquam sit amet dui a dapibus. Sed sit amet augue iaculis, tincidunt arcu vitae, feugiat mi. Curabitur interdum lacinia elementum. Nulla in metus tortor. Suspendisse elementum sem non odio tincidunt, vel malesuada ligula dapibus. Praesent vel risus non orci viverra varius quis sit amet diam.
+            </p>
+        </section>
+    </article>
+
+    
+    <script src="../../../dist/responsive.js"></script>
+
+    <script>
+        (function ($) {
+
+            $.fn.makeDraggable = function () {
+
+                // Check if CSS properties are available
+                var supports = (function () {
+                    var div = document.createElement("div"),
+                        vendors = "Moz Webkit O Ms".split(" "),
+                        len = vendors.length;
+
+                    return function (prop) {
+                        if (prop in div.style) return true;
+
+                        prop = prop.replace(/^[a-z]/, function (val) {
+                            return val.toUpperCase();
+                        });
+
+                        while (len--) {
+                            if (vendors[len] + prop in div.style) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    };
+                }());
+
+                // Create variable for checking compatibility
+                var supportsTransform = supports("transform");
+
+                return this.each(function () {
+
+                    var $this = $(this),
+                        dragging = false,
+                        $parent = $this.parent(),
+                        offsetLeft,
+                        offsetTop,
+                        cacheVal;
+
+                    // Container element mustn't be set to position static in order for position caching to work properly
+                    $parent.css("position", "relative");
+
+                    // Cache position values adjacent to [X-Axis, Y-Axis]
+                    cacheVal = $this.is(":visible") ? [$this.position().left, $this.position().top] : [0, 0];
+
+                    // Set object properties to work with later
+                    offsetLeft = cacheVal[0];
+                    offsetTop = cacheVal[1];
+
+                    if (supportsTransform) {
+                        // Reset css values to 0 for transform
+                        $this[0].style.top = 0;
+                        $this[0].style.left = 0;
+
+                        // Keep the element on the same position.
+                        $this.css("transform", "matrix(1, 0, 0, 1, " + cacheVal[0] + ", " + cacheVal[1] + ")");
+                    }
+
+                    // Use the responsive swipe functionality to normalize events across devices.
+                    $parent.on("swipe.drag", true)
+                           .on("swipestart.drag", function () {
+
+                               if ($this.is(":visible")) {
+                                   // User starts to drag
+                                   dragging = true;
+                               }
+
+                           }).on("swipemove.drag", function (e) {
+
+                               // Only if the user is currently dragging, execute the following
+                               if (dragging) {
+
+                                   // Provide value for styling
+                                   offsetLeft = cacheVal[0] + e.delta.x;
+                                   offsetTop = cacheVal[1] + e.delta.y;
+
+                                   // Style it
+                                   if (supportsTransform) {
+                                       // Using jQuery"s .css() method for automatic prefixing
+                                       $this.css("transform", "matrix(1, 0, 0, 1, " + offsetLeft + ", " + offsetTop + ")");
+                                   } else {
+                                       // Using plain JavaScript for better performance
+                                       $this[0].style.left = $this.offsetLeft + "px";
+                                       $this[0].style.top = $this.offsetTop + "px";
+                                   }
+                               }
+                           }).on("swipeend.drag", function () {
+                               // User stopped dragging
+                               dragging = false;
+                               // Cache the offset values in order to prevent the element from returning to 0
+                               cacheVal[0] = offsetLeft;
+                               cacheVal[1] = offsetTop;
+                           });
+                });
+            };
+
+        }(jQuery));
+
+
+        $(document).on("ready", function () {
+
+            $(".swipe-1").on("swipe.drag", true).on("swipeend.r.swipe", function (event) {
+
+                $(this).html(event.direction + "<br/>" + event.delta.x + "<br/>" + event.delta.y);
+
+            });
+
+            $(".swipe-2").makeDraggable();
+
+        });
+
+    </script>
+</body>
+</html>

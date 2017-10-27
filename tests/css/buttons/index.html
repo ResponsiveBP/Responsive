@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Button Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+
+<body>
+    <article class="container">
+        <div>
+            <p class="clearfix">
+                <a class="push" href="../index.html">Back to Index</a>
+            </p>
+        </div>
+        <h1>Buttons</h1>
+        <hr />
+        <section>
+            <h2>Default Button Styles</h2>
+            <p>All styles are attribute based.</p>
+            <p>
+                Button states are:
+                <code>:hover</code>,
+                <code>:focus</code>,
+                <code>:active</code>, and
+                <code>:disabled</code>.
+            </p>
+
+            <div class="row">
+                <div class="col-s-6">
+                    <h3>Default LTR</h3>
+                    <div>
+                        <h3>Button</h3>
+                        <p>Standard
+                            <code>button</code> element.</p>
+                        <button>button</button>
+                    </div>
+                    <div>
+                        <h3>Input : Button</h3>
+                        <p>Standard
+                            <code>input[type="button"]</code> element.</p>
+                        <input type="button" value="button" />
+                    </div>
+                    <div>
+                        <h3>Input : Submit </h3>
+                        <p>Standard
+                            <code>input[type="submit"]</code> element.</p>
+                        <input type="submit" value="submit" />
+                    </div>
+                    <div>
+                        <h3>Input : Reset </h3>
+                        <p>Standard
+                            <code>input[type="reset"]</code> element.</p>
+                        <input type="reset" value="reset" />
+                    </div>
+                </div>
+                <div class="col-s-6" dir="rtl">
+                    <h3>Default RTL</h3>
+                    <div>
+                        <h3>Button</h3>
+                        <p>Standard
+                            <code>button</code> element.</p>
+                        <button>button</button>
+                    </div>
+                    <div>
+                        <h3>Input : Button</h3>
+                        <p>Standard
+                            <code>input[type="button"]</code> element.</p>
+                        <input type="button" value="button" />
+                    </div>
+                    <div>
+                        <h3>Input : Submit </h3>
+                        <p>Standard
+                            <code>input[type="submit"]</code> element.</p>
+                        <input type="submit" value="submit" />
+                    </div>
+                    <div>
+                        <h3>Input : Reset </h3>
+                        <p>Standard
+                            <code>input[type="reset"]</code> element.</p>
+                        <input type="reset" value="reset" />
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <hr />
+        <section class="row">
+            <div class="col-s-6">
+                <h2>Disabled State LTR</h2>
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard
+                        <code>button</code> element.</p>
+                    <button disabled>button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard
+                        <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button" disabled />
+                </div>
+                <div>
+                    <h3>Input : Submit</h3>
+                    <p>Standard
+                        <code>input[type="submit"]</code> element.</p>
+                    <input type="submit" value="submit" disabled />
+                </div>
+                <div>
+                    <h3>Input : Reset</h3>
+                    <p>Standard
+                        <code>input[type="reset"]</code> element.</p>
+                    <input type="reset" value="reset" disabled />
+                </div>
+            </div>
+            <div class="col-s-6" dir="rtl">
+                <h2>Disabled State RTL</h2>
+                <div>
+                    <h3>Button</h3>
+                    <p>Standard
+                        <code>button</code> element.</p>
+                    <button disabled>button</button>
+                </div>
+                <div>
+                    <h3>Input : Button</h3>
+                    <p>Standard
+                        <code>input[type="button"]</code> element.</p>
+                    <input type="button" value="button" disabled />
+                </div>
+                <div>
+                    <h3>Input : Submit</h3>
+                    <p>Standard
+                        <code>input[type="submit"]</code> element.</p>
+                    <input type="submit" value="submit" disabled />
+                </div>
+                <div>
+                    <h3>Input : Reset</h3>
+                    <p>Standard
+                        <code>input[type="reset"]</code> element.</p>
+                    <input type="reset" value="reset" disabled />
+                </div>
+            </div>
+        </section>
+        <hr/>
+        <section>
+            <h1>Inline buttons</h1>
+            <p>
+                Wrap inputs in a div with the class
+                <code>.input-group</code> and button in a span with the class
+                <code>.input-group-addon</code>.
+            </p>
+            <div class="row">
+                <div class="col-s-6">
+                    <h2>Inline buttons LTR</h2>
+                    <div>
+                        <h3>Button</h3>
+                        <p>Standard
+                            <code>button</code> element.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <button>button</button>
+                            </span>
+                            <input type="text" />
+                        </div>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <button>button</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Button</h3>
+                        <p>Standard
+                            <code>input[type="button"]</code> element.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="button" value="button" />
+                            </span>
+                            <input type="text" />
+                        </div>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <input type="button" value="button" />
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Submit</h3>
+                        <p>
+                            Standard
+                            <code>input[type="submit"]</code> element.
+                        </p>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="submit" value="submit" />
+                            </span>
+                            <input type="text" />
+                        </div>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <input type="submit" value="submit" />
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Reset</h3>
+                        <p>Standard
+                            <code>input[type="reset"]</code> element.</p>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <input type="reset" value="reset" />
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="reset" value="reset" />
+                            </span>
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s-6" dir="rtl">
+                    <h2>Inline buttons RTL</h2>
+                    <div>
+                        <h3>Button</h3>
+                        <p>Standard
+                            <code>button</code> element.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <button>button</button>
+                            </span>
+                            <input type="text" />
+                        </div>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <button>button</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Button</h3>
+                        <p>Standard
+                            <code>input[type="button"]</code> element.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="button" value="button" />
+                            </span>
+                            <input type="text" />
+                        </div>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <input type="button" value="button" />
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Submit</h3>
+                        <p>
+                            Standard
+                            <code>input[type="submit"]</code> element.
+                        </p>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="submit" value="submit" />
+                            </span>
+                            <input type="text" />
+                        </div>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <input type="submit" value="submit" />
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Reset</h3>
+                        <p>Standard
+                            <code>input[type="reset"]</code> element.</p>
+                        <div class="input-group">
+                            <input type="text" />
+                            <span class="input-group-addon">
+                                <input type="reset" value="reset" />
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="reset" value="reset" />
+                            </span>
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr/>
+        <section>
+            <h2>Grouped Buttons</h2>
+            <p>Wrap the buttons in a div with class
+                <code>.btn-group</code>
+            </p>
+            <div class="row">
+                <div class="col-s-6">
+                    <h2>Grouped LTR</h2>
+                    <div>
+                        <h3>Button</h3>
+                        <p>Standard
+                            <code>button</code> element.</p>
+                        <div class="btn-group">
+                            <button>first</button>
+                            <button>second</button>
+                            <button>third</button>
+                            <button>fourth</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Button</h3>
+                        <p>Standard
+                            <code>input[type="button"]</code> element.</p>
+                        <div class="btn-group">
+                            <input type="button" value="first" />
+                            <input type="button" value="second" />
+                            <input type="button" value="third" />
+                            <input type="button" value="fourth" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Submit</h3>
+                        <p>Standard
+                            <code>input[type="submit"]</code> element.</p>
+                        <div class="btn-group">
+                            <input type="submit" value="first" />
+                            <input type="submit" value="second" />
+                            <input type="submit" value="third" />
+                            <input type="submit" value="fourth" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Reset</h3>
+                        <p>Standard
+                            <code>input[type="reset"]</code> element.</p>
+                        <div class="btn-group">
+                            <input type="reset" value="first" />
+                            <input type="reset" value="second" />
+                            <input type="reset" value="third" />
+                            <input type="reset" value="fourth" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s-6" dir="rtl">
+                    <h2>Grouped RTL</h2>
+                    <div>
+                        <h3>Button</h3>
+                        <p>Standard
+                            <code>button</code> element.</p>
+                        <div class="btn-group">
+                            <button>first</button>
+                            <button>second</button>
+                            <button>third</button>
+                            <button>fourth</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Button</h3>
+                        <p>Standard
+                            <code>input[type="button"]</code> element.</p>
+                        <div class="btn-group">
+                            <input type="button" value="first" />
+                            <input type="button" value="second" />
+                            <input type="button" value="third" />
+                            <input type="button" value="fourth" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Submit</h3>
+                        <p>Standard
+                            <code>input[type="submit"]</code> element.</p>
+                        <div class="btn-group">
+                            <input type="submit" value="first" />
+                            <input type="submit" value="second" />
+                            <input type="submit" value="third" />
+                            <input type="submit" value="fourth" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Input : Reset</h3>
+                        <p>Standard
+                            <code>input[type="reset"]</code> element.</p>
+                        <div class="btn-group">
+                            <input type="reset" value="first" />
+                            <input type="reset" value="second" />
+                            <input type="reset" value="third" />
+                            <input type="reset" value="fourth" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+
+    <script src="../../../dist/responsive.js"></script>
+</body>
+
+</html>

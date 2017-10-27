@@ -1,0 +1,76 @@
+﻿// Media Query Breakpoints
+@mixin bp($point) {
+    @if $point == xxs {
+        @media (max-width: $grid-breakpoint-xxs-max) {
+            @content;
+        }
+    }
+    @elseif $point == xs {
+        @media print and (max-width: $grid-print-breakpoint-xs-max ), screen and (min-width: $grid-breakpoint-xs-min) and (max-width: $grid-breakpoint-xs-max) {
+            @content;
+        }
+    }
+    @else if $point == s {
+        @media print and (min-width: $grid-print-breakpoint-s-min ) and (max-width: $grid-breakpoint-s-max), screen and (min-width: $grid-breakpoint-s-min) and (max-width: $grid-breakpoint-s-max) {
+            @content;
+        }
+    }
+    @else if $point == m {
+        @media (min-width: $grid-breakpoint-m-min) and (max-width: $grid-breakpoint-m-max) {
+            @content;
+        }
+    }
+    @else if $point == l {
+        @media (min-width: $grid-breakpoint-l-min) {
+            @content;
+        }
+    }
+}
+
+// Minimum width.
+@mixin bp-min($point) {
+    @if $point == xs {
+        @media print and (min-width: $grid-print-breakpoint-xs-max ), screen and (min-width: $grid-breakpoint-xs-min) {
+            @content;
+        }
+    }
+    @else if $point == s {
+        @media print and (min-width: $grid-print-breakpoint-s-min ), screen and (min-width: $grid-breakpoint-s-min) {
+            @content;
+        }
+    }
+    @else if $point == m {
+        @media (min-width: $grid-breakpoint-m-min) {
+            @content;
+        }
+    }
+    @else if $point == l {
+        @media (min-width: $grid-breakpoint-l-min) {
+            @content;
+        }
+    }
+}
+
+// Max width. 'l' needs no max width since it is the top tier.
+@mixin bp-max($point) {
+    @if $point == xxs {
+        @media (max-width: $grid-breakpoint-xxs-max) {
+            @content;
+        }
+    }
+    @else if $point == xs {
+        @media print and (max-width: $grid-print-breakpoint-xs-max ), screen and (max-width: $grid-breakpoint-xs-max) {
+            @content;
+        }
+    }
+    @else if $point == s {
+        @media (max-width: $grid-breakpoint-s-max) {
+            @content;
+        }
+    }
+    @else if $point == m {
+        @media (max-width: $grid-breakpoint-m-max) {
+            @content;
+        }
+    }
+}

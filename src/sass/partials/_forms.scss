@@ -1,19 +1,26 @@
 // Normalize
+// Define consistent border, margin, and padding.
 fieldset {
     border: 0;
     margin: 0;
     padding: 0;
 }
 
+// 1. Correct `color` not being inherited in IE 11.
+// 2. Remove padding so people aren't caught out if they zero out fieldsets.
+// 3. Correct the text wrapping in Edge and IE.
 legend {
-    display: block;
-    width: 100%;
-    margin-bottom: 1rem;
+    border: 0; // 1
+    padding: 0; // 2
+    display: table; // 3
+    max-width: 100%; // 3
+    white-space: normal; // 3
+    margin-bottom: $form-input-margin-bottom;
 }
 
 label {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: $form-input-margin-bottom;
 
     &[for] {
         cursor: pointer;
@@ -35,17 +42,16 @@ label {
 
 select,
 textarea,
-input,
-.readonly {
+input {
     display: block;
     height: $form-input-height;
     padding: $form-input-padding;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: $form-input-margin-bottom;
     background: $form-input-background;
     border: $form-input-border;
     border-radius: $form-input-border-radius;
-    color: $form-input-color;
+    color: $form-input-font-color;
     font-family: inherit;
     // Disabled
     // 1. Add cursor for disabled elements.
@@ -60,74 +66,65 @@ input,
     }
 }
 
-.readonly[hidden]{
-    display: none;
+button, input, textarea, keygen, select {
+  &:focus{
+        outline-offset: $form-input-focus-outline-offset;
+        outline: $form-input-focus-outline;
+  }
 }
 
-// Clean up that hideous file input.
+// Clean up that hideous file input in Edge.
 input[type='file']::-ms-value {
     background: $form-input-background;
     border: none;
 }
 
 input[type='file']::-ms-browse {
-    padding-top: .1rem;
+    height: $form-input-ms-file-height;
     background: $button-background;
     border: $button-border;
-    color: $form-input-color;
+    color: $form-input-font-color;
 
     &:active {
-        background-color: lighten($button-background, 5);
+        background-color: $button-active-background;
     }
 }
 
+// And Webkit.
 input[type='file']::-webkit-file-upload-button {
     -webkit-appearance: none;
     border-radius: 0;
     background: $button-background;
     border: $button-border;
-    color: $form-input-color;
+    color: $form-input-font-color;
 
     &:active {
-        background-color: lighten($button-background, 5);
+        background-color: $button-active-background;
     }
 }
 
 input[type='color'] {
-    max-width: 6.563rem;
+    max-width: $form-input-color-width;
 }
 
 // Declared separately to reduce selector duplication for padding
 input[type='radio'],
 input[type='checkbox'] {
-    height: 1.334rem;
-    min-width: 1.334rem;
-    margin-bottom: 1.1rem;
+    height: $form-input-radio-checkbox-dimensions;
+    min-width: $form-input-radio-checkbox-dimensions;
+    margin-bottom: $form-input-radio-checkbox-margin;
     padding: 0;
     width: auto;
 }
 
-// 1: Fix background in IE
-// 2: Remove border in IE9
-input[type='radio'] {
-    border-radius: 100%; // 1
-    border: none \9; // 2
+// Fix background color leak on Edge
+input[type='radio']{
+    border-radius: 100%; 
 }
 
-// Add range styles for IE9
-input[type='range'] {
-    border: 1px solid transparent;
-    border: $form-input-border \9;
-    background-color: transparent;
-    background-color: $form-input-background \9;
-    padding: $form-input-padding 0;
-    padding: $form-input-padding \9;
-}
-
-// 1. Remove borders and padding on range controls in IE10+
-_::-ms-reveal,
+// 1. Remove borders on range controls
 input[type='range'] { // 1
-    border: 1px solid transparent;
+    border: none;
 }
 
 // Fix field styling on iPhone and iPad.
@@ -151,7 +148,7 @@ input[type='color'] {
     -webkit-appearance: none; // 1
 }
 
-// 1: Remove border and and bgcolor around caret on IE10+
+// 1: Remove border and and bgcolor around caret on Edge
 select {
     &::-ms-expand {
         border: 0;
@@ -171,33 +168,34 @@ select {
 }
 
 // Textareas : Multiple resizable options.
-// 1: Horizontal
+// 1: Remove default vertical scrollbar in IE 8/9/10/11.
+// 2: Horizontal
 // 2: Vertical
-// 3: None
+// 4: None
 textarea {
+    overflow: auto; // 1
     height: auto;
     min-height: 5.25rem;
     resize: both;
 
     &.horizontal {
-        resize: horizontal; // 1
+        resize: horizontal; // 2
     }
 
     &.vertical {
-        resize: vertical; // 2
+        resize: vertical; // 3
     }
 
     &.no-resize {
-        resize: none; // 3
+        resize: none; // 4
     }
 }
 
 // Read only
-.readonly,
 [readonly] {
     background-color: $form-input-background-readonly;
     border-color: $form-input-border-color-readonly;
-    color: $form-input-color-readonly;
+    color: $form-input-font-color-readonly;
     cursor: not-allowed;
 }
 
@@ -238,15 +236,15 @@ textarea {
     // 1. Add a select indicator
     // 2. Remove for multiple
     select {
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cG9seWdvbiBmaWxsPSIjMjIyIiBwb2ludHM9IjExLDAgNS41LDkgMCwwIi8+PC9zdmc+'); // 1
+        background-image: $form-input-select-arrow; // 1
         background-repeat: no-repeat;
-        background-position: right .6rem center;
-        padding-right: 1.67rem;
+        background-position: right $form-input-select-arrow-position center;
+        padding-right: $form-input-select-arrow-padding;
 
         [dir=rtl] & {
-            background-position: .6rem center;
-            padding-right: 0;
-            padding-left: 1.67rem;
+            background-position: $form-input-select-arrow-position center;
+            padding-right: $form-input-padding;
+            padding-left: $form-input-select-arrow-padding;
         }
 
         &[multiple] {
@@ -265,18 +263,16 @@ select.inline-block {
 
 // Actions - Contains buttons
 .form-actions {
-    margin: 1rem 0;
-    padding: 1rem 0;
+    margin: $form-actions-margin 0;
+    padding: $form-actions-padding 0;
 }
 
 // Grouped inputs.
 .input-group,
 .btn-group {
-    position: relative;
-    display: table;
-    border-collapse: separate;
+    display: flex;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: $form-input-margin-bottom;
 }
 
 .btn-group {
@@ -285,15 +281,15 @@ select.inline-block {
 
 .input-group > *,
 .btn-group > * {
-    display: table-cell;
+    flex: 1 0 0;
     margin-bottom: 0;
 }
 
+// 1: Force no margin on checkbox, radio
 .input-group-addon {
-    width: 1%;
+    flex: 0;
     white-space: nowrap;
-    vertical-align: middle;
-    // Force no margin on checkbox, radio
+
     & > * {
         margin-bottom: 0 !important; // 1
     }
@@ -301,7 +297,7 @@ select.inline-block {
 
 // Supplementary content for displaying symbols.
 .supplement {
-    padding: 0 1rem;
+    padding: $form-input-padding 1rem;
     line-height: $form-line-height;
     background: $button-background;
     border: $button-border;

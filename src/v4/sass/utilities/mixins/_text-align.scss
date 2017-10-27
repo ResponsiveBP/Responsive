@@ -1,0 +1,99 @@
+﻿//==
+// Creates text align classes for each breakpoint.
+//##
+@mixin text-align($bp) {
+    // XS doesn't have a min value.
+    @if $bp == xxs {
+
+        .text-#{$bp}-pull {
+            text-align: left;
+
+            [dir="rtl"] & {
+                text-align: right;
+            }
+        }
+
+        .text-#{$bp}-push {
+            text-align: right;
+
+            [dir="rtl"] & {
+                text-align: left;
+            }
+        }
+
+        .text-#{$bp}-center {
+            text-align: center;
+        }
+
+        @include bp-max($bp) {
+            .text-#{$bp}-pull-only {
+                text-align: left;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
+            }
+
+            .text-#{$bp}-push-only {
+                text-align: right;
+
+                [dir="rtl"] & {
+                    text-align: left;
+                }
+            }
+
+            .text-#{$bp}-center-only {
+                text-align: center;
+            }
+        }
+    }
+    @else {
+
+        @include bp-min($bp) {
+
+            .text-#{$bp}-pull {
+                text-align: left;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
+            }
+
+            .text-#{$bp}-push {
+                text-align: right;
+
+                [dir="rtl"] & {
+                    text-align: left;
+                }
+            }
+
+            .text-#{$bp}-center {
+                text-align: center;
+            }
+            // Large doesn't need an "only" since it operates on min width.
+            @if $bp != l {
+                @include bp-max($bp) {
+                    .text-#{$bp}-pull-only {
+                        text-align: left;
+
+                        [dir="rtl"] & {
+                            text-align: right;
+                        }
+                    }
+
+                    .text-#{$bp}-push-only {
+                        text-align: right;
+
+                        [dir="rtl"] & {
+                            text-align: left;
+                        }
+                    }
+
+                    .text-#{$bp}-center-only {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+// Make it responsive
+table {
+    margin: 1rem 0;
+    max-width: 100%;
+    width: 100%;
+
+    th,
+    td {
+        padding: $table-cell-pad;
+        text-align: left;
+        vertical-align: top;
+
+        [dir="rtl"] & {
+            text-align: right;
+        }
+    }
+}
+
+// Bordered tables
+// 1: Remove double border on headless tables.
+.table-bordered {
+    border: $table-bordered-border;
+    border-left-width: 0;
+    border-collapse: separate;
+
+    th,
+    td {
+        border-top: $table-bordered-border;
+        border-left: $table-bordered-border;
+    }
+
+    thead:first-child tr:first-child th,
+    tbody:first-child tr:first-child td {
+        border-top-width: 0;
+    }
+    
+    tbody:first-child tr:first-child th[scope="row"] {
+        border-top: none; // 1
+    }
+}
+
+// Striped tables
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+    background-color: $table-striped-background-color;
+}
+
+
+// Overflow helpers
+.table-scrollable {
+    margin: 1rem 0;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 100%;
+
+    table {
+        margin: 0;
+    }
+}

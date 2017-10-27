@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Base Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+
+<body>
+    <article class="container">
+        <div>
+            <p class="clearfix">
+                <a class="push" href="../index.html">Back to Index</a>
+            </p>
+        </div>
+        <h1>Base</h1>
+        <hr />
+        <h3>Helpers</h3>
+        <section>
+            <h1>Responsive helpers.</h1>
+            <p>
+                These helpers allow you to toggle the visibility of elements as the viewport scales.
+                <var>rem</var>
+                values are calculated at the browser body default of
+                <var>16px = 1rem</var>.
+            </p>
+
+            <h3>Visible Example: Green means visible</h3>
+            <div class="block-row-s-5 pad-gutter">
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>&lt; 37.5em</h3>
+                        <code>.visible-xxs</code>
+                        <div class="visible-xxs responsive-helper-alert is-shown">
+                            <h3>&lt; 37.5em</h3>
+                            <code>.visible-xxs</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>37.5em to 48em</h3>
+                        <code>.visible-xs</code>
+                        <div class="visible-xs responsive-helper-alert is-shown">
+                            <h3>37.5em to 48em</h3>
+                            <code>.visible-xs</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>48em to 62em</h3>
+                        <code>.visible-s</code>
+                        <div class="visible-s responsive-helper-alert is-shown">
+                            <h3>48em to 62em</h3>
+                            <code>.visible-s</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>62em to 75em</h3>
+                        <code>.visible-m</code>
+                        <div class="visible-m responsive-helper-alert is-shown">
+                            <h3>62em to 75em</h3>
+                            <code>.visible-m</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>&gt; 75em</h3>
+                        <code>.visible-l</code>
+                        <div class="visible-l responsive-helper-alert is-shown">
+                            <h3>&gt; 75em</h3>
+                            <code>.visible-l</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3>Hidden Example: Red means hidden</h3>
+            <div class="block-row-s-5">
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>&lt; 37.5em</h3>
+                        <code>.hidden-xxs</code>
+                        <div class="hidden-xxs responsive-helper-alert is-shown">
+                            <h3>&lt; 37.5em</h3>
+                            <code>.hidden-xxs</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>37.5em to 48em</h3>
+                        <code>.hidden-xs</code>
+                        <div class="hidden-xs responsive-helper-alert is-shown">
+                            <h3>37.5em to 48em</h3>
+                            <code>.hidden-xs</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>48em to 62em</h3>
+                        <code>.hidden-s</code>
+                        <div class="hidden-s responsive-helper-alert is-shown">
+                            <h3>48em to 62em</h3>
+                            <code>.hidden-s</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>62em to 75em</h3>
+                        <code>.hidden-m</code>
+                        <div class="hidden-m responsive-helper-alert is-shown">
+                            <h3>62em to 75em</h3>
+                            <code>.hidden-m</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="responsive-helper-pane is-hidden">
+                        <h3>&gt; 75em</h3>
+                        <code>.hidden-l</code>
+                        <div class="hidden-l responsive-helper-alert is-shown">
+                            <h3>&gt; 75em</h3>
+                            <code>.hidden-l</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Typography Helpers LTR</h3>
+            <div class="row">
+                <div class="col-s-4">
+                    <code>text-pull</code>
+                    <p class="text-pull">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.
+                    </p>
+                </div>
+                <div class="col-s-4">
+                    <code>text-center</code>
+                    <p class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.
+                    </p>
+                </div>
+                <div class="col-s-4">
+                    <code>text-push</code>
+                    <p class="text-push">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+            <h3>Typography Helpers RTL</h3>
+            <div class="row" dir="rtl">
+                <div class="col-s-4">
+                    <code>text-pull</code>
+                    <p class="text-pull">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.
+                    </p>
+                </div>
+                <div class="col-s-4">
+                    <code>text-center</code>
+                    <p class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.
+                    </p>
+                </div>
+                <div class="col-s-4">
+                    <code>text-push</code>
+                    <p class="text-push">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </article>
+
+
+    <script src="../../../dist/responsive.js"></script>
+</body>
+
+</html>

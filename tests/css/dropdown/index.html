@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dropdown Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <div>
+            <p class="clearfix"><a class="push" href="../index.html">Back to Index</a></p>
+        </div>
+        <h1>Dropdown</h1>
+        <hr />
+        <p>Ungrouped panes allow tabbing between headers but only to their panels when expanded.</p>
+        <p>Grouped panes can only be tabbed to if they are expanded. Left and right will navigate between pane headers in this instance.</p>
+        <p>Both <kbd>space</kbd> and <kbd>enter</kbd> will toggle state as will click.</p>
+        <section>
+            <h3>Accordion</h3>
+            <div class="row">
+                <div class="col-s-6">
+                    <h3>Un-Grouped</h3>
+
+                    <div class="accordion">
+                        <div class="accordion-head">
+                            <a data-dropdown-target="#cllps1" href="#">
+                                Accordion group item 1
+                            </a>
+                        </div>
+                        <div class="accordion-body" id="cllps1">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-head">
+                            <a data-dropdown-target="#cllps2" href="#">
+                                Accordion group item 2
+                            </a>
+                        </div>
+                        <div class="accordion-body collapse" id="cllps2">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-head">
+                            <a data-dropdown-target="#cllps3" href="#">
+                                Accordion group item 3
+                            </a>
+                        </div>
+                        <div class="accordion-body collapse" id="cllps3">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s-6">
+                    <h3>Grouped</h3>
+                    <p>
+                        Add <code>data-dropdown-parent="selector"</code> to the trigger and class <code>.dropdown-group</code> to each target.
+                    </p>
+                    <div class="accordion-group">
+                        <div class="accordion">
+                            <div class="accordion-head">
+                                <a data-dropdown-target="#cllps4" data-dropdown-parent=".accordion-group" href="#">
+                                    Accordion group item 1
+                                </a>
+                            </div>
+                            <div class="accordion-body dropdown-group" id="cllps4">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                    deserunt mollit anim id est laborum.
+                                </p>
+                                <div class="accordion">
+                                    <div class="accordion-head">
+                                        <a data-dropdown-target="#cllps5" href="#">
+                                            Accordion group item 1
+                                        </a>
+                                    </div>
+                                    <div class="accordion-body dropdown-group" id="cllps5">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                            deserunt mollit anim id est laborum.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <div class="accordion-head">
+                                <a data-dropdown-target="#cllps6" data-dropdown-parent=".accordion-group" href="#">
+                                    Accordion group item 2
+                                </a>
+                            </div>
+                            <div class="accordion-body dropdown-group collapse" id="cllps6">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                    deserunt mollit anim id est laborum.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <div class="accordion-head">
+                                <a data-dropdown-target="#cllps7" data-dropdown-parent=".accordion-group" href="#">
+                                    Accordion group item 3
+                                </a>
+                            </div>
+                            <div class="accordion-body dropdown-group collapse" id="cllps7">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                    deserunt mollit anim id est laborum.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Basic Vertical</h3>
+            <div class="row">
+                <div class="col-s-6">
+                    <h3>Below</h3>
+                    <button data-dropdown-target="#Div1">Click me to toggle</button>
+                    <div class="collapse" id="Div1">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-s-6">
+                    <h3>Above</h3>
+                    <div class="collapse" id="Div2">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                    <button data-dropdown-target="#Div2">Click me to toggle</button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Basic Horizontal</h3>
+            <div class="alert">
+                <p>Note: To prevent word wrap fix the height and width of the item within your target container.</p>
+            </div>
+            <div class="row">
+                <div class="col-s-6">
+                    <button data-dropdown-target="#Div3" data-dropdown-dimension="width">Click me to toggle</button>
+                    <div id="Div3" class="collapse width">
+                        <div class="dropdown-filler">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    
+    <script src="../../../dist/responsive.js"></script>
+</body>
+</html>

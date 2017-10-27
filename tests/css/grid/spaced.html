@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spaced - Grid Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+
+<body class="grid-test">
+    <article class="container grid-test">
+        <div>
+            <p class="clearfix">
+                <a class="push" href="../index.html">Back to Index</a>
+            </p>
+        </div>
+        <h1>Grid</h1>
+        <hr />
+        <h3>Spaced Columns</h3>
+        <p>
+            Add class
+            <code>.push-{size}-{number}</code> to the column.
+        </p>
+        <section>
+            <h2>Standard LTR</h2>
+            <div class="row">
+                <div class="col-s-3 push-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-6">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-3">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+            <h2>Standard RTL</h2>
+            <div class="row" dir="rtl">
+                <div class="col-s-3 push-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-6">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+            <div class="row" dir="rtl">
+                <div class="col-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-3">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+        </section>
+        <hr/>
+        <section>
+            <h2>No Gutter LTR</h2>
+            <div class="row no-gutter">
+                <div class="col-s-3 push-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-6">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-3">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+            <h2>No Gutter RTL</h2>
+            <div class="row no-gutter" dir="rtl">
+                <div class="col-s-3 push-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-6">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+            <div class="row no-gutter" dir="rtl">
+                <div class="col-s-3">
+                    <span>3 (1)</span>
+                </div>
+                <div class="col-s-3 push-s-3">
+                    <span>3 (2)</span>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <script src="../../../dist/responsive.js"></script>
+</body>
+
+</html>

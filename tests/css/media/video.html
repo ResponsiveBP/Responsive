@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Media Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <div>
+            <p class="clearfix"><a class="push" href="../index.html">Back to Index</a></p>
+        </div>
+        <h1>Media</h1>
+        <hr />
+        <section class="row">
+            <h3>Video</h3>
+            <p>Wrap the video element in a container marked with classes <code>.media</code> and <code>.video</code>.</p>
+            <p>Embed code taken from <a href="http://camendesign.com/code/video_for_everybody">"Video For Everybody"</a>.</p>
+            <div class="col-s-6">
+                <div class="media video">
+                    <!-- "Video For Everybody" http://camendesign.com/code/video_for_everybody -->
+                    <video controls="controls" poster="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360">
+                        <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
+                        <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" />
+                        <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" />
+                        <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
+                            <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                            <param name="allowFullScreen" value="true" />
+                            <param name="wmode" value="transparent" />
+                            <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fsandbox.thewikies.com%2Fvfe-generator%2Fimages%2Fbig-buck-bunny_poster.jpg',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />
+                            <img alt="Big Buck Bunny" src="http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg" width="640" height="360" title="No video playback capabilities, please download the video below" />
+                        </object>
+                    </video>
+                </div>
+                <p>
+                    <strong>Download video:</strong> <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">MP4 format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv">Ogg format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm">WebM format</a>
+                </p>
+            </div>
+        </section>
+    </article>
+
+    
+    <script src="../../../dist/responsive.js"></script>
+</body>
+</html>

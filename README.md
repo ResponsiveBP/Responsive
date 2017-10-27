@@ -1,33 +1,37 @@
-# Responsive
-## A powerful, accessible, developer friendly framework for building responsive websites
+<h1 align="center">
+	<a href="http://responsivebp.com"><img src="icons/rbp-logo.svg" alt="Responsive-BP-logo" width="220px"></a><br>
+	<br>
+    <a href="http://responsivebp.com">Responsive Boilerplate</a><br>
+	<br>
+</h1>
+
+## A powerful, accessible, developer friendly, framework for building responsive websites
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ResponsiveBP/Responsive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-### Responsive is the developers' framework.
+### Responsive BP is the developers' framework.
 
 Other frameworks are too design opinionated and heavy. They're great for prototyping but every time
 you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
 functionality of the website. That costs developers time and money.
 
-**Responsive** has been built with that in mind. It is the result of thousands of hours of real, client driven web development and
+**Responsive BP** has been built with that in mind. It is the result of thousands of hours of real, client driven web development and
 testing; specifically developed to be as lightweight as possible to prevent the need to undo styles set by the framework itself
 and allow developers to write efficient code and lower costs.
   
-**Responsive is tiny**. The combined output CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality 
-built into the framework with touch, right-to-left language, and accessibility support. It's designed to be dropped-in, as-is to your website 
-such as you would with [Normalize.css](http://necolas.github.io/normalize.css/).
+**Responsive BP is tiny**. The combined output CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality built into the framework with touch, right-to-left language, and accessibility support. 
 
-Browser support covers IE9+ as well as all other modern browsers.
+Browser support covers all evergreen browsers.
 
-## Downloading Responsive
+## Downloading Responsive BP
 
 Several options are available for downloading Responsive:
 
-- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.1.3/responsive.zip).
-- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.1.3.zip).
+- [Download the latest release](https://github.com/ResponsiveBP/Responsive/releases/download/4.1.4/responsive.zip).
+- [Download the latest release source](https://github.com/ResponsiveBP/Responsive/archive/4.1.4.zip).
 - Clone the repo: `git clone https://github.com/ResponsiveBP/Responsive.git`.
-- Install with [Bower](http://bower.io): `bower install responsive`.
+- Install with [NPM](https://www.npmjs.com/package/responsive-bp): `npm install responsive-bp`.
 
 ## Documentation
 
@@ -57,10 +61,9 @@ Please take a moment to review the [guidelines for contributing](CONTRIBUTING.md
 
 ## Building the Sass and JavaScript
 
-The build process for Responsive is powered by [gulpjs](http://gulpjs.com/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
+The build process for Responsive is powered by [Webpack](https://webpack.js.org/). To build Responsive you will need to first install the required plugins using the following commands from the root `/Responsive` directory:
 
-1. `npm install -g gulp` To install gulp globally.
-2. `npm install` to install the necessary build dependencies based on the contents of the `package.json` file.
+1. `npm install` to install the necessary build dependencies based on the contents of the `package.json` file.
 
 If you are adding new functionality to the build process use:
 
@@ -68,9 +71,8 @@ If you are adding new functionality to the build process use:
 
 There are three types of build available:
 
- 1. `gulp` Compiles the framework to the **build** folder.
- 2. `gulp watch` For debug purposes. Compiles the framework to the **build** folder and watches for further changes
- 3. `gulp release` Compiles the framework to the **build** folder and zips up the build in the **dist** folder for release.
+ 1. `npm run compile` Compiles the framework to the **dist** folder.
+ 2. `npm run watch` For debug purposes. Compiles the framework to the **dist** folder and watches for further changes
 
 ## Authors
 

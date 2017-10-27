@@ -1,0 +1,101 @@
+// Remove the gap between images, videos, audio and canvas and the bottom of
+// their containers: h5bp.com/i/440
+audio,
+canvas,
+iframe,
+img,
+video,
+svg {
+    vertical-align: middle;
+}
+
+// Make the image responsive.
+// 1: Fix svg aspect scaling in IE
+img {
+    max-width: 100%;
+    height: auto;
+
+    &[src*=".svg"] {
+        width: 100% \9; // 1
+    }
+}
+
+_::-ms-reveal,
+img[src*=".svg"] {
+    width: 100%; // 1
+}
+
+// Remove the border around images in anchors.
+a img {
+    border: none;
+}
+
+// Properly scale your video on any device based on common ratios.
+// The code here is based on research and work by Theirry Koblentz, Anders Andersen,
+// Niklaus Gerber, and Jeff Hobbs.
+// 1: Default to widescreen 16:9 aspect ratio.
+.media {
+    height: 0;
+    height: auto;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    overflow: hidden;
+    padding-bottom: 56.25%; // 1
+    position: relative;
+
+    &.four-by-three {
+        padding-bottom: 75%;
+    }
+
+    &.instagram {
+        height: auto;
+        max-width: none;
+        padding-bottom: 120%;
+    }
+
+    &.vine {
+        height: auto;
+        max-width: none;
+        padding-bottom: 100%;
+    }
+
+    &.getty {
+        height: auto;
+        padding-bottom: 79.9663%;
+    }
+
+    iframe,
+    object,
+    embed,
+    video {
+        background-color: transparent;
+        border: 0;
+        height: 100%;
+        left: 0;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    img {
+        // Position the image absolutely and then move it's four positions
+        // 1000000% out of the container. This with an auto margin is the core of the trick.
+        // Why such a large number? Firefox seems to have issue when using larger images even
+        // at 100%.
+        bottom: -1000000%;
+        left: -1000000%;
+        margin: auto;
+        position: absolute;
+        right: -1000000%;
+        top: -1000000%;
+        width: 100%;
+    }
+
+    &.media-scroll {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

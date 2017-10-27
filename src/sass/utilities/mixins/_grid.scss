@@ -10,18 +10,27 @@
     @for $i from 1 to ($max-columns) {
         $temp-width: $column-width * $i;
 
+        // 1: Firefox will break when content overflows without this.
         .col-#{$breakpoint}-#{$i} {
-            width: $temp-width;
+            max-width: $temp-width; // 1
+            flex: 0 0 $temp-width;
         }
         // We don't want add offsets etc to full width columns.
-        @if $i < $max-columns {
-            // Keep offset for now for backwards compatibility.
-            .offset-#{$breakpoint}-#{$i},
+        @if $i < $max-columns {         
+            
+            // Positional resets happen outside the loop
+            .offset-#{$breakpoint}-#{$i} {
+                margin-left: $temp-width;
+
+                [dir="rtl"] & {
+                    margin-right: $temp-width;
+                }
+            }
+
             .push-#{$breakpoint}-#{$i} {
                 left: $temp-width;
 
                 [dir="rtl"] & {
-                    left: auto;
                     right: $temp-width;
                 }
             }
@@ -30,21 +39,10 @@
                 right: $temp-width;
 
                 [dir="rtl"] & {
-                    right: auto;
                     left: $temp-width;
                 }
             }
         }
-    }
-    // Equal height
-    .equal-height > [class*=col-#{$breakpoint}] {
-        display: table-cell;
-        height: 100%;
-    }
-
-    .equal-height > .col-#{$breakpoint}-#{$grid-column-count} {
-        display: table-caption;
-		height: auto;
     }
 }
 
@@ -55,21 +53,14 @@
     $max-columns: $grid-column-count + 1;
     // Loop through and set width.
     @for $i from 1 to ($max-columns) {
+        
         // Calculate column width .
         $column-width: (100% / $i);
 
         .block-row-#{$breakpoint}-#{$i} {
 
             > * {
-                width: $column-width;
-            }
-
-            > :nth-of-type(n+1) {
-                clear: none;
-            }
-
-            > :nth-of-type(#{$i}n+1) {
-                clear: both;
+                flex: 0 0 $column-width;
             }
         }
     }

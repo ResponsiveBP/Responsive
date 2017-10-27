@@ -10,8 +10,9 @@ input[type="reset"] {
     color: inherit;
     cursor: pointer;
     display: inline-block;
-    min-height: $form-input-height;
-    padding: 0 1rem;
+    vertical-align: middle;
+    min-height: $button-height;
+    padding: $button-padding;
     margin-bottom: 0;
     background: $button-background;
     border: $button-border;
@@ -19,16 +20,16 @@ input[type="reset"] {
     text-decoration: none;
 
     &:hover {
-        background-color: darken($button-background, 5);
+        background-color: $button-hover-background;
     }
 
     &:active {
-        background-color: lighten($button-background, 5);
+        background-color: $button-active-background;
         outline: none;
     }
     // 1. Fix IOS 6/7 opacity issue
     &[disabled] {
-        background-color: lighten($button-background, 5);
+        background-color: $button-disabled-background;
         color: $button-color-disabled;
         cursor: not-allowed;
         opacity: 1; // 1
@@ -36,9 +37,9 @@ input[type="reset"] {
     }
     // Inline buttons designed for rendering next to inputs.
     // 1. Fix width on Chrome.
-    .input-group & {
-        min-width: 100%; // 1
-    }
+    // .input-group & {
+    //     min-width: 100%; // 1
+    // }
 }
 
 // Reset width for inputs
@@ -48,14 +49,5 @@ input {
     &[type="button"] {
         max-width: none;
         width: auto;
-    }
-}
-
-// Grouped buttons.
-.btn-group > * {
-    float: left;
-
-    [dir="rtl"] & {
-        float: right;
     }
 }

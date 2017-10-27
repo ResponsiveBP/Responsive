@@ -1,11 +1,13 @@
-﻿// Media Query Breakpoints
+﻿// Media Query Breakpoints.
+//
+// Breakpoints are defined in multiple tiers which take into consideration print sizes. 
 @mixin bp($point) {
     @if $point == xxs {
         @media (max-width: $grid-breakpoint-xxs-max) {
             @content;
         }
     }
-    @elseif $point == xs {
+    @else if $point == xs {
         @media print and (max-width: $grid-print-breakpoint-xs-max ), screen and (min-width: $grid-breakpoint-xs-min) and (max-width: $grid-breakpoint-xs-max) {
             @content;
         }
@@ -27,7 +29,7 @@
     }
 }
 
-// Minimum width.
+// Minimum width. 'xxs' requires no breakpoint since it is the bottom tier
 @mixin bp-min($point) {
     @if $point == xs {
         @media print and (min-width: $grid-print-breakpoint-xs-max ), screen and (min-width: $grid-breakpoint-xs-min) {

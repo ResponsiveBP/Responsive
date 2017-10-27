@@ -2,39 +2,45 @@
     padding-bottom: 50px;
 }
 
+
 /* ==========================================================================
    Grid
    ========================================================================== */
+
 .container {
-   /* background-color: #ffffbb;*/
+    /* background-color: #ffffbb;*/
 }
 
-.grid-test .row,
-.grid-test [class*="block-row-"] {
+.grid-test .row, .grid-test [class*="block-row-"] {
     text-align: center;
     background: #ebebeb;
 }
 
-    .grid-test .row + .row,
-    .grid-test .row .row {
-        padding-top: .5em;
-    }
+.grid-test .row + .row, .grid-test .row .row {
+    padding-top: .5em;
+}
 
-    .grid-test .row.equal-height {
-        padding-top: 0;
-    }
+.grid-test [class*="block-row-"] > * > *, 
+.grid-test [class*="col-"] > span,
+.grid-test [class*="col-"] > [class*="visible-"] > span,
+.grid-test [class*="col-"] > [class*="hidden-"] > span,
+.grid-test.equalheight [class*="col-"] {
+    line-height: 2em;
+    background-color: #3876a7;
+    color: #fff;
+}
 
-    .grid-test [class*="block-row-"] > *,
-    .grid-test [class*="col-"] {
-        line-height: 2em;
-        background-color: #3876a7;
-        color: #fff;
-    }
+.grid-test [class*="col-"] > [class*="visible-"] > span,
+.grid-test [class*="col-"] > [class*="hidden-"] > span,
+.grid-test [class*="col-"] > span {
+    display: block;
+}
 
-        .grid-test [class*="col-"] [class*="col-"] {
-            background-color: #434343;
-            color: #fff;
-        }
+.grid-test [class*="col-"] [class*="col-"] > * {
+    background-color: #434343;
+    color: #fff;
+}
+
 
 /* ==========================================================================
    Dropdown
@@ -54,8 +60,7 @@
  * Helper examples.
  */
 
-.responsive-helper-pane,
-.responsive-helper-alert {
+.responsive-helper-pane, .responsive-helper-alert {
     text-align: center;
     position: relative;
     padding: 1em 0;

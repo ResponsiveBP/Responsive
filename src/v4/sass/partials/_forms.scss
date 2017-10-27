@@ -1,0 +1,324 @@
+// Normalize
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 1rem;
+
+    &[for] {
+        cursor: pointer;
+    }
+
+    > input,
+    > input[type='checkbox'],
+    > input[type='radio'],
+    > select {
+        display: inline-block;
+        margin: 0 1rem 0 0;
+        vertical-align: text-top;
+
+        [dir=rtl] & {
+            margin: 0 0 0 1rem;
+        }
+    }
+}
+
+select,
+textarea,
+input,
+.readonly {
+    display: block;
+    height: $form-input-height;
+    padding: $form-input-padding;
+    width: 100%;
+    margin-bottom: 1rem;
+    background: $form-input-background;
+    border: $form-input-border;
+    border-radius: $form-input-border-radius;
+    color: $form-input-color;
+    font-family: inherit;
+    // Disabled
+    // 1. Add cursor for disabled elements.
+    // 2. Fix IOS 6/7 opacity issue
+    fieldset[disabled] &,
+    &[disabled] {
+        background: $form-input-background-disabled;
+        border-color: $form-input-border-color-disabled;
+        color: $form-input-color-disabled;
+        cursor: not-allowed; // 1
+        opacity: 1; // 2
+    }
+}
+
+.readonly[hidden]{
+    display: none;
+}
+
+// Clean up that hideous file input.
+input[type='file']::-ms-value {
+    background: $form-input-background;
+    border: none;
+}
+
+input[type='file']::-ms-browse {
+    padding-top: .1rem;
+    background: $button-background;
+    border: $button-border;
+    color: $form-input-color;
+
+    &:active {
+        background-color: lighten($button-background, 5);
+    }
+}
+
+input[type='file']::-webkit-file-upload-button {
+    -webkit-appearance: none;
+    border-radius: 0;
+    background: $button-background;
+    border: $button-border;
+    color: $form-input-color;
+
+    &:active {
+        background-color: lighten($button-background, 5);
+    }
+}
+
+input[type='color'] {
+    max-width: 6.563rem;
+}
+
+// Declared separately to reduce selector duplication for padding
+input[type='radio'],
+input[type='checkbox'] {
+    height: 1.334rem;
+    min-width: 1.334rem;
+    margin-bottom: 1.1rem;
+    padding: 0;
+    width: auto;
+}
+
+// 1: Fix background in IE
+// 2: Remove border in IE9
+input[type='radio'] {
+    border-radius: 100%; // 1
+    border: none \9; // 2
+}
+
+// Add range styles for IE9
+input[type='range'] {
+    border: 1px solid transparent;
+    border: $form-input-border \9;
+    background-color: transparent;
+    background-color: $form-input-background \9;
+    padding: $form-input-padding 0;
+    padding: $form-input-padding \9;
+}
+
+// 1. Remove borders and padding on range controls in IE10+
+_::-ms-reveal,
+input[type='range'] { // 1
+    border: 1px solid transparent;
+}
+
+// Fix field styling on iPhone and iPad.
+// 1. Strip OS styling on IOS
+select,
+textarea,
+input[type='text'],
+input[type='search'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='date'],
+input[type='week'],
+input[type='month'],
+input[type='time'],
+input[type='number'],
+input[type='password'],
+input[type='tel'],
+input[type='email'],
+input[type='url'],
+input[type='color'] {
+    -webkit-appearance: none; // 1
+}
+
+// 1: Remove border and and bgcolor around caret on IE10+
+select {
+    &::-ms-expand {
+        border: 0;
+        background-color: inherit; // 1
+    }
+    option {
+        height: 100%;
+    }
+}
+
+[multiple] {
+    height: auto;
+}
+
+[multiple] option {
+    height: auto;
+}
+
+// Textareas : Multiple resizable options.
+// 1: Horizontal
+// 2: Vertical
+// 3: None
+textarea {
+    height: auto;
+    min-height: 5.25rem;
+    resize: both;
+
+    &.horizontal {
+        resize: horizontal; // 1
+    }
+
+    &.vertical {
+        resize: vertical; // 2
+    }
+
+    &.no-resize {
+        resize: none; // 3
+    }
+}
+
+// Read only
+.readonly,
+[readonly] {
+    background-color: $form-input-background-readonly;
+    border-color: $form-input-border-color-readonly;
+    color: $form-input-color-readonly;
+    cursor: not-allowed;
+}
+
+// Placeholder
+// 1: Ensure color is correct in Firefox
+::placeholder {
+    color: $form-placeholder;
+    opacity: 1; // 1
+}
+
+@-moz-document url-prefix() {
+    // Remove excess padding in Firefox
+    input[type='color'] {
+        padding: 0;
+    }
+    // 1: Fix file display height.
+    input[type='file'] {
+        height: auto;
+        min-height: $form-input-height; // 1
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio:0) {
+    // Remove excess padding in Webkit
+    input[type='color'] {
+        padding: 0;
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        &::-webkit-color-swatch {
+            border: none;
+        }
+    }
+
+    // Fix field styling on iPhone and iPad.
+    // 1. Add a select indicator
+    // 2. Remove for multiple
+    select {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cG9seWdvbiBmaWxsPSIjMjIyIiBwb2ludHM9IjExLDAgNS41LDkgMCwwIi8+PC9zdmc+'); // 1
+        background-repeat: no-repeat;
+        background-position: right .6rem center;
+        padding-right: 1.67rem;
+
+        [dir=rtl] & {
+            background-position: .6rem center;
+            padding-right: 0;
+            padding-left: 1.67rem;
+        }
+
+        &[multiple] {
+            background-image: none; // 2
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+// Inline
+input.inline-block,
+select.inline-block {
+    width: auto;
+}
+
+// Actions - Contains buttons
+.form-actions {
+    margin: 1rem 0;
+    padding: 1rem 0;
+}
+
+// Grouped inputs.
+.input-group,
+.btn-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.btn-group {
+    width: auto;
+}
+
+.input-group > *,
+.btn-group > * {
+    display: table-cell;
+    margin-bottom: 0;
+}
+
+.input-group-addon {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    // Force no margin on checkbox, radio
+    & > * {
+        margin-bottom: 0 !important; // 1
+    }
+}
+
+// Supplementary content for displaying symbols.
+.supplement {
+    padding: 0 1rem;
+    line-height: $form-line-height;
+    background: $button-background;
+    border: $button-border;
+
+    html:not([dir=rtl]) &:first-child {
+        border-right: none;
+    }
+
+    html:not([dir=rtl]) &:last-child {
+        border-left: none;
+    }
+
+    [dir=rtl] &:first-child {
+        border-left: none;
+    }
+
+    [dir=rtl] &:last-child {
+        border-right: none;
+    }
+}

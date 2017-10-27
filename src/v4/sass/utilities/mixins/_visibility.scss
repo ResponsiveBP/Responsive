@@ -1,0 +1,52 @@
+﻿//==
+// Creates visibility classes for each breakpoint.
+//##
+@mixin visibility($bp) {
+    @include bp($bp) {
+
+        .hidden-#{$bp} {
+            display: none !important;
+        }
+
+        .visible-#{$bp} {
+            display: block !important;
+        }
+
+        .visible-#{$bp}.inline {
+            display: inline !important;
+        }
+
+        .visible-#{$bp}.inline-block {
+            display: inline-block !important;
+        }
+
+        table.visible-#{$bp} {
+            display: table;
+        }
+
+        thead.visible-#{$bp} {
+            display: table-header-group !important;
+        }
+
+        tfoot.visible-#{$bp} {
+            display: table-footer-group !important;
+        }
+
+        tr.visible-#{$bp} {
+            display: table-row !important;
+        }
+
+        th.visible-#{$bp},
+        td.visible-#{$bp} {
+            display: table-cell !important;
+        }
+
+        col.visible-#{$bp} {
+            display: table-column !important;
+        }
+
+        caption.visible-#{$bp} {
+            display: table-caption !important;
+        }
+    }
+}

@@ -10,19 +10,9 @@ svg {
 }
 
 // Make the image responsive.
-// 1: Fix svg aspect scaling in IE
 img {
     max-width: 100%;
     height: auto;
-
-    &[src*=".svg"] {
-        width: 100% \9; // 1
-    }
-}
-
-_::-ms-reveal,
-img[src*=".svg"] {
-    width: 100%; // 1
 }
 
 // Remove the border around images in anchors.
@@ -81,17 +71,13 @@ a img {
     }
 
     img {
-        // Position the image absolutely and then move it's four positions
-        // 1000000% out of the container. This with an auto margin is the core of the trick.
-        // Why such a large number? Firefox seems to have issue when using larger images even
-        // at 100%.
-        bottom: -1000000%;
-        left: -1000000%;
+        // Scale the image to the bounds of its container cropping any excess
         margin: auto;
         position: absolute;
-        right: -1000000%;
-        top: -1000000%;
+        object-position: center;
+        object-fit: cover;
         width: 100%;
+        height: 100%;
     }
 
     &.media-scroll {

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Your site description." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Media Tests</title>
+
+    <link href="../../../dist/responsive.css" rel="stylesheet" />
+    <link href="../test-assets/css/tests.css" rel="stylesheet" />
+</head>
+<body>
+    <article class="container">
+        <div>
+            <p class="clearfix"><a class="push" href="../index.html">Back to Index</a></p>
+        </div>
+        <h1>Media</h1>
+        <hr />
+        <section>
+            <h3>Images</h3>
+            <div class="row">
+                <div class="col-s-3">
+                    <img src="../test-assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="col-s-3">
+                    <img src="../test-assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="col-s-3">
+                    <img src="../test-assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                </div>
+                <div class="col-s-3">
+                    <img src="../test-assets/img/SVG_logo.svg" alt="responsive image" title="responsive image" />
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Constrained Images</h3>
+            <p>Wrap the image in a container with the class <code>.media</code>.</p>
+            <div class="row">
+                <div class="col-s-4">
+                    <div class="media">
+                        <img src="../test-assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="col-s-4">
+                    <div class="media">
+                        <img src="../test-assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="col-s-4">
+                    <div class="media">
+                        <img src="../test-assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+            </div>
+            <p>Add the class <code>.four-by-three</code> to change the aspect ratio.</p>
+            <div class="row">
+                <div class="col-s-4">
+                    <div class="media four-by-three">
+                        <img src="../test-assets/img/768x900.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="col-s-4">
+                    <div class="media four-by-three">
+                        <img src="../test-assets/img/768x600.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+                <div class="col-s-4">
+                    <div class="media four-by-three">
+                        <img src="../test-assets/img/768x400.jpg" alt="responsive image" title="responsive image" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    
+    <script src="../../../dist/responsive.js"></script>
+</body>
+</html>

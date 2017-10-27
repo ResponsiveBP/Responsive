@@ -1,53 +1,33 @@
 {
-    "name": "responsive-bp",
-    "description": "A powerful, accessible, developer friendly framework for building responsive websites.",
-    "version": "4.1.4",
-    "keywords": [
-        "html",
-        "css",
-        "js",
-        "javascript",
-        "sass",
-        "mobile-first",
-        "responsive",
-        "rwd",
-        "front-end",
-        "framework",
-        "boilerplate",
-        "web"
-    ],
-    "homepage": "http://responsivebp.com",
-    "author": "James South",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/responsivebp/responsive.git"
-    },
-    "bugs": {
-        "url": "https://github.com/responsivebp/responsive/issues"
-    },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/ResponsiveBP/Responsive/blob/master/MIT-LICENSE.txt"
-        }
-    ],
-    "devDependencies": {
-        "del": "^1.2.0",
-        "event-stream": "^3.3.2",
-        "jshint": "^2.9.2",
-        "gulp": "^3.9.0",
-        "gulp-autoprefixer": "^3.1.0",
-        "gulp-concat": "^2.6.0",
-        "gulp-jshint": "^2.0.0",
-        "gulp-load-plugins": "^1.2.2",
-        "gulp-minify-css": "^1.2.4",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^3.1.0",
-        "gulp-uglify": "^2.0.1",
-        "gulp-util": "^3.0.7",
-        "gulp-zip": "^3.0.2"
-    },
-    "dependencies": {
-        "jquery": ">=2.1.4"
-    }
+  "name": "responsive-bp",
+  "description": "A powerful, accessible, developer friendly framework for building responsive websites.",
+  "version": "5.0.0",
+  "homepage": "http://responsivebp.com",
+  "author": "James South",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/responsivebp/responsive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/responsivebp/responsive/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "eslint": "^4.9.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.8",
+    "sass-loader": "^6.0.6",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "compile": "webpack --config webpack.config.js --progress --color",
+    "watch": "webpack --config webpack.config.js --progress --color --watch"
+  }
 }

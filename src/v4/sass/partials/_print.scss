@@ -1,0 +1,82 @@
+// #
+// Basic print styles
+// --------------------------------------------------
+// Source: https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css
+
+@media print {
+    *, :before, :after, 
+    *:first-letter, 
+    // Cannot use universal selector here as it causes the browser to hang.
+    // https://github.com/ResponsiveBP/Responsive/issues/89
+    p:first-line,
+    div:first-line,
+    blockquote:first-line,
+    li:first-line {
+        box-shadow: none !important;
+        text-shadow: none !important;
+        background: transparent !important;
+        color: #000 !important; // Black prints faster: h5bp.com/s
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    // Don't show links that are fragment identifiers,
+    // or use the `javascript:` pseudo protocol
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid $code-border-color;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; // h5bp.com/t
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+
+    // Responsive overrides for layout.
+    .container {
+        max-width: 100%;
+        width: 100%;
+
+        &.fixed,
+        .fixed & {
+            width: 100%;
+        }
+    }
+}

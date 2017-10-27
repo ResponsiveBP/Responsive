@@ -1,0 +1,77 @@
+﻿[data-navigation],
+.navigation {
+    transform: translate3d(0, 0, 0);
+    position: fixed;
+    z-index: 2147483647;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    visibility: hidden;
+    background-color: $navigation-background-color;
+    color: $navigation-color;
+    transition: .3s linear width;
+
+    &.open {
+        width: $navigation-width;
+    }
+
+    &.visible {
+        visibility: visible;
+    }
+
+    > button:first-child {
+        visibility: visible;
+        background-color: $navigation-background-color;
+        color: $navigation-color;
+        width: 55px;
+        height: 48px;
+        padding: 0;
+        position: absolute;
+        left: 1px;
+        transform: translate3d(-100%, 0, 0);
+        border: none;
+    }
+    // Rtl + pull support.
+    [dir="rtl"] &,
+    &.pull {
+        float: none;
+        right: auto;
+        left: 0;
+
+        > button:first-child {
+            left: auto;
+            right: 1px;
+            transform: translate3d(100%, 0, 0);
+        }
+    }
+    // Ensure Rtl switches side with pull
+    [dir="rtl"] & {
+        &.pull {
+            left: auto;
+            right: 0;
+
+            > button:first-child {
+                right: auto;
+                left: 1px;
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+    }
+
+    & > ul {
+        list-style: none;
+        margin: 0;
+        padding: .5rem 0;
+        width: $navigation-width;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    a {
+        color: inherit;
+        display: block;
+        padding: .5rem 1rem;
+    }
+}

@@ -1,0 +1,122 @@
+// Unordered and ordered lists
+// Scale the padding/margin with the base font.
+ul,
+ol {
+    margin: 1rem 0;
+    padding-left: 2.5rem;
+
+    [dir="rtl"] & {
+        padding-left: 0;
+        padding-right: 2.5rem;
+    }
+}
+
+ul ul,
+ol ol {
+    margin: 0;
+}
+
+// No bullets on first level.
+ul.no-bullets,
+ol.no-bullets {
+    padding-left: 0;
+
+    [dir="rtl"] & {
+        padding-right: 0;
+    }
+
+    & > li {
+        list-style: none;
+    }
+}
+
+// Coloured lists.
+ul.colored,
+ol.colored {
+    padding-left: 2.5rem;
+
+    & > li {
+        list-style-type: none;
+        position: relative;
+        // 1. Normalize funky webkit margin
+        // 2. Escaped unicode coloured circle.
+        // 3. Edit this property to change all colored class lists.
+        &:before {
+            position: absolute;
+            top: .1rem;
+            left: -1rem;
+            -webkit-margin-start: -.25rem; // 1
+            content: "\25cf"; // 2
+            color: $list-colored-bullet; // 3
+            font-size: .8rem;
+            text-align: right;
+            text-decoration: none;
+
+            [dir="rtl"] & {
+                left: auto;
+                right: -1rem;
+                text-align: left;
+            }
+        }
+    }
+}
+
+// Counter increment to replace standard numbers.
+ol.colored {
+    counter-reset: foo;
+
+    > li {
+        counter-increment: foo;
+        // Use the :before pseudo element to supply numbers.
+        // 1. The counter value.
+        // 2. Normalize funky webkit margin
+        &:before {
+            content: counter(foo) "."; // 1
+            top: 0;
+            left: -3.125rem;
+            width: 2.5rem;
+            -webkit-margin-start: 0; // 2
+            font-size: 1rem;
+
+            [dir="rtl"] & {
+                right: -3.125rem;
+            }
+        }
+    }
+}
+
+// Definition lists
+// Prevent dt and dd collapse.
+dt, dd {
+    min-height: 1.4rem;
+}
+
+@include bp-min(s) {
+    // Horizontally styled definition list
+    .dl-horizontal {
+        & > dt {
+            clear: left;
+            float: left;
+            width: 9.375rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: right;
+            text-overflow: ellipsis;
+
+            [dir="rtl"] & {
+                clear: right;
+                float: right;
+                text-align: left;
+            }
+        }
+
+        & > dd {
+            margin-left: 10.375rem;
+
+            [dir="rtl"] & {
+                margin-left: auto;
+                margin-right: 10.375rem;
+            }
+        }
+    }
+}
