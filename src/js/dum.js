@@ -50,7 +50,7 @@ const $d = ((w, d) => {
 
     const sibling = (element, dir, expression) => {
         // eslint-disable-next-line no-empty
-        while (!element.matches(expression) && (element = element[dir])) { }
+        while ((element = element[dir]) && !element.matches(expression)) { }
         return element;
     };
 
