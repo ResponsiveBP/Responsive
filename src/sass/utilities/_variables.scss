@@ -84,6 +84,7 @@ $table-striped-background-color: #ebebeb !default;
 //##
 
 // Forms
+$form-input-font-family: inherit;
 $form-line-height: 1.4 !default;
 $form-placeholder: lighten($base-font-color, 20) !default;
 $form-input-padding: .25rem !default;

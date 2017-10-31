@@ -52,7 +52,7 @@ input {
     border: $form-input-border;
     border-radius: $form-input-border-radius;
     color: $form-input-font-color;
-    font-family: inherit;
+    font-family: $form-input-font-family;
     // Disabled
     // 1. Add cursor for disabled elements.
     // 2. Fix IOS 6/7 opacity issue
