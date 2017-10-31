@@ -106,7 +106,7 @@ $form-input-radio-checkbox-dimensions: 1.334rem !default;
 $form-input-radio-checkbox-margin: 1.1rem;
 
 // Overrides for webkit browsers to normalize the select input.
-$form-input-select-arrow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cGF0aCBmaWxsPSIjMjIyIiBkPSJNMTEgMEw1LjUgOSAwIDAiLz48L3N2Zz4=') !default;
+$form-input-select-arrow: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='10.5'><path fill='%23222' d='M11 0L5.5 9 0 0'/></svg>") !default;
 $form-input-select-arrow-position: .6rem !default;
 $form-input-select-arrow-padding: 1.67rem !default;
 

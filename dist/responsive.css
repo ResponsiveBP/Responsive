@@ -1592,7 +1592,7 @@ textarea {
     input[type='color']::-webkit-color-swatch {
       border: none; }
   select {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMC41Ij48cGF0aCBmaWxsPSIjMjIyIiBkPSJNMTEgMEw1LjUgOSAwIDAiLz48L3N2Zz4=");
+    background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='10.5'><path fill='%23222' d='M11 0L5.5 9 0 0'/></svg>");
     background-repeat: no-repeat;
     background-position: right 0.6rem center;
     padding-right: 1.67rem; }
