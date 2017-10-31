@@ -8,7 +8,12 @@ $base-font-family:
 Helvetica, Arial, sans-serif, 
 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $base-line-height: 1.15 !default;
+
+
+// Colors
 $base-font-color: #222 !default;
+$base-border-color: #c0c0c0 !default;
+$base-disabled-color: #ebebeb !default;
 
 // Typography
 // These have been calculated to match the default browser sizes.
@@ -66,12 +71,12 @@ $grid-print-breakpoint-s-min: 537px !default;
 //##
 
 // Horizontal Rule
-$horizontal-rule-color: #c0c0c0 !default;
+$horizontal-rule-color: $base-border-color !default;
 
 // Tables
 $table-cell-pad: .5rem !default;
 $table-bordered-border-width: 1px !default;
-$table-bordered-border: $table-bordered-border-width solid #c0c0c0 !default;
+$table-bordered-border: $table-bordered-border-width solid $base-border-color !default;
 $table-striped-background-color: #ebebeb !default;
 
 //==
@@ -85,20 +90,17 @@ $form-input-padding: .25rem !default;
 $form-input-margin-bottom: 1rem !default;
 $form-input-height: 2rem !default;
 $form-input-background: #fff !default;
-$form-input-border: 1px solid #c0c0c0 !default;
+$form-input-border: 1px solid $base-border-color !default;
 $form-input-focus-outline-offset: -1px !default;
 $form-input-focus-outline: 1px solid $selection-focus-color !default;
 $form-input-border-radius: 0 !default;
 $form-input-font-color: #222 !default;
 $form-input-ms-file-height: 1.25rem !default;
 
-$form-input-background-disabled: #ebebeb !default;
-$form-input-border-color-disabled: #c0c0c0 !default;
-$form-input-color-disabled: #c0c0c0 !default;
-
-$form-input-background-readonly: null !default;
-$form-input-border-color-readonly: #ebebeb !default;
-$form-input-font-color-readonly: #5d5d5d !default;
+$form-input-background-disabled: $base-disabled-color !default;
+$form-input-border-color-disabled: $base-border-color !default;
+$form-input-color-disabled: $base-border-color !default;
+$form-input-border-color-readonly: $base-disabled-color !default;
 
 $form-input-color-width: 6.563rem !default;
 
@@ -110,11 +112,15 @@ $form-input-select-arrow: url("data:image/svg+xml;charset=utf8,<svg xmlns='http:
 $form-input-select-arrow-position: .6rem !default;
 $form-input-select-arrow-padding: 1.67rem !default;
 
+$form-input-group-background: $base-border-color !default;
+$form-input-group-color: inherit !default;
+
 $form-actions-margin: 1rem !default;
 $form-actions-padding: 1rem !default;
 
 // Buttons
 $button-background: #dadada !default;
+$button-font-color: inherit !default;
 $button-hover-background: darken($button-background, 5) !default;
 $button-active-background: lighten($button-background, 5) !default;
 $button-disabled-background: lighten($button-background, 5) !default;
@@ -183,26 +189,31 @@ $carousel-control-color: #fff !default;
 $carousel-nav-background-color: transparent !default;
 $carousel-nav-border: 1px solid #222 !default;
 
-$carousel-nav-background-color-hover: #c0c0c0 !default;
+$carousel-nav-background-color-hover: $base-border-color !default;
 $carousel-nav-border-color-hover: null !default;
 
 $carousel-nav-background-color-active: #fff !default;
 $carousel-nav-border-color-active: null !default;
 
 // Tabs
-$tabs-nav-border-color: #c0c0c0 !default;
+$tabs-nav-border-color: $base-border-color !default;
 
 $tabs-nav-item-background-color: null !default;
 $tabs-nav-item-border-color: transparent !default;
 $tabs-nav-item-color: null !default;
 
 $tabs-nav-item-background-color-hover: #ebebeb !default;
-$tabs-nav-item-border-color-hover: #c0c0c0 !default;
+$tabs-nav-item-border-color-hover: $base-border-color !default;
 $tabs-nav-item-color-hover: null !default;
 
 $tabs-nav-item-background-color-active: #fff !default;
-$tabs-nav-item-border-color-active: #c0c0c0 !default;
+$tabs-nav-item-border-color-active: $base-border-color !default;
 $tabs-nav-item-color-active: #454545 !default;
 
 // Dropdown
-$accordion-border-color: #c0c0c0 !default;
+$dropdown-transition-function: .3s ease !default;
+$dropdown-accordion-margin: .125rem !default;
+$dropdown-accordion-padding: .5rem !default;
+$dropdown-accordion-border-width: 1px !default;
+$dropdown-accordion-border-style: solid !default;
+$dropdown-accordion-border-color: $base-border-color !default;

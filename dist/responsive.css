@@ -1569,9 +1569,7 @@ textarea {
     resize: none; }
 
 [readonly] {
-  border-color: #ebebeb;
-  color: #5d5d5d;
-  cursor: not-allowed; }
+  border-color: #ebebeb; }
 
 ::placeholder {
   color: #555555;
@@ -1636,8 +1634,9 @@ select.inline-block {
 .supplement {
   padding: 0.25rem 1rem;
   line-height: 1.4;
-  background: #dadada;
-  border: 1px solid #c1c1c1; }
+  background: #c0c0c0;
+  color: inherit;
+  border: 1px solid #c0c0c0; }
   html:not([dir=rtl]) .supplement:first-child {
     border-right: none; }
   html:not([dir=rtl]) .supplement:last-child {
@@ -2060,16 +2059,16 @@ table {
 
 .accordion {
   border: solid 1px #c0c0c0;
-  margin-bottom: .125rem; }
+  margin-bottom: 0.125rem; }
 
 .accordion-head {
   display: block; }
   .accordion-head a {
     display: block;
-    padding: .5rem; }
+    padding: 0.5rem; }
 
 .accordion-body {
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
   border-top: solid 1px #c0c0c0; }
   .accordion-body.collapse {
     border-top-color: transparent; }
@@ -2082,7 +2081,7 @@ table {
   overflow: hidden;
   position: relative;
   width: auto;
-  transition: height .3s ease, width .3s ease, border .3s ease; }
+  transition: height 0.3s ease, width 0.3s ease, border 0.3s ease; }
 
 .collapse {
   height: 0; }

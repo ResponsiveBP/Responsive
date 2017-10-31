@@ -1,7 +1,7 @@
 // Set container styles
 .accordion {
-    border: solid 1px $accordion-border-color;
-    margin-bottom: .125rem;
+    border: $dropdown-accordion-border-style $dropdown-accordion-border-width $dropdown-accordion-border-color;
+    margin-bottom: $dropdown-accordion-margin;
 }
 
 .accordion-head {
@@ -9,13 +9,13 @@
 
     a {
         display: block;
-        padding: .5rem;
+        padding: $dropdown-accordion-padding;
     }
 }
 
 .accordion-body {
-    padding: 0 .5rem;
-    border-top: solid 1px $accordion-border-color;
+    padding: 0 $dropdown-accordion-padding;
+    border-top: $dropdown-accordion-border-style $dropdown-accordion-border-width $dropdown-accordion-border-color;
     
     &.collapse{
         border-top-color: transparent;
@@ -30,7 +30,7 @@
     overflow: hidden;
     position: relative;
     width: auto;
-    transition: height .3s ease, width .3s ease, border .3s ease;
+    transition: height $dropdown-transition-function, width $dropdown-transition-function, border $dropdown-transition-function;
 }
 
 .collapse {

@@ -7,7 +7,7 @@ input[type="button"],
 input[type="reset"] {
     -webkit-appearance: none; // 1
     border-radius: 0; // 1
-    color: inherit;
+    color: $button-font-color;
     cursor: pointer;
     display: inline-block;
     vertical-align: middle;
@@ -35,11 +35,6 @@ input[type="reset"] {
         opacity: 1; // 1
         pointer-events: none
     }
-    // Inline buttons designed for rendering next to inputs.
-    // 1. Fix width on Chrome.
-    // .input-group & {
-    //     min-width: 100%; // 1
-    // }
 }
 
 // Reset width for inputs

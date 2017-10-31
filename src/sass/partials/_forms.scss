@@ -193,10 +193,7 @@ textarea {
 
 // Read only
 [readonly] {
-    background-color: $form-input-background-readonly;
     border-color: $form-input-border-color-readonly;
-    color: $form-input-font-color-readonly;
-    cursor: not-allowed;
 }
 
 // Placeholder
@@ -299,8 +296,9 @@ select.inline-block {
 .supplement {
     padding: $form-input-padding 1rem;
     line-height: $form-line-height;
-    background: $button-background;
-    border: $button-border;
+    background: $form-input-group-background;
+    color: $form-input-group-color;
+    border: $form-input-border;
 
     html:not([dir=rtl]) &:first-child {
         border-right: none;
