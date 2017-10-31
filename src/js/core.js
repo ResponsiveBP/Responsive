@@ -134,7 +134,7 @@ const RbpCore = (($d, w) => {
             if (supportTransition) {
                 $d.one(element, supportTransition, null, () => {
                     // Prevent events firing too early.
-                    let end = new Date();
+                    const end = new Date();
                     if (error >= end.getMilliseconds() - start.getMilliseconds()) {
                         w.setTimeout(callback, duration);
                         return;
@@ -149,7 +149,7 @@ const RbpCore = (($d, w) => {
         }
     }
 
-    let core = new RbpCore();
+    const core = new RbpCore();
     w.$rbp = core.fn;
     return core;
 

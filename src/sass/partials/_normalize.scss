@@ -47,7 +47,7 @@ audio:not([controls]) {
     height: 0;
 }
 
-// Hide the `template` element in IE 11.
+// Hide the `template` element in Safari.
 template {
     display: none;
 }

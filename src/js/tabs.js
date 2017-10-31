@@ -97,13 +97,13 @@ const RbpTabs = (($d, core, base) => {
             $d.setAttr(inPanes, { "tabIndex": -1 })
             $d.removeClass(inPanes, "fade-in");
 
-            const complete = function () {
+            const complete = () => {
                 this.tabbing = false;
                 $d.removeClass(this.tabpanes, "fade-out fade-in");
                 $d.trigger(this.element, this.eshown, { relatedTarget: nextPane })
             };
 
-            core.onTransitionEnd(nextPane, complete.bind(this));
+            core.onTransitionEnd(nextPane, complete);
             core.redraw(nextPane)
             $d.addClass(nextPane, "fade-in");
         }

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -447,7 +447,7 @@ const RbpCore = (($d, w) => {
             if (supportTransition) {
                 $d.one(element, supportTransition, null, () => {
                     // Prevent events firing too early.
-                    let end = new Date();
+                    const end = new Date();
                     if (error >= end.getMilliseconds() - start.getMilliseconds()) {
                         w.setTimeout(callback, duration);
                         return;
@@ -462,7 +462,7 @@ const RbpCore = (($d, w) => {
         }
     }
 
-    let core = new RbpCore();
+    const core = new RbpCore();
     w.$rbp = core.fn;
     return core;
 
@@ -518,7 +518,9 @@ const RbpBase = (($d, core) => {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dismiss__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tabs__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tablelist__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__swiper__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dropdown__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__swiper__ = __webpack_require__(8);
+
 
 
 
@@ -710,13 +712,13 @@ const RbpTabs = (($d, core, base) => {
             $d.setAttr(inPanes, { "tabIndex": -1 })
             $d.removeClass(inPanes, "fade-in");
 
-            const complete = function () {
+            const complete = () => {
                 this.tabbing = false;
                 $d.removeClass(this.tabpanes, "fade-out fade-in");
                 $d.trigger(this.element, this.eshown, { relatedTarget: nextPane })
             };
 
-            core.onTransitionEnd(nextPane, complete.bind(this));
+            core.onTransitionEnd(nextPane, complete);
             core.redraw(nextPane)
             $d.addClass(nextPane, "fade-in");
         }
@@ -881,6 +883,257 @@ const RbpTableList = (($d, core, base) => {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dum__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core__ = __webpack_require__(1);
+
+
+
+
+const RbpDropdown = (($d, core, base) => {
+
+    const defaults = { dimension: "height", parent: null };
+    class RbpDropdown extends base {
+
+        constructor(element, options) {
+            super(element, defaults, options, "dropdown");
+
+            this.eshow = "show.rbp";
+            this.eshown = "shown.rbp";
+            this.ehide = "hide.rbp";
+            this.ehidden = "hidden.rbp";
+
+            this.rtl = core.isRtl(this.element);
+            this.target = $d.query(this.options.target);
+            this.parent = null;
+            this.transitioning = false;
+            this.endSize = null;
+
+            const paneId = this.target.id = this.target.id || core.uid(),
+                active = !this.target.classList.contains("collapse");
+
+            $d.setAttr(this.element, {
+                "role": "tab",
+                "aria-controls": paneId,
+                "aria-selected": active,
+                "aria-expanded": active,
+                "tabindex": 0
+            });
+
+            if (this.options.parent) {
+                this.parent = this.target.closest(this.options.parent);
+                $d.setAttr(this.parent, { "role": "tablist", "aria-multiselectable": "true" });
+
+                // We're safe to add the attribute here since if it's not used when data-api is disabled.
+                $d.setAttr(this.element, { "data-dropdown-parent": this.options.parent });
+            }
+
+            $d.setAttr(this.target, {
+                "role": "tabpanel",
+                "aria-labelledby": this.element.id,
+                "aria-hidden": !active,
+                "tabindex": active ? 0 : -1
+            });
+
+            if (!active) {
+                $d.setAttr(this.target, { "hidden": true });
+            }
+
+            // Bind events.
+            $d.on(this.element, "click", null, this.click.bind(this));
+            $d.on(this.element, "keydown", null, this.keydown.bind(this));
+        }
+
+        transition(method, startEvent, completeEvent, eventData) {
+
+            const doShow = method === "removeClass",
+                complete = () => {
+                    // Ensure the height/width is set to auto.
+                    $d.setStyle(this.target, { [this.options.dimension]: "" });
+
+                    // Set the correct aria attributes.
+                    $d.setAttr(this.target, { "aria-hidden": !doShow, "tabindex": doShow ? 0 : -1 });
+
+                    if (!doShow) {
+                        $d.setAttr(this.target, { "hidden": true });
+                    }
+
+                    let tab = $d.id($d.getAttr(this.target, "aria-labelledby"));
+                    $d.setAttr(tab, { "aria-selected": doShow, "aria-expanded": doShow });
+
+                    if (doShow) {
+                        tab.focus();
+                    }
+
+                    this.transitioning = false;
+
+                    $d.trigger(this.element, completeEvent, { relatedTarget: this.options.target });
+                };
+
+            if (!$d.trigger(this.element, startEvent, eventData)) {
+                return;
+            }
+
+            // Remove or add the expand classes.
+            core.onTransitionEnd(this.target, complete);
+            $d[method](this.target, "collapse");
+            $d[startEvent === this.eshow ? "addClass" : "removeClass"](this.target, "expand");
+            core.redraw(this.target);
+        }
+
+        show() {
+
+            if (this.transitioning || this.target.classList.contains("expand")) {
+                return;
+            }
+
+            this.transitioning = true;
+
+            let dimension = this.options.dimension,
+                size,
+                actives = [];
+
+            if (this.parent) {
+                // Get all the related open panes.
+                actives = $d.queryAll(`[data-dropdown-parent="${this.options.parent}"]`)
+                    .filter(a => {
+                        let data = core.data(a).dropdown,
+                            target = data && data.target;
+
+                        return target && !target.classList.contains("collapse")
+                            && data !== this
+                            && data.parent
+                            && data.parent === this.parent;
+                    });
+            }
+
+            // Set the height/width to zero then to the height/width so animation can take place.
+            $d.setStyle(this.target, { [dimension]: 0 });
+
+            if (core.support.transition) {
+
+                // Calculate the height/width.
+                $d.setStyle(this.target, { [dimension]: "auto" });
+                $d.setAttr(this.target, { "aria-hidden": false });
+                this.target.removeAttribute("hidden");
+                size = window.getComputedStyle(this.target)[dimension];
+
+                // Reset to zero and force repaint.
+                $d.setStyle(this.target, { [dimension]: 0 });
+                core.redraw(this.target);
+            }
+
+            $d.setStyle(this.target, { [dimension]: size || "" });
+            this.transition("removeClass", this.eshow, this.eshown, { relatedTarget: this.options.target });
+            actives.forEach(a => core.data(a).dropdown.hide());
+        }
+
+        hide() {
+
+            if (this.transitioning || this.target.classList.contains("collapse")) {
+                return;
+            }
+
+            this.transitioning = true;
+
+            // Reset the height/width and then reduce to zero.
+            let dimension = this.options.dimension,
+                size;
+
+            if (core.support.transition) {
+
+                // Set the height to auto, calculate the height/width and reset.
+                size = window.getComputedStyle(this.target)[dimension];
+
+                // Reset the size and force repaint.
+                $d.setStyle(this.target, { [dimension]: size });
+                core.redraw(this.target);
+            }
+
+            this.transition("addClass", this.ehide, this.ehidden, { relatedTarget: this.options.target });
+            $d.setStyle(this.target, { [dimension]: 0 });
+        }
+
+        toggle() {
+            if (this.transitioning) {
+                return;
+            }
+
+            this[this.target.classList.contains("collapse") ? "show" : "hide"]();
+        }
+
+        click(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.toggle();
+        }
+
+        keydown(event) {
+            if (/input|textarea/i.test(event.target.tagName)) {
+                return;
+            }
+
+            const which = event.which;
+            if (which === core.keys.SPACE || which === core.keys.LEFT || which === core.keys.RIGHT) {
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            // var $this = $(event.target);
+
+            if (which === core.keys.SPACE) {
+                this.toggle();
+                return;
+            }
+
+            if (!this.parent) {
+                return;
+            }
+
+            let items = $d.queryAll(`[data-dropdown-parent="${this.options.parent}"]`),
+                index = items.findIndex(i => i.matches(":focus")),
+                length = items.length;
+
+            if (which === core.keys.LEFT) {
+                this.rtl ? index += 1 : index -= 1;
+            } else if (which === core.keys.RIGHT) {
+                this.rtl ? index -= 1 : index += 1;
+            }
+
+            // Ensure that the index stays within bounds.
+            if (index === length) {
+                index = 0;
+            }
+
+            if (index < 0) {
+                index = length - 1;
+            }
+
+            const data = core.data(items[index]).dropdown;
+            data && data.show();
+        }
+    }
+
+    // Register plugin and data-api event handler
+    core.fn.dropdown = (e, o) => $d.queryAll(e).forEach(i => core.data(i).dropdown || (core.data(i).dropdown = new RbpDropdown(i, o)));
+    core.fn.on["dropdown.data-api"] = $d.on(document, core.einit, null, () => {
+        core.fn.dropdown("[data-dropdown-target]");
+    });
+
+    $d.ready().then(() => { $d.trigger(document, core.einit); });
+
+    return RbpDropdown;
+
+})(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
+
+/* unused harmony default export */ var _unused_webpack_default_export = (RbpDropdown);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dum__ = __webpack_require__(0);
 
 
 const Swiper = (($d, w, d) => {
@@ -981,7 +1234,7 @@ const Swiper = (($d, w, d) => {
                 }
 
                 /* eslint-disable no-nested-ternary */
-                let dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x,
+                const dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x,
                     dy = (isMouse ? event.pageY : isPointer ? event.clientY : event.touches[0].pageY) - start.y;
                 /* eslint-enable no-nested-ternary */
 
@@ -1026,14 +1279,14 @@ const Swiper = (($d, w, d) => {
 
             const onEnd = () => {
                 // Measure duration
-                let duration = Number(new Date()) - start.time;
+                const duration = Number(new Date()) - start.time;
 
                 // Determine if slide attempt triggers slide.
                 if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
 
                     // Set the direction and return it.
                     /* eslint-disable sort-vars */
-                    let horizontal = delta.x < 0 ? "left" : "right",
+                    const horizontal = delta.x < 0 ? "left" : "right",
                         vertical = delta.y < 0 ? "up" : "down",
                         direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
                     /* eslint-disable sort-vars */
@@ -1050,7 +1303,7 @@ const Swiper = (($d, w, d) => {
 
             const onStart = event => {
                 // Normalize the variables.
-                let isMouse = event.type === "mousedown",
+                const isMouse = event.type === "mousedown",
                     isPointer = event.type !== "touchstart" && !isMouse;
 
                 event.stopPropagation();
@@ -1122,19 +1375,19 @@ const Swiper = (($d, w, d) => {
 /* unused harmony default export */ var _unused_webpack_default_export = (Swiper);
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_rbp_scss__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_rbp_scss__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_rbp_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_rbp_scss__);
 
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

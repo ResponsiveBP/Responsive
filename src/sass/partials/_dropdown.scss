@@ -22,12 +22,6 @@
     }
 }
 
-// Animation styles
-.trans,
-.collapse {
-    transition: height .3s ease, width .3s ease, border .3s ease;
-}
-
 .expand,
 .collapse {
     display: block;
@@ -36,6 +30,7 @@
     overflow: hidden;
     position: relative;
     width: auto;
+    transition: height .3s ease, width .3s ease, border .3s ease;
 }
 
 .collapse {

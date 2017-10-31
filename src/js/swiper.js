@@ -98,7 +98,7 @@ const Swiper = (($d, w, d) => {
                 }
 
                 /* eslint-disable no-nested-ternary */
-                let dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x,
+                const dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x,
                     dy = (isMouse ? event.pageY : isPointer ? event.clientY : event.touches[0].pageY) - start.y;
                 /* eslint-enable no-nested-ternary */
 
@@ -143,14 +143,14 @@ const Swiper = (($d, w, d) => {
 
             const onEnd = () => {
                 // Measure duration
-                let duration = Number(new Date()) - start.time;
+                const duration = Number(new Date()) - start.time;
 
                 // Determine if slide attempt triggers slide.
                 if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
 
                     // Set the direction and return it.
                     /* eslint-disable sort-vars */
-                    let horizontal = delta.x < 0 ? "left" : "right",
+                    const horizontal = delta.x < 0 ? "left" : "right",
                         vertical = delta.y < 0 ? "up" : "down",
                         direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
                     /* eslint-disable sort-vars */
@@ -167,7 +167,7 @@ const Swiper = (($d, w, d) => {
 
             const onStart = event => {
                 // Normalize the variables.
-                let isMouse = event.type === "mousedown",
+                const isMouse = event.type === "mousedown",
                     isPointer = event.type !== "touchstart" && !isMouse;
 
                 event.stopPropagation();

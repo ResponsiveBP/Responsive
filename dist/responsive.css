@@ -2074,10 +2074,6 @@ table {
   .accordion-body.collapse {
     border-top-color: transparent; }
 
-.trans,
-.collapse {
-  transition: height .3s ease, width .3s ease, border .3s ease; }
-
 .expand,
 .collapse {
   display: block;
@@ -2085,7 +2081,8 @@ table {
   margin-top: 0;
   overflow: hidden;
   position: relative;
-  width: auto; }
+  width: auto;
+  transition: height .3s ease, width .3s ease, border .3s ease; }
 
 .collapse {
   height: 0; }
