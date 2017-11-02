@@ -13,6 +13,7 @@ $base-line-height: 1.15 !default;
 // Colors
 $base-font-color: #222 !default;
 $base-border-color: #c0c0c0 !default;
+$base-input-border-color: #c0c0c0 !default;
 $base-disabled-color: #ebebeb !default;
 
 // Typography
@@ -91,7 +92,7 @@ $form-input-padding: .25rem !default;
 $form-input-margin-bottom: 1rem !default;
 $form-input-height: 2rem !default;
 $form-input-background: #fff !default;
-$form-input-border: 1px solid $base-border-color !default;
+$form-input-border: 1px solid $base-input-border-color !default;
 $form-input-focus-outline-offset: -1px !default;
 $form-input-focus-outline: 1px solid $selection-focus-color !default;
 $form-input-border-radius: 0 !default;
@@ -99,8 +100,8 @@ $form-input-font-color: #222 !default;
 $form-input-ms-file-height: 1.25rem !default;
 
 $form-input-background-disabled: $base-disabled-color !default;
-$form-input-border-color-disabled: $base-border-color !default;
-$form-input-color-disabled: $base-border-color !default;
+$form-input-border-color-disabled: $base-input-border-color !default;
+$form-input-color-disabled: $base-input-border-color !default;
 $form-input-border-color-readonly: $base-disabled-color !default;
 
 $form-input-color-width: 6.563rem !default;
@@ -113,7 +114,7 @@ $form-input-select-arrow: url("data:image/svg+xml;charset=utf8,<svg xmlns='http:
 $form-input-select-arrow-position: .6rem !default;
 $form-input-select-arrow-padding: 1.67rem !default;
 
-$form-input-group-background: $base-border-color !default;
+$form-input-group-background: $base-input-border-color !default;
 $form-input-group-color: inherit !default;
 
 $form-actions-margin: 1rem !default;

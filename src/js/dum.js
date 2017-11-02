@@ -204,7 +204,7 @@ const $d = ((w, d) => {
             empty(elements) {
                 return arrayFunction(elements, function () {
                     let child = this;
-                    while (child = this.firstChild) {
+                    while ((child = this.firstChild)) {
                         Object.keys(Handler.listeners).forEach(l => {
                             // Check if eventhandlers are themselves a weak map; we might be able to just delete here
                             if (Handler.listeners[l] === child) { $d.off(l); }
