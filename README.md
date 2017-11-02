@@ -71,8 +71,8 @@ If you are adding new functionality to the build process use:
 
 There are three types of build available:
 
- 1. `npm run compile` Compiles the framework to the **dist** folder.
- 2. `npm run watch` For debug purposes. Compiles the framework to the **dist** folder and watches for further changes
+ 1. `npm run build` Compiles the framework to the **dist** folder.
+ 2. `npm run build:watch` For development purposes. Compiles the framework to the **dist** folder and watches for further changes
 
 ## Authors
 

@@ -192,8 +192,6 @@ const RbpDropdown = (($d, core, base) => {
                 event.stopPropagation();
             }
 
-            // var $this = $(event.target);
-
             if (which === core.keys.SPACE) {
                 this.toggle();
                 return;
