@@ -27,7 +27,7 @@
     "webpack": "^3.8.1"
   },
   "scripts": {
-    "compile": "webpack --config webpack.config.js --progress --color",
-    "watch": "webpack --config webpack.config.js --progress --color --watch"
+    "build": "webpack --config webpack.config.js --progress --color",
+    "build:watch": "webpack --config webpack.config.js --progress --color --watch"
   }
 }
