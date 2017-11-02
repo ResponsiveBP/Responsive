@@ -936,7 +936,7 @@ const RbpDropdown = (($d, core, base) => {
             this.endSize = null;
 
             const paneId = this.target.id = this.target.id || core.uid(),
-                active = !this.target.classList.contains("collapse");
+                active = !$d.hasClass(this.target, "collapse");
 
             $d.setAttr(this.element, {
                 "role": "tab",
@@ -1009,7 +1009,7 @@ const RbpDropdown = (($d, core, base) => {
 
         show() {
 
-            if (this.transitioning || this.target.classList.contains("expand")) {
+            if (this.transitioning || $d.hasClass(this.target, "expand")) {
                 return;
             }
 
@@ -1026,7 +1026,7 @@ const RbpDropdown = (($d, core, base) => {
                         let data = core.data(a).dropdown,
                             target = data && data.target;
 
-                        return target && !target.classList.contains("collapse")
+                        return target && !$d.hasClass(target, "collapse")
                             && data !== this
                             && data.parent
                             && data.parent === this.parent;
