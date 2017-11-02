@@ -2643,30 +2643,30 @@ button.modal-direction {
   .text-l-center {
     text-align: center; } }
 
-.grid-state-indicator {
+.gsi {
   position: absolute;
   top: -9999px;
   height: 1px;
   width: 0; }
 
 @media (max-width: 37.49em) {
-  .grid-state-indicator {
+  .gsi {
     width: 0; } }
 
 @media print and (max-width: 536px), screen and (min-width: 37.5em) and (max-width: 47.99em) {
-  .grid-state-indicator {
+  .gsi {
     width: 1px; } }
 
 @media print and (min-width: 537px) and (max-width: 61.99em), screen and (min-width: 48em) and (max-width: 61.99em) {
-  .grid-state-indicator {
+  .gsi {
     width: 2px; } }
 
 @media (min-width: 62em) and (max-width: 74.99em) {
-  .grid-state-indicator {
+  .gsi {
     width: 3px; } }
 
 @media (min-width: 75em) {
-  .grid-state-indicator {
+  .gsi {
     width: 4px; } }
 
 .scrollbar-measure {

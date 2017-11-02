@@ -32,11 +32,11 @@ const $d = ((w, d) => {
 
     const toArray = obj => Array.prototype.slice.call(obj);
 
-    const arrayFunction = (items, handler, args) => {
+    const arrayFunction = (items, delegate, args) => {
         items = isArray(items) ? items : [items];
         let result = [];
         items.forEach(i => {
-            let r = handler.apply(i, args);
+            const r = delegate.apply(i, args);
             result = result.concat(isArray(r) ? r : [r]);
         });
         return result;
@@ -47,6 +47,18 @@ const $d = ((w, d) => {
             arrayFunction(elements, function () { this.classList[method](n); });
         });
     };
+
+    const insertAction = (elements, children, reverse, action) => {
+        children = isArray(children) ? children : [children];
+        children = reverse ? children.reverse() : children;
+        let i = 0
+        arrayFunction(elements, function () {
+            // If we are adding to multiple elements we need to clone
+            let clones = i > 0 ? children.map(c => c.cloneNode(true)) : children
+            clones.forEach(c => action.call(this, c));
+            i++
+        });
+    }
 
     const sibling = (element, dir, expression) => {
         // eslint-disable-next-line no-empty
@@ -157,6 +169,23 @@ const $d = ((w, d) => {
         // A shortcut for document.createElement()
         create(type) {
             return d.createElement(type);
+        }
+
+        // Prepends the child or collection of child elements to the element or collection of elements
+        // The child collection is reversed before prepending to ensure order is correct.
+        // If prepending to multiple elements the nodes are deep cloned for successive elements
+        prepend(elements, children) {
+            insertAction(elements, children, true, function (c) {
+                this.insertBefore(c, this.firstChild);
+            });
+        }
+
+        // Appends the child or collection of child elements to the element or collection of elements
+        // If appending to multiple elements the nodes are deep cloned for successive elements
+        append(elements, children) {
+            insertAction(elements, children, false, function (c) {
+                this.appendChild(c);
+            });
         }
 
         // Returns a value indicating whether the element classList contains the given name

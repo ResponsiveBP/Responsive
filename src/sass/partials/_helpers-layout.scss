@@ -91,7 +91,7 @@
 @include text-align(l);
 
 // Grid state detection.
-.grid-state-indicator {
+.gsi {
     position: absolute;
     top: -9999px;
     height: 1px;

@@ -115,6 +115,20 @@ const RbpCore = (($d, w) => {
             return Array.prototype.slice.call(template.content.childNodes);
         }
 
+        debounce(func, wait, immediate) {
+
+            let timeout;
+            return function () {
+                const context = this, args = arguments;
+                w.clearTimeout(timeout);
+                timeout = w.setTimeout(function () {
+                    timeout = null;
+                    if (!immediate) { func.apply(context, args); }
+                }, wait);
+                if (immediate && !timeout) { func.apply(context, args); }
+            };
+        }
+
         ensureTransitionEnd(element, duration) {
             const supportTransition = this.support.transition;
             if (!supportTransition) {
