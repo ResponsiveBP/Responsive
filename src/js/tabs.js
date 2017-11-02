@@ -92,7 +92,7 @@ const RbpTabs = (($d, core, base) => {
             $d.addClass(nextPane, "fade-out");
 
             // Shouldn't this be simply currentPane?
-            let inPanes = this.tabpanes.filter(p => p.classList.contains("fade-in"));
+            let inPanes = this.tabpanes.filter(p => $d.hasClass(p, "fade-in"));
 
             $d.setAttr(inPanes, { "tabIndex": -1 })
             $d.removeClass(inPanes, "fade-in");

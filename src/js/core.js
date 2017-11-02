@@ -109,6 +109,12 @@ const RbpCore = (($d, w) => {
             return element.offsetWidth;
         }
 
+        parseHtml(html) {
+            const template = document.createElement("template");
+            template.innerHTML = html;
+            return Array.prototype.slice.call(template.content.childNodes);
+        }
+
         ensureTransitionEnd(element, duration) {
             const supportTransition = this.support.transition;
             if (!supportTransition) {
