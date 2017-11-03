@@ -5,39 +5,30 @@
 const $d = ((w, d) => {
 
     // Regular expressions
+    // Spaces
     const rspace = /\s+/;
 
-    // Returns the type of an object in lowercase
-    const type = obj => {
-        if (obj === null) {
-            return "null";
-        }
+    // Array-like collections that we should slice
+    const rslice = /nodelist|htmlcollection/;
 
-        if (obj === undefined) {
-            return "undefined";
-        }
-
-        let ret = (Object.prototype.toString.call(obj).match(/^\[object\s+(.*?)\]$/)[1] || "").toLowerCase();
-
-        if (ret == "number" && isNaN(obj)) {
-            return "nan";
-        }
-
-        return ret;
-    };
+    // Returns the type of an object in lowercase. Kudos Angus Croll
+    // https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
+    const type = obj => ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 
     const isString = obj => type(obj) === "string";
 
     const isArray = obj => type(obj) === "array";
 
-    const toArray = obj => Array.prototype.slice.call(obj);
+    // Convert, number, string, and collection types to an array 
+    const toArray = obj => {
+        return isArray(obj) ? obj : rslice.test(type(obj)) ? [].slice.call(obj) : [obj];
+    }
 
     const arrayFunction = (items, delegate, args) => {
-        items = isArray(items) ? items : [items];
         let result = [];
-        items.forEach(i => {
+        toArray(items).forEach(i => {
             const r = delegate.apply(i, args);
-            result = result.concat(isArray(r) ? r : [r]);
+            result = result.concat(toArray(r));
         });
         return result;
     };
@@ -49,7 +40,7 @@ const $d = ((w, d) => {
     };
 
     const insertAction = (elements, children, reverse, action) => {
-        children = isArray(children) ? children : [children];
+        children = toArray(children);
         children = reverse ? children.reverse() : children;
         let i = 0
         arrayFunction(elements, function () {
@@ -260,8 +251,7 @@ const $d = ((w, d) => {
             let ids = [],
                 one = () => this.off(ids);
 
-            events = isArray(events) ? events : [events];
-            events.forEach(e => {
+            toArray(events).forEach(e => {
                 ids.push(Handler.on(element, e, selector, handler));
                 ids.push(Handler.on(element, e, selector, one));
             });
