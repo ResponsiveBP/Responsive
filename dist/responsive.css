@@ -1908,18 +1908,24 @@ table {
   -webkit-perspective: 1000; }
   .carousel.no-transition > figure {
     transition-duration: 0s !important; }
-  .carousel > figure {
+  .carousel > figure,
+  .carousel > .slide {
     margin: 0;
     display: none;
     position: relative;
     transition: .7s ease-in-out left;
     transform: translate3d(0, 0, 0); }
-    [dir="rtl"] .carousel > figure {
+    [dir="rtl"] .carousel > figure, [dir="rtl"]
+    .carousel > .slide {
       transition: .7s ease-in-out right; }
-    .carousel > figure > img {
+    .carousel > figure > img,
+    .carousel > .slide > img {
       display: block;
       width: 100%; }
-    .carousel > figure > figcaption {
+    .carousel > figure > figcaption,
+    .carousel > figure > .caption,
+    .carousel > .slide > figcaption,
+    .carousel > .slide > .caption {
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -2026,7 +2032,8 @@ table {
     .carousel > button:hover {
       text-decoration: underline; }
 
-.carousel-fade > figure {
+.carousel-fade > figure,
+.carousel-fade > .slide {
   position: absolute;
   top: 0;
   right: 0 !important;
@@ -2036,12 +2043,18 @@ table {
   height: 100%;
   opacity: 0; }
   .carousel-fade > figure,
-  [dir="rtl"] .carousel-fade > figure {
+  [dir="rtl"] .carousel-fade > figure,
+  .carousel-fade > .slide,
+  [dir="rtl"]
+  .carousel-fade > .slide {
     transition: opacity .7s ease-in-out; }
 
 .carousel-fade > figure.swipe,
 .carousel-fade > figure.next,
-.carousel-fade > figure.prev {
+.carousel-fade > figure.prev,
+.carousel-fade > slide.swipe,
+.carousel-fade > slide.next,
+.carousel-fade > slide.prev {
   z-index: 1;
   opacity: 1; }
 

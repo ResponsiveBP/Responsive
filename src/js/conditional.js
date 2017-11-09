@@ -11,16 +11,16 @@ const RbpConditional = (($d, core, base) => {
         m: null,
         l: null,
         fallback: null,
-        errorHint: "<p>An error has occured.</p>"
+        error: "<p>An error has occured.</p>"
     };
 
     class RbpConditional extends base {
         constructor(element, options) {
             super(element, defaults, options, "conditional");
 
-            this.eload = "load.rbp",
-                this.eloaded = "loaded.rbp",
-                this.eerror = "error.rbp";
+            this.eload = "load.rbp";
+            this.eloaded = "loaded.rbp";
+            this.eerror = "error.rbp";
 
             this.cache = {};
             this.currentGrid = null;
@@ -89,7 +89,7 @@ const RbpConditional = (($d, core, base) => {
                 $d.trigger(this.element, this.eloaded, detail);
             }).catch(e => {
                 $d.trigger(this.element, this.eerror, Object.assign({}, detail, { error: e, }));
-                this.element.innerHTML = this.options.errorHint;
+                this.element.innerHTML = this.options.error;
                 this.loading = false;
             });
         }
@@ -98,7 +98,7 @@ const RbpConditional = (($d, core, base) => {
     // Register plugin and data-api event handler
     core.fn.conditional = (e, o) => $d.queryAll(e).forEach(i => core.data(i).conditional || (core.data(i).conditional = new RbpConditional(i, o)));
     core.fn.on["conditional.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.conditional(`${["xxs", "xs", "s", "m", "l"].map(x => `[data-conditional-${x}]`).join(", ")}`);
+        core.fn.conditional(`${["xxs", "xs", "s", "m", "l", "fallback", "error"].map(x => `[data-conditional-${x}]`).join(", ")}`);
     });
 
     $d.ready().then(() => { $d.trigger(document, core.einit); });

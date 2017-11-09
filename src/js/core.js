@@ -104,6 +104,7 @@ const RbpCore = (($d, w, d) => {
             this.einit = einit;
 
             this.keys = {
+                ENTER: 13,
                 SPACE: 32,
                 LEFT: 37,
                 RIGHT: 39

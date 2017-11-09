@@ -202,7 +202,7 @@ const $d = ((w, d) => {
          */
         children(elements, expression) {
             return arrayFunction(elements, function () {
-                return toArray(this.children || []).filter(c => expression ? c.matches(expression) : true);
+                return toArray(this && this.children || []).filter(c => expression ? c.matches(expression) : true);
             });
         }
 
@@ -308,6 +308,18 @@ const $d = ((w, d) => {
         setAttr(elements, values) {
             arrayFunction(elements, function () {
                 Object.keys(values).forEach(k => this.setAttribute(k, values[k]));
+            });
+        }
+
+        /**
+         * Removes specified attribute, space-separated attribute names or attribute array from the element or collection of elements
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} names The name or array of names to remove
+         * @memberof DUM
+         */
+        remAttr(elements, names) {
+            (isArray(names) ? names : names.split(rspace)).forEach(n => {
+                arrayFunction(elements, function () { this.removeAttribute(n); });
             });
         }
 

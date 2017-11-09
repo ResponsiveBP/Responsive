@@ -272,7 +272,7 @@ const $d = ((w, d) => {
          */
         children(elements, expression) {
             return arrayFunction(elements, function () {
-                return toArray(this.children || []).filter(c => expression ? c.matches(expression) : true);
+                return toArray(this && this.children || []).filter(c => expression ? c.matches(expression) : true);
             });
         }
 
@@ -378,6 +378,18 @@ const $d = ((w, d) => {
         setAttr(elements, values) {
             arrayFunction(elements, function () {
                 Object.keys(values).forEach(k => this.setAttribute(k, values[k]));
+            });
+        }
+
+        /**
+         * Removes specified attribute, space-separated attribute names or attribute array from the element or collection of elements
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} names The name or array of names to remove
+         * @memberof DUM
+         */
+        remAttr(elements, names) {
+            (isArray(names) ? names : names.split(rspace)).forEach(n => {
+                arrayFunction(elements, function () { this.removeAttribute(n); });
             });
         }
 
@@ -594,6 +606,7 @@ const RbpCore = (($d, w, d) => {
             this.einit = einit;
 
             this.keys = {
+                ENTER: 13,
                 SPACE: 32,
                 LEFT: 37,
                 RIGHT: 39
@@ -842,7 +855,9 @@ const RbpBase = (($d, core) => {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tablelist__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dropdown__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__conditional__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__swiper__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__carousel__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__swiper__ = __webpack_require__(9);
+
 
 
 
@@ -1338,7 +1353,7 @@ const RbpDropdown = (($d, core, base) => {
                 // Calculate the height/width.
                 $d.setStyle(this.target, { [dimension]: "auto" });
                 $d.setAttr(this.target, { "aria-hidden": false });
-                this.target.removeAttribute("hidden");
+                $d.remAttr(this.target, "hidden");
                 size = window.getComputedStyle(this.target)[dimension];
 
                 // Reset to zero and force repaint.
@@ -1471,16 +1486,16 @@ const RbpConditional = (($d, core, base) => {
         m: null,
         l: null,
         fallback: null,
-        errorHint: "<p>An error has occured.</p>"
+        error: "<p>An error has occured.</p>"
     };
 
     class RbpConditional extends base {
         constructor(element, options) {
             super(element, defaults, options, "conditional");
 
-            this.eload = "load.rbp",
-                this.eloaded = "loaded.rbp",
-                this.eerror = "error.rbp";
+            this.eload = "load.rbp";
+            this.eloaded = "loaded.rbp";
+            this.eerror = "error.rbp";
 
             this.cache = {};
             this.currentGrid = null;
@@ -1549,7 +1564,7 @@ const RbpConditional = (($d, core, base) => {
                 $d.trigger(this.element, this.eloaded, detail);
             }).catch(e => {
                 $d.trigger(this.element, this.eerror, Object.assign({}, detail, { error: e, }));
-                this.element.innerHTML = this.options.errorHint;
+                this.element.innerHTML = this.options.error;
                 this.loading = false;
             });
         }
@@ -1558,7 +1573,7 @@ const RbpConditional = (($d, core, base) => {
     // Register plugin and data-api event handler
     core.fn.conditional = (e, o) => $d.queryAll(e).forEach(i => core.data(i).conditional || (core.data(i).conditional = new RbpConditional(i, o)));
     core.fn.on["conditional.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.conditional(`${["xxs", "xs", "s", "m", "l"].map(x => `[data-conditional-${x}]`).join(", ")}`);
+        core.fn.conditional(`${["xxs", "xs", "s", "m", "l", "fallback", "error"].map(x => `[data-conditional-${x}]`).join(", ")}`);
     });
 
     $d.ready().then(() => { $d.trigger(document, core.einit); });
@@ -1832,6 +1847,100 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dum__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core__ = __webpack_require__(1);
+
+
+
+
+const RbpCarousel = (($d, core, base) => {
+
+    const rhint = /\((\w+)\|(\w+)\)/;
+
+    const defaults = {
+        interval: 0, // Better for a11y
+        mode: "slide",
+        pause: "hover",
+        wrap: true,
+        keyboard: true,
+        touch: true,
+        lazyImages: true,
+        lazyOnDemand: true,
+        nextTrigger: null,
+        nextHint: "Next: (Left|Right) Arrow",
+        prevTrigger: null,
+        prevHint: "Previous: (Right|Left) Arrow",
+        indicators: null
+    };
+
+    class RbpCarousel extends base {
+        constructor(element, options) {
+            super(element, defaults, options, "carousel"); {
+
+                this.paused = null;
+                this.interval = null;
+                this.sliding = null;
+                this.$items = null;
+                this.keyboardTriggered = null;
+                this.translationDuration = null;
+
+                const rtl = core.isRtl(this.element);
+                this.nextHint = this.options.nextHint.replace(rhint, rtl ? "$1" : "$2");
+                this.prevHint = this.options.prevHint.replace(rhint, rtl ? "$1" : "$2");
+
+                this.nextTrigger = this.options.nextTrigger ? $d.query(this.options.nextTrigger) : $d.children(this.element, "button.forward")[0];
+                this.prevTrigger = this.options.prevTrigger ? $d.query(this.options.prevTrigger) : $d.children(this.element, "button:not(.forward)")[0];
+                this.indicators = this.options.indicators ? $d.query(this.options.indicators) : $d.children($d.children(this.element, "ol")[0], "li");
+                this.items = $d.children(this.element, "figure, .slide");
+
+                const activeIndex = this.items.findIndex(i => $d.hasClass(i, "carousel-active"));
+
+                // Hide the previous button if no wrapping.
+                const hidden = { "aria-hidden": true, "hidden": true };
+                if (!this.options.wrap) {
+                    if (activeIndex === 0) {
+                        $d.setAttr(this.prevTrigger, hidden);
+                    }
+                }
+
+                // Hide both if one item.
+                if (this.items.length === 1) {
+                    $d.setAttr(this.prevTrigger, hidden);
+                    $d.setAttr(this.nextTrigger, hidden);
+                }
+
+                // Add the css class to support fade.
+                this.options.mode === "fade" && $d.addClass(this.$element, "carousel-fade");
+
+                // Add a11y features.
+                $d.setAttr(this.element, { "role": "listbox", "aria-live": "polite" });
+            }
+        }
+    }
+
+    // Register plugin and data-api event handler
+    core.fn.carousel = (e, o) => $d.queryAll(e).forEach(i => core.data(i).carousel || (core.data(i).carousel = new RbpCarousel(i, o)));
+    core.fn.on["carousel.data-api"] = $d.on(document, core.einit, null, () => {
+        core.fn.carousel(`${["interval", "mode", "pause", "wrap", "keyboard"].map(x => `[data-carousel-${x}]`).join(", ")}`);
+    });
+
+    $d.ready().then(() => { $d.trigger(document, core.einit); });
+
+    return RbpCarousel;
+
+})(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
+
+/* unused harmony default export */ var _unused_webpack_default_export = (RbpCarousel);
 
 /***/ })
 /******/ ]);

@@ -9,7 +9,8 @@
         transition-duration: 0s !important;
     }
     // Default slide version
-    > figure {
+    > figure, 
+    > .slide {
         margin: 0;
         display: none;
         position: relative;
@@ -25,7 +26,8 @@
             width: 100%;
         }
 
-        > figcaption {
+        > figcaption, 
+        > .caption {
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -178,7 +180,8 @@
 
 // Fade version
 .carousel-fade {
-    > figure {
+    > figure,
+    > .slide {
         position: absolute;
         top: 0;
         right: 0 !important;
@@ -196,7 +199,10 @@
 
     > figure.swipe,
     > figure.next,
-    > figure.prev {
+    > figure.prev,
+    > slide.swipe,
+    > slide.next,
+    > slide.prev  {
         z-index: 1;
         opacity: 1;
     }
