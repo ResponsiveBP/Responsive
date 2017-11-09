@@ -895,9 +895,9 @@ const RbpDismiss = (($d, core, base) => {
                 $d.setAttr(this.target, { "role": "alert" });
             }
 
-            if (!$d.queryAll(".visuallyhidden", this.element).length) {
+            if (!$d.queryAll(".vhidden", this.element).length) {
                 let span = $d.create("span");
-                $d.addClass(span, "visuallyhidden");
+                $d.addClass(span, "vhidden");
                 span.innerHTML = this.options.hint;
                 this.element.appendChild(span);
             }

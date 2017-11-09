@@ -2707,7 +2707,7 @@ button.modal-direction {
 .hidden {
   display: none !important; }
 
-.visuallyhidden {
+.vhidden {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -2717,13 +2717,15 @@ button.modal-direction {
   position: absolute;
   white-space: no-wrap;
   width: 1px; }
-  .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  .vhidden.focusable:active, .vhidden.focusable:focus {
     clip: auto;
+    clip-path: none;
     height: auto;
     margin: 0;
     overflow: visible;
     position: static;
-    width: auto; }
+    width: auto;
+    white-space: inherit; }
 
 .invisible {
   visibility: hidden; }
