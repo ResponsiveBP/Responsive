@@ -3,7 +3,20 @@ import $d from "./dum"
 /**! 
  * Responsive v5.0.0 | MIT License | responsivebp.com 
  */
-const RbpCore = (($d, w) => {
+const RbpCore = (($d, w, d) => {
+
+    // The initialization event used to trigger component autoloading
+    const einit = "rbpinit";
+
+    const domParser = new window.DOMParser();
+
+    // Observe for changes in the DOM and trigger the einit event
+    new MutationObserver(() => {
+        $d.trigger(d, einit);
+    }).observe(d.body, {
+        childList: true,
+        subtree: true
+    });
 
     const support = {
         touchEvents: "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch,
@@ -42,6 +55,33 @@ const RbpCore = (($d, w) => {
 
     const fcamelCase = (all, letter) => letter.toUpperCase();
 
+    /**
+     * Contains information about the current viewport grid definition
+     * @class Grid
+     */
+    class Grid {
+        constructor(grid, index, range) {
+
+            /**
+             * The grid The current applied grid; either xxs, xs, s, m, or l
+             * @type {string}
+             */
+            this.grid = grid;
+
+            /**
+            * The index of the current grid in the range
+            * @type {number}
+            */
+            this.index = index;
+
+            /**
+            * The available grid range
+            * @type {string[]}
+            */
+            this.range = range;
+        }
+    }
+
     class RbpCore {
 
         constructor() {
@@ -61,7 +101,7 @@ const RbpCore = (($d, w) => {
                 }
             };
             this.support = support;
-            this.einit = "rbpinit";
+            this.einit = einit;
 
             this.keys = {
                 SPACE: 32,
@@ -70,6 +110,11 @@ const RbpCore = (($d, w) => {
             }
         }
 
+        /**
+         * Generates a unique eight character random string prefixed with `uid-`
+         * @returns {string}
+         * @memberof RbpCore
+         */
         uid() {
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             let id = "";
@@ -81,11 +126,23 @@ const RbpCore = (($d, w) => {
             return `uid-${id}`;
         }
 
+        /**
+         * Returns a transformed string in camel case format
+         * @param {string} value The string to alter
+         * @returns {string}
+         * @memberof RbpCore
+         */
         camelCase(value) {
-            let noDash = value.replace(rdashAlpha, fcamelCase);
+            const noDash = value.replace(rdashAlpha, fcamelCase);
             return noDash.charAt(0).toLowerCase() + noDash.substring(1)
         }
 
+        /**
+         * Returns any data stored in data-attributes for the given element
+         * @param {HTMLElement} element 
+         * @returns {object}
+         * @memberof RbpCore
+         */
         data(element) {
             if (!dataMap.has(element)) {
                 let attr = {},
@@ -101,31 +158,99 @@ const RbpCore = (($d, w) => {
             return dataMap.get(element);
         }
 
+        /**
+         * Returns a value indicating what grid range the current browser width is within.
+         * @returns {Grid}
+         * @memberof RbpCore
+         */
+        currentGrid() {
+            const div = $d.create("div");
+            $d.addClass(div, "gsi");
+            $d.prepend(d.body, div);
+
+            // These numbers match values in the css
+            const grids = ["xxs", "xs", "s", "m", "l"],
+                key = parseInt(w.getComputedStyle(div).width, 10);
+
+            div.remove();
+
+            return new Grid(grids[key], key, grids);
+        }
+
+        /**
+         * Returns a value indicating whether the given element is within a right-to-left context
+         * @param {HTMLElement} element 
+         * @returns {boolean}
+         * @memberof RbpCore
+         */
         isRtl(element) {
             return Boolean(element.closest("[dir=rtl]"));
         }
 
+        /**
+         * Forces the browser to redraw given element
+         * @param {HTMLElement} element 
+         * @memberof RbpCore
+         */
         redraw(element) {
             return element.offsetWidth;
         }
 
+        /**
+         * Returns the given HTML string as a complete document.
+         * @param {string} html the string to parse
+         * @returns {HtmlDocument}
+         * @memberof RbpCore
+         */
         parseHtml(html) {
-            const template = document.createElement("template");
-            template.innerHTML = html;
-            return Array.prototype.slice.call(template.content.childNodes);
+            return domParser.parseFromString(html, "text/html");
         }
 
-        debounce(func, wait, immediate) {
+        /**
+         * Returns the document or element from the given url
+         * @param {any} url The path to the target document. if a space prefixed `#selector` is appended to the url then
+         * the element matching that selector will be returned.
+         * @returns {HtmlDocument | HtmlElement}
+         * @memberof RbpCore
+         */
+        loadHtml(url) {
+            const parts = url.split(/\s+/),
+                selector = parts.length > 1 ? parts[1].trim() : null;
+            url = parts[0];
 
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw Error(response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    return selector ? $d.query(selector, this.parseHtml(data)) : this.parseHtml(data).body;
+                });
+        }
+
+        /**
+         * Returns a function, that, as long as it continues to be invoked, will not
+         * be triggered. The function will be called after it stops being called for
+         * N milliseconds. If `immediate` is passed, trigger the function on the
+         * leading edge, instead of the trailing.
+         * @param {Function} func The function to debounce
+         * @param {number} wait The number of milliseconds to delay
+         * @param {boolean} immediate Specify execution on the leading edge of the timeout
+         * @returns {Function}
+         * @memberof RbpCore
+         */
+        debounce(func, wait, immediate) {
             let timeout;
             return function () {
-                const context = this, args = arguments;
+                const args = arguments;
                 w.clearTimeout(timeout);
-                timeout = w.setTimeout(function () {
+                timeout = w.setTimeout(() => {
                     timeout = null;
-                    if (!immediate) { func.apply(context, args); }
+                    if (!immediate) { func.apply(this, args); }
                 }, wait);
-                if (immediate && !timeout) { func.apply(context, args); }
+                if (immediate && !timeout) { func.apply(this, args); }
             };
         }
 
@@ -173,6 +298,6 @@ const RbpCore = (($d, w) => {
     w.$rbp = core.fn;
     return core;
 
-})($d, window);
+})($d, window, document);
 
 export default RbpCore

@@ -95,10 +95,19 @@ const $d = ((w, d) => {
         };
     })();
 
-    // The public instance. We only need one to power the while thing.
+    /**
+     * Specifies helper methods for traversing and manipulating the Document Object Model (DOM)
+     * in an efficient manner 
+     * @class DUM
+     */
     class DUM {
 
-        // Similar to jQuery's $.ready() function. Returns a Promise
+        /**
+         * Specify a function to execute when the element of DOM is fully loaded.
+         * @param {HTMLElement | HTMLDocument} context The context to monitor the state of; defaults to `document` if not set
+         * @returns {Promise}
+         * @memberof DUM
+         */
         ready(context) {
             context = context || d;
 
@@ -113,10 +122,22 @@ const $d = ((w, d) => {
             });
         }
 
-        // A shortcut for document.getElementById();
+        /**
+         * Returns a reference to the first object with the specified value of the `id` or `name` attribute.
+         * @param {string} id 
+         * @returns {HTMLElement | null}
+         * @memberof DUM
+         */
         id(id) { return d.getElementById(id); }
 
-        // A shortcut for element.querySelectorSelector();
+        /**
+         * Returns the first element that is a descendant of the element on which it is invoked that matches the 
+         * specified group of selectors.
+         * @param {string} expression The selector expression; this must be valid CSS syntax
+         * @param {HTMLElement | HTMLDocument} context The context to search within; defaults to `document` if not set
+         * @returns {HTMLElement | null}
+         * @memberof DUM
+         */
         query(expression, context) {
             if (arguments.length == 2 && !context || !expression) {
                 return null;
@@ -125,7 +146,14 @@ const $d = ((w, d) => {
             return isString(expression) ? (context || d).querySelector(expression) : expression || null;
         }
 
-        // A shortcut for element.querySelectorSelectorAll() that can handle multiple contexts
+        /**
+         * Returns a list of the elements within the element or collection of elements (using depth-first pre-order traversal of the elements nodes) 
+         * that match the specified group of selectors. The object returned is different from `querySelectorAll` in that it is a true array.
+         * @param {string} expression The selector expression; this must be valid CSS syntax
+         * @param {HTMLElement | HTMLElement[] | HTMLDocument} contexts The element or collection of elements to search within; defaults to `document` if not set
+         * @returns {HTMLElement[]}
+         * @memberof DUM
+         */
         queryAll(expression, contexts) {
             if (expression instanceof Node || expression instanceof Window) {
                 return [expression];
@@ -140,80 +168,157 @@ const $d = ((w, d) => {
             });
         }
 
-        // Gets the first previous element sibling matching the given optional expression
+        /**
+         * Returns the element matching the optional expression immediately prior to the specified one in its parent's children list, 
+         * or null if the specified element is the first one in the list
+         * @param {HTMLElement} element The element to search from
+         * @param {string} expression The optional selector expression; this must be valid CSS syntax
+         * @returns {HTMLElement | null}
+         * @memberof DUM
+         */
         prev(element, expression) {
             return expression ? sibling(element, "previousElementSibling", expression) : element.previousElementSibling;
         }
 
-        // Gets the first next element sibling matching the given optional expression
+        /**
+         * Returns the element matching the optional expression immediately following to the specified one in its parent's children list, 
+         * or null if the specified element is the last one in the list
+         * @param {HTMLElement} element The element to search from
+         * @param {string} expression The optional selector expression; this must be valid CSS syntax
+         * @returns {HTMLElement | null}
+         * @memberof DUM
+         */
         next(element, expression) {
             return expression ? sibling(element, "nextElementSibling", expression) : element.nextElementSibling;
         }
 
-        // Gets the immediate children of the elements or elements matching the given optional expression
+        /**
+         * Returns an ordered collection of DOM elements that are children of the given element or element collection. 
+         * If there are no element children, then children contains no elements and has a length of 0.
+         * @param {any} elements The element or collection of elements to search within
+         * @param {any} expression The optional selector expression; this must be valid CSS syntax
+         * @returns {HTMLElement[]}
+         * @memberof DUM
+         */
         children(elements, expression) {
             return arrayFunction(elements, function () {
                 return toArray(this.children || []).filter(c => expression ? c.matches(expression) : true);
             });
         }
 
-        // A shortcut for document.createElement()
+        /**
+         * Creates an instance of an element for the specified tag
+         * @param {string} type 
+         * @returns {HTMLElement}
+         * @memberof DUM
+         */
         create(type) {
             return d.createElement(type);
         }
 
-        // Prepends the child or collection of child elements to the element or collection of elements
-        // The child collection is reversed before prepending to ensure order is correct.
-        // If prepending to multiple elements the nodes are deep cloned for successive elements
+        /**
+         * Prepends the child or collection of child elements to the element or collection of elements
+         * The child collection is reversed before prepending to ensure order is correct.
+         * If prepending to multiple elements the nodes are deep cloned for successive elements.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements to prepend within
+         * @param {HTMLElement[]} children The collection of child elements
+         * @memberof DUM
+         */
         prepend(elements, children) {
             insertAction(elements, children, true, function (c) {
                 this.insertBefore(c, this.firstChild);
             });
         }
 
-        // Appends the child or collection of child elements to the element or collection of elements
-        // If appending to multiple elements the nodes are deep cloned for successive elements
+        /**
+         * Appends the child or collection of child elements to the element or collection of elements
+         * If appending to multiple elements the nodes are deep cloned for successive elements.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements to prepend within
+         * @param {HTMLElement[]} children The collection of child elements
+         * @memberof DUM
+         */
         append(elements, children) {
             insertAction(elements, children, false, function (c) {
                 this.appendChild(c);
             });
         }
 
-        // Returns a value indicating whether the element classList contains the given name
+        /**
+         * Returns a value indicating whether the specified class value exists in class attribute of the element.
+         * @param {HTMLElement} element The element to search within
+         * @param {string} name The class name 
+         * @returns {boolean}
+         * @memberof DUM
+         */
         hasClass(element, name) {
             return element.classList.contains(name);
         }
 
-        // Adds an array or space-separated collection of classes to an element or collection of elements
+        /**
+         * Add the specified class, space-separated class values or class array to the given element or collection of elements. 
+         * If these classes already exist in attribute of the element, then they are ignored.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} names 
+         * @memberof DUM
+         */
         addClass(elements, names) {
             classAction(elements, "add", names);
         }
 
-        // Removes an array or space-separated collection of classes to an element or collection of elements
+        /**
+         * Removes the specified class, space-separated class values or class array from the given element or collection of elements. 
+         * If these classes already exist in attribute of the element, then they are ignored.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} names 
+         * @memberof DUM
+         */
         removeClass(elements, names) {
             classAction(elements, "remove", names);
         }
 
-        // Toggles an array or space-separated collection of classes to an element or collection of elements
+        /**
+         * Toggles the specified class, space-separated class values or class array to or from the given element or collection of elements. 
+         * If these classes already exist in attribute of the element, then they are ignored.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} names 
+         * @memberof DUM
+         */
         toggleClass(elements, names) {
             classAction(elements, "toggle", names);
         }
 
-        // Returns the value for the given attribute name from an element
+        /**
+         * Returns the value of a specified attribute on the element. If the given attribute does not exists the value 
+         * returned will be `null`.
+         * @param {HTMLElement} element The element
+         * @param {string} name The string specifying the attribute whose value to return
+         * @returns {HTMLElement | null}
+         * @memberof DUM
+         */
         getAttr(element, name) {
             return element.getAttribute(name);
         }
 
-        // Sets the collection of attribute values on the element or elements
+        /**
+         * Sets the collection of attribute values on the element or collection of elements
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {object} values The object contining the collection of key-value attribute pairs to set
+         * @memberof DUM
+         */
         setAttr(elements, values) {
-            return arrayFunction(elements, function () {
+            arrayFunction(elements, function () {
                 Object.keys(values).forEach(k => this.setAttribute(k, values[k]));
             });
         }
 
-        // Sets the collection of style values on the element or elements
+        /**
+         * Sets the collection of style values on the element or collection of elements
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {object} values The object contining the collection of key-value attribute pairs to set
+         * @memberof DUM
+         */
         setStyle(elements, values) {
-            return arrayFunction(elements, function () {
+            arrayFunction(elements, function () {
                 Object.keys(values).forEach(k => {
                     if (k in this.style) {
                         this.style[k] = values[k];
@@ -225,9 +330,14 @@ const $d = ((w, d) => {
             });
         }
 
-        // Empties the contents of the given element or elements. Any event handlers bound to the element contents are automatically removed
+        /**
+         * Empties the contents of the given element or collection of elements. 
+         * Any event handlers bound to the element contents are automatically removed
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @memberof DUM
+         */
         empty(elements) {
-            return arrayFunction(elements, function () {
+            arrayFunction(elements, function () {
                 let child = this;
                 while ((child = this.firstChild)) {
                     Object.keys(Handler.listeners).forEach(l => {
@@ -239,14 +349,29 @@ const $d = ((w, d) => {
             });
         }
 
-        // Adds an event listener to the given element returning the id of the listener
-        // Events can be delegated by passing a selector
+        /**
+         * Adds an event listener to the given element returning the id of the listener which can be used to unbind
+         * the event handler at a later point in time. Events can be delegated to a parent by passing a CSS selector.
+         * @param {HTMLElement} element 
+         * @param {string | string[]} events The event or collection of event names
+         * @param {string | null} selector The selector expression; this must be valid CSS syntax or `null`
+         * @param {Function} handler The function to call when the event is triggered
+         * @returns {number} The id of the listener
+         * @memberof DUM
+         */
         on(element, events, selector, handler) {
             return arrayFunction(events, function () { return Handler.on(element, this, selector, handler); });
         }
 
-        // Adds an event listener to the given element removing it once the event is fired
-        // Events can be delegated by passing a selector
+        /**
+        * Adds an event listener to the given element that is immediately unbound when the event is triggered. 
+        * Events can be delegated to a parent by passing a CSS selector.
+        * @param {HTMLElement} element 
+        * @param {string | string[]} events The event or collection of event names
+        * @param {string | null} selector The selector expression; this must be valid CSS syntax or `null`
+        * @param {Function} handler The function to call when the event is triggered
+        * @memberof DUM
+        */
         one(element, events, selector, handler) {
             let ids = [],
                 one = () => this.off(ids);
@@ -257,12 +382,24 @@ const $d = ((w, d) => {
             });
         }
 
-        // Removes the event listener matching the given ids
+        /**
+         * Removes any event listener matching the given ids
+         * @param {number[]} ids The event ids, previously bound using `on`.
+         * @memberof DUM
+         */
         off(ids) {
             arrayFunction(ids, function () { Handler.off(this); });
         }
 
-        // Triggers an event. By default the event bubbles and is cancelable
+        /**
+         * Triggers an event returning a value indicating whether the event has been cancelled. 
+         * By default the event bubbles and is cancelable.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string} event The name of the event to trigger
+         * @param {object} detail Optional and defaulting to `null` this contains any event dependant value associated with the event
+         * @returns {boolean} A value indicating whether at least one of the bound event handlers called `Event.preventDefault()`
+         * @memberof DUM
+         */
         trigger(elements, event, detail) {
             let params = { bubbles: true, cancelable: true, detail: detail };
             return arrayFunction(elements, function () { return this.dispatchEvent(new CustomEvent(event, params)); }).length || false;
