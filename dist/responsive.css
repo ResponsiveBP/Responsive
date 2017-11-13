@@ -1934,6 +1934,11 @@ table {
       padding: 1px 3rem;
       background-color: rgba(34, 34, 34, 0.4);
       color: #fff; }
+      .carousel > figure > figcaption a,
+      .carousel > figure > .caption a,
+      .carousel > .slide > figcaption a,
+      .carousel > .slide > .caption a {
+        color: inherit; }
   .carousel > ol {
     left: 0;
     list-style: none;
@@ -2013,24 +2018,29 @@ table {
     width: 3rem;
     height: 3rem;
     margin-top: -1rem;
-    background-color: transparent;
-    border: none;
-    font-size: 2rem;
-    font-weight: bold;
     color: #fff;
-    text-align: center;
-    text-decoration: none; }
+    fill: #fff;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 4.933 8'><path d='M4.933.933L4 0 0 4l4 4 .933-.933L1.867 4'/></svg>");
+    background-size: 50% 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    opacity: .5; }
     [dir="rtl"] .carousel > button {
       left: auto;
-      right: 1px; }
+      right: 1px;
+      background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 4.933 8'><path d='M0 7l3.067-3L0 .933.933 0l4 4-4 4'/></svg>"); }
     .carousel > button.forward {
       left: auto;
-      right: 1px; }
+      right: 1px;
+      background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 4.933 8'><path d='M0 7l3.067-3L0 .933.933 0l4 4-4 4'/></svg>"); }
       [dir="rtl"] .carousel > button.forward {
         right: auto;
-        left: 1px; }
-    .carousel > button:hover {
-      text-decoration: underline; }
+        left: 1px;
+        background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 4.933 8'><path d='M4.933.933L4 0 0 4l4 4 .933-.933L1.867 4'/></svg>"); }
+    .carousel > button:hover, .carousel > button:focus {
+      opacity: 1; }
 
 .carousel-fade > figure,
 .carousel-fade > .slide {
@@ -2067,7 +2077,7 @@ table {
     z-index: 2;
     opacity: 0; }
 
-.carousel-fade .carousel-control, .carousel-fade .carousel-control:visited {
+.carousel-fade .carousel-control {
   z-index: 3; }
 
 .accordion {

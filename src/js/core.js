@@ -255,6 +255,42 @@ const RbpCore = (($d, w, d) => {
             };
         }
 
+        /**
+         * An enhanced version of `window.setInterval` that uses the enhanced performance and accuracy offered by 
+         * `window.requestAnimationFrame`. 
+         * see https://github.com/nk-components/request-interval
+         * @param {Function} func A function to be executed every delay milliseconds. 
+         * @param {number} delay The delay in milliseconds
+         * The function is not passed any parameters, and no return value is expected. 
+         * @returns {object}
+         * @memberof RbpCore
+         */
+        setInterval(func, delay) {
+            let start = Date.now(),
+                handler = { id: w.requestAnimationFrame(loop) };
+
+            return handler;
+
+            function loop() {
+                handler.id = w.requestAnimationFrame(loop);
+
+                if (Date.now() - start >= delay) {
+                    func();
+                    start = Date.now();
+                }
+            }
+        }
+
+        /**
+         * An enhanced version of `window.clearInterval` that uses the enhanced performance and accuracy offered by 
+         * `window.cancelAnimationFrame`. 
+         * @param {object} handler The handler returned by th previous `setInterval` call
+         * @memberof RbpCore
+         */
+        clearInterval(handler) {
+            handler && w.cancelAnimationFrame(handler.id);
+        }
+
         ensureTransitionEnd(element, duration) {
             const supportTransition = this.support.transition;
             if (!supportTransition) {
@@ -273,15 +309,14 @@ const RbpCore = (($d, w, d) => {
             const supportTransition = this.support.transition;
             let duration = getDurationMs(element),
                 error = duration / 10,
-                start = new Date();
+                start = new Date().getTime();
 
             this.redraw(element);
 
             if (supportTransition) {
                 $d.one(element, supportTransition, null, () => {
                     // Prevent events firing too early.
-                    const end = new Date();
-                    if (error >= end.getMilliseconds() - start.getMilliseconds()) {
+                    if (error >= new Date().getTime() - start) {
                         w.setTimeout(callback, duration);
                         return;
                     }

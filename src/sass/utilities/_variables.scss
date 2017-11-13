@@ -187,7 +187,10 @@ $carousel-caption-background-color: rgba(34, 34, 34,.4) !default;
 $carousel-caption-color: #fff !default;
 
 $carousel-control-color: #fff !default;
-
+$carousel-control-background-color: transparent !default;
+$carousel-control-background-prev: str-replace(url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M4.933.933L4 0 0 4l4 4 .933-.933L1.867 4'/></svg>"), "#", "%23") !default;
+$carousel-control-background-next: str-replace(url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M0 7l3.067-3L0 .933.933 0l4 4-4 4'/></svg>"), "#", "%23") !default;
+$carousel-control-background-size: 50% 50% !default;
 $carousel-nav-background-color: transparent !default;
 $carousel-nav-border: 1px solid #222 !default;
 

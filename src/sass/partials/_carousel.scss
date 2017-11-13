@@ -36,6 +36,10 @@
             padding: 1px 3rem;
             background-color: $carousel-caption-background-color;
             color: $carousel-caption-color;
+
+            & a{
+                color: inherit;
+            }
         }
     }
     // Indicators
@@ -138,8 +142,6 @@
         }
     }
 
-    // Ensure element is clickable in IE9
-    // See: https://developer.mozilla.org/en-US/docs/Web/Events/click#Internet_Explorer
     > button {
         position: absolute;
         left: 1px;
@@ -149,31 +151,36 @@
         width: 3rem;
         height: 3rem;        
         margin-top: -1rem;
-        background-color: rgba(0,0,0,0); // 1
-        border: none;
-        font-size: 2rem;
-        font-weight: bold;
         color: $carousel-control-color;
-        text-align: center;
-        text-decoration: none;
+        fill: $carousel-control-color;
+        background-color: $carousel-control-background-color; 
+        background-image: $carousel-control-background-prev; 
+        background-size: $carousel-control-background-size;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: none;
+        opacity: .5;
 
         [dir="rtl"] & {
             left: auto;
             right: 1px;
+            background-image: $carousel-control-background-next;
         }
 
         &.forward {
             left: auto;
             right: 1px;
+            background-image: $carousel-control-background-next;
 
             [dir="rtl"] & {
                 right: auto;
                 left: 1px;
+                background-image: $carousel-control-background-prev;
             }
         }
 
-        &:hover {
-            text-decoration: underline;
+        &:hover, &:focus {
+            opacity: 1;
         }
     }
 }
@@ -222,9 +229,6 @@
     }
 
     .carousel-control {
-        &,
-        &:visited {
             z-index: 3;
-        }
     }
 }
