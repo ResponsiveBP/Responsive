@@ -5,9 +5,12 @@
     position: relative;
     -webkit-backface-visibility: hidden; // 1
     -webkit-perspective: 1000; // 1
-    &.no-transition > figure {
+    &.no-transition{ 
+        > figure, 
+        > .slide {
         transition-duration: 0s !important;
     }
+}
     // Default slide version
     > figure, 
     > .slide {
@@ -121,10 +124,6 @@
         [dir="rtl"] & {
             left: auto;
             right: 100%;
-
-            &.swiping {
-                right: -100%;
-            }
         }
     }
 
@@ -135,10 +134,6 @@
         [dir="rtl"] & {
             left: auto;
             right: -100%;
-
-            &.swiping {
-                right: 100%;
-            }
         }
     }
 
@@ -207,9 +202,9 @@
     > figure.swipe,
     > figure.next,
     > figure.prev,
-    > slide.swipe,
-    > slide.next,
-    > slide.prev  {
+    > .slide.swipe,
+    > .slide.next,
+    > .slide.prev  {
         z-index: 1;
         opacity: 1;
     }

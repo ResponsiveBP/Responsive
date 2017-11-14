@@ -216,6 +216,11 @@ const Swiper = (($d, w, d) => {
             bindTouchEvents(this);
         }
 
+        onSwipeStart(handler) {
+            prvt(this).onSwipeStart = $d.on(d, this.swipeEvents.swipeStart, this.selector, handler);
+            return this;
+        }
+
         onSwipeMove(handler) {
             prvt(this).onSwipeMove = $d.on(d, this.swipeEvents.swipeMove, this.selector, handler);
             return this;

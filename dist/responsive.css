@@ -1906,7 +1906,8 @@ table {
   position: relative;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000; }
-  .carousel.no-transition > figure {
+  .carousel.no-transition > figure,
+  .carousel.no-transition > .slide {
     transition-duration: 0s !important; }
   .carousel > figure,
   .carousel > .slide {
@@ -1996,9 +1997,6 @@ table {
     .carousel .carousel-active.right {
       left: auto;
       right: 100%; }
-      [dir="rtl"] .carousel .next.swiping, [dir="rtl"]
-      .carousel .carousel-active.right.swiping {
-        right: -100%; }
   .carousel .prev,
   .carousel .carousel-active.left {
     left: -100%; }
@@ -2006,9 +2004,6 @@ table {
     .carousel .carousel-active.left {
       left: auto;
       right: -100%; }
-      [dir="rtl"] .carousel .prev.swiping, [dir="rtl"]
-      .carousel .carousel-active.left.swiping {
-        right: 100%; }
   .carousel > button {
     position: absolute;
     left: 1px;
@@ -2062,9 +2057,9 @@ table {
 .carousel-fade > figure.swipe,
 .carousel-fade > figure.next,
 .carousel-fade > figure.prev,
-.carousel-fade > slide.swipe,
-.carousel-fade > slide.next,
-.carousel-fade > slide.prev {
+.carousel-fade > .slide.swipe,
+.carousel-fade > .slide.next,
+.carousel-fade > .slide.prev {
   z-index: 1;
   opacity: 1; }
 
