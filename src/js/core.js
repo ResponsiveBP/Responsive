@@ -247,7 +247,6 @@ const RbpCore = (($d, w, d) => {
             return function () {
                 const args = arguments;
                 w.clearTimeout(timeout);
-                timeout = w.setTimeout(() => {
                 timeout = this.setTimeout(() => {
                     timeout = null;
                     if (!immediate) { func.apply(this, args); }
@@ -259,7 +258,6 @@ const RbpCore = (($d, w, d) => {
         /**
          * An enhanced version of `window.setInterval` that uses the enhanced performance and accuracy offered by 
          * `window.requestAnimationFrame`. 
-         * `windoraf`. 
          * see https://github.com/nk-components/request-interval
          * @param {Function} func A function to be executed every delay milliseconds. 
          * @param {number} delay The delay in milliseconds
@@ -295,7 +293,7 @@ const RbpCore = (($d, w, d) => {
 
         /**
          * An enhanced version of `window.setTimeout` that uses the enhanced performance and accuracy offered by 
-         * `window.cancelAnimationFrame`. 
+         * `window.requestAnimationFrame`. 
          * @param {Function} func A function to be executed after delay milliseconds. 
          * @param {number} delay The delay in milliseconds
          * @returns 
