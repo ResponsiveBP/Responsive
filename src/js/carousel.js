@@ -7,6 +7,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
     const rhint = /\((\w+)\|(\w+)\)/;
 
+    const cactive = "carousel-active",
+        citems = "figure, .slide";
+
     const defaults = {
         interval: 0, // Better for a11y
         mode: "slide",
@@ -43,7 +46,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.prevTrigger = this.options.prevTrigger ? $d.query(this.options.prevTrigger) : $d.children(this.element, "button:not(.forward)")[0];
             this.indicators = this.options.indicators ? $d.query(this.options.indicators) : $d.children($d.children(this.element, "ol")[0], "li");
             this.options.mode === "fade" && $d.addClass(this.element, "carousel-fade");
-            this.items = $d.children(this.element, "figure, .slide");
+            this.items = $d.children(this.element, citems);
             this.interval = parseInt(this.options.interval, 10);
 
             const activeIndex = this.activeIndex();
@@ -122,7 +125,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         }
 
         activeIndex() {
-            return this.items.findIndex(i => $d.hasClass(i, "carousel-active"));
+            return this.items.findIndex(i => $d.hasClass(i, cactive));
         }
 
         pause(event) {
@@ -207,11 +210,10 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             if (this.interval) {
                 this.pause();
             }
-
-            $d.addClass(this.element, "no-transition");
         }
 
         swipemove(event) {
+
             // Left is next in LTR mode.
             let left = event.detail.delta.x < 0,
                 type = this.rtl ? left ? "prev" : "next" : left ? "next" : "prev",
@@ -220,7 +222,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 activeIndex = this.activeIndex(),
                 activeItem = this.items[activeIndex];
 
-            let nextItem = $d[type](activeItem, "figure, .slide");
+            let nextItem = $d[type](activeItem, citems);
 
             // Work out which item to slide to.
             if (!nextItem) {
@@ -232,12 +234,11 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 nextItem = this.items[fallback];
             }
 
-            if ($d.hasClass(nextItem, "carousel-active")) {
+            if ($d.hasClass(nextItem, cactive)) {
                 return;
             }
 
             const notActive = this.items.filter(i => i !== activeItem && i !== nextItem);
-            $d.removeClass(notActive, "swipe");
             $d.setStyle(notActive, { "left": "", "right": "", "opacity": "" });
 
             // if (this.options.lazyImages && this.options.lazyOnDemand) {
@@ -254,25 +255,27 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 percent *= -1;
             }
 
-            // This is crazy complicated. 
-            // Basically swipe behaviour change direction in rtl so you need to handle that.
+            // Swipe behaviour changes direction in rtl mode.
             w.requestAnimationFrame(() => {
+
+                // Frustratingly can't be added on swipe start since edge triggers that on "click"
+                $d.addClass(this.element, "no-transition");
+
                 if (this.options.mode === "slide") {
                     if (this.rtl) {
                         $d.setStyle(activeItem, { "right": percent + "%" });
 
-                        $d.addClass(nextItem, ["swipe", type]);
+                        $d.addClass(nextItem, type);
                         $d.setStyle(nextItem, { "right": (percent + diff) + "%" });
                     } else {
                         $d.setStyle(activeItem, { "left": percent + "%" });
 
-                        $d.addClass(nextItem, ["swipe", type]);
+                        $d.addClass(nextItem, type);
                         $d.setStyle(nextItem, { "left": (percent + diff) + "%" });
                     }
                 } else {
-                    $d.addClass(activeItem, "swipe");
                     $d.setStyle(activeItem, { "opacity": 1 - Math.abs((percent / 100)) });
-                    $d.addClass(nextItem, ["swipe", type]);
+                    $d.addClass(nextItem, type);
                 }
             });
         }
@@ -306,12 +309,10 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                     newDuration = (((100 - percentageTravelled) / 100) * (Math.min(this.translationDuration, swipeDuration)));
 
                 // Set the new temporary duration.
-                this.items.forEach(i => {
-                    $d.setStyle(i, { "transition-duration": `${newDuration}s` });
-                });
+                $d.setStyle(this.items, { "transition-duration": `${newDuration}s` });
             }
 
-            this.slide(method, null, true);
+            this.slide(method);
         }
 
         keydown() { }
@@ -344,9 +345,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             }
         }
 
-        slide(type, next, swipe) {
+        slide(type, next) {
             let activeItem = this.items[this.activeIndex()],
-                nextItem = next || $d[type](activeItem, "figure, .slide"),
+                nextItem = next || $d[type](activeItem, citems),
                 isCycling = this.interval,
                 isNext = type === "next",
                 fallback = isNext ? 0 : this.items.length - 1;
@@ -366,14 +367,14 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 nextItem = this.items[fallback];
             }
 
-            if ($d.hasClass(nextItem, "carousel-active")) {
+            if ($d.hasClass(nextItem, cactive)) {
                 return (this.sliding = false);
             }
 
             const direction = isNext ? "left" : "right",
-                eventDirection = this.rtl ? (isNext ? "right" : "left") : (isNext ? "left" : "right");
+                edirection = this.rtl ? (isNext ? "right" : "left") : (isNext ? "left" : "right");
 
-            if (!$d.trigger(this.element, this.eslide, { relatedTarget: nextItem, direction: eventDirection })) {
+            if (!$d.trigger(this.element, this.eslide, { relatedTarget: nextItem, direction: edirection })) {
                 return;
             }
 
@@ -386,14 +387,14 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.sliding = true;
 
             $d.one(this.element, this.eslid, null, () => {
+                const activeIndex = this.activeIndex();
                 if (!this.options.wrap) {
-                    const activeIndex = this.activeIndex();
-                    if (this.items && activeIndex === this.items.length - 1) {
+                    if (activeIndex === this.items.length - 1) {
                         $d.setAttr(this.nextTrigger, { "aria-hidden": true, "hidden": true });
                         $d.removeAttr(this.prevTrigger, ["aria-hidden", "hidden"]);
                         if (this.keyboardTriggered) { this.prevTrigger.focus(); this.keyboardTriggered = false; }
                     }
-                    else if (this.items && activeIndex === 0) {
+                    else if (activeIndex === 0) {
                         $d.setAttr(this.prevTrigger, { "aria-hidden": true, "hidden": true });
                         $d.removeAttr(this.nextTrigger, ["aria-hidden", "hidden"]);
                         if (this.keyboardTriggered) { this.nextTrigger.focus(); this.keyboardTriggered = false; }
@@ -406,50 +407,40 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
                 // Highlight the correct indicator.
                 $d.removeClass(this.indicators, "active");
-                $d.addClass(this.indicators[this.activeIndex()], "active");
+                $d.addClass(this.indicators[activeIndex], "active");
             });
 
             const complete = () => {
 
-                $d.removeClass(activeItem, ["carousel-active", direction]);
+                $d.removeClass(activeItem, [cactive, direction]);
                 $d.setAttr(activeItem, { "aria-selected": false, "tabIndex": -1 });
 
-                if (this.items && swipe) {
-                    // Clear the transition properties if set.
-                    $d.setStyle(this.items, { "transition-duration": "" });
-                }
+                // We have to undo left etc twice. I don't know why.
+                $d.setStyle(this.items, { "transition-duration": "", "left": "", "right": "", "opacity": "" });
 
                 $d.removeClass(nextItem, [type, direction]);
-                $d.addClass(nextItem, "carousel-active");
+                $d.addClass(nextItem, cactive);
                 $d.setAttr(nextItem, { "aria-selected": true, "tabIndex": 0 });
 
                 this.sliding = false;
-                $d.trigger(this.element, this.eslid, { relatedTarget: nextItem, direction: direction })
+                $d.trigger(this.element, this.eslid, { relatedTarget: nextItem, direction: edirection })
+
+                // Restart the cycle.
+                if (isCycling) {
+
+                    this.cycle();
+                }
             };
 
             // Force reflow.
             $d.addClass(nextItem, type);
             core.redraw(nextItem);
 
-            // Do the slide.
+            // Do the slide and clear the added styles.     
+            core.onTransitionEnd(activeItem, complete);
             $d.addClass(activeItem, direction);
             $d.addClass(nextItem, direction);
-
-            // Clear the added css.
-            if (this.items && swipe) {
-                $d.removeClass(this.items, "swipe");
-                $d.setStyle(this.items, { "left": "", "right": "", "opacity": "" });
-            }
-
-            core.onTransitionEnd(activeItem, complete);
-            core.redraw(activeItem);
-
-            // Restart the cycle.
-            if (isCycling) {
-
-                this.cycle();
-            }
-
+            $d.setStyle(this.items, { "left": "", "right": "", "opacity": "" });        
             return this;
         }
     }

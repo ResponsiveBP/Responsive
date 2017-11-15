@@ -182,25 +182,29 @@ $modal-media-background-color: #222 !default;
 
 $modal-control-color: #fff !default;
 
-// Carousel
+// ###### Carousel ######
+$carousel-transition-function: .7s ease-in-out !default;
 $carousel-caption-background-color: rgba(34, 34, 34,.4) !default;
 $carousel-caption-color: #fff !default;
 
+// Controls
 $carousel-control-color: #fff !default;
 $carousel-control-background-color: transparent !default;
 $carousel-control-background-prev: str-replace(url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M4.933.933L4 0 0 4l4 4 .933-.933L1.867 4'/></svg>"), "#", "%23") !default;
 $carousel-control-background-next: str-replace(url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M0 7l3.067-3L0 .933.933 0l4 4-4 4'/></svg>"), "#", "%23") !default;
 $carousel-control-background-size: 50% 50% !default;
-$carousel-nav-background-color: transparent !default;
-$carousel-nav-border: 1px solid #222 !default;
+$carousel-control-opacity: .5 !default;
+$carousel-control-opacity-active: 1 !default;
 
-$carousel-nav-background-color-hover: $base-border-color !default;
-$carousel-nav-border-color-hover: null !default;
+// Indicators
+$carousel-nav-background-color: #fff !default;
+$carousel-nav-background-opacity: .5 !default;
+$carousel-nav-background-color-hover: $carousel-nav-background-color !default;
+$carousel-nav-background-opacity-hover: 1 !default;
+$carousel-nav-background-color-active: $carousel-nav-background-color !default;
+$carousel-nav-background-opacity-active: 1 !default;
 
-$carousel-nav-background-color-active: #fff !default;
-$carousel-nav-border-color-active: null !default;
-
-// Tabs
+// ###### Tabs ######
 $tabs-nav-border-color: $base-border-color !default;
 
 $tabs-nav-item-background-color: null !default;

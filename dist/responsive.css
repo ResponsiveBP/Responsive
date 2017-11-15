@@ -1914,11 +1914,10 @@ table {
     margin: 0;
     display: none;
     position: relative;
-    transition: .7s ease-in-out left;
-    transform: translate3d(0, 0, 0); }
+    transition: 0.7s ease-in-out left; }
     [dir="rtl"] .carousel > figure, [dir="rtl"]
     .carousel > .slide {
-      transition: .7s ease-in-out right; }
+      transition: 0.7s ease-in-out right; }
     .carousel > figure > img,
     .carousel > .slide > img {
       display: block;
@@ -1941,34 +1940,32 @@ table {
       .carousel > .slide > .caption a {
         color: inherit; }
   .carousel > ol {
+    position: absolute;
+    z-index: 3;
+    top: 1rem;
     left: 0;
+    right: 0;
     list-style: none;
     margin: 0;
     padding: 0;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 1rem;
-    z-index: 3; }
+    text-align: center; }
     .carousel > ol li {
-      background-color: transparent;
-      border: 1px solid #222;
+      background-color: #fff;
+      opacity: 0.5;
       cursor: pointer;
       display: inline-block;
       height: 1rem;
       margin: 1px;
-      text-indent: -9999px;
       width: 1rem; }
       .carousel > ol li:hover {
-        background-color: #c0c0c0; }
+        background-color: #fff;
+        opacity: 1; }
     .carousel > ol .active {
-      background-color: #fff; }
-      .carousel > ol .active:hover {
-        background-color: #fff; }
+      background-color: #fff;
+      opacity: 1; }
   .carousel .carousel-active,
   .carousel .next,
-  .carousel .prev,
-  .carousel .swipe {
+  .carousel .prev {
     display: block; }
   .carousel .carousel-active,
   .carousel .next.left,
@@ -1983,8 +1980,7 @@ table {
     position: relative !important;
     z-index: 1; }
   .carousel .next,
-  .carousel .prev,
-  .carousel .swipe {
+  .carousel .prev {
     position: absolute;
     z-index: 0;
     top: 0;
@@ -2021,7 +2017,7 @@ table {
     background-position: center;
     background-repeat: no-repeat;
     border: none;
-    opacity: .5; }
+    opacity: 0.5; }
     [dir="rtl"] .carousel > button {
       left: auto;
       right: 1px;
@@ -2052,21 +2048,17 @@ table {
   .carousel-fade > .slide,
   [dir="rtl"]
   .carousel-fade > .slide {
-    transition: opacity .7s ease-in-out; }
+    transition: opacity 0.7s ease-in-out; }
 
-.carousel-fade > figure.swipe,
 .carousel-fade > figure.next,
 .carousel-fade > figure.prev,
-.carousel-fade > .slide.swipe,
 .carousel-fade > .slide.next,
 .carousel-fade > .slide.prev {
   z-index: 1;
   opacity: 1; }
 
-.carousel-fade .carousel-active.swipe {
-  z-index: 2; }
-
 .carousel-fade .carousel-active {
+  z-index: 2;
   opacity: 1; }
   .carousel-fade .carousel-active.left, .carousel-fade .carousel-active.right {
     z-index: 2;

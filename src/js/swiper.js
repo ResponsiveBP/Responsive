@@ -19,7 +19,7 @@ const Swiper = (($d, w, d) => {
 
     const pointerStart = "pointerdown",
         pointerMove = "pointermove",
-        pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave"];
+        pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave","lostpointercapture"];
 
     const touchStart = "touchstart",
         touchMove = "touchmove",

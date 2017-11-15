@@ -8,7 +8,9 @@ const RbpCore = (($d, w, d) => {
     // The initialization event used to trigger component autoloading
     const einit = "rbpinit";
 
-    const domParser = new window.DOMParser();
+    const domParser = new w.DOMParser();
+
+    const raf = w.requestAnimationFrame;
 
     // Observe for changes in the DOM and trigger the einit event
     new MutationObserver(() => {
@@ -29,9 +31,7 @@ const RbpCore = (($d, w, d) => {
             const div = $d.create("div"),
                 transEndEventNames = {
                     "transition": "transitionend",
-                    "WebkitTransition": "webkitTransitionEnd",
-                    "MozTransition": "transitionend",
-                    "OTransition": "oTransitionEnd otransitionend"
+                    "WebkitTransition": "webkitTransitionEnd"
                 };
 
             const names = Object.keys(transEndEventNames);
@@ -194,7 +194,7 @@ const RbpCore = (($d, w, d) => {
          * @memberof RbpCore
          */
         redraw(element) {
-            return element.offsetWidth;
+            return element.offsetWidth && element.offsetHeight;
         }
 
         /**
@@ -248,6 +248,7 @@ const RbpCore = (($d, w, d) => {
                 const args = arguments;
                 w.clearTimeout(timeout);
                 timeout = w.setTimeout(() => {
+                timeout = this.setTimeout(() => {
                     timeout = null;
                     if (!immediate) { func.apply(this, args); }
                 }, wait);
@@ -258,6 +259,7 @@ const RbpCore = (($d, w, d) => {
         /**
          * An enhanced version of `window.setInterval` that uses the enhanced performance and accuracy offered by 
          * `window.requestAnimationFrame`. 
+         * `windoraf`. 
          * see https://github.com/nk-components/request-interval
          * @param {Function} func A function to be executed every delay milliseconds. 
          * @param {number} delay The delay in milliseconds
@@ -267,12 +269,12 @@ const RbpCore = (($d, w, d) => {
          */
         setInterval(func, delay) {
             let start = Date.now(),
-                handler = { id: w.requestAnimationFrame(loop) };
+                handler = { id: raf(loop) };
 
             return handler;
 
             function loop() {
-                handler.id = w.requestAnimationFrame(loop);
+                handler.id = raf(loop);
 
                 if (Date.now() - start >= delay) {
                     func();
@@ -291,42 +293,58 @@ const RbpCore = (($d, w, d) => {
             handler && w.cancelAnimationFrame(handler.id);
         }
 
-        ensureTransitionEnd(element, duration) {
-            const supportTransition = this.support.transition;
-            if (!supportTransition) {
-                return this;
+        /**
+         * An enhanced version of `window.setTimeout` that uses the enhanced performance and accuracy offered by 
+         * `window.cancelAnimationFrame`. 
+         * @param {Function} func A function to be executed after delay milliseconds. 
+         * @param {number} delay The delay in milliseconds
+         * @returns 
+         * @memberof RbpCore
+         */
+        setTimeout(func, delay) {
+            let start = Date.now(),
+                handler = { id: raf(loop) };
+
+            return handler;
+
+            function loop() {
+                (Date.now() - start) >= delay
+                    ? func()
+                    : handler.id = raf(loop);
             }
-
-            let called = false;
-            const callback = function () { if (!called) { $d.trigger(element, supportTransition); } };
-
-            $d.one(element, supportTransition, () => called = true);
-            w.setTimeout(callback, duration || getDurationMs(element));
-            return this;
         }
 
-        onTransitionEnd(element, callback) {
+        /**
+         * Binds a one-time event handler to the element that is triggered on CSS transition end
+         * ensuring that the event is always triggered after the correct duration.
+         * @param {HTMLElement} element The element to bind to
+         * @param {Function} func The callback function
+         * @memberof RbpCore
+         */
+        onTransitionEnd(element, func) {
             const supportTransition = this.support.transition;
-            let duration = getDurationMs(element),
-                error = duration / 10,
-                start = new Date().getTime();
 
-            this.redraw(element);
-
-            if (supportTransition) {
-                $d.one(element, supportTransition, null, () => {
-                    // Prevent events firing too early.
-                    if (error >= new Date().getTime() - start) {
-                        w.setTimeout(callback, duration);
-                        return;
-                    }
-
-                    callback();
-                });
-
+            if (!supportTransition) {
+                func();
                 return;
             }
-            callback();
+
+            // Register the eventhandler that calls the defined callback
+            let called = false;
+            $d.one(element, supportTransition, null, () => {
+                if (!called) {
+                    called = true;
+                    func();
+                }
+            });
+
+            // Ensure that the event is always triggered.
+            const ensure = function () {
+                if (!called) {
+                    $d.trigger(element, supportTransition);
+                }
+            };
+            this.setTimeout(ensure, getDurationMs(element));
         }
     }
 
