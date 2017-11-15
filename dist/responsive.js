@@ -642,6 +642,48 @@ const RbpCore = (($d, w, d) => {
         }
 
         /**
+         * Returns a transformed string in dashed case format
+         * @param {string} value The string to alter
+         * @returns {string}
+         * @memberof RbpCore
+         */
+        dashedCase(value) {
+            return value.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+        }
+
+        /**
+         * Returns a namespaced data attribute CSS selector from the given default options 
+         * 
+         * @param {any} defaults 
+         * @param {any} namespace 
+         * @returns 
+         * @memberof RbpCore
+         */
+        dataSelector(defaults, namespace) {
+            return (defaults && `${Object.keys(defaults).map(x => `[data-${namespace}-${this.dashedCase(x)}]`).join(", ")}`)
+                || `[data-${namespace}]`;
+        }
+
+        /**
+         * Registers the given plugin against the data-api using the given namespace and defaults
+         * @param {Class} plugin The plugin type
+         * @param {any} namespace The data-api namespace
+         * @param {object} defaults The object containing the default data-attribute keys
+         * @returns {Class} the plugin type
+         * @memberof RbpCore
+         */
+        registerDataApi(plugin, namespace, defaults) {
+            if (this.fn[namespace]) { return; }
+
+            this.fn[namespace] = (e, o) => $d.queryAll(e).forEach(i => this.data(i)[namespace] || (this.data(i)[namespace] = new plugin(i, o)));
+            this.fn.on[`${namespace}.data-api`] = $d.on(d, this.einit, null, () => {
+                this.fn[namespace](this.dataSelector(defaults, namespace));
+            });
+
+            return plugin;
+        }
+
+        /**
          * Returns any data stored in data-attributes for the given element
          * @param {HTMLElement} element 
          * @returns {object}
@@ -849,8 +891,14 @@ const RbpCore = (($d, w, d) => {
         }
     }
 
+    // Create our core instance
     const core = new RbpCore();
     w.$rbp = core.fn;
+
+    // Register the data event handlers on ready
+    $d.ready().then(() => $d.trigger(d, core.einit));
+
+    // Return
     return core;
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], window, document);
@@ -1234,15 +1282,8 @@ const RbpDismiss = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.dismiss = (e, o) => $d.queryAll(e).forEach(i => core.data(i).dismiss || (core.data(i).dismiss = new RbpDismiss(i, o)));
-    core.fn.on["dismiss.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.dismiss("[data-dismiss-target]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpDismiss;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpDismiss, "dismiss", defaults);
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
 
@@ -1408,15 +1449,8 @@ const RbpTabs = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.tabs = (e, o) => $d.queryAll(e).forEach(i => core.data(i).tabs || (core.data(i).tabs = new RbpTabs(i, o)));
-    core.fn.on["tabs.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.tabs("[data-tabs]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpTabs;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpTabs, "tabs", null);
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
 
@@ -1453,7 +1487,7 @@ const RbpTableList = (($d, core, base) => {
             this.tfoot = $d.children(this.element, "tfoot");
             this.tbody = $d.children(this.element, "tbody");
             this.hasHeader = this.thead.length;
-            
+
             this.headerColumns = $d.queryAll("th", this.thead);
             this.footerColumns = $d.queryAll("th", this.tfoot);
             this.footerColumns.forEach(f => $d.setAttr(f, { "aria-role": "columnheader", "aria-hidden": "false" }));
@@ -1505,15 +1539,8 @@ const RbpTableList = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.tablelist = (e, o) => $d.queryAll(e).forEach(i => core.data(i).tablelist || (core.data(i).tablelist = new RbpTableList(i, o)));
-    core.fn.on["tablelist.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.tablelist("[data-tablelist]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpTableList;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpTableList, "tablelist", null);
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
 
@@ -1533,7 +1560,7 @@ const RbpTableList = (($d, core, base) => {
 
 const RbpDropdown = (($d, core, base) => {
 
-    const defaults = { dimension: "height", parent: null };
+    const defaults = { dimension: "height", target: null, parent: null };
     class RbpDropdown extends base {
 
         constructor(element, options) {
@@ -1754,15 +1781,8 @@ const RbpDropdown = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.dropdown = (e, o) => $d.queryAll(e).forEach(i => core.data(i).dropdown || (core.data(i).dropdown = new RbpDropdown(i, o)));
-    core.fn.on["dropdown.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.dropdown("[data-dropdown-target]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpDropdown;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpDropdown, "dropdown", defaults);
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
 
@@ -1873,15 +1893,8 @@ const RbpConditional = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.conditional = (e, o) => $d.queryAll(e).forEach(i => core.data(i).conditional || (core.data(i).conditional = new RbpConditional(i, o)));
-    core.fn.on["conditional.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.conditional(`${["xxs", "xs", "s", "m", "l", "fallback", "error"].map(x => `[data-conditional-${x}]`).join(", ")}`);
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpConditional;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpConditional, "conditional", defaults);
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__base__["a" /* default */]);
 
@@ -1935,7 +1948,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.sliding = null;
             this.keyboardTriggered = null;
             this.translationDuration = null;
-            
+
             this.nextHint = this.options.nextHint.replace(rhint, this.rtl ? "$1" : "$2");
             this.prevHint = this.options.prevHint.replace(rhint, this.rtl ? "$1" : "$2");
 
@@ -2376,15 +2389,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.carousel = (e, o) => $d.queryAll(e).forEach(i => core.data(i).carousel || (core.data(i).carousel = new RbpCarousel(i, o)));
-    core.fn.on["carousel.data-api"] = $d.on(d, core.einit, null, () => {
-        core.fn.carousel(`${["interval", "mode", "pause", "wrap", "keyboard"].map(x => `[data-carousel-${x}]`).join(", ")}`);
-    });
-
-    $d.ready().then(() => { $d.trigger(d, core.einit); });
-
-    return RbpCarousel;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpCarousel, "carousel", defaults);
+    
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__swiper__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__base__["a" /* default */], window, document);
 

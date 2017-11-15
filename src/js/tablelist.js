@@ -21,7 +21,7 @@ const RbpTableList = (($d, core, base) => {
             this.tfoot = $d.children(this.element, "tfoot");
             this.tbody = $d.children(this.element, "tbody");
             this.hasHeader = this.thead.length;
-            
+
             this.headerColumns = $d.queryAll("th", this.thead);
             this.footerColumns = $d.queryAll("th", this.tfoot);
             this.footerColumns.forEach(f => $d.setAttr(f, { "aria-role": "columnheader", "aria-hidden": "false" }));
@@ -73,15 +73,8 @@ const RbpTableList = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.tablelist = (e, o) => $d.queryAll(e).forEach(i => core.data(i).tablelist || (core.data(i).tablelist = new RbpTableList(i, o)));
-    core.fn.on["tablelist.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.tablelist("[data-tablelist]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpTableList;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpTableList, "tablelist", null);
 
 })($d, RbpCore, RbpBase);
 

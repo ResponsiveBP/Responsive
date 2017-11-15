@@ -4,7 +4,7 @@ import RbpCore from "./core"
 
 const RbpDropdown = (($d, core, base) => {
 
-    const defaults = { dimension: "height", parent: null };
+    const defaults = { dimension: "height", target: null, parent: null };
     class RbpDropdown extends base {
 
         constructor(element, options) {
@@ -225,15 +225,8 @@ const RbpDropdown = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.dropdown = (e, o) => $d.queryAll(e).forEach(i => core.data(i).dropdown || (core.data(i).dropdown = new RbpDropdown(i, o)));
-    core.fn.on["dropdown.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.dropdown("[data-dropdown-target]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpDropdown;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpDropdown, "dropdown", defaults);
 
 })($d, RbpCore, RbpBase);
 

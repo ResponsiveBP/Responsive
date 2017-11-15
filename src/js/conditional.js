@@ -95,15 +95,8 @@ const RbpConditional = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.conditional = (e, o) => $d.queryAll(e).forEach(i => core.data(i).conditional || (core.data(i).conditional = new RbpConditional(i, o)));
-    core.fn.on["conditional.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.conditional(`${["xxs", "xs", "s", "m", "l", "fallback", "error"].map(x => `[data-conditional-${x}]`).join(", ")}`);
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpConditional;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpConditional, "conditional", defaults);
 
 })($d, RbpCore, RbpBase);
 

@@ -37,7 +37,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.sliding = null;
             this.keyboardTriggered = null;
             this.translationDuration = null;
-            
+
             this.nextHint = this.options.nextHint.replace(rhint, this.rtl ? "$1" : "$2");
             this.prevHint = this.options.prevHint.replace(rhint, this.rtl ? "$1" : "$2");
 
@@ -478,15 +478,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.carousel = (e, o) => $d.queryAll(e).forEach(i => core.data(i).carousel || (core.data(i).carousel = new RbpCarousel(i, o)));
-    core.fn.on["carousel.data-api"] = $d.on(d, core.einit, null, () => {
-        core.fn.carousel(`${["interval", "mode", "pause", "wrap", "keyboard"].map(x => `[data-carousel-${x}]`).join(", ")}`);
-    });
-
-    $d.ready().then(() => { $d.trigger(d, core.einit); });
-
-    return RbpCarousel;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpCarousel, "carousel", defaults);
+    
 
 })($d, Swiper, RbpCore, RbpBase, window, document);
 

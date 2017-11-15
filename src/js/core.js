@@ -140,6 +140,48 @@ const RbpCore = (($d, w, d) => {
         }
 
         /**
+         * Returns a transformed string in dashed case format
+         * @param {string} value The string to alter
+         * @returns {string}
+         * @memberof RbpCore
+         */
+        dashedCase(value) {
+            return value.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+        }
+
+        /**
+         * Returns a namespaced data attribute CSS selector from the given default options 
+         * 
+         * @param {any} defaults 
+         * @param {any} namespace 
+         * @returns 
+         * @memberof RbpCore
+         */
+        dataSelector(defaults, namespace) {
+            return (defaults && `${Object.keys(defaults).map(x => `[data-${namespace}-${this.dashedCase(x)}]`).join(", ")}`)
+                || `[data-${namespace}]`;
+        }
+
+        /**
+         * Registers the given plugin against the data-api using the given namespace and defaults
+         * @param {Class} plugin The plugin type
+         * @param {any} namespace The data-api namespace
+         * @param {object} defaults The object containing the default data-attribute keys
+         * @returns {Class} the plugin type
+         * @memberof RbpCore
+         */
+        registerDataApi(plugin, namespace, defaults) {
+            if (this.fn[namespace]) { return; }
+
+            this.fn[namespace] = (e, o) => $d.queryAll(e).forEach(i => this.data(i)[namespace] || (this.data(i)[namespace] = new plugin(i, o)));
+            this.fn.on[`${namespace}.data-api`] = $d.on(d, this.einit, null, () => {
+                this.fn[namespace](this.dataSelector(defaults, namespace));
+            });
+
+            return plugin;
+        }
+
+        /**
          * Returns any data stored in data-attributes for the given element
          * @param {HTMLElement} element 
          * @returns {object}
@@ -347,8 +389,14 @@ const RbpCore = (($d, w, d) => {
         }
     }
 
+    // Create our core instance
     const core = new RbpCore();
     w.$rbp = core.fn;
+
+    // Register the data event handlers on ready
+    $d.ready().then(() => $d.trigger(d, core.einit));
+
+    // Return
     return core;
 
 })($d, window, document);

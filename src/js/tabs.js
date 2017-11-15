@@ -150,15 +150,8 @@ const RbpTabs = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.tabs = (e, o) => $d.queryAll(e).forEach(i => core.data(i).tabs || (core.data(i).tabs = new RbpTabs(i, o)));
-    core.fn.on["tabs.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.tabs("[data-tabs]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpTabs;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpTabs, "tabs", null);
 
 })($d, RbpCore, RbpBase);
 

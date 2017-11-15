@@ -55,15 +55,8 @@ const RbpDismiss = (($d, core, base) => {
         }
     }
 
-    // Register plugin and data-api event handler
-    core.fn.dismiss = (e, o) => $d.queryAll(e).forEach(i => core.data(i).dismiss || (core.data(i).dismiss = new RbpDismiss(i, o)));
-    core.fn.on["dismiss.data-api"] = $d.on(document, core.einit, null, () => {
-        core.fn.dismiss("[data-dismiss-target]");
-    });
-
-    $d.ready().then(() => { $d.trigger(document, core.einit); });
-
-    return RbpDismiss;
+    // Register plugin and data-api event handler and return
+    return core.registerDataApi(RbpDismiss, "dismiss", defaults);
 
 })($d, RbpCore, RbpBase);
 
