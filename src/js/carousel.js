@@ -315,7 +315,41 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.slide(method);
         }
 
-        keydown() { }
+        keydown(event) {
+            if (!event || /input|textarea/i.test(event.target.tagName)) {
+                return;
+            }
+
+            const which = event.which;
+            if (which === core.keys.LEFT || which === core.keys.RIGHT) {
+
+                this.keyboardTriggered = true;
+                event.preventDefault();
+                event.stopPropagation();
+
+                // Seek out the correct direction indicator, shift, and focus.
+                switch (which) {
+                    case core.keys.LEFT:
+                        if (this.rtl) {
+                            this.next();
+                            this.nextTrigger.focus();
+                        } else {
+                            this.prev();
+                            this.prevTrigger.focus();
+                        }
+                        break;
+                    case core.keys.RIGHT:
+                        if (this.rtl) {
+                            this.prev();
+                            this.prevTrigger.focus();
+                        } else {
+                            this.next();
+                            this.nextTrigger.focus();
+                        }
+                        break;
+                }
+            }
+        }
 
         click(event) {
 
@@ -324,7 +358,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             }
 
             const which = event.which;
-            if (which && which !== 1) {
+            if (which && which !== core.keys.CLICK) {
                 if (which === core.keys.SPACE || which === core.keys.ENTER) {
                     this.keyboardTriggered = true;
                 } else {
@@ -440,7 +474,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             core.onTransitionEnd(activeItem, complete);
             $d.addClass(activeItem, direction);
             $d.addClass(nextItem, direction);
-            $d.setStyle(this.items, { "left": "", "right": "", "opacity": "" });        
+            $d.setStyle(this.items, { "left": "", "right": "", "opacity": "" });
             return this;
         }
     }

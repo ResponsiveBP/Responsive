@@ -104,6 +104,7 @@ const RbpCore = (($d, w, d) => {
             this.einit = einit;
 
             this.keys = {
+                CLICK: 1, // Not really a keyboard event but get passed via which
                 ENTER: 13,
                 SPACE: 32,
                 LEFT: 37,
