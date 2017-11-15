@@ -874,6 +874,7 @@ const RbpBase = (($d, core) => {
             this.element = element;
             this.element.id = element.id || core.uid();
             this.options = this.extend(defaults, options || this.dataOptions(prefix));
+            this.rtl = core.isRtl(this.element);
         }
 
         extend(defaults, options) {
@@ -1270,7 +1271,6 @@ const RbpTabs = (($d, core, base) => {
             this.eshow = "show.rbp";
             this.eshown = "shown.rbp";
 
-            this.rtl = core.isRtl(this.element);
             this.tabbing = false;
 
             this.tablist = $d.children(this.element, "ul")[0];
@@ -1935,8 +1935,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.sliding = null;
             this.keyboardTriggered = null;
             this.translationDuration = null;
-
-            this.rtl = core.isRtl(this.element);
+            
             this.nextHint = this.options.nextHint.replace(rhint, this.rtl ? "$1" : "$2");
             this.prevHint = this.options.prevHint.replace(rhint, this.rtl ? "$1" : "$2");
 

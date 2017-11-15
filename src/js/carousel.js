@@ -37,8 +37,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             this.sliding = null;
             this.keyboardTriggered = null;
             this.translationDuration = null;
-
-            this.rtl = core.isRtl(this.element);
+            
             this.nextHint = this.options.nextHint.replace(rhint, this.rtl ? "$1" : "$2");
             this.prevHint = this.options.prevHint.replace(rhint, this.rtl ? "$1" : "$2");
 

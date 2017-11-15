@@ -8,6 +8,7 @@ const RbpBase = (($d, core) => {
             this.element = element;
             this.element.id = element.id || core.uid();
             this.options = this.extend(defaults, options || this.dataOptions(prefix));
+            this.rtl = core.isRtl(this.element);
         }
 
         extend(defaults, options) {

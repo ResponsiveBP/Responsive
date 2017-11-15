@@ -13,7 +13,6 @@ const RbpTabs = (($d, core, base) => {
             this.eshow = "show.rbp";
             this.eshown = "shown.rbp";
 
-            this.rtl = core.isRtl(this.element);
             this.tabbing = false;
 
             this.tablist = $d.children(this.element, "ul")[0];
