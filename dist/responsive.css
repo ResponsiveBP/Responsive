@@ -2244,10 +2244,10 @@ button.modal-direction {
 	 */
   [data-tablelist] {
     opacity: 0; }
-  .table-list {
+  .tablelist {
     display: block; }
-    .table-list thead,
-    .table-list tfoot {
+    .tablelist thead,
+    .tablelist tfoot {
       border: 0;
       clip: rect(0 0 0 0);
       height: 1px;
@@ -2256,46 +2256,46 @@ button.modal-direction {
       padding: 0;
       position: absolute;
       width: 1px; }
-    .table-list tbody,
-    .table-list tr,
-    .table-list td {
+    .tablelist tbody,
+    .tablelist tr,
+    .tablelist td {
       position: static;
       display: block;
       overflow: visible;
       visibility: visible; }
-    .table-list tr:before, .table-list tr:after {
+    .tablelist tr:before, .tablelist tr:after {
       content: "";
       display: table; }
-    .table-list tr:after {
+    .tablelist tr:after {
       clear: both; }
-    .table-list td,
-    .table-list th[scope=row] {
+    .tablelist td,
+    .tablelist th[scope=row] {
       float: left;
       width: 100%; }
-      [dir="rtl"] .table-list td, [dir="rtl"]
-      .table-list th[scope=row] {
+      [dir="rtl"] .tablelist td, [dir="rtl"]
+      .tablelist th[scope=row] {
         float: right; }
-    .table-list td:before, .table-list td:after {
+    .tablelist td:before, .tablelist td:after {
       display: block;
       padding: 0.5rem 0;
       font-weight: bold; }
-    .table-list td:before {
+    .tablelist td:before {
       content: attr(data-thead); }
-    .table-list th[scope=row]:before, .table-list th[scope=row]:after {
+    .tablelist th[scope=row]:before, .tablelist th[scope=row]:after {
       display: block;
       padding: 0.5rem 0;
       font-weight: bold; }
-    .table-list th[scope=row]:before {
+    .tablelist th[scope=row]:before {
       content: attr(data-thead); }
-    .table-list td:after,
-    .table-list th[scope=row]:after {
+    .tablelist td:after,
+    .tablelist th[scope=row]:after {
       content: attr(data-tfoot); }
-    .table-list.table-bordered {
+    .tablelist.table-bordered {
       border-top-width: 0; }
-      .table-list.table-bordered.no-thead {
+      .tablelist.table-bordered.no-thead {
         border-top-width: 1px; }
-      .table-list.table-bordered thead:first-child tr:first-child th,
-      .table-list.table-bordered tbody:first-child tr:first-child td {
+      .tablelist.table-bordered thead:first-child tr:first-child th,
+      .tablelist.table-bordered tbody:first-child tr:first-child td {
         border-top-width: 1px; } }
 
 .tabs {
