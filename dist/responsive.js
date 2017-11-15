@@ -2002,7 +2002,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
             // Bind events
             if (this.options.lazyImages && !this.options.lazyOnDemand) {
-                $d.on(w, "load", null, this.lazyimages.bind(this));
+                $d.on(w, "load", null, this.lazyimages.bind(this, this.items[activeIndex]));
             }
 
             if (this.options.pause === "hover") {
@@ -2036,6 +2036,19 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
         activeIndex() {
             return this.items.findIndex(i => $d.hasClass(i, cactive));
+        }
+
+        lazyimages(slide) {
+            if (!core.data(slide)["lazyLoaded"]) {
+
+                $d.queryAll("img[data-src]", slide).forEach(s => {
+                    if (s.src.length === 0) {
+                        s.src = $d.getAttr(s, "data-src");
+                    }
+                });
+
+                core.data(slide)["lazyLoaded"] = true;
+            }
         }
 
         pause(event) {
@@ -2151,10 +2164,10 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
             const notActive = this.items.filter(i => i !== activeItem && i !== nextItem);
             $d.setStyle(notActive, { "left": "", "right": "", "opacity": "" });
 
-            // if (this.options.lazyImages && this.options.lazyOnDemand) {
-            //     // Load the next image.
-            //     this.lazyimages.call($nextItem);
-            // }
+            if (this.options.lazyImages && this.options.lazyOnDemand) {
+                // Load the next image.
+                this.lazyimages(nextItem);
+            }
 
             // Get the distance swiped as a percentage.
             let width = parseInt(w.getComputedStyle(activeItem).width, 10),
@@ -2322,10 +2335,10 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 return;
             }
 
-            // if (this.options.lazyImages && this.options.lazyOnDemand) {
-            //     // Load the next image.
-            //     this.lazyimages.call(nextItem);
-            // }
+            if (this.options.lazyImages && this.options.lazyOnDemand) {
+                // Load the next image.
+                this.lazyimages(nextItem);
+            }
 
             // Good to go? Then let's slide.
             this.sliding = true;
@@ -2391,7 +2404,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
     // Register plugin and data-api event handler and return
     return core.registerDataApi(RbpCarousel, "carousel", defaults);
-    
+
 
 })(__WEBPACK_IMPORTED_MODULE_0__dum__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__swiper__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__core__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__base__["a" /* default */], window, document);
 
