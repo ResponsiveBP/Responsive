@@ -6,19 +6,13 @@ import $d from "./dum"
 const RbpCore = (($d, w, d) => {
 
     // The initialization event used to trigger component autoloading
-    const einit = "rbpinit";
+    const einit = "init.rpb";
 
     const domParser = new w.DOMParser();
 
     const raf = w.requestAnimationFrame;
 
-    // Observe for changes in the DOM and trigger the einit event
-    new MutationObserver(() => {
-        $d.trigger(d, einit);
-    }).observe(d.body, {
-        childList: true,
-        subtree: true
-    });
+    const okeys = Object.keys;
 
     const support = {
         touchEvents: "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch,
@@ -34,7 +28,7 @@ const RbpCore = (($d, w, d) => {
                     "WebkitTransition": "webkitTransitionEnd"
                 };
 
-            const names = Object.keys(transEndEventNames);
+            const names = okeys(transEndEventNames);
             for (let i = 0; i < names.length; i++) {
                 if (div.style[names[i]] !== undefined) {
                     return transEndEventNames[names[i]];
@@ -89,7 +83,7 @@ const RbpCore = (($d, w, d) => {
                 on: {},
                 off: function (api) {
                     if (api === "data-api") {
-                        Object.keys(this.on).forEach(k => {
+                        okeys(this.on).forEach(k => {
                             $d.off(this.on[k]);
                             delete this.on[k];
                         });
@@ -159,7 +153,7 @@ const RbpCore = (($d, w, d) => {
          * @memberof RbpCore
          */
         dataSelector(defaults, namespace) {
-            return (defaults && `${Object.keys(defaults).map(x => `[data-${namespace}-${this.dashedCase(x)}]`).join(", ")}`)
+            return (defaults && `${okeys(defaults).map(x => `[data-${namespace}-${this.dashedCase(x)}]`).join(", ")}`)
                 || `[data-${namespace}]`;
         }
 
@@ -401,12 +395,23 @@ const RbpCore = (($d, w, d) => {
         }
     }
 
-    // Create our core instance
+    // Create our core instance and bind to the window
     const core = new RbpCore();
     w.$rbp = core.fn;
 
     // Register the data event handlers on ready
-    $d.ready().then(() => $d.trigger(d, core.einit));
+    $d.ready().then(() => {
+        // Trigger the einit event
+        $d.trigger(d, core.einit);
+
+        // Observe for future changes in the DOM
+        new MutationObserver(() => {
+            $d.trigger(d, einit);
+        }).observe(d.body, {
+            childList: true,
+            subtree: true
+        });
+    });
 
     // Return
     return core;
