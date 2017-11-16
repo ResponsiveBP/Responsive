@@ -167,22 +167,22 @@ $navigation-width: 260px !default;
 $navigation-background-color: #222 !default;
 $navigation-color: #fff !default;
 
-// Modal
+// ######################
+// ######## Modal #######
+// ######################
 $modal-overlay-background-color: rgba(0, 0, 0,.7) !default;
-
-$modal-header-background: transparent !default;
-$modal-header-color: #fff !default;
-
-$modal-footer-background: transparent !default;
-$modal-footer-color: #fff !default;
+$modal-max-width: $grid-container-max-width !default;
+$modal-titles-color: #fff !default;
 
 $modal-content-background-color: #fff !default;
-
 $modal-media-background-color: #222 !default;
-
 $modal-control-color: #fff !default;
 
+$modal-loader-color: #fff !default;
+
+// ######################
 // ###### Carousel ######
+// ######################
 $carousel-transition-function: .7s ease-in-out !default;
 $carousel-caption-background-color: rgba(34, 34, 34,.4) !default;
 $carousel-caption-color: #fff !default;
@@ -204,7 +204,9 @@ $carousel-nav-background-opacity-hover: 1 !default;
 $carousel-nav-background-color-active: $carousel-nav-background-color !default;
 $carousel-nav-background-opacity-active: 1 !default;
 
-// ###### Tabs ######
+// ######################
+// ######## Tabs ########
+// ######################
 $tabs-nav-border-color: $base-border-color !default;
 
 $tabs-nav-item-background-color: null !default;

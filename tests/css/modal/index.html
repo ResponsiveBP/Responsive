@@ -21,10 +21,10 @@
         <a href="../grid/standard-s.html #grid" data-modal-title="Relative url">Launch relative overlay</a>
 
         <h3>External target with iframe header and footer</h3>
-        <a href="//www.microsoft.com" data-modal-title="Microsoft" data-modal-description="<p>sample text or the footer.</p>" data-modal-iframe-scroll="false">Launch external overlay</a>
+        <a href="//www.imageprocessor.org" data-modal-title="ImageProcessor" data-modal-description="<p>sample text or the footer.</p>" data-modal-iframe-scroll="false">Launch external overlay</a>
 
         <h3>External target with iframe header and footer and scrollbars</h3>
-        <a href="//www.microsoft.com" data-modal-title="Microsoft" data-modal-description="<p>sample text or the footer.</p>">Launch external overlay</a>
+        <a href="//www.imageprocessor.org" data-modal-title="ImageProcessor" data-modal-description="<p>sample text or the footer.</p>">Launch external overlay</a>
 
         <h3>Youtube</h3>
         <a href="//www.youtube.com/embed/eRW84aVCMWo" data-modal-title="Youtube">Launch Youtube overlay</a>
@@ -163,28 +163,28 @@
     
     <script src="../../../dist/responsive.js"></script>
     <script>
-        var $target = $(":attrStart(data-modal)"),
-            $h1 = $("h1");
+        // var $target = $(":attrStart(data-modal)"),
+        //     $h1 = $("h1");
 
-        // Bind to the show event.
-        $target.on("show.r.modal", function (event) {
-            $h1.text("show");
-        });
+        // // Bind to the show event.
+        // $target.on("show.r.modal", function (event) {
+        //     $h1.text("show");
+        // });
 
-        // Bind to the shown event.
-        $target.on("shown.r.modal", function (event) {
-            $h1.text("shown");
-        });
+        // // Bind to the shown event.
+        // $target.on("shown.r.modal", function (event) {
+        //     $h1.text("shown");
+        // });
 
-        // Bind to the hide event.
-        $target.on("hide.r.modal", function (event) {
-            $h1.text("hide");
-        });
+        // // Bind to the hide event.
+        // $target.on("hide.r.modal", function (event) {
+        //     $h1.text("hide");
+        // });
 
-        // Bind to the hidden event.
-        $target.on("hidden.r.modal", function (event) {
-            $h1.text("hidden");
-        });
+        // // Bind to the hidden event.
+        // $target.on("hidden.r.modal", function (event) {
+        //     $h1.text("hidden");
+        // });
     </script>
 </body>
 </html>

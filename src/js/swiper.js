@@ -7,19 +7,19 @@ const Swiper = (($d, w, d) => {
         pointerEvents: w.PointerEvent
     };
 
-    // Used to store the event handlers for all instances.
-    const map = new WeakMap(),
-        prvt = object => {
-            if (!map.has(object)) {
-                map.set(object, {});
-            }
+    // Used to store private methods.
+    const map = new WeakMap();
+    const prvt = object => {
+        if (!map.has(object)) {
+            map.set(object, {});
+        }
 
-            return map.get(object);
-        };
+        return map.get(object);
+    };
 
     const pointerStart = "pointerdown",
         pointerMove = "pointermove",
-        pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave","lostpointercapture"];
+        pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave", "lostpointercapture"];
 
     const touchStart = "touchstart",
         touchMove = "touchmove",

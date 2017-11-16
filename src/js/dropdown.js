@@ -127,7 +127,7 @@ const RbpDropdown = (($d, core, base) => {
                 // Calculate the height/width.
                 $d.setStyle(this.target, { [dimension]: "auto" });
                 $d.setAttr(this.target, { "aria-hidden": false });
-                $d.remAttr(this.target, "hidden");
+                $d.removeAttr(this.target, "hidden");
                 size = window.getComputedStyle(this.target)[dimension];
 
                 // Reset to zero and force repaint.

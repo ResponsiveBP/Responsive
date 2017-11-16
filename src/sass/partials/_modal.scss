@@ -1,176 +1,304 @@
-.modal-overlay {
+// 1: Max possible value
+// 2: Prevent font shift on chrome.
+.modal-overlay,
+#dmo {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 2147483647;
+    z-index: 2147483647; // 1
     width: 100%;
     height: 100%;
     overflow: hidden;
     touch-action: none;
     background-color: $modal-overlay-background-color;
     -webkit-overflow-scrolling: touch;
-    -webkit-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; // 2
     text-align: center;
+}
 
-    &:before {
-        content: "";
-        display: inline-block;
-        height: 100%;
-        width: 1px;
-        margin-right: -1px;
-        vertical-align: middle;
+// 1: Maintain aspect-ratio for boxed iframes
+// 2: Allow normal image scaling
+.modal {
+    height: 95%;
+    max-height: 95%;
+    max-width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 
-        [dir="rtl"] & {
-            margin-right: 0;
-            margin-left: -1px;
+    &.auto-height{
+        height: auto; // 1
+    }
+
+    &.auto-width{
+        display: inline-flex; // 2
+    }
+
+    & > * {
+        flex: 1 1 auto;
+    }
+
+    & > header,
+    & > footer {
+        color: $modal-titles-color;
+    }
+
+    // 1: We want main to dominate height
+    // 2: No double scroll
+    & > main {
+        text-align: initial;
+        background-color: $modal-content-background-color;
+        overflow-y: auto;
+        flex-basis: 100%; // 1 
+
+        &.no-overflow {            
+            overflow: hidden; // 2
         }
+
+        // Stretch unwrapped iframes to container.
+        > iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        > .media {
+            margin-bottom: 0;
+        }
+    }   
+}
+
+@include bp-min(l) {
+    .modal{
+        max-width: $modal-max-width;
     }
 }
 
-// Embedded animated gif.
+.modal-loader,
+.modal-loader:before,
 .modal-loader:after {
+    background: $modal-loader-color;
+    animation: load 1.5s infinite ease-in-out;
+    width: .5rem;
+    height: 1rem;
+}
+
+.modal-loader {
+    color: $modal-loader-color;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 3;
-    width: 12px;
-    height: 4px;
     margin: auto;
-    content: "";
-    background-image: url(data:image/gif;base64,R0lGODlhDAAEAPABAP///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJMgABACwAAAAADAAEAAACCoQRqXm42h48MhUAIfkECTIAAQAsBAAAAAQABAAAAgSEjwkFACH5BAUyAAEALAgAAAAEAAQAAAIEhI8JBQA7); // 1
-    image-rendering: optimizeSpeed;
-}
+    transform: translateZ(0);
+    animation-delay: -0.16s;
 
-.modal {
-    display: inline-block;
-    max-height: 95%;
-    max-width: 95%;
-    vertical-align: middle;
-    margin: 0 auto;
-    overflow: auto;
-}
+    &:before, &:after {
+        position: absolute;
+        top: 0;
+        content: ""
+    }
 
-.modal-ajax.container,
-.modal-iframe {
-    @extend .container;
-}
+    &:before {
+        left: -1em;
+        animation-delay: -0.32s;
+    }
 
-.modal-iframe,
-.modal-image {
-    overflow: hidden;
-}
-
-.modal-iframe .media,
-.modal-iframe iframe {
-    max-height: 100%;
-    max-width: 100%;
-}
-
-.modal-iframe .media {
-    background-color: #fff;
-    margin-bottom: 0;
-}
-
-.modal-iframe.iframe-full {
-    height: 95%;
-}
-
-.iframe-full .media {
-    height: 100%;
-    padding: 0;
-}
-
-.modal-image {
-    > img {
-        max-height: 100%;
+    &:after {
+        left: 1rem;
     }
 }
 
-.modal-content {
-    max-height: 100%;
-    overflow: auto;
-    padding: 1rem;
-    background-color: $modal-content-background-color;
-    text-align: left;
-
-    [dir="rtl"] & {
-        text-align: right;
+@keyframes load {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0;
+        height: 1rem;
+    }
+    40% {
+        box-shadow: 0 -.5rem;
+        height: 1.5rem;
     }
 }
 
-.modal-header,
-.modal-footer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    color: #fff;
-}
 
-.modal-header {
-    padding: 0 4.555rem;
-}
+// .modal-overlay {
+//     position: fixed;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     z-index: 2147483647;
+//     width: 100%;
+//     height: 100%;
+//     overflow: hidden;
+//     touch-action: none;
+//     background-color: $modal-overlay-background-color;
+//     -webkit-overflow-scrolling: touch;
+//     -webkit-backface-visibility: hidden;
+//     text-align: center;
 
-.modal-footer {
-    top: auto;
-    bottom: 0;
-}
+//     &:before {
+//         content: "";
+//         display: inline-block;
+//         height: 100%;
+//         width: 1px;
+//         margin-right: -1px;
+//         vertical-align: middle;
 
-.modal-close {
-    position: fixed;
-    top: 1px;
-    right: 1px;
-    z-index: 2;
-    display: inline-block;
-    padding: $h2-margin;
-    font-size: $h2-font-size;
-    font-weight: bold;
-    color: $modal-control-color;
+//         [dir="rtl"] & {
+//             margin-right: 0;
+//             margin-left: -1px;
+//         }
+//     }
+// }
 
-    [dir="rtl"] & {
-        right: auto;
-        left: 1px;
-    }
-}
+// // Embedded animated gif.
+// .modal-loader:after {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     z-index: 3;
+//     width: 12px;
+//     height: 4px;
+//     margin: auto;
+//     content: "";
+//     background-image: url(data:image/gif;base64,R0lGODlhDAAEAPABAP///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJMgABACwAAAAADAAEAAACCoQRqXm42h48MhUAIfkECTIAAQAsBAAAAAQABAAAAgSEjwkFACH5BAUyAAEALAgAAAAEAAQAAAIEhI8JBQA7); // 1
+//     image-rendering: optimizeSpeed;
+// }
 
-.modal-direction {
-    position: fixed;
-    top: 49%;
-    left: 0;
-    z-index: 2;
-    display: block;
-    width: 3rem;
-    padding: 1rem;
-    color: $modal-control-color;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
+// .modal {
+//     display: inline-block;
+//     max-height: 95%;
+//     max-width: 95%;
+//     vertical-align: middle;
+//     margin: 0 auto;
+//     overflow: auto;
+// }
 
-    [dir="rtl"] & {
-        right: 0;
-    }
+// .modal-ajax.container,
+// .modal-iframe {
+//     @extend .container;
+// }
 
-    &.next {
-        left: auto;
-        right: 0;
+// .modal-iframe,
+// .modal-image {
+//     overflow: hidden;
+// }
 
-        [dir="rtl"] & {
-            right: auto;
-            left: 0;
-        }
-    }
-}
+// .modal-iframe .media,
+// .modal-iframe iframe {
+//     max-height: 100%;
+//     max-width: 100%;
+// }
 
-button.modal-close,
-button.modal-direction {
-    background-color: transparent;
-    border: none;
+// .modal-iframe .media {
+//     background-color: #fff;
+//     margin-bottom: 0;
+// }
 
-    &:hover {
-        text-decoration: underline;
-    }
-}
+// .modal-iframe.iframe-full {
+//     height: 95%;
+// }
+
+// .iframe-full .media {
+//     height: 100%;
+//     padding: 0;
+// }
+
+// .modal-image {
+//     > img {
+//         max-height: 100%;
+//     }
+// }
+
+// .modal-content {
+//     max-height: 100%;
+//     overflow: auto;
+//     padding: 1rem;
+//     background-color: $modal-content-background-color;
+//     text-align: left;
+
+//     [dir="rtl"] & {
+//         text-align: right;
+//     }
+// }
+
+// .modal-header,
+// .modal-footer {
+//     position: fixed;
+//     top: 0;
+//     right: 0;
+//     left: 0;
+//     color: #fff;
+// }
+
+// .modal-header {
+//     padding: 0 4.555rem;
+// }
+
+// .modal-footer {
+//     top: auto;
+//     bottom: 0;
+// }
+
+// .modal-close {
+//     position: fixed;
+//     top: 1px;
+//     right: 1px;
+//     z-index: 2;
+//     display: inline-block;
+//     padding: $h2-margin;
+//     font-size: $h2-font-size;
+//     font-weight: bold;
+//     color: $modal-control-color;
+
+//     [dir="rtl"] & {
+//         right: auto;
+//         left: 1px;
+//     }
+// }
+
+// .modal-direction {
+//     position: fixed;
+//     top: 49%;
+//     left: 0;
+//     z-index: 2;
+//     display: block;
+//     width: 3rem;
+//     padding: 1rem;
+//     color: $modal-control-color;
+//     font-size: 2rem;
+//     font-weight: bold;
+//     text-align: center;
+
+//     [dir="rtl"] & {
+//         right: 0;
+//     }
+
+//     &.next {
+//         left: auto;
+//         right: 0;
+
+//         [dir="rtl"] & {
+//             right: auto;
+//             left: 0;
+//         }
+//     }
+// }
+
+// button.modal-close,
+// button.modal-direction {
+//     background-color: transparent;
+//     border: none;
+
+//     &:hover {
+//         text-decoration: underline;
+//     }
+// }

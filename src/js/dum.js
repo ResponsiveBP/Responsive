@@ -11,6 +11,8 @@ const $d = ((w, d) => {
     // Array-like collections that we should slice
     const rslice = /nodelist|htmlcollection/;
 
+    const keys = Object.keys;
+
     // Returns the type of an object in lowercase. Kudos Angus Croll
     // https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
     const type = obj => ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
@@ -21,7 +23,7 @@ const $d = ((w, d) => {
 
     // Convert, number, string, and collection types to an array 
     const toArray = obj => {
-        return isArray(obj) ? obj : rslice.test(type(obj)) ? [].slice.call(obj) : [obj];
+        return (obj && (isArray(obj) ? obj : rslice.test(type(obj)) ? [].slice.call(obj) : [obj])) || [];
     }
 
     const arrayFunction = (items, delegate, args) => {
@@ -34,8 +36,8 @@ const $d = ((w, d) => {
     };
 
     const classAction = (elements, method, names) => {
-        (isArray(names) ? names : names.split(rspace)).forEach(n => {
-            arrayFunction(elements, function () { this.classList[method](n); });
+        (isArray(names) ? names : (names && names.split(rspace)) || []).forEach(n => {
+            arrayFunction(elements, function () { n && this.classList[method](n); });
         });
     };
 
@@ -202,7 +204,7 @@ const $d = ((w, d) => {
          */
         children(elements, expression) {
             return arrayFunction(elements, function () {
-                return toArray(this && this.children || []).filter(c => expression ? c.matches(expression) : true);
+                return toArray(this && this.children).filter(c => expression ? c.matches(expression) : true);
             });
         }
 
@@ -221,7 +223,7 @@ const $d = ((w, d) => {
          * The child collection is reversed before prepending to ensure order is correct.
          * If prepending to multiple elements the nodes are deep cloned for successive elements.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements to prepend within
-         * @param {HTMLElement[]} children The collection of child elements
+         * @param {HTMLElement | HTMLElement[]} children The child or collection of child elements
          * @memberof DUM
          */
         prepend(elements, children) {
@@ -234,13 +236,24 @@ const $d = ((w, d) => {
          * Appends the child or collection of child elements to the element or collection of elements
          * If appending to multiple elements the nodes are deep cloned for successive elements.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements to prepend within
-         * @param {HTMLElement[]} children The collection of child elements
+         * @param {HTMLElement | HTMLElement[]} children The child or collection of child elements
          * @memberof DUM
          */
         append(elements, children) {
             insertAction(elements, children, false, function (c) {
                 this.appendChild(c);
             });
+        }
+
+        /**
+         * Detaches an element from the DOM returning the result. Any event handlers bound to the element are still present
+         * @param {HTMLElement} element The element to detach
+         * @returns {HTMLElement}
+         * @memberof DUM
+         */
+        detach(element) {
+            element && element.remove();
+            return element;
         }
 
         /**
@@ -296,7 +309,7 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         getAttr(element, name) {
-            return element.getAttribute(name);
+            return element && element.getAttribute(name);
         }
 
         /**
@@ -307,7 +320,7 @@ const $d = ((w, d) => {
          */
         setAttr(elements, values) {
             arrayFunction(elements, function () {
-                Object.keys(values).forEach(k => this.setAttribute(k, values[k]));
+                keys(values).forEach(k => this.setAttribute(k, values[k]));
             });
         }
 
@@ -317,7 +330,7 @@ const $d = ((w, d) => {
          * @param {string | string[]} names The name or array of names to remove
          * @memberof DUM
          */
-        remAttr(elements, names) {
+        removeAttr(elements, names) {
             (isArray(names) ? names : names.split(rspace)).forEach(n => {
                 arrayFunction(elements, function () { this.removeAttribute(n); });
             });
@@ -331,7 +344,7 @@ const $d = ((w, d) => {
          */
         setStyle(elements, values) {
             arrayFunction(elements, function () {
-                Object.keys(values).forEach(k => {
+                keys(values).forEach(k => {
                     if (k in this.style) {
                         this.style[k] = values[k];
                     }
@@ -352,7 +365,7 @@ const $d = ((w, d) => {
             arrayFunction(elements, function () {
                 let child = this;
                 while ((child = this.firstChild)) {
-                    Object.keys(Handler.listeners).forEach(l => {
+                    keys(Handler.listeners).forEach(l => {
                         // Check if eventhandlers are themselves a weak map; we might be able to just delete here
                         if (Handler.listeners[l] === child) { $d.off(l); }
                     });

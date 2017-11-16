@@ -106,6 +106,7 @@ const RbpCore = (($d, w, d) => {
             this.keys = {
                 CLICK: 1, // Not really a keyboard event but get passed via which
                 ENTER: 13,
+                ESCAPE: 27,
                 SPACE: 32,
                 LEFT: 37,
                 RIGHT: 39
@@ -232,12 +233,23 @@ const RbpCore = (($d, w, d) => {
         }
 
         /**
+         * Returns a value indicating whether the given element both hidden from display and layout in the DOM
+         * @param {HTMLElement} element 
+         * @returns {boolean}
+         * @memberof RbpCore
+         */
+        isHidden(element) {
+            const visible = Boolean(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+            return !visible;
+        }
+
+        /**
          * Forces the browser to redraw given element
          * @param {HTMLElement} element 
          * @memberof RbpCore
          */
         redraw(element) {
-            return element.offsetWidth && element.offsetHeight;
+            return element && element.offsetWidth;
         }
 
         /**
