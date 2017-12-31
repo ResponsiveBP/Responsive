@@ -11,7 +11,13 @@ const $d = ((w, d) => {
     // Array-like collections that we should slice
     const rslice = /nodelist|htmlcollection/;
 
+    // Event namespace detection
+    const rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
+
     const keys = Object.keys;
+
+    // Escape function for RexExp https://github.com/benjamingr/RegExp.escape
+    const escape = (s) => String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 
     // Returns the type of an object in lowercase. Kudos Angus Croll
     // https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
@@ -20,6 +26,8 @@ const $d = ((w, d) => {
     const isString = obj => type(obj) === "string";
 
     const isArray = obj => type(obj) === "array";
+
+    const isFunc = obj => type(obj) === "function";
 
     // Convert, number, string, and collection types to an array 
     const toArray = obj => {
@@ -59,42 +67,101 @@ const $d = ((w, d) => {
         return element;
     };
 
+    const doBind = (once, elements, events, selector, handler) => {
+        // Handle missing selector param
+        const hasSelector = isString(selector);
+        if (!hasSelector && !isFunc(handler)) {
+            handler = selector;
+        }
+
+        arrayFunction(elements, function () {
+            let el = this;
+            arrayFunction(events, function () { Handler.on(el, this, hasSelector ? selector : null, handler, hasSelector ? false : true, once); });
+        });
+    };
+
     // Handles the adding and removing of events. 
     // Events can be assigned to the element or delegated to a parent 
     const Handler = (() => {
-        let i = 1;
+        const handlerMap = new WeakMap();
+        let i = 0;
 
-        // Bubbled event handling
-        const delegate = (selector, handler, event) => {
-            let t = event.target;
-            if (t.closest && t.closest(selector)) {
-                handler.call(t, event);
+        const getHandlers = function (element, event, set) {
+            // Set if the event doesn't exist
+            if (!handlerMap.has(element) && set) {
+                let handlers = { [event]: {} };
+                handlerMap.set(element, handlers);
+            } else if (!handlerMap.get(element)[[event]] && set) {
+                let handlers = handlerMap.get(element);
+                handlers[[event]] = {};
+                handlerMap.set(element, handlers);
+            }
+
+            if (set) {
+                return handlerMap.get(element)[[event]];
+            }
+
+            // Get handlers matching type or namespace partial
+            if (handlerMap.has(element)) {
+                const namespaces = rtypenamespace.exec(event) || [];
+                let handlers = handlerMap.get(element);
+                for (const h of keys(handlers)) {
+                    let len = namespaces.length;
+                    while (len--) {
+                        if (namespaces[len] && (new RegExp(`^${escape(h)}$`).exec(namespaces[len]))) {
+                            return handlers[h];
+                        }
+                    }
+                }
+            }
+
+            return {};
+        };
+
+        // Bubbled event handling, one-time running
+        const delegate = (selector, handler, element, once, event) => {
+            if (!handler) {
+                return;
+            }
+            if (selector) {
+                let target = event.target;
+                while (target && target !== element && target.matches && !target.matches(selector)) {
+                    target = target.parentNode;
+                }
+
+                if (target.matches && target.matches(selector)) {
+                    handler.call(target, event);
+                }
+            } else {
+                handler.call(element, event);
+            }
+
+            if (once) {
+                Handler.off(element, event.type);
             }
         };
+
         return {
-            listeners: {},
-            on: function (element, event, selector, handler) {
-                if (selector) {
-                    element.addEventListener(event, handler = delegate.bind(element, selector, handler), false);
-                } else {
-                    element.addEventListener(event, handler, true);
-                }
-                this.listeners[i] = {
-                    element: element,
-                    event: event,
+            on: function (element, event, selector, handler, capture, once) {
+                // Store the full namespaced event binding only the type
+                const type = event.split(".")[0];
+                handler = delegate.bind(element, selector, handler, element, once);
+                element.addEventListener(type, handler, capture);
+                getHandlers(element, event, true)[i++] = {
+                    type: type,
                     handler: handler,
-                    capture: selector ? false : true
+                    capture: capture
                 };
-                return i++;
             },
-            off: function (id) {
-                if (id in this.listeners) {
-                    let h = this.listeners[id];
-                    h.element.removeEventListener(h.event, h.handler, h.capture);
-                    delete this.listeners[id];
-                }
+            off: function (element, event) {
+                let handlers = getHandlers(element, event, false);
+                keys(handlers).forEach(l => {
+                    let h = handlers[l];
+                    element.removeEventListener(h.type, h.handler, h.capture);
+                    delete handlers[l];
+                });
             }
-        };
+        }
     })();
 
     /**
@@ -105,7 +172,7 @@ const $d = ((w, d) => {
     class DUM {
 
         /**
-         * Specify a function to execute when the element of DOM is fully loaded.
+         * Specifies a function to execute when the element of DOM is fully loaded.
          * @param {HTMLElement | HTMLDocument} context The context to monitor the state of; defaults to `document` if not set
          * @returns {Promise}
          * @memberof DUM
@@ -119,7 +186,7 @@ const $d = ((w, d) => {
                     resolve();
                 }
                 else {
-                    Handler.on(context, "DOMContentLoaded", null, () => resolve());
+                    Handler.on(context, "DOMContentLoaded", null, () => resolve(), true, true);
                 }
             });
         }
@@ -172,7 +239,7 @@ const $d = ((w, d) => {
 
         /**
          * Returns the element matching the optional expression immediately prior to the specified one in its parent's children list, 
-         * or null if the specified element is the first one in the list
+         * or `null` if the specified element is the first one in the list.
          * @param {HTMLElement} element The element to search from
          * @param {string} expression The optional selector expression; this must be valid CSS syntax
          * @returns {HTMLElement | null}
@@ -184,7 +251,7 @@ const $d = ((w, d) => {
 
         /**
          * Returns the element matching the optional expression immediately following to the specified one in its parent's children list, 
-         * or null if the specified element is the last one in the list
+         * or `null` if the specified element is the last one in the list.
          * @param {HTMLElement} element The element to search from
          * @param {string} expression The optional selector expression; this must be valid CSS syntax
          * @returns {HTMLElement | null}
@@ -197,8 +264,8 @@ const $d = ((w, d) => {
         /**
          * Returns an ordered collection of DOM elements that are children of the given element or element collection. 
          * If there are no element children, then children contains no elements and has a length of 0.
-         * @param {any} elements The element or collection of elements to search within
-         * @param {any} expression The optional selector expression; this must be valid CSS syntax
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements to search within
+         * @param {string} expression The optional selector expression; this must be valid CSS syntax
          * @returns {HTMLElement[]}
          * @memberof DUM
          */
@@ -219,7 +286,7 @@ const $d = ((w, d) => {
         }
 
         /**
-         * Prepends the child or collection of child elements to the element or collection of elements
+         * Prepends the child or collection of child elements to the element or collection of elements.
          * The child collection is reversed before prepending to ensure order is correct.
          * If prepending to multiple elements the nodes are deep cloned for successive elements.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements to prepend within
@@ -246,7 +313,7 @@ const $d = ((w, d) => {
         }
 
         /**
-         * Detaches an element from the DOM returning the result. Any event handlers bound to the element are still present
+         * Detaches an element from the DOM returning the result. Any event handlers bound to the element are still present.
          * @param {HTMLElement} element The element to detach
          * @returns {HTMLElement}
          * @memberof DUM
@@ -313,7 +380,7 @@ const $d = ((w, d) => {
         }
 
         /**
-         * Sets the collection of attribute values on the element or collection of elements
+         * Sets the collection of attribute values on the element or collection of elements.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
          * @param {object} values The object contining the collection of key-value attribute pairs to set
          * @memberof DUM
@@ -325,7 +392,7 @@ const $d = ((w, d) => {
         }
 
         /**
-         * Removes specified attribute, space-separated attribute names or attribute array from the element or collection of elements
+         * Removes specified attribute, space-separated attribute names or attribute array from the element or collection of elements.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
          * @param {string | string[]} names The name or array of names to remove
          * @memberof DUM
@@ -337,7 +404,7 @@ const $d = ((w, d) => {
         }
 
         /**
-         * Sets the collection of style values on the element or collection of elements
+         * Sets the collection of style values on the element or collection of elements.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
          * @param {object} values The object contining the collection of key-value attribute pairs to set
          * @memberof DUM
@@ -357,7 +424,7 @@ const $d = ((w, d) => {
 
         /**
          * Empties the contents of the given element or collection of elements. 
-         * Any event handlers bound to the element contents are automatically removed
+         * Any event handlers bound to the element contents are automatically garbage collected.
          * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
          * @memberof DUM
          */
@@ -365,55 +432,47 @@ const $d = ((w, d) => {
             arrayFunction(elements, function () {
                 let child = this;
                 while ((child = this.firstChild)) {
-                    keys(Handler.listeners).forEach(l => {
-                        // Check if eventhandlers are themselves a weak map; we might be able to just delete here
-                        if (Handler.listeners[l] === child) { $d.off(l); }
-                    });
-                    child.remove();
+                    child.remove(); // Events are automatically garbage collected
                 }
             });
         }
 
         /**
-         * Adds an event listener to the given element returning the id of the listener which can be used to unbind
-         * the event handler at a later point in time. Events can be delegated to a parent by passing a CSS selector.
-         * @param {HTMLElement} element 
+         * Adds an event listener to the given element or collection of elements. Events can be delegated to a parent by passing a CSS selector.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
          * @param {string | string[]} events The event or collection of event names
-         * @param {string | null} selector The selector expression; this must be valid CSS syntax or `null`
+         * @param {string | undefined} selector The optional selector expression; this must be valid CSS syntax or `undefined`
          * @param {Function} handler The function to call when the event is triggered
-         * @returns {number} The id of the listener
          * @memberof DUM
          */
-        on(element, events, selector, handler) {
-            return arrayFunction(events, function () { return Handler.on(element, this, selector, handler); });
+        on(elements, events, selector, handler) {
+            doBind(false, elements, events, selector, handler);
         }
 
         /**
-        * Adds an event listener to the given element that is immediately unbound when the event is triggered. 
+        * Adds an event listener to the given element or collection of elements that is immediately unbound when the event is triggered. 
         * Events can be delegated to a parent by passing a CSS selector.
-        * @param {HTMLElement} element 
+        * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
         * @param {string | string[]} events The event or collection of event names
-        * @param {string | null} selector The selector expression; this must be valid CSS syntax or `null`
+        * @param {string | undefined} selector The selector expression; this must be valid CSS syntax or `undefined`
         * @param {Function} handler The function to call when the event is triggered
         * @memberof DUM
         */
-        one(element, events, selector, handler) {
-            let ids = [],
-                one = () => this.off(ids);
-
-            toArray(events).forEach(e => {
-                ids.push(Handler.on(element, e, selector, handler));
-                ids.push(Handler.on(element, e, selector, one));
-            });
+        one(elements, events, selector, handler) {
+            doBind(true, elements, events, selector, handler);
         }
 
         /**
-         * Removes any event listener matching the given ids
-         * @param {number[]} ids The event ids, previously bound using `on`.
+         * Removes any event listener matching the given name or names.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} events The event name or names, previously bound using `on`.
          * @memberof DUM
          */
-        off(ids) {
-            arrayFunction(ids, function () { Handler.off(this); });
+        off(elements, events) {
+            arrayFunction(elements, function () {
+                let el = this;
+                arrayFunction(events, function () { Handler.off(el, this); });
+            });
         }
 
         /**
@@ -426,8 +485,11 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         trigger(elements, event, detail) {
-            let params = { bubbles: true, cancelable: true, detail: detail };
-            return arrayFunction(elements, function () { return this.dispatchEvent(new CustomEvent(event, params)); }).length || false;
+            const namespaces = rtypenamespace.exec(event) || [];
+            detail = detail || {};
+            detail.namespace = (namespaces[2] || "");
+            const params = { bubbles: true, cancelable: true, detail: detail };
+            return arrayFunction(elements, function () { return this.dispatchEvent(new CustomEvent(namespaces[1], params)); }).length || false;
         }
     }
 
