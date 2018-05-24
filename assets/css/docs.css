@@ -56,14 +56,11 @@ blockquote {
     margin-left: 0;
     margin-right: 8px;
 }
-/*
- * 1: Counteract jekyll whitespace bug.
- */
+
 .breadcrumb {
     background-color: #395179;
     color: #fff;
     position: relative;
-    margin-top: -1.5rem; /* 1 */
     margin-bottom: 2rem;
 }
 
