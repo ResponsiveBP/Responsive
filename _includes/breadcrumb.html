@@ -3,9 +3,9 @@
         <ol>
             {% capture whitespace_hack %}{% capture url_parts %} {{ page.url | remove: "/index.html" | replace:'/'," " }}{% endcapture %}{% capture num_parts %}{{ url_parts | number_of_words | minus: 1 }}{% endcapture %}{% assign previous="" %}{% assign splitwords={{url_parts | replace:'.html',"" | split: " "}} %}{% assign lastword={{splitwords.last}} %}{% endcapture %}{% assign whitespace_hack = nil %}
             {% if num_parts == "0" or num_parts == "-1" %}
-            <li><a href="{{ site.baseurl }}">home</a> &#187; </li>
+            <li><a href="{{ "/" | relative_url }}">home</a> &#187; </li>
             {% else %}
-            <li><a href="{{ site.baseurl }}">home</a> &#187; </li>
+            <li><a href="{{ "/" | relative_url }}">home</a> &#187; </li>
 
             {% for unused in page.content limit:num_parts %}
             {% capture first_word %}{{ url_parts | truncatewords:1 | remove:"..."}}{% endcapture %}
