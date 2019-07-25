@@ -8,8 +8,6 @@ const RbpCore = (($d, w, d) => {
             // The initialization event used to trigger component autoloading
             const einit = "init.rpb";
 
-            const domParser = new w.DOMParser();
-
             const raf = w.requestAnimationFrame;
 
             const okeys = Object.keys;
@@ -92,7 +90,8 @@ const RbpCore = (($d, w, d) => {
 
                             $d.off(this.on[api]);
                             delete this.on[api];
-                        }
+                        },
+                        support: support
                     };
                     this.support = support;
                     this.einit = einit;
@@ -168,7 +167,22 @@ const RbpCore = (($d, w, d) => {
         registerDataApi(plugin, namespace, defaults) {
             if (this.fn[namespace]) { return; }
 
-            this.fn[namespace] = (e, o) => $d.queryAll(e).forEach(i => this.data(i)[namespace] || (this.data(i)[namespace] = new plugin(i, o)));
+            if(!this.fn[namespace]){
+                this.fn[namespace] = [];
+            }
+
+            this.fn[namespace] = (e, o) => {
+                let result = [];
+
+                $d.queryAll(e).forEach(i =>
+                {
+                    return result.push(this.data(i)[namespace] || (this.data(i)[namespace] = new plugin(i, o)));
+                });
+
+                return result;
+            };
+                
+            // TODO: We need to refactor this to allow removal.
             this.fn.on[`${namespace}.data-api`] = $d.on(d, this.einit, null, () => {
                 this.fn[namespace](this.dataSelector(defaults, namespace));
             });
@@ -247,16 +261,6 @@ const RbpCore = (($d, w, d) => {
         }
 
         /**
-         * Returns the given HTML string as a complete document.
-         * @param {string} html the string to parse
-         * @returns {HtmlDocument}
-         * @memberof RbpCore
-         */
-        parseHtml(html) {
-            return domParser.parseFromString(html, "text/html");
-        }
-
-        /**
          * Returns the document or element from the given url
          * @param {any} url The path to the target document. if a space prefixed `#selector` is appended to the url then
          * the element matching that selector will be returned.
@@ -276,7 +280,7 @@ const RbpCore = (($d, w, d) => {
                     return response.text();
                 })
                 .then(data => {
-                    return selector ? $d.query(selector, this.parseHtml(data)) : this.parseHtml(data).body;
+                    return $d.fromHtml(data,selector);
                 });
         }
 

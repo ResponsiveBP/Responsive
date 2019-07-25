@@ -16,6 +16,10 @@ const $d = ((w, d) => {
 
     const keys = Object.keys;
 
+    const domParser = new w.DOMParser();
+
+    const parseHtml = (html) => domParser.parseFromString(html, "text/html");
+
     // Escape function for RexExp https://github.com/benjamingr/RegExp.escape
     const escape = (s) => String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 
@@ -81,7 +85,9 @@ const $d = ((w, d) => {
 
         arrayFunction(elements, function() {
             let el = this;
-            arrayFunction(events, function() { Handler.on(el, this, hasSelector ? selector : null, handler, hasSelector ? false : true, once); });
+            arrayFunction(events, function() {
+                Handler.on(el, this, hasSelector ? selector : null, handler, hasSelector ? false : true, once);
+            });
         });
     };
 
@@ -112,6 +118,7 @@ const $d = ((w, d) => {
             // Get handlers matching type or namespace partial
             if (handlerMap.has(element)) {
                 const namespaces = rtypenamespace.exec(event) || [];
+
                 let handlers = handlerMap.get(element);
                 for (const h of keys(handlers)) {
                     let len = namespaces.length;
@@ -127,25 +134,26 @@ const $d = ((w, d) => {
         };
 
         // Bubbled event handling, one-time running
-        const delegate = (selector, handler, element, once, event) => {
+        const handlerDelegate = (selector, handler, element, once, eventName, event) => {
             if (!handler) {
                 return;
             }
+
+            if (once) {
+                Handler.off(element, eventName);
+            }
+
             if (selector) {
                 let target = event.target;
                 while (target && target !== element && target.matches && !target.matches(selector)) {
                     target = target.parentNode;
                 }
 
-                if (target.matches && target.matches(selector)) {
+                if (target && target.matches && target.matches(selector)) {
                     handler.call(target, event);
                 }
             } else {
                 handler.call(element, event);
-            }
-
-            if (once) {
-                Handler.off(element, event.type);
             }
         };
 
@@ -153,7 +161,7 @@ const $d = ((w, d) => {
             on: function(element, event, selector, handler, capture, once) {
                 // Store the full namespaced event binding only the type
                 const type = event.split(".")[0];
-                handler = delegate.bind(element, selector, handler, element, once);
+                handler = handlerDelegate.bind(element, selector, handler, element, once, event);
                 element.addEventListener(type, handler, capture);
                 getHandlers(element, event, true)[i++] = {
                     type: type,
@@ -163,6 +171,7 @@ const $d = ((w, d) => {
             },
             off: function(element, event) {
                 let handlers = getHandlers(element, event, false);
+
                 keys(handlers).forEach(l => {
                     let h = handlers[l];
                     element.removeEventListener(h.type, h.handler, h.capture);
@@ -290,6 +299,17 @@ const $d = ((w, d) => {
          */
         create(type) {
             return d.createElement(type);
+        }
+
+        /**
+         * Creates an instance of an element or elements from the given HTML.
+         * @param {string} html 
+         * @param {string | undefined} selector The optional selector expression; this must be valid CSS syntax or `undefined`
+         * @returns {HTMLElement| HTMLElement[]}
+         * @memberof DUM
+         */
+        fromHtml(html, selector) {
+            return selector ? this.query(selector, parseHtml(html)) : this.children(parseHtml(html).body);
         }
 
         /**

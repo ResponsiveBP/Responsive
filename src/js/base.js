@@ -19,7 +19,7 @@ const RbpBase = (($d, core) => {
             let result = {};
             Object.entries(core.data(this.element).attr).forEach(d => {
                 // eslint-disable-next-line prefer-destructuring
-                result[core.camelCase(d[0].slice(prefix.length))] = d[1];
+                result[core.camelCase(d[0].slice(prefix && prefix.length || 0))] = d[1];
             });
 
             return result;
