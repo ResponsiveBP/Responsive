@@ -75,6 +75,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
             // Controls.
             [this.nextTrigger, this.prevTrigger].forEach(t => {
+                if (t === undefined) {
+                    return;
+                }
                 $d.setAttr(t, { "tabindex": 0, "aria-controls": this.element.id });
                 if (!t.tagName === "BUTTON") { $d.setAttr(t, { "role": "button" }); }
                 if (!$d.query(".vhidden", t)) {
@@ -94,7 +97,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 $d.on(w, "load", null, this.lazyimages.bind(this, this.items[activeIndex]));
             }
 
-            if (this.options.pause === "hover") {
+            if (this.interval > 0 && this.options.pause === "hover") {
                 // Bind the mouse enter/leave events.
                 if (!core.support.touchEvents && !core.support.pointerEvents) {
                     $d.on(this.element, "mouseenter", null, this.pause.bind(this));
@@ -114,9 +117,8 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                 $d.on(this.element, "keydown", null, this.keydown.bind(this));
             }
 
-            $d.on(d, this.options.keyboard
-                ? ["click", "keydown"]
-                : "click", `[aria-controls=${this.element.id}]`, this.click.bind(this));
+            $d.on(d, this.options.keyboard ? ["click", "keydown"] :
+                "click", `[aria-controls=${this.element.id}]`, this.click.bind(this));
 
             if (this.interval) {
                 this.pause().cycle();
@@ -383,8 +385,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
             if (event.target === this.nextTrigger) {
                 this.next();
-            }
-            else if (event.target === this.prevTrigger) {
+            } else if (event.target === this.prevTrigger) {
                 this.prev();
             } else {
                 this.to(this.indicators.findIndex(i => i === event.target));
@@ -438,12 +439,17 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
                     if (activeIndex === this.items.length - 1) {
                         $d.setAttr(this.nextTrigger, { "aria-hidden": true, "hidden": true });
                         $d.removeAttr(this.prevTrigger, ["aria-hidden", "hidden"]);
-                        if (this.keyboardTriggered) { this.prevTrigger.focus(); this.keyboardTriggered = false; }
-                    }
-                    else if (activeIndex === 0) {
+                        if (this.keyboardTriggered) {
+                            this.prevTrigger.focus();
+                            this.keyboardTriggered = false;
+                        }
+                    } else if (activeIndex === 0) {
                         $d.setAttr(this.prevTrigger, { "aria-hidden": true, "hidden": true });
                         $d.removeAttr(this.nextTrigger, ["aria-hidden", "hidden"]);
-                        if (this.keyboardTriggered) { this.nextTrigger.focus(); this.keyboardTriggered = false; }
+                        if (this.keyboardTriggered) {
+                            this.nextTrigger.focus();
+                            this.keyboardTriggered = false;
+                        }
                     } else {
                         $d.removeAttr(this.prevTrigger, ["aria-hidden", "hidden"]);
                         $d.removeAttr(this.nextTrigger, ["aria-hidden", "hidden"]);

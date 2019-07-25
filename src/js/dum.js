@@ -29,6 +29,8 @@ const $d = ((w, d) => {
 
     const isFunc = obj => type(obj) === "function";
 
+    const isNullOrUndefined = obj => obj === null || obj === undefined;
+
     // Convert, number, string, and collection types to an array 
     const toArray = obj => {
         return (obj && (isArray(obj) ? obj : rslice.test(type(obj)) ? [].slice.call(obj) : [obj])) || [];
@@ -37,6 +39,9 @@ const $d = ((w, d) => {
     const arrayFunction = (items, delegate, args) => {
         let result = [];
         toArray(items).forEach(i => {
+            if (isNullOrUndefined(i)) {
+                return;
+            }
             const r = delegate.apply(i, args);
             result = result.concat(toArray(r));
         });
@@ -45,7 +50,7 @@ const $d = ((w, d) => {
 
     const classAction = (elements, method, names) => {
         (isArray(names) ? names : (names && names.split(rspace)) || []).forEach(n => {
-            arrayFunction(elements, function () { n && this.classList[method](n); });
+            arrayFunction(elements, function() { n && this.classList[method](n); });
         });
     };
 
@@ -53,7 +58,7 @@ const $d = ((w, d) => {
         children = toArray(children);
         children = reverse ? children.reverse() : children;
         let i = 0
-        arrayFunction(elements, function () {
+        arrayFunction(elements, function() {
             // If we are adding to multiple elements we need to clone
             let clones = i > 0 ? children.map(c => c.cloneNode(true)) : children
             clones.forEach(c => action.call(this, c));
@@ -63,7 +68,7 @@ const $d = ((w, d) => {
 
     const sibling = (element, dir, expression) => {
         // eslint-disable-next-line no-empty
-        while ((element = element[dir]) && !element.matches(expression)) { }
+        while ((element = element[dir]) && !element.matches(expression)) {}
         return element;
     };
 
@@ -74,9 +79,9 @@ const $d = ((w, d) => {
             handler = selector;
         }
 
-        arrayFunction(elements, function () {
+        arrayFunction(elements, function() {
             let el = this;
-            arrayFunction(events, function () { Handler.on(el, this, hasSelector ? selector : null, handler, hasSelector ? false : true, once); });
+            arrayFunction(events, function() { Handler.on(el, this, hasSelector ? selector : null, handler, hasSelector ? false : true, once); });
         });
     };
 
@@ -86,18 +91,21 @@ const $d = ((w, d) => {
         const handlerMap = new WeakMap();
         let i = 0;
 
-        const getHandlers = function (element, event, set) {
+        const getHandlers = function(element, event, set) {
             // Set if the event doesn't exist
-            if (!handlerMap.has(element) && set) {
-                let handlers = { [event]: {} };
-                handlerMap.set(element, handlers);
-            } else if (!handlerMap.get(element)[[event]] && set) {
-                let handlers = handlerMap.get(element);
-                handlers[[event]] = {};
-                handlerMap.set(element, handlers);
-            }
-
             if (set) {
+                if (!handlerMap.has(element)) {
+                    let handlers = {
+                        [event]: {}
+                    };
+                    handlerMap.set(element, handlers);
+
+                } else if (!handlerMap.get(element)[[event]]) {
+                    let handlers = handlerMap.get(element);
+                    handlers[[event]] = {};
+                    handlerMap.set(element, handlers);
+                }
+
                 return handlerMap.get(element)[[event]];
             }
 
@@ -142,7 +150,7 @@ const $d = ((w, d) => {
         };
 
         return {
-            on: function (element, event, selector, handler, capture, once) {
+            on: function(element, event, selector, handler, capture, once) {
                 // Store the full namespaced event binding only the type
                 const type = event.split(".")[0];
                 handler = delegate.bind(element, selector, handler, element, once);
@@ -153,7 +161,7 @@ const $d = ((w, d) => {
                     capture: capture
                 };
             },
-            off: function (element, event) {
+            off: function(element, event) {
                 let handlers = getHandlers(element, event, false);
                 keys(handlers).forEach(l => {
                     let h = handlers[l];
@@ -184,8 +192,7 @@ const $d = ((w, d) => {
             return new Promise((resolve, reject) => {
                 if (context.readyState !== "loading") {
                     resolve();
-                }
-                else {
+                } else {
                     Handler.on(context, "DOMContentLoaded", null, () => resolve(), true, true);
                 }
             });
@@ -232,7 +239,7 @@ const $d = ((w, d) => {
                 return [];
             }
 
-            return arrayFunction(contexts || document, function () {
+            return arrayFunction(contexts || document, function() {
                 return toArray(isString(expression) ? this.querySelectorAll(expression) : expression || []);
             });
         }
@@ -270,7 +277,7 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         children(elements, expression) {
-            return arrayFunction(elements, function () {
+            return arrayFunction(elements, function() {
                 return toArray(this && this.children).filter(c => expression ? c.matches(expression) : true);
             });
         }
@@ -294,7 +301,7 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         prepend(elements, children) {
-            insertAction(elements, children, true, function (c) {
+            insertAction(elements, children, true, function(c) {
                 this.insertBefore(c, this.firstChild);
             });
         }
@@ -307,7 +314,7 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         append(elements, children) {
-            insertAction(elements, children, false, function (c) {
+            insertAction(elements, children, false, function(c) {
                 this.appendChild(c);
             });
         }
@@ -386,7 +393,7 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         setAttr(elements, values) {
-            arrayFunction(elements, function () {
+            arrayFunction(elements, function() {
                 keys(values).forEach(k => this.setAttribute(k, values[k]));
             });
         }
@@ -399,7 +406,7 @@ const $d = ((w, d) => {
          */
         removeAttr(elements, names) {
             (isArray(names) ? names : names.split(rspace)).forEach(n => {
-                arrayFunction(elements, function () { this.removeAttribute(n); });
+                arrayFunction(elements, function() { this.removeAttribute(n); });
             });
         }
 
@@ -410,12 +417,11 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         setStyle(elements, values) {
-            arrayFunction(elements, function () {
+            arrayFunction(elements, function() {
                 keys(values).forEach(k => {
                     if (k in this.style) {
                         this.style[k] = values[k];
-                    }
-                    else {
+                    } else {
                         this.style.setProperty(k, values[k]);
                     }
                 });
@@ -429,7 +435,7 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         empty(elements) {
-            arrayFunction(elements, function () {
+            arrayFunction(elements, function() {
                 let child = this;
                 while ((child = this.firstChild)) {
                     child.remove(); // Events are automatically garbage collected
@@ -450,14 +456,14 @@ const $d = ((w, d) => {
         }
 
         /**
-        * Adds an event listener to the given element or collection of elements that is immediately unbound when the event is triggered. 
-        * Events can be delegated to a parent by passing a CSS selector.
-        * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
-        * @param {string | string[]} events The event or collection of event names
-        * @param {string | undefined} selector The selector expression; this must be valid CSS syntax or `undefined`
-        * @param {Function} handler The function to call when the event is triggered
-        * @memberof DUM
-        */
+         * Adds an event listener to the given element or collection of elements that is immediately unbound when the event is triggered. 
+         * Events can be delegated to a parent by passing a CSS selector.
+         * @param {HTMLElement | HTMLElement[]} elements The element or collection of elements
+         * @param {string | string[]} events The event or collection of event names
+         * @param {string | undefined} selector The selector expression; this must be valid CSS syntax or `undefined`
+         * @param {Function} handler The function to call when the event is triggered
+         * @memberof DUM
+         */
         one(elements, events, selector, handler) {
             doBind(true, elements, events, selector, handler);
         }
@@ -469,9 +475,9 @@ const $d = ((w, d) => {
          * @memberof DUM
          */
         off(elements, events) {
-            arrayFunction(elements, function () {
+            arrayFunction(elements, function() {
                 let el = this;
-                arrayFunction(events, function () { Handler.off(el, this); });
+                arrayFunction(events, function() { Handler.off(el, this); });
             });
         }
 
@@ -489,7 +495,7 @@ const $d = ((w, d) => {
             detail = detail || {};
             detail.namespace = (namespaces[2] || "");
             const params = { bubbles: true, cancelable: true, detail: detail };
-            return arrayFunction(elements, function () { return this.dispatchEvent(new CustomEvent(namespaces[1], params)); }).length || false;
+            return arrayFunction(elements, function() { return this.dispatchEvent(new CustomEvent(namespaces[1], params)); }).length || false;
         }
     }
 

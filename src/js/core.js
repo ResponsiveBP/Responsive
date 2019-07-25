@@ -5,155 +5,155 @@ import $d from "./dum"
  */
 const RbpCore = (($d, w, d) => {
 
-    // The initialization event used to trigger component autoloading
-    const einit = "init.rpb";
+            // The initialization event used to trigger component autoloading
+            const einit = "init.rpb";
 
-    const domParser = new w.DOMParser();
+            const domParser = new w.DOMParser();
 
-    const raf = w.requestAnimationFrame;
+            const raf = w.requestAnimationFrame;
 
-    const okeys = Object.keys;
+            const okeys = Object.keys;
 
-    const support = {
-        touchEvents: "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch,
-        pointerEvents: w.PointerEvent
-    };
+            const support = {
+                touchEvents: "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch,
+                pointerEvents: w.PointerEvent
+            };
 
-    support.transition = (() => {
+            support.transition = (() => {
 
-        const transitionEnd = () => {
-            const div = $d.create("div"),
-                transEndEventNames = {
-                    "transition": "transitionend",
-                    "WebkitTransition": "webkitTransitionEnd"
-                };
+                const transitionEnd = () => {
+                    const div = $d.create("div"),
+                        transEndEventNames = {
+                            "transition": "transitionend",
+                            "WebkitTransition": "webkitTransitionEnd"
+                        };
 
-            const names = okeys(transEndEventNames);
-            for (let i = 0; i < names.length; i++) {
-                if (div.style[names[i]] !== undefined) {
-                    return transEndEventNames[names[i]];
-                }
-            }
-
-            return null;
-        };
-
-        return transitionEnd();
-    })();
-
-    const getDurationMs = element => w.getComputedStyle(element).transitionDuration.match(/\d+(.\d+)?/)[0] * 1000;
-
-    const dataMap = new WeakMap();
-
-    const rdashAlpha = /-([a-z])/g;
-
-    const fcamelCase = (all, letter) => letter.toUpperCase();
-
-    /**
-     * Contains information about the current viewport grid definition
-     * @class Grid
-     */
-    class Grid {
-        constructor(grid, index, range) {
-
-            /**
-             * The grid The current applied grid; either xxs, xs, s, m, or l
-             * @type {string}
-             */
-            this.grid = grid;
-
-            /**
-            * The index of the current grid in the range
-            * @type {number}
-            */
-            this.index = index;
-
-            /**
-            * The available grid range
-            * @type {string[]}
-            */
-            this.range = range;
-        }
-    }
-
-    class RbpCore {
-
-        constructor() {
-            this.fn = {
-                on: {},
-                off: function (api) {
-                    if (api === "data-api") {
-                        okeys(this.on).forEach(k => {
-                            $d.off(this.on[k]);
-                            delete this.on[k];
-                        });
-                        return;
+                    const names = okeys(transEndEventNames);
+                    for (let i = 0; i < names.length; i++) {
+                        if (div.style[names[i]] !== undefined) {
+                            return transEndEventNames[names[i]];
+                        }
                     }
 
-                    $d.off(this.on[api]);
-                    delete this.on[api];
+                    return null;
+                };
+
+                return transitionEnd();
+            })();
+
+            const getDurationMs = element => w.getComputedStyle(element).transitionDuration.match(/\d+(.\d+)?/)[0] * 1000;
+
+            const dataMap = new WeakMap();
+
+            const rdashAlpha = /-([a-z])/g;
+
+            const fcamelCase = (all, letter) => letter.toUpperCase();
+
+            /**
+             * Contains information about the current viewport grid definition
+             * @class Grid
+             */
+            class Grid {
+                constructor(grid, index, range) {
+
+                    /**
+                     * The grid The current applied grid; either xxs, xs, s, m, or l
+                     * @type {string}
+                     */
+                    this.grid = grid;
+
+                    /**
+                     * The index of the current grid in the range
+                     * @type {number}
+                     */
+                    this.index = index;
+
+                    /**
+                     * The available grid range
+                     * @type {string[]}
+                     */
+                    this.range = range;
                 }
-            };
-            this.support = support;
-            this.einit = einit;
-
-            this.keys = {
-                CLICK: 1, // Not really a keyboard event but get passed via which
-                ENTER: 13,
-                ESCAPE: 27,
-                SPACE: 32,
-                LEFT: 37,
-                RIGHT: 39
-            }
-        }
-
-        /**
-         * Generates a unique eight character random string prefixed with `uid-`
-         * @returns {string}
-         * @memberof RbpCore
-         */
-        uid() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            let id = "";
-
-            for (let i = 0; i < 8; i++) {
-                id += chars.charAt(Math.floor(Math.random() * chars.length));
             }
 
-            return `uid-${id}`;
-        }
+            class RbpCore {
 
-        /**
-         * Returns a transformed string in camel case format
-         * @param {string} value The string to alter
-         * @returns {string}
-         * @memberof RbpCore
-         */
-        camelCase(value) {
-            const noDash = value.replace(rdashAlpha, fcamelCase);
-            return noDash.charAt(0).toLowerCase() + noDash.substring(1)
-        }
+                constructor() {
+                    this.fn = {
+                        on: {},
+                        off: function(api) {
+                            if (api === "data-api") {
+                                okeys(this.on).forEach(k => {
+                                    $d.off(this.on[k]);
+                                    delete this.on[k];
+                                });
+                                return;
+                            }
 
-        /**
-         * Returns a transformed string in dashed case format
-         * @param {string} value The string to alter
-         * @returns {string}
-         * @memberof RbpCore
-         */
-        dashedCase(value) {
-            return value.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
-        }
+                            $d.off(this.on[api]);
+                            delete this.on[api];
+                        }
+                    };
+                    this.support = support;
+                    this.einit = einit;
 
-        /**
-         * Returns a namespaced data attribute CSS selector from the given default options 
-         * 
-         * @param {any} defaults 
-         * @param {any} namespace 
-         * @returns 
-         * @memberof RbpCore
-         */
-        dataSelector(defaults, namespace) {
-            return (defaults && `${okeys(defaults).map(x => `[data-${namespace}-${this.dashedCase(x)}]`).join(", ")}`)
+                    this.keys = {
+                        CLICK: 1, // Not really a keyboard event but get passed via which
+                        ENTER: 13,
+                        ESCAPE: 27,
+                        SPACE: 32,
+                        LEFT: 37,
+                        RIGHT: 39
+                    }
+                }
+
+                /**
+                 * Generates a unique eight character random string prefixed with `uid-`
+                 * @returns {string}
+                 * @memberof RbpCore
+                 */
+                uid() {
+                    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    let id = "";
+
+                    for (let i = 0; i < 8; i++) {
+                        id += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+
+                    return `uid-${id}`;
+                }
+
+                /**
+                 * Returns a transformed string in camel case format
+                 * @param {string} value The string to alter
+                 * @returns {string}
+                 * @memberof RbpCore
+                 */
+                camelCase(value) {
+                    const noDash = value.replace(rdashAlpha, fcamelCase);
+                    return noDash.charAt(0).toLowerCase() + noDash.substring(1)
+                }
+
+                /**
+                 * Returns a transformed string in dashed case format
+                 * @param {string} value The string to alter
+                 * @returns {string}
+                 * @memberof RbpCore
+                 */
+                dashedCase(value) {
+                    return value.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+                }
+
+                /**
+                 * Returns a namespaced data attribute CSS selector from the given default options 
+                 * 
+                 * @param {any} defaults 
+                 * @param {any} namespace 
+                 * @returns 
+                 * @memberof RbpCore
+                 */
+                dataSelector(defaults, namespace) {
+                        return (defaults && `${okeys(defaults).map(x => `[data-${namespace}-${this.dashedCase(x)}]`).join(", ")}`)
                 || `[data-${namespace}]`;
         }
 

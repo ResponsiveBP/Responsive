@@ -1,33 +1,32 @@
 {
-  "name": "responsive-bp",
-  "description": "A powerful, accessible, developer friendly framework for building responsive websites.",
-  "version": "5.0.0",
-  "homepage": "http://responsivebp.com",
-  "author": "James South",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/responsivebp/responsive.git"
-  },
-  "bugs": {
-    "url": "https://github.com/responsivebp/responsive/issues"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "css-loader": "^0.28.7",
-    "eslint": "^4.9.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "extract-text-webpack-plugin": "^3.0.1",
-    "node-sass": "^4.7.2",
-    "postcss-loader": "^2.0.8",
-    "sass-loader": "^6.0.6",
-    "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
-    "webpack": "^3.8.1"
-  },
-  "scripts": {
-    "build": "webpack --config webpack.config.js --progress --color",
-    "build:watch": "webpack --config webpack.config.js --progress --color --watch"
-  }
+    "name": "responsive-bp",
+    "description": "A powerful, accessible, developer friendly framework for building responsive websites.",
+    "version": "5.0.0",
+    "homepage": "http://responsivebp.com",
+    "author": "James South",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/responsivebp/responsive.git"
+    },
+    "bugs": {
+        "url": "https://github.com/responsivebp/responsive/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+        "dev": "webpack --config webpack.config.js --mode=development --progress --color",
+        "dev:watch": "webpack --config webpack.config.js --mode=development --progress --color --watch",
+        "build": "webpack --config webpack.config.js --mode=production --progress --color"
+    },
+    "devDependencies": {
+        "css-loader": "^3.1.0",
+        "cssnano": "^4.1.10",
+        "eslint": "^6.1.0",
+        "eslint-loader": "^2.2.1",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.12.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "sass-loader": "^7.1.0",
+        "webpack": "^4.37.0",
+        "webpack-cli": "^3.3.6"
+    }
 }

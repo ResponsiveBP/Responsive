@@ -1,20 +1,10 @@
 import $d from "./dum"
 
-const Swiper = (($d, w, d) => {
+const Swiper = (($d, w) => {
 
     const support = {
         touchEvents: "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch,
         pointerEvents: w.PointerEvent
-    };
-
-    // Used to store private methods.
-    const map = new WeakMap();
-    const prvt = object => {
-        if (!map.has(object)) {
-            map.set(object, {});
-        }
-
-        return map.get(object);
     };
 
     const pointerStart = "pointerdown",
@@ -39,8 +29,7 @@ const Swiper = (($d, w, d) => {
             estart = touchStart;
             emove = touchMove;
             eend = touchEnd;
-        }
-        else if (support.pointerEvents) {
+        } else if (support.pointerEvents) {
             estart = pointerStart;
             emove = pointerMove;
             eend = pointerEnd;
@@ -71,10 +60,7 @@ const Swiper = (($d, w, d) => {
         swiper.elements.forEach(element => {
 
             let delta = {},
-                endIds = [],
-                moveId = -1,
-                start = {},
-                startId = -1;
+                start = {};
 
             const onMove = event => {
 
@@ -98,8 +84,8 @@ const Swiper = (($d, w, d) => {
                 }
 
                 /* eslint-disable no-nested-ternary */
-                const dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x,
-                    dy = (isMouse ? event.pageY : isPointer ? event.clientY : event.touches[0].pageY) - start.y;
+                const dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x;
+                const dy = (isMouse ? event.pageY : isPointer ? event.clientY : event.touches[0].pageY) - start.y;
                 /* eslint-enable no-nested-ternary */
 
                 /* eslint-disable sort-vars, no-extra-parens */
@@ -161,14 +147,14 @@ const Swiper = (($d, w, d) => {
                 }
 
                 // Disable the touch events till next time.
-                $d.off(moveId);
-                $d.off(endIds);
+                $d.off(element, swiper.touchEvents.move);
+                $d.off(element, swiper.touchEvents.end);
             };
 
             const onStart = event => {
                 // Normalize the variables.
-                const isMouse = event.type === "mousedown",
-                    isPointer = event.type !== "touchstart" && !isMouse;
+                const isMouse = event.type === "mousedown";
+                const isPointer = event.type !== "touchstart" && !isMouse;
 
                 event.stopPropagation();
 
@@ -192,15 +178,12 @@ const Swiper = (($d, w, d) => {
                 delta = { x: 0, y: 0 };
 
                 // Attach touchmove and touchend listeners.
-                moveId = $d.on(element, swiper.touchEvents.move, null, onMove);
-
-                swiper.touchEvents.end.forEach(e => {
-                    endIds.push($d.on(element, e, null, onEnd))
-                });
+                $d.on(element, swiper.touchEvents.move, null, onMove);
+                $d.on(element, swiper.touchEvents.end, null, onEnd);
             };
 
-            $d.off(startId);
-            startId = $d.on(element, swiper.touchEvents.start, null, onStart);
+            $d.off(element, swiper.touchEvents.start);
+            $d.on(element, swiper.touchEvents.start, null, onStart);
         });
     };
 
@@ -216,29 +199,30 @@ const Swiper = (($d, w, d) => {
             bindTouchEvents(this);
         }
 
-        onSwipeStart(handler) {
-            prvt(this).onSwipeStart = $d.on(d, this.swipeEvents.swipeStart, this.selector, handler);
+        onSwipeStart(element, handler) {
+            $d.on(this.elements, this.swipeEvents.swipeStart, null, handler);
             return this;
         }
 
         onSwipeMove(handler) {
-            prvt(this).onSwipeMove = $d.on(d, this.swipeEvents.swipeMove, this.selector, handler);
+            $d.on(this.elements, this.swipeEvents.swipeMove, null, handler);
             return this;
         }
 
         onSwipeEnd(handler) {
-            prvt(this).onSwipeEnd = $d.on(d, this.swipeEvents.swipeEnd, this.selector, handler);
+            $d.on(this.elements, this.swipeEvents.swipeEnd, null, handler);
             return this;
         }
 
         destroy() {
-            $d.off(prvt(this).onSwipeMove);
-            $d.off(prvt(this).onSwipeEnd);
+            $d.off(this.elements, this.swipeEvents.swipeStart);
+            $d.off(this.elements, this.swipeEvents.swipeMove);
+            $d.off(this.elements, this.swipeEvents.swipeEnd);
         }
     }
 
-    return w.Swiper = Swiper;
+    return Swiper;
 
-})($d, window, document);
+})($d, window);
 
 export default Swiper
