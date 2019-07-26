@@ -5,31 +5,29 @@
     position: relative;
     -webkit-backface-visibility: hidden; // 1
     -webkit-perspective: 1000; // 1
-    &.no-transition{ 
-        > figure, 
-        > .slide {
-        transition-duration: 0s !important;
+    &.no-transition {
+        >figure,
+        >.slide {
+            transition-duration: 0s !important;
+        }
     }
-}
     // Default slide version
-    > figure, 
-    > .slide {
+    >figure,
+    >.slide {
         margin: 0;
         display: none;
         position: relative;
         transition: $carousel-transition-function left;
-
         [dir="rtl"] & {
             transition: $carousel-transition-function right;
         }
-
-        > img {
+        >img {
             display: block;
             width: 100%;
+            object-fit: cover;
         }
-
-        > figcaption, 
-        > .caption {
+        >figcaption,
+        >.caption {
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -38,14 +36,13 @@
             padding: 1px 3rem;
             background-color: $carousel-caption-background-color;
             color: $carousel-caption-color;
-
-            & a{
+            & a {
                 color: inherit;
             }
         }
     }
     // Indicators
-    > ol {
+    >ol {
         position: absolute;
         z-index: 3;
         top: 1rem;
@@ -55,7 +52,6 @@
         margin: 0;
         padding: 0;
         text-align: center;
-
         li {
             background-color: $carousel-nav-background-color;
             opacity: $carousel-nav-background-opacity;
@@ -64,13 +60,11 @@
             height: 1rem;
             margin: 1px;
             width: 1rem;
-
             &:hover {
                 background-color: $carousel-nav-background-color-hover;
                 opacity: $carousel-nav-background-opacity-hover;
             }
         }
-
         .active {
             background-color: $carousel-nav-background-color-active;
             opacity: $carousel-nav-background-opacity-active;
@@ -82,23 +76,19 @@
     .prev {
         display: block;
     }
-
     .carousel-active,
     .next.left,
     .prev.right {
         left: 0;
-
         [dir="rtl"] & {
             left: auto;
             right: 0;
         }
     }
-
     .carousel-active {
         position: relative !important;
         z-index: 1;
     }
-
     .next,
     .prev {
         position: absolute;
@@ -107,65 +97,57 @@
         width: 100%;
         height: 100%;
     }
-
     .next,
     .carousel-active.right {
         left: 100%;
-
         [dir="rtl"] & {
             left: auto;
             right: 100%;
         }
     }
-
     .prev,
     .carousel-active.left {
         left: -100%;
-
         [dir="rtl"] & {
             left: auto;
             right: -100%;
         }
     }
-
-    > button {
+    >button {
         position: absolute;
         left: 1px;
         top: 40%;
         z-index: 3;
         display: block;
         width: 3rem;
-        height: 3rem;        
+        height: 3rem;
         margin-top: -1rem;
         color: $carousel-control-color;
         fill: $carousel-control-color;
-        background-color: $carousel-control-background-color; 
-        background-image: $carousel-control-background-prev; 
+        background-color: $carousel-control-background-color;
+        background-image: $carousel-control-background-prev;
         background-size: $carousel-control-background-size;
         background-position: center;
         background-repeat: no-repeat;
         border: none;
         opacity: $carousel-control-opacity;
-
         [dir="rtl"] & {
             left: auto;
             right: 1px;
             background-image: $carousel-control-background-next;
         }
-
         &.forward {
             left: auto;
             right: 1px;
             background-image: $carousel-control-background-next;
-
             [dir="rtl"] & {
                 right: auto;
                 left: 1px;
                 background-image: $carousel-control-background-prev;
             }
         }
-
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             opacity: $carousel-control-opacity-active;
         }
     }
@@ -173,8 +155,8 @@
 
 // Fade version
 .carousel-fade {
-    > figure,
-    > .slide {
+    >figure,
+    >.slide {
         position: absolute;
         top: 0;
         right: 0 !important;
@@ -183,33 +165,28 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-
         &,
         [dir="rtl"] & {
             transition: opacity $carousel-transition-function;
         }
     }
-
-    > figure.next,
-    > figure.prev,
-    > .slide.next,
-    > .slide.prev  {
+    >figure.next,
+    >figure.prev,
+    >.slide.next,
+    >.slide.prev {
         z-index: 1;
         opacity: 1;
     }
-
     .carousel-active {
         z-index: 2;
         opacity: 1;
-
         &.left,
         &.right {
             z-index: 2;
             opacity: 0;
         }
     }
-
     .carousel-control {
-            z-index: 3;
+        z-index: 3;
     }
 }

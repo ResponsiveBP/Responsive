@@ -1913,7 +1913,8 @@ table {
     .carousel > figure > img,
     .carousel > .slide > img {
       display: block;
-      width: 100%; }
+      width: 100%;
+      object-fit: cover; }
     .carousel > figure > figcaption,
     .carousel > figure > .caption,
     .carousel > .slide > figcaption,

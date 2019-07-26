@@ -63,11 +63,11 @@
 
         var done = assert.async();
         // $(carouselHtml).appendTo("#qunit-fixture")
-        $d.one($carousel, "slide.rbp", null, function(e) {
+        $d.one($carousel, "slide.rbp.carousel", null, function(e) {
             assert.ok(true, "Slide event fired.");
         });
 
-        $d.one($carousel, "slid.rbp", null, function(e) {
+        $d.one($carousel, "slid.rbp.carousel", null, function(e) {
             assert.ok(true, "Slid event fired.");
             done();
         });

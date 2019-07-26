@@ -90,19 +90,36 @@
 /*!***********************!*\
   !*** ./src/js/app.js ***!
   \***********************/
-/*! no exports provided */
+/*! exports provided: swiper, dismiss, tabs, tablelist, dropdown, conditional, carousel, modal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./swiper */ "./src/js/swiper.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "swiper", function() { return _swiper__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
 /* harmony import */ var _dismiss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dismiss */ "./src/js/dismiss.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dismiss", function() { return _dismiss__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tabs */ "./src/js/tabs.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "tabs", function() { return _tabs__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
 /* harmony import */ var _tablelist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tablelist */ "./src/js/tablelist.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "tablelist", function() { return _tablelist__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
 /* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dropdown */ "./src/js/dropdown.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dropdown", function() { return _dropdown__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
 /* harmony import */ var _conditional__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./conditional */ "./src/js/conditional.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "conditional", function() { return _conditional__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
 /* harmony import */ var _carousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./carousel */ "./src/js/carousel.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "carousel", function() { return _carousel__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modal */ "./src/js/modal.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "modal", function() { return _modal__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+
 
 
 
@@ -207,8 +224,8 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         constructor(element, options) {
             super(element, defaults, options, "carousel");
 
-            this.eslide = "slide.rbp";
-            this.eslid = "slid.rbp";
+            this.eslide = "slide.rbp.carousel";
+            this.eslid = "slid.rbp.carousel";
 
             this.paused = null;
             this.sliding = null;

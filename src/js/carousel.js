@@ -30,8 +30,8 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         constructor(element, options) {
             super(element, defaults, options, "carousel");
 
-            this.eslide = "slide.rbp";
-            this.eslid = "slid.rbp";
+            this.eslide = "slide.rbp.carousel";
+            this.eslid = "slid.rbp.carousel";
 
             this.paused = null;
             this.sliding = null;
