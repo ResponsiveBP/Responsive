@@ -29,8 +29,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
     constructor(element, options) {
       super(element, defaults, options, "carousel");
 
-      this.eslide = "slide.rbp.carousel";
-      this.eslid = "slid.rbp.carousel";
+      const namespace = ".rbp.carousel";
+      this.eslide = `slide${namespace}`;
+      this.eslid = `slid${namespace}`;
 
       this.paused = null;
       this.sliding = null;
@@ -457,14 +458,14 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         return (this.sliding = false);
       }
 
-      const direction = isNext ? "left" : "right",
-        edirection = this.rtl
-          ? isNext
-            ? "right"
-            : "left"
-          : isNext
-          ? "left"
-          : "right";
+      const direction = isNext ? "left" : "right";
+      const edirection = this.rtl
+        ? isNext
+          ? "right"
+          : "left"
+        : isNext
+        ? "left"
+        : "right";
 
       if (
         !$d.trigger(this.element, this.eslide, {

@@ -1,9 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="Your site description." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Responsive Unit Tests</title>
@@ -11,65 +10,65 @@
     <link href="../../../node_modules/qunit/qunit/qunit.css" rel="stylesheet" />
 
     <style>
-        /*Allow us to test the conditional plugin.*/
-        
+      /*Allow us to test the conditional plugin.*/
+
+      .grid-state-indicator {
+        position: absolute;
+        top: -99999px;
+        left: -99999px;
+        height: 1px;
+        width: 0;
+      }
+
+      [dir="rtl"] .grid-state-indicator {
+        left: auto;
+        right: -99999px;
+      }
+
+      @media (max-width: 37.49em) {
         .grid-state-indicator {
-            position: absolute;
-            top: -99999px;
-            left: -99999px;
-            height: 1px;
-            width: 0;
+          width: 0;
         }
-        
-        [dir="rtl"] .grid-state-indicator {
-            left: auto;
-            right: -99999px;
-        }
-        
-        @media (max-width: 37.49em) {
-            .grid-state-indicator {
-                width: 0;
-            }
-        }
-        
-        @media print and (max-width: 536px),
+      }
+
+      @media print and (max-width: 536px),
         screen and (min-width: 37.5em) and (max-width: 47.99em) {
-            .grid-state-indicator {
-                width: 1px;
-            }
+        .grid-state-indicator {
+          width: 1px;
         }
-        
-        @media print and (min-width: 537px) and (max-width: 61.99em),
+      }
+
+      @media print and (min-width: 537px) and (max-width: 61.99em),
         screen and (min-width: 48em) and (max-width: 61.99em) {
-            .grid-state-indicator {
-                width: 2px;
-            }
+        .grid-state-indicator {
+          width: 2px;
         }
-        
-        @media (min-width: 62em) and (max-width: 74.99em) {
-            .grid-state-indicator {
-                width: 3px;
-            }
+      }
+
+      @media (min-width: 62em) and (max-width: 74.99em) {
+        .grid-state-indicator {
+          width: 3px;
         }
-        
-        @media (min-width: 75em) {
-            .grid-state-indicator {
-                width: 4px;
-            }
+      }
+
+      @media (min-width: 75em) {
+        .grid-state-indicator {
+          width: 4px;
         }
-        /*#qunit-tests > li.pass {
-            display: none; /* Make it easier to see failing tests in Sauce screencasts */
-        /*}*/
-        
-        #qunit-fixture {
-            top: 0;
-            left: 0;
-        }
+      }
+
+      #qunit-fixture {
+        top: 0;
+        left: 0;
+      }
+
+      #qunit-fixture > * {
+        visibility: hidden;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
 
@@ -77,29 +76,27 @@
 
     <script src="../../../dist/responsive.js"></script>
     <script>
-        // // Turn off the data api
-        // $(document).off(".data-api");
+      // Turn off the data api
+      $rbp.off("data-api");
 
-        // // Disable transition support so all events fire.
-        // $.support.transition = false;
-        console.log(window.$rbp);
-        window.$rbp.support.transition = false;
+      // Disable transition support so all events fire.
+      $rbp.support.transition = false;
 
-        // Cleanup
-        QUnit.testDone(function() {
+      console.log($rbp);
 
-            window.$d.empty($d.id("qunit-fixture"));
-        });
+      // Cleanup
+      QUnit.testDone(function() {
+        $d.empty($d.id("qunit-fixture"));
+      });
     </script>
 
     <!-- <script src="autosize.js"></script> -->
     <script src="carousel.js"></script>
-    <!-- <script src="conditional.js"></script>
     <script src="dropdown.js"></script>
+    <!-- <script src="conditional.js"></script>
     <script src="modal.js"></script>
     <script src="tabs.js"></script>
     <script src="tablelist.js"></script>
     <script src="navigation.js"></script> -->
-</body>
-
+  </body>
 </html>

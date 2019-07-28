@@ -371,9 +371,11 @@ const $d = ((w, d) => {
      * @memberof DUM
      */
     fromHtml(html, selector) {
-      return selector
-        ? this.query(selector, parseHtml(html))
+      var result = selector
+        ? this.queryAll(selector, parseHtml(html))
         : this.children(parseHtml(html).body);
+
+      return result.length === 1 ? result[0] : result;
     }
 
     /**

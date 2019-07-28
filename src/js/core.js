@@ -190,7 +190,7 @@ const RbpCore = (($d, w, d) => {
           );
         });
 
-        return result;
+        return result.length === 1 ? result[0] : result;
       };
 
       this.fn.on.push(`${namespace}.data-api`);
