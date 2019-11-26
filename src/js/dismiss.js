@@ -3,15 +3,19 @@ import RbpBase from "./base";
 import RbpCore from "./core";
 
 const RbpDismiss = (($d, core, base) => {
-  const defaults = { hint: "Click to close", target: "" };
+  const defaults = { hint: "Click to close", target: null };
   class RbpDismiss extends base {
     constructor(element, options) {
       super(element, defaults, options, "dismiss");
 
-      this.eDismiss = "dismiss.rbp.dismiss";
-      this.eDismissed = "dismissed.rbp.dismiss";
+      const namespace = ".rbp.dismiss";
+      this.eDismiss = `dismiss${namespace}`;
+      this.eDismissed = `dismissed${namespace}`;
       this.dismissing = false;
-      this.target = this.element.closest(this.options.target);
+      this.target =
+        typeof this.options.target === "string"
+          ? this.element.closest(this.options.target)
+          : this.options.target;
 
       // A11y
       $d.setAttr(this.element, { type: "button" });

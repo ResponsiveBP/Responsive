@@ -1,130 +1,207 @@
 // 1: Max possible value
 // 2: Prevent font shift on chrome.
-.modal-overlay,
-#dmo {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2147483647; // 1
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    touch-action: none;
-    background-color: $modal-overlay-background-color;
-    -webkit-overflow-scrolling: touch;
-    -webkit-backface-visibility: hidden; // 2
-    text-align: center;
-}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483647; // 1
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  background-color: $modal-overlay-background-color;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden; // 2
+  backface-visibility: hidden; // 2
 
-// 1: Maintain aspect-ratio for boxed iframes
-// 2: Allow normal image scaling
-.modal {
-    height: 95%;
-    max-height: 95%;
-    max-width: 95%;
-    margin: auto;
+  // 1: Align everything to the center
+  // 2: Stick the header and footer to the top and bottom
+  &.open {
     display: flex;
     flex-direction: column;
+    align-items: center; // 1
+    text-align: center; // 1
+    justify-content: space-between; // 2
+  }
 
-    &.auto-height{
-        height: auto; // 1
+  main {
+    width: 100%;
+    height: calc(100% - #{$modal-header-height + $modal-footer-height});
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-y: auto;
+
+    > * {
+      max-height: 100%;
+      flex-grow: 0;
+      flex-shrink: 1;
     }
 
-    &.auto-width{
-        display: inline-flex; // 2
+    > iframe {
+      flex-grow: 1;
+      width: 100%;
     }
 
-    & > * {
-        flex: 1 1 auto;
+    .media {
+      margin-bottom: 0;
     }
+  }
+  header,
+  footer {
+    width: 100%;
+    color: $modal-titles-color;
+    height: $modal-header-height;
+  }
 
-    & > header,
-    & > footer {
-        color: $modal-titles-color;
-    }
-
-    // 1: We want main to dominate height
-    // 2: No double scroll
-    & > main {
-        text-align: initial;
-        background-color: $modal-content-background-color;
-        overflow-y: auto;
-        flex-basis: 100%; // 1 
-
-        &.no-overflow {            
-            overflow: hidden; // 2
-        }
-
-        // Stretch unwrapped iframes to container.
-        > iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        > .media {
-            margin-bottom: 0;
-        }
-    }   
+  footer {
+    overflow-y: auto;
+    height: $modal-footer-height;
+  }
 }
 
-@include bp-min(l) {
-    .modal{
-        max-width: $modal-max-width;
-    }
-}
+// .modal {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center; // 1
+//   justify-content: space-between; // 1
+//   text-align: center; // 1
+//   height: 95%;
+//   width: 95%;
+//   background-color: green;
+// }
 
-.modal-loader,
-.modal-loader:before,
-.modal-loader:after {
-    background: $modal-loader-color;
-    animation: load 1.5s infinite ease-in-out;
-    width: .5rem;
-    height: 1rem;
-}
+// // 1: Max possible value
+// // 2: Prevent font shift on chrome.
+// .modal-overlay,
+// #dmo {
+//   position: fixed;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   z-index: 2147483647; // 1
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+//   touch-action: none;
+//   background-color: $modal-overlay-background-color;
+//   -webkit-overflow-scrolling: touch;
+//   -webkit-backface-visibility: hidden; // 2
+//   backface-visibility: hidden; // 2
+//   text-align: center;
+// }
 
-.modal-loader {
-    color: $modal-loader-color;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    transform: translateZ(0);
-    animation-delay: -0.16s;
+// // 1: Maintain aspect-ratio for boxed iframes
+// // 2: Allow normal image scaling
+// .modal {
+//   height: 95%;
+//   max-height: 95%;
+//   max-width: 95%;
+//   margin: auto;
+//   display: flex;
+//   flex-direction: column;
 
-    &:before, &:after {
-        position: absolute;
-        top: 0;
-        content: ""
-    }
+//   &.auto-height {
+//     height: auto; // 1
+//   }
 
-    &:before {
-        left: -1em;
-        animation-delay: -0.32s;
-    }
+//   &.auto-width {
+//     display: inline-flex; // 2
+//   }
 
-    &:after {
-        left: 1rem;
-    }
-}
+//   & > * {
+//     flex: 1 1 auto;
+//   }
 
-@keyframes load {
-    0%,
-    80%,
-    100% {
-        box-shadow: 0 0;
-        height: 1rem;
-    }
-    40% {
-        box-shadow: 0 -.5rem;
-        height: 1.5rem;
-    }
-}
+//   & > header,
+//   & > footer {
+//     color: $modal-titles-color;
+//   }
 
+//   // 1: We want main to dominate height
+//   // 2: No double scroll
+//   & > main {
+//     text-align: initial;
+//     background-color: $modal-content-background-color;
+//     overflow-y: auto;
+//     flex-basis: 100%; // 1
+
+//     &.no-overflow {
+//       overflow: hidden; // 2
+//     }
+
+//     // Stretch unwrapped iframes to container.
+//     > iframe {
+//       width: 100%;
+//       height: 100%;
+//       border: 0;
+//     }
+
+//     > .media {
+//       margin-bottom: 0;
+//     }
+//   }
+// }
+
+// @include bp-min(l) {
+//   .modal {
+//     max-width: $modal-max-width;
+//   }
+// }
+
+// .modal-loader,
+// .modal-loader:before,
+// .modal-loader:after {
+//   background: $modal-loader-color;
+//   animation: load 1.5s infinite ease-in-out;
+//   width: 0.5rem;
+//   height: 1rem;
+// }
+
+// .modal-loader {
+//   color: $modal-loader-color;
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   margin: auto;
+//   transform: translateZ(0);
+//   animation-delay: -0.16s;
+
+//   &:before,
+//   &:after {
+//     position: absolute;
+//     top: 0;
+//     content: "";
+//   }
+
+//   &:before {
+//     left: -1em;
+//     animation-delay: -0.32s;
+//   }
+
+//   &:after {
+//     left: 1rem;
+//   }
+// }
+
+// @keyframes load {
+//   0%,
+//   80%,
+//   100% {
+//     box-shadow: 0 0;
+//     height: 1rem;
+//   }
+//   40% {
+//     box-shadow: 0 -0.5rem;
+//     height: 1.5rem;
+//   }
+// }
 
 // .modal-overlay {
 //     position: fixed;

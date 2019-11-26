@@ -1,71 +1,70 @@
-
 .container,
 .container-full {
-    @extend .clearfix;
-    margin: 0 auto;
+  @extend .clearfix;
+  margin: 0 auto;
 
-    &.fixed,
-    .fixed & {
-        width: 100%;
-    }
+  &.fixed,
+  .fixed & {
+    width: 100%;
+  }
 }
 
 // 1: Prevent horizontal scrollbar.
 .container-full {
-    overflow-x: hidden; // 1
+  overflow-x: hidden; // 1
 }
 
 // 1: Ensure .row negative gutter cannot cause horizontal scrollbar.
 .container {
-    max-width: $grid-container-max-width;
-    width: calc(100% - #{$grid-column-gutter}); // 1
-    &.fixed,
-    .fixed & {
-        width: $grid-container-max-width; // 1
-    }
+  max-width: $grid-container-max-width;
+  width: calc(100% - #{$grid-column-gutter}); // 1
+  &.fixed,
+  .fixed & {
+    width: $grid-container-max-width; // 1
+  }
 }
 // 1: .container not filling full width allows for negative margin.
 .row,
 [class*="block-row-"] {
-    margin: 0 (-$grid-column-gutter/2); // 1
-    display: flex;
-    flex-wrap: wrap;
+  margin: 0 (-$grid-column-gutter/2); // 1
+  display: flex;
+  flex-wrap: wrap;
 }
 
 // No margin required.
 .no-gutter {
-    margin: 0;
+  margin: 0;
 }
 
 // Block-row
 // Ensure lists can be used as columns
 [class*="block-row-"] {
-    padding: 0; // 1
-    list-style: none; // 1
+  padding: 0; // 1
+  list-style: none; // 1
 }
 
 // Columns
 // 1: Offset row margins.
 // 2: Ensure default width is full.
-[class*=col-],
+[class*="col-"],
 [class*="block-row-"] > * {
-    padding: 0 ($grid-column-gutter/2); // 1
-    width: 100%; // 2
+  padding: 0 ($grid-column-gutter/2); // 1
+  width: 100%; // 2
 }
 
 // Movable columns
-[class*=col-] {
-    &[class*=offset],
-    &[class*=push],
-    &[class*=pull] {
-        position: relative;
-    }
+[class*="col-"] {
+  &[class*="offset"],
+  &[class*="push"],
+  &[class*="pull"] {
+    position: relative;
+  }
 }
 
 // 1: Remove gutter
 [class*="block-row-"].no-gutter > *,
-.no-gutter > [class*=col-] {
-    padding: 0;
+.no-gutter > [class*="col-"] {
+  padding: 0;
 }
 
 // Extra, extra small
@@ -74,40 +73,40 @@
 
 // Extra small
 @include bp-min(xs) {
-    @include grid-columns(xs);
-    @include block-grid-columns(xs);
+  @include grid-columns(xs);
+  @include block-grid-columns(xs);
 }
 
 // Small
 @include bp-min(s) {
-    @include grid-columns(s);
-    @include block-grid-columns(s);
+  @include grid-columns(s);
+  @include block-grid-columns(s);
 }
 
 // Medium
 @include bp-min(m) {
-    @include grid-columns(m);
-    @include block-grid-columns(m);
+  @include grid-columns(m);
+  @include block-grid-columns(m);
 }
 
 // Large
 @include bp-min(l) {
-    @include grid-columns(l);
-    @include block-grid-columns(l);
+  @include grid-columns(l);
+  @include block-grid-columns(l);
 }
 
 // Ensure that push/pull/offset all work in rtl
 // We do this here to save repetition
 [dir="rtl"] {
-    [class*="offset-"]{
-        margin-left: auto;
-    }
+  [class*="offset-"] {
+    margin-left: auto;
+  }
 
-    [class*="push-"]{
-        left: auto;        
-    }
+  [class*="push-"] {
+    left: auto;
+  }
 
-    [class*="pull-"]{
-        right: auto; 
-    }
+  [class*="pull-"] {
+    right: auto;
+  }
 }

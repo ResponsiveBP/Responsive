@@ -90,36 +90,19 @@
 /*!***********************!*\
   !*** ./src/js/app.js ***!
   \***********************/
-/*! exports provided: swiper, dismiss, tabs, tablelist, dropdown, conditional, carousel, modal */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./swiper */ "./src/js/swiper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "swiper", function() { return _swiper__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
 /* harmony import */ var _dismiss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dismiss */ "./src/js/dismiss.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dismiss", function() { return _dismiss__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tabs */ "./src/js/tabs.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "tabs", function() { return _tabs__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
 /* harmony import */ var _tablelist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tablelist */ "./src/js/tablelist.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "tablelist", function() { return _tablelist__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
 /* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dropdown */ "./src/js/dropdown.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dropdown", function() { return _dropdown__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
 /* harmony import */ var _conditional__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./conditional */ "./src/js/conditional.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "conditional", function() { return _conditional__WEBPACK_IMPORTED_MODULE_5__["default"]; });
-
 /* harmony import */ var _carousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./carousel */ "./src/js/carousel.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "carousel", function() { return _carousel__WEBPACK_IMPORTED_MODULE_6__["default"]; });
-
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modal */ "./src/js/modal.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "modal", function() { return _modal__WEBPACK_IMPORTED_MODULE_7__["default"]; });
-
-
 
 
 
@@ -200,8 +183,12 @@ __webpack_require__.r(__webpack_exports__);
 const RbpCarousel = (($d, swiper, core, base, w, d) => {
   const rhint = /\((\w+)\|(\w+)\)/;
 
-  const cactive = "carousel-active",
-    citems = "figure, .slide";
+  const cactive = "carousel-active";
+  const citems = "figure, .slide";
+  const cleft = "left";
+  const cright = "right";
+  const cprev = "prev";
+  const cnext = "next";
 
   const defaults = {
     interval: 0, // Better for a11y
@@ -433,7 +420,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         return;
       }
 
-      this.slide(index > activeIndex ? "next" : "prev", this.items[index]);
+      this.slide(index > activeIndex ? cnext : cprev, this.items[index]);
     }
 
     next() {
@@ -441,7 +428,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         return false;
       }
 
-      return this.slide("next");
+      return this.slide(cnext);
     }
 
     prev() {
@@ -449,7 +436,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         return false;
       }
 
-      return this.slide("prev");
+      return this.slide(cprev);
     }
 
     swipestart() {
@@ -465,8 +452,8 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
     swipemove(event) {
       // Left is next in LTR mode.
       let left = event.detail.delta.x < 0,
-        type = this.rtl ? (left ? "prev" : "next") : left ? "next" : "prev",
-        isNext = type === "next",
+        type = this.rtl ? (left ? cprev : cnext) : left ? cnext : cprev,
+        isNext = type === cnext,
         fallback = isNext ? 0 : this.items.length - 1,
         activeIndex = this.activeIndex(),
         activeItem = this.items[activeIndex];
@@ -497,9 +484,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
       }
 
       // Get the distance swiped as a percentage.
-      let width = parseInt(w.getComputedStyle(activeItem).width, 10),
-        percent = parseFloat((event.detail.delta.x / width) * 100),
-        diff = isNext ? 100 : -100;
+      let width = parseInt(w.getComputedStyle(activeItem).width, 10);
+      let percent = parseFloat((event.detail.delta.x / width) * 100);
+      let diff = isNext ? 100 : -100;
 
       if (this.rtl) {
         percent *= -1;
@@ -507,7 +494,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
       // Swipe behaviour changes direction in rtl mode.
       w.requestAnimationFrame(() => {
-        // Frustratingly can't be added on swipe start since edge triggers that on "click"
+        // TODO: Frustratingly can't be added on swipe start since edge triggers that on "click"
         $d.addClass(this.element, "no-transition");
 
         if (this.options.mode === "slide") {
@@ -534,8 +521,8 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         return;
       }
 
-      const left = event.detail.direction === "left",
-        method = this.rtl ? (left ? "prev" : "next") : left ? "next" : "prev";
+      const left = event.detail.direction === cleft;
+      const method = this.rtl ? (left ? cprev : cnext) : left ? cnext : cprev;
 
       // Re-enable the transitions.
       $d.removeClass(this.element, "no-transition");
@@ -551,13 +538,16 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
         // Get the distance and turn it into a percentage
         // to calculate the duration. Whichever is lowest is used.
-        const width = parseInt(style.width, 10),
-          percentageTravelled = (Math.abs(event.detail.delta.x) / width) * 100,
-          swipeDuration =
-            ((event.detail.duration / 1000) * 100) / percentageTravelled,
-          newDuration =
-            ((100 - percentageTravelled) / 100) *
-            Math.min(this.translationDuration, swipeDuration);
+        const width = parseInt(style.width, 10);
+        const percentageTravelled =
+          (Math.abs(event.detail.delta.x) / width) * 100;
+
+        const swipeDuration =
+          ((event.detail.duration / 1000) * 100) / percentageTravelled;
+
+        const newDuration =
+          ((100 - percentageTravelled) / 100) *
+          Math.min(this.translationDuration, swipeDuration);
 
         // Set the new temporary duration.
         $d.setStyle(this.items, { "transition-duration": `${newDuration}s` });
@@ -631,7 +621,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
       let activeItem = this.items[this.activeIndex()],
         nextItem = next || $d[type](activeItem, citems),
         isCycling = this.interval,
-        isNext = type === "next",
+        isNext = type === cnext,
         fallback = isNext ? 0 : this.items.length - 1;
 
       if (isCycling) {
@@ -652,14 +642,14 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
         return (this.sliding = false);
       }
 
-      const direction = isNext ? "left" : "right";
+      const direction = isNext ? cleft : cright;
       const edirection = this.rtl
         ? isNext
-          ? "right"
-          : "left"
+          ? cright
+          : cleft
         : isNext
-        ? "left"
-        : "right";
+        ? cleft
+        : cright;
 
       if (
         !$d.trigger(this.element, this.eslide, {
@@ -684,6 +674,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
           if (activeIndex === this.items.length - 1) {
             $d.setAttr(this.nextTrigger, { "aria-hidden": true, hidden: true });
             $d.removeAttr(this.prevTrigger, ["aria-hidden", "hidden"]);
+
             if (this.keyboardTriggered) {
               this.prevTrigger.focus();
               this.keyboardTriggered = false;
@@ -691,6 +682,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
           } else if (activeIndex === 0) {
             $d.setAttr(this.prevTrigger, { "aria-hidden": true, hidden: true });
             $d.removeAttr(this.nextTrigger, ["aria-hidden", "hidden"]);
+
             if (this.keyboardTriggered) {
               this.nextTrigger.focus();
               this.keyboardTriggered = false;
@@ -719,7 +711,7 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
           opacity: ""
         });
 
-        $d.removeClass(nextItem, [type, direction]);
+        $d.removeClass(nextItem, [cnext, cprev, cleft, cright]);
         $d.addClass(nextItem, cactive);
         $d.setAttr(nextItem, { "aria-selected": true, tabIndex: 0 });
 
@@ -1047,7 +1039,7 @@ const RbpCore = (($d, w, d) => {
         (defaults &&
           `${okeys(defaults)
             .map(x => `[data-${namespace}-${this.dashedCase(x)}]`)
-            .join(", ")}`) ||
+            .join(", ")}, [data-${namespace}]`) ||
         `[data-${namespace}]`
       );
     }
@@ -1301,7 +1293,7 @@ const RbpCore = (($d, w, d) => {
           $d.trigger(element, supportTransition);
         }
       };
-      this.setTimeout(ensure, getDurationMs(element));
+      this.setTimeout(ensure, getDurationMs(element) || 1);
     }
   }
 
@@ -1349,15 +1341,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const RbpDismiss = (($d, core, base) => {
-  const defaults = { hint: "Click to close", target: "" };
+  const defaults = { hint: "Click to close", target: null };
   class RbpDismiss extends base {
     constructor(element, options) {
       super(element, defaults, options, "dismiss");
 
-      this.eDismiss = "dismiss.rbp.dismiss";
-      this.eDismissed = "dismissed.rbp.dismiss";
+      const namespace = ".rbp.dismiss";
+      this.eDismiss = `dismiss${namespace}`;
+      this.eDismissed = `dismissed${namespace}`;
       this.dismissing = false;
-      this.target = this.element.closest(this.options.target);
+      this.target =
+        typeof this.options.target === "string"
+          ? this.element.closest(this.options.target)
+          : this.options.target;
 
       // A11y
       $d.setAttr(this.element, { type: "button" });
@@ -1722,11 +1718,16 @@ const $d = ((w, d) => {
       .match(/\s([a-zA-Z]+)/)[1]
       .toLowerCase());
 
+  const isElement = obj =>
+    isObjectLike(obj) && obj.nodeType === 1 && type(obj) !== "object";
+
   const isString = obj => type(obj) === "string";
 
   const isArray = obj => type(obj) === "array";
 
   const isFunc = obj => type(obj) === "function";
+
+  const isObjectLike = obj => obj != null && typeof obj === "object";
 
   const isNullOrUndefined = obj => obj === null || obj === undefined;
 
@@ -1984,7 +1985,11 @@ const $d = ((w, d) => {
      * @memberof DUM
      */
     queryAll(expression, contexts) {
-      if (expression instanceof Node || expression instanceof Window) {
+      if (
+        expression instanceof Node ||
+        expression instanceof Window ||
+        isElement(expression)
+      ) {
         return [expression];
       }
 
@@ -2309,355 +2314,86 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const RbpModal = (($d, core, base, w, d) => {
+const RbpModal = (($d, w, core, base) => {
+  const protocol =
+    w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:";
 
-    const protocol = w.location.protocol.indexOf("http") === 0 ? w.location.protocol : "http:";
+  // Regular expressions.
+  const rhint = /\((\w+)\|(\w+)\)/;
+  const rexternalHost = new RegExp("//" + w.location.host + "($|/)");
+  // Taken from jQuery.
+  const rhash = /^#.*$/; // Altered to only match beginning.
+  const rurl = /^([\w.+-]+:)(?:\/\/([^/?#:]*)(?::(\d+)|)|)/;
+  const rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/;
+  const rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(ff|f)|webp|svg)((\?|#).*)?$)/i;
 
-    // Regular expressions.
-    const rhint = /\((\w+)\|(\w+)\)/;
-    const rexternalHost = new RegExp("//" + w.location.host + "($|/)");
-    // Taken from jQuery.
-    const rhash = /^#.*$/; // Altered to only match beginning.
-    const rurl = /^([\w.+-]+:)(?:\/\/([^/?#:]*)(?::(\d+)|)|)/;
-    const rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/;
-    const rimage = /(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|ti(ff|f)|webp|svg)((\?|#).*)?$)/i;
+  const fromTemplate = template => {
+    return $d.fromHtml(template);
+  };
 
-    const fromTemplate = (template) => {
-        return core.parseHtml(template).body.firstChild;
+  const defaults = { hint: "Click to close", target: null };
+  class RbpModal extends base {
+    constructor(element, options) {
+      super(element, defaults, options, "modal");
+
+      const namespace = ".rbp.modal";
+      this.transitioning = false;
+
+      this.overlay =
+        $d.query("modal-overlay") ||
+        fromTemplate(
+          `<div role="document" class="modal-overlay fade-out"></div>`
+        );
     }
 
-    const getMediaProvider = url => {
-        const providers = {
-            youtube: /youtu(be\.com|be\.googleapis\.com|\.be)/i,
-            vimeo: /vimeo/i,
-            vine: /vine/i,
-            instagram: /instagram|instagr\.am/i,
-            getty: /embed\.gettyimages\.com/i
+    showOverlay() {
+      if (this.transitioning) {
+        return;
+      }
+      // add open, fadein; remove fadout. Fire events.
+
+      this.showModal();
+    }
+
+    hideOverlay() {
+      if (this.transitioning) {
+        return;
+      }
+
+      this.hideModal(() => {
+        const complete = () => {
+          $d.removeClass(this.overlay, ["fade-in", "open"]);
         };
 
-        const keys = Object.keys(providers);
-        for (let i = 0; i < keys.length; i++) {
-            let k = keys[i];
-            let p = providers[k];
-            if (p.test(url)) {
-                return k;
-            }
-        }
-
-        return null;
-    };
-
-    const isExternalUrl = url => {
-
-        // Handle different host types.
-        // Split the url into it's various parts.
-        const locationParts = rurl.exec(url) || rurl.exec(protocol + url);
-
-        if (locationParts === undefined || rhash.test(url)) {
-            return false;
-        }
-
-        // Target is a local protocol.
-        if (!locationParts || !locationParts[2] || rlocalProtocol.test(locationParts[1])) {
-            return false;
-        }
-
-        // If the regex doesn't match return true . 
-        return !rexternalHost.test(locationParts[2]);
-    };
-
-    // Context is bound to the modal instance
-    function buildMain(complete) {
-        const notHash = !rhash.test(this.target),
-            external = isExternalUrl(this.target),
-            iframeScroll = this.options.iframeScroll === true,
-            isImage = this.options.image === true || rimage.test(this.target),
-            isIframe = this.options.iframe === true || notHash && external ? !isImage : false;
-
-        this.local = !notHash && !external;
-
-        if (!this.local) {
-            // iframe
-            if (isIframe) {
-                if (iframeScroll) {
-                    // Prevent double scroll
-                    $d.addClass(this.main, "no-overflow");
-                }
-
-                const src = (external && this.target.indexOf("http") !== 0) ? protocol + this.target : this.target;
-                const frame = $d.create("iframe");
-                $d.setAttr(frame, {
-                    "scrolling": iframeScroll ? "yes" : "no",
-                    "allowTransparency": true,
-                    "allowfullscreen": ""
-                });
-
-                // Test and add media wrapper + classes.
-                const mediaClass = getMediaProvider(this.target);
-                if (mediaClass) {
-                    const iframeWrap = $d.create("div");
-                    $d.addClass(iframeWrap, ["media", mediaClass]);
-                    $d.append(iframeWrap, frame);
-                    $d.append(this.main, iframeWrap);
-
-                    // Undo full height to allow aspect-ratio
-                    $d.addClass(this.modal, "auto-height");
-                } else {
-                    $d.append(this.main, frame);
-                }
-
-                // Ensure callback is called only once fully loaded
-                $d.one(frame, ["load", "error"], null, complete);
-                $d.setAttr(frame, { "src": src });
-                return;
-            }
-
-            // image
-            if (isImage) {
-                $d.addClass(this.modal, "auto-height auto-width");
-                const image = $d.create("img");
-                $d.append(this.main, image);
-
-                // Ensure callback is called only once fully loaded
-                $d.one(image, ["load", "error"], null, complete);
-                $d.setAttr(image, { "src": this.target });
-                return;
-            }
-
-            // html
-            core.loadHtml(this.target).then(html => {
-                html = html.outerHTML;
-                this.main.innerHTML = html;
-                complete();
-            }).catch(complete);
-        }
-        // TODO: Local swap out
+        core.redraw(this.overlay);
+        core.onTransitionEnd(this.overlay, complete);
+        $d.removeClass(this.overlay, "fade-in");
+      });
     }
 
-    // Context is bound to the modal instance
-    function destroyMain() {
-
-        $d.removeClass(this.main, "no-overflow");
-        if (!this.local) {
-            $d.empty(this.main);
-        }
-
-        // TODO Handle local
+    showModal() {
+      if (this.transitioning) {
+        return;
+      }
     }
 
-    const defaults = {
-        modal: null,
-        external: false,
-        group: null,
-        image: false,
-        immediate: false,
-        iframe: false,
-        iframeScroll: true,
-        keyboard: true,
-        touch: true,
-        nextHint: "Next: (Left|Right) Arrow",
-        prevHint: "Previous: (Right|Left) Arrow",
-        closeHint: "Close (Esc)",
-        errorHint: "<p>An error has occured.</p>",
-        loadHint: "Loading modal content",
-        mobileTarget: null,
-        mobileViewportWidth: "xs",
-        fitViewport: true,
-        title: null,
-        description: null
-    };
-
-    class RbpModal extends base {
-
-        constructor(element, options) {
-            super(element, defaults, options, "modal");
-
-            // We fallback to the attribute to preserve relative urls
-            this.target = this.options.target || $d.getAttr(this.element, "href");
-            if (!this.target) {
-                return;
-            }
-
-            this.title = null;
-            this.description = null;
-
-            this.isShown = null;
-            this.group = $d.queryAll(this.options.group) || [];
-            this.groupIndex = 0;
-            this.nextHint = this.options.nextHint.replace(rhint, this.rtl ? "$1" : "$2");
-            this.prevHint = this.options.prevHint.replace(rhint, this.rtl ? "$1" : "$2");
-
-            const modalId = core.uid();
-            this.overlay = fromTemplate(`<div role="document" class="modal-overlay fade-out"></div>`);
-            this.dummy = $d.id("dmo");
-            if (!this.dummy) {
-                this.dummy = fromTemplate(`<div id="dmo" hidden class="fade-out"></div>`);
-                $d.prepend(d.body, this.dummy);
-            }
-
-            this.modal = fromTemplate(`<div id="${modalId}" class="modal fade-out"></div>`);
-            this.loader = fromTemplate(`<span class="modal-loader"><span class="vhidden">${this.options.loadHint}</span></span>`);
-            this.closeTrigger = fromTemplate(`<button class="modal-close"><span class="vhidden">${this.closeHint}</span></button>`);
-            this.prevTrigger = fromTemplate(`<button><span class="vhidden">${this.prevHint}</span></button>`);
-            this.nextTrigger = fromTemplate(`<button class="forward"><span class="vhidden">${this.nextHint}</span></button>`);
-
-            if (this.options.title) {
-                this.titleId = core.uid();
-                this.header = fromTemplate(`<header><h2 id="${this.titleId}">${this.options.title}</h2></header>`);
-            }
-
-            this.main = $d.create("main");
-
-            if (this.options.description) {
-                this.descId = core.uid();
-                this.footer = fromTemplate(`<footer><p id="${this.descId}">${this.options.description}</p></footer>`);
-            }
-
-            // A11y
-            $d.setAttr([this.prevTrigger, this.nextTrigger], { "tabindex": 0, "aria-controls": modalId });
-            if (this.titleId || this.descId) {
-
-                $d.setAttr(this.overlay, { "aria-labelledby": `${this.titleId || ""} ${this.descId || ""}` });
-            }
-
-            // Bind events.
-            $d.on(this.element, "click", null, this.click.bind(this));
-            $d.on(this.overlay, "click", null, this.overlayClick.bind(this));
-
-            if (this.options.immediate) {
-                this.show();
-            }
-        }
-
-        click(event) {
-            event.preventDefault();
-            this.show();
-        }
-
-        overlayClick(event) {
-            if (this.options.modal) {
-                return;
-            }
-
-            const eventTarget = event.target;
-
-            // Order is important here. We always have to check the modal first
-            if (eventTarget === this.modal || this.modal.contains(eventTarget)) {
-                return;
-            }
-
-            if (eventTarget === this.closeTrigger) {
-                this.hideModal();
-                return;
-            }
-
-            if (eventTarget === this.overlay || this.overlay.contains(eventTarget)) {
-                this.hideModal();
-            }
-        }
-
-        show() {
-            if (this.isShown) { return; }
-
-            const complete = () => {
-                $d.setAttr(this.dummy, { "hidden": "" });
-                // TODO: track scroll position
-                this.showModal();
-            };
-
-            $d.append(this.overlay, this.loader);
-            $d.append(d.body, this.overlay);
-            core.redraw(this.overlay);
-
-            core.onTransitionEnd(this.overlay, complete);
-
-            core.redraw(this.dummy);
-            $d.removeClass(this.dummy, "fade-in");
-            $d.addClass(this.overlay, "fade-in");
-        }
-
-        showModal() {
-
-            if (this.isShown) { return; }
-
-            const complete = () => {
-                this.isShown = true;
-            };
-
-            $d.append(this.overlay, this.modal);
-            if (this.header) {
-                $d.append(this.modal, this.header);
-            }
-
-            $d.append(this.modal, this.main);
-
-            if (this.footer) {
-                $d.append(this.modal, this.footer);
-            }
-            const animate = () => {
-                this.loader = $d.detach(this.loader);
-
-                core.redraw(this.modal);
-                core.onTransitionEnd(this.modal, complete);
-                $d.addClass(this.modal, "fade-in");
-            }
-
-            // Lazy load main content
-            buildMain.call(this, animate);
-        }
-
-        hide() {
-            if (!this.isShown) { return; }
-
-            const complete = () => {
-                // TODO: Fire events
-                this.isShown = false;
-                this.overlay = $d.detach(this.overlay);
-            };
-
-            core.redraw(this.overlay);
-            core.onTransitionEnd(this.overlay, complete);
-
-            $d.removeClass(this.overlay, "fade-in");
-        }
-
-        hideModal() {
-
-            if (!this.isShown) { return; }
-
-            const complete = () => {
-                $d.removeClass(this.modal, "auto-height auto-width");
-
-                // TODO: Fire events
-                this.header = $d.detach(this.header);
-
-                destroyMain.call(this);
-                this.main = $d.detach(this.main);
-
-                this.footer = $d.detach(this.footer);
-
-                w.requestAnimationFrame(() => {
-                    $d.removeAttr(this.dummy, "hidden");
-                    core.redraw(this.dummy);
-
-                    $d.addClass(this.dummy, "fade-in");
-                    core.redraw(this.dummy);
-                    this.hide();
-                });
-            };
-
-            core.redraw(this.modal);
-            core.onTransitionEnd(this.modal, complete);
-            $d.removeClass(this.modal, "fade-in");
-        }
+    hideModal(callback) {
+      if (this.transitioning) {
+        return;
+      }
     }
 
-    // Register plugin and data-api event handler and return
-    return core.registerDataApi(RbpModal, "modal", defaults);
+    next() {}
 
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"], window, document);
+    prev() {}
+  }
+
+  // Register plugin and data-api event handler and return
+  return core.registerDataApi(RbpModal, "modal", defaults);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], window, _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (RbpModal);
+
 
 /***/ }),
 
@@ -2674,231 +2410,270 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Swiper = (($d, w) => {
+  const support = {
+    touchEvents:
+      "ontouchstart" in w ||
+      (w.DocumentTouch && document instanceof w.DocumentTouch),
+    pointerEvents: w.PointerEvent
+  };
 
-    const support = {
-        touchEvents: "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch,
-        pointerEvents: w.PointerEvent
-    };
+  const pointerStart = "pointerdown";
+  const pointerMove = "pointermove";
+  const pointerEnd = "pointerup";
 
-    const pointerStart = "pointerdown",
-        pointerMove = "pointermove",
-        pointerEnd = ["pointerup", "pointerout", "pointercancel", "pointerleave", "lostpointercapture"];
+  const touchStart = "touchstart";
+  const touchMove = "touchmove";
+  const touchEnd = "touchend";
 
-    const touchStart = "touchstart",
-        touchMove = "touchmove",
-        touchEnd = ["touchend", "touchleave", "touchcancel"];
+  const mouseStart = "mousedown";
+  const mouseMove = "mousemove";
+  const mouseEnd = "mouseup";
 
-    const mouseStart = "mousedown",
-        mouseMove = "mousemove",
-        mouseEnd = ["mouseup", "mouseleave"];
+  const getTouchEvents = () => {
+    let eend = mouseEnd;
+    let emove = mouseMove;
+    let estart = mouseStart;
 
-    const getTouchEvents = () => {
-        let eend = mouseEnd,
-            emove = mouseMove,
-            estart = mouseStart;
-
-        // Keep the events separate since support could be crazy.
-        if (support.touchEvents) {
-            estart = touchStart;
-            emove = touchMove;
-            eend = touchEnd;
-        } else if (support.pointerEvents) {
-            estart = pointerStart;
-            emove = pointerMove;
-            eend = pointerEnd;
-        }
-
-        return {
-            start: estart,
-            move: emove,
-            end: eend
-        };
-    };
-
-    const getSwipeEvents = ns => ({
-        swipeStart: `swipestart${ns}`,
-        swipeMove: `swipemove${ns}`,
-        swipeEnd: `swipeend${ns}`
-    });
-
-    const bindTouchEvents = swiper => {
-
-        // Enable extended touch events on supported browsers before any touch events.
-        if (support.pointerEvents) {
-            swiper.elements.forEach(e => {
-                $d.setStyle(e, { touchAction: swiper.touchAction });
-            });
-        }
-
-        swiper.elements.forEach(element => {
-
-            let delta = {},
-                start = {};
-
-            const onMove = event => {
-
-                // Normalize the variables.
-                let isMouse = event.type === "mousemove",
-                    isPointer = event.type !== "touchmove" && !isMouse;
-
-                // Only left click allowed.
-                if (isMouse && event.which !== 1) {
-                    return;
-                }
-
-                // One touch allowed.
-                if (event.touches && event.touches.length > 1) {
-                    return;
-                }
-
-                // Ensure swiping with one touch and not pinching.
-                if (event.scale && event.scale !== 1) {
-                    return;
-                }
-
-                /* eslint-disable no-nested-ternary */
-                const dx = (isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX) - start.x;
-                const dy = (isMouse ? event.pageY : isPointer ? event.clientY : event.touches[0].pageY) - start.y;
-                /* eslint-enable no-nested-ternary */
-
-                /* eslint-disable sort-vars, no-extra-parens */
-                let doSwipe = false,
-                    rectangle = element.getBoundingClientRect(),
-                    percentX = Math.abs(parseFloat((dx / rectangle.width) * 100)) || 100,
-                    percentY = Math.abs(parseFloat((dy / rectangle.height) * 100)) || 100;
-                /* eslint-enable sort-vars, no-extra-parens */
-
-                // Work out whether to do a scroll based on the sensitivity limit.
-                switch (swiper.touchAction) {
-                    case "pan-x":
-                        if (Math.abs(dy) > Math.abs(dx)) {
-                            event.preventDefault();
-                        }
-                        doSwipe = Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > swiper.sensitivity && percentY < 100;
-                        break;
-                    case "pan-y":
-                        if (Math.abs(dx) > Math.abs(dy)) {
-                            event.preventDefault();
-                        }
-                        doSwipe = Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swiper.sensitivity && percentX < 100;
-                        break;
-                    default:
-                        event.preventDefault();
-                        doSwipe = Math.abs(dy) > swiper.sensitivity || Math.abs(dx) > swiper.sensitivity && percentX < 100 && percentY < 100;
-                        break;
-                }
-
-                event.stopPropagation();
-                if (!doSwipe || !$d.trigger(element, swiper.swipeEvents.swipeMove, { delta: { x: dx, y: dy } })) {
-                    return;
-                }
-
-                // Measure change in x and y.
-                delta = {
-                    x: dx,
-                    y: dy
-                };
-            };
-
-            const onEnd = () => {
-                // Measure duration
-                const duration = Number(new Date()) - start.time;
-
-                // Determine if slide attempt triggers slide.
-                if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
-
-                    // Set the direction and return it.
-                    /* eslint-disable sort-vars */
-                    const horizontal = delta.x < 0 ? "left" : "right",
-                        vertical = delta.y < 0 ? "up" : "down",
-                        direction = Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
-                    /* eslint-disable sort-vars */
-
-                    if (!$d.trigger(element, swiper.swipeEvents.swipeEnd, { delta: delta, direction: direction, duration: duration })) {
-                        return;
-                    }
-                }
-
-                // Disable the touch events till next time.
-                $d.off(element, swiper.touchEvents.move);
-                $d.off(element, swiper.touchEvents.end);
-            };
-
-            const onStart = event => {
-                // Normalize the variables.
-                const isMouse = event.type === "mousedown";
-                const isPointer = event.type !== "touchstart" && !isMouse;
-
-                event.stopPropagation();
-
-                // Measure start values.
-                start = {
-                    // Get initial touch coordinates.
-                    /* eslint-disable no-nested-ternary */
-                    x: isMouse ? event.pageX : isPointer ? event.clientX : event.touches[0].pageX,
-                    y: isMouse ? event.pageY : isPointer ? event.clientY : event.touches[0].pageY,
-                    /* eslint-enable no-nested-ternary */
-
-                    // Store time to determine touch duration.
-                    time: Number(new Date())
-                };
-
-                if (!$d.trigger(element, swiper.swipeEvents.swipeStart, { start: start })) {
-                    return;
-                }
-
-                // Reset delta and end measurements.
-                delta = { x: 0, y: 0 };
-
-                // Attach touchmove and touchend listeners.
-                $d.on(element, swiper.touchEvents.move, null, onMove);
-                $d.on(element, swiper.touchEvents.end, null, onEnd);
-            };
-
-            $d.off(element, swiper.touchEvents.start);
-            $d.on(element, swiper.touchEvents.start, null, onStart);
-        });
-    };
-
-    class Swiper {
-        constructor(selector, namespace, touchAction, sensitivity) {
-            this.selector = selector;
-            this.namespace = namespace ? `.${namespace}` : "";
-            this.touchAction = touchAction || "none";
-            this.sensitivity = sensitivity || 5;
-            this.swipeEvents = getSwipeEvents(this.namespace);
-            this.touchEvents = getTouchEvents();
-            this.elements = $d.queryAll(selector);
-            bindTouchEvents(this);
-        }
-
-        onSwipeStart(element, handler) {
-            $d.on(this.elements, this.swipeEvents.swipeStart, null, handler);
-            return this;
-        }
-
-        onSwipeMove(handler) {
-            $d.on(this.elements, this.swipeEvents.swipeMove, null, handler);
-            return this;
-        }
-
-        onSwipeEnd(handler) {
-            $d.on(this.elements, this.swipeEvents.swipeEnd, null, handler);
-            return this;
-        }
-
-        destroy() {
-            $d.off(this.elements, this.swipeEvents.swipeStart);
-            $d.off(this.elements, this.swipeEvents.swipeMove);
-            $d.off(this.elements, this.swipeEvents.swipeEnd);
-        }
+    // Keep the events separate since support could be crazy.
+    if (support.touchEvents) {
+      estart = touchStart;
+      emove = touchMove;
+      eend = touchEnd;
+    } else if (support.pointerEvents) {
+      estart = pointerStart;
+      emove = pointerMove;
+      eend = pointerEnd;
     }
 
-    return Swiper;
+    return {
+      start: estart,
+      move: emove,
+      end: eend
+    };
+  };
 
+  const getSwipeEvents = ns => ({
+    swipeStart: `swipestart${ns}`,
+    swipeMove: `swipemove${ns}`,
+    swipeEnd: `swipeend${ns}`
+  });
+
+  const bindTouchEvents = swiper => {
+    // Enable extended touch events on supported browsers before any touch events.
+    if (support.pointerEvents) {
+      swiper.elements.forEach(e => {
+        $d.setStyle(e, { touchAction: swiper.touchAction });
+      });
+    }
+
+    swiper.elements.forEach(element => {
+      let delta = {};
+      let start = {};
+
+      const onMove = event => {
+        // Normalize the variables.
+        const isMouse = event.type === mouseMove;
+        const isPointer = event.type !== touchMove && !isMouse;
+
+        // Only left click allowed.
+        if (isMouse && event.which !== 1) {
+          return;
+        }
+
+        // One touch allowed.
+        if (event.touches && event.touches.length > 1) {
+          return;
+        }
+
+        // Ensure swiping with one touch and not pinching.
+        if (event.scale && event.scale !== 1) {
+          return;
+        }
+
+        /* eslint-disable no-nested-ternary */
+        const dx =
+          (isMouse
+            ? event.pageX
+            : isPointer
+            ? event.clientX
+            : event.touches[0].pageX) - start.x;
+        const dy =
+          (isMouse
+            ? event.pageY
+            : isPointer
+            ? event.clientY
+            : event.touches[0].pageY) - start.y;
+        /* eslint-enable no-nested-ternary */
+
+        /* eslint-disable sort-vars, no-extra-parens */
+        let doSwipe = false,
+          rectangle = element.getBoundingClientRect(),
+          percentX = Math.abs(parseFloat((dx / rectangle.width) * 100)) || 100,
+          percentY = Math.abs(parseFloat((dy / rectangle.height) * 100)) || 100;
+        /* eslint-enable sort-vars, no-extra-parens */
+
+        // Work out whether to do a scroll based on the sensitivity limit.
+        switch (swiper.touchAction) {
+          case "pan-x":
+            if (Math.abs(dy) > Math.abs(dx)) {
+              event.preventDefault();
+            }
+            doSwipe =
+              Math.abs(dy) > Math.abs(dx) &&
+              Math.abs(dy) > swiper.sensitivity &&
+              percentY < 100;
+            break;
+          case "pan-y":
+            if (Math.abs(dx) > Math.abs(dy)) {
+              event.preventDefault();
+            }
+            doSwipe =
+              Math.abs(dx) > Math.abs(dy) &&
+              Math.abs(dx) > swiper.sensitivity &&
+              percentX < 100;
+            break;
+          default:
+            event.preventDefault();
+            doSwipe =
+              Math.abs(dy) > swiper.sensitivity ||
+              (Math.abs(dx) > swiper.sensitivity &&
+                percentX < 100 &&
+                percentY < 100);
+            break;
+        }
+
+        event.stopPropagation();
+        if (
+          !doSwipe ||
+          !$d.trigger(element, swiper.swipeEvents.swipeMove, {
+            delta: { x: dx, y: dy }
+          })
+        ) {
+          return;
+        }
+
+        // Measure change in x and y.
+        delta = {
+          x: dx,
+          y: dy
+        };
+      };
+
+      const onEnd = () => {
+        // Measure duration
+        const duration = Number(new Date()) - start.time;
+
+        // Determine if slide attempt triggers slide.
+        if (Math.abs(delta.x) > 1 || Math.abs(delta.y) > 1) {
+          // Set the direction and return it.
+          /* eslint-disable sort-vars */
+          const horizontal = delta.x < 0 ? "left" : "right",
+            vertical = delta.y < 0 ? "up" : "down",
+            direction =
+              Math.abs(delta.x) > Math.abs(delta.y) ? horizontal : vertical;
+          /* eslint-disable sort-vars */
+
+          if (
+            !$d.trigger(element, swiper.swipeEvents.swipeEnd, {
+              delta: delta,
+              direction: direction,
+              duration: duration
+            })
+          ) {
+            return;
+          }
+        }
+
+        // Disable the touch events till next time.
+        $d.off(element, swiper.touchEvents.move);
+        $d.off(element, swiper.touchEvents.end);
+      };
+
+      const onStart = event => {
+        // Normalize the variables.
+        const isMouse = event.type === mouseStart;
+        const isPointer = event.type !== touchStart && !isMouse;
+
+        event.stopPropagation();
+
+        // Measure start values.
+        start = {
+          // Get initial touch coordinates.
+          /* eslint-disable no-nested-ternary */
+          x: isMouse
+            ? event.pageX
+            : isPointer
+            ? event.clientX
+            : event.touches[0].pageX,
+          y: isMouse
+            ? event.pageY
+            : isPointer
+            ? event.clientY
+            : event.touches[0].pageY,
+          /* eslint-enable no-nested-ternary */
+
+          // Store time to determine touch duration.
+          time: Number(new Date())
+        };
+
+        if (
+          !$d.trigger(element, swiper.swipeEvents.swipeStart, { start: start })
+        ) {
+          return;
+        }
+
+        // Reset delta and end measurements.
+        delta = { x: 0, y: 0 };
+
+        // Attach touchmove and touchend listeners.
+        $d.on(element, swiper.touchEvents.move, null, onMove);
+        $d.on(element, swiper.touchEvents.end, null, onEnd);
+      };
+
+      $d.off(element, swiper.touchEvents.start);
+      $d.on(element, swiper.touchEvents.start, null, onStart);
+    });
+  };
+
+  class Swiper {
+    constructor(selector, namespace, touchAction, sensitivity) {
+      this.selector = selector;
+      this.namespace = namespace ? `.${namespace}` : "";
+      this.touchAction = touchAction || "none";
+      this.sensitivity = sensitivity || 5;
+      this.swipeEvents = getSwipeEvents(this.namespace);
+      this.touchEvents = getTouchEvents();
+      this.elements = $d.queryAll(selector);
+      bindTouchEvents(this);
+    }
+
+    onSwipeStart(handler) {
+      $d.on(this.elements, this.swipeEvents.swipeStart, null, handler);
+      return this;
+    }
+
+    onSwipeMove(handler) {
+      $d.on(this.elements, this.swipeEvents.swipeMove, null, handler);
+      return this;
+    }
+
+    onSwipeEnd(handler) {
+      $d.on(this.elements, this.swipeEvents.swipeEnd, null, handler);
+      return this;
+    }
+
+    destroy() {
+      $d.off(this.elements, this.swipeEvents.swipeStart);
+      $d.off(this.elements, this.swipeEvents.swipeMove);
+      $d.off(this.elements, this.swipeEvents.swipeEnd);
+    }
+  }
+
+  return Swiper;
 })(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], window);
 
 /* harmony default export */ __webpack_exports__["default"] = (Swiper);
+
 
 /***/ }),
 
@@ -3184,13 +2959,13 @@ const RbpTabs = (($d, core, base) => {
 
 /***/ 0:
 /*!*************************************************!*\
-  !*** multi ./src/js/app.js ./src/sass/app.scss ***!
+  !*** multi ./src/sass/app.scss ./src/js/app.js ***!
   \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! ./src/sass/app.scss */"./src/sass/app.scss");
+__webpack_require__(/*! ./src/sass/app.scss */"./src/sass/app.scss");
+module.exports = __webpack_require__(/*! ./src/js/app.js */"./src/js/app.js");
 
 
 /***/ })

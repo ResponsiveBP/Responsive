@@ -3,12 +3,10 @@ $base-font-size: 1rem !default; // Normalized default
 
 // https://booking.design/implementing-system-fonts-on-booking-com-a-lesson-learned-bdc984df627f
 // Default system fonts, web fallbacks, emoji defaults
-$base-font-family:
--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-Helvetica, Arial, sans-serif, 
-"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol" !default;
 $base-line-height: 1.15 !default;
-
 
 // Colors
 $base-font-color: #222 !default;
@@ -30,24 +28,24 @@ $h3-margin: 1.17rem !default;
 $h4-font-size: 1rem !default;
 $h4-margin: 1.33rem !default;
 
-$h5-font-size: .83rem !default;
+$h5-font-size: 0.83rem !default;
 $h5-margin: 1.386rem !default;
 
-$h6-font-size: .67rem !default;
+$h6-font-size: 0.67rem !default;
 $h6-margin: 1.561rem !default;
 
 // Selected text
 $selection-background: #b3d4fc !default;
 
 // Focused objects
-$selection-focus-color: #3b99fc!default;
+$selection-focus-color: #3b99fc !default;
 
 //==
 // Grid System
 //##
 $grid-container-max-width: 1140px !default;
 $grid-column-gutter: 16px !default;
-$grid-column-count: 12!default;
+$grid-column-count: 12 !default;
 
 // Breakpoints. These have been carefully considered so it
 // is recommended to leave them as they are.
@@ -75,7 +73,7 @@ $grid-print-breakpoint-s-min: 537px !default;
 $horizontal-rule-color: $base-border-color !default;
 
 // Tables
-$table-cell-pad: .5rem !default;
+$table-cell-pad: 0.5rem !default;
 $table-bordered-border-width: 1px !default;
 $table-bordered-border: $table-bordered-border-width solid $base-border-color !default;
 $table-striped-background-color: #ebebeb !default;
@@ -88,7 +86,7 @@ $table-striped-background-color: #ebebeb !default;
 $form-input-font-family: inherit;
 $form-line-height: 1.4 !default;
 $form-placeholder: lighten($base-font-color, 20) !default;
-$form-input-padding: .25rem !default;
+$form-input-padding: 0.25rem !default;
 $form-input-margin-bottom: 1rem !default;
 $form-input-height: 2rem !default;
 $form-input-background: #fff !default;
@@ -111,7 +109,7 @@ $form-input-radio-checkbox-margin: 1.1rem;
 
 // Overrides for webkit browsers to normalize the select input.
 $form-input-select-arrow: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='10.5'><path fill='%23222' d='M11 0L5.5 9 0 0'/></svg>") !default;
-$form-input-select-arrow-position: .6rem !default;
+$form-input-select-arrow-position: 0.6rem !default;
 $form-input-select-arrow-padding: 1.67rem !default;
 
 $form-input-group-background: $base-input-border-color !default;
@@ -149,14 +147,13 @@ $alert-border-style: solid !default;
 $alert-border-color: #ff6f00 !default;
 $alert-button-font-size: $h3-font-size !default;
 
-
 // Code
 $code-font-family: monospace, monospace !default;
 $code-background-color: #f7f7f9 !default;
 $code-color: #950b2f !default;
 $code-scrollable-max-height: 20rem !default;
-$code-pre-padding: .5rem !default;
-$code-code-padding: .0667rem .25rem !default;
+$code-pre-padding: 0.5rem !default;
+$code-code-padding: 0.0667rem 0.25rem !default;
 
 //==
 // JS Plugins
@@ -170,7 +167,7 @@ $navigation-color: #fff !default;
 // ######################
 // ######## Modal #######
 // ######################
-$modal-overlay-background-color: rgba(0, 0, 0,.7) !default;
+$modal-overlay-background-color: rgba(0, 0, 0, 0.7) !default;
 $modal-max-width: $grid-container-max-width !default;
 $modal-titles-color: #fff !default;
 
@@ -179,26 +176,36 @@ $modal-media-background-color: #222 !default;
 $modal-control-color: #fff !default;
 
 $modal-loader-color: #fff !default;
+$modal-header-height: 100px !default;
+$modal-footer-height: 100px !default;
 
 // ######################
 // ###### Carousel ######
 // ######################
-$carousel-transition-function: .7s ease-in-out !default;
-$carousel-caption-background-color: rgba(34, 34, 34,.4) !default;
+$carousel-transition-function: 0.7s ease-in-out !default;
+$carousel-caption-background-color: rgba(34, 34, 34, 0.4) !default;
 $carousel-caption-color: #fff !default;
 
 // Controls
 $carousel-control-color: #fff !default;
 $carousel-control-background-color: transparent !default;
-$carousel-control-background-prev: str-replace(url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M4.933.933L4 0 0 4l4 4 .933-.933L1.867 4'/></svg>"), "#", "%23") !default;
-$carousel-control-background-next: str-replace(url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M0 7l3.067-3L0 .933.933 0l4 4-4 4'/></svg>"), "#", "%23") !default;
+$carousel-control-background-prev: str-replace(
+  url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M4.933.933L4 0 0 4l4 4 .933-.933L1.867 4'/></svg>"),
+  "#",
+  "%23"
+) !default;
+$carousel-control-background-next: str-replace(
+  url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 4.933 8'><path d='M0 7l3.067-3L0 .933.933 0l4 4-4 4'/></svg>"),
+  "#",
+  "%23"
+) !default;
 $carousel-control-background-size: 50% 50% !default;
-$carousel-control-opacity: .5 !default;
+$carousel-control-opacity: 0.5 !default;
 $carousel-control-opacity-active: 1 !default;
 
 // Indicators
 $carousel-nav-background-color: #fff !default;
-$carousel-nav-background-opacity: .5 !default;
+$carousel-nav-background-opacity: 0.5 !default;
 $carousel-nav-background-color-hover: $carousel-nav-background-color !default;
 $carousel-nav-background-opacity-hover: 1 !default;
 $carousel-nav-background-color-active: $carousel-nav-background-color !default;
@@ -222,9 +229,9 @@ $tabs-nav-item-border-color-active: $base-border-color !default;
 $tabs-nav-item-color-active: #454545 !default;
 
 // Dropdown
-$dropdown-transition-function: .3s ease !default;
-$dropdown-accordion-margin: .125rem !default;
-$dropdown-accordion-padding: .5rem !default;
+$dropdown-transition-function: 0.3s ease !default;
+$dropdown-accordion-margin: 0.125rem !default;
+$dropdown-accordion-padding: 0.5rem !default;
 $dropdown-accordion-border-width: 1px !default;
 $dropdown-accordion-border-style: solid !default;
 $dropdown-accordion-border-color: $base-border-color !default;

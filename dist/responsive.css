@@ -199,16 +199,16 @@ hr {
   padding: 0;
   list-style: none; }
 
-[class*=col-],
+[class*="col-"],
 [class*="block-row-"] > * {
   padding: 0 8px;
   width: 100%; }
 
-[class*=col-][class*=offset], [class*=col-][class*=push], [class*=col-][class*=pull] {
+[class*="col-"][class*="offset"], [class*="col-"][class*="push"], [class*="col-"][class*="pull"] {
   position: relative; }
 
 [class*="block-row-"].no-gutter > *,
-.no-gutter > [class*=col-] {
+.no-gutter > [class*="col-"] {
   padding: 0; }
 
 .col-xxs-1 {
@@ -2092,8 +2092,7 @@ table {
     height: auto;
     width: 0; }
 
-.modal-overlay,
-#dmo {
+.modal-overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -2107,79 +2106,38 @@ table {
   background-color: rgba(0, 0, 0, 0.7);
   -webkit-overflow-scrolling: touch;
   -webkit-backface-visibility: hidden;
-  text-align: center; }
-
-.modal {
-  height: 95%;
-  max-height: 95%;
-  max-width: 95%;
-  margin: auto;
-  display: flex;
-  flex-direction: column; }
-  .modal.auto-height {
-    height: auto; }
-  .modal.auto-width {
-    display: inline-flex; }
-  .modal > * {
-    flex: 1 1 auto; }
-  .modal > header,
-  .modal > footer {
-    color: #fff; }
-  .modal > main {
-    text-align: initial;
-    background-color: #fff;
-    overflow-y: auto;
-    flex-basis: 100%; }
-    .modal > main.no-overflow {
-      overflow: hidden; }
-    .modal > main > iframe {
-      width: 100%;
-      height: 100%;
-      border: 0; }
-    .modal > main > .media {
+  backface-visibility: hidden; }
+  .modal-overlay.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between; }
+  .modal-overlay main {
+    width: 100%;
+    height: calc(100% - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-y: auto; }
+    .modal-overlay main > * {
+      max-height: 100%;
+      flex-grow: 0;
+      flex-shrink: 1; }
+    .modal-overlay main > iframe {
+      flex-grow: 1;
+      width: 100%; }
+    .modal-overlay main .media {
       margin-bottom: 0; }
-
-@media (min-width: 75em) {
-  .modal {
-    max-width: 1140px; } }
-
-.modal-loader,
-.modal-loader:before,
-.modal-loader:after {
-  background: #fff;
-  animation: load 1.5s infinite ease-in-out;
-  width: .5rem;
-  height: 1rem; }
-
-.modal-loader {
-  color: #fff;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  transform: translateZ(0);
-  animation-delay: -0.16s; }
-  .modal-loader:before, .modal-loader:after {
-    position: absolute;
-    top: 0;
-    content: ""; }
-  .modal-loader:before {
-    left: -1em;
-    animation-delay: -0.32s; }
-  .modal-loader:after {
-    left: 1rem; }
-
-@keyframes load {
-  0%,
-  80%,
-  100% {
-    box-shadow: 0 0;
-    height: 1rem; }
-  40% {
-    box-shadow: 0 -.5rem;
-    height: 1.5rem; } }
+  .modal-overlay header,
+  .modal-overlay footer {
+    width: 100%;
+    color: #fff;
+    height: 100px; }
+  .modal-overlay footer {
+    overflow-y: auto;
+    height: 100px; }
 
 @media print and (max-width: 536px), screen and (max-width: 47.99em) {
   /*

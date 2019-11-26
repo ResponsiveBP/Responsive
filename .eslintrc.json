@@ -1,18 +1,18 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
-    },
-    "rules": {
-        "no-console": "warn",
-        "sort-vars": "off",
-        "no-unused-vars": "error",
-        "no-extra-parens": "off",
-        "max-statements": "off"
-    }
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": "warn",
+    "sort-vars": "off",
+    "no-unused-vars": "off",
+    "no-extra-parens": "off",
+    "max-statements": "off"
+  }
 }

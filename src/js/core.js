@@ -46,6 +46,32 @@ const RbpCore = (($d, w, d) => {
   const dataMap = new WeakMap();
 
   const rdashAlpha = /-([a-z])/g;
+  const rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/;
+
+  const getData = data => {
+    if (data === "true") {
+      return true;
+    }
+
+    if (data === "false") {
+      return false;
+    }
+
+    if (data === "null") {
+      return null;
+    }
+
+    // Only convert to a number if it doesn't change the string
+    if (data === +data + "") {
+      return +data;
+    }
+
+    if (rbrace.test(data)) {
+      return JSON.parse(data);
+    }
+
+    return data;
+  };
 
   const fcamelCase = (all, letter) => letter.toUpperCase();
 
@@ -160,7 +186,7 @@ const RbpCore = (($d, w, d) => {
         (defaults &&
           `${okeys(defaults)
             .map(x => `[data-${namespace}-${this.dashedCase(x)}]`)
-            .join(", ")}`) ||
+            .join(", ")}, [data-${namespace}]`) ||
         `[data-${namespace}]`
       );
     }
@@ -215,7 +241,7 @@ const RbpCore = (($d, w, d) => {
           );
 
         data.forEach(d => {
-          attr[this.camelCase(d.name.slice(5))] = d.value;
+          attr[this.camelCase(d.name.slice(5))] = getData(d.value);
         });
 
         dataMap.set(element, { attr: attr });
@@ -414,7 +440,7 @@ const RbpCore = (($d, w, d) => {
           $d.trigger(element, supportTransition);
         }
       };
-      this.setTimeout(ensure, getDurationMs(element));
+      this.setTimeout(ensure, getDurationMs(element) || 1);
     }
   }
 

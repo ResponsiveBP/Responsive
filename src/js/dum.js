@@ -30,11 +30,16 @@ const $d = ((w, d) => {
       .match(/\s([a-zA-Z]+)/)[1]
       .toLowerCase());
 
+  const isElement = obj =>
+    isObjectLike(obj) && obj.nodeType === 1 && type(obj) !== "object";
+
   const isString = obj => type(obj) === "string";
 
   const isArray = obj => type(obj) === "array";
 
   const isFunc = obj => type(obj) === "function";
+
+  const isObjectLike = obj => obj != null && typeof obj === "object";
 
   const isNullOrUndefined = obj => obj === null || obj === undefined;
 
@@ -292,7 +297,11 @@ const $d = ((w, d) => {
      * @memberof DUM
      */
     queryAll(expression, contexts) {
-      if (expression instanceof Node || expression instanceof Window) {
+      if (
+        expression instanceof Node ||
+        expression instanceof Window ||
+        isElement(expression)
+      ) {
         return [expression];
       }
 
