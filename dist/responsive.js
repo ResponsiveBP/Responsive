@@ -1,99 +1,13 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ({
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/app.js":
 /*!***********************!*\
   !*** ./src/js/app.js ***!
   \***********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./swiper */ "./src/js/swiper.js");
 /* harmony import */ var _dismiss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dismiss */ "./src/js/dismiss.js");
@@ -119,11 +33,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************!*\
   !*** ./src/js/base.js ***!
   \************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
 
@@ -156,9 +71,9 @@ const RbpBase = (($d, core) => {
 
     return RbpBase;
 
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _core__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpBase);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpBase);
 
 /***/ }),
 
@@ -166,11 +81,12 @@ const RbpBase = (($d, core) => {
 /*!****************************!*\
   !*** ./src/js/carousel.js ***!
   \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swiper */ "./src/js/swiper.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
@@ -742,9 +658,9 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 
   // Register plugin and data-api event handler and return
   return core.registerDataApi(RbpCarousel, "carousel", defaults);
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _swiper__WEBPACK_IMPORTED_MODULE_1__["default"], _core__WEBPACK_IMPORTED_MODULE_3__["default"], _base__WEBPACK_IMPORTED_MODULE_2__["default"], window, document);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _swiper__WEBPACK_IMPORTED_MODULE_1__.default, _core__WEBPACK_IMPORTED_MODULE_3__.default, _base__WEBPACK_IMPORTED_MODULE_2__.default, window, document);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpCarousel);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpCarousel);
 
 
 /***/ }),
@@ -753,11 +669,12 @@ const RbpCarousel = (($d, swiper, core, base, w, d) => {
 /*!*******************************!*\
   !*** ./src/js/conditional.js ***!
   \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
@@ -861,9 +778,9 @@ const RbpConditional = (($d, core, base) => {
     // Register plugin and data-api event handler and return
     return core.registerDataApi(RbpConditional, "conditional", defaults);
 
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _core__WEBPACK_IMPORTED_MODULE_2__.default, _base__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpConditional);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpConditional);
 
 /***/ }),
 
@@ -871,11 +788,12 @@ const RbpConditional = (($d, core, base) => {
 /*!************************!*\
   !*** ./src/js/core.js ***!
   \************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 
 
@@ -925,6 +843,32 @@ const RbpCore = (($d, w, d) => {
   const dataMap = new WeakMap();
 
   const rdashAlpha = /-([a-z])/g;
+  const rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/;
+
+  const getData = data => {
+    if (data === "true") {
+      return true;
+    }
+
+    if (data === "false") {
+      return false;
+    }
+
+    if (data === "null") {
+      return null;
+    }
+
+    // Only convert to a number if it doesn't change the string
+    if (data === +data + "") {
+      return +data;
+    }
+
+    if (rbrace.test(data)) {
+      return JSON.parse(data);
+    }
+
+    return data;
+  };
 
   const fcamelCase = (all, letter) => letter.toUpperCase();
 
@@ -1094,7 +1038,7 @@ const RbpCore = (($d, w, d) => {
           );
 
         data.forEach(d => {
-          attr[this.camelCase(d.name.slice(5))] = d.value;
+          attr[this.camelCase(d.name.slice(5))] = getData(d.value);
         });
 
         dataMap.set(element, { attr: attr });
@@ -1317,9 +1261,9 @@ const RbpCore = (($d, w, d) => {
 
   // Return
   return core;
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], window, document);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, window, document);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpCore);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpCore);
 
 
 /***/ }),
@@ -1328,11 +1272,12 @@ const RbpCore = (($d, w, d) => {
 /*!***************************!*\
   !*** ./src/js/dismiss.js ***!
   \***************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
@@ -1402,9 +1347,9 @@ const RbpDismiss = (($d, core, base) => {
 
   // Register plugin and data-api event handler and return
   return core.registerDataApi(RbpDismiss, "dismiss", defaults);
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _core__WEBPACK_IMPORTED_MODULE_2__.default, _base__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpDismiss);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpDismiss);
 
 
 /***/ }),
@@ -1413,11 +1358,12 @@ const RbpDismiss = (($d, core, base) => {
 /*!****************************!*\
   !*** ./src/js/dropdown.js ***!
   \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
@@ -1670,9 +1616,9 @@ const RbpDropdown = (($d, core, base) => {
 
   // Register plugin and data-api event handler and return
   return core.registerDataApi(RbpDropdown, "dropdown", defaults);
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _core__WEBPACK_IMPORTED_MODULE_2__.default, _base__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpDropdown);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpDropdown);
 
 
 /***/ }),
@@ -1681,11 +1627,12 @@ const RbpDropdown = (($d, core, base) => {
 /*!***********************!*\
   !*** ./src/js/dum.js ***!
   \***********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /**!
  * DUM.js | MIT License | https://github.com/JimBobSquarePants/DUM.js
  */
@@ -2293,7 +2240,7 @@ const $d = ((w, d) => {
   return (w.$d = w.DUM = new DUM());
 })(window, document);
 
-/* harmony default export */ __webpack_exports__["default"] = ($d);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ($d);
 
 
 /***/ }),
@@ -2302,11 +2249,12 @@ const $d = ((w, d) => {
 /*!*************************!*\
   !*** ./src/js/modal.js ***!
   \*************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
@@ -2352,7 +2300,17 @@ const RbpModal = (($d, w, core, base) => {
       }
       // add open, fadein; remove fadout. Fire events.
 
-      this.showModal();
+      const complete = () => {
+
+        this.showModal();
+      };
+
+      $d.addClass(this.overlay, "open","fade-out");
+
+      core.redraw(this.overlay);
+      core.onTransitionEnd(this.overlay, complete);
+
+
     }
 
     hideOverlay() {
@@ -2390,9 +2348,9 @@ const RbpModal = (($d, w, core, base) => {
 
   // Register plugin and data-api event handler and return
   return core.registerDataApi(RbpModal, "modal", defaults);
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], window, _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, window, _core__WEBPACK_IMPORTED_MODULE_2__.default, _base__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpModal);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpModal);
 
 
 /***/ }),
@@ -2401,11 +2359,12 @@ const RbpModal = (($d, w, core, base) => {
 /*!**************************!*\
   !*** ./src/js/swiper.js ***!
   \**************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 
 
@@ -2669,10 +2628,10 @@ const Swiper = (($d, w) => {
     }
   }
 
-  return Swiper;
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], window);
+  return w.Swiper = Swiper;
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, window);
 
-/* harmony default export */ __webpack_exports__["default"] = (Swiper);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Swiper);
 
 
 /***/ }),
@@ -2681,11 +2640,12 @@ const Swiper = (($d, w) => {
 /*!*****************************!*\
   !*** ./src/js/tablelist.js ***!
   \*****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
@@ -2705,7 +2665,7 @@ const RbpTableList = (($d, core, base) => {
             this.eadded = "added.rbp";
             this.isAdded = false;
 
-            $d.addClass(this.element, "table-list");
+            $d.addClass(this.element, "tablelist");
             $d.setAttr(this.element, { "aria-role": "grid" });
 
             this.thead = $d.children(this.element, "thead");
@@ -2767,9 +2727,9 @@ const RbpTableList = (($d, core, base) => {
     // Register plugin and data-api event handler and return
     return core.registerDataApi(RbpTableList, "tablelist", null);
 
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _core__WEBPACK_IMPORTED_MODULE_2__.default, _base__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpTableList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpTableList);
 
 /***/ }),
 
@@ -2777,11 +2737,12 @@ const RbpTableList = (($d, core, base) => {
 /*!************************!*\
   !*** ./src/js/tabs.js ***!
   \************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _dum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dum */ "./src/js/dum.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core */ "./src/js/core.js");
@@ -2940,9 +2901,9 @@ const RbpTabs = (($d, core, base) => {
     // Register plugin and data-api event handler and return
     return core.registerDataApi(RbpTabs, "tabs", null);
 
-})(_dum__WEBPACK_IMPORTED_MODULE_0__["default"], _core__WEBPACK_IMPORTED_MODULE_2__["default"], _base__WEBPACK_IMPORTED_MODULE_1__["default"]);
+})(_dum__WEBPACK_IMPORTED_MODULE_0__.default, _core__WEBPACK_IMPORTED_MODULE_2__.default, _base__WEBPACK_IMPORTED_MODULE_1__.default);
 
-/* harmony default export */ __webpack_exports__["default"] = (RbpTabs);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RbpTabs);
 
 /***/ }),
 
@@ -2950,25 +2911,74 @@ const RbpTabs = (($d, core, base) => {
 /*!***************************!*\
   !*** ./src/sass/app.scss ***!
   \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!*************************************************!*\
-  !*** multi ./src/sass/app.scss ./src/js/app.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ./src/sass/app.scss */"./src/sass/app.scss");
-module.exports = __webpack_require__(/*! ./src/js/app.js */"./src/js/app.js");
 
 
 /***/ })
 
-/******/ });
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	__webpack_require__("./src/sass/app.scss");
+/******/ 	// This entry module used 'exports' so it can't be inlined
+/******/ 	__webpack_require__("./src/js/app.js");
+/******/ })()
+;
 //# sourceMappingURL=responsive.js.map

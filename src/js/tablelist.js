@@ -14,7 +14,7 @@ const RbpTableList = (($d, core, base) => {
             this.eadded = "added.rbp";
             this.isAdded = false;
 
-            $d.addClass(this.element, "table-list");
+            $d.addClass(this.element, "tablelist");
             $d.setAttr(this.element, { "aria-role": "grid" });
 
             this.thead = $d.children(this.element, "thead");

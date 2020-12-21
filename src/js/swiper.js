@@ -260,7 +260,7 @@ const Swiper = (($d, w) => {
     }
   }
 
-  return Swiper;
+  return w.Swiper = Swiper;
 })($d, window);
 
 export default Swiper;
