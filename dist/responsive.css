@@ -37,7 +37,8 @@ a:hover {
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
-  text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
   cursor: help; }
 
 b,
@@ -153,6 +154,10 @@ h5 {
 h6 {
   font-size: 0.67rem;
   margin: 1.561rem 0; }
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none; }
 
 ::selection {
   background: #b3d4fc;
@@ -1563,6 +1568,14 @@ textarea {
 [readonly] {
   border-color: #ebebeb; }
 
+::-moz-placeholder {
+  color: #555555;
+  opacity: 1; }
+
+:-ms-input-placeholder {
+  color: #555555;
+  opacity: 1; }
+
 ::placeholder {
   color: #555555;
   opacity: 1; }
@@ -1771,8 +1784,10 @@ a img {
   .media img {
     margin: auto;
     position: absolute;
-    object-position: center;
-    object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
+    -o-object-fit: cover;
+       object-fit: cover;
     width: 100%;
     height: 100%; }
   .media.media-scroll {
@@ -1914,7 +1929,8 @@ table {
     .carousel > .slide > img {
       display: block;
       width: 100%;
-      object-fit: cover; }
+      -o-object-fit: cover;
+         object-fit: cover; }
     .carousel > figure > figcaption,
     .carousel > figure > .caption,
     .carousel > .slide > figcaption,
@@ -2615,7 +2631,8 @@ table {
   width: 1px; }
   .vhidden.focusable:active, .vhidden.focusable:focus {
     clip: auto;
-    clip-path: none;
+    -webkit-clip-path: none;
+            clip-path: none;
     height: auto;
     margin: 0;
     overflow: visible;

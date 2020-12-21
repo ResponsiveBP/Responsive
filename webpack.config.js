@@ -33,7 +33,6 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          { loader: "postcss-loader" },
           { loader: MiniCssExtractPlugin.loader },
           {
             loader: "css-loader",
@@ -41,6 +40,7 @@ const config = {
               url: false // Allows relative urls for assets in source.
             }
           },
+          { loader: "postcss-loader" },
           { loader: "sass-loader" }
         ]
       }
