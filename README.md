@@ -10,21 +10,21 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ResponsiveBP/Responsive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-### Responsive BP is the developers' framework.
+### Responsive Boilerplate is the developers' framework.
 
 Other frameworks are too design opinionated and heavy. They're great for prototyping but every time
 you start a real, front-facing, project with them you have to overwrite lots of designer styles that do nothing to add to the
 functionality of the website. That costs developers time and money.
 
-**Responsive BP** has been built with that in mind. It is the result of thousands of hours of real, client driven web development and
+**Responsive Boilerplate** has been built with that in mind. It is the result of thousands of hours of real, client driven web development and
 testing; specifically developed to be as lightweight as possible to prevent the need to undo styles set by the framework itself
 and allow developers to write efficient code and lower costs.
   
-**Responsive BP is tiny**. The combined output CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality built into the framework with touch, right-to-left language, and accessibility support. 
+**Responsive Boilerplate is tiny**. The combined output CSS and JavaScript is **only 20.3kb minified and gzipped** but there is a lot of functionality built into the framework with touch, right-to-left language, and accessibility support. 
 
 Browser support covers all evergreen browsers.
 
-## Downloading Responsive BP
+## Downloading Responsive Boilerplate
 
 Several options are available for downloading Responsive:
 
@@ -85,4 +85,4 @@ Discuss Responsive on [Gitter](https://gitter.im/ResponsiveBP/Responsive).
 
 ### Copyright and license
 
-Copyright 2013-2017 James Jackson-South under the [MIT license](http://opensource.org/licenses/MIT).
+Copyright 2013 James Jackson-South under the [MIT license](http://opensource.org/licenses/MIT).
