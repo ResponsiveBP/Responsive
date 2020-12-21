@@ -1,16 +1,13 @@
 const path = require("path");
-const cssnano = require("cssnano");
+// const cssnano = require("cssnano");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const miniCss = new MiniCssExtractPlugin({
   filename: "[name].css"
 });
 
-const optimizeCss = new OptimizeCssAssetsPlugin({
-  cssProcessor: cssnano,
-  canPrint: true
-});
+const optimizeCss = new CssMinimizerPlugin();
 
 // Default to production configuration
 const config = {
