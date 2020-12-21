@@ -33,6 +33,7 @@ const config = {
       {
         test: /\.scss$/,
         use: [
+          { loader: "postcss-loader" },
           { loader: MiniCssExtractPlugin.loader },
           {
             loader: "css-loader",
@@ -57,5 +58,3 @@ module.exports = (env, argv) => {
 
   return config;
 };
-
-// TODO: Add Autoprefixer
